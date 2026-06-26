@@ -142,13 +142,12 @@
   var inSub = SECTIONS.indexOf(lastName) !== -1;
   var base = inSub ? '../' : '';
 
-  // Convert an absolute DLS path like /buttons/ to the correct relative path
+  // Convert an absolute DLS path like /buttons/ to a relative path.
+  // Always use relative paths so the site works at any base URL (localhost, GitHub Pages, etc.)
   function toHref(absPath) {
-    if (!isFile) return absPath; // http:// — absolute paths work fine
-    if (absPath === '/') return inSub ? '../index.html' : 'index.html';
-    // Strip leading slash, e.g. /buttons/ → buttons/index.html
+    if (absPath === '/') return inSub ? (isFile ? '../index.html' : '../') : (isFile ? 'index.html' : './');
     var seg = absPath.replace(/^\//, '').replace(/\/$/, '');
-    return base + seg + '/index.html';
+    return base + seg + (isFile ? '/index.html' : '/');
   }
 
   function isActive(itemPath) {

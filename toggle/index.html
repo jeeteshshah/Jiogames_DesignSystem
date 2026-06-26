@@ -1,0 +1,1236 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toggle — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    /* ── Page-specific styles ── */
+    body { background: var(--bg); color: var(--text); font-family: var(--jio-font); margin: 0; }
+
+    /* Component page header */
+
+    /* Hero */
+    .component-hero {
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      min-height: 280px;
+      padding: 48px 32px 32px;
+    }
+    .component-hero--dark { background: #060810; }
+    .component-hero--grid {
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 32px 32px;
+      background-color: #060810;
+      border: 1px solid var(--border-subtle);
+    }
+    .component-hero-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 400px;
+    }
+    .component-hero-caption {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: var(--text4);
+      margin-top: 24px;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 320px;
+      height: 180px;
+      border-radius: var(--pill);
+      background: radial-gradient(ellipse, rgba(0,168,89,.2) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Toggle component */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      cursor: pointer;
+      gap: 16px;
+    }
+    .toggle-label-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex: 1;
+      min-width: 0;
+    }
+    .toggle-label {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .toggle-sublabel {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text3);
+      line-height: 1.4;
+    }
+    .toggle-track {
+      width: 48px;
+      height: 28px;
+      border-radius: var(--pill);
+      position: relative;
+      transition: background 200ms ease;
+      flex-shrink: 0;
+    }
+    .toggle-track--off {
+      background: var(--surface-3);
+    }
+    .toggle-track--on {
+      background: var(--jio);
+    }
+    .toggle-track--disabled {
+      background: var(--surface-3);
+      opacity: 0.32;
+      pointer-events: none;
+    }
+    .toggle-thumb {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--text);
+      position: absolute;
+      top: 3px;
+      transition: left 200ms ease;
+    }
+    .toggle-track--off .toggle-thumb  { left: 3px; }
+    .toggle-track--on .toggle-thumb   { left: 23px; }
+    .toggle-track--disabled .toggle-thumb { left: 3px; }
+
+    /* Hero toggle list */
+    .hero-toggle-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      width: 100%;
+      background: var(--surface-1);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+    }
+    .hero-toggle-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      gap: 16px;
+    }
+    .hero-toggle-item:last-child { border-bottom: none; }
+
+    /* Intro */
+    .component-intro {
+      margin-bottom: 48px;
+    }
+    .component-intro p {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.65;
+      margin-bottom: 20px;
+      max-width: 640px;
+    }
+    .component-summary-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      overflow: hidden;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .component-summary-list li {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.55;
+    }
+    .component-summary-list li:last-child { border-bottom: none; }
+    .component-summary-list li strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    /* Best practices */
+    .component-best-practices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .component-bp-card {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1.5px solid;
+    }
+    .component-bp-card--do   { border-color: rgba(0,168,89,.3); }
+    .component-bp-card--dont { border-color: rgba(255,71,87,.3); }
+    .component-bp-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 16px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+    }
+    .component-bp-label--do   { background: rgba(0,168,89,.07);  color: var(--jio); }
+    .component-bp-label--dont { background: rgba(255,71,87,.07); color: var(--negative); }
+    .component-bp-label--do::before   { content: '\2713'; font-size: 11px; }
+    .component-bp-label--dont::before { content: '\2715'; font-size: 11px; }
+    .component-bp-list {
+      padding: 16px 20px 20px;
+      background: var(--surface-1);
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      list-style: none;
+    }
+    .component-bp-list li {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+    .component-bp-list li::before {
+      content: '\00B7';
+      position: absolute;
+      left: 3px;
+      color: var(--text4);
+    }
+
+    /* Content grid */
+    .component-content-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .component-content-card {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      padding: 20px;
+    }
+    .component-content-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-bottom: 12px;
+    }
+    .component-content-card ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .component-content-card li {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+    .component-content-card li::before {
+      content: '\00B7';
+      position: absolute;
+      left: 3px;
+      color: var(--text4);
+    }
+
+    /* Platform cards */
+    .component-platform-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .component-platform-card {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      padding: 20px;
+    }
+    .component-platform-card--mobile { border-top: 2px solid rgba(110,231,183,.4); }
+    .component-platform-card--web    { border-top: 2px solid rgba(147,197,253,.4); }
+    .component-platform-card--tv     { border-top: 2px solid rgba(251,191,36,.4); }
+    .component-platform-card-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 12px;
+    }
+    .component-platform-card--mobile .component-platform-card-title { color: #6ee7b7; }
+    .component-platform-card--web    .component-platform-card-title { color: #93c5fd; }
+    .component-platform-card--tv     .component-platform-card-title { color: #fbbf24; }
+    .component-platform-card ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .component-platform-card li {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+    .component-platform-card li::before {
+      content: '\00B7';
+      position: absolute;
+      left: 3px;
+      color: var(--text4);
+    }
+
+    /* Changelog */
+    .component-changelog {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      overflow: hidden;
+    }
+    .component-changelog-entry {
+      display: grid;
+      grid-template-columns: 56px 80px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 12px;
+    }
+    .component-changelog-entry:last-child { border-bottom: none; }
+    .component-changelog-version {
+      font-family: monospace;
+      font-weight: 700;
+      color: var(--jio);
+      font-size: 11px;
+    }
+    .component-changelog-date {
+      color: var(--text3);
+      font-weight: 500;
+    }
+    .component-changelog-desc {
+      color: var(--text2);
+      line-height: 1.5;
+    }
+
+    /* Note box */
+    .ds-note {
+      background: rgba(0,168,89,.06);
+      border: 1px solid rgba(0,168,89,.2);
+      border-radius: var(--r3);
+      padding: 14px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.55;
+    }
+    .ds-note strong { color: var(--jio); }
+
+    /* Sizes table */
+    .toggle-size-matrix {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      overflow: hidden;
+    }
+    .toggle-size-matrix-head {
+      display: grid;
+      grid-template-columns: 120px 1fr 1fr 1fr;
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .toggle-size-matrix-head > div {
+      padding: 10px 16px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+    .toggle-size-matrix-row {
+      display: grid;
+      grid-template-columns: 120px 1fr 1fr 1fr;
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--surface-1);
+    }
+    .toggle-size-matrix-row:last-child { border-bottom: none; }
+    .toggle-size-matrix-label {
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 3px;
+      border-right: 1px solid var(--border-subtle);
+      background: var(--surface-2);
+    }
+    .toggle-size-matrix-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .toggle-size-matrix-cell {
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      justify-content: center;
+    }
+    .toggle-size-matrix-px {
+      font-family: monospace;
+      font-size: 10px;
+      color: var(--text3);
+    }
+
+    /* State matrix */
+    .toggle-state-matrix {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      overflow: hidden;
+    }
+    .toggle-state-matrix-scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .toggle-state-matrix-scroll::-webkit-scrollbar { height: 4px; }
+    .toggle-state-matrix-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--pill); }
+    .toggle-state-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      padding: 24px;
+    }
+    .toggle-state-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .toggle-state-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      color: var(--text3);
+      text-align: center;
+    }
+
+    /* Accessibility */
+    .a11y-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      overflow: hidden;
+      margin-top: 24px;
+    }
+    .a11y-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .a11y-row:last-child { border-bottom: none; }
+    .a11y-label {
+      padding: 14px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text3);
+      letter-spacing: .3px;
+      background: var(--surface-2);
+      text-transform: uppercase;
+      display: flex;
+      align-items: flex-start;
+      padding-top: 16px;
+    }
+    .a11y-content {
+      padding: 14px 20px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.6;
+      background: var(--surface-1);
+    }
+    .a11y-content code {
+      font-family: monospace;
+      font-size: 11px;
+      background: var(--surface-3);
+      padding: 1px 5px;
+      border-radius: 3px;
+      color: var(--text);
+    }
+
+    /* Related tokens table */
+    .token-table {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      overflow: hidden;
+      margin-top: 24px;
+    }
+    .token-table-head {
+      display: grid;
+      grid-template-columns: 180px 160px 1fr;
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .token-table-head > div {
+      padding: 10px 16px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+    .token-table-row {
+      display: grid;
+      grid-template-columns: 180px 160px 1fr;
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--surface-1);
+    }
+    .token-table-row:last-child { border-bottom: none; }
+    .token-table-row:hover { background: var(--surface-2); }
+    .token-table-cell {
+      padding: 12px 16px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.5;
+      display: flex;
+      align-items: center;
+    }
+    .token-table-cell code {
+      font-family: monospace;
+      font-size: 11px;
+      color: #a8e6c5;
+    }
+
+    /* Variants */
+    .toggle-variant-row {
+      display: grid;
+      grid-template-columns: 160px 80px 1fr;
+      gap: 16px;
+      align-items: center;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 20px;
+      padding-top: 4px;
+    }
+    .toggle-variant-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .toggle-variant-name { font-size: 12px; font-weight: 700; color: var(--text); }
+    .toggle-variant-class { font-size: 11px; color: var(--text3); margin-top: 2px; font-family: monospace; }
+    .toggle-variant-desc { font-size: 12px; color: var(--text2); line-height: 1.5; }
+
+    /* Loading spinner for thumb */
+    .toggle-track--loading {
+      background: var(--surface-3);
+    }
+    .toggle-track--loading .toggle-thumb {
+      left: 3px;
+      background: transparent;
+      border: 2px solid var(--border);
+      border-top-color: var(--jio);
+      animation: toggle-spin 600ms linear infinite;
+    }
+    @keyframes toggle-spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Destructive on toggle */
+    .toggle-track--destructive-on {
+      background: var(--negative);
+    }
+    .toggle-track--destructive-on .toggle-thumb { left: 23px; }
+
+    @media (max-width: 760px) {
+      .component-best-practices,
+      .component-content-grid,
+      .component-platform-grid { grid-template-columns: 1fr; }
+      .toggle-size-matrix { overflow-x: auto; }
+      .toggle-size-matrix-head,
+      .toggle-size-matrix-row { min-width: 480px; }
+      .token-table-head,
+      .token-table-row { min-width: 500px; }
+      .token-table { overflow-x: auto; }
+      .toggle-state-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head><body><main class="ds-content">
+
+  <!-- ===================================================
+       1. PAGE HEADER
+  =================================================== -->
+  <div class="component-page-header">
+    <div class="component-breadcrumb">
+      <a href="../index.html">JioGames DLS</a>
+      <span class="component-breadcrumb-sep">&#x203A;</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">&#x203A;</span>
+      <span>Toggle</span>
+    </div>
+    <h1 class="component-page-title">Toggle</h1>
+    <p class="component-page-def">A toggle switch controls a binary on/off setting with immediate effect.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+      <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+      <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+      <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+    </div>
+  </div>
+
+  <!-- ===================================================
+       2. HERO VISUAL
+  =================================================== -->
+  <section class="component-hero component-hero--dark component-hero--grid" id="overview">
+    <div class="hero-glow" style="top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+    <div class="component-hero-inner">
+      <div class="hero-toggle-list">
+        <!-- Row 1: Off -->
+        <div class="hero-toggle-item">
+          <div class="toggle-label-group">
+            <span class="toggle-label">Autoplay videos</span>
+            <span class="toggle-sublabel">Play trailers automatically on hover</span>
+          </div>
+          <div class="toggle-track toggle-track--off"><div class="toggle-thumb"></div></div>
+        </div>
+        <!-- Row 2: On -->
+        <div class="hero-toggle-item">
+          <div class="toggle-label-group">
+            <span class="toggle-label">Push notifications</span>
+            <span class="toggle-sublabel">Get alerts for new games and offers</span>
+          </div>
+          <div class="toggle-track toggle-track--on"><div class="toggle-thumb"></div></div>
+        </div>
+        <!-- Row 3: Disabled -->
+        <div class="hero-toggle-item" style="opacity:0.55">
+          <div class="toggle-label-group">
+            <span class="toggle-label" style="color:var(--text2)">Background sync</span>
+            <span class="toggle-sublabel">Managed by your organisation</span>
+          </div>
+          <div class="toggle-track toggle-track--disabled"><div class="toggle-thumb"></div></div>
+        </div>
+      </div>
+    </div>
+    <span class="component-hero-caption">Settings list &#xB7; Off / On / Disabled &#xB7; 1:1 scale at Mobile</span>
+  </section>
+
+  <!-- ===================================================
+       3. INTRO
+  =================================================== -->
+  <section class="component-intro" id="intro">
+    <p>Toggle switches give players immediate, persistent control over binary settings. Unlike buttons that trigger one-time actions, a toggle persists its state until explicitly changed. Use toggles only for settings with an immediate effect &#x2014; changes take effect without requiring a Save action.</p>
+    <ul class="component-summary-list">
+      <li><strong>Binary only.</strong> Toggles control on/off states exclusively. Use a checkbox for selections, a radio for one-of-many choices.</li>
+      <li><strong>Immediate effect.</strong> The setting activates on tap. Never require a confirm step unless the action is destructive.</li>
+      <li><strong>Label the setting, not the action.</strong> &#x201C;Autoplay videos&#x201D; not &#x201C;Enable Autoplay&#x201D;.</li>
+      <li><strong>Platform-aware sizing.</strong> Mobile 24&#xD7;40px track, Web 26&#xD7;44px, TV 36&#xD7;60px.</li>
+    </ul>
+  </section>
+
+  <!-- ===================================================
+       4. BEST PRACTICES
+  =================================================== -->
+  <section class="ds-section" id="best-practices">
+    <h2 class="ds-section-title">Best practices</h2>
+    <p class="ds-section-desc">Follow these rules to keep toggle usage consistent across the JioGames settings surface.</p>
+    <div class="component-best-practices">
+      <div class="component-bp-card component-bp-card--do">
+        <span class="component-bp-label component-bp-label--do">Do</span>
+        <ul class="component-bp-list">
+          <li>Label the setting noun (&#x201C;Autoplay videos&#x201D;, &#x201C;Dark mode&#x201D;)</li>
+          <li>Use sub-labels to explain the consequence in under 60 chars</li>
+          <li>Keep toggles grouped in settings lists, not scattered across the UI</li>
+          <li>Ensure the label still makes sense when the toggle is off</li>
+          <li>Show a loading state when the toggle triggers an async change</li>
+          <li>Use disabled state with a tooltip explaining why</li>
+        </ul>
+      </div>
+      <div class="component-bp-card component-bp-card--dont">
+        <span class="component-bp-label component-bp-label--dont">Don&#x27;t</span>
+        <ul class="component-bp-list">
+          <li>Don&#x27;t use toggles for actions (use a button instead)</li>
+          <li>Don&#x27;t label with &#x201C;Enable X&#x201D; &#x2014; the toggle implies enable/disable</li>
+          <li>Don&#x27;t require a Save button after a toggle change</li>
+          <li>Don&#x27;t use toggles for form inputs or multi-step flows</li>
+          <li>Don&#x27;t place toggles in dense action areas without visual separation</li>
+          <li>Don&#x27;t animate toggle thumb &gt; 200ms</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       5. ANATOMY
+  =================================================== -->
+  <section class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <p class="ds-section-desc">The toggle is a two-part structure &#x2014; a pill track and a sliding thumb &#x2014; combined with an optional label group. State is communicated exclusively through track fill colour and thumb position.</p>
+    <div class="ds-anatomy">
+      <div class="ds-anatomy-preview">
+        <div style="display:flex;flex-direction:column;gap:20px;align-items:flex-start;width:100%;max-width:300px">
+          <div style="display:flex;align-items:center;justify-content:space-between;width:100%;padding:16px 20px;background:var(--surface-2);border-radius:var(--r4);position:relative">
+            <div style="display:flex;flex-direction:column;gap:3px">
+              <span style="font-size:14px;font-weight:500;color:var(--text)">Notifications</span>
+              <span style="font-size:11px;color:var(--text3)">Get alerts for new games</span>
+            </div>
+            <div class="toggle-track toggle-track--on" style="pointer-events:none"><div class="toggle-thumb"></div></div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;width:100%;padding:16px 20px;background:var(--surface-2);border-radius:var(--r4)">
+            <span style="font-size:14px;font-weight:500;color:var(--text)">Autoplay</span>
+            <div class="toggle-track toggle-track--off" style="pointer-events:none"><div class="toggle-thumb"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="ds-anatomy-list">
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">1</div>
+          <div>
+            <div class="ds-anatomy-label">Track <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Pill-shaped container. Off: <code style="font-family:monospace;font-size:11px">var(--surface-3)</code>. On: <code style="font-family:monospace;font-size:11px">var(--jio)</code>. Transition: background-color 200ms ease.</div>
+            <div class="ds-anatomy-token">CSS: .toggle-track &#xB7; Figma: Toggle/Track</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">2</div>
+          <div>
+            <div class="ds-anatomy-label">Thumb <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">White circle that slides between off (left:3px) and on (left:23px) positions. Transition: left 200ms ease.</div>
+            <div class="ds-anatomy-token">CSS: .toggle-thumb &#xB7; Figma: Toggle/Thumb</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">3</div>
+          <div>
+            <div class="ds-anatomy-label">Label <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Setting name. Max 1 line. Font-weight 500. Always a noun or noun phrase that makes sense without the word &#x201C;enable&#x201D;.</div>
+            <div class="ds-anatomy-token">CSS: .toggle-label &#xB7; Figma: Toggle/Label</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">4</div>
+          <div>
+            <div class="ds-anatomy-label">Sub-label / description <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc">Consequence text under the label. Max 60 chars. Color: <code style="font-family:monospace;font-size:11px">var(--text3)</code>. Explains what changes when toggled.</div>
+            <div class="ds-anatomy-token">CSS: .toggle-sublabel &#xB7; Figma: Toggle/SubLabel</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">5</div>
+          <div>
+            <div class="ds-anatomy-label">Disabled overlay <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc"><code style="font-family:monospace;font-size:11px">opacity: 0.32</code> on the entire toggle row. Add tooltip on the row explaining why it is disabled. Do not remove from tab order.</div>
+            <div class="ds-anatomy-token">CSS: .toggle-track--disabled &#xB7; State: is-disabled</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       6. VARIANTS
+  =================================================== -->
+  <section class="ds-section" id="variants">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Five variants cover the full toggle usage model. Default covers 95&#x25; of cases. Only use Destructive or Loading when the specific context demands it.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex;flex-direction:column;gap:20px">
+
+        <div class="toggle-variant-row">
+          <div>
+            <div class="toggle-variant-name">Default (off)</div>
+            <div class="toggle-variant-class">.toggle-track--off</div>
+          </div>
+          <div class="toggle-track toggle-track--off"><div class="toggle-thumb"></div></div>
+          <div class="toggle-variant-desc">Standard rest state. Track is <code style="font-family:monospace;font-size:11px">var(--surface-3)</code>. Thumb sits at left:3px.</div>
+        </div>
+
+        <div class="toggle-variant-row">
+          <div>
+            <div class="toggle-variant-name">Default (on)</div>
+            <div class="toggle-variant-class">.toggle-track--on</div>
+          </div>
+          <div class="toggle-track toggle-track--on"><div class="toggle-thumb"></div></div>
+          <div class="toggle-variant-desc">Active state. Track fills to <code style="font-family:monospace;font-size:11px">var(--jio)</code>. Thumb slides to left:23px. Never override the green.</div>
+        </div>
+
+        <div class="toggle-variant-row">
+          <div>
+            <div class="toggle-variant-name">With sub-label</div>
+            <div class="toggle-variant-class">+ .toggle-sublabel</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px">
+            <div class="toggle-label-group" style="max-width:140px">
+              <span class="toggle-label" style="font-size:13px">Sound effects</span>
+              <span class="toggle-sublabel" style="font-size:11px">Plays on game events</span>
+            </div>
+            <div class="toggle-track toggle-track--on"><div class="toggle-thumb"></div></div>
+          </div>
+          <div class="toggle-variant-desc">Adds a secondary description below the label. Keep under 60 chars. Explains what turns on/off.</div>
+        </div>
+
+        <div class="toggle-variant-row">
+          <div>
+            <div class="toggle-variant-name">Destructive</div>
+            <div class="toggle-variant-class">.toggle-track--destructive-on</div>
+          </div>
+          <div class="toggle-track toggle-track--destructive-on"><div class="toggle-thumb"></div></div>
+          <div class="toggle-variant-desc">Red track when on &#x2014; for dangerous settings only (e.g. &#x201C;Delete account on logout&#x201D;). Never use for standard preferences.</div>
+        </div>
+
+        <div class="toggle-variant-row">
+          <div>
+            <div class="toggle-variant-name">Loading</div>
+            <div class="toggle-variant-class">.toggle-track--loading</div>
+          </div>
+          <div class="toggle-track toggle-track--loading"><div class="toggle-thumb"></div></div>
+          <div class="toggle-variant-desc">Spinner in thumb position while async change processes. Prevents re-tap. Resolves to on or off once response arrives.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       7. SIZES
+  =================================================== -->
+  <section class="ds-section" id="sizes">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Three platform-resolved size tiers. The toggle component class stays constant &#x2014; platform context determines the actual pixel values. TV sizes are mandatory for 10-foot legibility and remote-precision.</p>
+
+    <div class="ds-note" style="margin-bottom:20px">
+      <strong>Platform &#x2260; Size.</strong> Use the same component on all platforms. A CSS media context or platform wrapper resolves the correct dimensions. Never hard-code pixel values in component markup.
+    </div>
+
+    <div class="toggle-size-matrix">
+      <div class="toggle-size-matrix-head">
+        <div>Property</div>
+        <div style="color:#6ee7b7">Mobile</div>
+        <div style="color:#93c5fd">Web</div>
+        <div style="color:#fbbf24">TV</div>
+      </div>
+      <div class="toggle-size-matrix-row">
+        <div class="toggle-size-matrix-label">
+          <span class="toggle-size-matrix-name">Track width</span>
+        </div>
+        <div class="toggle-size-matrix-cell">
+          <div class="toggle-track toggle-track--on" style="width:40px;height:24px"><div class="toggle-thumb" style="width:18px;height:18px;left:3px;top:3px"></div></div>
+          <span class="toggle-size-matrix-px">40px</span>
+        </div>
+        <div class="toggle-size-matrix-cell">
+          <div class="toggle-track toggle-track--on" style="width:44px;height:26px"><div class="toggle-thumb" style="width:20px;height:20px;left:3px;top:3px"></div></div>
+          <span class="toggle-size-matrix-px">44px</span>
+        </div>
+        <div class="toggle-size-matrix-cell">
+          <div class="toggle-track toggle-track--on" style="width:60px;height:36px"><div class="toggle-thumb" style="width:28px;height:28px;left:4px;top:4px"></div></div>
+          <span class="toggle-size-matrix-px">60px</span>
+        </div>
+      </div>
+      <div class="toggle-size-matrix-row">
+        <div class="toggle-size-matrix-label">
+          <span class="toggle-size-matrix-name">Track height</span>
+        </div>
+        <div class="toggle-size-matrix-cell"><span class="toggle-size-matrix-px">24px</span></div>
+        <div class="toggle-size-matrix-cell"><span class="toggle-size-matrix-px">26px</span></div>
+        <div class="toggle-size-matrix-cell"><span class="toggle-size-matrix-px">36px</span></div>
+      </div>
+      <div class="toggle-size-matrix-row">
+        <div class="toggle-size-matrix-label">
+          <span class="toggle-size-matrix-name">Thumb diameter</span>
+        </div>
+        <div class="toggle-size-matrix-cell"><span class="toggle-size-matrix-px">18px</span></div>
+        <div class="toggle-size-matrix-cell"><span class="toggle-size-matrix-px">20px</span></div>
+        <div class="toggle-size-matrix-cell"><span class="toggle-size-matrix-px">28px</span></div>
+      </div>
+      <div class="toggle-size-matrix-row">
+        <div class="toggle-size-matrix-label">
+          <span class="toggle-size-matrix-name">Label font-size</span>
+        </div>
+        <div class="toggle-size-matrix-cell"><span class="toggle-size-matrix-px">14px</span></div>
+        <div class="toggle-size-matrix-cell"><span class="toggle-size-matrix-px">14px</span></div>
+        <div class="toggle-size-matrix-cell"><span class="toggle-size-matrix-px">18px</span></div>
+      </div>
+      <div class="toggle-size-matrix-row">
+        <div class="toggle-size-matrix-label">
+          <span class="toggle-size-matrix-name">Min row height</span>
+        </div>
+        <div class="toggle-size-matrix-cell"><span class="toggle-size-matrix-px">44px touch</span></div>
+        <div class="toggle-size-matrix-cell"><span class="toggle-size-matrix-px">44px</span></div>
+        <div class="toggle-size-matrix-cell"><span class="toggle-size-matrix-px">60px D-pad</span></div>
+      </div>
+    </div>
+
+    <div class="ds-note" style="margin-top:16px">
+      <strong>TV note.</strong> TV toggles use larger touch targets and the thumb scales proportionally. The focus ring on TV applies to the entire row, not the toggle track itself.
+    </div>
+  </section>
+
+  <!-- ===================================================
+       8. STATES
+  =================================================== -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Eight states cover the full interaction model. Hover states apply on web only &#x2014; never on mobile or TV. The TV focused state uses <code style="font-family:monospace;font-size:11px;background:var(--surface-2);padding:1px 5px;border-radius:3px">var(--tv-focus-shadow)</code> glow ring on the row container.</p>
+
+    <div class="toggle-state-matrix">
+      <div class="toggle-state-matrix-scroll">
+        <div class="toggle-state-grid">
+
+          <div class="toggle-state-cell">
+            <div class="toggle-track toggle-track--off"><div class="toggle-thumb"></div></div>
+            <span class="toggle-state-label">Off</span>
+          </div>
+
+          <div class="toggle-state-cell">
+            <div class="toggle-track toggle-track--on"><div class="toggle-thumb"></div></div>
+            <span class="toggle-state-label">On</span>
+          </div>
+
+          <div class="toggle-state-cell">
+            <div class="toggle-track toggle-track--off" style="background:var(--border)"><div class="toggle-thumb"></div></div>
+            <span class="toggle-state-label">Hover Off</span>
+          </div>
+
+          <div class="toggle-state-cell">
+            <div class="toggle-track toggle-track--on" style="background:#00be65"><div class="toggle-thumb"></div></div>
+            <span class="toggle-state-label">Hover On</span>
+          </div>
+
+          <div class="toggle-state-cell">
+            <div class="toggle-track toggle-track--off" style="outline:2px solid var(--jio);outline-offset:3px;border-radius:var(--pill)"><div class="toggle-thumb"></div></div>
+            <span class="toggle-state-label">Focus</span>
+          </div>
+
+          <div class="toggle-state-cell">
+            <div style="opacity:0.32"><div class="toggle-track toggle-track--off"><div class="toggle-thumb"></div></div></div>
+            <span class="toggle-state-label">Disabled Off</span>
+          </div>
+
+          <div class="toggle-state-cell">
+            <div style="opacity:0.32"><div class="toggle-track toggle-track--on"><div class="toggle-thumb"></div></div></div>
+            <span class="toggle-state-label">Disabled On</span>
+          </div>
+
+          <div class="toggle-state-cell">
+            <div class="toggle-track toggle-track--loading"><div class="toggle-thumb"></div></div>
+            <span class="toggle-state-label">Loading</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       9. CONTENT
+  =================================================== -->
+  <section class="ds-section" id="content">
+    <h2 class="ds-section-title">Content</h2>
+    <p class="ds-section-desc">Toggle labels are the clearest signal to players about what is being controlled. Write labels that are unambiguous whether the toggle is on or off.</p>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Label writing</div>
+        <ul>
+          <li>Describe the setting not the action &#x2014; noun or noun phrase</li>
+          <li>Avoid &#x201C;Enable X&#x201D; / &#x201C;Disable X&#x201D; &#x2014; the toggle implies it</li>
+          <li>&#x201C;Sound effects&#x201D; not &#x201C;Enable sound effects&#x201D;</li>
+          <li>&#x201C;Dark mode&#x201D; not &#x201C;Turn on dark mode&#x201D;</li>
+          <li>Label must make sense without reading surrounding UI</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Sub-labels</div>
+        <ul>
+          <li>Explain consequences in under 60 chars</li>
+          <li>&#x201C;Downloads will use mobile data&#x201D; &#x2014; not &#x201C;This may use mobile data depending on your connection settings&#x201D;</li>
+          <li>Write in present tense: &#x201C;Plays on game events&#x201D;</li>
+          <li>Omit if the label is already fully self-explanatory</li>
+          <li>Never repeat the label word-for-word</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       10. PLATFORM
+  =================================================== -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform</h2>
+    <p class="ds-section-desc">The same toggle component adapts across platforms via resolved size tokens and platform-specific interaction models.</p>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>40&#xD7;24px track; 18px thumb</li>
+          <li>44px minimum touch target on the row</li>
+          <li>Haptic feedback on toggle (implementation layer)</li>
+          <li>No hover state &#x2014; touch model only</li>
+          <li>Full-row tap target, not just the track</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>44&#xD7;26px track; 20px thumb</li>
+          <li>Pointer cursor on hover over row</li>
+          <li>Hover state shows brighter track (off: <code style="font-family:monospace;font-size:10px">var(--border)</code>)</li>
+          <li>Keyboard-navigable via Tab + Space</li>
+          <li>Focus ring on track via <code style="font-family:monospace;font-size:10px">:focus-visible</code></li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>60&#xD7;36px track; 28px thumb</li>
+          <li>Navigated via D-pad &#x2014; entire row is the focus target</li>
+          <li>Focus ring on row, not track itself</li>
+          <li>Uses <code style="font-family:monospace;font-size:10px">var(--tv-focus-shadow)</code> glow + scale(1.02)</li>
+          <li>18px label for 10-foot legibility</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       11. ACCESSIBILITY
+  =================================================== -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">Toggles must be navigable and interpretable without vision. The <code style="font-family:monospace;font-size:11px;background:var(--surface-2);padding:1px 5px;border-radius:3px">role="switch"</code> semantic is mandatory &#x2014; it tells screen readers this is a binary control, not a button.</p>
+    <div class="a11y-grid">
+      <div class="a11y-row">
+        <div class="a11y-label">Role</div>
+        <div class="a11y-content">Use <code>&lt;input type="checkbox" role="switch"&gt;</code> or <code>role="switch"</code> on the control element. Never use a bare <code>&lt;div&gt;</code> or <code>&lt;span&gt;</code>.</div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">aria-checked</div>
+        <div class="a11y-content"><code>aria-checked="true"</code> when on, <code>aria-checked="false"</code> when off. Update dynamically via JS on every state change.</div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">aria-label</div>
+        <div class="a11y-content">If no visible label is adjacent to the control, provide <code>aria-label</code> on the control. Must describe the setting: <code>aria-label="Enable push notifications"</code>.</div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Keyboard</div>
+        <div class="a11y-content"><kbd style="font-family:monospace;font-size:11px;background:var(--surface-3);padding:2px 6px;border-radius:3px;border:1px solid var(--border)">Space</kbd> toggles the switch. <kbd style="font-family:monospace;font-size:11px;background:var(--surface-3);padding:2px 6px;border-radius:3px;border:1px solid var(--border)">Enter</kbd> should <em>not</em> toggle &#x2014; this prevents conflict with form submission. <kbd style="font-family:monospace;font-size:11px;background:var(--surface-3);padding:2px 6px;border-radius:3px;border:1px solid var(--border)">Tab</kbd> moves focus in and out.</div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Motion</div>
+        <div class="a11y-content">Thumb slide transition respects <code>prefers-reduced-motion</code>. When reduced motion is preferred, use instant snap instead of 200ms ease transition.</div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Disabled</div>
+        <div class="a11y-content">Use <code>aria-disabled="true"</code>, not just the <code>disabled</code> HTML attribute, so the element remains in tab order. Screen reader users can then discover it and hear the label explaining why it is disabled.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="platform-considerations" class="component-section">
+  <h2 class="ds-section-title">Platform considerations</h2>
+  <div class="component-platform-grid">
+    <div class="component-platform component-platform--mobile">
+      <div class="component-platform-label">Mobile</div>
+      <ul class="component-platform-list">
+        <li>Minimum touch target 48×48px wrapping the toggle track</li>
+        <li>State change fires on tap-release, not tap-start</li>
+        <li>Label always to the left; toggle to the right edge of the row</li>
+        <li>Haptic feedback recommended on state change</li>
+      </ul>
+    </div>
+    <div class="component-platform component-platform--web">
+      <div class="component-platform-label">Web</div>
+      <ul class="component-platform-list">
+        <li>Space key toggles when focused; Enter also accepted</li>
+        <li>Focus ring on track, not thumb</li>
+        <li>Hover on label also activates hover state on track</li>
+        <li>Pointer cursor on hover</li>
+      </ul>
+    </div>
+    <div class="component-platform component-platform--tv">
+      <div class="component-platform-label">TV</div>
+      <ul class="component-platform-list">
+        <li>OK/Select button on remote toggles state</li>
+        <li>TV focus ring wraps full toggle row, not just track</li>
+        <li>Do not use toggles inside scrollable lists on TV — prefer segmented control</li>
+        <li>Increase track width to L size minimum for 10-foot legibility</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="content" class="component-section">
+  <h2 class="ds-section-title">Content guidance</h2>
+  <div class="component-content-grid">
+    <div>
+      <h3 class="ds-subsection-title">Labels</h3>
+      <p class="ds-body">Label the setting, not the state. "Notifications" not "Enable notifications". The toggle itself communicates on/off.</p>
+    </div>
+    <div>
+      <h3 class="ds-subsection-title">Supporting text</h3>
+      <p class="ds-body">Use supporting text only when the setting has non-obvious consequences. Keep to one short sentence below the label.</p>
+    </div>
+    <div>
+      <h3 class="ds-subsection-title">State labels</h3>
+      <p class="ds-body">Do not add "On" / "Off" text inside the toggle track. Colour and position of the thumb communicate state sufficiently.</p>
+    </div>
+    <div>
+      <h3 class="ds-subsection-title">Grouping</h3>
+      <p class="ds-body">Group related toggles under a section header. Keep each group to 5 items or fewer. Use a list component to contain multiple toggles.</p>
+    </div>
+  </div>
+</section>
+
+  <!-- ===================================================
+       12. RELATED TOKENS
+  =================================================== -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-desc">All token values from <code style="font-family:monospace;font-size:11px;background:var(--surface-2);padding:1px 5px;border-radius:3px">tokens/tokens.css</code>. Never override the on-state green &#x2014; <code style="font-family:monospace;font-size:11px;background:var(--surface-2);padding:1px 5px;border-radius:3px">--jio</code> is the sole brand accent for active toggle state.</p>
+    <div class="token-table">
+      <div class="token-table-head">
+        <div>Token</div>
+        <div>Default value</div>
+        <div>Usage</div>
+      </div>
+      <div class="token-table-row">
+        <div class="token-table-cell"><code>--jio</code></div>
+        <div class="token-table-cell" style="color:var(--text3)">&#x23;00A859</div>
+        <div class="token-table-cell" style="color:var(--text3)">Track fill when on &#x2014; never override</div>
+      </div>
+      <div class="token-table-row">
+        <div class="token-table-cell"><code>--surface-3</code></div>
+        <div class="token-table-cell" style="color:var(--text3)">Dark gray surface</div>
+        <div class="token-table-cell" style="color:var(--text3)">Track fill when off</div>
+      </div>
+      <div class="token-table-row">
+        <div class="token-table-cell"><code>--text</code></div>
+        <div class="token-table-cell" style="color:var(--text3)">&#x23;F4F2EE</div>
+        <div class="token-table-cell" style="color:var(--text3)">Thumb fill &#x2014; always white</div>
+      </div>
+      <div class="token-table-row">
+        <div class="token-table-cell"><code>--text3</code></div>
+        <div class="token-table-cell" style="color:var(--text3)">rgba(244,242,238,.32)</div>
+        <div class="token-table-cell" style="color:var(--text3)">Sub-label color</div>
+      </div>
+      <div class="token-table-row">
+        <div class="token-table-cell"><code>--dur-default</code></div>
+        <div class="token-table-cell" style="color:var(--text3)">200ms</div>
+        <div class="token-table-cell" style="color:var(--text3)">Track background transition</div>
+      </div>
+      <div class="token-table-row">
+        <div class="token-table-cell"><code>--dur-fast</code></div>
+        <div class="token-table-cell" style="color:var(--text3)">120ms</div>
+        <div class="token-table-cell" style="color:var(--text3)">Focus ring appearance</div>
+      </div>
+      <div class="token-table-row">
+        <div class="token-table-cell"><code>--pill</code></div>
+        <div class="token-table-cell" style="color:var(--text3)">100px</div>
+        <div class="token-table-cell" style="color:var(--text3)">Track border-radius (pill shape)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       13. CODE EXAMPLES
+  =================================================== -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
+    <div class="component-code-block">
+      <div class="component-code-label">Toggle — switch</div>
+      <pre class="component-code-pre"><code>&lt;div class="toggle-row"&gt;
+  &lt;label class="toggle-label" for="notif-toggle"&gt;
+    &lt;span class="toggle-label__text"&gt;Notifications&lt;/span&gt;
+    &lt;span class="toggle-label__desc"&gt;Get alerts for new games&lt;/span&gt;
+  &lt;/label&gt;
+  &lt;div class="switch"&gt;
+    &lt;input
+      type="checkbox"
+      id="notif-toggle"
+      class="switch__input"
+      role="switch"
+      aria-checked="true"
+      checked
+    &gt;
+    &lt;label for="notif-toggle" class="switch__track"&gt;
+      &lt;span class="switch__thumb"&gt;&lt;/span&gt;
+    &lt;/label&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+    <div class="component-code-block">
+      <div class="component-code-label">Toggle — group in settings list</div>
+      <pre class="component-code-pre"><code>&lt;ul class="ds-list" role="list"&gt;
+  &lt;li class="ds-list-item"&gt;
+    &lt;div class="ds-list-item__body"&gt;
+      &lt;div class="ds-list-item__label"&gt;Notifications&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="switch"&gt;
+      &lt;input type="checkbox" id="t1" class="switch__input" role="switch" checked&gt;
+      &lt;label for="t1" class="switch__track"&gt;&lt;span class="switch__thumb"&gt;&lt;/span&gt;&lt;/label&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li class="ds-list-item"&gt;
+    &lt;div class="ds-list-item__body"&gt;
+      &lt;div class="ds-list-item__label"&gt;Auto-play trailers&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="switch"&gt;
+      &lt;input type="checkbox" id="t2" class="switch__input" role="switch"&gt;
+      &lt;label for="t2" class="switch__track"&gt;&lt;span class="switch__thumb"&gt;&lt;/span&gt;&lt;/label&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       14. CHANGELOG
+  =================================================== -->
+
+</main><script src="../sprite-loader.js"></script><script src="../shell.js"></script></body></html>

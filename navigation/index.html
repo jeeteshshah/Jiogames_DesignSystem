@@ -1,0 +1,1236 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navigation — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    /* ── Page-specific styles ── */
+    body { background: var(--bg); color: var(--text); font-family: var(--jio-font); margin: 0; }
+
+    /* Component page header */
+
+    /* Hero */
+    .component-hero {
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      min-height: 280px;
+      padding: 48px 32px 32px;
+    }
+    .component-hero--dark { background: #060810; }
+    .component-hero--grid {
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 32px 32px;
+      background-color: #060810;
+      border: 1px solid var(--border-subtle);
+    }
+    .component-hero-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 640px;
+    }
+    .component-hero-caption {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: var(--text4);
+      margin-top: 24px;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 320px;
+      height: 180px;
+      border-radius: var(--pill);
+      background: radial-gradient(ellipse, rgba(0,168,89,.2) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Intro */
+    .component-intro {
+      margin-bottom: 48px;
+    }
+    .component-intro p {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.65;
+      margin-bottom: 20px;
+      max-width: 640px;
+    }
+    .component-summary-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      overflow: hidden;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .component-summary-list li {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.55;
+    }
+    .component-summary-list li:last-child { border-bottom: none; }
+    .component-summary-list li strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    /* Best practices */
+    .component-best-practices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .component-bp-card {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1.5px solid;
+    }
+    .component-bp-card--do   { border-color: rgba(0,168,89,.3); }
+    .component-bp-card--dont { border-color: rgba(255,71,87,.3); }
+    .component-bp-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 16px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+    }
+    .component-bp-label--do   { background: rgba(0,168,89,.07);  color: var(--jio); }
+    .component-bp-label--dont { background: rgba(255,71,87,.07); color: var(--negative); }
+    .component-bp-label--do::before   { content: '\2713'; font-size: 11px; }
+    .component-bp-label--dont::before { content: '\2715'; font-size: 11px; }
+    .component-bp-list {
+      padding: 16px 20px 20px;
+      background: var(--surface-1);
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      list-style: none;
+    }
+    .component-bp-list li {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+    .component-bp-list li::before {
+      content: '\00B7';
+      position: absolute;
+      left: 3px;
+      color: var(--text4);
+    }
+
+    /* Content grid */
+    .component-content-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .component-content-card {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      padding: 20px;
+    }
+    .component-content-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-bottom: 12px;
+    }
+    .component-content-card ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .component-content-card li {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+    .component-content-card li::before {
+      content: '\00B7';
+      position: absolute;
+      left: 3px;
+      color: var(--text4);
+    }
+
+    /* Platform cards */
+    .component-platform-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .component-platform-card {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      padding: 20px;
+    }
+    .component-platform-card--mobile { border-top: 2px solid rgba(110,231,183,.4); }
+    .component-platform-card--web    { border-top: 2px solid rgba(147,197,253,.4); }
+    .component-platform-card--tv     { border-top: 2px solid rgba(251,191,36,.4); }
+    .component-platform-card-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 12px;
+    }
+    .component-platform-card--mobile .component-platform-card-title { color: #6ee7b7; }
+    .component-platform-card--web    .component-platform-card-title { color: #93c5fd; }
+    .component-platform-card--tv     .component-platform-card-title { color: #fbbf24; }
+    .component-platform-card ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .component-platform-card li {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+    .component-platform-card li::before {
+      content: '\00B7';
+      position: absolute;
+      left: 3px;
+      color: var(--text4);
+    }
+
+    /* Changelog */
+    .component-changelog {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      overflow: hidden;
+    }
+    .component-changelog-entry {
+      display: grid;
+      grid-template-columns: 56px 80px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 12px;
+    }
+    .component-changelog-entry:last-child { border-bottom: none; }
+    .component-changelog-version {
+      font-family: monospace;
+      font-weight: 700;
+      color: var(--jio);
+      font-size: 11px;
+    }
+    .component-changelog-date {
+      color: var(--text3);
+      font-weight: 500;
+    }
+    .component-changelog-desc {
+      color: var(--text2);
+      line-height: 1.5;
+    }
+
+    /* Note box */
+    .ds-note {
+      background: rgba(0,168,89,.06);
+      border: 1px solid rgba(0,168,89,.2);
+      border-radius: var(--r3);
+      padding: 14px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.55;
+    }
+    .ds-note strong { color: var(--jio); }
+
+    /* Nav size matrix */
+    .nav-size-matrix {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      overflow: hidden;
+    }
+    .nav-size-matrix-head {
+      display: grid;
+      grid-template-columns: 160px 1fr 1fr 1fr;
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .nav-size-matrix-head > div {
+      padding: 10px 16px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+    .nav-size-matrix-row {
+      display: grid;
+      grid-template-columns: 160px 1fr 1fr 1fr;
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--surface-1);
+    }
+    .nav-size-matrix-row:last-child { border-bottom: none; }
+    .nav-size-matrix-row:hover { background: var(--glass-1); }
+    .nav-size-matrix-label {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 3px;
+      border-right: 1px solid var(--border-subtle);
+      background: var(--surface-2);
+    }
+    .nav-size-matrix-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .nav-size-matrix-cell {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      justify-content: center;
+    }
+    .nav-size-matrix-value {
+      font-family: monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .nav-size-matrix-note {
+      font-size: 10px;
+      color: var(--text3);
+      line-height: 1.4;
+    }
+
+    /* State grid for nav items */
+    .ds-state-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .ds-state-cell {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      padding: 20px 12px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .ds-state-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: var(--text3);
+      text-align: center;
+    }
+
+    /* Token table */
+    .ds-token-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      overflow: hidden;
+      font-size: 12px;
+      margin-top: 24px;
+    }
+    .ds-token-table thead tr {
+      background: var(--surface-2);
+    }
+    .ds-token-table th {
+      padding: 10px 16px;
+      text-align: left;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--text3);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .ds-token-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      vertical-align: top;
+      background: var(--surface-1);
+    }
+    .ds-token-table tr:last-child td { border-bottom: none; }
+    .ds-token-table tr:hover td { background: var(--glass-1); }
+    .ds-token-name {
+      font-family: monospace;
+      font-size: 11px;
+      color: #a8e6c5;
+      font-weight: 700;
+    }
+    .ds-token-value {
+      font-family: monospace;
+      font-size: 11px;
+      color: var(--text2);
+    }
+    .ds-token-desc {
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.5;
+    }
+
+    /* Accessibility grid */
+    .a11y-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      overflow: hidden;
+      margin-top: 24px;
+    }
+    .a11y-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .a11y-row:last-child { border-bottom: none; }
+    .a11y-label {
+      padding: 14px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text3);
+      letter-spacing: .3px;
+      background: var(--surface-2);
+      text-transform: uppercase;
+      display: flex;
+      align-items: flex-start;
+      padding-top: 16px;
+    }
+    .a11y-content {
+      padding: 14px 20px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.6;
+      background: var(--surface-1);
+    }
+    .a11y-content ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .a11y-content li {
+      padding-left: 14px;
+      position: relative;
+    }
+    .a11y-content li::before {
+      content: '\00B7';
+      position: absolute;
+      left: 3px;
+      color: var(--text4);
+    }
+
+    kbd {
+      display: inline-block;
+      padding: 1px 6px;
+      background: var(--surface-3);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 11px;
+      color: var(--text2);
+    }
+
+    /* Nav demo specific helpers */
+    .nav-pill-tab {
+      padding: 5px 12px;
+      border-radius: var(--pill);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text3);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .nav-pill-tab--active {
+      background: rgba(0,168,89,.15);
+      color: var(--jio);
+    }
+    .nav-genre-tab {
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text3);
+      cursor: pointer;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      flex-shrink: 0;
+    }
+    .nav-genre-tab--active {
+      color: var(--jio);
+      border-bottom-color: var(--jio);
+    }
+
+    /* Anatomy callout dots */
+    .nav-callout-dot {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--jio);
+      color: #000;
+      font-size: 9px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    /* Variant demo rows */
+    .nav-variant-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 20px;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .nav-variant-row:last-child { border-bottom: none; }
+    .nav-variant-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    @media (max-width: 760px) {
+      .component-best-practices,
+      .component-content-grid,
+      .component-platform-grid { grid-template-columns: 1fr; }
+      .nav-size-matrix { overflow-x: auto; }
+      .nav-size-matrix-head,
+      .nav-size-matrix-row { min-width: 520px; }
+      .ds-state-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head><body><main class="ds-content">
+
+  <!-- ===================================================
+       1. PAGE HEADER
+  =================================================== -->
+  <div class="component-page-header">
+    <div class="component-breadcrumb">
+      <a href="../index.html">JioGames DLS</a>
+      <span class="component-breadcrumb-sep">&#x203A;</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">&#x203A;</span>
+      <span>Navigation</span>
+    </div>
+    <h1 class="component-page-title">Navigation</h1>
+    <p class="component-page-def">Navigation provides the persistent wayfinding structure that helps players move between JioGames surfaces.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+      <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+      <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+      <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+    </div>
+  </div>
+
+  <!-- ===================================================
+       2. COMPONENT HERO
+  =================================================== -->
+  <section class="component-hero component-hero--dark component-hero--grid" id="overview">
+    <div class="hero-glow" style="top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+    <div class="component-hero-inner">
+
+      <!-- Web top nav bar -->
+      <div style="width:100%;max-width:640px;height:56px;background:rgba(6,8,15,.92);border:1px solid var(--border-subtle);border-radius:12px;display:flex;align-items:center;padding:0 16px;gap:12px;box-sizing:border-box">
+        <!-- Logo -->
+        <div style="font-size:16px;font-weight:900;color:var(--jio);letter-spacing:-.5px;flex-shrink:0">JioGames</div>
+        <!-- Pill tabs -->
+        <div style="display:flex;align-items:center;gap:2px;background:var(--surface-2);border-radius:var(--pill);padding:3px;flex-shrink:0">
+          <div class="nav-pill-tab nav-pill-tab--active">Home</div>
+          <div class="nav-pill-tab">Games</div>
+          <div class="nav-pill-tab">Store</div>
+          <div class="nav-pill-tab">Library</div>
+          <div class="nav-pill-tab">Pass</div>
+        </div>
+        <div style="flex:1"></div>
+        <!-- Search icon -->
+        <button class="btn btn--icon" aria-label="Search">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_search"></use></svg>
+        </button>
+        <!-- Bell icon -->
+        <button class="btn btn--icon" aria-label="Notifications">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_notification"></use></svg>
+        </button>
+        <!-- CTA -->
+        <button class="btn btn--primary btn--xs btn--hug" style="white-space:nowrap;flex-shrink:0">Get Pass</button>
+      </div>
+
+      <!-- Genre / section scroll nav -->
+      <div style="width:100%;max-width:640px;height:40px;background:rgba(6,8,15,.7);border:1px solid var(--border-subtle);border-radius:10px;display:flex;align-items:stretch;padding:0 8px;gap:0;overflow:hidden;box-sizing:border-box">
+        <div class="nav-genre-tab nav-genre-tab--active">All</div>
+        <div class="nav-genre-tab">Action</div>
+        <div class="nav-genre-tab">RPG</div>
+        <div class="nav-genre-tab">Sports</div>
+        <div class="nav-genre-tab">Racing</div>
+        <div class="nav-genre-tab">Adventure</div>
+      </div>
+
+    </div>
+    <span class="component-hero-caption">Web top nav &#xB7; 1:1 scale</span>
+  </section>
+
+  <!-- ===================================================
+       3. INTRO
+  =================================================== -->
+  <section class="component-intro" id="intro">
+    <p>Navigation defines how players orient themselves and move through JioGames. Unlike individual components, navigation is a system &#x2014; it governs which surfaces exist, how they relate, and how players transition between them.</p>
+    <ul class="component-summary-list">
+      <li><strong>Hierarchy.</strong> Three tiers: global nav (always visible), section nav (contextual), in-page nav (local tabs or anchors).</li>
+      <li><strong>Platform.</strong> Web uses a persistent top bar; mobile uses a bottom tab bar; TV uses a d-pad-traversable side rail.</li>
+      <li><strong>State.</strong> Every nav item has default, hover (web), active/selected, and disabled states.</li>
+      <li><strong>Context.</strong> Active state always reflects current location. Back navigation preserves scroll position.</li>
+    </ul>
+  </section>
+
+  <!-- ===================================================
+       4. BEST PRACTICES
+  =================================================== -->
+  <section class="ds-section" id="best-practices">
+    <h2 class="ds-section-title">Best practices</h2>
+    <p class="ds-section-desc">Follow these rules to keep navigation consistent and reliable across the JioGames product surface.</p>
+    <div class="component-best-practices">
+      <div class="component-bp-card component-bp-card--do">
+        <span class="component-bp-label component-bp-label--do">Do</span>
+        <ul class="component-bp-list">
+          <li>Use max 5&#x2013;6 nav items in top nav</li>
+          <li>Use noun labels (Home not Go Home)</li>
+          <li>Keep active indicator visible at all times</li>
+          <li>Ensure 44px minimum touch targets on mobile</li>
+          <li>Use persistent nav &#x2014; never hide on scroll on web</li>
+          <li>Highlight the active section clearly with color and indicator</li>
+        </ul>
+      </div>
+      <div class="component-bp-card component-bp-card--dont">
+        <span class="component-bp-label component-bp-label--dont">Don&#x27;t</span>
+        <ul class="component-bp-list">
+          <li>Don&#x27;t use icon-only nav items without labels on mobile</li>
+          <li>Don&#x27;t exceed 6 items in a single nav surface</li>
+          <li>Don&#x27;t change nav structure between authenticated and unauthenticated states beyond hiding locked items</li>
+          <li>Don&#x27;t use nav as a CTA surface &#x2014; keep CTAs in right-slot buttons</li>
+          <li>Don&#x27;t rely on color alone for active state</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       5. ANATOMY
+  =================================================== -->
+  <section class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <p class="ds-section-desc">The web top nav bar is the most anatomically complete navigation surface &#x2014; it contains all six parts. Mobile and TV use subsets of this structure.</p>
+    <div class="ds-anatomy">
+      <div class="ds-anatomy-preview">
+        <!-- Annotated nav bar with numbered callout dots -->
+        <div style="position:relative;display:inline-block;padding:24px 16px 16px;width:100%;max-width:560px;box-sizing:border-box">
+          <!-- Nav bar -->
+          <div style="height:56px;background:rgba(6,8,15,.92);border:1px solid var(--border-subtle);border-radius:12px;display:flex;align-items:center;padding:0 14px;gap:10px;position:relative">
+            <!-- 1: Logo -->
+            <div style="font-size:15px;font-weight:900;color:var(--jio);letter-spacing:-.5px;flex-shrink:0">JioGames</div>
+            <!-- 2: Section links -->
+            <div style="display:flex;align-items:center;gap:1px;background:var(--surface-2);border-radius:var(--pill);padding:3px;flex-shrink:0">
+              <!-- 3: Active indicator (Home pill) -->
+              <div class="nav-pill-tab nav-pill-tab--active" style="position:relative">Home</div>
+              <div class="nav-pill-tab">Games</div>
+              <div class="nav-pill-tab">Library</div>
+            </div>
+            <div style="flex:1"></div>
+            <!-- 4 & 5: Icon slots -->
+            <button class="btn btn--icon" style="flex-shrink:0" aria-label="Search">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </button>
+            <button class="btn btn--icon" style="flex-shrink:0" aria-label="Notifications">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="../sprite.svg#ic_notification"></use></svg>
+            </button>
+            <!-- 6: CTA button -->
+            <button class="btn btn--primary btn--xs btn--hug" style="white-space:nowrap;flex-shrink:0">Get Pass</button>
+
+            <!-- Callout dots -->
+            <div class="nav-callout-dot" style="top:-10px;left:14px">1</div>
+            <div class="nav-callout-dot" style="top:-10px;left:95px">2</div>
+            <div class="nav-callout-dot" style="bottom:-10px;left:122px">3</div>
+            <div class="nav-callout-dot" style="top:-10px;right:110px">4</div>
+            <div class="nav-callout-dot" style="bottom:-10px;right:58px">5</div>
+            <div class="nav-callout-dot" style="top:-10px;right:4px">6</div>
+          </div>
+        </div>
+      </div>
+      <div class="ds-anatomy-list">
+        <div class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">1</span>
+          <div>
+            <div class="ds-anatomy-label">Nav container <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Height: <code>var(--app-bar-h)</code> (64px). Sticky top. <code>background: rgba(6,8,15,.92)</code>, <code>backdrop-filter: blur(12px)</code>. Full width, z-index above content.</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">2</span>
+          <div>
+            <div class="ds-anatomy-label">Logo / brand slot <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Left-anchored JioGames wordmark or icon. Font-weight 900. Color <code>var(--jio)</code>. Never recreate or recolour. <code>flex-shrink: 0</code>.</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">3</span>
+          <div>
+            <div class="ds-anatomy-label">Section links <span class="ds-anatomy-required">Required (&#x2265;1)</span></div>
+            <div class="ds-anatomy-desc">Pill tab group or underline tabs. Max 6 items. Color <code>var(--text3)</code> inactive, active via pill or underline indicator.</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">4</span>
+          <div>
+            <div class="ds-anatomy-label">Active indicator <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Green underline <code>2px solid var(--jio)</code> or green pill background. Exactly one item active at all times.</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">5</span>
+          <div>
+            <div class="ds-anatomy-label">Icon slots (search, notification) <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc">44px touch targets. <code>var(--icon-size-base)</code> 24px icons. Right-side of nav bar, before CTA.</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">6</span>
+          <div>
+            <div class="ds-anatomy-label">CTA button <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc"><code>.btn--primary.btn--xs</code> &#x201C;Get Pass&#x201D; &#x2014; rightmost slot. Never more than one CTA. Never replace nav items with CTAs.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       6. VARIANTS
+  =================================================== -->
+  <section class="ds-section" id="variants">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Four navigation patterns cover all JioGames surfaces. Each is adapted for its platform context.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex;flex-direction:column;gap:0">
+
+        <!-- Top nav (web) -->
+        <div class="nav-variant-row">
+          <div class="nav-variant-label">Top nav<br><span style="font-size:9px;color:var(--text4);text-transform:none;letter-spacing:0;font-weight:500">(Web)</span></div>
+          <div style="height:52px;background:rgba(6,8,15,.92);border:1px solid var(--border-subtle);border-radius:10px;display:flex;align-items:center;padding:0 14px;gap:10px;max-width:500px">
+            <div style="font-size:14px;font-weight:900;color:var(--jio);letter-spacing:-.4px;flex-shrink:0">JioGames</div>
+            <div style="display:flex;align-items:center;gap:2px;background:var(--surface-2);border-radius:var(--pill);padding:2px;flex-shrink:0">
+              <div class="nav-pill-tab nav-pill-tab--active" style="font-size:11px;padding:4px 10px">Home</div>
+              <div class="nav-pill-tab" style="font-size:11px;padding:4px 10px">Games</div>
+              <div class="nav-pill-tab" style="font-size:11px;padding:4px 10px">Store</div>
+              <div class="nav-pill-tab" style="font-size:11px;padding:4px 10px">Library</div>
+            </div>
+            <div style="flex:1"></div>
+            <button class="btn btn--primary btn--xs btn--hug" style="flex-shrink:0">Get Pass</button>
+          </div>
+        </div>
+
+        <!-- Hamburger (mobile web) -->
+        <div class="nav-variant-row">
+          <div class="nav-variant-label">Hamburger<br><span style="font-size:9px;color:var(--text4);text-transform:none;letter-spacing:0;font-weight:500">(Mobile web &lt;640px)</span></div>
+          <div style="height:52px;background:rgba(6,8,15,.92);border:1px solid var(--border-subtle);border-radius:10px;display:flex;align-items:center;padding:0 14px;gap:10px;max-width:260px">
+            <div style="font-size:14px;font-weight:900;color:var(--jio);letter-spacing:-.4px;flex:1">JioGames</div>
+            <button class="btn btn--icon" style="flex-shrink:0" aria-label="Open menu" aria-expanded="false">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Contextual back nav -->
+        <div class="nav-variant-row">
+          <div class="nav-variant-label">Back nav<br><span style="font-size:9px;color:var(--text4);text-transform:none;letter-spacing:0;font-weight:500">(Contextual)</span></div>
+          <div style="height:52px;background:rgba(6,8,15,.92);border:1px solid var(--border-subtle);border-radius:10px;display:flex;align-items:center;padding:0 8px;gap:4px;max-width:340px">
+            <button class="btn btn--icon" style="flex-shrink:0" aria-label="Go back">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <div style="flex:1;text-align:center;font-size:14px;font-weight:700;color:var(--text)">War Thunder</div>
+            <button class="btn btn--icon" style="flex-shrink:0" aria-label="Search">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Breadcrumb trail -->
+        <div class="nav-variant-row" style="border-bottom:none">
+          <div class="nav-variant-label">Breadcrumb<br><span style="font-size:9px;color:var(--text4);text-transform:none;letter-spacing:0;font-weight:500">(Web / TV)</span></div>
+          <nav aria-label="Breadcrumb">
+            <ol style="display:flex;align-items:center;gap:6px;list-style:none;padding:0;margin:0;flex-wrap:wrap">
+              <li><a href="#" style="font-size:13px;color:var(--text3);text-decoration:none;font-weight:500;transition:color 120ms" onmouseover="this.style.color='var(--jio)'" onmouseout="this.style.color='var(--text3)'">JioGames</a></li>
+              <li style="color:var(--text4);font-size:13px">&#x203A;</li>
+              <li><a href="#" style="font-size:13px;color:var(--text3);text-decoration:none;font-weight:500" onmouseover="this.style.color='var(--jio)'" onmouseout="this.style.color='var(--text3)'">Games</a></li>
+              <li style="color:var(--text4);font-size:13px">&#x203A;</li>
+              <li><span style="font-size:13px;color:var(--text);font-weight:700" aria-current="page">Action</span></li>
+            </ol>
+          </nav>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       7. SIZES / PLATFORM MATRIX
+  =================================================== -->
+  <section class="ds-section" id="sizes">
+    <h2 class="ds-section-title">Platform matrix</h2>
+    <p class="ds-section-desc">Navigation dimensions, active indicators, and item limits differ per platform. Use token aliases; never hardcode raw pixel values in component CSS.</p>
+
+    <div class="nav-size-matrix">
+      <div class="nav-size-matrix-head">
+        <div>Attribute</div>
+        <div style="color:#6ee7b7">Mobile</div>
+        <div style="color:#93c5fd">Web</div>
+        <div style="color:#fbbf24">TV</div>
+      </div>
+
+      <div class="nav-size-matrix-row">
+        <div class="nav-size-matrix-label">
+          <span class="nav-size-matrix-name">Nav height</span>
+          <span style="font-family:monospace;font-size:10px;color:#a8e6c5">--app-bar-h</span>
+        </div>
+        <div class="nav-size-matrix-cell">
+          <span class="nav-size-matrix-value">64px</span>
+          <span class="nav-size-matrix-note">Bottom tab bar</span>
+        </div>
+        <div class="nav-size-matrix-cell">
+          <span class="nav-size-matrix-value">64px</span>
+          <span class="nav-size-matrix-note">Sticky top bar</span>
+        </div>
+        <div class="nav-size-matrix-cell">
+          <span class="nav-size-matrix-value">N/A</span>
+          <span class="nav-size-matrix-note">TV uses side rail</span>
+        </div>
+      </div>
+
+      <div class="nav-size-matrix-row">
+        <div class="nav-size-matrix-label">
+          <span class="nav-size-matrix-name">Active indicator</span>
+        </div>
+        <div class="nav-size-matrix-cell">
+          <span class="nav-size-matrix-value" style="font-size:11px">Dot + color</span>
+          <span class="nav-size-matrix-note">Bottom tab handles<br>active indicator</span>
+        </div>
+        <div class="nav-size-matrix-cell">
+          <span class="nav-size-matrix-value" style="font-size:11px">2px underline or<br>green pill</span>
+          <span class="nav-size-matrix-note"><code style="font-size:9px">var(--jio)</code></span>
+        </div>
+        <div class="nav-size-matrix-cell">
+          <span class="nav-size-matrix-value" style="font-size:11px">Green glow border</span>
+          <span class="nav-size-matrix-note"><code style="font-size:9px">var(--tv-focus-shadow)</code></span>
+        </div>
+      </div>
+
+      <div class="nav-size-matrix-row">
+        <div class="nav-size-matrix-label">
+          <span class="nav-size-matrix-name">Max items</span>
+        </div>
+        <div class="nav-size-matrix-cell">
+          <span class="nav-size-matrix-value">5</span>
+          <span class="nav-size-matrix-note">Bottom tab bar</span>
+        </div>
+        <div class="nav-size-matrix-cell">
+          <span class="nav-size-matrix-value">6</span>
+          <span class="nav-size-matrix-note">Top nav links</span>
+        </div>
+        <div class="nav-size-matrix-cell">
+          <span class="nav-size-matrix-value">8</span>
+          <span class="nav-size-matrix-note">Side rail, scrollable</span>
+        </div>
+      </div>
+
+      <div class="nav-size-matrix-row">
+        <div class="nav-size-matrix-label">
+          <span class="nav-size-matrix-name">Touch target</span>
+          <span style="font-family:monospace;font-size:10px;color:#a8e6c5">--touch-min</span>
+        </div>
+        <div class="nav-size-matrix-cell">
+          <span class="nav-size-matrix-value">44px</span>
+          <span class="nav-size-matrix-note">WCAG minimum</span>
+        </div>
+        <div class="nav-size-matrix-cell">
+          <span class="nav-size-matrix-value">48px</span>
+          <span class="nav-size-matrix-note">Pointer comfortable</span>
+        </div>
+        <div class="nav-size-matrix-cell">
+          <span class="nav-size-matrix-value">60px</span>
+          <span class="nav-size-matrix-note">D-pad target</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       8. STATES
+  =================================================== -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Every nav item across platforms responds to the same interaction states. Hover exists only on web. TV Focused uses the TV glow ring exclusively &#x2014; no hover.</p>
+
+    <div class="ds-state-grid">
+
+      <!-- Default -->
+      <div class="ds-state-cell" style="background:var(--bg)">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 12px;border-radius:var(--r3)">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--text3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+          <span style="font-size:11px;font-weight:600;color:var(--text3)">Games</span>
+        </div>
+        <div class="ds-state-label">Default</div>
+      </div>
+
+      <!-- Hover (web) -->
+      <div class="ds-state-cell" style="background:var(--bg)">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 12px;border-radius:var(--r3);background:var(--glass-1)">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--text2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+          <span style="font-size:11px;font-weight:600;color:var(--text2)">Games</span>
+        </div>
+        <div class="ds-state-label">Hover (web)</div>
+      </div>
+
+      <!-- Active / Selected -->
+      <div class="ds-state-cell" style="background:var(--bg)">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 14px;border-radius:var(--r3);background:rgba(0,168,89,.12)">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="var(--jio)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          <span style="font-size:11px;font-weight:700;color:var(--jio)">Home</span>
+        </div>
+        <div class="ds-state-label" style="color:var(--jio)">Active</div>
+      </div>
+
+      <!-- Disabled -->
+      <div class="ds-state-cell" style="background:var(--bg)">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 12px;border-radius:var(--r3);opacity:.32">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--text3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="../sprite.svg#ic_favorite"></use></svg>
+          <span style="font-size:11px;font-weight:600;color:var(--text3)">Wishlist</span>
+        </div>
+        <div class="ds-state-label">Disabled</div>
+      </div>
+
+      <!-- Badge (notification dot) -->
+      <div class="ds-state-cell" style="background:var(--bg)">
+        <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 12px;border-radius:var(--r3)">
+          <div style="position:relative;display:inline-block">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--text3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="../sprite.svg#ic_notification"></use></svg>
+            <div style="position:absolute;top:-3px;right:-3px;width:8px;height:8px;border-radius:50%;background:#ff4757;border:1.5px solid var(--bg)"></div>
+          </div>
+          <span style="font-size:11px;font-weight:600;color:var(--text3)">Alerts</span>
+        </div>
+        <div class="ds-state-label">Badge</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       9. CONTENT GUIDANCE
+  =================================================== -->
+  <section class="ds-section" id="content">
+    <h2 class="ds-section-title">Content</h2>
+    <p class="ds-section-desc">Nav labels and item counts are load-bearing decisions. Every word and every destination shapes how players understand the product.</p>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Label writing</div>
+        <ul>
+          <li>Use nouns not verbs (Home not Go Home)</li>
+          <li>Capitalize first letter only</li>
+          <li>Keep to 1 word where possible</li>
+          <li>Avoid abbreviations &#x2014; spell out full destination name</li>
+          <li>Match the label to what the section contains, not what you want users to do</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Item limits</div>
+        <ul>
+          <li>Max 5 tabs on mobile bottom bar</li>
+          <li>Max 6 links in web top nav</li>
+          <li>Prioritize most-used destinations &#x2014; analytics-informed</li>
+          <li>Surface Pass/Store as CTA button not a nav item</li>
+          <li>Hide locked items; don&#x27;t disable them (disabled implies coming soon)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       10. PLATFORM CONSIDERATIONS
+  =================================================== -->
+  <section class="ds-section" id="platforms">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <p class="ds-section-desc">Each platform enforces different constraints. Navigation that works on web may be completely unusable on TV or inaccessible on mobile.</p>
+    <div class="component-platform-grid">
+
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Bottom tab bar is primary nav &#x2014; never top nav</li>
+          <li>5 tab maximum &#x2014; strictly enforced</li>
+          <li>Icons + labels required on every tab</li>
+          <li>Tab bar height <code style="font-size:10px">var(--tab-bar-h)</code> 64px</li>
+          <li>Safe area inset bottom applied (<code style="font-size:10px">env(safe-area-inset-bottom)</code>)</li>
+          <li>No hover states &#x2014; only press and active</li>
+        </ul>
+      </div>
+
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Persistent sticky top nav &#x2014; never hides on scroll</li>
+          <li>Hamburger hidden at &#x2265;768px breakpoint</li>
+          <li>Pill tab group or underline tabs supported</li>
+          <li>Hover states on all interactive items</li>
+          <li>CTA button in rightmost slot, one maximum</li>
+          <li>Frosted glass treatment: <code style="font-size:10px">backdrop-filter: blur(12px)</code></li>
+        </ul>
+      </div>
+
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>Side rail navigation replaces top bar entirely</li>
+          <li>D-pad traversal &#x2014; vertical movement through rail items</li>
+          <li><code style="font-size:10px">var(--tv-focus-shadow)</code> glow mandatory on focus</li>
+          <li>No hover states &#x2014; D-pad has no pointer</li>
+          <li>Labels always visible alongside icons</li>
+          <li>Focus moves vertically; select with OK/Enter</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       11. ACCESSIBILITY
+  =================================================== -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">Navigation must be fully operable by keyboard, screen reader, and D-pad on all platforms. These requirements are not optional.</p>
+
+    <div class="a11y-grid">
+      <div class="a11y-row">
+        <div class="a11y-label">Roles</div>
+        <div class="a11y-content">
+          <ul>
+            <li><code>&lt;nav aria-label=&quot;Main navigation&quot;&gt;</code> wrapping element on all nav surfaces</li>
+            <li><code>role=&quot;list&quot;</code> for nav item group where <code>&lt;ol&gt;</code>/<code>&lt;ul&gt;</code> is not used</li>
+            <li>Mobile tab bar: <code>role=&quot;tablist&quot;</code> with <code>aria-label=&quot;Main navigation&quot;</code></li>
+          </ul>
+        </div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Keyboard</div>
+        <div class="a11y-content">
+          <ul>
+            <li><kbd>Tab</kbd> / <kbd>Shift+Tab</kbd> cycles through all nav items</li>
+            <li><kbd>Enter</kbd> / <kbd>Space</kbd> activates the focused item</li>
+            <li>Current page item receives <code>aria-current=&quot;page&quot;</code></li>
+            <li>Never trap keyboard focus inside nav &#x2014; <kbd>Tab</kbd> must always move out</li>
+          </ul>
+        </div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">ARIA</div>
+        <div class="a11y-content">
+          <ul>
+            <li><code>aria-label</code> on all icon-only buttons (search, notification, hamburger)</li>
+            <li><code>aria-expanded=&quot;true/false&quot;</code> on hamburger menu toggle</li>
+            <li>Screen reader announces active section via <code>aria-current</code></li>
+            <li>Hidden nav drawer must use <code>aria-hidden=&quot;true&quot;</code> + <code>tabindex=&quot;-1&quot;</code> on all children</li>
+          </ul>
+        </div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Focus</div>
+        <div class="a11y-content">
+          <ul>
+            <li>Focus ring always visible &#x2014; never suppress <code>:focus-visible</code></li>
+            <li>TV uses <code>var(--tv-focus-shadow)</code> &#x2014; mandatory glow ring on every focusable item</li>
+            <li>Skip-to-content link placed before nav: <code>&lt;a href=&quot;#main&quot; class=&quot;skip-link&quot;&gt;Skip to content&lt;/a&gt;</code></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       12. RELATED TOKENS
+  =================================================== -->
+  <section class="ds-section" id="tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-desc">Use these token aliases in all navigation component CSS. Never hardcode raw hex or pixel values.</p>
+
+    <table class="ds-token-table">
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>Value</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="ds-token-name">--app-bar-h</span></td>
+          <td><span class="ds-token-value">64px</span></td>
+          <td class="ds-token-desc">App bar / nav bar height</td>
+        </tr>
+        <tr>
+          <td><span class="ds-token-name">--tab-bar-h</span></td>
+          <td><span class="ds-token-value">64px</span></td>
+          <td class="ds-token-desc">Bottom tab bar height (mobile)</td>
+        </tr>
+        <tr>
+          <td><span class="ds-token-name">--status-bar-h</span></td>
+          <td><span class="ds-token-value">44px</span></td>
+          <td class="ds-token-desc">Status bar height (safe area)</td>
+        </tr>
+        <tr>
+          <td><span class="ds-token-name">--touch-min</span></td>
+          <td><span class="ds-token-value">44px</span></td>
+          <td class="ds-token-desc">Minimum touch target size</td>
+        </tr>
+        <tr>
+          <td><span class="ds-token-name">--jio</span></td>
+          <td><span class="ds-token-value">#00A859</span></td>
+          <td class="ds-token-desc">Active item color, active indicator, logo wordmark</td>
+        </tr>
+        <tr>
+          <td><span class="ds-token-name">--text3</span></td>
+          <td><span class="ds-token-value">#6B7280</span></td>
+          <td class="ds-token-desc">Default / inactive nav item text color</td>
+        </tr>
+        <tr>
+          <td><span class="ds-token-name">--border-subtle</span></td>
+          <td><span class="ds-token-value">rgba(255,255,255,.08)</span></td>
+          <td class="ds-token-desc">Nav bar bottom border, TV rail separator</td>
+        </tr>
+        <tr>
+          <td><span class="ds-token-name">--jio-font</span></td>
+          <td><span class="ds-token-value">JioType</span></td>
+          <td class="ds-token-desc">Nav label font family</td>
+        </tr>
+        <tr>
+          <td><span class="ds-token-name">--tv-focus-shadow</span></td>
+          <td><span class="ds-token-value">0 0 0 2px var(--jio)</span></td>
+          <td class="ds-token-desc">TV D-pad focus ring on nav items &#x2014; mandatory</td>
+        </tr>
+        <tr>
+          <td><span class="ds-token-name">--glass-1</span></td>
+          <td><span class="ds-token-value">rgba(255,255,255,.05)</span></td>
+          <td class="ds-token-desc">Web nav item hover background</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ===================================================
+       13. CODE EXAMPLES
+  =================================================== -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
+    <div class="component-code-block">
+      <div class="component-code-label">Navigation — side nav</div>
+      <pre class="component-code-pre"><code>&lt;nav class="ds-nav" aria-label="Main navigation"&gt;
+  &lt;a href="/home" class="ds-nav-link is-active" aria-current="page"&gt;
+    &lt;svg class="icon icon--m" aria-hidden="true"&gt;&lt;use href="/sprite.svg#ic_home"&gt;&lt;/use&gt;&lt;/svg&gt;
+    Home
+  &lt;/a&gt;
+  &lt;a href="/games" class="ds-nav-link"&gt;
+    &lt;svg class="icon icon--m" aria-hidden="true"&gt;&lt;use href="/sprite.svg#ic_games"&gt;&lt;/use&gt;&lt;/svg&gt;
+    Games
+  &lt;/a&gt;
+  &lt;a href="/search" class="ds-nav-link"&gt;
+    &lt;svg class="icon icon--m" aria-hidden="true"&gt;&lt;use href="/sprite.svg#ic_search"&gt;&lt;/use&gt;&lt;/svg&gt;
+    Search
+  &lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+    </div>
+    <div class="component-code-block">
+      <div class="component-code-label">Navigation — breadcrumb</div>
+      <pre class="component-code-pre"><code>&lt;nav aria-label="Breadcrumb"&gt;
+  &lt;ol style="display:flex;align-items:center;gap:6px;list-style:none;padding:0;margin:0"&gt;
+    &lt;li&gt;&lt;a href="/" style="color:var(--text3);text-decoration:none;font-size:12px"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li aria-hidden="true" style="color:var(--text4);font-size:12px"&gt;/&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/games" style="color:var(--text3);text-decoration:none;font-size:12px"&gt;Games&lt;/a&gt;&lt;/li&gt;
+    &lt;li aria-hidden="true" style="color:var(--text4);font-size:12px"&gt;/&lt;/li&gt;
+    &lt;li&gt;&lt;span aria-current="page" style="color:var(--text);font-size:12px;font-weight:700"&gt;War Thunder&lt;/span&gt;&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       14. CHANGELOG
+  =================================================== -->
+
+</main><script src="../sprite-loader.js"></script><script src="../shell.js"></script></body></html>

@@ -1,0 +1,762 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avatar — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    /* ── Avatar component CSS ── */
+    .avatar {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--pill);
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--surface-3);
+    }
+    .avatar__img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .avatar__initials {
+      font-family: var(--jio-font);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1;
+      letter-spacing: -.3px;
+    }
+    .avatar--initials { background: var(--surface-3); }
+    .avatar--initials-accent { background: var(--jio); }
+    .avatar--initials-accent .avatar__initials { color: #000; }
+
+    /* Sizes */
+    .avatar--xs { width: 24px; height: 24px; }
+    .avatar--xs .avatar__initials { font-size: 9px; }
+    .avatar--s  { width: 32px; height: 32px; }
+    .avatar--s  .avatar__initials { font-size: 12px; }
+    .avatar--m  { width: 40px; height: 40px; }
+    .avatar--m  .avatar__initials { font-size: 15px; }
+    .avatar--l  { width: 48px; height: 48px; }
+    .avatar--l  .avatar__initials { font-size: 18px; }
+    .avatar--xl { width: 64px; height: 64px; }
+    .avatar--xl .avatar__initials { font-size: 22px; }
+
+    /* Presence */
+    .avatar__presence {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 8px;
+      height: 8px;
+      border-radius: var(--pill);
+      background: var(--jio);
+      border: 2px solid var(--bg);
+    }
+    .avatar__presence--offline { background: var(--text4); }
+
+    /* Ring for stacking */
+    .avatar--ring { box-shadow: 0 0 0 2px var(--surface-1); }
+
+    /* Group */
+    .avatar-group { display: flex; flex-direction: row; }
+    .avatar-group .avatar + .avatar { margin-left: -8px; }
+
+    /* Skeleton shimmer */
+    @keyframes avatar-shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .avatar--skeleton {
+      background: linear-gradient(90deg, var(--surface-2) 25%, var(--surface-3) 50%, var(--surface-2) 75%);
+      background-size: 200% 100%;
+      animation: avatar-shimmer 1.4s ease-in-out infinite;
+    }
+
+    /* Hero XL ring variant */
+    .avatar--bordered {
+      border: 2px solid var(--jio);
+      background: var(--surface-2);
+    }
+  </style>
+</head><body><main class="ds-main">
+
+  <!-- PAGE HEADER -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <a href="../" class="component-breadcrumb-link">JioGames DLS</a>
+      <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="component-breadcrumb-current">Avatar</span>
+    </nav>
+    <h1 class="component-page-title">Avatar</h1>
+    <p class="component-page-def">User representation through profile images, initials fallback, and online presence indicators. Used in profiles, friend lists, comments, and leaderboards.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile">
+        <span class="component-platform-dot"></span>Mobile
+      </span>
+      <span class="component-platform component-platform--web">
+        <span class="component-platform-dot"></span>Web
+      </span>
+      <span class="component-platform component-platform--tv">
+        <span class="component-platform-dot"></span>TV
+      </span>
+      <span class="component-maturity component-maturity--draft">
+        <span class="component-maturity--dot"></span>Draft
+      </span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:300px; position:relative; overflow:hidden;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="flex-direction:row; gap:16px; flex-wrap:wrap; justify-content:center; align-items:center;">
+
+      <!-- XS -->
+      <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+        <div class="avatar avatar--xs avatar--initials" aria-label="JG">
+          <span class="avatar__initials" aria-hidden="true">JG</span>
+        </div>
+        <span style="font-size:10px; color:rgba(244,242,238,.35); letter-spacing:.4px; text-transform:uppercase;">XS · 24px</span>
+      </div>
+
+      <!-- S -->
+      <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+        <div class="avatar avatar--s avatar--initials" aria-label="AB">
+          <span class="avatar__initials" aria-hidden="true">AB</span>
+        </div>
+        <span style="font-size:10px; color:rgba(244,242,238,.35); letter-spacing:.4px; text-transform:uppercase;">S · 32px</span>
+      </div>
+
+      <!-- M with presence -->
+      <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+        <div class="avatar avatar--m avatar--initials-accent" aria-label="CD">
+          <span class="avatar__initials" aria-hidden="true">CD</span>
+          <span class="avatar__presence" aria-label="Online"></span>
+        </div>
+        <span style="font-size:10px; color:rgba(244,242,238,.35); letter-spacing:.4px; text-transform:uppercase;">M · 40px</span>
+      </div>
+
+      <!-- L -->
+      <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+        <div class="avatar avatar--l avatar--initials" aria-label="EF">
+          <span class="avatar__initials" aria-hidden="true">EF</span>
+        </div>
+        <span style="font-size:10px; color:rgba(244,242,238,.35); letter-spacing:.4px; text-transform:uppercase;">L · 48px</span>
+      </div>
+
+      <!-- XL with ring border -->
+      <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+        <div class="avatar avatar--xl avatar--initials avatar--bordered" aria-label="GH">
+          <span class="avatar__initials" aria-hidden="true">GH</span>
+        </div>
+        <span style="font-size:10px; color:rgba(244,242,238,.35); letter-spacing:.4px; text-transform:uppercase;">XL · 64px</span>
+      </div>
+
+    </div>
+    <p class="component-hero-caption">XS → XL · IMAGE · INITIALS · PRESENCE INDICATOR</p>
+  </section>
+
+  <!-- 1. INTRODUCTION -->
+  <section class="component-intro" id="intro">
+    <h2 class="ds-section-title">Introduction</h2>
+    <p>Avatar represents a user or entity across the JioGames platform. Three display modes operate in strict priority order:</p>
+    <ol style="margin:12px 0 0 18px; display:flex; flex-direction:column; gap:6px; font-size:14px; color:var(--text2); line-height:1.6;">
+      <li><strong style="color:var(--text);">Profile image</strong> — renders if a URL is available and loads successfully</li>
+      <li><strong style="color:var(--text);">Initials</strong> — 1–2 characters derived from the display name, rendered on a surface-3 background</li>
+      <li><strong style="color:var(--text);">Icon fallback</strong> — generic person icon when no name is available</li>
+    </ol>
+    <ul class="component-summary-list" style="margin-top:20px;">
+      <li><strong>Profile headers</strong> — XL or L size for the primary user identity surface</li>
+      <li><strong>Friend lists</strong> — M size, often paired with an online presence dot</li>
+      <li><strong>Comments &amp; chat</strong> — S size alongside message content</li>
+      <li><strong>Leaderboards</strong> — M size with rank context</li>
+      <li><strong>Notification items</strong> — S size for compact list rows</li>
+    </ul>
+    <p style="margin-top:16px; font-size:13px; color:var(--text3); line-height:1.55;">Do NOT use avatars for game cover art (use the game card thumbnail instead) or brand logos (use the logo component).</p>
+  </section>
+
+  <!-- 2. BEST PRACTICES -->
+  <section class="ds-section" id="best-practices">
+    <h2 class="ds-section-title">Best practices</h2>
+    <p class="ds-section-desc">Rules that keep Avatar consistent, accessible, and visually coherent across every context.</p>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+      <div class="component-bp-card component-bp-card--do">
+        <span class="component-bp-label component-bp-label--do">Do</span>
+        <ul class="component-bp-list">
+          <li>Always provide alt text for image avatars that describes the person — "Profile picture of Arjun" not "avatar image"</li>
+          <li>Use a token for initials background — never hardcode a user-specific color</li>
+          <li>Treat the online indicator as additive — never replace the avatar with a presence-only icon</li>
+          <li>Stack multiple avatars with −8px overlap and a surface-1 ring border to separate them visually</li>
+          <li>Use minimum M (40px) on TV — smaller avatars are indiscernible from 10 feet away</li>
+        </ul>
+      </div>
+      <div class="component-bp-card component-bp-card--dont">
+        <span class="component-bp-label component-bp-label--dont">Don't</span>
+        <ul class="component-bp-list">
+          <li>Use avatars for game cover art or brand logos — different components exist for those purposes</li>
+          <li>Show XS or S size on TV — too small to read at viewing distance</li>
+          <li>Rely on presence color alone — always pair a dot with a label in list rows</li>
+          <li>Display a square or non-circular avatar — always use border-radius: var(--pill)</li>
+          <li>Hardcode hex values for backgrounds — use design tokens to stay in sync with theme updates</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Do / Don't visual demo -->
+    <div class="ds-do-dont-grid" style="margin-top:24px;">
+      <div class="ds-do-card">
+        <div class="ds-do-body" style="display:flex; align-items:center; gap:14px; padding:24px;">
+          <div class="avatar avatar--m avatar--initials-accent" aria-label="Arjun Bose">
+            <span class="avatar__initials" aria-hidden="true">AB</span>
+            <span class="avatar__presence" aria-label="Online"></span>
+          </div>
+          <div>
+            <div style="font-size:14px; font-weight:600; color:var(--text);">Arjun Bose</div>
+            <div style="font-size:12px; color:var(--jio); display:flex; align-items:center; gap:4px; margin-top:2px;">
+              <span style="width:6px;height:6px;border-radius:50%;background:var(--jio);display:inline-block;"></span> Online
+            </div>
+          </div>
+        </div>
+        <div class="ds-do-footer">M avatar + initials + online indicator in friend list</div>
+      </div>
+      <div class="ds-dont-card">
+        <div class="ds-dont-body" style="display:flex; align-items:center; justify-content:center; padding:24px; gap:12px;">
+          <!-- Avatar used where game cover art should be -->
+          <div class="avatar avatar--xl avatar--initials" style="border-radius:12px;" aria-label="wrong usage">
+            <span class="avatar__initials" aria-hidden="true" style="font-size:10px; color:var(--text3);">GAME</span>
+          </div>
+          <div style="font-size:12px; color:var(--text3); max-width:140px; line-height:1.4;">Avatar used in place of game cover art</div>
+        </div>
+        <div class="ds-dont-footer">Avatar must not substitute a game card thumbnail</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. ANATOMY -->
+  <section class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <p class="ds-section-desc">Every part of the Avatar component and its associated token.</p>
+
+    <div class="ds-anatomy">
+      <div class="ds-anatomy-preview">
+        <div class="ds-anatomy-component" style="position:relative; width:80px; height:80px;">
+          <!-- Avatar M with presence -->
+          <div style="position:relative; display:inline-flex; width:80px; height:80px; border-radius:50%; background:var(--surface-3); align-items:center; justify-content:center; overflow:visible;">
+            <div style="width:80px; height:80px; border-radius:50%; background:var(--jio); display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative;">
+              <span style="font-family:var(--jio-font); font-weight:700; font-size:28px; color:#000; line-height:1;">JG</span>
+            </div>
+            <span style="position:absolute; bottom:2px; right:2px; width:16px; height:16px; border-radius:50%; background:var(--jio); border:3px solid var(--bg);"></span>
+          </div>
+          <!-- Callout dots -->
+          <span style="position:absolute; top:-20px; left:50%; transform:translateX(-50%); display:flex; align-items:center; justify-content:center;">
+            <span class="ds-anatomy-callout-num">1</span>
+          </span>
+          <span style="position:absolute; top:30px; left:-28px; display:flex; align-items:center; justify-content:center;">
+            <span class="ds-anatomy-callout-num">2</span>
+          </span>
+          <span style="position:absolute; top:30px; right:-28px; display:flex; align-items:center; justify-content:center;">
+            <span class="ds-anatomy-callout-num">3</span>
+          </span>
+          <span style="position:absolute; bottom:-20px; right:-28px; display:flex; align-items:center; justify-content:center;">
+            <span class="ds-anatomy-callout-num">4</span>
+          </span>
+        </div>
+      </div>
+      <ol class="ds-anatomy-list">
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">1</span>
+          <div>
+            <div class="ds-anatomy-label">Container <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Circular wrapper that clips image or initials. Always pill radius and hidden overflow.</div>
+            <code class="ds-anatomy-token ds-code">border-radius: var(--pill); overflow: hidden</code>
+          </div>
+        </li>
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">2</span>
+          <div>
+            <div class="ds-anatomy-label">Initials / Image <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Either an img tag (object-fit: cover) or a centered initials span. Exactly one is rendered at a time.</div>
+            <code class="ds-anatomy-token ds-code">color: var(--text); font-weight: 700</code>
+          </div>
+        </li>
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">3</span>
+          <div>
+            <div class="ds-anatomy-label">Initials background <span class="ds-anatomy-optional">Conditional</span></div>
+            <div class="ds-anatomy-desc">Surface-3 for neutral, --jio for accent. Applied on container, not the span.</div>
+            <code class="ds-anatomy-token ds-code">background: var(--surface-3) | var(--jio)</code>
+          </div>
+        </li>
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">4</span>
+          <div>
+            <div class="ds-anatomy-label">Presence dot <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc">Absolute-positioned dot at bottom-right. Green for online, text4 for offline. Border punches out from the avatar edge.</div>
+            <code class="ds-anatomy-token ds-code">background: var(--jio); border: 2px solid var(--bg)</code>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <table class="ds-spec-table" style="margin-top:24px;">
+      <thead>
+        <tr>
+          <th>Part</th>
+          <th>Element</th>
+          <th>Token</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Container</td>
+          <td><code class="ds-code">div.avatar</code></td>
+          <td><code class="ds-code">border-radius: var(--pill), overflow: hidden</code></td>
+        </tr>
+        <tr>
+          <td>Image</td>
+          <td><code class="ds-code">img.avatar__img</code></td>
+          <td><code class="ds-code">width: 100%; height: 100%; object-fit: cover</code></td>
+        </tr>
+        <tr>
+          <td>Initials</td>
+          <td><code class="ds-code">span.avatar__initials</code></td>
+          <td><code class="ds-code">color: var(--text), font-weight: 700</code></td>
+        </tr>
+        <tr>
+          <td>Initials bg</td>
+          <td><code class="ds-code">.avatar--initials</code></td>
+          <td><code class="ds-code">background: var(--surface-3)</code></td>
+        </tr>
+        <tr>
+          <td>Presence dot</td>
+          <td><code class="ds-code">span.avatar__presence</code></td>
+          <td><code class="ds-code">background: var(--jio), border: 2px solid var(--bg)</code></td>
+        </tr>
+        <tr>
+          <td>Presence offline</td>
+          <td><code class="ds-code">.avatar__presence--offline</code></td>
+          <td><code class="ds-code">background: var(--text4)</code></td>
+        </tr>
+        <tr>
+          <td>Ring (stacked)</td>
+          <td><code class="ds-code">.avatar--ring</code></td>
+          <td><code class="ds-code">box-shadow: 0 0 0 2px var(--surface-1)</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 4. VARIANTS -->
+  <section class="ds-section" id="variants">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Four display modes in priority order. All share the same circular container and size system.</p>
+
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:32px; align-items:flex-end; padding:8px 0;">
+
+        <!-- Image -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div class="avatar avatar--m" style="background:linear-gradient(135deg,#1a2a3a,#0d1a2a);" aria-label="Profile picture of a user">
+            <!-- Simulated image via gradient since no real src -->
+            <div style="width:100%;height:100%;background:linear-gradient(140deg,#2d4a6a 0%,#1a3050 100%);display:flex;align-items:center;justify-content:center;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="8" r="4" fill="rgba(255,255,255,.5)"/>
+                <use href="../sprite.svg#ic_user"></use>
+              </svg>
+            </div>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Image</span>
+        </div>
+
+        <!-- Initials accent -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div class="avatar avatar--m avatar--initials-accent" aria-label="JG">
+            <span class="avatar__initials" aria-hidden="true">JG</span>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Initials (accent)</span>
+        </div>
+
+        <!-- Initials neutral -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div class="avatar avatar--m avatar--initials" aria-label="PR">
+            <span class="avatar__initials" aria-hidden="true" style="color:var(--text2);">PR</span>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Initials (neutral)</span>
+        </div>
+
+        <!-- Icon fallback -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div class="avatar avatar--m avatar--initials" aria-label="Unknown user">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="8" r="4" fill="rgba(244,242,238,.35)"/>
+              <use href="../sprite.svg#ic_user"></use>
+            </svg>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Icon fallback</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. SIZES -->
+  <section class="ds-section" id="sizes">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Five sizes cover every context from dense notification rows to full profile pages. Presence dot scales proportionally.</p>
+
+    <div class="ds-demo ds-demo--dark" style="margin-bottom:24px;">
+      <div style="display:flex; flex-wrap:wrap; gap:24px; align-items:flex-end;">
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div class="avatar avatar--xs avatar--initials" aria-label="JG">
+            <span class="avatar__initials" aria-hidden="true">JG</span>
+          </div>
+          <span style="font-size:10px; color:rgba(244,242,238,.35);">XS</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div class="avatar avatar--s avatar--initials" aria-label="AB">
+            <span class="avatar__initials" aria-hidden="true">AB</span>
+          </div>
+          <span style="font-size:10px; color:rgba(244,242,238,.35);">S</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div class="avatar avatar--m avatar--initials-accent" aria-label="CD">
+            <span class="avatar__initials" aria-hidden="true">CD</span>
+            <span class="avatar__presence" aria-label="Online"></span>
+          </div>
+          <span style="font-size:10px; color:rgba(244,242,238,.35);">M</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div class="avatar avatar--l avatar--initials" aria-label="EF">
+            <span class="avatar__initials" aria-hidden="true">EF</span>
+          </div>
+          <span style="font-size:10px; color:rgba(244,242,238,.35);">L</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div class="avatar avatar--xl avatar--initials" aria-label="GH">
+            <span class="avatar__initials" aria-hidden="true">GH</span>
+          </div>
+          <span style="font-size:10px; color:rgba(244,242,238,.35);">XL</span>
+        </div>
+
+      </div>
+    </div>
+
+    <table class="ds-spec-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Size</th>
+          <th>Font</th>
+          <th>Presence dot</th>
+          <th>Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>XS</td>
+          <td>24px</td>
+          <td>9px</td>
+          <td>—</td>
+          <td>Dense lists, notification dots</td>
+        </tr>
+        <tr>
+          <td>S</td>
+          <td>32px</td>
+          <td>12px</td>
+          <td>6px</td>
+          <td>Comments, chat</td>
+        </tr>
+        <tr>
+          <td>M</td>
+          <td>40px</td>
+          <td>15px</td>
+          <td>8px</td>
+          <td>Friend lists, leaderboards</td>
+        </tr>
+        <tr>
+          <td>L</td>
+          <td>48px</td>
+          <td>18px</td>
+          <td>10px</td>
+          <td>Profile headers</td>
+        </tr>
+        <tr>
+          <td>XL</td>
+          <td>64px</td>
+          <td>22px</td>
+          <td>12px</td>
+          <td>Full profile page</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 6. STATES -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Avatar supports five states. Presence states are additive — they layer on top of the base avatar without replacing it.</p>
+
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:32px; align-items:flex-end; padding:8px 0;">
+
+        <!-- Default -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div class="avatar avatar--m avatar--initials" aria-label="Default user">
+            <span class="avatar__initials" aria-hidden="true">JG</span>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Default</span>
+        </div>
+
+        <!-- Online -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div class="avatar avatar--m avatar--initials-accent" aria-label="Online user">
+            <span class="avatar__initials" aria-hidden="true">AB</span>
+            <span class="avatar__presence" aria-label="Online"></span>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Online</span>
+        </div>
+
+        <!-- Offline/Away -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div class="avatar avatar--m avatar--initials" aria-label="Offline user">
+            <span class="avatar__initials" aria-hidden="true">CD</span>
+            <span class="avatar__presence avatar__presence--offline" aria-label="Offline"></span>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Offline / Away</span>
+        </div>
+
+        <!-- Loading skeleton -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div class="avatar avatar--m avatar--skeleton" aria-hidden="true" style="overflow:visible;"></div>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Loading</span>
+        </div>
+
+        <!-- Stacked group -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div class="avatar-group">
+            <div class="avatar avatar--m avatar--initials avatar--ring" aria-label="User A">
+              <span class="avatar__initials" aria-hidden="true">A</span>
+            </div>
+            <div class="avatar avatar--m avatar--initials-accent avatar--ring" aria-label="User B">
+              <span class="avatar__initials" aria-hidden="true">B</span>
+            </div>
+            <div class="avatar avatar--m avatar--initials avatar--ring" aria-label="3 more users" style="background:var(--surface-2);">
+              <span class="avatar__initials" aria-hidden="true" style="font-size:11px; color:var(--text2);">+3</span>
+            </div>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Stacked</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. CONTENT -->
+  <section class="ds-section" id="content">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <p class="ds-section-desc">Rules for deriving initials from display names across scripts and naming patterns.</p>
+
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Initials derivation</div>
+        <ul>
+          <li>Use the first letter of the first name + first letter of the last name — "Arjun Sharma" → "AS"</li>
+          <li>Single-name users: use the first two letters — "Priya" → "PR"</li>
+          <li>Non-Latin scripts: use 1 character only</li>
+          <li>Never truncate initials to nothing — fall back to the icon if no characters are available</li>
+          <li>Max 2 characters always — never show 3 or more</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Alt text &amp; labels</div>
+        <ul>
+          <li>Image avatars: describe the person — "Profile picture of Arjun" not "avatar image"</li>
+          <li>Initials avatars: put the full name on the container <code class="ds-code">aria-label</code></li>
+          <li>Icon fallback: use <code class="ds-code">aria-label="Unknown user"</code></li>
+          <li>Presence dot: <code class="ds-code">aria-label="Online"</code> or <code class="ds-code">aria-label="Offline"</code></li>
+          <li>Stacked overflow: <code class="ds-code">aria-label="N more users"</code> on the overflow bubble</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. PLATFORM -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <p class="ds-section-desc">Avatar adapts its minimum size and interaction affordances per platform. Core structure and tokens stay fixed.</p>
+
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>XS–XL all valid sizes; M is the most common</li>
+          <li>Presence dot always 8px at M size</li>
+          <li>Tap target for avatar links must be minimum 44×44px</li>
+          <li>Stacked groups: max 4 visible avatars + overflow chip</li>
+          <li>No tooltip needed — full name shown in adjacent text</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Same size range as mobile; M most common in rails</li>
+          <li>Hover shows a tooltip with the full display name</li>
+          <li>Presence dot 8px by default; scale with avatar size</li>
+          <li>Cursor: default — avatar is not inherently interactive</li>
+          <li>Focus ring on interactive avatars (links/buttons): 2px jio outline</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>Minimum M (40px) — no XS or S permitted</li>
+          <li>Presence dot 10px minimum for legibility at 10 feet</li>
+          <li>Focus/hover ring: var(--jio) glow — <code class="ds-code">box-shadow: 0 0 0 3px var(--jio), 0 0 20px rgba(0,200,100,.4)</code></li>
+          <li>Tooltip not applicable — show name as on-screen text label</li>
+          <li>XL preferred for profile header on TV detail pages</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. ACCESSIBILITY -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">Avatar must convey identity and presence to screen readers without relying on color or visual shape alone.</p>
+
+    <table class="ds-spec-table">
+      <thead>
+        <tr>
+          <th>Variant</th>
+          <th>Role / attribute</th>
+          <th>Guidance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Image avatar</td>
+          <td><code class="ds-code">alt</code> on img</td>
+          <td>Describe the person: <code class="ds-code">alt="Profile picture of Arjun Sharma"</code></td>
+        </tr>
+        <tr>
+          <td>Initials avatar</td>
+          <td><code class="ds-code">aria-label</code> on container</td>
+          <td>Put full name on the container div; add <code class="ds-code">aria-hidden="true"</code> to the initials span</td>
+        </tr>
+        <tr>
+          <td>Icon fallback</td>
+          <td><code class="ds-code">aria-label</code> on container</td>
+          <td>Use <code class="ds-code">aria-label="Unknown user"</code>; SVG icon gets <code class="ds-code">aria-hidden="true"</code></td>
+        </tr>
+        <tr>
+          <td>Presence indicator</td>
+          <td><code class="ds-code">aria-label</code> on dot span</td>
+          <td><code class="ds-code">aria-label="Online"</code> or <code class="ds-code">aria-label="Offline"</code> — never rely on color alone</td>
+        </tr>
+        <tr>
+          <td>Stacked group</td>
+          <td><code class="ds-code">aria-label</code> on overflow chip</td>
+          <td>Use <code class="ds-code">aria-label="4 more users"</code>; group wrapper can use <code class="ds-code">role="group"</code></td>
+        </tr>
+        <tr>
+          <td>All variants</td>
+          <td>Color contrast</td>
+          <td>Initials text must meet WCAG AA 4.5:1 against its background. Green-on-black passes; white-on-surface-3 passes.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 10. RELATED TOKENS -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-desc">Always use these tokens — never hardcode hex values.</p>
+
+    <table class="ds-spec-table">
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="ds-code">--surface-3</code></td>
+          <td>Initials background (neutral)</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--jio</code></td>
+          <td>Initials background (accent) / online presence dot</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--text4</code></td>
+          <td>Offline / away presence dot</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--text</code></td>
+          <td>Initials text color on neutral background</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--pill</code></td>
+          <td>Avatar border-radius (always circular)</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--bg</code></td>
+          <td>Presence dot border color — punches dot out from avatar edge</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--surface-1</code></td>
+          <td>Ring border for stacked avatar overlap separation</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 11. CODE EXAMPLES -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-section-desc">Copy these snippets as starting points. Always link <code class="ds-code">tokens/tokens.css</code>, <code class="ds-code">components.css</code>, and <code class="ds-code">states.css</code>.</p>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Image avatar with alt</div>
+      <pre class="component-code-pre"><code>&lt;!-- Image avatar with alt --&gt;
+&lt;div class="avatar avatar--m"&gt;
+  &lt;img class="avatar__img" src="profile.jpg" alt="Profile picture of Arjun Sharma"&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Initials avatar + online indicator</div>
+      <pre class="component-code-pre"><code>&lt;!-- Initials avatar + online indicator --&gt;
+&lt;div class="avatar avatar--m avatar--initials" aria-label="Priya Nair"&gt;
+  &lt;span class="avatar__initials" aria-hidden="true"&gt;PN&lt;/span&gt;
+  &lt;span class="avatar__presence" aria-label="Online"&gt;&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Stacked avatar group (3 users + overflow)</div>
+      <pre class="component-code-pre"><code>&lt;!-- Stacked avatar group (3 users + overflow) --&gt;
+&lt;div class="avatar-group"&gt;
+  &lt;div class="avatar avatar--s avatar--initials avatar--ring" aria-label="User A"&gt;
+    &lt;span class="avatar__initials" aria-hidden="true"&gt;A&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="avatar avatar--s avatar--initials avatar--ring" aria-label="User B"&gt;
+    &lt;span class="avatar__initials" aria-hidden="true"&gt;B&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="avatar avatar--s avatar--initials avatar--ring avatar--overflow" aria-label="4 more users"&gt;
+    &lt;span class="avatar__initials" aria-hidden="true"&gt;+4&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- 12. CHANGELOG -->
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

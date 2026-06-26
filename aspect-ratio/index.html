@@ -1,0 +1,448 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aspect Ratio — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    .aspect-ratio { position: relative; width: 100%; }
+    .aspect-ratio--16-9  { padding-top: 56.25%; }
+    .aspect-ratio--4-3   { padding-top: 75%; }
+    .aspect-ratio--1-1   { padding-top: 100%; }
+    .aspect-ratio--3-4   { padding-top: 133.33%; }
+    .aspect-ratio--2-3   { padding-top: 150%; }
+    .aspect-ratio__content { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+    /* Demo helpers */
+    .ratio-demo-box { background: var(--surface-2); border: 1px solid var(--border-subtle); border-radius: var(--r3); display: flex; align-items: center; justify-content: center; }
+    .ratio-demo-label { font-size: 10px; font-weight: 700; color: var(--text3); letter-spacing: .4px; text-align: center; }
+  </style>
+</head><body><main class="ds-content">
+
+  <!-- PAGE HEADER -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Aspect Ratio</span>
+    </nav>
+    <h1 class="component-page-title">Aspect Ratio</h1>
+    <p class="component-page-def">Utility wrapper that locks a container to a fixed aspect ratio. Critical for game thumbnails, hero images, and video embeds that must not reflow on load.</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:16px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+        <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+        <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+      </div>
+      <span class="component-maturity component-maturity--draft"><span class="component-maturity--dot"></span>Draft</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:340px;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="flex-direction:row; flex-wrap:wrap; gap:16px; align-items:flex-end; justify-content:center; position:relative; z-index:1;">
+
+      <!-- 16:9 -->
+      <div style="width:160px; display:flex; flex-direction:column; gap:8px;">
+        <div class="aspect-ratio aspect-ratio--16-9" style="border-radius:var(--r3);">
+          <div class="aspect-ratio__content ratio-demo-box">
+            <span class="ratio-demo-label">16:9</span>
+          </div>
+        </div>
+        <span style="font-size:10px; color:var(--text4); text-align:center; letter-spacing:.3px;">Hero / Video</span>
+      </div>
+
+      <!-- 4:3 -->
+      <div style="width:100px; display:flex; flex-direction:column; gap:8px;">
+        <div class="aspect-ratio aspect-ratio--4-3" style="border-radius:var(--r3);">
+          <div class="aspect-ratio__content ratio-demo-box">
+            <span class="ratio-demo-label">4:3</span>
+          </div>
+        </div>
+        <span style="font-size:10px; color:var(--text4); text-align:center; letter-spacing:.3px;">Landscape card</span>
+      </div>
+
+      <!-- 1:1 -->
+      <div style="width:80px; display:flex; flex-direction:column; gap:8px;">
+        <div class="aspect-ratio aspect-ratio--1-1" style="border-radius:var(--r3);">
+          <div class="aspect-ratio__content ratio-demo-box">
+            <span class="ratio-demo-label">1:1</span>
+          </div>
+        </div>
+        <span style="font-size:10px; color:var(--text4); text-align:center; letter-spacing:.3px;">Avatar / Icon</span>
+      </div>
+
+      <!-- 3:4 -->
+      <div style="width:72px; display:flex; flex-direction:column; gap:8px;">
+        <div class="aspect-ratio aspect-ratio--3-4" style="border-radius:var(--r3);">
+          <div class="aspect-ratio__content ratio-demo-box">
+            <span class="ratio-demo-label">3:4</span>
+          </div>
+        </div>
+        <span style="font-size:10px; color:var(--text4); text-align:center; letter-spacing:.3px;">Cover card</span>
+      </div>
+
+      <!-- 2:3 -->
+      <div style="width:64px; display:flex; flex-direction:column; gap:8px;">
+        <div class="aspect-ratio aspect-ratio--2-3" style="border-radius:var(--r3);">
+          <div class="aspect-ratio__content ratio-demo-box">
+            <span class="ratio-demo-label">2:3</span>
+          </div>
+        </div>
+        <span style="font-size:10px; color:var(--text4); text-align:center; letter-spacing:.3px;">Portrait poster</span>
+      </div>
+
+    </div>
+    <p class="component-hero-caption">All five ratios · 16:9 · 4:3 · 1:1 · 3:4 · 2:3</p>
+  </section>
+
+  <!-- INTRO -->
+  <section class="component-intro" id="intro">
+    <p>The Aspect Ratio wrapper solves layout shift caused by images and videos that load asynchronously. Without it, the browser renders a container with zero height until the media arrives, then reflowing the entire page — a jarring experience on slow connections. By setting a percentage <code class="ds-code">padding-top</code> on the wrapper before the image loads, the correct space is reserved in the layout from the first paint.</p>
+    <ul class="component-summary-list">
+      <li><strong>16:9</strong> — hero banners, video embeds, tournament livestream frames, wide promotional cards</li>
+      <li><strong>3:4</strong> — game cover cards in browse rails and search results (the primary game card format)</li>
+      <li><strong>2:3</strong> — portrait poster cards for featured game spotlights and cinematic promotions</li>
+      <li><strong>1:1</strong> — avatar containers, publisher logos, achievement icons, square thumbnails</li>
+      <li><strong>4:3</strong> — legacy game thumbnails and screenshot previews in game detail galleries</li>
+    </ul>
+  </section>
+
+  <!-- BEST PRACTICES -->
+  <section class="ds-section" id="best-practices">
+    <h2 class="ds-section-title">Best practices</h2>
+    <div class="component-best-practices">
+      <div class="component-bp-card component-bp-card--do">
+        <span class="component-bp-label component-bp-label--do">Do</span>
+        <ul class="component-bp-list">
+          <li>Always use the Aspect Ratio wrapper on any image or video container whose dimensions are not fixed in CSS</li>
+          <li>Set <code class="ds-code">object-fit: cover</code> on the child <code class="ds-code">&lt;img&gt;</code> to fill the container without distortion</li>
+          <li>Apply <code class="ds-code">border-radius</code> to the wrapper, not the child — border-radius inherits via <code class="ds-code">border-radius: inherit</code> on <code class="ds-code">.aspect-ratio__content</code></li>
+          <li>Use a low-quality placeholder or skeleton with the same ratio while the full image loads</li>
+          <li>Serve images at 2× the rendered pixel size for retina displays</li>
+        </ul>
+      </div>
+      <div class="component-bp-card component-bp-card--dont">
+        <span class="component-bp-label component-bp-label--dont">Don't</span>
+        <ul class="component-bp-list">
+          <li>Hard-code a <code class="ds-code">height</code> on image containers — the wrapper handles height automatically from width</li>
+          <li>Use <code class="ds-code">object-fit: contain</code> for game cover art — it adds letterbox bars that break the card grid aesthetic</li>
+          <li>Nest an Aspect Ratio wrapper inside another Aspect Ratio wrapper — percentages compound incorrectly</li>
+          <li>Skip the wrapper for images "above the fold" — layout shift still occurs on slow connections regardless of position</li>
+          <li>Omit <code class="ds-code">alt</code> text on the child <code class="ds-code">&lt;img&gt;</code> — even decorative images must have <code class="ds-code">alt=""</code></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <section class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <p class="ds-section-desc">The wrapper is a single <code class="ds-code">position: relative</code> container with a ratio-specific <code class="ds-code">padding-top</code> percentage. The child content is absolutely positioned to fill it.</p>
+    <div class="ds-anatomy">
+      <div class="ds-anatomy-preview">
+        <div style="width:200px; position:relative;">
+          <div class="aspect-ratio aspect-ratio--16-9" style="border-radius:var(--r3); position:relative;">
+            <div class="aspect-ratio__content ratio-demo-box">
+              <span class="ratio-demo-label">16:9</span>
+            </div>
+            <!-- Callout dots -->
+            <span class="ds-anatomy-callout-dot" style="position:absolute; top:-16px; left:50%; transform:translateX(-50%);"><span class="ds-anatomy-callout-num">1</span></span>
+            <span class="ds-anatomy-callout-dot" style="position:absolute; bottom:-16px; left:50%; transform:translateX(-50%);"><span class="ds-anatomy-callout-num">2</span></span>
+          </div>
+        </div>
+      </div>
+      <ol class="ds-anatomy-list">
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">1</span>
+          <div>
+            <div class="ds-anatomy-label">Wrapper <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">A <code class="ds-code">position: relative; width: 100%</code> block with a ratio-specific <code class="ds-code">padding-top</code> percentage. This reserves the correct vertical space before content loads.</div>
+            <code class="ds-anatomy-token ds-code">.aspect-ratio--16-9 { padding-top: 56.25%; }</code>
+          </div>
+        </li>
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">2</span>
+          <div>
+            <div class="ds-anatomy-label">Content <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">A child element with <code class="ds-code">position: absolute; inset: 0</code> that fills the wrapper entirely. This is where the <code class="ds-code">&lt;img&gt;</code>, <code class="ds-code">&lt;video&gt;</code>, or <code class="ds-code">&lt;iframe&gt;</code> lives.</div>
+            <code class="ds-anatomy-token ds-code">.aspect-ratio__content { position: absolute; inset: 0; object-fit: cover; }</code>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- VARIANTS -->
+  <section class="ds-section" id="variants">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Five ratio variants cover all JioGames image surfaces. Choose the ratio based on the asset format delivered by the content pipeline — never stretch or crop to fit a different ratio.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:24px; align-items:flex-end; padding:8px 0;">
+
+        <div style="width:200px;">
+          <div class="aspect-ratio aspect-ratio--16-9" style="border-radius:var(--r3);">
+            <div class="aspect-ratio__content ratio-demo-box"></div>
+          </div>
+          <div style="margin-top:10px;">
+            <div style="font-size:13px; font-weight:700; color:var(--text);">16:9</div>
+            <div style="font-size:11px; color:var(--text3); margin-top:2px;">56.25% padding-top</div>
+            <div style="font-size:11px; color:var(--text4); margin-top:2px;">Hero banners, video embeds</div>
+          </div>
+        </div>
+
+        <div style="width:140px;">
+          <div class="aspect-ratio aspect-ratio--4-3" style="border-radius:var(--r3);">
+            <div class="aspect-ratio__content ratio-demo-box"></div>
+          </div>
+          <div style="margin-top:10px;">
+            <div style="font-size:13px; font-weight:700; color:var(--text);">4:3</div>
+            <div style="font-size:11px; color:var(--text3); margin-top:2px;">75% padding-top</div>
+            <div style="font-size:11px; color:var(--text4); margin-top:2px;">Screenshot galleries</div>
+          </div>
+        </div>
+
+        <div style="width:100px;">
+          <div class="aspect-ratio aspect-ratio--1-1" style="border-radius:var(--r3);">
+            <div class="aspect-ratio__content ratio-demo-box"></div>
+          </div>
+          <div style="margin-top:10px;">
+            <div style="font-size:13px; font-weight:700; color:var(--text);">1:1</div>
+            <div style="font-size:11px; color:var(--text3); margin-top:2px;">100% padding-top</div>
+            <div style="font-size:11px; color:var(--text4); margin-top:2px;">Avatars, icons</div>
+          </div>
+        </div>
+
+        <div style="width:88px;">
+          <div class="aspect-ratio aspect-ratio--3-4" style="border-radius:var(--r3);">
+            <div class="aspect-ratio__content ratio-demo-box"></div>
+          </div>
+          <div style="margin-top:10px;">
+            <div style="font-size:13px; font-weight:700; color:var(--text);">3:4</div>
+            <div style="font-size:11px; color:var(--text3); margin-top:2px;">133.33% padding-top</div>
+            <div style="font-size:11px; color:var(--text4); margin-top:2px;">Cover cards</div>
+          </div>
+        </div>
+
+        <div style="width:76px;">
+          <div class="aspect-ratio aspect-ratio--2-3" style="border-radius:var(--r3);">
+            <div class="aspect-ratio__content ratio-demo-box"></div>
+          </div>
+          <div style="margin-top:10px;">
+            <div style="font-size:13px; font-weight:700; color:var(--text);">2:3</div>
+            <div style="font-size:11px; color:var(--text3); margin-top:2px;">150% padding-top</div>
+            <div style="font-size:11px; color:var(--text4); margin-top:2px;">Portrait posters</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- USE CASES (in place of sizes section, as per spec) -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">Use cases by ratio</h2>
+    <p class="ds-section-desc">Each ratio maps to a specific content type in the JioGames asset pipeline. The backend delivers assets at one of these exact dimensions — always match the wrapper ratio to the delivered asset format.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Ratio</th><th>padding-top</th><th>Asset dimensions</th><th>JioGames usage</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>16:9</td>
+          <td><code class="ds-code">56.25%</code></td>
+          <td><code class="ds-code">1920×1080px</code></td>
+          <td>Home hero banner, game detail hero, video embed, tournament stream frame</td>
+        </tr>
+        <tr>
+          <td>4:3</td>
+          <td><code class="ds-code">75%</code></td>
+          <td><code class="ds-code">800×600px</code></td>
+          <td>Landscape game thumbnail in horizontal rail, screenshot gallery viewer</td>
+        </tr>
+        <tr>
+          <td>1:1</td>
+          <td><code class="ds-code">100%</code></td>
+          <td><code class="ds-code">512×512px</code></td>
+          <td>User avatar, publisher logo, achievement badge, game icon in search result</td>
+        </tr>
+        <tr>
+          <td>3:4</td>
+          <td><code class="ds-code">133.33%</code></td>
+          <td><code class="ds-code">720×960px</code></td>
+          <td>Game cover card in browse rail, search grid, recommended section</td>
+        </tr>
+        <tr>
+          <td>2:3</td>
+          <td><code class="ds-code">150%</code></td>
+          <td><code class="ds-code">720×1080px</code></td>
+          <td>Featured game portrait poster, cinematic promotional spotlight</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="ds-section" id="content">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Image alt text</div>
+        <ul>
+          <li>Always provide an <code class="ds-code">alt</code> attribute on <code class="ds-code">&lt;img&gt;</code> children</li>
+          <li>For game cover art: <code class="ds-code">alt="Tomb Raider — game cover"</code></li>
+          <li>For hero banners with text overlaid: describe the scene, not the text (the text is in HTML)</li>
+          <li>For purely decorative backgrounds: <code class="ds-code">alt=""</code> — empty string, not omitted</li>
+          <li>For avatars: <code class="ds-code">alt="[Username]'s profile picture"</code></li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Loading strategy</div>
+        <ul>
+          <li>Use <code class="ds-code">loading="lazy"</code> on images below the fold to defer network requests</li>
+          <li>Use <code class="ds-code">loading="eager"</code> (or omit) on hero images above the fold — they should load immediately</li>
+          <li>Add a skeleton or blurred placeholder with the same ratio to prevent jarring blank states</li>
+          <li>Use <code class="ds-code">srcset</code> and <code class="ds-code">sizes</code> to serve appropriately sized images at each breakpoint</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>The wrapper naturally adapts to the full container width — no extra work needed for responsive sizing</li>
+          <li>On mobile, 16:9 hero banners typically span full viewport width (<code class="ds-code">width:100vw</code>)</li>
+          <li>3:4 cover cards are typically 120–160px wide in horizontal rails</li>
+          <li>Use <code class="ds-code">loading="lazy"</code> on all below-fold images — mobile networks are frequently constrained</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>The CSS <code class="ds-code">aspect-ratio</code> property is an alternative on modern browsers — but the padding-top technique has broader legacy support and is the DLS standard</li>
+          <li>Use <code class="ds-code">sizes</code> attribute to specify breakpoint-aware widths for correct srcset selection</li>
+          <li>For video embeds (<code class="ds-code">&lt;iframe&gt;</code>), apply <code class="ds-code">allow="autoplay; fullscreen"</code> on the iframe, not the wrapper</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>Always use this wrapper — never hard-code pixel heights on TV where layout scales with display resolution</li>
+          <li>16:9 is the dominant ratio on TV — it aligns with the display's native format and avoids pillarboxing</li>
+          <li>Focus states on card wrappers: <code class="ds-code">transform: scale(1.05)</code> + green glow — border-radius must be applied to the wrapper so it scales consistently</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Requirement</th><th>Implementation</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Image alt text</td>
+          <td><code class="ds-code">alt="…"</code> on every <code class="ds-code">&lt;img&gt;</code></td>
+          <td>Required by WCAG 1.1.1. Decorative images: <code class="ds-code">alt=""</code>. Meaningful images: describe the content, not the visual style.</td>
+        </tr>
+        <tr>
+          <td>Video embeds</td>
+          <td>Captions and title attribute</td>
+          <td>Add <code class="ds-code">title="Game trailer: Tomb Raider"</code> to <code class="ds-code">&lt;iframe&gt;</code>. Ensure embedded video has closed captions enabled.</td>
+        </tr>
+        <tr>
+          <td>Wrapper role</td>
+          <td>No ARIA role needed</td>
+          <td>The wrapper is a layout container with no semantic meaning. Do not add <code class="ds-code">role="img"</code> to the wrapper — place it on the child <code class="ds-code">&lt;img&gt;</code> or figure element.</td>
+        </tr>
+        <tr>
+          <td>Lazy loading</td>
+          <td><code class="ds-code">loading="lazy"</code></td>
+          <td>Lazy loading does not affect accessibility. Screen readers read alt text regardless of load state. Ensure alt is present in the HTML before the image loads.</td>
+        </tr>
+        <tr>
+          <td>Layout shift (CLS)</td>
+          <td>Wrapper reserves space</td>
+          <td>The padding-top technique eliminates CLS for images. This also reduces the risk of content shifting under a focused element, which can disorient keyboard and switch-access users.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- RELATED TOKENS -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-desc">Aspect Ratio is a layout utility — it uses no color or typography tokens itself. Border-radius is the only visual token applied at the wrapper level.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Token</th><th>Usage in context</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code class="ds-code">--r2</code></td><td>Small thumbnail corner radius (e.g. icon in a list row)</td></tr>
+        <tr><td><code class="ds-code">--r3</code></td><td>Standard card corner radius — most game cover cards and thumbnails</td></tr>
+        <tr><td><code class="ds-code">--r4</code></td><td>Large card corner radius — hero banners and featured spotlight cards</td></tr>
+        <tr><td><code class="ds-code">--r5</code></td><td>Extra-large — full-bleed hero on game detail page with very rounded corners</td></tr>
+        <tr><td><code class="ds-code">--surface-2</code></td><td>Skeleton / placeholder background fill while image loads</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CODE EXAMPLES -->
+  <section class="ds-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+
+    <div class="component-code-block">
+      <div class="component-code-label">16:9 hero image</div>
+      <pre class="component-code-pre"><code>&lt;div class="aspect-ratio aspect-ratio--16-9" style="border-radius:var(--r4);"&gt;
+  &lt;img
+    class="aspect-ratio__content"
+    src="/Assets/horizontal/tomb-raider-thumbnail--gamehero-1920x1080.jpeg"
+    alt="Tomb Raider — hero banner"
+    loading="eager"
+  &gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">3:4 game cover card</div>
+      <pre class="component-code-pre"><code>&lt;div class="aspect-ratio aspect-ratio--3-4" style="border-radius:var(--r3); width:120px;"&gt;
+  &lt;img
+    class="aspect-ratio__content"
+    src="/Assets/vertical/tomb-raider-thumbnail--cover-720x1080.jpeg"
+    alt="Tomb Raider — game cover"
+    loading="lazy"
+  &gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">16:9 video embed (iframe)</div>
+      <pre class="component-code-pre"><code>&lt;div class="aspect-ratio aspect-ratio--16-9" style="border-radius:var(--r3);"&gt;
+  &lt;iframe
+    class="aspect-ratio__content"
+    src="https://www.youtube.com/embed/VIDEO_ID"
+    title="Tomb Raider — official gameplay trailer"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+    frameborder="0"
+  &gt;&lt;/iframe&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+  </section>
+
+  <!-- CHANGELOG -->
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

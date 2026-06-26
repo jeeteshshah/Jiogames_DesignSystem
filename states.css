@@ -1,0 +1,517 @@
+/* ============================================================
+   JioGames DLS — states.css
+   Global state system: helper classes, spinner, skeleton, overlays,
+   card state system, input state system, chip state system.
+   .btn and .icon systems live in components.css.
+   Link AFTER tokens.css and components.css.
+   ============================================================ */
+
+/* ── Keyframes ── */
+@keyframes jio-spin    { to { transform: rotate(360deg); } }
+@keyframes jio-shimmer { 0%  { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+@keyframes jio-pulse   { 0%,100% { opacity: 1; } 50% { opacity: .45; } }
+@keyframes jio-bounce-in { 0% { transform: scale(.85); opacity:0; } 60% { transform: scale(1.04); } 100% { transform: scale(1); opacity:1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  @keyframes jio-spin    { to { transform: none; } }
+  @keyframes jio-shimmer { 0%,100% { background-position: 0 0; } }
+  @keyframes jio-pulse   { 0%,100% { opacity: 1; } }
+}
+
+/* ============================================================
+   DOCUMENTATION HELPER STATES (.is-*)
+   Apply to any component in doc pages to simulate a state.
+   ============================================================ */
+
+/* Hover */
+.is-hover  { background: var(--state-hover-bg) !important; border-color: var(--state-hover-border) !important; }
+
+/* Pressed */
+.is-pressed { transform: scale(var(--state-pressed-scale)) !important; opacity: var(--state-pressed-opacity) !important; }
+
+/* Focus */
+.is-focused { outline: var(--focus-ring-width) solid var(--focus-ring-color) !important; outline-offset: var(--focus-ring-offset) !important; }
+
+/* Selected */
+.is-selected { background: var(--state-selected-bg) !important; border-color: var(--state-selected-border) !important; color: var(--state-selected-text) !important; }
+
+/* Active */
+.is-active { background: var(--state-selected-bg) !important; color: var(--state-selected-text) !important; }
+
+/* Disabled */
+.is-disabled { opacity: var(--state-disabled-opacity) !important; pointer-events: none !important; cursor: not-allowed !important; }
+
+/* Loading */
+.is-loading { position: relative !important; color: transparent !important; pointer-events: none !important; }
+.is-loading::after {
+  content: '';
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: var(--spinner-size-md);
+  height: var(--spinner-size-md);
+  margin: calc(var(--spinner-size-md) / -2) 0 0 calc(var(--spinner-size-md) / -2);
+  border: var(--spinner-stroke) solid rgba(255,255,255,.25);
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: jio-spin var(--dur-icon-spin) linear infinite;
+  color: white;
+}
+.is-loading.btn--primary::after   { color: var(--text-inv); }
+.is-loading.btn--ultimate::after  { color: var(--text-inv); }
+
+/* Success */
+.is-success { background: var(--success-soft) !important; border-color: var(--success-border) !important; color: var(--success-text) !important; }
+
+/* Error */
+.is-error { background: var(--error-soft) !important; border-color: var(--error-border) !important; color: var(--error-text) !important; }
+
+/* Warning */
+.is-warning { background: var(--warning-soft) !important; border-color: var(--warning-border) !important; color: var(--warning-text) !important; }
+
+/* Empty */
+.is-empty { opacity: .45; }
+
+/* Skeleton */
+.is-skeleton {
+  background: linear-gradient(90deg, var(--skeleton-bg) 25%, var(--skeleton-highlight) 50%, var(--skeleton-bg) 75%) !important;
+  background-size: 200% 100% !important;
+  animation: jio-shimmer var(--dur-shimmer) infinite linear !important;
+  color: transparent !important;
+  border-color: transparent !important;
+  border-radius: var(--skeleton-radius) !important;
+  pointer-events: none !important;
+}
+.is-skeleton * { opacity: 0 !important; }
+
+/* Offline */
+.is-offline { filter: grayscale(.7); opacity: .65; }
+
+/* Locked */
+.is-locked { position: relative; }
+.is-locked::after {
+  content: '🔒';
+  position: absolute;
+  inset: 0;
+  background: var(--locked-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  border-radius: inherit;
+}
+
+/* Premium */
+.is-premium { border-color: var(--premium-border) !important; box-shadow: var(--premium-glow) !important; }
+
+/* Unavailable */
+.is-unavailable { opacity: var(--unavailable-opacity) !important; filter: grayscale(.5) !important; pointer-events: none !important; }
+
+/* TV focused */
+.is-tv-focused {
+  outline: none !important;
+  box-shadow: var(--tv-focus-shadow) !important;
+  transform: scale(var(--tv-focus-scale)) !important;
+  z-index: 1;
+  position: relative;
+}
+
+/* ============================================================
+   SPINNER COMPONENT
+   ============================================================ */
+.jio-spinner {
+  display: inline-block;
+  border-radius: 50%;
+  border: var(--spinner-stroke) solid rgba(255,255,255,.2);
+  border-top-color: currentColor;
+  animation: jio-spin var(--dur-icon-spin) linear infinite;
+  flex-shrink: 0;
+}
+.jio-spinner--sm { width: var(--spinner-size-sm); height: var(--spinner-size-sm); }
+.jio-spinner--md { width: var(--spinner-size-md); height: var(--spinner-size-md); }
+.jio-spinner--lg { width: var(--spinner-size-lg); height: var(--spinner-size-lg); }
+.jio-spinner--tv { width: var(--spinner-size-tv); height: var(--spinner-size-tv); border-width: 3px; }
+
+/* ============================================================
+   CARD STATE SYSTEM
+   ============================================================ */
+
+/* Base card shell — all card variants extend this */
+.card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--card-radius-landscape);
+  background: var(--surface-card);
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: block;
+  transition:
+    transform var(--dur-fast) var(--spring),
+    box-shadow var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    opacity var(--dur-fast) var(--ease-out);
+}
+.card:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+.card:hover   { border-color: var(--border); box-shadow: var(--shadow-2); }
+.card:active  { transform: scale(var(--card-active-scale)); }
+
+/* State: skeleton */
+.card.is-skeleton .card__art,
+.card.is-skeleton .card__title,
+.card.is-skeleton .card__meta { background: linear-gradient(90deg, var(--skeleton-bg) 25%, var(--skeleton-highlight) 50%, var(--skeleton-bg) 75%); background-size: 200% 100%; animation: jio-shimmer var(--dur-shimmer) infinite linear; border-radius: var(--skeleton-radius); color: transparent; }
+
+/* State: locked */
+.card--locked .card__lock-overlay { display: flex; }
+.card__lock-overlay {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: var(--overlay-locked);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  border-radius: inherit;
+}
+.card__lock-icon { font-size: 24px; }
+.card__lock-label { font-size: 11px; font-weight: 700; color: var(--text2); letter-spacing: .5px; text-transform: uppercase; }
+
+/* State: premium */
+.card--premium { border-color: var(--premium-border); }
+.card--premium:hover { box-shadow: var(--premium-glow); }
+
+/* State: claimed/owned */
+.card--owned { border-color: var(--success-border); }
+.card--owned::after { content: '✓ Owned'; position: absolute; top: 8px; right: 8px; background: var(--success); color: #000; font-size: 10px; font-weight: 900; padding: 3px 8px; border-radius: var(--pill); }
+
+/* State: unavailable */
+.card--unavailable { opacity: var(--unavailable-opacity); filter: grayscale(.4); pointer-events: none; }
+
+/* State: offline */
+.card--offline { filter: grayscale(.6); }
+.card--offline::before { content: 'Offline'; position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,.7); color: var(--text2); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: var(--pill); z-index: 2; }
+
+/* State: TV focused */
+.card.is-tv-focused {
+  transform: scale(var(--tv-focus-scale));
+  box-shadow: var(--tv-focus-shadow);
+  border-color: var(--tv-focus-ring-color);
+  outline: none;
+  z-index: 2;
+}
+
+/* Card art area */
+.card__art {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: var(--surface-2);
+  position: relative;
+  overflow: hidden;
+}
+.card__art img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.card__art--portrait { aspect-ratio: 2/3; }
+.card__art--square   { aspect-ratio: 1/1; }
+
+/* Card gradient overlay */
+.card__overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--overlay-card);
+  pointer-events: none;
+}
+
+/* Card body */
+.card__body { padding: var(--space-1-5); }
+.card__title { font-size: 13px; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card__meta  { font-size: 11px; font-weight: 500; color: var(--text2); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Card badges */
+.card__badge { position: absolute; top: 8px; left: 8px; font-size: 10px; font-weight: 900; padding: 3px 8px; border-radius: var(--pill); line-height: 1.3; }
+.card__badge--new     { background: var(--jio); color: #000; }
+.card__badge--live    { background: var(--negative); color: #fff; animation: jio-pulse 2s ease-in-out infinite; }
+.card__badge--premium { background: var(--premium-gradient); color: #000; }
+.card__badge--rating  { background: rgba(0,0,0,.72); color: var(--text); backdrop-filter: blur(4px); }
+
+/* Progress bar (continue card) */
+.card__progress { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: rgba(255,255,255,.15); }
+.card__progress-fill { height: 100%; background: var(--jio); border-radius: 0 2px 2px 0; }
+
+/* ============================================================
+   INPUT / FORM STATE SYSTEM
+   ============================================================ */
+
+.input-wrap { display: flex; flex-direction: column; gap: 6px; }
+.input-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text2);
+  letter-spacing: .6px;
+  text-transform: uppercase;
+}
+.input-label--error { color: var(--error-text); }
+
+.input-field::placeholder { color: var(--input-placeholder); }
+.input-field:hover   { border-color: var(--border-strong); }
+.input-field:focus   { border-color: var(--input-border-focus); box-shadow: 0 0 0 3px rgba(0,168,89,.12); }
+.input-field.is-error,
+.input-field[aria-invalid="true"] { border-color: var(--error-border); }
+.input-field.is-error:focus { box-shadow: 0 0 0 3px var(--error-soft); }
+.input-field.is-success  { border-color: var(--success-border); }
+.input-field.is-warning  { border-color: var(--warning-border); }
+.input-field:disabled,
+.input-field.is-disabled { opacity: var(--state-disabled-opacity); pointer-events: none; }
+.input-field[readonly]   { color: var(--text2); border-color: var(--border-subtle); cursor: default; }
+
+.input-hint  { font-size: 12px; font-weight: 500; color: var(--text3); line-height: 1.5; }
+.input-error { font-size: 12px; font-weight: 500; color: var(--error-text); line-height: 1.5; }
+
+/* Input with icon/action */
+.input-icon-wrap { position: relative; }
+.input-icon-wrap .input-field { padding-left: 44px; }
+.input-icon-wrap .input-icon-lead { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text3); pointer-events: none; }
+.input-icon-wrap .input-action { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--text3); cursor: pointer; padding: 4px; }
+.input-icon-wrap .input-action:hover { color: var(--text); }
+
+/* ============================================================
+   CHIP / TAG STATE SYSTEM
+   ============================================================ */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: var(--pill);
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--text2);
+  font-family: var(--jio-font);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+  -webkit-appearance: none;
+}
+.chip:hover  { background: var(--state-hover-bg); border-color: var(--state-hover-border); color: var(--text); }
+.chip:active { transform: scale(.96); }
+.chip:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); }
+
+.chip--selected,
+.chip[aria-selected="true"],
+.chip[aria-checked="true"],
+.chip.is-active {
+  background: var(--jio) !important;
+  border-color: var(--jio) !important;
+  color: var(--text-inv) !important;
+  font-weight: 700;
+}
+.chip.is-disabled,
+.chip:disabled { opacity: var(--state-disabled-opacity); pointer-events: none; }
+.chip.is-loading { color: transparent; pointer-events: none; }
+.chip.is-loading::after { content: ''; display: inline-block; width: 12px; height: 12px; border: 1.5px solid rgba(255,255,255,.25); border-top-color: currentColor; border-radius: 50%; animation: jio-spin var(--dur-icon-spin) linear infinite; position: absolute; color: var(--text2); }
+.chip.is-premium { border-color: var(--premium-border); color: var(--premium); }
+.chip.is-tv-focused { box-shadow: var(--tv-focus-shadow); transform: scale(1.04); outline: none; }
+
+.chip--sm { height: 26px; padding: 0 10px; font-size: 12px; }
+.chip--lg { height: 40px; padding: 0 16px; font-size: 14px; }
+
+/* Remove action inside chip */
+.chip__remove { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border-radius: 50%; background: rgba(255,255,255,.15); margin-left: 2px; font-size: 10px; line-height: 1; }
+.chip__remove:hover { background: var(--error-soft); color: var(--error-text); }
+
+/* ============================================================
+   BADGE / STATUS INDICATOR SYSTEM
+   ============================================================ */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--pill);
+  font-family: var(--jio-font);
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Count badge */
+.badge--count {
+  background: var(--negative);
+  color: var(--text);
+  font-size: 10px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+}
+.badge--count.badge--lg { min-width: 22px; height: 22px; font-size: 11px; padding: 0 6px; }
+
+/* Dot badge */
+.badge--dot { width: 8px; height: 8px; background: var(--negative); }
+.badge--dot.badge--success { background: var(--success); }
+.badge--dot.badge--warning { background: var(--warning); }
+
+/* Label badges */
+.badge--new     { background: var(--jio); color: #000; font-size: 10px; padding: 3px 8px; }
+.badge--live    { background: var(--negative); color: #fff; font-size: 10px; padding: 3px 8px; animation: jio-pulse 2s ease-in-out infinite; }
+.badge--premium { background: var(--premium-gradient); color: #000; font-size: 10px; padding: 3px 8px; }
+.badge--warning { background: var(--warning-soft); border: 1px solid var(--warning-border); color: var(--warning-text); font-size: 10px; padding: 3px 8px; }
+.badge--success { background: var(--success-soft); border: 1px solid var(--success-border); color: var(--success-text); font-size: 10px; padding: 3px 8px; }
+.badge--error   { background: var(--error-soft); border: 1px solid var(--error-border); color: var(--error-text); font-size: 10px; padding: 3px 8px; }
+.badge--muted   { background: var(--surface-3); color: var(--text3); font-size: 10px; padding: 3px 8px; }
+
+/* ============================================================
+   TOGGLE / SWITCH STATE SYSTEM
+   ============================================================ */
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 30px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.switch__track {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--pill);
+  background: var(--surface-3);
+  border: 1.5px solid var(--border);
+  transition: background var(--dur-default) var(--spring), border-color var(--dur-default) var(--spring);
+}
+.switch__knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--pill);
+  background: var(--text2);
+  box-shadow: var(--shadow-1);
+  transition: left var(--dur-default) var(--spring), background var(--dur-default) var(--spring);
+}
+/* ON state */
+.switch[aria-checked="true"] .switch__track,
+.switch.is-active .switch__track { background: var(--jio); border-color: var(--jio); }
+.switch[aria-checked="true"] .switch__knob,
+.switch.is-active .switch__knob { left: calc(52px - 22px - 5px); background: var(--text-inv); }
+/* Focus */
+.switch:focus-visible { outline: var(--focus-ring-width) solid var(--focus-ring-color); outline-offset: var(--focus-ring-offset); border-radius: var(--pill); }
+/* Disabled */
+.switch.is-disabled,
+.switch[aria-disabled="true"] { opacity: var(--state-disabled-opacity); pointer-events: none; }
+/* Error */
+.switch.is-error .switch__track { background: var(--error-soft); border-color: var(--error-border); }
+/* TV */
+.switch.is-tv-focused { box-shadow: var(--tv-focus-shadow); outline: none; }
+
+/* ============================================================
+   BANNER STATE SYSTEM
+   ============================================================ */
+
+
+.banner--info    { background: rgba(38,214,201,.08); border-color: rgba(38,214,201,.2); color: var(--cyan); }
+.banner--success { background: var(--success-soft); border-color: var(--success-border); color: var(--success-text); }
+.banner--warning { background: var(--warning-soft); border-color: var(--warning-border); color: var(--warning-text); }
+.banner--error   { background: var(--error-soft); border-color: var(--error-border); color: var(--error-text); }
+.banner--premium { background: var(--premium-soft); border-color: var(--premium-border); color: var(--premium); }
+.banner--offline { background: var(--surface-2); border-color: var(--border); color: var(--text2); }
+
+/* ============================================================
+   SKELETON SHIMMER UTILITY
+   ============================================================ */
+
+.skeleton {
+  background: linear-gradient(90deg, var(--skeleton-bg) 25%, var(--skeleton-highlight) 50%, var(--skeleton-bg) 75%);
+  background-size: 200% 100%;
+  animation: jio-shimmer var(--dur-shimmer) infinite linear;
+  border-radius: var(--skeleton-radius);
+  color: transparent;
+  pointer-events: none;
+  user-select: none;
+}
+.skeleton--text  { height: 14px; border-radius: 4px; }
+.skeleton--title { height: 20px; border-radius: 6px; }
+.skeleton--art   { width: 100%; aspect-ratio: 16/9; border-radius: var(--card-radius-landscape); }
+.skeleton--art-portrait { aspect-ratio: 2/3; }
+.skeleton--art-sq { aspect-ratio: 1; border-radius: var(--card-radius-square); }
+.skeleton--btn   { height: var(--btn-h-lg); border-radius: var(--pill); }
+.skeleton--avatar { border-radius: var(--pill); }
+
+/* ============================================================
+   TV FOCUS SYSTEM
+   ============================================================ */
+
+/* Any element can receive TV focus class */
+.tv-focus {
+  transition: transform var(--dur-default) var(--spring), box-shadow var(--dur-default) var(--spring) !important;
+}
+.tv-focus:focus,
+.tv-focus.is-tv-focused {
+  transform: scale(var(--tv-focus-scale));
+  box-shadow: var(--tv-focus-shadow);
+  outline: none;
+  z-index: 2;
+  position: relative;
+}
+
+/* ============================================================
+   STATE MATRIX GRID (documentation utility)
+   Used to display many states in a grid for docs pages.
+   ============================================================ */
+
+.state-matrix {
+  display: grid;
+  gap: 1px;
+  background: var(--border-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--r5);
+  overflow: hidden;
+  font-size: 12px;
+}
+.state-matrix__header-row,
+.state-matrix__row {
+  display: contents;
+}
+.state-matrix__cell {
+  background: var(--surface-1);
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 80px;
+}
+.state-matrix__cell--header {
+  background: var(--surface-2);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  color: var(--text3);
+  padding: 10px 12px;
+  min-height: 0;
+  text-align: center;
+}
+.state-matrix__cell--label {
+  background: var(--surface-2);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text2);
+  padding: 12px;
+  align-items: flex-start;
+  justify-content: center;
+}
+.state-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+  color: var(--text4);
+  text-align: center;
+}

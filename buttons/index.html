@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buttons — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    /* ── Page-specific styles ── */
+    body { background: var(--bg); color: var(--text); font-family: var(--jio-font); margin: 0; }
+
+    /* Component page header */
+
+    /* Hero */
+    .component-hero {
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      min-height: 280px;
+      padding: 48px 32px 32px;
+    }
+    .component-hero--dark { background: #060810; }
+    .component-hero--grid {
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 32px 32px;
+      background-color: #060810;
+      border: 1px solid var(--border-subtle);
+    }
+    .component-hero-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+      position: relative;
+      z-index: 2;
+    }
+    .component-hero-caption {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: var(--text4);
+      margin-top: 24px;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 320px;
+      height: 180px;
+      border-radius: var(--pill);
+      background: radial-gradient(ellipse, rgba(0,168,89,.2) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Intro */
+    .component-intro {
+      margin-bottom: 48px;
+    }
+    .component-intro p {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.65;
+      margin-bottom: 20px;
+      max-width: 640px;
+    }
+    .component-summary-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      overflow: hidden;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .component-summary-list li {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.55;
+    }
+    .component-summary-list li:last-child { border-bottom: none; }
+    .component-summary-list li strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    /* Best practices */
+    .component-best-practices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .component-bp-card {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1.5px solid;
+    }
+    .component-bp-card--do   { border-color: rgba(0,168,89,.3); }
+    .component-bp-card--dont { border-color: rgba(255,71,87,.3); }
+    .component-bp-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 16px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+    }
+    .component-bp-label--do   { background: rgba(0,168,89,.07);  color: var(--jio); }
+    .component-bp-label--dont { background: rgba(255,71,87,.07); color: var(--negative); }
+    .component-bp-label--do::before   { content: '\2713'; font-size: 11px; }
+    .component-bp-label--dont::before { content: '\2715'; font-size: 11px; }
+    .component-bp-list {
+      padding: 16px 20px 20px;
+      background: var(--surface-1);
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      list-style: none;
+    }
+    .component-bp-list li {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+    .component-bp-list li::before {
+      content: '\00B7';
+      position: absolute;
+      left: 3px;
+      color: var(--text4);
+    }
+
+    /* Content grid */
+    .component-content-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .component-content-card {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      padding: 20px;
+    }
+    .component-content-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-bottom: 12px;
+    }
+    .component-content-card ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .component-content-card li {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+    .component-content-card li::before {
+      content: '\00B7';
+      position: absolute;
+      left: 3px;
+      color: var(--text4);
+    }
+
+    /* Platform cards */
+    .component-platform-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .component-platform-card {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      padding: 20px;
+    }
+    .component-platform-card--mobile { border-top: 2px solid rgba(110,231,183,.4); }
+    .component-platform-card--web    { border-top: 2px solid rgba(147,197,253,.4); }
+    .component-platform-card--tv     { border-top: 2px solid rgba(251,191,36,.4); }
+    .component-platform-card-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 12px;
+    }
+    .component-platform-card--mobile .component-platform-card-title { color: #6ee7b7; }
+    .component-platform-card--web    .component-platform-card-title { color: #93c5fd; }
+    .component-platform-card--tv     .component-platform-card-title { color: #fbbf24; }
+    .component-platform-card ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .component-platform-card li {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+    .component-platform-card li::before {
+      content: '\00B7';
+      position: absolute;
+      left: 3px;
+      color: var(--text4);
+    }
+
+    /* Changelog */
+    .component-changelog {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      overflow: hidden;
+    }
+    .component-changelog-entry {
+      display: grid;
+      grid-template-columns: 56px 80px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 12px;
+    }
+    .component-changelog-entry:last-child { border-bottom: none; }
+    .component-changelog-version {
+      font-family: monospace;
+      font-weight: 700;
+      color: var(--jio);
+      font-size: 11px;
+    }
+    .component-changelog-date {
+      color: var(--text3);
+      font-weight: 500;
+    }
+    .component-changelog-desc {
+      color: var(--text2);
+      line-height: 1.5;
+    }
+
+    /* Note box */
+    .ds-note {
+      background: rgba(0,168,89,.06);
+      border: 1px solid rgba(0,168,89,.2);
+      border-radius: var(--r3);
+      padding: 14px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.55;
+    }
+    .ds-note strong { color: var(--jio); }
+
+    /* Sizes section */
+    .btn-size-matrix {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      overflow: hidden;
+    }
+    .btn-size-matrix-head {
+      display: grid;
+      grid-template-columns: 100px 1fr 1fr 1fr;
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .btn-size-matrix-head > div {
+      padding: 10px 16px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+    .btn-size-matrix-row {
+      display: grid;
+      grid-template-columns: 100px 1fr 1fr 1fr;
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--surface-1);
+    }
+    .btn-size-matrix-row:last-child { border-bottom: none; }
+    .btn-size-matrix-row:hover { background: var(--glass-1); }
+    .btn-size-matrix-label {
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 3px;
+      border-right: 1px solid var(--border-subtle);
+      background: var(--surface-2);
+    }
+    .btn-size-matrix-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .btn-size-matrix-class {
+      font-family: monospace;
+      font-size: 10px;
+      color: #a8e6c5;
+    }
+    .btn-size-matrix-cell {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      justify-content: center;
+    }
+    .btn-size-matrix-px {
+      font-family: monospace;
+      font-size: 10px;
+      color: var(--text3);
+    }
+
+    /* State matrix */
+    .btn-state-matrix {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      overflow: hidden;
+    }
+    .btn-state-matrix-scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .btn-state-matrix-scroll::-webkit-scrollbar { height: 4px; }
+    .btn-state-matrix-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--pill); }
+    .btn-state-matrix-grid {
+      display: grid;
+      grid-template-columns: 120px repeat(6, 1fr);
+      min-width: 820px;
+      background: var(--border-subtle);
+      gap: 1px;
+    }
+    .btn-state-matrix-header {
+      background: var(--surface-2);
+      padding: 10px 12px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--text3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      text-align: center;
+    }
+    .btn-state-matrix-row-label {
+      background: var(--surface-2);
+      padding: 12px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text2);
+      display: flex;
+      align-items: center;
+      min-height: 80px;
+      white-space: nowrap;
+    }
+    .btn-state-matrix-cell {
+      background: var(--surface-1);
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-height: 80px;
+      overflow: hidden;
+    }
+    .btn-state-matrix-cell--dark { background: var(--bg); }
+
+    /* Icon usage section */
+    .icon-demo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .icon-demo-cell {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .icon-demo-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      color: var(--text3);
+      text-align: center;
+    }
+    .icon-demo-desc {
+      font-size: 11px;
+      color: var(--text3);
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    /* Accessibility */
+    .a11y-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      overflow: hidden;
+      margin-top: 24px;
+    }
+    .a11y-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .a11y-row:last-child { border-bottom: none; }
+    .a11y-label {
+      padding: 14px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text3);
+      letter-spacing: .3px;
+      background: var(--surface-2);
+      text-transform: uppercase;
+      display: flex;
+      align-items: flex-start;
+      padding-top: 16px;
+    }
+    .a11y-content {
+      padding: 14px 20px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.6;
+      background: var(--surface-1);
+    }
+    .a11y-content ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .a11y-content li {
+      padding-left: 14px;
+      position: relative;
+    }
+    .a11y-content li::before {
+      content: '\00B7';
+      position: absolute;
+      left: 3px;
+      color: var(--text4);
+    }
+
+    kbd {
+      display: inline-block;
+      padding: 1px 6px;
+      background: var(--surface-3);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 11px;
+      color: var(--text2);
+    }
+
+    @media (max-width: 760px) {
+      .component-best-practices,
+      .component-content-grid,
+      .component-platform-grid { grid-template-columns: 1fr; }
+      .icon-demo-grid { grid-template-columns: 1fr 1fr; }
+      .btn-size-matrix { overflow-x: auto; }
+      .btn-size-matrix-head,
+      .btn-size-matrix-row { min-width: 500px; }
+    }
+  </style>
+</head>
+<body>
+<main class="ds-content">
+
+  <!-- ===================================================
+       1. PAGE HEADER
+  =================================================== -->
+  <div class="component-page-header">
+    <div class="component-breadcrumb">
+      <a href="../index.html">JioGames DLS</a>
+      <span class="component-breadcrumb-sep">&#x203A;</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">&#x203A;</span>
+      <span>Buttons</span>
+    </div>
+    <h1 class="component-page-title">Buttons</h1>
+    <p class="component-page-def">A button initiates an immediate action.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+      <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+      <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+      <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+    </div>
+  </div>
+
+  <!-- ===================================================
+       2. HERO VISUAL
+  =================================================== -->
+  <section class="component-hero component-hero--dark component-hero--grid" id="overview">
+    <div class="hero-glow" style="top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+    <div class="component-hero-inner">
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center">
+        <button class="btn btn--primary btn--l btn--hug">Play Now</button>
+        <button class="btn btn--secondary btn--l btn--hug">Add to Library</button>
+        <button class="btn btn--ghost btn--l btn--hug">Skip for now</button>
+        <button class="btn btn--text btn--hug">Learn more</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <button class="btn btn--primary btn--l btn--hug is-focused">Play Now</button>
+          <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--jio);text-transform:uppercase">Focus ring</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <button class="btn btn--primary btn--l btn--hug">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_play"></use></svg>
+            Play Game
+          </button>
+          <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--text3);text-transform:uppercase">Icon + label</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <button class="btn btn--primary btn--l btn--hug is-loading" style="min-width:120px">Play Now</button>
+          <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--text3);text-transform:uppercase">Loading</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <button class="btn btn--primary btn--l btn--hug is-disabled">Play Now</button>
+          <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--text3);text-transform:uppercase">Disabled</span>
+        </div>
+      </div>
+    </div>
+    <span class="component-hero-caption">All variants &#xB7; 1:1 scale at Mobile L</span>
+  </section>
+
+  <!-- ===================================================
+       3. INTRO
+  =================================================== -->
+  <section class="component-intro" id="intro">
+    <p>Buttons give players a clear, familiar way to take action across JioGames. A button combines hierarchy, size, state, and content to communicate what will happen next &#x2014; from playing a game to unlocking a pass.</p>
+    <ul class="component-summary-list">
+      <li><strong>Hierarchy.</strong> Seven variants from Primary to Destructive establish visual priority. Only one Primary button per section.</li>
+      <li><strong>Size.</strong> Five canonical sizes &#x2014; XS through XL &#x2014; each resolving to different pixel values on Mobile, Web, and TV.</li>
+      <li><strong>State.</strong> Every button handles hover, pressed, focus, disabled, loading, success, error, and TV focus.</li>
+      <li><strong>Platform.</strong> Size class stays constant. Platform context (mobile touch, web pointer, TV remote) resolves the token alias.</li>
+    </ul>
+  </section>
+
+  <!-- ===================================================
+       4. BEST PRACTICES
+  =================================================== -->
+  <section class="ds-section" id="best-practices">
+    <h2 class="ds-section-title">Best practices</h2>
+    <p class="ds-section-desc">Follow these rules to keep button usage consistent across the JioGames product surface.</p>
+    <div class="component-best-practices">
+      <div class="component-bp-card component-bp-card--do">
+        <span class="component-bp-label component-bp-label--do">Do</span>
+        <ul class="component-bp-list">
+          <li>Use one Primary button per section or screen region</li>
+          <li>Use clear action verbs: Play, Start, Continue, Unlock, Try again</li>
+          <li>Keep the Primary CTA anchored at the bottom on mobile</li>
+          <li>Use icon + label when the icon meaningfully reinforces the action</li>
+          <li>Maintain stable button width during loading state</li>
+          <li>Use Destructive only for truly irreversible actions</li>
+          <li>On TV, use L or XL size &#x2014; never XS or S</li>
+        </ul>
+      </div>
+      <div class="component-bp-card component-bp-card--dont">
+        <span class="component-bp-label component-bp-label--dont">Don&#x27;t</span>
+        <ul class="component-bp-list">
+          <li>Don&#x27;t use multiple Primary buttons in the same view</li>
+          <li>Don&#x27;t use vague labels like &#x22;Submit&#x22; or &#x22;OK&#x22; when action can be clearer</li>
+          <li>Don&#x27;t use icon-only buttons without an accessible aria-label</li>
+          <li>Don&#x27;t rely on color alone to signal destructive actions</li>
+          <li>Don&#x27;t place tiny XS/S buttons as the main TV CTA</li>
+          <li>Don&#x27;t change button width between default and loading states</li>
+          <li>Don&#x27;t use <code class="ds-code">.btn--tv</code> &#x2014; use <code class="ds-code">.btn--l</code> inside <code class="ds-code">.platform-tv</code></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       5. ANATOMY
+  =================================================== -->
+  <section class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <p class="ds-section-desc">Every button is composed of the same four slots. The Container is the only required element &#x2014; all other slots are optional but must be used intentionally.</p>
+    <div class="ds-anatomy">
+      <div class="ds-anatomy-preview">
+        <div class="ds-anatomy-component" style="position:relative;display:inline-flex;padding:52px 60px">
+          <!-- Touch target dashed outline -->
+          <div style="position:absolute;inset:22px 16px;border:1px dashed rgba(255,255,255,.1);border-radius:var(--pill);pointer-events:none"></div>
+          <!-- Button -->
+          <button class="btn btn--primary btn--l btn--hug" style="position:relative;pointer-events:none">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_play"></use></svg>
+            Play Now
+          </button>
+          <!-- Callout 1: touch target top -->
+          <div style="position:absolute;top:5px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0">
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">1</div>
+            <div style="width:1px;height:17px;background:var(--jio);opacity:.5"></div>
+            <div class="ds-anatomy-callout-dot"></div>
+          </div>
+          <!-- Callout 2: icon -->
+          <div style="position:absolute;bottom:4px;left:26%;display:flex;flex-direction:column;align-items:center;gap:0">
+            <div class="ds-anatomy-callout-dot"></div>
+            <div style="width:1px;height:14px;background:var(--jio);opacity:.5"></div>
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">2</div>
+          </div>
+          <!-- Callout 3: label -->
+          <div style="position:absolute;bottom:4px;left:58%;display:flex;flex-direction:column;align-items:center;gap:0">
+            <div class="ds-anatomy-callout-dot"></div>
+            <div style="width:1px;height:14px;background:var(--jio);opacity:.5"></div>
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">3</div>
+          </div>
+          <!-- Callout 4: focus ring -->
+          <div style="position:absolute;top:5px;right:10%;display:flex;flex-direction:column;align-items:center;gap:0">
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">4</div>
+            <div style="width:1px;height:17px;background:var(--jio);opacity:.5"></div>
+            <div class="ds-anatomy-callout-dot"></div>
+          </div>
+        </div>
+      </div>
+      <div class="ds-anatomy-list">
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">1</div>
+          <div>
+            <div class="ds-anatomy-label">Container <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Pill-shaped container with <code class="ds-code">height: var(--btn-l-h)</code> and horizontal padding. Background comes from the variant token (e.g. <code class="ds-code">--btn-primary-bg</code>).</div>
+            <div class="ds-anatomy-token">CSS: .btn &#xB7; Figma: Button/Container</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">2</div>
+          <div>
+            <div class="ds-anatomy-label">Icon slot <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc">Leading icon using <code class="ds-code">.icon .icon--s</code>. Sizes with the button size &#x2014; S icon for M/L button, XS for S button. Uses <code class="ds-code">fill:currentColor</code>.</div>
+            <div class="ds-anatomy-token">CSS: .icon.icon--s &#xB7; Figma: Button/LeadingIcon</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">3</div>
+          <div>
+            <div class="ds-anatomy-label">Label <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Action text. Font: <code class="ds-code">var(--jio-font)</code>, weight 700, size from <code class="ds-code">--btn-l-fs</code>. Minimum contrast 4.5:1 on all backgrounds.</div>
+            <div class="ds-anatomy-token">CSS: text node &#xB7; Figma: Button/Label</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">4</div>
+          <div>
+            <div class="ds-anatomy-label">Focus ring <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc">2px solid <code class="ds-code">var(--focus-ring-color)</code>, offset 3px. Visible on <code class="ds-code">:focus-visible</code>. On TV, replaced by <code class="ds-code">var(--tv-focus-shadow)</code> glow + scale(1.05).</div>
+            <div class="ds-anatomy-token">CSS: :focus-visible / .is-tv-focused &#xB7; Figma: Button/FocusRing</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       6. VARIANTS
+  =================================================== -->
+  <section class="ds-section" id="variants">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Seven variants cover every interaction tier. Use the lowest-weight variant that still communicates the action&#x27;s importance. Never place two Primary buttons in the same view.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex;flex-direction:column;gap:20px">
+
+        <div style="display:grid;grid-template-columns:140px 1fr 2fr;gap:16px;align-items:center;border-bottom:1px solid var(--border-subtle);padding-bottom:20px">
+          <div>
+            <div style="font-size:12px;font-weight:700;color:var(--text)">Primary</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:2px"><code class="ds-code">.btn--primary</code></div>
+          </div>
+          <button class="btn btn--primary btn--l btn--hug">Play Now</button>
+          <div style="font-size:12px;color:var(--text2)">Default CTA. One per section. Green fill from <code class="ds-code">--btn-primary-bg</code>. Highest visual weight.</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:140px 1fr 2fr;gap:16px;align-items:center;border-bottom:1px solid var(--border-subtle);padding-bottom:20px">
+          <div>
+            <div style="font-size:12px;font-weight:700;color:var(--text)">Secondary</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:2px"><code class="ds-code">.btn--secondary</code></div>
+          </div>
+          <button class="btn btn--secondary btn--l btn--hug">Add to Library</button>
+          <div style="font-size:12px;color:var(--text2)">Supporting actions alongside Primary. Subtle border, no background fill.</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:140px 1fr 2fr;gap:16px;align-items:center;border-bottom:1px solid var(--border-subtle);padding-bottom:20px">
+          <div>
+            <div style="font-size:12px;font-weight:700;color:var(--text)">Tertiary</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:2px"><code class="ds-code">.btn--tertiary</code></div>
+          </div>
+          <button class="btn btn--tertiary btn--l btn--hug">View Details</button>
+          <div style="font-size:12px;color:var(--text2)">Low-emphasis. Text only, no background or border. Use in dense layouts or settings.</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:140px 1fr 2fr;gap:16px;align-items:center;border-bottom:1px solid var(--border-subtle);padding-bottom:20px">
+          <div>
+            <div style="font-size:12px;font-weight:700;color:var(--text)">Ghost</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:2px"><code class="ds-code">.btn--ghost</code></div>
+          </div>
+          <button class="btn btn--ghost btn--l btn--hug">Skip for now</button>
+          <div style="font-size:12px;color:var(--text2)">Outline style. Dismissive or secondary choices. Muted text color by default.</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:140px 1fr 2fr;gap:16px;align-items:center;border-bottom:1px solid var(--border-subtle);padding-bottom:20px">
+          <div>
+            <div style="font-size:12px;font-weight:700;color:var(--text)">Text</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:2px"><code class="ds-code">.btn--text</code></div>
+          </div>
+          <button class="btn btn--text btn--hug">Learn more</button>
+          <div style="font-size:12px;color:var(--text2)">Inline links with no chrome. Green color signals interaction. Underline appears on hover.</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:140px 1fr 2fr;gap:16px;align-items:center;border-bottom:1px solid var(--border-subtle);padding-bottom:20px">
+          <div>
+            <div style="font-size:12px;font-weight:700;color:var(--text)">Destructive</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:2px"><code class="ds-code">.btn--destructive</code></div>
+          </div>
+          <button class="btn btn--destructive btn--l btn--hug">Cancel Subscription</button>
+          <div style="font-size:12px;color:var(--text2)">Irreversible actions only. Red treatment with semi-transparent fill. Never the primary CTA.</div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:140px 1fr 2fr;gap:16px;align-items:center">
+          <div>
+            <div style="font-size:12px;font-weight:700;color:var(--text)">Ultimate</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:2px"><code class="ds-code">.btn--ultimate</code></div>
+          </div>
+          <button class="btn btn--ultimate btn--l btn--hug">Upgrade to Ultimate</button>
+          <div style="font-size:12px;color:var(--text2)">Premium pass upsell only. Gradient fill from <code class="ds-code">--btn-ultimate-bg</code>. Weight 900 label.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       7. SIZES
+  =================================================== -->
+  <section class="ds-section" id="sizes">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Five canonical size names describe visual hierarchy. Platform context determines actual pixel values via CSS token aliases. The same class produces different sizes on Mobile, Web, and TV.</p>
+
+    <div class="ds-note" style="margin-bottom:20px">
+      <strong>Platform &#x2260; Size.</strong> The size class stays constant. Platform context resolves the correct token alias. <code class="ds-code">.btn--l</code> on mobile = 54px. <code class="ds-code">.btn--l</code> inside <code class="ds-code">.platform-tv</code> = 72px. Same class, same selector, different computed value.
+    </div>
+
+    <div class="ds-demo ds-demo--dark" style="margin-bottom:24px">
+      <div style="display:flex;flex-direction:column;gap:20px;align-items:flex-start">
+        <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+          <button class="btn btn--primary btn--xs btn--hug">XS</button>
+          <button class="btn btn--primary btn--s btn--hug">Small</button>
+          <button class="btn btn--primary btn--m btn--hug">Medium</button>
+          <button class="btn btn--primary btn--l btn--hug">Large</button>
+          <button class="btn btn--primary btn--xl btn--hug">Extra Large</button>
+        </div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text4)">Live preview &#x2014; current platform token values</div>
+      </div>
+    </div>
+
+    <div class="btn-size-matrix">
+      <div class="btn-size-matrix-head">
+        <div>Size</div>
+        <div style="color:#6ee7b7">Mobile</div>
+        <div style="color:#93c5fd">Web</div>
+        <div style="color:#fbbf24">TV</div>
+      </div>
+      <div class="btn-size-matrix-row">
+        <div class="btn-size-matrix-label">
+          <span class="btn-size-matrix-name">XS</span>
+          <span class="btn-size-matrix-class">.btn--xs</span>
+        </div>
+        <div class="btn-size-matrix-cell">
+          <button class="btn btn--primary btn--hug" style="height:var(--btn-xs-h-mobile);padding:0 var(--btn-xs-px-mobile);font-size:var(--btn-xs-fs-mobile)">Play</button>
+          <span class="btn-size-matrix-px">h:28 &#xB7; px:10 &#xB7; fs:11</span>
+        </div>
+        <div class="btn-size-matrix-cell">
+          <button class="btn btn--primary btn--hug" style="height:var(--btn-xs-h-web);padding:0 var(--btn-xs-px-web);font-size:var(--btn-xs-fs-web)">Play</button>
+          <span class="btn-size-matrix-px">h:30 &#xB7; px:12 &#xB7; fs:12</span>
+        </div>
+        <div class="btn-size-matrix-cell">
+          <button class="btn btn--primary btn--hug" style="height:var(--btn-xs-h-tv);padding:0 var(--btn-xs-px-tv);font-size:var(--btn-xs-fs-tv)">Play</button>
+          <span class="btn-size-matrix-px">h:48 &#xB7; px:20 &#xB7; fs:14</span>
+        </div>
+      </div>
+      <div class="btn-size-matrix-row">
+        <div class="btn-size-matrix-label">
+          <span class="btn-size-matrix-name">S</span>
+          <span class="btn-size-matrix-class">.btn--s</span>
+        </div>
+        <div class="btn-size-matrix-cell">
+          <button class="btn btn--primary btn--hug" style="height:var(--btn-s-h-mobile);padding:0 var(--btn-s-px-mobile);font-size:var(--btn-s-fs-mobile)">Play Now</button>
+          <span class="btn-size-matrix-px">h:36 &#xB7; px:16 &#xB7; fs:13</span>
+        </div>
+        <div class="btn-size-matrix-cell">
+          <button class="btn btn--primary btn--hug" style="height:var(--btn-s-h-web);padding:0 var(--btn-s-px-web);font-size:var(--btn-s-fs-web)">Play Now</button>
+          <span class="btn-size-matrix-px">h:38 &#xB7; px:18 &#xB7; fs:13</span>
+        </div>
+        <div class="btn-size-matrix-cell">
+          <button class="btn btn--primary btn--hug" style="height:var(--btn-s-h-tv);padding:0 var(--btn-s-px-tv);font-size:var(--btn-s-fs-tv)">Play Now</button>
+          <span class="btn-size-matrix-px">h:56 &#xB7; px:28 &#xB7; fs:16</span>
+        </div>
+      </div>
+      <div class="btn-size-matrix-row">
+        <div class="btn-size-matrix-label">
+          <span class="btn-size-matrix-name">M</span>
+          <span class="btn-size-matrix-class">.btn--m</span>
+        </div>
+        <div class="btn-size-matrix-cell">
+          <button class="btn btn--primary btn--hug" style="height:var(--btn-m-h-mobile);padding:0 var(--btn-m-px-mobile);font-size:var(--btn-m-fs-mobile)">Play Now</button>
+          <span class="btn-size-matrix-px">h:44 &#xB7; px:20 &#xB7; fs:14</span>
+        </div>
+        <div class="btn-size-matrix-cell">
+          <button class="btn btn--primary btn--hug" style="height:var(--btn-m-h-web);padding:0 var(--btn-m-px-web);font-size:var(--btn-m-fs-web)">Play Now</button>
+          <span class="btn-size-matrix-px">h:44 &#xB7; px:22 &#xB7; fs:14</span>
+        </div>
+        <div class="btn-size-matrix-cell">
+          <button class="btn btn--primary btn--hug" style="height:var(--btn-m-h-tv);padding:0 var(--btn-m-px-tv);font-size:var(--btn-m-fs-tv)">Play Now</button>
+          <span class="btn-size-matrix-px">h:64 &#xB7; px:36 &#xB7; fs:18</span>
+        </div>
+      </div>
+      <div class="btn-size-matrix-row">
+        <div class="btn-size-matrix-label">
+          <span class="btn-size-matrix-name">L</span>
+          <span class="btn-size-matrix-class">.btn--l</span>
+        </div>
+        <div class="btn-size-matrix-cell">
+          <button class="btn btn--primary btn--hug" style="height:var(--btn-l-h-mobile);padding:0 var(--btn-l-px-mobile);font-size:var(--btn-l-fs-mobile)">Play Now</button>
+          <span class="btn-size-matrix-px">h:54 &#xB7; px:24 &#xB7; fs:15</span>
+        </div>
+        <div class="btn-size-matrix-cell">
+          <button class="btn btn--primary btn--hug" style="height:var(--btn-l-h-web);padding:0 var(--btn-l-px-web);font-size:var(--btn-l-fs-web)">Play Now</button>
+          <span class="btn-size-matrix-px">h:54 &#xB7; px:28 &#xB7; fs:16</span>
+        </div>
+        <div class="btn-size-matrix-cell">
+          <button class="btn btn--primary btn--hug" style="height:var(--btn-l-h-tv);padding:0 var(--btn-l-px-tv);font-size:var(--btn-l-fs-tv)">Play Now</button>
+          <span class="btn-size-matrix-px">h:72 &#xB7; px:44 &#xB7; fs:20</span>
+        </div>
+      </div>
+      <div class="btn-size-matrix-row">
+        <div class="btn-size-matrix-label">
+          <span class="btn-size-matrix-name">XL</span>
+          <span class="btn-size-matrix-class">.btn--xl</span>
+        </div>
+        <div class="btn-size-matrix-cell">
+          <button class="btn btn--primary btn--hug" style="height:var(--btn-xl-h-mobile);padding:0 var(--btn-xl-px-mobile);font-size:var(--btn-xl-fs-mobile)">Play Now</button>
+          <span class="btn-size-matrix-px">h:64 &#xB7; px:32 &#xB7; fs:17</span>
+        </div>
+        <div class="btn-size-matrix-cell">
+          <button class="btn btn--primary btn--hug" style="height:var(--btn-xl-h-web);padding:0 var(--btn-xl-px-web);font-size:var(--btn-xl-fs-web)">Play Now</button>
+          <span class="btn-size-matrix-px">h:64 &#xB7; px:36 &#xB7; fs:18</span>
+        </div>
+        <div class="btn-size-matrix-cell">
+          <button class="btn btn--primary btn--hug" style="height:var(--btn-xl-h-tv);padding:0 var(--btn-xl-px-tv);font-size:var(--btn-xl-fs-tv)">Play Now</button>
+          <span class="btn-size-matrix-px">h:80 &#xB7; px:56 &#xB7; fs:22</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       8. STATES
+  =================================================== -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Every button variant responds to the same six interaction states. Use the <code class="ds-code">.is-*</code> helper classes from <code class="ds-code">states.css</code> to simulate states in documentation or prototypes.</p>
+
+    <div class="btn-state-matrix">
+      <div class="btn-state-matrix-scroll">
+        <div class="btn-state-matrix-grid">
+          <div class="btn-state-matrix-header" style="background:var(--surface-1)"></div>
+          <div class="btn-state-matrix-header">Default</div>
+          <div class="btn-state-matrix-header">Hover</div>
+          <div class="btn-state-matrix-header">Pressed</div>
+          <div class="btn-state-matrix-header">Focus</div>
+          <div class="btn-state-matrix-header">Disabled</div>
+          <div class="btn-state-matrix-header">Loading</div>
+
+          <div class="btn-state-matrix-row-label">Primary</div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--primary btn--m btn--hug">Play</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--primary btn--m btn--hug is-hover">Play</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--primary btn--m btn--hug is-pressed">Play</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--primary btn--m btn--hug is-focused">Play</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--primary btn--m btn--hug is-disabled">Play</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--primary btn--m btn--hug is-loading" style="min-width:76px">Play</button></div>
+
+          <div class="btn-state-matrix-row-label">Secondary</div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--secondary btn--m btn--hug">Library</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--secondary btn--m btn--hug" style="background:var(--state-hover-bg);border-color:var(--state-hover-border)">Library</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--secondary btn--m btn--hug is-pressed">Library</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--secondary btn--m btn--hug is-focused">Library</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--secondary btn--m btn--hug is-disabled">Library</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--secondary btn--m btn--hug is-loading" style="min-width:80px">Library</button></div>
+
+          <div class="btn-state-matrix-row-label">Ghost</div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--ghost btn--m btn--hug">Skip</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--ghost btn--m btn--hug" style="color:var(--text);border-color:var(--border-strong)">Skip</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--ghost btn--m btn--hug is-pressed">Skip</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--ghost btn--m btn--hug is-focused">Skip</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--ghost btn--m btn--hug is-disabled">Skip</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--ghost btn--m btn--hug is-loading" style="min-width:68px">Skip</button></div>
+
+          <div class="btn-state-matrix-row-label">Text</div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--text btn--m btn--hug">More</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--text btn--m btn--hug" style="text-decoration:underline;text-decoration-color:var(--jio)">More</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--text btn--m btn--hug is-pressed">More</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--text btn--m btn--hug is-focused">More</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--text btn--m btn--hug is-disabled">More</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><span style="font-size:10px;color:var(--text4)">N/A</span></div>
+
+          <div class="btn-state-matrix-row-label">Destructive</div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--destructive btn--m btn--hug">Delete</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--destructive btn--m btn--hug" style="background:rgba(255,71,87,.18);border-color:rgba(255,71,87,.45)">Delete</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--destructive btn--m btn--hug is-pressed">Delete</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--destructive btn--m btn--hug" style="outline:2px solid var(--negative);outline-offset:3px">Delete</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--destructive btn--m btn--hug is-disabled">Delete</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--destructive btn--m btn--hug is-loading" style="min-width:76px">Delete</button></div>
+
+          <div class="btn-state-matrix-row-label">TV Focus</div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--primary btn--m btn--hug is-tv-focused">Play</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark" style="justify-content:flex-start;padding:10px"><span style="font-size:10px;color:var(--text4)">No hover on TV</span></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--primary btn--m btn--hug is-pressed">Play</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark" style="justify-content:flex-start;padding:10px"><span style="font-size:10px;color:var(--text4)">Same as focus</span></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--primary btn--m btn--hug is-disabled">Play</button></div>
+          <div class="btn-state-matrix-cell btn-state-matrix-cell--dark"><button class="btn btn--primary btn--m btn--hug is-loading" style="min-width:68px">Play</button></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:24px">
+      <div class="ds-sub-label">Success, Error, and Warning states</div>
+      <div class="ds-demo ds-demo--dark">
+        <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end">
+          <div style="display:flex;flex-direction:column;align-items:flex-start;gap:8px">
+            <button class="btn btn--primary btn--l btn--hug is-success">Added to Library</button>
+            <span style="font-size:10px;font-weight:700;letter-spacing:.4px;color:var(--text3);text-transform:uppercase">.is-success</span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-start;gap:8px">
+            <button class="btn btn--primary btn--l btn--hug is-error">Failed &#x2014; Retry</button>
+            <span style="font-size:10px;font-weight:700;letter-spacing:.4px;color:var(--text3);text-transform:uppercase">.is-error</span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:flex-start;gap:8px">
+            <button class="btn btn--secondary btn--l btn--hug is-warning">Subscription expiring</button>
+            <span style="font-size:10px;font-weight:700;letter-spacing:.4px;color:var(--text3);text-transform:uppercase">.is-warning</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       9. ICON USAGE
+  =================================================== -->
+  <section class="ds-section" id="icon-usage">
+    <h2 class="ds-section-title">Icon usage</h2>
+    <p class="ds-section-desc">Icons reinforce meaning and aid scannability. Use the icon slot intentionally &#x2014; never add decoration for its own sake. Icon-only buttons always need an accessible label.</p>
+
+    <div class="icon-demo-grid">
+      <div class="icon-demo-cell">
+        <button class="btn btn--primary btn--l btn--hug">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_play"></use></svg>
+          Play Now
+        </button>
+        <div class="icon-demo-label">Leading icon</div>
+        <div class="icon-demo-desc">Icon placed before label. Use <code class="ds-code">.icon--s</code> (16px) inside <code class="ds-code">.btn--l</code> or <code class="ds-code">.btn--m</code>.</div>
+      </div>
+
+      <div class="icon-demo-cell">
+        <button class="btn btn--icon" aria-label="Play game">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_play"></use></svg>
+        </button>
+        <div class="icon-demo-label">Icon only</div>
+        <div class="icon-demo-desc"><code class="ds-code">.btn--icon</code> &#x2014; 44px touch target, transparent bg. Always requires <code class="ds-code">aria-label</code>.</div>
+      </div>
+
+      <div class="icon-demo-cell">
+        <button class="btn btn--icon-circle" aria-label="Share game">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_share"></use></svg>
+        </button>
+        <div class="icon-demo-label">Icon circle</div>
+        <div class="icon-demo-desc"><code class="ds-code">.btn--icon-circle</code> &#x2014; glass bg with border. For toolbars and floating action areas.</div>
+      </div>
+
+      <div class="icon-demo-cell">
+        <button class="btn btn--icon-pill btn--hug">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_play_circle"></use></svg>
+          Trailer
+        </button>
+        <div class="icon-demo-label">Icon pill</div>
+        <div class="icon-demo-desc"><code class="ds-code">.btn--icon-pill</code> &#x2014; compact labeled icon button. Use in toolbars with limited space.</div>
+      </div>
+
+      <div class="icon-demo-cell">
+        <button class="btn btn--secondary btn--l btn--hug" style="gap:8px">
+          Wishlist
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_favorite"></use></svg>
+        </button>
+        <div class="icon-demo-label">Trailing icon</div>
+        <div class="icon-demo-desc">Icon after label. Use only when the icon describes an output rather than the action itself.</div>
+      </div>
+
+      <div class="icon-demo-cell" style="align-items:flex-start">
+        <div style="display:flex;flex-direction:column;gap:8px;width:100%">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-family:monospace;font-size:10px;color:var(--text3);width:48px">.btn--xs</span>
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="var(--text2)" aria-hidden="true"><use href="../sprite.svg#ic_play"></use></svg>
+            <span style="font-size:10px;color:var(--text3)">12px &#x2014; icon--xs</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-family:monospace;font-size:10px;color:var(--text3);width:48px">.btn--s</span>
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="var(--text2)" aria-hidden="true"><use href="../sprite.svg#ic_play"></use></svg>
+            <span style="font-size:10px;color:var(--text3)">14px</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-family:monospace;font-size:10px;color:var(--text3);width:48px">.btn--m</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="var(--text2)" aria-hidden="true"><use href="../sprite.svg#ic_play"></use></svg>
+            <span style="font-size:10px;color:var(--text3)">16px &#x2014; icon--s</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-family:monospace;font-size:10px;color:var(--text3);width:48px">.btn--l</span>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="var(--text2)" aria-hidden="true"><use href="../sprite.svg#ic_play"></use></svg>
+            <span style="font-size:10px;color:var(--text3)">16px &#x2014; icon--s</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-family:monospace;font-size:10px;color:var(--text3);width:48px">.btn--xl</span>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="var(--text2)" aria-hidden="true"><use href="../sprite.svg#ic_play"></use></svg>
+            <span style="font-size:10px;color:var(--text3)">20px &#x2014; icon--m</span>
+          </div>
+        </div>
+        <div class="icon-demo-label">Icon size pairing</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       10. LOADING BEHAVIOR
+  =================================================== -->
+  <section class="ds-section" id="loading">
+    <h2 class="ds-section-title">Loading behavior</h2>
+    <p class="ds-section-desc">The loading state communicates that an action has been received and is processing. It prevents re-submission and removes the label visually while keeping layout stable.</p>
+
+    <div class="ds-demo ds-demo--dark" style="margin-bottom:24px">
+      <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:center">
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3)">Before</div>
+          <button class="btn btn--primary btn--l" style="width:160px">Play Now</button>
+        </div>
+        <div style="color:var(--text4);font-size:20px">&#x2192;</div>
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--jio)">Loading</div>
+          <button class="btn btn--primary btn--l is-loading" style="width:160px">Play Now</button>
+        </div>
+        <div style="color:var(--text4);font-size:20px">&#x2192;</div>
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#6ee7b7">Success</div>
+          <button class="btn btn--primary btn--l is-success" style="width:160px">Done!</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border-subtle);border-radius:var(--r4);overflow:hidden;border:1px solid var(--border-subtle)">
+      <div style="background:var(--surface-1);padding:16px 20px">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--jio);margin-bottom:10px">Do</div>
+        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Keep <code class="ds-code">width</code> stable &#x2014; set fixed or <code class="ds-code">min-width</code></li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Spinner auto-injected via <code class="ds-code">::after</code> &#x2014; no extra HTML</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Label text goes transparent, stays in DOM for layout</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Add <code class="ds-code">aria-busy="true"</code> on the button element</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Transition to <code class="ds-code">.is-success</code> or <code class="ds-code">.is-error</code> after</li>
+        </ul>
+      </div>
+      <div style="background:var(--surface-1);padding:16px 20px">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--negative);margin-bottom:10px">Don&#x27;t</div>
+        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Don&#x27;t change the label text to &#x22;Loading&#x2026;&#x22;</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Don&#x27;t allow width to collapse &#x2014; causes layout shift</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Don&#x27;t add a separate spinner element in the HTML</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Don&#x27;t leave the button loading indefinitely</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Don&#x27;t use loading on <code class="ds-code">.btn--text</code> buttons</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       11. CONTENT GUIDANCE
+  =================================================== -->
+  <section class="ds-section" id="content">
+    <h2 class="ds-section-title">Content</h2>
+    <p class="ds-section-desc">Button labels are the most direct communication between the product and the player. Every word carries weight.</p>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Label writing</div>
+        <ul>
+          <li>Use action verbs: Play, Start, Continue, Unlock, Try again</li>
+          <li>Keep to 1&#x2013;3 words where possible</li>
+          <li>Avoid &#x22;Submit&#x22;, &#x22;OK&#x22;, &#x22;Yes&#x22; without clear context</li>
+          <li>Icon + label: icon should reinforce, not replace, the label</li>
+          <li>Match the verb to the outcome: &#x22;Play&#x22; not &#x22;Launch&#x22;</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Loading state</div>
+        <ul>
+          <li>Do not change the label text during loading</li>
+          <li>Maintain button width &#x2014; add <code class="ds-code">min-width</code> if needed</li>
+          <li>Spinner appears automatically via CSS <code class="ds-code">::after</code></li>
+          <li>Success state: show confirmation, then return to default</li>
+          <li>Error state: show feedback and allow retry</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Destructive labels</div>
+        <ul>
+          <li>Name the consequence: &#x22;Delete save file&#x22;, not &#x22;Delete&#x22;</li>
+          <li>Confirm before triggering &#x2014; use a dialog</li>
+          <li>Never use Destructive as the primary CTA</li>
+          <li>Always pair with a cancel option</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Icon-only buttons</div>
+        <ul>
+          <li>Always require <code class="ds-code">aria-label</code> on the button element</li>
+          <li>Use a tooltip to surface the label on hover</li>
+          <li>Minimum 44px touch target on mobile</li>
+          <li>Prefer icon + label if there&#x27;s sufficient space</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       12. PLATFORM CONSIDERATIONS
+  =================================================== -->
+  <section class="ds-section" id="platform-considerations">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <p class="ds-section-desc">Each platform has a different interaction model. The same button classes adapt their token values &#x2014; but usage patterns also differ fundamentally.</p>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>44px minimum touch target &#x2014; use M or L</li>
+          <li>Full-width Primary CTA at bottom of screen</li>
+          <li>Avoid XS/S as primary action targets</li>
+          <li>Bottom sheet CTAs use full-width Primary</li>
+          <li>Loading keeps stable width to avoid layout shift</li>
+          <li>Tap highlight suppressed via <code class="ds-code">-webkit-tap-highlight-color</code></li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Hover state via <code class="ds-code">:hover</code> pseudo-class</li>
+          <li>Keyboard focus via <code class="ds-code">:focus-visible</code></li>
+          <li>Hug-content width for most actions</li>
+          <li>Dense layouts can use S size</li>
+          <li>Full-width only inside cards or modal footers</li>
+          <li>Cursor: pointer on all button elements</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>Remote d-pad navigation &#x2014; no hover</li>
+          <li>L or XL size only &#x2014; never XS/S on TV</li>
+          <li>TV focus: scale(1.05) + <code class="ds-code">var(--tv-focus-shadow)</code></li>
+          <li>10-foot readability &#x2014; min 16px font at TV sizes</li>
+          <li>Use <code class="ds-code">.is-tv-focused</code> in prototypes</li>
+          <li>Never use <code class="ds-code">.btn--tv</code> &#x2014; deprecated</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top:24px">
+      <div class="ds-sub-label">Same class &#xB7; different platform context</div>
+      <div class="ds-demo ds-demo--dark">
+        <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end">
+          <div class="platform-preview platform-preview--mobile">
+            <div style="font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#6ee7b7;margin-bottom:8px">Mobile</div>
+            <button class="btn btn--primary btn--l btn--hug" style="height:var(--btn-l-h-mobile);padding:0 var(--btn-l-px-mobile);font-size:var(--btn-l-fs-mobile)">Play Now</button>
+            <div style="font-size:10px;color:var(--text4);margin-top:6px">h: 54px &#xB7; fs: 15px</div>
+          </div>
+          <div class="platform-preview platform-preview--web">
+            <div style="font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#93c5fd;margin-bottom:8px">Web</div>
+            <button class="btn btn--primary btn--l btn--hug" style="height:var(--btn-l-h-web);padding:0 var(--btn-l-px-web);font-size:var(--btn-l-fs-web)">Play Now</button>
+            <div style="font-size:10px;color:var(--text4);margin-top:6px">h: 54px &#xB7; fs: 16px</div>
+          </div>
+          <div class="platform-preview platform-preview--tv">
+            <div style="font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#fbbf24;margin-bottom:8px">TV</div>
+            <button class="btn btn--primary btn--l btn--hug" style="height:var(--btn-l-h-tv);padding:0 var(--btn-l-px-tv);font-size:var(--btn-l-fs-tv)">Play Now</button>
+            <div style="font-size:10px;color:var(--text4);margin-top:6px">h: 72px &#xB7; fs: 20px</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       13. ACCESSIBILITY
+  =================================================== -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">Buttons are interactive controls. Every button must be operable with keyboard, screen reader, and pointer input.</p>
+    <div class="a11y-grid">
+      <div class="a11y-row">
+        <div class="a11y-label">ARIA roles</div>
+        <div class="a11y-content">Use a native <code class="ds-code">&lt;button&gt;</code> element whenever possible &#x2014; it carries <code class="ds-code">role="button"</code>, keyboard activation, and click semantics. If using a non-button element, add <code class="ds-code">role="button"</code>, <code class="ds-code">tabindex="0"</code>, and handle <kbd>Enter</kbd> + <kbd>Space</kbd> in JavaScript.</div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Keyboard nav</div>
+        <div class="a11y-content">
+          <ul>
+            <li><kbd>Tab</kbd> &#x2014; moves focus to the next interactive element</li>
+            <li><kbd>Enter</kbd> or <kbd>Space</kbd> &#x2014; activates the button</li>
+            <li><kbd>Escape</kbd> &#x2014; dismisses dialogs triggered by the button</li>
+            <li>Focus ring visible on <code class="ds-code">:focus-visible</code>, not <code class="ds-code">:focus</code></li>
+          </ul>
+        </div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Contrast</div>
+        <div class="a11y-content">
+          <ul>
+            <li>Primary: black text on <code class="ds-code">#00A859</code> &#x2014; 5.1:1 contrast ratio</li>
+            <li>Secondary / Ghost: white text on dark bg &#x2014; meets 4.5:1</li>
+            <li>Destructive: <code class="ds-code">var(--negative)</code> red &#x2014; ensure 4.5:1 on any bg</li>
+            <li>Disabled: 0.32 opacity &#x2014; decorative, not required to meet contrast</li>
+          </ul>
+        </div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Screen readers</div>
+        <div class="a11y-content">
+          <ul>
+            <li>Icon-only: always add <code class="ds-code">aria-label="[action]"</code> to the button element</li>
+            <li>Add <code class="ds-code">aria-hidden="true"</code> to all decorative SVG icons</li>
+            <li>Loading: add <code class="ds-code">aria-busy="true"</code> to the button while loading</li>
+            <li>Disabled: use native <code class="ds-code">disabled</code> attribute, not CSS opacity alone</li>
+            <li>Success/error: use <code class="ds-code">aria-live="polite"</code> region for feedback announcements</li>
+          </ul>
+        </div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Touch targets</div>
+        <div class="a11y-content">
+          Mobile: minimum 44&#xD7;44px touch target per WCAG 2.5.5. Use M size (<code class="ds-code">.btn--m</code> = 44px) or larger. Never use XS or S as standalone primary actions on mobile. Maintain minimum 8px spacing between adjacent button targets.
+        </div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Reduced motion</div>
+        <div class="a11y-content">
+          The DLS respects <code class="ds-code">prefers-reduced-motion</code> at the token level. All duration tokens collapse to 0ms when the preference is set. The loading spinner animation is paused. Never add custom animations that bypass the token duration system.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       14. RELATED TOKENS
+  =================================================== -->
+  <section class="ds-section" id="tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-desc">All button values are defined in <code class="ds-code">tokens/tokens.css</code>. Change a token once and all button instances update automatically.</p>
+
+    <div class="ds-sub-label" style="margin-bottom:12px;margin-top:8px">Variant color tokens</div>
+    <table class="ds-spec-table" style="margin-bottom:32px">
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>Value</th>
+          <th>Swatch</th>
+          <th>Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="ds-code">--btn-primary-bg</code></td>
+          <td><code class="ds-code">var(--jio)</code> &#x2192; #00A859</td>
+          <td><span class="ds-token-swatch" style="background:#00A859"></span></td>
+          <td>Primary button background</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--btn-primary-text</code></td>
+          <td><code class="ds-code">var(--text-inv)</code> &#x2192; #000000</td>
+          <td><span class="ds-token-swatch" style="background:#000"></span></td>
+          <td>Primary button label color</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--btn-primary-hover-bg</code></td>
+          <td>#00be65</td>
+          <td><span class="ds-token-swatch" style="background:#00be65"></span></td>
+          <td>Primary hover state background</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--btn-secondary-border</code></td>
+          <td><code class="ds-code">var(--border-strong)</code></td>
+          <td><span class="ds-token-swatch" style="background:rgba(255,255,255,.14)"></span></td>
+          <td>Secondary border color</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--btn-ghost-border</code></td>
+          <td><code class="ds-code">var(--border)</code></td>
+          <td><span class="ds-token-swatch" style="background:rgba(255,255,255,.1)"></span></td>
+          <td>Ghost button border</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--btn-destructive-bg</code></td>
+          <td>rgba(255,71,87,.12)</td>
+          <td><span class="ds-token-swatch" style="background:rgba(255,71,87,.12)"></span></td>
+          <td>Destructive fill</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--btn-destructive-text</code></td>
+          <td><code class="ds-code">var(--negative)</code> &#x2192; #FF4757</td>
+          <td><span class="ds-token-swatch" style="background:#FF4757"></span></td>
+          <td>Destructive label color</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--btn-ultimate-bg</code></td>
+          <td>linear-gradient(135deg, #00cc65, #00E870)</td>
+          <td><span class="ds-token-swatch" style="background:linear-gradient(135deg,#00cc65,#00E870)"></span></td>
+          <td>Ultimate pass gradient</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--btn-disabled-opacity</code></td>
+          <td>0.32</td>
+          <td>&#x2014;</td>
+          <td>Disabled state opacity</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ds-sub-label" style="margin-bottom:12px">Size tokens &#x2014; Mobile / Web / TV</div>
+    <div style="overflow-x:auto">
+    <table class="ds-spec-table" style="margin-bottom:32px;min-width:560px">
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>Mobile</th>
+          <th>Web</th>
+          <th>TV</th>
+          <th>Property</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code class="ds-code">--btn-xs-h</code></td><td>28px</td><td>30px</td><td>48px</td><td>height</td></tr>
+        <tr><td><code class="ds-code">--btn-s-h</code></td><td>36px</td><td>38px</td><td>56px</td><td>height</td></tr>
+        <tr><td><code class="ds-code">--btn-m-h</code></td><td>44px</td><td>44px</td><td>64px</td><td>height</td></tr>
+        <tr><td><code class="ds-code">--btn-l-h</code></td><td>54px</td><td>54px</td><td>72px</td><td>height</td></tr>
+        <tr><td><code class="ds-code">--btn-xl-h</code></td><td>64px</td><td>64px</td><td>80px</td><td>height</td></tr>
+        <tr><td><code class="ds-code">--btn-xs-px</code></td><td>10px</td><td>12px</td><td>20px</td><td>padding-inline</td></tr>
+        <tr><td><code class="ds-code">--btn-s-px</code></td><td>16px</td><td>18px</td><td>28px</td><td>padding-inline</td></tr>
+        <tr><td><code class="ds-code">--btn-m-px</code></td><td>20px</td><td>22px</td><td>36px</td><td>padding-inline</td></tr>
+        <tr><td><code class="ds-code">--btn-l-px</code></td><td>24px</td><td>28px</td><td>44px</td><td>padding-inline</td></tr>
+        <tr><td><code class="ds-code">--btn-xl-px</code></td><td>32px</td><td>36px</td><td>56px</td><td>padding-inline</td></tr>
+        <tr><td><code class="ds-code">--btn-xs-fs</code></td><td>11px</td><td>12px</td><td>14px</td><td>font-size</td></tr>
+        <tr><td><code class="ds-code">--btn-s-fs</code></td><td>13px</td><td>13px</td><td>16px</td><td>font-size</td></tr>
+        <tr><td><code class="ds-code">--btn-m-fs</code></td><td>14px</td><td>14px</td><td>18px</td><td>font-size</td></tr>
+        <tr><td><code class="ds-code">--btn-l-fs</code></td><td>15px</td><td>16px</td><td>20px</td><td>font-size</td></tr>
+        <tr><td><code class="ds-code">--btn-xl-fs</code></td><td>17px</td><td>18px</td><td>22px</td><td>font-size</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="ds-sub-label" style="margin-bottom:12px">Focus and interaction tokens</div>
+    <table class="ds-spec-table">
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>Value</th>
+          <th>Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="ds-code">--focus-ring-color</code></td>
+          <td><code class="ds-code">var(--jio)</code> &#x2192; #00A859</td>
+          <td>Focus outline color</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--focus-ring-width</code></td>
+          <td>2px (mobile/web) &#xB7; 3px (TV)</td>
+          <td>Focus ring stroke</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--focus-ring-offset</code></td>
+          <td>3px (mobile/web) &#xB7; 4px (TV)</td>
+          <td>Outline offset from edge</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--state-pressed-scale</code></td>
+          <td>0.97</td>
+          <td>Scale transform on :active</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--state-disabled-opacity</code></td>
+          <td>0.32</td>
+          <td>Disabled state opacity</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--tv-focus-shadow</code></td>
+          <td>0 0 0 3px var(--jio), 0 0 24px var(--jio-glow), 0 0 48px rgba(0,200,100,.2)</td>
+          <td>TV d-pad glow</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--tv-focus-scale</code></td>
+          <td>1.05</td>
+          <td>TV focus scale transform</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--spinner-size-md</code></td>
+          <td>20px</td>
+          <td>Default spinner diameter</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--spinner-stroke</code></td>
+          <td>2px</td>
+          <td>Spinner border width</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ===================================================
+       15. CODE EXAMPLES
+  =================================================== -->
+  <section class="ds-section" id="code">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-section-desc">Copy-pasteable patterns for every common button use case.</p>
+
+    <div style="display:flex;flex-direction:column;gap:24px">
+
+      <div>
+        <div class="ds-sub-label" style="margin-bottom:8px">Primary button</div>
+        <pre class="ds-code-block" data-lang="HTML">&lt;button class="btn btn--primary btn--l btn--hug"&gt;
+  Play Now
+&lt;/button&gt;
+
+&lt;!-- Full-width (mobile bottom CTA) --&gt;
+&lt;button class="btn btn--primary btn--l btn--full"&gt;
+  Play Now
+&lt;/button&gt;</pre>
+      </div>
+
+      <div>
+        <div class="ds-sub-label" style="margin-bottom:8px">Secondary &amp; Ghost</div>
+        <pre class="ds-code-block" data-lang="HTML">&lt;button class="btn btn--secondary btn--l btn--hug"&gt;Add to Library&lt;/button&gt;
+&lt;button class="btn btn--ghost btn--l btn--hug"&gt;Skip for now&lt;/button&gt;</pre>
+      </div>
+
+      <div>
+        <div class="ds-sub-label" style="margin-bottom:8px">Icon + label</div>
+        <pre class="ds-code-block" data-lang="HTML">&lt;button class="btn btn--primary btn--l btn--hug"&gt;
+  &lt;svg viewBox="0 0 24 24" class="icon icon--s" aria-hidden="true"&gt;
+    &lt;use href="../sprite.svg#ic_play"&gt;&lt;/use&gt;
+  &lt;/svg&gt;
+  Play Game
+&lt;/button&gt;</pre>
+      </div>
+
+      <div>
+        <div class="ds-sub-label" style="margin-bottom:8px">Loading state</div>
+        <pre class="ds-code-block" data-lang="HTML">&lt;!-- Add .is-loading via JS when action fires --&gt;
+&lt;button
+  class="btn btn--primary btn--l btn--hug is-loading"
+  aria-busy="true"
+  style="min-width:140px"
+&gt;
+  Play Now
+&lt;/button&gt;</pre>
+      </div>
+
+      <div>
+        <div class="ds-sub-label" style="margin-bottom:8px">TV platform context</div>
+        <pre class="ds-code-block" data-lang="HTML">&lt;!-- .platform-tv resolves all --btn-*-h tokens to TV values --&gt;
+&lt;div class="platform-tv"&gt;
+  &lt;button class="btn btn--primary btn--l btn--hug"&gt;
+    Play Now
+  &lt;/button&gt;
+&lt;/div&gt;
+
+&lt;!-- Simulate TV focus in prototypes --&gt;
+&lt;button class="btn btn--primary btn--l btn--hug is-tv-focused"&gt;
+  Play Now
+&lt;/button&gt;</pre>
+      </div>
+
+      <div>
+        <div class="ds-sub-label" style="margin-bottom:8px">Accessible icon-only buttons</div>
+        <pre class="ds-code-block" data-lang="HTML">&lt;!-- Transparent bg, 44px touch target --&gt;
+&lt;button class="btn btn--icon" aria-label="Play game"&gt;
+  &lt;svg viewBox="0 0 24 24" class="icon icon--m" aria-hidden="true"&gt;
+    &lt;use href="../sprite.svg#ic_play"&gt;&lt;/use&gt;
+  &lt;/svg&gt;
+&lt;/button&gt;
+
+&lt;!-- Glass bg with border --&gt;
+&lt;button class="btn btn--icon-circle" aria-label="Share"&gt;
+  &lt;svg viewBox="0 0 24 24" class="icon icon--s" aria-hidden="true"&gt;
+    &lt;use href="../sprite.svg#ic_share"&gt;&lt;/use&gt;
+  &lt;/svg&gt;
+&lt;/button&gt;</pre>
+      </div>
+
+      <div>
+        <div class="ds-sub-label" style="margin-bottom:8px">Destructive with confirmation pattern</div>
+        <pre class="ds-code-block" data-lang="HTML">&lt;!-- Always pair with a cancel action --&gt;
+&lt;div style="display:flex;gap:12px"&gt;
+  &lt;button class="btn btn--ghost btn--l btn--hug"&gt;
+    Cancel
+  &lt;/button&gt;
+  &lt;button class="btn btn--destructive btn--l btn--hug"&gt;
+    Delete save file
+  &lt;/button&gt;
+&lt;/div&gt;</pre>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       16. CHANGELOG
+  =================================================== -->
+
+</main>
+<script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script>
+</body>
+</html>

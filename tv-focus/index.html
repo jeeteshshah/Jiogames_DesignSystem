@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TV Focus — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+</head>
+<body>
+  <main class="ds-main">
+
+    <header class="component-page-header">
+      <nav class="component-breadcrumb" aria-label="Breadcrumb">
+        <a href="../">JioGames DLS</a>
+        <span class="component-breadcrumb-sep" aria-hidden="true">›</span>
+        <span>TV Focus</span>
+      </nav>
+      <h1 class="component-page-title">TV Focus</h1>
+      <p class="component-page-def">JioGames TV uses a D-pad + OK model. No hover. All interaction via directional focus. The focus ring is the primary affordance — it must be unmissable at 3m viewing distance.</p>
+      <div class="component-platforms">
+        <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+        <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <div class="component-hero component-hero--dark" style="padding:32px 40px;align-items:flex-start;gap:20px">
+      <div class="hero-glow"></div>
+      <div style="display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;position:relative;z-index:1">
+        <!-- Focused card demo -->
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Focused</div>
+          <div style="width:160px;height:100px;border-radius:var(--r4);background:var(--surface-2);border:3px solid var(--jio);box-shadow:0 0 0 4px rgba(0,168,89,.22),0 0 24px rgba(0,168,89,.18);transform:scale(1.05);display:flex;align-items:center;justify-content:center">
+            <span style="font-size:11px;font-weight:700;color:var(--jio)">FOCUSED</span>
+          </div>
+        </div>
+        <!-- Unfocused card -->
+        <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Unfocused</div>
+          <div style="width:160px;height:100px;border-radius:var(--r4);background:var(--surface-2);border:3px solid transparent;display:flex;align-items:center;justify-content:center">
+            <span style="font-size:11px;font-weight:700;color:var(--text3)">CARD</span>
+          </div>
+        </div>
+        <!-- Focus ring spec -->
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Ring spec</div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="font-size:11px;color:var(--text2)">Border: 3px solid var(--jio)</div>
+            <div style="font-size:11px;color:var(--text2)">Outer glow: rgba(0,168,89,.22)</div>
+            <div style="font-size:11px;color:var(--text2)">Scale: 1.05×</div>
+            <div style="font-size:11px;color:var(--text2)">Transition: 150ms ease-out</div>
+          </div>
+        </div>
+      </div>
+      <p class="component-hero-caption">3PX GREEN RING · GLOW · 1.05× SCALE · D-PAD NAVIGATION</p>
+    </div>
+
+    <!-- THE FOCUS RING -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">The Focus Ring</h2>
+      <p class="ds-section-desc">Three element types — button, card, custom tile — all receive the same unmissable TV focus treatment: a 3px green ring, layered glow, and a 1.05× scale lift.</p>
+      <div class="ds-demo ds-demo--dark">
+        <div style="display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap">
+
+          <!-- Button -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
+            <button class="btn btn--primary btn--xl btn--hug is-tv-focused">Play Now</button>
+            <span style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Button</span>
+          </div>
+
+          <!-- Card -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
+            <div class="card is-tv-focused" style="width:200px">
+              <div class="card__art" style="height:112px;background:linear-gradient(135deg,var(--surface-3),var(--violet))">
+                <div class="card__overlay"></div>
+              </div>
+              <div class="card__body">
+                <div class="card__title">War Thunder</div>
+                <div class="card__meta">Free to Play</div>
+              </div>
+            </div>
+            <span style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Card</span>
+          </div>
+
+          <!-- Genre tile -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:14px">
+            <div style="width:96px;height:96px;border-radius:var(--r5);background:linear-gradient(135deg,var(--jio-soft),var(--surface-2));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:var(--text);box-shadow:var(--tv-focus-shadow);transform:scale(var(--tv-focus-scale));outline:none;transition:all var(--dur-base) var(--ease-out)">Action</div>
+            <span style="font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Genre Tile</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ANATOMY DIAGRAM -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Focus Anatomy</h2>
+      <p class="ds-section-desc">The TV focus ring is a composite of three shadow layers plus a scale transform. Each layer serves a distinct visual purpose.</p>
+      <table class="ds-token-table">
+        <thead>
+          <tr>
+            <th>Layer</th>
+            <th>CSS</th>
+            <th>Token</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color:var(--text)">Focus ring</strong></td>
+            <td><span class="ds-token-value">0 0 0 3px var(--jio)</span></td>
+            <td><span class="ds-token-name">--tv-focus-ring-color</span></td>
+            <td style="color:var(--text2)">Solid green border — primary identity signal</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--text)">Inner glow</strong></td>
+            <td><span class="ds-token-value">0 0 24px var(--jio-glow)</span></td>
+            <td><span class="ds-token-name">--jio-glow</span></td>
+            <td style="color:var(--text2)">Soft radiance — depth and warmth at distance</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--text)">Outer ambient</strong></td>
+            <td><span class="ds-token-value">0 0 48px rgba(0,200,100,.2)</span></td>
+            <td><span class="ds-token-name">--tv-focus-shadow</span></td>
+            <td style="color:var(--text2)">Atmospheric bloom — visible at 3m</td>
+          </tr>
+          <tr>
+            <td><strong style="color:var(--text)">Scale</strong></td>
+            <td><span class="ds-token-value">transform: scale(1.05)</span></td>
+            <td><span class="ds-token-name">--tv-focus-scale</span></td>
+            <td style="color:var(--text2)">Physical lift — confirms selection spatially</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- WEB vs TV COMPARISON -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Web Focus vs TV Focus</h2>
+      <p class="ds-section-desc">Web focus is subtle — 2px ring, no scale, no glow. TV focus is theatrical — designed to be readable from a couch at 3 metres.</p>
+      <div class="ds-demo ds-demo--dark">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+          <div style="background:var(--surface-1);border-radius:var(--r5);padding:24px;display:flex;flex-direction:column;align-items:center;gap:12px">
+            <div style="font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:4px">Web Focus</div>
+            <button class="btn btn--primary btn--hug is-focused">Play Now</button>
+            <div style="font-size:11px;color:var(--text3)">2px ring · no scale · subtle</div>
+          </div>
+          <div style="background:#000308;border-radius:var(--r5);padding:24px;display:flex;flex-direction:column;align-items:center;gap:12px">
+            <div style="font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:4px">TV Focus (10-foot)</div>
+            <button class="btn btn--primary btn--xl btn--hug is-tv-focused">Play Now</button>
+            <div style="font-size:11px;color:var(--text3)">3px ring + glow + scale 1.05</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOCUS ORDER RULES -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Focus Order Rules</h2>
+      <p class="ds-section-desc">Focus must follow a predictable spatial model. Users learn the grid — any deviation breaks their mental map.</p>
+      <div class="ds-demo">
+        <ol style="font-size:14px;color:var(--text2);line-height:2.2;padding-left:20px;margin:0">
+          <li><strong style="color:var(--text)">Left → Right, Top → Bottom</strong> — natural reading order within each row.</li>
+          <li><strong style="color:var(--text)">Wrap to next row</strong> — pressing Right at end of rail moves focus to the first card of the next rail.</li>
+          <li><strong style="color:var(--text)">Modal traps focus</strong> — once a sheet or dialog opens, focus must stay inside until dismissed.</li>
+          <li><strong style="color:var(--text)">Back button exits modal</strong> — always. Never leave the user stranded.</li>
+          <li><strong style="color:var(--text)">No orphan focus</strong> — every state must have at least one focusable element; never render a UI with no focusable target.</li>
+          <li><strong style="color:var(--text)">All interactive elements must be focusable</strong> — custom divs acting as buttons need <code>tabindex="0"</code> and keyboard handlers.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- RAIL NAVIGATION PATTERN -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Rail Navigation Pattern</h2>
+      <p class="ds-section-desc">The standard TV layout is horizontal card rails. Focus moves Left/Right within a rail; Up/Down switches rails. The focused card pops with glow + scale.</p>
+      <div class="ds-demo ds-demo--dark" >
+        <div style="background:#000308;border-radius:var(--r5);padding:32px 24px;overflow:hidden">
+          <div style="font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin-bottom:16px">Popular Games</div>
+          <div style="display:flex;gap:16px;overflow:hidden">
+            <div class="card" style="width:180px;flex-shrink:0">
+              <div class="card__art" style="height:101px;background:linear-gradient(135deg,var(--surface-3),var(--surface-2))"><div class="card__overlay"></div></div>
+              <div class="card__body"><div class="card__title">Game 1</div><div class="card__meta">Action</div></div>
+            </div>
+            <div class="card is-tv-focused" style="width:180px;flex-shrink:0">
+              <div class="card__art" style="height:101px;background:linear-gradient(135deg,var(--jio-soft),var(--surface-2))"><div class="card__overlay"></div></div>
+              <div class="card__body"><div class="card__title">War Thunder</div><div class="card__meta">Free to Play</div></div>
+            </div>
+            <div class="card" style="width:180px;flex-shrink:0">
+              <div class="card__art" style="height:101px;background:linear-gradient(135deg,var(--surface-3),var(--violet))"><div class="card__overlay"></div></div>
+              <div class="card__body"><div class="card__title">Game 3</div><div class="card__meta">RPG</div></div>
+            </div>
+            <div class="card" style="width:180px;flex-shrink:0;opacity:0.5">
+              <div class="card__art" style="height:101px;background:linear-gradient(135deg,var(--surface-2),var(--surface-3))"><div class="card__overlay"></div></div>
+              <div class="card__body"><div class="card__title">Game 4</div><div class="card__meta">Racing</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- APPLYING TV FOCUS -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Applying TV Focus</h2>
+      <p class="ds-section-desc">Add the focus shadow and scale to any custom element using <code>:focus-visible</code> or the <code>.is-tv-focused</code> class. Wire D-pad keys in JS.</p>
+
+      <div class="ds-code">
+<pre>/* CSS — apply to any focusable TV element */
+.my-card:focus-visible,
+.my-card.is-tv-focused {
+  outline: none;
+  box-shadow: var(--tv-focus-shadow);
+  transform: scale(var(--tv-focus-scale));
+  transition: box-shadow var(--dur-base) var(--ease-out),
+              transform var(--dur-base) var(--spring);
+}</pre>
+      </div>
+
+      <div class="ds-code" style="margin-top:16px">
+<pre>/* JS — D-pad navigation handler */
+element.addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') activate();
+  if (e.key === 'ArrowRight') focusNext();
+  if (e.key === 'ArrowLeft')  focusPrev();
+  if (e.key === 'ArrowDown')  focusNextRow();
+  if (e.key === 'ArrowUp')    focusPrevRow();
+});</pre>
+      </div>
+    </section>
+
+    <!-- REDUCED MOTION -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Reduced Motion</h2>
+      <p class="ds-section-desc">TV focus animation must respect <code>prefers-reduced-motion</code>. Users with vestibular conditions must never see unexpected scale or glow animation. The ring itself (box-shadow) can remain — only the transition is disabled.</p>
+      <div class="ds-code">
+<pre>@media (prefers-reduced-motion: reduce) {
+  .card, .btn, [class*="is-tv-focused"] {
+    transition: none;
+    transform: none;
+  }
+
+  /* Focus ring stays (it's a static outline), but scale is removed */
+  .card.is-tv-focused,
+  .btn.is-tv-focused {
+    box-shadow: var(--tv-focus-shadow);
+    transform: none; /* no scale under reduced motion */
+  }
+}</pre>
+      </div>
+    </section>
+
+    <!-- TOKEN TABLE -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Tokens</h2>
+      <table class="ds-token-table">
+        <thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="ds-token-name">--tv-focus-ring-color</span></td>
+            <td><span class="ds-token-value">var(--jio)</span></td>
+            <td style="color:var(--text2)">Ring colour (green)</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--tv-focus-shadow</span></td>
+            <td><span class="ds-token-value">0 0 0 3px var(--jio), 0 0 24px var(--jio-glow), 0 0 48px rgba(0,200,100,.2)</span></td>
+            <td style="color:var(--text2)">Full composite shadow</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--tv-focus-scale</span></td>
+            <td><span class="ds-token-value">1.05</span></td>
+            <td style="color:var(--text2)">Scale-up transform</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--focus-ring-color</span></td>
+            <td><span class="ds-token-value">var(--jio)</span></td>
+            <td style="color:var(--text2)">Web/mobile focus ring colour</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--focus-ring-width</span></td>
+            <td><span class="ds-token-value">2px</span></td>
+            <td style="color:var(--text2)">Web focus ring thickness</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--dur-base</span></td>
+            <td><span class="ds-token-value">200ms</span></td>
+            <td style="color:var(--text2)">Focus transition duration</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--ease-out</span></td>
+            <td><span class="ds-token-value">cubic-bezier(0.2,0,0,1)</span></td>
+            <td style="color:var(--text2)">Focus easing</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- RULES -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Rules</h2>
+      <ul class="ds-rules">
+        <li class="ds-rule ds-rule--pass">Always use <code>:focus-visible</code>, never <code>:focus</code> — avoids spurious rings on mouse click.</li>
+        <li class="ds-rule ds-rule--pass">Focus ring must be visible on all backgrounds — test on the darkest surface (<code>--bg</code>) and lightest overlay.</li>
+        <li class="ds-rule ds-rule--pass">Scale + glow must animate using <code>--spring</code> easing — the physics sell the physicality at distance.</li>
+        <li class="ds-rule ds-rule--pass">Every focusable element must have <code>tabindex="0"</code> if it is not a native interactive element.</li>
+        <li class="ds-rule ds-rule--pass">Respect <code>prefers-reduced-motion</code> — disable scale and transition, keep the static ring.</li>
+        <li class="ds-rule ds-rule--fail">Hover-only states — TV remotes have no hover; all states must be reachable via D-pad.</li>
+        <li class="ds-rule ds-rule--fail">Missing <code>tabIndex</code> on interactive custom elements — they become unreachable by keyboard/remote.</li>
+        <li class="ds-rule ds-rule--fail">Relying on <code>outline:none</code> without a replacement — leaves TV users with no focus signal at all.</li>
+        <li class="ds-rule ds-rule--fail">Focus ring contrast below 3:1 — fails WCAG 2.4.11 for non-text contrast.</li>
+      </ul>
+    </section>
+
+
+    <!-- CHANGELOG -->
+
+  </main>
+  <script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script>
+</body>
+</html>

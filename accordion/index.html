@@ -1,0 +1,519 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accordion — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    .accordion { border: 1px solid var(--border-subtle); border-radius: var(--r5); overflow: hidden; }
+    .accordion-item { border-bottom: 1px solid var(--border-subtle); }
+    .accordion-item:last-child { border-bottom: none; }
+    .accordion-trigger {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px var(--space-2);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-family: var(--jio-font);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      text-align: left;
+      transition: background var(--dur-fast) var(--ease-out);
+      gap: 12px;
+    }
+    .accordion-trigger:hover { background: var(--glass-1); }
+    .accordion-trigger[aria-expanded="true"] { color: var(--jio); }
+    .accordion-icon { flex-shrink: 0; color: var(--text3); transition: transform var(--dur-fast) var(--ease-out); }
+    .accordion-trigger[aria-expanded="true"] .accordion-icon { transform: rotate(180deg); color: var(--jio); }
+    .accordion-body { padding: 0 var(--space-2) 16px; font-size: 14px; color: var(--text2); line-height: 1.6; }
+    .accordion-item--disabled .accordion-trigger { opacity: 0.38; pointer-events: none; }
+  </style>
+</head><body><main class="ds-main">
+
+  <!-- PAGE HEADER -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Accordion</span>
+    </nav>
+    <h1 class="component-page-title">Accordion</h1>
+    <p class="component-page-def">Vertically stacked expandable items for FAQs, settings categories, and grouped content. One item open at a time (exclusive) or multiple (non-exclusive).</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+        <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+        <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+      </div>
+      <span class="component-maturity component-maturity--draft"><span class="component-maturity--dot"></span>Draft</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:320px;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="align-items:flex-start; max-width:480px; width:100%;">
+      <div class="accordion" style="width:100%;">
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="true">
+            How does JioGames Pass work?
+            <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="transform:rotate(180deg); color:var(--jio);">
+              <use href="../sprite.svg#ic_chevron_down"></use>
+            </svg>
+          </button>
+          <div class="accordion-body">JioGames Pass gives you access to 100+ premium games across mobile, web, and TV. Subscribe once and play on all your devices — no ads, no in-app purchases.</div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">
+            What games are included?
+            <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <use href="../sprite.svg#ic_chevron_down"></use>
+            </svg>
+          </button>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false">
+            Can I share my pass?
+            <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <use href="../sprite.svg#ic_chevron_down"></use>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <p class="component-hero-caption">Accordion · exclusive mode, first item expanded</p>
+  </section>
+
+  <!-- INTRO -->
+  <section class="component-intro">
+    <p>Accordions progressively disclose content — hiding detail until the user needs it. They reduce cognitive load on dense pages like FAQs, settings screens, and help centres by showing only headings by default. Unlike Collapsible (which is a single show/hide), Accordion manages a group of related items with shared expand/collapse logic.</p>
+    <ul class="component-summary-list">
+      <li><strong>Exclusive (single-open)</strong> — only one item can be expanded at a time. Collapsing one opens none.</li>
+      <li><strong>Non-exclusive (multi-open)</strong> — any number of items can be expanded simultaneously.</li>
+      <li><strong>Flush / borderless</strong> — no outer border; items separated by dividers only. Use inside cards.</li>
+      <li><strong>With icon prefix</strong> — leading icon on trigger for category-style accordions (e.g. Settings groups).</li>
+    </ul>
+  </section>
+
+  <!-- BEST PRACTICES -->
+  <section class="component-best-practices">
+    <div class="component-bp-card component-bp-card--do">
+      <span class="component-bp-label component-bp-label--do">Do</span>
+      <ul class="component-bp-list">
+        <li>Keep trigger text under 60 characters — a question or a category name.</li>
+        <li>Use 14px / line-height 1.6 for body text — the comfortable reading standard.</li>
+        <li>Ensure triggers are at least 48px tall for touch affordance on mobile.</li>
+        <li>Animate the chevron icon 180° on expand — confirms state change visually.</li>
+        <li>Use exclusive mode for FAQs; non-exclusive for settings where users compare panels.</li>
+      </ul>
+    </div>
+    <div class="component-bp-card component-bp-card--dont">
+      <span class="component-bp-label component-bp-label--dont">Don't</span>
+      <ul class="component-bp-list">
+        <li>Nest accordions — never put an accordion inside another accordion panel.</li>
+        <li>Use accordions for navigation — links that go to new pages belong in a nav list.</li>
+        <li>Open all items by default — defeats the purpose of progressive disclosure.</li>
+        <li>Use accordion for a single item — use Collapsible instead.</li>
+        <li>Put critical actions inside accordion panels — they must be always visible.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <div class="ds-anatomy" style="margin-bottom:64px;">
+    <div class="ds-anatomy-preview">
+      <div class="ds-anatomy-component" style="width:280px;">
+        <div style="border:1px solid var(--border-subtle); border-radius:var(--r5); overflow:hidden; position:relative;">
+          <div style="position:relative;">
+            <button class="accordion-trigger" style="pointer-events:none; position:relative;">
+              Trigger label
+              <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="transform:rotate(180deg); color:var(--jio);">
+                <use href="../sprite.svg#ic_chevron_down"></use>
+              </svg>
+              <span class="ds-anatomy-callout-dot" style="position:absolute; top:8px; left:-10px;"><span class="ds-anatomy-callout-num">1</span></span>
+              <span class="ds-anatomy-callout-dot" style="position:absolute; top:8px; right:-10px;"><span class="ds-anatomy-callout-num">2</span></span>
+            </button>
+            <div class="accordion-body" style="position:relative;">
+              Body text content area
+              <span class="ds-anatomy-callout-dot" style="position:absolute; top:4px; left:-10px;"><span class="ds-anatomy-callout-num">3</span></span>
+            </div>
+          </div>
+          <div style="border-top:1px solid var(--border-subtle); position:relative;">
+            <button class="accordion-trigger" style="pointer-events:none;">
+              Collapsed item
+              <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <use href="../sprite.svg#ic_chevron_down"></use>
+              </svg>
+            </button>
+            <span class="ds-anatomy-callout-dot" style="position:absolute; bottom:-10px; left:50%; transform:translateX(-50%);"><span class="ds-anatomy-callout-num">4</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ol class="ds-anatomy-list">
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">1</span>
+        <div>
+          <div class="ds-anatomy-label">Trigger label <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">15px / weight 600. Active trigger: <code class="ds-code">var(--jio)</code>. Default: <code class="ds-code">var(--text)</code>. Max 60 chars. Question or category format.</div>
+          <code class="ds-anatomy-token ds-code">font-size:15px; font-weight:600</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">2</span>
+        <div>
+          <div class="ds-anatomy-label">Chevron icon <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">16px icon. Rotates 180° when expanded. Color matches trigger label — green when open, muted when closed.</div>
+          <code class="ds-anatomy-token ds-code">transition: transform var(--dur-fast)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">3</span>
+        <div>
+          <div class="ds-anatomy-label">Body content <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">14px / line-height 1.6 / <code class="ds-code">var(--text2)</code>. Padding: 0 <code class="ds-code">var(--space-2)</code> 16px. Can contain text, links, and simple lists.</div>
+          <code class="ds-anatomy-token ds-code">font-size:14px; line-height:1.6</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">4</span>
+        <div>
+          <div class="ds-anatomy-label">Item divider <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">1px border between items. Uses <code class="ds-code">var(--border-subtle)</code>. Omit on last child.</div>
+          <code class="ds-anatomy-token ds-code">border-bottom: 1px solid var(--border-subtle)</code>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- VARIANTS -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">All variants use the same trigger/panel structure. Outer border and icon prefix are the only visual differences.</p>
+
+    <div class="ds-section-stack" style="gap:32px;">
+      <!-- Default bordered -->
+      <div>
+        <div class="ds-sub-label">Default — bordered, exclusive</div>
+        <div class="ds-demo ds-demo--dark">
+          <div class="accordion" style="max-width:480px;">
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="true">
+                How does JioGames Pass work?
+                <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="transform:rotate(180deg); color:var(--jio);">
+                  <use href="../sprite.svg#ic_chevron_down"></use>
+                </svg>
+              </button>
+              <div class="accordion-body">JioGames Pass gives you access to 100+ premium games with no ads and no in-app purchases.</div>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="false">
+                What games are included?
+                <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <use href="../sprite.svg#ic_chevron_down"></use>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flush / no border -->
+      <div>
+        <div class="ds-sub-label">Flush — no outer border, for use inside cards</div>
+        <div class="ds-demo ds-demo--dark">
+          <div style="max-width:480px; background:var(--surface-1); border-radius:var(--r5); overflow:hidden; border:1px solid var(--border-subtle);">
+            <div style="border-bottom:1px solid var(--border-subtle);">
+              <button class="accordion-trigger" aria-expanded="false">Account settings<svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="margin-left:auto;"><use href="../sprite.svg#ic_chevron_down"></use></svg></button>
+            </div>
+            <div>
+              <button class="accordion-trigger" aria-expanded="false">Privacy &amp; data<svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="margin-left:auto;"><use href="../sprite.svg#ic_chevron_down"></use></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- With icon prefix -->
+      <div>
+        <div class="ds-sub-label">With icon prefix</div>
+        <div class="ds-demo ds-demo--dark">
+          <div class="accordion" style="max-width:480px;">
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="true" style="gap:12px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="flex-shrink:0; color:var(--jio);">
+                  <use href="../sprite.svg#ic_notification"></use>
+                </svg>
+                Notifications
+                <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="transform:rotate(180deg); color:var(--jio);">
+                  <use href="../sprite.svg#ic_chevron_down"></use>
+                </svg>
+              </button>
+              <div class="accordion-body">Control which events trigger push notifications, emails, and in-app alerts.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIZES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Two sizes. Default for most surfaces. Compact for dense settings panels or sidebar accordions.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div class="ds-section-stack" style="gap:32px;">
+        <div>
+          <div class="ds-sub-label" style="margin-bottom:8px;">Compact — 13px trigger / 12px body</div>
+          <div class="accordion" style="max-width:400px;">
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="false" style="font-size:13px; padding:12px 16px;">
+                Video quality settings
+                <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_chevron_down"></use></svg>
+              </button>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="true" style="font-size:13px; padding:12px 16px; color:var(--jio);">
+                Audio settings
+                <svg class="accordion-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="transform:rotate(180deg); color:var(--jio);"><use href="../sprite.svg#ic_chevron_down"></use></svg>
+              </button>
+              <div class="accordion-body" style="font-size:12px; padding:0 16px 12px;">Choose your preferred audio output and equaliser preset.</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="ds-sub-label" style="margin-bottom:8px;">Default — 15px trigger / 14px body</div>
+          <div class="accordion" style="max-width:400px;">
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="false">
+                Video quality settings
+                <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_chevron_down"></use></svg>
+              </button>
+            </div>
+            <div class="accordion-item">
+              <button class="accordion-trigger" aria-expanded="true" style="color:var(--jio);">
+                Audio settings
+                <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="transform:rotate(180deg); color:var(--jio);"><use href="../sprite.svg#ic_chevron_down"></use></svg>
+              </button>
+              <div class="accordion-body">Choose your preferred audio output and equaliser preset.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Each trigger has 5 states. Disabled items remain visible with reduced opacity.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div class="accordion" style="max-width:480px;">
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" style="pointer-events:none;">
+            Collapsed (default)
+            <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_chevron_down"></use></svg>
+          </button>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" style="pointer-events:none; background:var(--glass-1);">
+            Hover state
+            <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_chevron_down"></use></svg>
+          </button>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="true" style="pointer-events:none; color:var(--jio);">
+            Expanded (active)
+            <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="transform:rotate(180deg); color:var(--jio);"><use href="../sprite.svg#ic_chevron_down"></use></svg>
+          </button>
+          <div class="accordion-body">Content is visible when item is expanded.</div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" style="pointer-events:none; outline:2px solid var(--jio); outline-offset:-2px;">
+            Focus state
+            <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_chevron_down"></use></svg>
+          </button>
+        </div>
+        <div class="accordion-item accordion-item--disabled">
+          <button class="accordion-trigger" aria-expanded="false" disabled>
+            Disabled item
+            <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_chevron_down"></use></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT GUIDANCE -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <p class="ds-section-desc">Trigger text should be a question or category name. Keep under 60 chars. Body text: 14px, line-height 1.6. Never nest accordions — use a flat list instead.</p>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Trigger text</div>
+        <ul>
+          <li>Write as a question for FAQs: "How do I cancel my subscription?"</li>
+          <li>Write as a noun for settings: "Notification preferences" not "Manage notifications".</li>
+          <li>Max 60 characters — longer text wraps awkwardly on mobile.</li>
+          <li>Don't start with a verb unless it's unavoidable — noun-first reads faster at a glance.</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Body content</div>
+        <ul>
+          <li>14px body, 1.6 line-height — comfortable reading density.</li>
+          <li>Links are allowed inside body. Buttons are discouraged — surface critical actions above the accordion.</li>
+          <li>Keep body text concise — if content exceeds ~200 words, consider a dedicated page instead.</li>
+          <li>Never nest another accordion inside a panel body.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Full-width, edge-to-edge layout.</li>
+          <li>Minimum trigger height 48px — ensures comfortable touch tap area.</li>
+          <li>Use default size only — compact is too dense at small screen widths.</li>
+          <li>Expanded panels should not be taller than the viewport — allow inner scroll if needed.</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Max-width 640px recommended for FAQ-style accordions.</li>
+          <li>Keyboard: Tab to focus trigger, Enter / Space to toggle, Tab into panel content when open.</li>
+          <li>Add smooth <code class="ds-code">max-height</code> transition for expand/collapse animation.</li>
+          <li>Right-click on trigger should not open a context menu — <code class="ds-code">&lt;button&gt;</code> prevents this by default.</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>D-pad Down navigates through triggers, OK expands/collapses.</li>
+          <li>Expanded panel content is scrollable via D-pad when focused inside.</li>
+          <li>Use default size minimum — compact is unreadable at 3m.</li>
+          <li>Avoid deep content in panels on TV — prefer a new screen instead.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <table class="ds-spec-table">
+      <thead><tr><th>Element</th><th>Role / attribute</th><th>Guidance</th></tr></thead>
+      <tbody>
+        <tr><td>Trigger</td><td><code class="ds-code">&lt;button&gt;</code> + <code class="ds-code">aria-expanded</code></td><td><code class="ds-code">aria-expanded="true"</code> when panel is open. Links to panel via <code class="ds-code">aria-controls="panel-id"</code>.</td></tr>
+        <tr><td>Panel</td><td><code class="ds-code">role="region"</code> + <code class="ds-code">aria-labelledby</code></td><td>Region label points to trigger id. Hidden panels use <code class="ds-code">hidden</code> attr or <code class="ds-code">display:none</code>.</td></tr>
+        <tr><td>Chevron</td><td><code class="ds-code">aria-hidden="true"</code></td><td>Icon is decorative — state is communicated via <code class="ds-code">aria-expanded</code>, not icon direction.</td></tr>
+        <tr><td>Keyboard</td><td>Enter / Space</td><td>Toggles expanded state. Tab moves into panel content when open. Shift+Tab returns to trigger.</td></tr>
+        <tr><td>Disabled</td><td><code class="ds-code">disabled</code> attr</td><td>Disabled triggers are skipped by Tab. Add <code class="ds-code">aria-disabled="true"</code> if you want them in tab order but non-interactive.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- RELATED TOKENS -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <table class="ds-spec-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td><code class="ds-code">--jio</code></td><td><code class="ds-code">#00A859</code></td><td>Expanded trigger label and chevron color</td></tr>
+        <tr><td><code class="ds-code">--border-subtle</code></td><td><code class="ds-code">rgba(255,255,255,.08)</code></td><td>Outer accordion border and item dividers</td></tr>
+        <tr><td><code class="ds-code">--glass-1</code></td><td><code class="ds-code">rgba(255,255,255,.04)</code></td><td>Trigger hover background</td></tr>
+        <tr><td><code class="ds-code">--text</code></td><td><code class="ds-code">#f4f2ee</code></td><td>Default trigger label color</td></tr>
+        <tr><td><code class="ds-code">--text2</code></td><td><code class="ds-code">rgba(244,242,238,.55)</code></td><td>Body text color</td></tr>
+        <tr><td><code class="ds-code">--text3</code></td><td><code class="ds-code">rgba(244,242,238,.32)</code></td><td>Chevron icon color (collapsed)</td></tr>
+        <tr><td><code class="ds-code">--r5</code></td><td><code class="ds-code">16px</code></td><td>Outer accordion container border-radius</td></tr>
+        <tr><td><code class="ds-code">--dur-fast</code></td><td><code class="ds-code">120ms</code></td><td>Chevron rotation and hover background transition</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CODE EXAMPLES -->
+  <section class="ds-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Single accordion item</div>
+      <pre class="component-code-pre"><code>&lt;div class="accordion-item"&gt;
+  &lt;button class="accordion-trigger"
+          aria-expanded="false"
+          aria-controls="faq-1"
+          id="faq-1-trigger"&gt;
+    How does JioGames Pass work?
+    &lt;svg class="accordion-icon" width="16" height="16" aria-hidden="true"&gt;
+      &lt;!-- chevron-down path --&gt;
+    &lt;/svg&gt;
+  &lt;/button&gt;
+  &lt;div class="accordion-body"
+       role="region"
+       id="faq-1"
+       aria-labelledby="faq-1-trigger"
+       hidden&gt;
+    JioGames Pass gives you access to 100+ premium games...
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Full accordion group (exclusive)</div>
+      <pre class="component-code-pre"><code>&lt;div class="accordion"&gt;
+  &lt;div class="accordion-item"&gt;
+    &lt;button class="accordion-trigger" aria-expanded="true" aria-controls="p1"&gt;
+      Question one
+      &lt;svg class="accordion-icon" aria-hidden="true"&gt;...&lt;/svg&gt;
+    &lt;/button&gt;
+    &lt;div class="accordion-body" role="region" id="p1"&gt;Answer one&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="accordion-item"&gt;
+    &lt;button class="accordion-trigger" aria-expanded="false" aria-controls="p2"&gt;
+      Question two
+      &lt;svg class="accordion-icon" aria-hidden="true"&gt;...&lt;/svg&gt;
+    &lt;/button&gt;
+    &lt;div class="accordion-body" role="region" id="p2" hidden&gt;Answer two&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Non-exclusive multi-open (JS toggle logic)</div>
+      <pre class="component-code-pre"><code>// For non-exclusive: each trigger toggles independently
+document.querySelectorAll('.accordion-trigger').forEach(trigger =&gt; {
+  trigger.addEventListener('click', () =&gt; {
+    const expanded = trigger.getAttribute('aria-expanded') === 'true';
+    const panel = document.getElementById(trigger.getAttribute('aria-controls'));
+    trigger.setAttribute('aria-expanded', !expanded);
+    panel.hidden = expanded;
+  });
+});</code></pre>
+    </div>
+  </section>
+
+  <!-- CHANGELOG -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Changelog</h2>
+    <div class="component-changelog">
+      <div class="component-changelog-entry">
+        <span class="component-changelog-version">v0.1</span>
+        <span class="component-changelog-date">Jun 2026</span>
+        <p class="component-changelog-desc">Initial draft. Exclusive and non-exclusive variants. Default and compact sizes. Flush / borderless variant. Icon prefix variant. Full accessibility documentation.</p>
+      </div>
+    </div>
+  </section>
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

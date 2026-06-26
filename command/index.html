@@ -1,0 +1,498 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Command — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    .command-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 1000; display: flex; align-items: flex-start; justify-content: center; padding-top: 80px; }
+    .command-panel { width: 100%; max-width: 560px; background: var(--surface-1); border: 1px solid var(--border-subtle); border-radius: var(--r6); overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,.6); }
+    .command-input-wrap { display: flex; align-items: center; gap: 12px; padding: 16px; border-bottom: 1px solid var(--border-subtle); }
+    .command-input { flex: 1; background: transparent; border: none; outline: none; font-family: var(--jio-font); font-size: 16px; font-weight: 500; color: var(--text); }
+    .command-input::placeholder { color: var(--text3); }
+    .command-list { max-height: 320px; overflow-y: auto; }
+    .command-group-header { padding: 8px 16px 4px; font-size: 11px; font-weight: 700; color: var(--text3); letter-spacing: .4px; text-transform: uppercase; }
+    .command-item { display: flex; align-items: center; gap: 10px; padding: 10px 16px; cursor: pointer; font-family: var(--jio-font); font-size: 14px; font-weight: 500; color: var(--text); transition: background var(--dur-fast) var(--ease-out); }
+    .command-item:hover, .command-item.is-active { background: var(--glass-1); }
+    .command-item-icon { color: var(--text3); flex-shrink: 0; }
+    .command-item-label { flex: 1; }
+    .command-shortcut { font-size: 11px; color: var(--text3); background: var(--surface-3); border-radius: var(--r2); padding: 2px 6px; font-weight: 700; }
+    .command-empty { padding: 24px 16px; text-align: center; font-size: 13px; color: var(--text3); }
+    .command-footer { padding: 8px 16px; border-top: 1px solid var(--border-subtle); display: flex; gap: 16px; }
+    .command-hint { font-size: 11px; color: var(--text3); }
+    .command-hint kbd { background: var(--surface-3); border-radius: var(--r1); padding: 1px 5px; font-family: monospace; font-size: 10px; }
+    .demo-command-wrap { position: relative; width: 100%; max-width: 560px; margin: 0 auto; }
+  </style>
+</head><body><main class="ds-content">
+
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Command</span>
+    </nav>
+    <h1 class="component-page-title">Command</h1>
+    <p class="component-page-def">Full-screen or modal search and command palette. Press ⌘K (web) to find games, navigate screens, or trigger actions without using the navigation. JioGames-adapted for game library search.</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--web">
+          <span class="component-platform-dot"></span>Web
+        </span>
+      </div>
+      <span class="component-maturity component-maturity--draft">
+        <span class="component-maturity--dot"></span>Draft
+      </span>
+    </div>
+  </header>
+
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:380px; position:relative; overflow:hidden;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="padding:48px 32px;">
+      <div class="demo-command-wrap">
+        <div class="command-panel">
+          <div class="command-input-wrap">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="color:var(--text3); flex-shrink:0;"><use href="../sprite.svg#ic_search"></use></svg>
+            <span class="command-input" style="display:block;">tomb</span>
+            <kbd style="font-size:10px; color:var(--text3); background:var(--surface-3); border-radius:var(--r2); padding:2px 6px; font-family:monospace;">Esc</kbd>
+          </div>
+          <div class="command-list">
+            <div class="command-group-header">Games</div>
+            <div class="command-item is-active">
+              <span class="command-item-icon">🎮</span>
+              <span class="command-item-label">Tomb Raider</span>
+              <span class="command-shortcut">ACTION</span>
+            </div>
+            <div class="command-item">
+              <span class="command-item-icon">🎮</span>
+              <span class="command-item-label">Tomb Raider II</span>
+              <span class="command-shortcut">ACTION</span>
+            </div>
+            <div class="command-group-header">Navigate</div>
+            <div class="command-item">
+              <span class="command-item-icon">📚</span>
+              <span class="command-item-label">Go to Library</span>
+              <span class="command-shortcut">⌘L</span>
+            </div>
+          </div>
+          <div class="command-footer">
+            <span class="command-hint"><kbd>↑↓</kbd> navigate</span>
+            <span class="command-hint"><kbd>↵</kbd> select</span>
+            <span class="command-hint"><kbd>Esc</kbd> close</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="component-hero-caption">Command palette · search "tomb" · grouped results · keyboard hints</p>
+  </section>
+
+  <section class="component-intro">
+    <p>The Command palette is a keyboard-first overlay that lets users search games, jump to screens, and trigger actions from anywhere in the JioGames web app. It appears on ⌘K (Mac) or Ctrl+K (Windows/Linux) and dismisses on Escape. On mobile the command palette is replaced by a full-screen search view — the palette itself is web-only.</p>
+    <ul class="component-summary-list">
+      <li><strong>Search</strong> — find games by name, genre, or pass tier instantly</li>
+      <li><strong>Navigate</strong> — jump to Library, Home, Profile, Settings without mouse</li>
+      <li><strong>Actions</strong> — trigger common tasks like "Add to Wishlist" or "Open Subscription"</li>
+      <li><strong>Recent</strong> — shows last 5 searches when opened with empty input</li>
+    </ul>
+  </section>
+
+  <section class="component-best-practices">
+    <div class="component-bp-card component-bp-card--do">
+      <span class="component-bp-label component-bp-label--do">Do</span>
+      <ul class="component-bp-list">
+        <li>Show recent searches when input is empty so users can reopen without retyping</li>
+        <li>Group results into labeled sections — Games, Navigate, Actions — for scannability</li>
+        <li>Limit each group to 8 items before scrolling begins within the list</li>
+        <li>Highlight the first result automatically so Enter immediately works on open</li>
+        <li>Return focus to the element that triggered the palette when it closes</li>
+      </ul>
+    </div>
+    <div class="component-bp-card component-bp-card--dont">
+      <span class="component-bp-label component-bp-label--dont">Don't</span>
+      <ul class="component-bp-list">
+        <li>Use the command palette on mobile — replace with the full-screen search view instead</li>
+        <li>Show more than 3 groups in a single result set — too many categories overwhelms users</li>
+        <li>Close the palette on outside click if the user is mid-type — wait for Escape or selection</li>
+        <li>Include destructive actions (delete, unsubscribe) in the command palette without confirmation</li>
+        <li>Show zero-state "No results" for queries under 2 characters — wait before searching</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="ds-anatomy" style="margin:40px 0;">
+    <div class="ds-anatomy-preview">
+      <div class="ds-anatomy-component" style="position:relative; width:100%; max-width:300px;">
+        <div class="command-panel">
+          <div class="command-input-wrap" style="padding:10px 12px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="color:var(--text3);"><use href="../sprite.svg#ic_search"></use></svg>
+            <span style="flex:1; font-size:13px; font-weight:500; color:var(--text3);">Search games…</span>
+          </div>
+          <div style="padding:6px 0;">
+            <div class="command-group-header">Recent</div>
+            <div class="command-item" style="padding:8px 12px; font-size:13px;">
+              <span class="command-item-icon" style="font-size:12px;">🕐</span>
+              <span class="command-item-label">Tomb Raider</span>
+            </div>
+          </div>
+          <div class="command-footer" style="padding:6px 12px;">
+            <span class="command-hint"><kbd>↵</kbd> select</span>
+          </div>
+        </div>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:-14px; left:40px;"><span class="ds-anatomy-callout-num">1</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:44px; right:-20px;"><span class="ds-anatomy-callout-num">2</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:80px; left:-20px;"><span class="ds-anatomy-callout-num">3</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; bottom:-14px; right:40px;"><span class="ds-anatomy-callout-num">4</span></span>
+      </div>
+    </div>
+    <ol class="ds-anatomy-list">
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">1</span>
+        <div>
+          <div class="ds-anatomy-label">Panel container <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Fixed max-width 560px. Dark surface, 1px border, large border-radius, deep box-shadow. Never full-bleed.</div>
+          <code class="ds-anatomy-token ds-code">background: var(--surface-1); border-radius: var(--r6)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">2</span>
+        <div>
+          <div class="ds-anatomy-label">Search input <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Transparent background, no border, auto-focused on open. Search icon left, Esc badge right. Placeholder: "Search games…"</div>
+          <code class="ds-anatomy-token ds-code">role="combobox"; aria-expanded; aria-autocomplete="list"</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">3</span>
+        <div>
+          <div class="ds-anatomy-label">Result list <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Scrollable, max-height 320px. Groups separated by uppercase headers. Active item uses glass-1 fill. Icon, label, optional shortcut right-aligned.</div>
+          <code class="ds-anatomy-token ds-code">role="listbox"; aria-activedescendant</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">4</span>
+        <div>
+          <div class="ds-anatomy-label">Footer hints <span class="ds-anatomy-optional">Optional</span></div>
+          <div class="ds-anatomy-desc">Keyboard shortcut guide: ↑↓ navigate, ↵ select, Esc close. 11px muted text. Always visible when results are showing.</div>
+          <code class="ds-anatomy-token ds-code">font-size: 11px; color: var(--text3)</code>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Four command palette states cover the full interaction lifecycle — from empty open to active searching.</p>
+    <div class="ds-demo ds-demo--dark" style="display:flex; flex-direction:column; gap:24px;">
+
+      <div>
+        <div style="font-size:11px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; margin-bottom:12px;">Default — ⌘K trigger, empty, shows recent</div>
+        <div style="max-width:400px;">
+          <div class="command-panel">
+            <div class="command-input-wrap">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="color:var(--text3);"><use href="../sprite.svg#ic_search"></use></svg>
+              <span style="flex:1; font-size:14px; font-weight:500; color:var(--text3);">Search games…</span>
+            </div>
+            <div class="command-list">
+              <div class="command-group-header">Recent searches</div>
+              <div class="command-item is-active"><span class="command-item-icon">🕐</span><span class="command-item-label">Tomb Raider</span></div>
+              <div class="command-item"><span class="command-item-icon">🕐</span><span class="command-item-label">War Thunder</span></div>
+            </div>
+            <div class="command-footer">
+              <span class="command-hint"><kbd>↑↓</kbd> navigate</span>
+              <span class="command-hint"><kbd>↵</kbd> select</span>
+              <span class="command-hint"><kbd>Esc</kbd> close</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size:11px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; margin-bottom:12px;">With grouped results</div>
+        <div style="max-width:400px;">
+          <div class="command-panel">
+            <div class="command-input-wrap">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="color:var(--text3);"><use href="../sprite.svg#ic_search"></use></svg>
+              <span style="flex:1; font-size:14px; font-weight:500; color:var(--text);">tomb</span>
+            </div>
+            <div class="command-list">
+              <div class="command-group-header">Games</div>
+              <div class="command-item is-active"><span class="command-item-icon">🎮</span><span class="command-item-label">Tomb Raider</span><span class="command-shortcut">ACTION</span></div>
+              <div class="command-item"><span class="command-item-icon">🎮</span><span class="command-item-label">Tomb Raider II</span><span class="command-shortcut">ACTION</span></div>
+              <div class="command-group-header">Navigate</div>
+              <div class="command-item"><span class="command-item-icon">📚</span><span class="command-item-label">Go to Library</span><span class="command-shortcut">⌘L</span></div>
+            </div>
+            <div class="command-footer">
+              <span class="command-hint"><kbd>↑↓</kbd> navigate</span>
+              <span class="command-hint"><kbd>↵</kbd> select</span>
+              <span class="command-hint"><kbd>Esc</kbd> close</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size:11px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; margin-bottom:12px;">Empty state — no match</div>
+        <div style="max-width:400px;">
+          <div class="command-panel">
+            <div class="command-input-wrap">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="color:var(--text3);"><use href="../sprite.svg#ic_search"></use></svg>
+              <span style="flex:1; font-size:14px; font-weight:500; color:var(--text);">xyzabc123</span>
+            </div>
+            <div class="command-empty">No games found for "xyzabc123"</div>
+            <div class="command-footer">
+              <span class="command-hint"><kbd>Esc</kbd> close</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">The command panel has a single fixed size — max-width 560px, dynamic height based on results. No size variants exist.</p>
+    <div class="ds-demo ds-demo--dark">
+      <table class="ds-spec-table">
+        <thead><tr><th>Property</th><th>Value</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Panel max-width</td><td><code class="ds-code">560px</code></td><td>Centered in viewport, full-width on narrow screens</td></tr>
+          <tr><td>List max-height</td><td><code class="ds-code">320px</code></td><td>Scrollable beyond — never grows past this</td></tr>
+          <tr><td>Item height</td><td><code class="ds-code">40px</code></td><td>10px top + bottom padding + 20px content</td></tr>
+          <tr><td>Input font-size</td><td><code class="ds-code">16px</code></td><td>Prevents iOS zoom on focus</td></tr>
+          <tr><td>Viewport offset</td><td><code class="ds-code">80px from top</code></td><td>Leaves space for users to see they're in overlay context</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Five discrete states cover the full command palette lifecycle. Only one state is active at a time.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:16px;">
+        <div style="flex:1; min-width:140px; background:var(--surface-1); border:1px solid var(--border-subtle); border-radius:var(--r4); padding:16px;">
+          <div style="font-size:11px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; margin-bottom:6px;">Empty</div>
+          <div style="font-size:12px; color:var(--text2); line-height:1.5;">Input blank. Shows recent searches or suggested commands.</div>
+        </div>
+        <div style="flex:1; min-width:140px; background:var(--surface-1); border:1px solid var(--border-subtle); border-radius:var(--r4); padding:16px;">
+          <div style="font-size:11px; font-weight:700; color:var(--jio); letter-spacing:.5px; text-transform:uppercase; margin-bottom:6px;">Searching</div>
+          <div style="font-size:12px; color:var(--text2); line-height:1.5;">Input has text, loading spinner in search icon position.</div>
+        </div>
+        <div style="flex:1; min-width:140px; background:var(--surface-1); border:1px solid var(--border-subtle); border-radius:var(--r4); padding:16px;">
+          <div style="font-size:11px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; margin-bottom:6px;">Results</div>
+          <div style="font-size:12px; color:var(--text2); line-height:1.5;">Grouped items visible, first item highlighted, keyboard active.</div>
+        </div>
+        <div style="flex:1; min-width:140px; background:var(--surface-1); border:1px solid var(--border-subtle); border-radius:var(--r4); padding:16px;">
+          <div style="font-size:11px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; margin-bottom:6px;">No results</div>
+          <div style="font-size:12px; color:var(--text2); line-height:1.5;">Empty list area with "No games found" message. No results groups.</div>
+        </div>
+        <div style="flex:1; min-width:140px; background:var(--surface-1); border:1px solid var(--border-subtle); border-radius:var(--r4); padding:16px;">
+          <div style="font-size:11px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; margin-bottom:6px;">Loading</div>
+          <div style="font-size:12px; color:var(--text2); line-height:1.5;">Async search in progress — skeleton rows or spinner in list area.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <p class="ds-section-desc">Command palette text must be action-oriented and immediately scannable. Users read these labels in motion.</p>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Groups and labels</div>
+        <ul>
+          <li>Use exactly these group names: <strong>Games</strong>, <strong>Navigate</strong>, <strong>Actions</strong></li>
+          <li>Recent searches label: "Recent searches" not "History" or "Recent"</li>
+          <li>Max 8 items per group before scroll — do not paginate inside the palette</li>
+          <li>Empty state copy: 'No games found for "[query]"' — include the query</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Item labels</div>
+        <ul>
+          <li>Game results: title only, genre tag as shortcut badge right-aligned</li>
+          <li>Navigate items: start with a verb — "Go to Library", "Open Settings"</li>
+          <li>Action items: imperative — "Add to Wishlist", "Start Download"</li>
+          <li>Keyboard shortcuts: use system notation (⌘L, Ctrl+L) — never spell "Command"</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <p class="ds-section-desc">Command palette is a web-only pattern. Each other platform has an equivalent experience.</p>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>No command palette on mobile — use the full-screen search view instead</li>
+          <li>Search icon in header triggers the full-screen overlay</li>
+          <li>Results layout matches command palette groups but without keyboard hints</li>
+          <li>Voice search button alongside text input</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>⌘K (Mac) or Ctrl+K (Win/Linux) opens the palette from anywhere</li>
+          <li>Backdrop click closes if input is empty — warns with shake animation if not</li>
+          <li>Tab moves between groups, arrow keys within a group</li>
+          <li>Persist recent searches in localStorage, max 10 entries</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>Not applicable — no keyboard shortcut available on TV remote</li>
+          <li>Use dedicated Search screen navigable via D-pad instead</li>
+          <li>Voice search via remote mic button where hardware supports it</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">The command palette relies heavily on ARIA roles and live regions to communicate state to screen-reader users.</p>
+    <table class="ds-spec-table">
+      <thead><tr><th>Element</th><th>Role / attribute</th><th>Guidance</th></tr></thead>
+      <tbody>
+        <tr><td>Overlay container</td><td><code class="ds-code">role="dialog"</code></td><td><code class="ds-code">aria-modal="true"</code>, <code class="ds-code">aria-label="Search and command palette"</code>. Focus trapped inside while open.</td></tr>
+        <tr><td>Search input</td><td><code class="ds-code">role="combobox"</code></td><td><code class="ds-code">aria-expanded</code>, <code class="ds-code">aria-autocomplete="list"</code>, <code class="ds-code">aria-controls</code> pointing to listbox ID.</td></tr>
+        <tr><td>Result list</td><td><code class="ds-code">role="listbox"</code></td><td><code class="ds-code">aria-label="Search results"</code>. Input's <code class="ds-code">aria-activedescendant</code> tracks the highlighted item's ID.</td></tr>
+        <tr><td>Group headers</td><td><code class="ds-code">role="group"</code></td><td><code class="ds-code">aria-label</code> on each group matching the visible header text.</td></tr>
+        <tr><td>Result items</td><td><code class="ds-code">role="option"</code></td><td><code class="ds-code">aria-selected="true"</code> on highlighted item. Each item has a stable unique ID.</td></tr>
+        <tr><td>Escape key</td><td>Native keyboard event</td><td>Closes dialog and returns focus to the element that triggered it — typically the search icon button.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-desc">All command palette surfaces use existing system tokens — no component-specific tokens required.</p>
+    <table class="ds-spec-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td><code class="ds-code">--surface-1</code></td><td><code class="ds-code">#0e1118</code></td><td>Command panel background</td></tr>
+        <tr><td><code class="ds-code">--border-subtle</code></td><td><code class="ds-code">rgba(255,255,255,.08)</code></td><td>Panel border, input divider, footer divider</td></tr>
+        <tr><td><code class="ds-code">--glass-1</code></td><td><code class="ds-code">rgba(255,255,255,.05)</code></td><td>Hovered and active item background</td></tr>
+        <tr><td><code class="ds-code">--surface-3</code></td><td>—</td><td>Shortcut badge background, Esc key background</td></tr>
+        <tr><td><code class="ds-code">--r6</code></td><td><code class="ds-code">20px</code></td><td>Panel corner radius</td></tr>
+        <tr><td><code class="ds-code">--text3</code></td><td><code class="ds-code">rgba(244,242,238,.32)</code></td><td>Placeholder, group headers, footer hints, icons</td></tr>
+        <tr><td><code class="ds-code">--dur-fast</code></td><td><code class="ds-code">120ms</code></td><td>Item hover background transition</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-section-desc">Three starting-point snippets covering the most common command palette compositions.</p>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Basic command panel structure</div>
+      <pre class="component-code-pre"><code>&lt;div role="dialog" aria-modal="true" aria-label="Search and command palette" class="command-overlay"&gt;
+  &lt;div class="command-panel"&gt;
+    &lt;div class="command-input-wrap"&gt;
+      &lt;svg class="command-search-icon" aria-hidden="true"&gt;...&lt;/svg&gt;
+      &lt;input
+        class="command-input"
+        role="combobox"
+        aria-expanded="true"
+        aria-autocomplete="list"
+        aria-controls="command-listbox"
+        aria-activedescendant="cmd-item-0"
+        placeholder="Search games…"
+        autofocus
+      /&gt;
+      &lt;kbd aria-label="Press Escape to close"&gt;Esc&lt;/kbd&gt;
+    &lt;/div&gt;
+    &lt;ul id="command-listbox" role="listbox" aria-label="Search results" class="command-list"&gt;
+      &lt;!-- results injected here --&gt;
+    &lt;/ul&gt;
+    &lt;div class="command-footer"&gt;
+      &lt;span class="command-hint"&gt;&lt;kbd&gt;↑↓&lt;/kbd&gt; navigate&lt;/span&gt;
+      &lt;span class="command-hint"&gt;&lt;kbd&gt;↵&lt;/kbd&gt; select&lt;/span&gt;
+      &lt;span class="command-hint"&gt;&lt;kbd&gt;Esc&lt;/kbd&gt; close&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Grouped results markup</div>
+      <pre class="component-code-pre"><code>&lt;ul id="command-listbox" role="listbox" aria-label="Search results" class="command-list"&gt;
+
+  &lt;li role="group" aria-label="Games"&gt;
+    &lt;div class="command-group-header" aria-hidden="true"&gt;Games&lt;/div&gt;
+    &lt;ul&gt;
+      &lt;li id="cmd-item-0" role="option" aria-selected="true" class="command-item is-active"&gt;
+        &lt;span class="command-item-icon" aria-hidden="true"&gt;🎮&lt;/span&gt;
+        &lt;span class="command-item-label"&gt;Tomb Raider&lt;/span&gt;
+        &lt;span class="command-shortcut" aria-label="Genre: Action"&gt;ACTION&lt;/span&gt;
+      &lt;/li&gt;
+      &lt;li id="cmd-item-1" role="option" aria-selected="false" class="command-item"&gt;
+        &lt;span class="command-item-icon" aria-hidden="true"&gt;🎮&lt;/span&gt;
+        &lt;span class="command-item-label"&gt;Tomb Raider II&lt;/span&gt;
+        &lt;span class="command-shortcut" aria-label="Genre: Action"&gt;ACTION&lt;/span&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+
+  &lt;li role="group" aria-label="Navigate"&gt;
+    &lt;div class="command-group-header" aria-hidden="true"&gt;Navigate&lt;/div&gt;
+    &lt;ul&gt;
+      &lt;li id="cmd-item-2" role="option" aria-selected="false" class="command-item"&gt;
+        &lt;span class="command-item-icon" aria-hidden="true"&gt;📚&lt;/span&gt;
+        &lt;span class="command-item-label"&gt;Go to Library&lt;/span&gt;
+        &lt;span class="command-shortcut"&gt;⌘L&lt;/span&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+
+&lt;/ul&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Empty state with recent searches</div>
+      <pre class="component-code-pre"><code>&lt;!-- Shown when input is empty (no query typed yet) --&gt;
+&lt;ul id="command-listbox" role="listbox" aria-label="Recent searches" class="command-list"&gt;
+  &lt;li role="group" aria-label="Recent searches"&gt;
+    &lt;div class="command-group-header" aria-hidden="true"&gt;Recent searches&lt;/div&gt;
+    &lt;ul&gt;
+      &lt;li id="cmd-recent-0" role="option" aria-selected="true" class="command-item is-active"&gt;
+        &lt;span class="command-item-icon" aria-hidden="true"&gt;🕐&lt;/span&gt;
+        &lt;span class="command-item-label"&gt;Tomb Raider&lt;/span&gt;
+      &lt;/li&gt;
+      &lt;li id="cmd-recent-1" role="option" aria-selected="false" class="command-item"&gt;
+        &lt;span class="command-item-icon" aria-hidden="true"&gt;🕐&lt;/span&gt;
+        &lt;span class="command-item-label"&gt;War Thunder&lt;/span&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- Shown when search returns no results --&gt;
+&lt;div class="command-empty" role="status" aria-live="polite"&gt;
+  No games found for "xyzabc"
+&lt;/div&gt;</code></pre>
+    </div>
+  </section>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">Changelog</h2>
+    <div class="component-changelog">
+      <div class="component-changelog-entry">
+        <span class="component-changelog-version">v0.1</span>
+        <span class="component-changelog-date">Jun 2026</span>
+        <p class="component-changelog-desc">Initial draft. Includes panel structure, grouped results, empty state, keyboard navigation, and ARIA documentation. Web-only — mobile and TV equivalents noted.</p>
+      </div>
+    </div>
+  </section>
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

@@ -1,0 +1,562 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resizable — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    .resizable-container { display: flex; width: 100%; height: 400px; overflow: hidden; border: 1px solid var(--border-subtle); border-radius: var(--r5); }
+    .resizable-panel { overflow: auto; }
+    .resizable-handle { width: 6px; flex-shrink: 0; background: var(--border-subtle); cursor: col-resize; position: relative; transition: background var(--dur-fast) var(--ease-out); display: flex; align-items: center; justify-content: center; }
+    .resizable-handle:hover, .resizable-handle.is-dragging { background: var(--jio); }
+    .resizable-handle::after { content: ''; width: 2px; height: 24px; background: currentColor; border-radius: var(--pill); opacity: 0.5; }
+    .resizable-handle--horizontal { height: 6px; width: 100%; cursor: row-resize; flex-direction: column; }
+    .resizable-handle--horizontal::after { width: 24px; height: 2px; }
+    .resizable-container--vertical { flex-direction: column; }
+    /* Demo panel content */
+    .panel-content { padding: 16px; height: 100%; }
+    .panel-label { font-size: 10px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--text3); margin-bottom: 12px; }
+    .panel-game-row { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border-subtle); cursor: pointer; }
+    .panel-game-thumb { width: 36px; height: 36px; border-radius: var(--r3); flex-shrink: 0; }
+    .panel-game-title { font-size: 13px; font-weight: 500; color: var(--text); }
+    .panel-game-meta { font-size: 11px; color: var(--text3); margin-top: 2px; }
+    .panel-detail-art { width: 100%; height: 120px; border-radius: var(--r4); margin-bottom: 12px; }
+    .panel-detail-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .panel-detail-meta { font-size: 12px; color: var(--text3); margin-bottom: 12px; }
+    .handle-label { position: absolute; background: var(--jio); color: #000; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 3px; white-space: nowrap; left: 50%; transform: translateX(-50%); top: 50%; margin-top: 16px; letter-spacing: .3px; }
+  </style>
+</head><body><main class="ds-content">
+
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Resizable</span>
+    </nav>
+    <h1 class="component-page-title">Resizable</h1>
+    <p class="component-page-def">A panel or area that can be resized by dragging a handle. Used in the JioGames web app for split-panel layouts — game library (list) + game detail (preview).</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--web">
+          <span class="component-platform-dot"></span>Web
+        </span>
+      </div>
+      <span class="component-maturity component-maturity--draft">
+        <span class="component-maturity--dot"></span>Draft
+      </span>
+    </div>
+  </header>
+
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:360px; position:relative; overflow:hidden;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="padding:40px 32px; align-items:stretch;">
+      <div style="width:100%; max-width:640px;">
+        <div class="resizable-container" style="height:260px;">
+          <!-- Left panel: game list -->
+          <div class="resizable-panel" style="width:38%; background:var(--surface-1); flex-shrink:0;">
+            <div class="panel-content">
+              <div class="panel-label">Library</div>
+              <div class="panel-game-row">
+                <div class="panel-game-thumb" style="background:linear-gradient(135deg,#1a1a2e,#16213e);"></div>
+                <div><div class="panel-game-title">Tomb Raider</div><div class="panel-game-meta">Action · 72% completed</div></div>
+              </div>
+              <div class="panel-game-row" style="background:var(--glass-1); margin:0 -16px; padding:10px 16px; border-bottom:1px solid var(--border-subtle);">
+                <div class="panel-game-thumb" style="background:linear-gradient(135deg,#1a2a1a,#0d2010);"></div>
+                <div><div class="panel-game-title" style="color:var(--jio);">War Thunder</div><div class="panel-game-meta">Action · 41% completed</div></div>
+              </div>
+              <div class="panel-game-row">
+                <div class="panel-game-thumb" style="background:linear-gradient(135deg,#2a1a1a,#200a0a);"></div>
+                <div><div class="panel-game-title">Yooka-Laylee</div><div class="panel-game-meta">Platform · Not started</div></div>
+              </div>
+            </div>
+          </div>
+          <!-- Handle -->
+          <div class="resizable-handle" style="background:var(--jio); color:var(--jio);">
+            <span class="handle-label">drag</span>
+          </div>
+          <!-- Right panel: detail -->
+          <div class="resizable-panel" style="flex:1; background:var(--bg);">
+            <div class="panel-content">
+              <div class="panel-detail-art" style="background:linear-gradient(135deg,#1a1a2e 0%,#0d1b3e 40%,#0a1020 100%);"></div>
+              <div class="panel-detail-title">War Thunder</div>
+              <div class="panel-detail-meta">Action · Free to Play · ★ 4.2</div>
+              <div style="display:flex; gap:8px;">
+                <div style="flex:1; height:32px; background:var(--jio); border-radius:var(--r3);"></div>
+                <div style="width:32px; height:32px; background:var(--surface-2); border-radius:var(--r3); border:1px solid var(--border-subtle);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="component-hero-caption">Resizable · horizontal split · game list left · game detail right · handle highlighted green</p>
+  </section>
+
+  <section class="component-intro">
+    <p>The Resizable component wraps two or more panels with a draggable handle between them. Users drag the handle to allocate more screen space to the panel they need. It is a web-only pattern used in the JioGames admin and game library split view. On mobile, resizable panels are replaced by stacked full-width sections with standard navigation between them.</p>
+    <ul class="component-summary-list">
+      <li><strong>Horizontal split</strong> — left/right panels divided by a vertical 6px handle; default orientation</li>
+      <li><strong>Vertical split</strong> — top/bottom panels divided by a horizontal 6px handle</li>
+      <li><strong>Three panels</strong> — two handles dividing three panels; only in advanced layout contexts</li>
+      <li><strong>Collapsible</strong> — double-click handle to collapse a panel to its minimum or snap to 50/50</li>
+    </ul>
+  </section>
+
+  <section class="component-best-practices">
+    <div class="component-bp-card component-bp-card--do">
+      <span class="component-bp-label component-bp-label--do">Do</span>
+      <ul class="component-bp-list">
+        <li>Always set a minimum panel size (min 20% or 200px) — never allow a panel to reach 0px</li>
+        <li>Persist panel size proportions in localStorage so the user's preference survives page reload</li>
+        <li>Highlight the handle green on hover so users discover it is draggable</li>
+        <li>Support double-click on the handle to snap panels back to equal split</li>
+        <li>Provide keyboard arrow key resizing (8px steps) for users who cannot use a pointer</li>
+      </ul>
+    </div>
+    <div class="component-bp-card component-bp-card--dont">
+      <span class="component-bp-label component-bp-label--dont">Don't</span>
+      <ul class="component-bp-list">
+        <li>Use resizable panels on mobile — stack the panels vertically with navigation between them instead</li>
+        <li>Allow panel sizes below 20% — content becomes unreadable and interaction targets too small</li>
+        <li>Use more than two handles (three splits) unless the layout specifically requires it — adds complexity</li>
+        <li>Change cursor from col-resize / row-resize during drag — unexpected cursor changes disorient users</li>
+        <li>Animate panel resize — live resize must be immediate; animation adds latency and feels broken</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="ds-anatomy" style="margin:40px 0;">
+    <div class="ds-anatomy-preview">
+      <div class="ds-anatomy-component" style="position:relative; width:100%;">
+        <div class="resizable-container" style="height:180px;">
+          <div class="resizable-panel" style="width:45%; background:var(--surface-1); flex-shrink:0;">
+            <div style="padding:12px;">
+              <div style="font-size:10px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:.5px; margin-bottom:8px;">Panel A</div>
+              <div style="height:12px; background:var(--surface-3); border-radius:4px; margin-bottom:6px; width:80%;"></div>
+              <div style="height:12px; background:var(--surface-3); border-radius:4px; margin-bottom:6px; width:60%;"></div>
+              <div style="height:12px; background:var(--surface-3); border-radius:4px; width:70%;"></div>
+            </div>
+          </div>
+          <div class="resizable-handle" style="background:var(--jio); color:var(--jio);"></div>
+          <div class="resizable-panel" style="flex:1; background:var(--bg);">
+            <div style="padding:12px;">
+              <div style="font-size:10px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:.5px; margin-bottom:8px;">Panel B</div>
+              <div style="height:48px; background:var(--surface-2); border-radius:var(--r4); margin-bottom:8px;"></div>
+              <div style="height:12px; background:var(--surface-3); border-radius:4px; width:50%;"></div>
+            </div>
+          </div>
+        </div>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:50%; left:22%; transform:translateY(-50%);">
+          <span class="ds-anatomy-callout-num">1</span>
+        </span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:-14px; left:44%; transform:translateX(-50%);">
+          <span class="ds-anatomy-callout-num">2</span>
+        </span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:50%; left:72%; transform:translateY(-50%);">
+          <span class="ds-anatomy-callout-num">3</span>
+        </span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; bottom:-14px; left:44%; transform:translateX(-50%);">
+          <span class="ds-anatomy-callout-num">4</span>
+        </span>
+      </div>
+    </div>
+    <ol class="ds-anatomy-list">
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">1</span>
+        <div>
+          <div class="ds-anatomy-label">Panel <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Any content area. Overflows independently. Min-size enforced by JavaScript — CSS alone cannot prevent collapse to 0. Two or three panels per container.</div>
+          <code class="ds-anatomy-token ds-code">overflow: auto; min-width: 20%</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">2</span>
+        <div>
+          <div class="ds-anatomy-label">Drag handle <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">6px wide (horizontal split) or 6px tall (vertical split). Default color border-subtle, green on hover and while dragging. Grip dots via ::after pseudo-element.</div>
+          <code class="ds-anatomy-token ds-code">width: 6px; cursor: col-resize; role="separator"</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">3</span>
+        <div>
+          <div class="ds-anatomy-label">Second panel <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Grows or shrinks to fill remaining space. Uses flex:1. Different background from Panel A helps users visually distinguish the two areas.</div>
+          <code class="ds-anatomy-token ds-code">flex: 1; overflow: auto</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">4</span>
+        <div>
+          <div class="ds-anatomy-label">Container <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Outer flex container with fixed height. Clips overflow. Border and border-radius applied here, not on individual panels, for a unified appearance.</div>
+          <code class="ds-anatomy-token ds-code">display: flex; overflow: hidden; border-radius: var(--r5)</code>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Three split configurations — horizontal, vertical, and three-panel. Collapsible behavior applies to any variant.</p>
+    <div class="ds-demo ds-demo--dark" style="display:flex; flex-direction:column; gap:32px;">
+
+      <div>
+        <div style="font-size:11px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; margin-bottom:12px;">Horizontal split (left / right)</div>
+        <div class="resizable-container" style="height:160px;">
+          <div class="resizable-panel" style="width:40%; background:var(--surface-1); flex-shrink:0;">
+            <div style="padding:14px; font-size:12px; color:var(--text3);">Left panel</div>
+          </div>
+          <div class="resizable-handle"></div>
+          <div class="resizable-panel" style="flex:1; background:var(--bg);">
+            <div style="padding:14px; font-size:12px; color:var(--text3);">Right panel</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size:11px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; margin-bottom:12px;">Vertical split (top / bottom)</div>
+        <div class="resizable-container resizable-container--vertical" style="height:200px;">
+          <div class="resizable-panel" style="height:55%; background:var(--surface-1); flex-shrink:0; width:100%;">
+            <div style="padding:14px; font-size:12px; color:var(--text3);">Top panel</div>
+          </div>
+          <div class="resizable-handle resizable-handle--horizontal"></div>
+          <div class="resizable-panel" style="flex:1; background:var(--bg); width:100%;">
+            <div style="padding:14px; font-size:12px; color:var(--text3);">Bottom panel</div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size:11px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; margin-bottom:12px;">Three-panel horizontal</div>
+        <div class="resizable-container" style="height:160px;">
+          <div class="resizable-panel" style="width:28%; background:var(--surface-1); flex-shrink:0;">
+            <div style="padding:14px; font-size:12px; color:var(--text3);">Panel A</div>
+          </div>
+          <div class="resizable-handle"></div>
+          <div class="resizable-panel" style="flex:1; background:var(--bg);">
+            <div style="padding:14px; font-size:12px; color:var(--text3);">Panel B</div>
+          </div>
+          <div class="resizable-handle"></div>
+          <div class="resizable-panel" style="width:28%; background:var(--surface-1); flex-shrink:0;">
+            <div style="padding:14px; font-size:12px; color:var(--text3);">Panel C</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Panel sizes are developer-defined percentages, not fixed tokens. The handle itself has a single fixed spec.</p>
+    <div class="ds-demo ds-demo--dark">
+      <table class="ds-spec-table">
+        <thead><tr><th>Property</th><th>Value</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Handle width (horizontal)</td><td><code class="ds-code">6px</code></td><td>Fixed — wide enough to click, narrow enough to not consume space</td></tr>
+          <tr><td>Handle height (vertical)</td><td><code class="ds-code">6px</code></td><td>Same spec, rotated orientation</td></tr>
+          <tr><td>Grip indicator</td><td><code class="ds-code">2px × 24px</code></td><td>::after pseudo-element, 50% opacity</td></tr>
+          <tr><td>Panel minimum size</td><td><code class="ds-code">20% / 200px</code></td><td>Enforced by JS — use whichever is larger for the context</td></tr>
+          <tr><td>Panel maximum size</td><td><code class="ds-code">80%</code></td><td>Prevents the other panel from becoming unworkable</td></tr>
+          <tr><td>Default split</td><td><code class="ds-code">50% / 50%</code></td><td>On first render before localStorage preference is loaded</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Handle states are the primary visual feedback for the resize interaction. Panel states are layout-level, not visual.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:32px; align-items:center;">
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div style="width:6px; height:80px; background:var(--border-subtle); border-radius:3px; display:flex; align-items:center; justify-content:center;">
+            <div style="width:2px; height:24px; background:var(--border-subtle); border-radius:var(--pill); opacity:.5;"></div>
+          </div>
+          <span style="font-size:11px; color:var(--text3);">Idle</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div style="width:6px; height:80px; background:rgba(0,168,89,.4); border-radius:3px; display:flex; align-items:center; justify-content:center; box-shadow:0 0 8px rgba(0,168,89,.2);">
+            <div style="width:2px; height:24px; background:var(--jio); border-radius:var(--pill); opacity:.5;"></div>
+          </div>
+          <span style="font-size:11px; color:var(--text3);">Hover</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div style="width:6px; height:80px; background:var(--jio); border-radius:3px; display:flex; align-items:center; justify-content:center; box-shadow:0 0 12px rgba(0,168,89,.35);">
+            <div style="width:2px; height:24px; background:#000; border-radius:var(--pill); opacity:.4;"></div>
+          </div>
+          <span style="font-size:11px; color:var(--text3);">Dragging</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div style="display:flex; align-items:stretch; height:80px; border:1px solid var(--border-subtle); border-radius:6px; overflow:hidden; width:120px;">
+            <div style="width:4px; background:var(--surface-1); flex-shrink:0;"></div>
+            <div style="width:6px; background:var(--border-subtle); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <div style="width:2px; height:16px; background:var(--border-subtle); border-radius:2px; opacity:.4;"></div>
+            </div>
+            <div style="flex:1; background:var(--bg);"></div>
+          </div>
+          <span style="font-size:11px; color:var(--text3); text-align:center;">At minimum</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div style="display:flex; align-items:stretch; height:80px; border:1px solid var(--border-subtle); border-radius:6px; overflow:hidden; width:120px;">
+            <div style="flex:1; background:var(--surface-1);"></div>
+            <div style="width:6px; background:var(--border-subtle); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <div style="width:2px; height:16px; background:var(--border-subtle); border-radius:2px; opacity:.4;"></div>
+            </div>
+            <div style="width:4px; background:var(--bg); flex-shrink:0;"></div>
+          </div>
+          <span style="font-size:11px; color:var(--text3); text-align:center;">At maximum</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Panel content rules</div>
+        <ul>
+          <li>Each panel must be independently scrollable — never rely on page scroll for panel content</li>
+          <li>Panels must handle narrow widths gracefully — use responsive layouts within panels</li>
+          <li>Collapsed state (min size): show an icon-only sidebar, not a blank white panel</li>
+          <li>Avoid fixed-width content (wide tables, non-responsive images) inside resizable panels</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Persistence and defaults</div>
+        <ul>
+          <li>Store panel sizes as percentages in localStorage keyed by layout ID</li>
+          <li>Default 50/50 split on first render — do not assume one panel is "primary"</li>
+          <li>Double-click handle resets to default 50/50 — document this affordance with a tooltip</li>
+          <li>On window resize, recalculate panel sizes to maintain percentage ratios, not pixel values</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Not applicable — replace with full-width stacked panels</li>
+          <li>Navigation between panels uses tab bar or back button, not a visible split</li>
+          <li>Game list and game detail become separate screens linked by tap navigation</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Pointer drag on handle resizes panels in real time — no preview ghost</li>
+          <li>Arrow keys (focus on handle): ← → resize horizontal, ↑ ↓ resize vertical in 8px steps</li>
+          <li>Double-click snaps to 50/50 equal split</li>
+          <li>Persist sizes in <code class="ds-code">localStorage</code> under a stable layout key</li>
+          <li>Minimum viewport width for split layout: 768px — stack panels below this breakpoint</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>Not applicable — no pointer available for dragging</li>
+          <li>Fixed two-column layout with D-pad focus switching between panels</li>
+          <li>Panel proportions are fixed at design time for TV layouts</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <table class="ds-spec-table">
+      <thead><tr><th>Element</th><th>Role / attribute</th><th>Guidance</th></tr></thead>
+      <tbody>
+        <tr><td>Drag handle</td><td><code class="ds-code">role="separator"</code></td><td>Separator with <code class="ds-code">aria-orientation="vertical"</code> (horizontal split) or <code class="ds-code">"horizontal"</code> (vertical split).</td></tr>
+        <tr><td>Size value</td><td><code class="ds-code">aria-valuenow</code></td><td>Percentage of the primary panel: <code class="ds-code">aria-valuenow="40"</code>. Update on every resize step.</td></tr>
+        <tr><td>Min / max</td><td><code class="ds-code">aria-valuemin / aria-valuemax</code></td><td><code class="ds-code">aria-valuemin="20" aria-valuemax="80"</code> matching the enforced JS constraints.</td></tr>
+        <tr><td>Label</td><td><code class="ds-code">aria-label</code></td><td>"Resize panels" — describes the action the handle performs, not the visual appearance.</td></tr>
+        <tr><td>Keyboard</td><td>Arrow keys</td><td>Handle must be focusable (<code class="ds-code">tabindex="0"</code>). Arrow keys move in 8px steps; Shift+Arrow in 40px steps for power users.</td></tr>
+        <tr><td>Live region</td><td><code class="ds-code">aria-live="polite"</code></td><td>Optional: announce panel percentage after keyboard resize stops — "Left panel: 45%". Debounce to avoid over-announcing during drag.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <table class="ds-spec-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td><code class="ds-code">--border-subtle</code></td><td><code class="ds-code">rgba(255,255,255,.08)</code></td><td>Container border, handle idle fill color</td></tr>
+        <tr><td><code class="ds-code">--jio</code></td><td><code class="ds-code">#00A859</code></td><td>Handle hover and dragging fill color</td></tr>
+        <tr><td><code class="ds-code">--surface-1</code></td><td>—</td><td>Primary panel background (list/sidebar)</td></tr>
+        <tr><td><code class="ds-code">--bg</code></td><td><code class="ds-code">#080a10</code></td><td>Secondary panel background (detail/main content)</td></tr>
+        <tr><td><code class="ds-code">--r5</code></td><td>—</td><td>Container border-radius</td></tr>
+        <tr><td><code class="ds-code">--pill</code></td><td><code class="ds-code">100px</code></td><td>Grip indicator (::after) border-radius</td></tr>
+        <tr><td><code class="ds-code">--dur-fast</code></td><td><code class="ds-code">120ms</code></td><td>Handle background color transition on hover</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Two-panel horizontal split</div>
+      <pre class="component-code-pre"><code>&lt;div class="resizable-container"&gt;
+
+  &lt;div class="resizable-panel" id="panel-list" style="width:40%;"&gt;
+    &lt;!-- Game list content --&gt;
+  &lt;/div&gt;
+
+  &lt;div
+    class="resizable-handle"
+    role="separator"
+    aria-orientation="vertical"
+    aria-label="Resize panels"
+    aria-valuenow="40"
+    aria-valuemin="20"
+    aria-valuemax="80"
+    tabindex="0"
+  &gt;&lt;/div&gt;
+
+  &lt;div class="resizable-panel" id="panel-detail" style="flex:1;"&gt;
+    &lt;!-- Game detail content --&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;script&gt;
+const handle = document.querySelector('.resizable-handle');
+const panelLeft = document.getElementById('panel-list');
+const container = document.querySelector('.resizable-container');
+let isDragging = false;
+
+handle.addEventListener('mousedown', () => {
+  isDragging = true;
+  handle.classList.add('is-dragging');
+  document.body.style.cursor = 'col-resize';
+  document.body.style.userSelect = 'none';
+});
+
+document.addEventListener('mousemove', (e) => {
+  if (!isDragging) return;
+  const rect = container.getBoundingClientRect();
+  let pct = ((e.clientX - rect.left) / rect.width) * 100;
+  pct = Math.min(80, Math.max(20, pct));
+  panelLeft.style.width = pct + '%';
+  handle.setAttribute('aria-valuenow', Math.round(pct));
+  // Persist
+  localStorage.setItem('panel-split', pct);
+});
+
+document.addEventListener('mouseup', () => {
+  isDragging = false;
+  handle.classList.remove('is-dragging');
+  document.body.style.cursor = '';
+  document.body.style.userSelect = '';
+});
+
+// Keyboard resize
+handle.addEventListener('keydown', (e) => {
+  const step = e.shiftKey ? 40 : 8;
+  const rect = container.getBoundingClientRect();
+  let pct = parseFloat(panelLeft.style.width);
+  if (e.key === 'ArrowLeft') pct = Math.max(20, pct - (step / rect.width * 100));
+  if (e.key === 'ArrowRight') pct = Math.min(80, pct + (step / rect.width * 100));
+  panelLeft.style.width = pct + '%';
+  handle.setAttribute('aria-valuenow', Math.round(pct));
+});
+
+// Restore persisted size
+const saved = localStorage.getItem('panel-split');
+if (saved) panelLeft.style.width = saved + '%';
+
+// Double-click to reset 50/50
+handle.addEventListener('dblclick', () => {
+  panelLeft.style.width = '50%';
+  handle.setAttribute('aria-valuenow', 50);
+  localStorage.setItem('panel-split', 50);
+});
+&lt;/script&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Vertical split (top / bottom)</div>
+      <pre class="component-code-pre"><code>&lt;div class="resizable-container resizable-container--vertical"&gt;
+
+  &lt;div class="resizable-panel" id="panel-top" style="height:55%; width:100%;"&gt;
+    &lt;!-- Top panel content --&gt;
+  &lt;/div&gt;
+
+  &lt;div
+    class="resizable-handle resizable-handle--horizontal"
+    role="separator"
+    aria-orientation="horizontal"
+    aria-label="Resize panels"
+    aria-valuenow="55"
+    aria-valuemin="20"
+    aria-valuemax="80"
+    tabindex="0"
+  &gt;&lt;/div&gt;
+
+  &lt;div class="resizable-panel" style="flex:1; width:100%;"&gt;
+    &lt;!-- Bottom panel content --&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Three-panel horizontal layout</div>
+      <pre class="component-code-pre"><code>&lt;div class="resizable-container"&gt;
+
+  &lt;div class="resizable-panel" id="panel-a" style="width:25%;"&gt;
+    &lt;!-- Sidebar / filters --&gt;
+  &lt;/div&gt;
+
+  &lt;div class="resizable-handle" role="separator" aria-orientation="vertical"
+    aria-label="Resize sidebar and content"
+    aria-valuenow="25" aria-valuemin="15" aria-valuemax="40"
+    tabindex="0"&gt;&lt;/div&gt;
+
+  &lt;div class="resizable-panel" id="panel-b" style="flex:1;"&gt;
+    &lt;!-- Main content --&gt;
+  &lt;/div&gt;
+
+  &lt;div class="resizable-handle" role="separator" aria-orientation="vertical"
+    aria-label="Resize content and detail"
+    aria-valuenow="50" aria-valuemin="15" aria-valuemax="50"
+    tabindex="0"&gt;&lt;/div&gt;
+
+  &lt;div class="resizable-panel" id="panel-c" style="width:30%;"&gt;
+    &lt;!-- Detail / preview --&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</code></pre>
+    </div>
+  </section>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">Changelog</h2>
+    <div class="component-changelog">
+      <div class="component-changelog-entry">
+        <span class="component-changelog-version">v0.1</span>
+        <span class="component-changelog-date">Jun 2026</span>
+        <p class="component-changelog-desc">Initial draft. Horizontal, vertical, and three-panel variants. Full drag + keyboard resize JS example. ARIA separator pattern with aria-valuenow/min/max. localStorage persistence guidance. Web-only scope documented.</p>
+      </div>
+    </div>
+  </section>
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

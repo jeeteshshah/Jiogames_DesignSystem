@@ -1,0 +1,710 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Table — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    .data-table-wrap { width: 100%; overflow-x: auto; border: 1px solid var(--border-subtle); border-radius: var(--r5); }
+    .data-table { width: 100%; border-collapse: collapse; font-family: var(--jio-font); }
+    .data-table thead { background: var(--surface-2); }
+    .data-table th {
+      padding: 12px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text3);
+      letter-spacing: .4px;
+      text-transform: uppercase;
+      text-align: left;
+      white-space: nowrap;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .data-table th.is-sortable { cursor: pointer; user-select: none; }
+    .data-table th.is-sortable:hover { color: var(--text2); }
+    .data-table th.is-sorted { color: var(--jio); }
+    .data-table td {
+      padding: 12px 16px;
+      font-size: 14px;
+      color: var(--text);
+      border-bottom: 1px solid var(--border-subtle);
+      vertical-align: middle;
+    }
+    .data-table tbody tr:last-child td { border-bottom: none; }
+    .data-table tbody tr:hover td { background: var(--glass-1); }
+    .data-table tbody tr.is-selected td { background: rgba(0,168,89,.06); }
+    .data-table-rank { font-size: 12px; font-weight: 900; color: var(--text3); width: 32px; }
+    .data-table-rank--gold   { color: #FFCF5C; }
+    .data-table-rank--silver { color: var(--text2); }
+    .data-table-rank--bronze { color: rgba(244,183,100,.8); }
+
+    /* Compact variant */
+    .data-table--compact th { padding: 8px 12px; font-size: 10px; }
+    .data-table--compact td { padding: 8px 12px; font-size: 12px; }
+
+    /* Comfortable variant */
+    .data-table--comfortable td { padding: 16px 18px; }
+    .data-table--comfortable th { padding: 16px 18px; }
+
+    /* Striped variant */
+    .data-table--striped tbody tr:nth-child(odd) td { background: var(--surface-2); }
+    .data-table--striped tbody tr:nth-child(odd):hover td { background: var(--glass-1); }
+
+    /* Borderless variant */
+    .data-table-wrap--borderless { border: none; }
+    .data-table--borderless td, .data-table--borderless th { border-bottom: none; }
+
+    /* Skeleton loading rows */
+    .data-table-skeleton { height: 16px; border-radius: 6px; background: var(--surface-3); animation: skel-pulse 1.4s ease-in-out infinite; }
+    @keyframes skel-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .4; } }
+
+    /* Checkbox column */
+    .data-table-check { width: 36px; padding: 12px 8px 12px 16px !important; }
+
+    /* Sort icon */
+    .sort-icon { display: inline-block; margin-left: 4px; opacity: .5; font-style: normal; font-size: 10px; }
+    th.is-sorted .sort-icon { opacity: 1; color: var(--jio); }
+
+    /* Number cells */
+    .data-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    .data-table th.num { text-align: right; }
+
+    /* Empty state */
+    .data-table-empty { padding: 48px 16px; text-align: center; color: var(--text3); font-size: 13px; }
+
+    /* Avatar + name combo */
+    .dt-player { display: flex; align-items: center; gap: 10px; }
+    .dt-avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--surface-3); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--text3); }
+    .dt-avatar--a { background: rgba(0,168,89,.15); color: var(--jio); }
+    .dt-avatar--b { background: rgba(99,179,237,.15); color: #63b3ed; }
+    .dt-avatar--c { background: rgba(246,173,85,.15); color: #f6ad55; }
+    .dt-avatar--d { background: rgba(255,71,87,.15); color: var(--negative); }
+    .dt-avatar--e { background: rgba(167,139,250,.15); color: #a78bfa; }
+  </style>
+</head><body><main class="ds-content">
+
+  <!-- 1. PAGE HEADER -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Data Table</span>
+    </nav>
+    <h1 class="component-page-title">Data Table</h1>
+    <p class="component-page-def">Structured grid for leaderboards, achievement lists, game stats, and friend rankings. Supports sorting, selection, and row actions.</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile">
+          <span class="component-platform-dot"></span>Mobile
+        </span>
+        <span class="component-platform component-platform--web">
+          <span class="component-platform-dot"></span>Web
+        </span>
+        <span class="component-platform component-platform--tv">
+          <span class="component-platform-dot"></span>TV
+        </span>
+      </div>
+      <span class="component-maturity component-maturity--draft">
+        <span class="component-maturity--dot"></span>Draft
+      </span>
+    </div>
+  </header>
+
+  <!-- 2. HERO -->
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:380px; position:relative;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="padding:40px 32px; max-width:720px; width:100%;">
+      <div class="data-table-wrap" style="width:100%;">
+        <table class="data-table" role="grid" aria-label="Game leaderboard">
+          <thead>
+            <tr>
+              <th class="data-table-rank" scope="col">#</th>
+              <th scope="col">Player</th>
+              <th scope="col">Game</th>
+              <th scope="col" class="num is-sorted is-sortable" aria-sort="descending">Score <i class="sort-icon">↓</i></th>
+              <th scope="col" class="num">Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="data-table-rank data-table-rank--gold">1</span></td>
+              <td><div class="dt-player"><div class="dt-avatar dt-avatar--a">AK</div><span>ArjunKing99</span></div></td>
+              <td>Tomb Raider</td>
+              <td class="num" style="color:var(--jio); font-weight:700;">1,24,850</td>
+              <td class="num" style="color:var(--text2);">2h 14m</td>
+            </tr>
+            <tr>
+              <td><span class="data-table-rank data-table-rank--silver">2</span></td>
+              <td><div class="dt-player"><div class="dt-avatar dt-avatar--b">PS</div><span>PriyaStar</span></div></td>
+              <td>Tomb Raider</td>
+              <td class="num" style="font-weight:700;">1,18,200</td>
+              <td class="num" style="color:var(--text2);">2h 31m</td>
+            </tr>
+            <tr>
+              <td><span class="data-table-rank data-table-rank--bronze">3</span></td>
+              <td><div class="dt-player"><div class="dt-avatar dt-avatar--c">RV</div><span>RocketVeer</span></div></td>
+              <td>Yooka-Laylee</td>
+              <td class="num" style="font-weight:700;">98,500</td>
+              <td class="num" style="color:var(--text2);">1h 58m</td>
+            </tr>
+            <tr>
+              <td><span class="data-table-rank">4</span></td>
+              <td><div class="dt-player"><div class="dt-avatar dt-avatar--d">NM</div><span>NightMira</span></div></td>
+              <td>Vigilante</td>
+              <td class="num">84,100</td>
+              <td class="num" style="color:var(--text2);">3h 02m</td>
+            </tr>
+            <tr>
+              <td><span class="data-table-rank">5</span></td>
+              <td><div class="dt-player"><div class="dt-avatar dt-avatar--e">KZ</div><span>KaranZap</span></div></td>
+              <td>Vigilante</td>
+              <td class="num">76,350</td>
+              <td class="num" style="color:var(--text2);">3h 17m</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <p class="component-hero-caption">Leaderboard table · rank highlights, sorted column, number alignment</p>
+  </section>
+
+  <!-- 3. INTRO -->
+  <section class="component-intro">
+    <p>Data Table renders structured rows and columns of information. It is the right component for leaderboards, achievement logs, session history, game stats comparisons, and friend rankings. The table supports column sorting, row selection, and compact or comfortable density modes. On mobile, it scrolls horizontally when columns exceed the viewport — always use <code class="ds-code">overflow-x: auto</code> on the wrapper.</p>
+    <ul class="component-summary-list">
+      <li><strong>Leaderboard</strong> — rank badge in first column, score sorted descending, player avatar + name</li>
+      <li><strong>Achievement list</strong> — icon, name, description, earned date, XP value</li>
+      <li><strong>Game stats</strong> — metric labels, numeric values right-aligned, comparison columns</li>
+      <li><strong>Selection</strong> — checkboxes in first column, selected row gets a subtle green tint</li>
+    </ul>
+  </section>
+
+  <!-- 4. BEST PRACTICES -->
+  <section class="component-best-practices">
+    <div class="component-bp-card component-bp-card--do">
+      <span class="component-bp-label component-bp-label--do">Do</span>
+      <ul class="component-bp-list">
+        <li>Right-align numeric columns — scores, times, counts, currency</li>
+        <li>Left-align text columns — names, titles, descriptions</li>
+        <li>Keep column headers under 3 words in title case</li>
+        <li>Truncate long text with ellipsis and provide a tooltip on hover</li>
+        <li>Show "No results" empty state when the table has zero rows</li>
+        <li>Use sticky header when the table scrolls vertically beyond the viewport</li>
+      </ul>
+    </div>
+    <div class="component-bp-card component-bp-card--dont">
+      <span class="component-bp-label component-bp-label--dont">Don't</span>
+      <ul class="component-bp-list">
+        <li>Show more than 5–6 columns on mobile — limit to 3–4 visible, swipe for more</li>
+        <li>Use center-aligned text for body cells — it creates ragged columns</li>
+        <li>Mix left and right alignment in the same column across header and body</li>
+        <li>Use a table for a single column of items — use a List component instead</li>
+        <li>Nest tables — avoid deeply nested table cells</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. ANATOMY -->
+  <div class="ds-anatomy" style="margin: 40px 0;">
+    <div class="ds-anatomy-preview" style="align-items:flex-start; padding:24px;">
+      <div style="width:100%; overflow-x:auto;">
+        <table class="data-table" style="min-width:320px;">
+          <thead>
+            <tr>
+              <th scope="col" style="position:relative;">
+                <span style="position:absolute; top:-22px; left:50%; transform:translateX(-50%);">
+                  <span class="ds-anatomy-callout-num">1</span>
+                </span>
+                Rank
+              </th>
+              <th scope="col">Player</th>
+              <th scope="col" class="is-sorted is-sortable" style="position:relative;">
+                Score <i class="sort-icon">↓</i>
+                <span style="position:absolute; top:-22px; right:4px;">
+                  <span class="ds-anatomy-callout-num">2</span>
+                </span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="is-selected" style="position:relative;">
+              <td>
+                <span class="data-table-rank data-table-rank--gold">1</span>
+                <span style="position:absolute; left:-22px; top:50%; transform:translateY(-50%);">
+                  <span class="ds-anatomy-callout-num">4</span>
+                </span>
+              </td>
+              <td>ArjunKing99</td>
+              <td class="num" style="color:var(--jio); font-weight:700; position:relative;">1,24,850
+                <span style="position:absolute; right:-22px; top:50%; transform:translateY(-50%);">
+                  <span class="ds-anatomy-callout-num">3</span>
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="data-table-rank data-table-rank--silver">2</span></td>
+              <td>PriyaStar</td>
+              <td class="num">1,18,200</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <ol class="ds-anatomy-list">
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">1</span>
+        <div>
+          <div class="ds-anatomy-label">Table header (thead) <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Sticky or static header row. Uppercase 11px labels, text3 color. Sortable headers get sort icon and cursor:pointer. Sorted column uses --jio color.</div>
+          <code class="ds-anatomy-token ds-code">font-size:11px; font-weight:700; text-transform:uppercase</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">2</span>
+        <div>
+          <div class="ds-anatomy-label">Sort indicator <span class="ds-anatomy-optional">Optional</span></div>
+          <div class="ds-anatomy-desc">Arrow icon in sorted column header. aria-sort="ascending" or "descending" on the th element for screen readers.</div>
+          <code class="ds-anatomy-token ds-code">aria-sort="descending"</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">3</span>
+        <div>
+          <div class="ds-anatomy-label">Table cell (td) <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">14px body text. Numbers right-aligned with tabular-nums. Text left-aligned. Hover state: glass-1 background. Vertical-align: middle for all cells.</div>
+          <code class="ds-anatomy-token ds-code">font-variant-numeric: tabular-nums</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">4</span>
+        <div>
+          <div class="ds-anatomy-label">Selected row <span class="ds-anatomy-optional">Optional</span></div>
+          <div class="ds-anatomy-desc">Adds is-selected class to tr. Background shifts to a subtle green tint — rgba(0,168,89,.06) — to signal active selection without overpowering the content.</div>
+          <code class="ds-anatomy-token ds-code">background: rgba(0,168,89,.06)</code>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- 6. VARIANTS -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">All variants share the same semantic HTML. Only CSS modifier classes on the table and wrapper change the visual treatment.</p>
+
+    <div style="display:flex; flex-direction:column; gap:32px;">
+
+      <!-- Default -->
+      <div>
+        <div class="ds-sub-label" style="margin-bottom:12px;">Default</div>
+        <div class="ds-demo ds-demo--dark">
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th scope="col" class="is-sortable is-sorted" aria-sort="descending">Game <i class="sort-icon">↓</i></th>
+                <th scope="col">Genre</th>
+                <th scope="col" class="num">Rating</th>
+              </tr></thead>
+              <tbody>
+                <tr><td>Tomb Raider</td><td>Action Adventure</td><td class="num">4.9</td></tr>
+                <tr><td>Yooka-Laylee</td><td>Platformer</td><td class="num">4.5</td></tr>
+                <tr><td>Vigilante</td><td>Action</td><td class="num">4.3</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Striped rows -->
+      <div>
+        <div class="ds-sub-label" style="margin-bottom:12px;">Striped rows</div>
+        <div class="ds-demo ds-demo--dark">
+          <div class="data-table-wrap">
+            <table class="data-table data-table--striped">
+              <thead><tr>
+                <th scope="col">Achievement</th>
+                <th scope="col">Game</th>
+                <th scope="col" class="num">XP</th>
+                <th scope="col">Earned</th>
+              </tr></thead>
+              <tbody>
+                <tr><td>First Blood</td><td>Vigilante</td><td class="num">500</td><td style="color:var(--text2);">12 Jun</td></tr>
+                <tr><td>Speedrunner</td><td>Tomb Raider</td><td class="num">1,200</td><td style="color:var(--text2);">10 Jun</td></tr>
+                <tr><td>Completionist</td><td>Yooka-Laylee</td><td class="num">2,500</td><td style="color:var(--text2);">8 Jun</td></tr>
+                <tr><td>Untouchable</td><td>Vigilante</td><td class="num">800</td><td style="color:var(--text2);">5 Jun</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Compact -->
+      <div>
+        <div class="ds-sub-label" style="margin-bottom:12px;">Compact — dense data displays</div>
+        <div class="ds-demo ds-demo--dark">
+          <div class="data-table-wrap">
+            <table class="data-table data-table--compact">
+              <thead><tr>
+                <th scope="col">#</th>
+                <th scope="col">Player</th>
+                <th scope="col" class="num">Score</th>
+                <th scope="col" class="num">Kills</th>
+                <th scope="col" class="num">Deaths</th>
+                <th scope="col" class="num">KD</th>
+              </tr></thead>
+              <tbody>
+                <tr><td>1</td><td>ArjunKing99</td><td class="num">8,420</td><td class="num">24</td><td class="num">3</td><td class="num" style="color:var(--jio);">8.0</td></tr>
+                <tr><td>2</td><td>PriyaStar</td><td class="num">7,100</td><td class="num">19</td><td class="num">5</td><td class="num">3.8</td></tr>
+                <tr><td>3</td><td>RocketVeer</td><td class="num">6,800</td><td class="num">17</td><td class="num">6</td><td class="num">2.8</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row selection -->
+      <div>
+        <div class="ds-sub-label" style="margin-bottom:12px;">With row selection</div>
+        <div class="ds-demo ds-demo--dark">
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th scope="col" class="data-table-check"><input type="checkbox" aria-label="Select all rows" style="accent-color:var(--jio);"></th>
+                <th scope="col">Game</th>
+                <th scope="col">Status</th>
+                <th scope="col" class="num">Playtime</th>
+              </tr></thead>
+              <tbody>
+                <tr class="is-selected">
+                  <td class="data-table-check"><input type="checkbox" checked aria-label="Select Tomb Raider" style="accent-color:var(--jio);"></td>
+                  <td>Tomb Raider</td>
+                  <td><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--jio);"><span style="width:6px;height:6px;border-radius:50%;background:var(--jio);display:inline-block;"></span>Installed</span></td>
+                  <td class="num">72h</td>
+                </tr>
+                <tr>
+                  <td class="data-table-check"><input type="checkbox" aria-label="Select Yooka-Laylee" style="accent-color:var(--jio);"></td>
+                  <td>Yooka-Laylee</td>
+                  <td><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--text2);"><span style="width:6px;height:6px;border-radius:50%;background:var(--text3);display:inline-block;"></span>Available</span></td>
+                  <td class="num">14h</td>
+                </tr>
+                <tr>
+                  <td class="data-table-check"><input type="checkbox" aria-label="Select Vigilante" style="accent-color:var(--jio);"></td>
+                  <td>Vigilante</td>
+                  <td><span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--text2);"><span style="width:6px;height:6px;border-radius:50%;background:var(--text3);display:inline-block;"></span>Available</span></td>
+                  <td class="num">0h</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leaderboard with rank badges -->
+      <div>
+        <div class="ds-sub-label" style="margin-bottom:12px;">Leaderboard — rank highlight</div>
+        <div class="ds-demo ds-demo--dark">
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th scope="col" style="width:40px;">#</th>
+                <th scope="col">Player</th>
+                <th scope="col" class="num is-sorted is-sortable" aria-sort="descending">Score <i class="sort-icon">↓</i></th>
+                <th scope="col" class="num">Time</th>
+              </tr></thead>
+              <tbody>
+                <tr><td><span class="data-table-rank data-table-rank--gold">1</span></td><td><div class="dt-player"><div class="dt-avatar dt-avatar--a">AK</div>ArjunKing99</div></td><td class="num" style="color:var(--jio);font-weight:700;">1,24,850</td><td class="num" style="color:var(--text2);">2h 14m</td></tr>
+                <tr><td><span class="data-table-rank data-table-rank--silver">2</span></td><td><div class="dt-player"><div class="dt-avatar dt-avatar--b">PS</div>PriyaStar</div></td><td class="num" style="font-weight:700;">1,18,200</td><td class="num" style="color:var(--text2);">2h 31m</td></tr>
+                <tr><td><span class="data-table-rank data-table-rank--bronze">3</span></td><td><div class="dt-player"><div class="dt-avatar dt-avatar--c">RV</div>RocketVeer</div></td><td class="num">98,500</td><td class="num" style="color:var(--text2);">1h 58m</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Borderless -->
+      <div>
+        <div class="ds-sub-label" style="margin-bottom:12px;">Borderless — embedded in a card</div>
+        <div class="ds-demo ds-demo--dark">
+          <div style="background:var(--surface-1);border-radius:var(--r5);overflow:hidden;border:1px solid var(--border-subtle);">
+            <div style="padding:16px 16px 0; font-size:14px; font-weight:700; color:var(--text);">Recent sessions</div>
+            <div class="data-table-wrap data-table-wrap--borderless">
+              <table class="data-table data-table--borderless">
+                <thead><tr>
+                  <th scope="col">Game</th>
+                  <th scope="col" class="num">Duration</th>
+                  <th scope="col" class="num">XP earned</th>
+                </tr></thead>
+                <tbody>
+                  <tr><td>Tomb Raider</td><td class="num">1h 22m</td><td class="num" style="color:var(--jio);">+840</td></tr>
+                  <tr><td>Vigilante</td><td class="num">45m</td><td class="num" style="color:var(--jio);">+320</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 7. SIZES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Three density tiers control padding and font size. Use Compact for dashboards with many rows, Default for most surfaces, Comfortable for focused single-table views.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr>
+          <th>Size</th>
+          <th>Header font</th>
+          <th>Body font</th>
+          <th>Cell padding</th>
+          <th>Use case</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Compact</td>
+          <td><code class="ds-code">10px</code></td>
+          <td><code class="ds-code">12px</code></td>
+          <td><code class="ds-code">8px 12px</code></td>
+          <td>Dense dashboards, session logs, 10+ rows</td>
+        </tr>
+        <tr>
+          <td>Default</td>
+          <td><code class="ds-code">11px</code></td>
+          <td><code class="ds-code">14px</code></td>
+          <td><code class="ds-code">12px 16px</code></td>
+          <td>Leaderboards, achievement lists, general data</td>
+        </tr>
+        <tr>
+          <td>Comfortable</td>
+          <td><code class="ds-code">11px</code></td>
+          <td><code class="ds-code">14px</code></td>
+          <td><code class="ds-code">16px 18px</code></td>
+          <td>Hero stats tables, featured comparisons, 5 or fewer rows</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 8. STATES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Individual rows and header cells each have distinct states. Column sort state lives on the th element.</p>
+    <div class="ds-demo ds-demo--dark" style="overflow-x:auto;">
+      <table class="data-table" style="min-width:480px;">
+        <thead><tr>
+          <th scope="col">State</th>
+          <th scope="col">Game</th>
+          <th scope="col" class="num is-sorted" aria-sort="descending">Score <i class="sort-icon">↓</i></th>
+          <th scope="col" class="num is-sortable">Time</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="color:var(--text3);font-size:11px;">Default row</td><td>Yooka-Laylee</td><td class="num">98,500</td><td class="num" style="color:var(--text2);">1h 58m</td></tr>
+          <tr style="background:var(--glass-1);"><td style="color:var(--text3);font-size:11px;">Hover row</td><td>Vigilante</td><td class="num">84,100</td><td class="num" style="color:var(--text2);">3h 02m</td></tr>
+          <tr class="is-selected"><td style="color:var(--text3);font-size:11px;">Selected row</td><td>Tomb Raider</td><td class="num" style="color:var(--jio);font-weight:700;">1,24,850</td><td class="num" style="color:var(--text2);">2h 14m</td></tr>
+          <tr>
+            <td style="color:var(--text3);font-size:11px;">Loading (skeleton)</td>
+            <td><div class="data-table-skeleton" style="width:100px;"></div></td>
+            <td class="num"><div class="data-table-skeleton" style="width:56px;margin-left:auto;"></div></td>
+            <td class="num"><div class="data-table-skeleton" style="width:48px;margin-left:auto;"></div></td>
+          </tr>
+          <tr>
+            <td colspan="4" class="data-table-empty" style="color:var(--text3);font-size:13px;">No results — try adjusting your filters</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 9. CONTENT GUIDANCE -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Column headers</div>
+        <ul>
+          <li>Use title case: "Player Name", not "player name" or "PLAYER NAME"</li>
+          <li>Keep headers to 3 words maximum — shorten "Time Played" to "Playtime"</li>
+          <li>Abbreviate only when meaning is unambiguous: "XP", "KD", "Lvl"</li>
+          <li>Add a tooltip for abbreviations where the full label adds clarity</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Cell content</div>
+        <ul>
+          <li>Numbers always right-aligned — never center or left</li>
+          <li>Text always left-aligned</li>
+          <li>Truncate long text at 1 line with ellipsis; surface full text in a tooltip</li>
+          <li>Use "—" (em dash) for empty or unavailable values, never blank</li>
+          <li>Format numbers with locale-appropriate separators: 1,24,850 not 124850</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. PLATFORM CONSIDERATIONS -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Wrap table in <code class="ds-code">overflow-x: auto</code> — never shrink columns to fit</li>
+          <li>Show 3–4 columns max in the visible viewport; allow swipe to reveal more</li>
+          <li>Freeze the first column (rank or name) using <code class="ds-code">position: sticky; left: 0</code></li>
+          <li>Use Compact size for any table with more than 6 rows</li>
+          <li>Avoid row selection on mobile — use a long-press action sheet instead</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Sticky header with <code class="ds-code">position: sticky; top: 0</code> for long tables</li>
+          <li>Full column set visible — no horizontal scroll needed</li>
+          <li>Sortable columns — click header to toggle ascending/descending</li>
+          <li>Row selection with checkboxes and keyboard support (Space to toggle)</li>
+          <li>Comfortable or Default size depending on content density</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>D-pad navigates rows; OK button triggers the row action</li>
+          <li>Focused row gets a prominent highlight border</li>
+          <li>Limit visible columns to 4 — TV resolution does not benefit from density</li>
+          <li>Use Comfortable size — minimum 48px row height for 3m legibility</li>
+          <li>No sorting interaction on TV — pre-sort server-side</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. ACCESSIBILITY -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Element</th><th>Attribute / role</th><th>Guidance</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Table</td><td><code class="ds-code">role="grid"</code></td><td>Use role="grid" for interactive tables (sortable, selectable). Use default table role for read-only leaderboards.</td></tr>
+        <tr><td>Header cells</td><td><code class="ds-code">&lt;th scope="col"&gt;</code></td><td>All header cells must have scope="col". Never use td elements as headers.</td></tr>
+        <tr><td>Sortable columns</td><td><code class="ds-code">aria-sort="ascending|descending|none"</code></td><td>Set aria-sort on the currently sorted th. All other sortable ths get aria-sort="none".</td></tr>
+        <tr><td>Row selection</td><td><code class="ds-code">aria-selected</code></td><td>Add aria-selected="true" to selected tr elements. Associate the checkbox with the row using aria-label="Select [row name]".</td></tr>
+        <tr><td>Skeleton rows</td><td><code class="ds-code">aria-busy="true"</code></td><td>Add aria-busy="true" to the table or tbody during loading, remove when data has loaded.</td></tr>
+        <tr><td>Empty state</td><td><code class="ds-code">aria-live="polite"</code></td><td>Wrap the empty-state td content in an aria-live region so screen readers announce when results change.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 12. RELATED TOKENS -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Token</th><th>Value</th><th>Usage</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code class="ds-code">--border-subtle</code></td><td><code class="ds-code">rgba(255,255,255,.08)</code></td><td>Row dividers and table wrapper border</td></tr>
+        <tr><td><code class="ds-code">--surface-2</code></td><td><code class="ds-code">—</code></td><td>thead background</td></tr>
+        <tr><td><code class="ds-code">--glass-1</code></td><td><code class="ds-code">rgba(255,255,255,.04)</code></td><td>Row hover background</td></tr>
+        <tr><td><code class="ds-code">--jio</code></td><td><code class="ds-code">#00A859</code></td><td>Sorted column header color, selected row tint base, rank gold accent for top score</td></tr>
+        <tr><td><code class="ds-code">--text3</code></td><td><code class="ds-code">rgba(244,242,238,.32)</code></td><td>Column header default color, rank number color</td></tr>
+        <tr><td><code class="ds-code">--r5</code></td><td><code class="ds-code">—</code></td><td>Table wrapper border-radius</td></tr>
+        <tr><td><code class="ds-code">--jio-font</code></td><td><code class="ds-code">'Outfit', sans-serif</code></td><td>All table text</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CODE EXAMPLES -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-body" style="font-size:13px;color:var(--text2);margin-bottom:8px;">Always wrap the table in <code class="ds-code">.data-table-wrap</code> for horizontal scroll containment.</p>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Basic leaderboard table</div>
+      <pre class="component-code-pre"><code>&lt;div class="data-table-wrap"&gt;
+  &lt;table class="data-table" role="grid" aria-label="Game leaderboard"&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th scope="col"&gt;#&lt;/th&gt;
+        &lt;th scope="col"&gt;Player&lt;/th&gt;
+        &lt;th scope="col" class="num"&gt;Score&lt;/th&gt;
+        &lt;th scope="col" class="num"&gt;Time&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td&gt;&lt;span class="data-table-rank data-table-rank--gold"&gt;1&lt;/span&gt;&lt;/td&gt;
+        &lt;td&gt;ArjunKing99&lt;/td&gt;
+        &lt;td class="num"&gt;1,24,850&lt;/td&gt;
+        &lt;td class="num"&gt;2h 14m&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Sortable table column</div>
+      <pre class="component-code-pre"><code>&lt;!-- Sorted descending --&gt;
+&lt;th scope="col"
+    class="num is-sortable is-sorted"
+    aria-sort="descending"
+    onclick="sortTable('score', 'desc')"&gt;
+  Score &lt;i class="sort-icon"&gt;↓&lt;/i&gt;
+&lt;/th&gt;
+
+&lt;!-- Unsorted but sortable --&gt;
+&lt;th scope="col"
+    class="num is-sortable"
+    aria-sort="none"
+    onclick="sortTable('time', 'asc')"&gt;
+  Time
+&lt;/th&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Row selection with checkboxes</div>
+      <pre class="component-code-pre"><code>&lt;table class="data-table" role="grid"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th scope="col" class="data-table-check"&gt;
+        &lt;input type="checkbox"
+               aria-label="Select all rows"
+               id="select-all"&gt;
+      &lt;/th&gt;
+      &lt;th scope="col"&gt;Game&lt;/th&gt;
+      &lt;th scope="col" class="num"&gt;Playtime&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr class="is-selected" aria-selected="true"&gt;
+      &lt;td class="data-table-check"&gt;
+        &lt;input type="checkbox" checked
+               aria-label="Select Tomb Raider"&gt;
+      &lt;/td&gt;
+      &lt;td&gt;Tomb Raider&lt;/td&gt;
+      &lt;td class="num"&gt;72h&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- 13. CHANGELOG -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Changelog</h2>
+    <div class="component-changelog">
+      <div class="component-changelog-entry">
+        <span class="component-changelog-version">v0.1</span>
+        <span class="component-changelog-date">Jun 2026</span>
+        <p class="component-changelog-desc">Initial draft. Includes Default, Striped, Compact, Comfortable, Row selection, Leaderboard, and Borderless variants. Anatomy, states, platform guidance, and accessibility table documented.</p>
+      </div>
+    </div>
+  </section>
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

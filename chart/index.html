@@ -1,0 +1,810 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chart — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    .chart-wrap { width: 100%; }
+    .chart-title { font-family: var(--jio-font); font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .chart-subtitle { font-size: 12px; color: var(--text3); margin-bottom: 16px; }
+    .chart-svg { width: 100%; display: block; }
+    /* Bar */
+    .chart-bar { fill: var(--jio); transition: opacity 150ms ease; }
+    .chart-bar:hover { opacity: 0.75; cursor: pointer; }
+    .chart-bar--secondary { fill: var(--surface-3, rgba(255,255,255,.1)); }
+    /* Line */
+    .chart-line { stroke: var(--jio); stroke-width: 2; fill: none; }
+    .chart-area { fill: url(#chart-gradient); opacity: 0.2; }
+    /* Donut */
+    .chart-donut-track { fill: none; stroke: var(--surface-3, rgba(255,255,255,.1)); }
+    .chart-donut-fill { fill: none; stroke: var(--jio); stroke-linecap: round; transition: stroke-dasharray 600ms cubic-bezier(0.25,0.46,0.45,0.94); }
+    /* Legend */
+    .chart-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 12px; }
+    .chart-legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text2); }
+    .chart-legend-dot { width: 8px; height: 8px; border-radius: var(--pill); flex-shrink: 0; }
+    /* Axis labels */
+    .chart-axis-label { font-size: 10px; fill: var(--text3); font-family: var(--jio-font, 'Outfit', sans-serif); }
+    .chart-grid-line { stroke: var(--border-subtle, rgba(255,255,255,.08)); stroke-width: 1; }
+    /* Tooltip */
+    .chart-tooltip { position: absolute; background: var(--surface-2); border: 1px solid var(--border-subtle); border-radius: var(--r3); padding: 6px 10px; font-size: 11px; font-weight: 700; color: var(--text); pointer-events: none; white-space: nowrap; }
+    /* Donut label */
+    .chart-donut-label { font-size: 28px; font-weight: 900; fill: var(--text); font-family: var(--jio-font, 'Outfit', sans-serif); }
+    .chart-donut-sublabel { font-size: 11px; fill: var(--text3); font-family: var(--jio-font, 'Outfit', sans-serif); }
+    /* Skeleton */
+    .chart-skeleton { background: var(--surface-2); border-radius: var(--r4); animation: chart-skel 1.4s ease-in-out infinite; }
+    @keyframes chart-skel { 0%,100%{opacity:1} 50%{opacity:.4} }
+    /* Empty / error */
+    .chart-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--text3); font-size: 13px; }
+    /* Size tiers */
+    .chart--s .chart-svg { height: 120px; }
+    .chart--m .chart-svg { height: 200px; }
+    .chart--l .chart-svg { height: 300px; }
+
+    /* Surface card for charts */
+    .chart-card { background: var(--surface-1); border: 1px solid var(--border-subtle); border-radius: var(--r5); padding: 20px 24px; }
+  </style>
+</head><body><main class="ds-content">
+
+  <!-- 1. PAGE HEADER -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Chart</span>
+    </nav>
+    <h1 class="component-page-title">Chart</h1>
+    <p class="component-page-def">Data visualisation for playtime trends, achievement progress, leaderboard history, and gaming stats. JioGames supports three chart types only: bar, line, and donut.</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile">
+          <span class="component-platform-dot"></span>Mobile
+        </span>
+        <span class="component-platform component-platform--web">
+          <span class="component-platform-dot"></span>Web
+        </span>
+        <span class="component-platform component-platform--tv">
+          <span class="component-platform-dot"></span>TV
+        </span>
+      </div>
+      <span class="component-maturity component-maturity--draft">
+        <span class="component-maturity--dot"></span>Draft
+      </span>
+    </div>
+  </header>
+
+  <!-- 2. HERO -->
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:380px; position:relative;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="flex-direction:row; gap:24px; align-items:flex-start; padding:40px 32px; flex-wrap:wrap; justify-content:center;">
+
+      <!-- Bar chart -->
+      <div style="flex:1; min-width:180px; max-width:240px;">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:2px;">Weekly playtime</div>
+        <div style="font-size:10px;color:var(--text3);margin-bottom:12px;">Hours · Jun 2026</div>
+        <svg class="chart-svg" viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bar chart: weekly playtime. Mon 1.5h, Tue 3h, Wed 2h, Thu 4h, Fri 5h, Sat 6.5h, Sun 4.5h">
+          <defs>
+            <linearGradient id="chart-gradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#00A859" stop-opacity="1"/>
+              <stop offset="100%" stop-color="#00A859" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <!-- Grid lines -->
+          <line x1="24" y1="10" x2="216" y2="10" class="chart-grid-line"/>
+          <line x1="24" y1="35" x2="216" y2="35" class="chart-grid-line"/>
+          <line x1="24" y1="60" x2="216" y2="60" class="chart-grid-line"/>
+          <line x1="24" y1="85" x2="216" y2="85" class="chart-grid-line"/>
+          <!-- Y labels -->
+          <text x="20" y="13" class="chart-axis-label" text-anchor="end">6h</text>
+          <text x="20" y="38" class="chart-axis-label" text-anchor="end">4h</text>
+          <text x="20" y="63" class="chart-axis-label" text-anchor="end">2h</text>
+          <text x="20" y="88" class="chart-axis-label" text-anchor="end">0</text>
+          <!-- Comparison bars (secondary) -->
+          <rect x="27" y="72" width="10" height="13" class="chart-bar chart-bar--secondary" rx="2"/>
+          <rect x="54" y="52" width="10" height="33" class="chart-bar chart-bar--secondary" rx="2"/>
+          <rect x="81" y="62" width="10" height="23" class="chart-bar chart-bar--secondary" rx="2"/>
+          <rect x="108" y="42" width="10" height="43" class="chart-bar chart-bar--secondary" rx="2"/>
+          <rect x="135" y="30" width="10" height="55" class="chart-bar chart-bar--secondary" rx="2"/>
+          <rect x="162" y="16" width="10" height="69" class="chart-bar chart-bar--secondary" rx="2"/>
+          <rect x="189" y="34" width="10" height="51" class="chart-bar chart-bar--secondary" rx="2"/>
+          <!-- Primary bars -->
+          <rect x="39" y="66" width="10" height="19" class="chart-bar" rx="2"><title>Mon · 1.5h</title></rect>
+          <rect x="66" y="48" width="10" height="37" class="chart-bar" rx="2"><title>Tue · 3h</title></rect>
+          <rect x="93" y="60" width="10" height="25" class="chart-bar" rx="2"><title>Wed · 2h</title></rect>
+          <rect x="120" y="35" width="10" height="50" class="chart-bar" rx="2"><title>Thu · 4h</title></rect>
+          <rect x="147" y="22" width="10" height="63" class="chart-bar" rx="2"><title>Fri · 5h</title></rect>
+          <rect x="174" y="10" width="10" height="75" class="chart-bar" rx="2"><title>Sat · 6.5h</title></rect>
+          <rect x="201" y="29" width="10" height="56" class="chart-bar" rx="2"><title>Sun · 4.5h</title></rect>
+          <!-- X labels -->
+          <text x="44" y="100" class="chart-axis-label" text-anchor="middle">M</text>
+          <text x="71" y="100" class="chart-axis-label" text-anchor="middle">T</text>
+          <text x="98" y="100" class="chart-axis-label" text-anchor="middle">W</text>
+          <text x="125" y="100" class="chart-axis-label" text-anchor="middle">T</text>
+          <text x="152" y="100" class="chart-axis-label" text-anchor="middle">F</text>
+          <text x="179" y="100" class="chart-axis-label" text-anchor="middle">S</text>
+          <text x="206" y="100" class="chart-axis-label" text-anchor="middle">S</text>
+        </svg>
+        <div class="chart-legend">
+          <div class="chart-legend-item"><span class="chart-legend-dot" style="background:var(--jio);"></span>This week</div>
+          <div class="chart-legend-item"><span class="chart-legend-dot" style="background:rgba(255,255,255,.15);"></span>Last week</div>
+        </div>
+      </div>
+
+      <!-- Line chart -->
+      <div style="flex:1; min-width:180px; max-width:240px;">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:2px;">Achievement points</div>
+        <div style="font-size:10px;color:var(--text3);margin-bottom:12px;">4 weeks · Jun 2026</div>
+        <svg class="chart-svg" viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Line chart: achievement points over 4 weeks. Week 1: 400, Week 2: 650, Week 3: 580, Week 4: 820">
+          <!-- Grid -->
+          <line x1="24" y1="10" x2="216" y2="10" class="chart-grid-line"/>
+          <line x1="24" y1="38" x2="216" y2="38" class="chart-grid-line"/>
+          <line x1="24" y1="66" x2="216" y2="66" class="chart-grid-line"/>
+          <line x1="24" y1="85" x2="216" y2="85" class="chart-grid-line"/>
+          <!-- Y labels -->
+          <text x="20" y="13" class="chart-axis-label" text-anchor="end">900</text>
+          <text x="20" y="41" class="chart-axis-label" text-anchor="end">600</text>
+          <text x="20" y="69" class="chart-axis-label" text-anchor="end">300</text>
+          <text x="20" y="88" class="chart-axis-label" text-anchor="end">0</text>
+          <!-- Area fill -->
+          <polygon points="44,61 108,38 172,44 216,16 216,85 44,85" class="chart-area"/>
+          <!-- Line -->
+          <polyline points="44,61 108,38 172,44 216,16" class="chart-line" stroke-linejoin="round" stroke-linecap="round"/>
+          <!-- Data points -->
+          <circle cx="44" cy="61" r="3.5" fill="var(--jio)"><title>Week 1 · 400 pts</title></circle>
+          <circle cx="108" cy="38" r="3.5" fill="var(--jio)"><title>Week 2 · 650 pts</title></circle>
+          <circle cx="172" cy="44" r="3.5" fill="var(--jio)"><title>Week 3 · 580 pts</title></circle>
+          <circle cx="216" cy="16" r="3.5" fill="var(--jio)"><title>Week 4 · 820 pts</title></circle>
+          <!-- X labels -->
+          <text x="44" y="100" class="chart-axis-label" text-anchor="middle">Wk 1</text>
+          <text x="108" y="100" class="chart-axis-label" text-anchor="middle">Wk 2</text>
+          <text x="172" y="100" class="chart-axis-label" text-anchor="middle">Wk 3</text>
+          <text x="216" y="100" class="chart-axis-label" text-anchor="middle">Wk 4</text>
+        </svg>
+        <div class="chart-legend">
+          <div class="chart-legend-item"><span class="chart-legend-dot" style="background:var(--jio);"></span>Achievement XP</div>
+        </div>
+      </div>
+
+      <!-- Donut chart -->
+      <div style="flex:0 0 auto;">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:2px;">Completion</div>
+        <div style="font-size:10px;color:var(--text3);margin-bottom:12px;">Tomb Raider · Jun 2026</div>
+        <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Donut chart: 72% achievement completion for Tomb Raider">
+          <!-- Track -->
+          <circle cx="60" cy="60" r="44" class="chart-donut-track" stroke-width="10"/>
+          <!-- Fill: 72% of circumference = 0.72 * 2π * 44 ≈ 199.5. Total = 276.5 -->
+          <circle cx="60" cy="60" r="44" class="chart-donut-fill" stroke-width="10"
+                  stroke-dasharray="199.5 277"
+                  stroke-dashoffset="69"
+                  transform="rotate(-90 60 60)"/>
+          <!-- Center label -->
+          <text x="60" y="55" class="chart-donut-label" text-anchor="middle" dominant-baseline="middle">72%</text>
+          <text x="60" y="72" class="chart-donut-sublabel" text-anchor="middle">complete</text>
+        </svg>
+        <div class="chart-legend">
+          <div class="chart-legend-item"><span class="chart-legend-dot" style="background:var(--jio);"></span>Achieved</div>
+          <div class="chart-legend-item"><span class="chart-legend-dot" style="background:rgba(255,255,255,.12);"></span>Remaining</div>
+        </div>
+      </div>
+
+    </div>
+    <p class="component-hero-caption">Chart · bar (comparison), line (with area), donut (72% completion)</p>
+  </section>
+
+  <!-- 3. INTRO -->
+  <section class="component-intro">
+    <p>Chart renders data as one of three approved visual forms: bar, line, or donut. These three types cover every gaming data story JioGames needs to tell — time-based comparisons (bar), trends over time (line), and proportions (donut). Other chart types (pie, scatter, radar) are explicitly excluded from the system. If your data does not fit bar, line, or donut, reconsider whether a chart is the right representation at all.</p>
+    <ul class="component-summary-list">
+      <li><strong>Bar</strong> — comparing values across discrete categories: daily playtime, games by genre, score by session</li>
+      <li><strong>Bar (comparison)</strong> — two bars per category using primary and secondary fills: this week vs last week</li>
+      <li><strong>Line</strong> — trends over continuous time: XP earned per week, ranking position over months</li>
+      <li><strong>Donut</strong> — single proportional metric: achievement completion %, pass usage, storage consumed</li>
+    </ul>
+    <div style="margin-top:16px; padding:12px 16px; background:rgba(255,71,87,.06); border:1px solid rgba(255,71,87,.2); border-radius:var(--r4);">
+      <span style="font-size:12px; font-weight:700; color:var(--negative);">No pie charts.</span>
+      <span style="font-size:12px; color:var(--text2); margin-left:6px;">Pie charts are visually ambiguous at small sizes and on dark backgrounds. Always use Donut instead. No scatter, radar, or area-only charts either.</span>
+    </div>
+  </section>
+
+  <!-- 4. BEST PRACTICES -->
+  <section class="component-best-practices">
+    <div class="component-bp-card component-bp-card--do">
+      <span class="component-bp-label component-bp-label--do">Do</span>
+      <ul class="component-bp-list">
+        <li>Always include a chart title and a source / date subtitle</li>
+        <li>Start Y-axis at 0 — never truncate the baseline to exaggerate a trend</li>
+        <li>Use <code class="ds-code">--jio</code> for the primary metric, surface-3 for comparison or secondary series</li>
+        <li>Show tooltips on hover with the exact numeric value</li>
+        <li>Provide a data table alternative for screen readers below every chart</li>
+        <li>Use the donut center label to show the primary percentage value</li>
+      </ul>
+    </div>
+    <div class="component-bp-card component-bp-card--dont">
+      <span class="component-bp-label component-bp-label--dont">Don't</span>
+      <ul class="component-bp-list">
+        <li>Use more than 2 colors in a single chart — third color introduces ambiguity</li>
+        <li>Use pie charts — always use Donut</li>
+        <li>Show a line chart on mobile — small screens make data points too close together; use bar instead</li>
+        <li>Omit the legend when two series are shown — always label both</li>
+        <li>Use chart animations on TV — hover tooltips and transitions don't apply at distance</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. ANATOMY -->
+  <div class="ds-anatomy" style="margin:40px 0;">
+    <div class="ds-anatomy-preview" style="align-items:flex-start; padding:20px;">
+      <div style="width:100%; position:relative;">
+        <span style="position:absolute;top:-18px;left:50%;transform:translateX(-50%);"><span class="ds-anatomy-callout-num">1</span></span>
+        <svg class="chart-svg" viewBox="0 0 220 110" xmlns="http://www.w3.org/2000/svg" style="overflow:visible;">
+          <!-- Grid -->
+          <line x1="24" y1="10" x2="216" y2="10" class="chart-grid-line"/>
+          <line x1="24" y1="40" x2="216" y2="40" class="chart-grid-line"/>
+          <line x1="24" y1="70" x2="216" y2="70" class="chart-grid-line"/>
+          <line x1="24" y1="85" x2="216" y2="85" class="chart-grid-line"/>
+          <!-- Y axis labels -->
+          <text x="20" y="13" class="chart-axis-label" text-anchor="end">6h</text>
+          <text x="20" y="43" class="chart-axis-label" text-anchor="end">4h</text>
+          <text x="20" y="73" class="chart-axis-label" text-anchor="end">2h</text>
+          <text x="20" y="88" class="chart-axis-label" text-anchor="end">0</text>
+          <!-- Bars -->
+          <rect x="44" y="50" width="18" height="35" class="chart-bar" rx="2"/>
+          <rect x="90" y="30" width="18" height="55" class="chart-bar" rx="2"/>
+          <rect x="136" y="15" width="18" height="70" class="chart-bar" rx="2"/>
+          <rect x="182" y="38" width="18" height="47" class="chart-bar" rx="2"/>
+          <!-- X labels -->
+          <text x="53" y="100" class="chart-axis-label" text-anchor="middle">Mon</text>
+          <text x="99" y="100" class="chart-axis-label" text-anchor="middle">Wed</text>
+          <text x="145" y="100" class="chart-axis-label" text-anchor="middle">Fri</text>
+          <text x="191" y="100" class="chart-axis-label" text-anchor="middle">Sun</text>
+          <!-- Callout markers -->
+          <!-- 2: Y axis -->
+          <text x="-10" y="50" class="chart-axis-label" fill="var(--jio)" text-anchor="middle" font-weight="900">②</text>
+          <!-- 3: bar body -->
+          <text x="145" y="-5" class="chart-axis-label" fill="var(--jio)" text-anchor="middle" font-weight="900">③</text>
+          <!-- 4: X axis -->
+          <text x="230" y="100" class="chart-axis-label" fill="var(--jio)" text-anchor="start" font-weight="900">④</text>
+        </svg>
+      </div>
+    </div>
+    <ol class="ds-anatomy-list">
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">1</span>
+        <div>
+          <div class="ds-anatomy-label">Grid lines <span class="ds-anatomy-optional">Optional</span></div>
+          <div class="ds-anatomy-desc">Horizontal reference lines at each Y-axis tick. Use --border-subtle (rgba(255,255,255,.08)) — subtle enough not to compete with data marks.</div>
+          <code class="ds-anatomy-token ds-code">stroke: var(--border-subtle); stroke-width: 1</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">2</span>
+        <div>
+          <div class="ds-anatomy-label">Y-axis labels <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Right-aligned text anchored to the left of the chart area. 10px, text3 color. Always start at 0. Max 5 ticks. Include unit abbreviation on the top tick only (6h, not on every tick).</div>
+          <code class="ds-anatomy-token ds-code">font-size:10px; fill:var(--text3); text-anchor:end</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">3</span>
+        <div>
+          <div class="ds-anatomy-label">Data mark (bar / line / donut arc) <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Bar: rect with rx:2 and --jio fill. Line: polyline with stroke:--jio, fill:none. Donut: circle with stroke-dasharray driving the filled arc. All support hover opacity reduction.</div>
+          <code class="ds-anatomy-token ds-code">fill:var(--jio) | stroke:var(--jio)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">4</span>
+        <div>
+          <div class="ds-anatomy-label">X-axis labels <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Center-anchored text below each bar group or data point. 10px, text3 color. Abbreviate to fit — "Mon" not "Monday", "Wk 1" not "Week 1".</div>
+          <code class="ds-anatomy-token ds-code">font-size:10px; fill:var(--text3); text-anchor:middle</code>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- 6. VARIANTS -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Six approved chart forms built from three base types. Each has a fixed semantic role — do not substitute one for another.</p>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+
+      <!-- Bar -->
+      <div class="chart-card">
+        <div class="chart-title">Bar</div>
+        <div class="chart-subtitle">Category comparison · e.g. daily playtime</div>
+        <svg class="chart-svg" viewBox="0 0 200 100" role="img" aria-label="Bar chart example">
+          <line x1="20" y1="10" x2="196" y2="10" class="chart-grid-line"/>
+          <line x1="20" y1="40" x2="196" y2="40" class="chart-grid-line"/>
+          <line x1="20" y1="70" x2="196" y2="70" class="chart-grid-line"/>
+          <line x1="20" y1="80" x2="196" y2="80" class="chart-grid-line"/>
+          <text x="16" y="13" class="chart-axis-label" text-anchor="end">6</text>
+          <text x="16" y="43" class="chart-axis-label" text-anchor="end">3</text>
+          <text x="16" y="73" class="chart-axis-label" text-anchor="end">0</text>
+          <rect x="28" y="50" width="20" height="30" class="chart-bar" rx="2"/>
+          <rect x="62" y="30" width="20" height="50" class="chart-bar" rx="2"/>
+          <rect x="96" y="40" width="20" height="40" class="chart-bar" rx="2"/>
+          <rect x="130" y="18" width="20" height="62" class="chart-bar" rx="2"/>
+          <rect x="164" y="35" width="20" height="45" class="chart-bar" rx="2"/>
+          <text x="38" y="94" class="chart-axis-label" text-anchor="middle">M</text>
+          <text x="72" y="94" class="chart-axis-label" text-anchor="middle">T</text>
+          <text x="106" y="94" class="chart-axis-label" text-anchor="middle">W</text>
+          <text x="140" y="94" class="chart-axis-label" text-anchor="middle">T</text>
+          <text x="174" y="94" class="chart-axis-label" text-anchor="middle">F</text>
+        </svg>
+      </div>
+
+      <!-- Bar comparison -->
+      <div class="chart-card">
+        <div class="chart-title">Bar (comparison)</div>
+        <div class="chart-subtitle">Two series side-by-side · primary + secondary</div>
+        <svg class="chart-svg" viewBox="0 0 200 100" role="img" aria-label="Comparison bar chart example">
+          <line x1="20" y1="10" x2="196" y2="10" class="chart-grid-line"/>
+          <line x1="20" y1="40" x2="196" y2="40" class="chart-grid-line"/>
+          <line x1="20" y1="70" x2="196" y2="70" class="chart-grid-line"/>
+          <line x1="20" y1="80" x2="196" y2="80" class="chart-grid-line"/>
+          <text x="16" y="13" class="chart-axis-label" text-anchor="end">6</text>
+          <text x="16" y="43" class="chart-axis-label" text-anchor="end">3</text>
+          <text x="16" y="73" class="chart-axis-label" text-anchor="end">0</text>
+          <rect x="26" y="52" width="11" height="28" class="chart-bar chart-bar--secondary" rx="2"/>
+          <rect x="38" y="45" width="11" height="35" class="chart-bar" rx="2"/>
+          <rect x="62" y="35" width="11" height="45" class="chart-bar chart-bar--secondary" rx="2"/>
+          <rect x="74" y="25" width="11" height="55" class="chart-bar" rx="2"/>
+          <rect x="98" y="42" width="11" height="38" class="chart-bar chart-bar--secondary" rx="2"/>
+          <rect x="110" y="38" width="11" height="42" class="chart-bar" rx="2"/>
+          <rect x="134" y="20" width="11" height="60" class="chart-bar chart-bar--secondary" rx="2"/>
+          <rect x="146" y="15" width="11" height="65" class="chart-bar" rx="2"/>
+          <rect x="170" y="30" width="11" height="50" class="chart-bar chart-bar--secondary" rx="2"/>
+          <rect x="182" y="33" width="11" height="47" class="chart-bar" rx="2"/>
+          <text x="38" y="94" class="chart-axis-label" text-anchor="middle">M</text>
+          <text x="74" y="94" class="chart-axis-label" text-anchor="middle">T</text>
+          <text x="110" y="94" class="chart-axis-label" text-anchor="middle">W</text>
+          <text x="146" y="94" class="chart-axis-label" text-anchor="middle">T</text>
+          <text x="182" y="94" class="chart-axis-label" text-anchor="middle">F</text>
+        </svg>
+        <div class="chart-legend">
+          <div class="chart-legend-item"><span class="chart-legend-dot" style="background:var(--jio);"></span>This week</div>
+          <div class="chart-legend-item"><span class="chart-legend-dot" style="background:rgba(255,255,255,.15);"></span>Last week</div>
+        </div>
+      </div>
+
+      <!-- Line -->
+      <div class="chart-card">
+        <div class="chart-title">Line</div>
+        <div class="chart-subtitle">Trend over time · no area fill</div>
+        <svg class="chart-svg" viewBox="0 0 200 100" role="img" aria-label="Line chart example">
+          <line x1="20" y1="10" x2="196" y2="10" class="chart-grid-line"/>
+          <line x1="20" y1="40" x2="196" y2="40" class="chart-grid-line"/>
+          <line x1="20" y1="70" x2="196" y2="70" class="chart-grid-line"/>
+          <line x1="20" y1="80" x2="196" y2="80" class="chart-grid-line"/>
+          <text x="16" y="13" class="chart-axis-label" text-anchor="end">900</text>
+          <text x="16" y="43" class="chart-axis-label" text-anchor="end">600</text>
+          <text x="16" y="73" class="chart-axis-label" text-anchor="end">0</text>
+          <polyline points="30,60 72,42 114,48 156,22 196,30" class="chart-line" stroke-linejoin="round" stroke-linecap="round"/>
+          <circle cx="30" cy="60" r="3" fill="var(--jio)"/>
+          <circle cx="72" cy="42" r="3" fill="var(--jio)"/>
+          <circle cx="114" cy="48" r="3" fill="var(--jio)"/>
+          <circle cx="156" cy="22" r="3" fill="var(--jio)"/>
+          <circle cx="196" cy="30" r="3" fill="var(--jio)"/>
+          <text x="30" y="94" class="chart-axis-label" text-anchor="middle">Wk1</text>
+          <text x="72" y="94" class="chart-axis-label" text-anchor="middle">Wk2</text>
+          <text x="114" y="94" class="chart-axis-label" text-anchor="middle">Wk3</text>
+          <text x="156" y="94" class="chart-axis-label" text-anchor="middle">Wk4</text>
+          <text x="196" y="94" class="chart-axis-label" text-anchor="middle">Wk5</text>
+        </svg>
+      </div>
+
+      <!-- Line with area -->
+      <div class="chart-card">
+        <div class="chart-title">Line with area</div>
+        <div class="chart-subtitle">Trend + volume impression below the line</div>
+        <svg class="chart-svg" viewBox="0 0 200 100" role="img" aria-label="Line chart with area fill example">
+          <defs>
+            <linearGradient id="chart-gradient-2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#00A859" stop-opacity="1"/>
+              <stop offset="100%" stop-color="#00A859" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <line x1="20" y1="10" x2="196" y2="10" class="chart-grid-line"/>
+          <line x1="20" y1="40" x2="196" y2="40" class="chart-grid-line"/>
+          <line x1="20" y1="70" x2="196" y2="70" class="chart-grid-line"/>
+          <line x1="20" y1="80" x2="196" y2="80" class="chart-grid-line"/>
+          <text x="16" y="13" class="chart-axis-label" text-anchor="end">900</text>
+          <text x="16" y="43" class="chart-axis-label" text-anchor="end">600</text>
+          <text x="16" y="73" class="chart-axis-label" text-anchor="end">0</text>
+          <polygon points="30,60 72,42 114,48 156,22 196,30 196,80 30,80" fill="url(#chart-gradient-2)" opacity="0.2"/>
+          <polyline points="30,60 72,42 114,48 156,22 196,30" class="chart-line" stroke-linejoin="round" stroke-linecap="round"/>
+          <circle cx="30" cy="60" r="3" fill="var(--jio)"/>
+          <circle cx="72" cy="42" r="3" fill="var(--jio)"/>
+          <circle cx="114" cy="48" r="3" fill="var(--jio)"/>
+          <circle cx="156" cy="22" r="3" fill="var(--jio)"/>
+          <circle cx="196" cy="30" r="3" fill="var(--jio)"/>
+          <text x="30" y="94" class="chart-axis-label" text-anchor="middle">Wk1</text>
+          <text x="72" y="94" class="chart-axis-label" text-anchor="middle">Wk2</text>
+          <text x="114" y="94" class="chart-axis-label" text-anchor="middle">Wk3</text>
+          <text x="156" y="94" class="chart-axis-label" text-anchor="middle">Wk4</text>
+          <text x="196" y="94" class="chart-axis-label" text-anchor="middle">Wk5</text>
+        </svg>
+      </div>
+
+      <!-- Donut -->
+      <div class="chart-card">
+        <div class="chart-title">Donut</div>
+        <div class="chart-subtitle">Single proportion · center label required</div>
+        <div style="display:flex; align-items:center; gap:24px;">
+          <svg width="100" height="100" viewBox="0 0 100 100" role="img" aria-label="Donut chart showing 72% completion">
+            <circle cx="50" cy="50" r="36" class="chart-donut-track" stroke-width="8"/>
+            <circle cx="50" cy="50" r="36" class="chart-donut-fill" stroke-width="8"
+                    stroke-dasharray="163 226"
+                    stroke-dashoffset="57"
+                    transform="rotate(-90 50 50)"/>
+            <text x="50" y="46" class="chart-donut-label" text-anchor="middle" font-size="20">72%</text>
+            <text x="50" y="60" class="chart-donut-sublabel" text-anchor="middle" font-size="9">complete</text>
+          </svg>
+          <div class="chart-legend" style="flex-direction:column; gap:8px;">
+            <div class="chart-legend-item"><span class="chart-legend-dot" style="background:var(--jio);"></span>Achieved 72%</div>
+            <div class="chart-legend-item"><span class="chart-legend-dot" style="background:rgba(255,255,255,.12);"></span>Remaining 28%</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Donut with label variant -->
+      <div class="chart-card">
+        <div class="chart-title">Donut with label</div>
+        <div class="chart-subtitle">Primary metric shown prominently in center</div>
+        <div style="display:flex; align-items:center; gap:24px;">
+          <svg width="100" height="100" viewBox="0 0 100 100" role="img" aria-label="Donut chart showing 340 hours played">
+            <circle cx="50" cy="50" r="36" class="chart-donut-track" stroke-width="8"/>
+            <circle cx="50" cy="50" r="36" class="chart-donut-fill" stroke-width="8"
+                    stroke-dasharray="190 226"
+                    stroke-dashoffset="57"
+                    transform="rotate(-90 50 50)"/>
+            <text x="50" y="44" class="chart-donut-label" text-anchor="middle" font-size="18">340h</text>
+            <text x="50" y="58" class="chart-donut-sublabel" text-anchor="middle" font-size="9">played</text>
+          </svg>
+          <div style="flex:1;">
+            <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:8px;">Pass usage</div>
+            <div style="font-size:11px;color:var(--text3);line-height:1.6;">Center label shows the absolute value (340h) while the arc shows it as a proportion of monthly cap (500h).</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 7. SIZES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Chart height is defined by three tiers. Width is always 100% of the container — never fixed-width charts.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Size</th><th>Class</th><th>SVG height</th><th>Use case</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>S</td><td><code class="ds-code">.chart--s</code></td><td><code class="ds-code">120px</code></td><td>Sparkline in a stat card, compact dashboard widget</td></tr>
+        <tr><td>M</td><td><code class="ds-code">.chart--m</code></td><td><code class="ds-code">200px</code></td><td>Default — profile stats, game detail analytics</td></tr>
+        <tr><td>L</td><td><code class="ds-code">.chart--l</code></td><td><code class="ds-code">300px</code></td><td>Full-page analytics view, expanded playtime breakdown</td></tr>
+      </tbody>
+    </table>
+    <div class="ds-demo ds-demo--dark" style="margin-top:16px;">
+      <div style="display:flex; gap:24px; align-items:flex-end; flex-wrap:wrap;">
+        <div style="flex:1; min-width:120px;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-bottom:8px;">S — 120px</div>
+          <svg viewBox="0 0 180 120" style="height:120px;width:100%;display:block;" role="img" aria-label="Small bar chart">
+            <rect x="10" y="60" width="22" height="50" class="chart-bar" rx="2"/>
+            <rect x="42" y="40" width="22" height="70" class="chart-bar" rx="2"/>
+            <rect x="74" y="30" width="22" height="80" class="chart-bar" rx="2"/>
+            <rect x="106" y="50" width="22" height="60" class="chart-bar" rx="2"/>
+            <rect x="138" y="20" width="22" height="90" class="chart-bar" rx="2"/>
+          </svg>
+        </div>
+        <div style="flex:1; min-width:120px;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-bottom:8px;">M — 200px</div>
+          <svg viewBox="0 0 180 200" style="height:200px;width:100%;display:block;" role="img" aria-label="Medium bar chart">
+            <rect x="10" y="110" width="22" height="80" class="chart-bar" rx="2"/>
+            <rect x="42" y="80" width="22" height="110" class="chart-bar" rx="2"/>
+            <rect x="74" y="60" width="22" height="130" class="chart-bar" rx="2"/>
+            <rect x="106" y="90" width="22" height="100" class="chart-bar" rx="2"/>
+            <rect x="138" y="40" width="22" height="150" class="chart-bar" rx="2"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. STATES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Charts have four non-interactive states and one interactive hover state.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start;">
+
+        <!-- Loading -->
+        <div style="flex:1; min-width:140px;">
+          <div class="ds-sub-label" style="margin-bottom:8px;">Loading</div>
+          <div class="chart-skeleton" style="width:100%;height:120px;"></div>
+          <div class="chart-skeleton" style="width:60%;height:8px;margin-top:10px;border-radius:4px;"></div>
+        </div>
+
+        <!-- Empty -->
+        <div style="flex:1; min-width:140px;">
+          <div class="ds-sub-label" style="margin-bottom:8px;">Empty — no data</div>
+          <div style="height:120px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4); display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--text4);"><rect x="3" y="14" width="4" height="7" rx="1"/><rect x="10" y="9" width="4" height="12" rx="1"/><rect x="17" y="4" width="4" height="17" rx="1"/></svg>
+            <div style="font-size:12px;color:var(--text3);">No data yet</div>
+            <div style="font-size:10px;color:var(--text4);">Play more games to see your stats</div>
+          </div>
+        </div>
+
+        <!-- Error -->
+        <div style="flex:1; min-width:140px;">
+          <div class="ds-sub-label" style="margin-bottom:8px;">Error</div>
+          <div style="height:120px;background:var(--surface-1);border:1px solid rgba(255,71,87,.2);border-radius:var(--r4);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;">
+            <div style="font-size:20px;line-height:1;">⚠</div>
+            <div style="font-size:12px;color:var(--negative);">Failed to load</div>
+            <div style="font-size:10px;color:var(--text3);">Tap to retry</div>
+          </div>
+        </div>
+
+        <!-- Hover tooltip -->
+        <div style="flex:1; min-width:140px;">
+          <div class="ds-sub-label" style="margin-bottom:8px;">Hover — data tooltip</div>
+          <div style="position:relative;height:120px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:visible;">
+            <svg viewBox="0 0 160 100" style="width:100%;height:100%;display:block;">
+              <rect x="10" y="50" width="20" height="40" class="chart-bar" rx="2" opacity="0.4"/>
+              <rect x="42" y="30" width="20" height="60" class="chart-bar" rx="2" opacity="0.4"/>
+              <rect x="74" y="20" width="20" height="70" class="chart-bar" rx="2"/>
+              <rect x="106" y="40" width="20" height="50" class="chart-bar" rx="2" opacity="0.4"/>
+              <rect x="138" y="35" width="20" height="55" class="chart-bar" rx="2" opacity="0.4"/>
+            </svg>
+            <div class="chart-tooltip" style="top:-36px;left:50%;transform:translateX(-50%);">Fri · 5.5h</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. CONTENT GUIDANCE -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Titles and labels</div>
+        <ul>
+          <li>Chart title: noun phrase describing the metric — "Weekly playtime", not "Your Stats"</li>
+          <li>Subtitle: data source and date range — "Hours · Jun 2026"</li>
+          <li>Y-axis: include unit abbreviation on the top tick only — "6h" not "6 hours"</li>
+          <li>X-axis: abbreviate to single letters or "Wk N" — never full day or month names</li>
+          <li>Legend labels: 2–3 words maximum per series</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Color rules</div>
+        <ul>
+          <li>Primary series: always <code class="ds-code">--jio</code> (#00A859)</li>
+          <li>Secondary / comparison series: always surface-3 (rgba(255,255,255,.1))</li>
+          <li>Maximum 2 colors in any single chart — no third data series</li>
+          <li>Never use red for a data series — it reads as an error state</li>
+          <li>Donut track (unfilled portion): surface-3, never transparent</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. PLATFORM CONSIDERATIONS -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Bar and Donut only — line charts are hard to read on narrow viewports</li>
+          <li>Use S or M size — L height forces unwanted vertical scroll</li>
+          <li>Tap on a bar to show the tooltip (no hover on touch)</li>
+          <li>Donut center label minimum 20px for legibility on small screens</li>
+          <li>Provide the data table alternative visually collapsed but screen-reader accessible</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>All three chart types available</li>
+          <li>Hover on data marks shows tooltip with exact value</li>
+          <li>Use M or L size depending on the page layout</li>
+          <li>Legend can be positioned right of the chart if space allows</li>
+          <li>SVG charts must have <code class="ds-code">role="img"</code> + <code class="ds-code">aria-label</code> describing all data</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>Donut only — bar and line require precise spatial reading at 3m</li>
+          <li>Donut center label minimum 36px</li>
+          <li>Legend text minimum 18px</li>
+          <li>No hover tooltips — show exact value in center label or legend</li>
+          <li>No animations — static render only at TV scale</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. ACCESSIBILITY -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">SVG charts are invisible to screen readers unless explicitly described. Every chart must have two accessibility surfaces: an aria-label on the SVG summarising the data, and a visually hidden data table below.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Requirement</th><th>Implementation</th><th>Guidance</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>SVG description</td><td><code class="ds-code">role="img" aria-label</code></td><td>aria-label must describe the chart type and key data points: "Bar chart: weekly playtime. Mon 1.5h, Tue 3h, Wed 2h, Thu 4h, Fri 5h, Sat 6.5h, Sun 4.5h".</td></tr>
+        <tr><td>Data table alternative</td><td><code class="ds-code">&lt;table&gt;</code> below chart</td><td>Provide a visually hidden data table (class="sr-only") with the same data as the chart. Screen readers navigate it with standard table commands.</td></tr>
+        <tr><td>Individual bars / points</td><td><code class="ds-code">&lt;title&gt;</code> inside SVG element</td><td>Each &lt;rect&gt; or &lt;circle&gt; can have a &lt;title&gt; child: &lt;title&gt;Fri · 5h&lt;/title&gt;. Browsers surface this as a tooltip and some screen readers read it.</td></tr>
+        <tr><td>Color contrast</td><td>--jio on dark bg</td><td>Green (#00A859) on dark background (#080a10) passes WCAG AA at 3.2:1 for large graphical elements. For text labels, use --text3 which passes at 4.5:1.</td></tr>
+        <tr><td>Tooltip</td><td><code class="ds-code">aria-live="polite"</code></td><td>If the tooltip is a DOM element (not just a browser title attribute), wrap it in an aria-live region so screen reader users hear the value on hover/focus.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 12. RELATED TOKENS -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Token</th><th>Value</th><th>Usage</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code class="ds-code">--jio</code></td><td><code class="ds-code">#00A859</code></td><td>Primary data series fill (bars), line stroke, donut arc stroke</td></tr>
+        <tr><td><code class="ds-code">--surface-3</code></td><td><code class="ds-code">rgba(255,255,255,.1)</code></td><td>Secondary / comparison bar fill, donut track stroke</td></tr>
+        <tr><td><code class="ds-code">--border-subtle</code></td><td><code class="ds-code">rgba(255,255,255,.08)</code></td><td>Grid line stroke color</td></tr>
+        <tr><td><code class="ds-code">--text3</code></td><td><code class="ds-code">rgba(244,242,238,.32)</code></td><td>Axis label text fill, subtitle color</td></tr>
+        <tr><td><code class="ds-code">--text</code></td><td><code class="ds-code">#f4f2ee</code></td><td>Chart title, donut center label</td></tr>
+        <tr><td><code class="ds-code">--surface-2</code></td><td><code class="ds-code">—</code></td><td>Tooltip background, loading skeleton fill</td></tr>
+        <tr><td><code class="ds-code">--jio-font</code></td><td><code class="ds-code">'Outfit', sans-serif</code></td><td>All SVG text — axis labels, donut center, title</td></tr>
+        <tr><td><code class="ds-code">--r4</code></td><td><code class="ds-code">—</code></td><td>Tooltip border-radius</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CODE EXAMPLES -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Bar chart SVG</div>
+      <pre class="component-code-pre"><code>&lt;div class="chart-wrap chart--m"&gt;
+  &lt;div class="chart-title"&gt;Weekly playtime&lt;/div&gt;
+  &lt;div class="chart-subtitle"&gt;Hours · Jun 2026&lt;/div&gt;
+  &lt;svg class="chart-svg"
+       viewBox="0 0 220 120"
+       role="img"
+       aria-label="Bar chart: daily playtime this week. Mon 1.5h, Tue 3h, Wed 2h, Thu 4h, Fri 5h, Sat 6.5h, Sun 4.5h"&gt;
+
+    &lt;!-- Grid lines --&gt;
+    &lt;line x1="24" y1="10" x2="216" y2="10" class="chart-grid-line"/&gt;
+    &lt;line x1="24" y1="40" x2="216" y2="40" class="chart-grid-line"/&gt;
+    &lt;line x1="24" y1="70" x2="216" y2="70" class="chart-grid-line"/&gt;
+
+    &lt;!-- Y-axis labels --&gt;
+    &lt;text x="20" y="13" class="chart-axis-label" text-anchor="end"&gt;6h&lt;/text&gt;
+    &lt;text x="20" y="43" class="chart-axis-label" text-anchor="end"&gt;3h&lt;/text&gt;
+    &lt;text x="20" y="73" class="chart-axis-label" text-anchor="end"&gt;0&lt;/text&gt;
+
+    &lt;!-- Bars --&gt;
+    &lt;rect x="30" y="66" width="18" height="19" class="chart-bar" rx="2"&gt;
+      &lt;title&gt;Mon · 1.5h&lt;/title&gt;
+    &lt;/rect&gt;
+    &lt;!-- repeat for each day --&gt;
+
+    &lt;!-- X-axis labels --&gt;
+    &lt;text x="39" y="100" class="chart-axis-label" text-anchor="middle"&gt;M&lt;/text&gt;
+    &lt;!-- repeat --&gt;
+
+  &lt;/svg&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Line chart SVG with area fill</div>
+      <pre class="component-code-pre"><code>&lt;svg class="chart-svg" viewBox="0 0 220 120"
+     role="img"
+     aria-label="Line chart: achievement XP per week. Wk1 400, Wk2 650, Wk3 580, Wk4 820"&gt;
+
+  &lt;defs&gt;
+    &lt;linearGradient id="chart-gradient" x1="0" y1="0" x2="0" y2="1"&gt;
+      &lt;stop offset="0%"   stop-color="#00A859" stop-opacity="1"/&gt;
+      &lt;stop offset="100%" stop-color="#00A859" stop-opacity="0"/&gt;
+    &lt;/linearGradient&gt;
+  &lt;/defs&gt;
+
+  &lt;!-- Area fill --&gt;
+  &lt;polygon
+    points="44,61 108,38 172,44 216,16 216,85 44,85"
+    fill="url(#chart-gradient)"
+    opacity="0.2"/&gt;
+
+  &lt;!-- Line --&gt;
+  &lt;polyline
+    points="44,61 108,38 172,44 216,16"
+    class="chart-line"
+    stroke-linejoin="round"
+    stroke-linecap="round"/&gt;
+
+  &lt;!-- Data points --&gt;
+  &lt;circle cx="44"  cy="61" r="3.5" fill="var(--jio)"&gt;&lt;title&gt;Wk1 · 400 XP&lt;/title&gt;&lt;/circle&gt;
+  &lt;circle cx="108" cy="38" r="3.5" fill="var(--jio)"&gt;&lt;title&gt;Wk2 · 650 XP&lt;/title&gt;&lt;/circle&gt;
+  &lt;circle cx="172" cy="44" r="3.5" fill="var(--jio)"&gt;&lt;title&gt;Wk3 · 580 XP&lt;/title&gt;&lt;/circle&gt;
+  &lt;circle cx="216" cy="16" r="3.5" fill="var(--jio)"&gt;&lt;title&gt;Wk4 · 820 XP&lt;/title&gt;&lt;/circle&gt;
+
+&lt;/svg&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Donut chart SVG with center label</div>
+      <pre class="component-code-pre"><code>&lt;!--
+  Donut math:
+  circumference = 2 * π * r = 2 * 3.14159 * 44 ≈ 276.5
+  filled arc    = percentage * circumference
+  72%           = 0.72 * 276.5 ≈ 199.1
+
+  stroke-dasharray = "filled_arc total_circumference"
+  stroke-dashoffset rotates start point: offset = circumference * 0.25
+                    (to start at top instead of right)
+--&gt;
+&lt;svg width="160" height="160" viewBox="0 0 120 120"
+     role="img"
+     aria-label="Donut chart: 72% achievement completion for Tomb Raider"&gt;
+
+  &lt;!-- Track (unfilled) --&gt;
+  &lt;circle cx="60" cy="60" r="44"
+          class="chart-donut-track"
+          stroke-width="10"/&gt;
+
+  &lt;!-- Fill arc --&gt;
+  &lt;circle cx="60" cy="60" r="44"
+          class="chart-donut-fill"
+          stroke-width="10"
+          stroke-dasharray="199.5 277"
+          stroke-dashoffset="69"
+          transform="rotate(-90 60 60)"/&gt;
+
+  &lt;!-- Center label --&gt;
+  &lt;text x="60" y="55"
+        class="chart-donut-label"
+        text-anchor="middle"
+        dominant-baseline="middle"&gt;72%&lt;/text&gt;
+  &lt;text x="60" y="72"
+        class="chart-donut-sublabel"
+        text-anchor="middle"&gt;complete&lt;/text&gt;
+
+&lt;/svg&gt;
+
+&lt;!-- Accessible data table (visually hidden) --&gt;
+&lt;table class="sr-only"&gt;
+  &lt;caption&gt;Tomb Raider achievement completion&lt;/caption&gt;
+  &lt;tr&gt;&lt;th&gt;Status&lt;/th&gt;&lt;th&gt;Percentage&lt;/th&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Achieved&lt;/td&gt;&lt;td&gt;72%&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Remaining&lt;/td&gt;&lt;td&gt;28%&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- 13. CHANGELOG -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Changelog</h2>
+    <div class="component-changelog">
+      <div class="component-changelog-entry">
+        <span class="component-changelog-version">v0.1</span>
+        <span class="component-changelog-date">Jun 2026</span>
+        <p class="component-changelog-desc">Initial draft. Covers bar, bar comparison, line, line with area, donut, and donut with label variants. S/M/L sizes. Loading, empty, error, and hover states. Full accessibility guidance including aria-label patterns and data table alternative. Pie chart explicitly excluded from system.</p>
+      </div>
+    </div>
+  </section>
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foundations — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+</head>
+<body>
+
+  <!-- Main content -->
+  <main class="ds-main">
+    <div class="ds-page">
+
+      <!-- Page header -->
+      <header class="component-page-header">
+        <nav class="component-breadcrumb" aria-label="Breadcrumb">
+          <a href="../">JioGames DLS</a>
+          <span class="component-breadcrumb-sep" aria-hidden="true">›</span>
+          <span>Foundations</span>
+        </nav>
+        <h1 class="component-page-title">Foundations</h1>
+        <p class="component-page-def">The design language behind JioGames — why we make the choices we make, how tokens flow from raw value to component, and the principles that govern every decision across Mobile, Web, and TV.</p>
+        <div class="component-platforms">
+          <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+          <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+          <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+          <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+        </div>
+      </header>
+
+      <!-- §1 Brand principles -->
+      <section class="ds-section" id="brand-principles">
+        <h2 class="ds-section-title">Brand Principles</h2>
+        <p class="ds-section-desc">Five non-negotiables that define what JioGames looks and feels like. Violating any one of these breaks the identity.</p>
+        <div class="ds-doc-card-grid">
+          <div class="ds-doc-card">
+            <div class="ds-doc-card-title">Dark-first</div>
+            <div class="ds-doc-card-desc">Every surface defaults to dark. Light is used for emphasis only — text, icons, CTA labels on green. No white or grey backgrounds ever.</div>
+            <div class="ds-doc-card-meta">Brand Principle</div>
+          </div>
+          <div class="ds-doc-card">
+            <div class="ds-doc-card-title">Green-first</div>
+            <div class="ds-doc-card-desc"><span class="ds-code-inline">--jio</span> (#00A859) is the sole brand colour. Never use blue, purple, or indigo as an accent. All tiers use green — Ultimate uses a brighter green, not a different hue.</div>
+            <div class="ds-doc-card-meta">Brand Principle</div>
+          </div>
+          <div class="ds-doc-card">
+            <div class="ds-doc-card-title">Gaming DNA</div>
+            <div class="ds-doc-card-desc">Motion, depth, and cinematic feel over flat utility. Hero imagery, glow states, and spring animations communicate a premium interactive experience.</div>
+            <div class="ds-doc-card-meta">Brand Principle</div>
+          </div>
+          <div class="ds-doc-card">
+            <div class="ds-doc-card-title">Premium at every tier</div>
+            <div class="ds-doc-card-desc">Even free users experience premium UI quality. The design system does not downgrade for lower-tier users — monetisation is in content, not interface quality.</div>
+            <div class="ds-doc-card-meta">Brand Principle</div>
+          </div>
+          <div class="ds-doc-card">
+            <div class="ds-doc-card-title">Platform-native</div>
+            <div class="ds-doc-card-desc">Mobile, Web, and TV each get native feel — not lowest-common-denominator compromises. Touch, pointer, and D-pad each have first-class design.</div>
+            <div class="ds-doc-card-meta">Brand Principle</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- §2 Product principles -->
+      <section class="ds-section" id="product-principles">
+        <h2 class="ds-section-title">Product Principles</h2>
+        <p class="ds-section-desc">Six principles that govern product decisions — what to build, what to show, and in what order.</p>
+        <div class="ds-doc-card-grid">
+          <div class="ds-doc-card">
+            <div class="ds-doc-card-title">Speed over completeness</div>
+            <div class="ds-doc-card-desc">Show something fast. Defer secondary content, don't block the primary experience waiting for it. Skeletons over spinners.</div>
+            <div class="ds-doc-card-meta">Product Principle</div>
+          </div>
+          <div class="ds-doc-card">
+            <div class="ds-doc-card-title">Progressive disclosure</div>
+            <div class="ds-doc-card-desc">Show what's needed now. Offer depth on demand. Don't surface every option upfront — earn complexity by showing the user needs it.</div>
+            <div class="ds-doc-card-meta">Product Principle</div>
+          </div>
+          <div class="ds-doc-card">
+            <div class="ds-doc-card-title">Trust through consistency</div>
+            <div class="ds-doc-card-desc">The same component behaves identically in every context. Predictability is not boring — it is the foundation of trust.</div>
+            <div class="ds-doc-card-meta">Product Principle</div>
+          </div>
+          <div class="ds-doc-card">
+            <div class="ds-doc-card-title">Accessible by default</div>
+            <div class="ds-doc-card-desc">Accessibility is not a checklist appended at the end. It is a design constraint applied from the first sketch. Every component is built accessible.</div>
+            <div class="ds-doc-card-meta">Product Principle</div>
+          </div>
+          <div class="ds-doc-card">
+            <div class="ds-doc-card-title">Zero tolerance for jank</div>
+            <div class="ds-doc-card-desc">60fps minimum. Animation must add value, not distract. If an animation cannot be achieved at 60fps, it is removed — not reduced.</div>
+            <div class="ds-doc-card-meta">Product Principle</div>
+          </div>
+          <div class="ds-doc-card">
+            <div class="ds-doc-card-title">Mobile is the primary surface</div>
+            <div class="ds-doc-card-desc">Design mobile first, scale up to web and TV. Every layout decision starts at 390px and expands — never the reverse.</div>
+            <div class="ds-doc-card-meta">Product Principle</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- §3 Platform principles -->
+      <section class="ds-section" id="platform-principles">
+        <h2 class="ds-section-title">Platform Principles</h2>
+        <p class="ds-section-desc">Each platform has a different input model, viewing distance, and interaction contract. Design for all three — not a single lowest common denominator.</p>
+        <div class="ds-platform-grid">
+          <div class="ds-platform-card">
+            <div class="ds-platform-card-title">
+              <span class="ds-ptag ds-ptag--mobile">Mobile</span>
+            </div>
+            <ul class="ds-platform-list">
+              <li>Touch targets ≥ 44px at all times</li>
+              <li>Bottom navigation — never a sidebar</li>
+              <li>Swipe gestures supplement tap, never replace</li>
+              <li>Safe areas respected (notch, home indicator)</li>
+              <li>Thumb reach zone is the hero interaction zone</li>
+              <li>AppBar collapses on scroll — screen space is precious</li>
+            </ul>
+          </div>
+          <div class="ds-platform-card">
+            <div class="ds-platform-card-title">
+              <span class="ds-ptag ds-ptag--web">Web</span>
+            </div>
+            <ul class="ds-platform-list">
+              <li>Hover states on all interactive elements</li>
+              <li>Full keyboard navigation — Tab, arrows, Enter, Escape</li>
+              <li>Right-click / context menus supported where appropriate</li>
+              <li>Desktop content density is acceptable — more per screen</li>
+              <li>Mouse precision allows smaller secondary targets (min 32px)</li>
+              <li>AppBar is always visible — sticky at top</li>
+            </ul>
+          </div>
+          <div class="ds-platform-card">
+            <div class="ds-platform-card-title">
+              <span class="ds-ptag ds-ptag--tv">TV</span>
+            </div>
+            <ul class="ds-platform-list">
+              <li>D-pad only — no mouse, no touch input</li>
+              <li>Focus ring is the sole affordance — never rely on hover</li>
+              <li>Minimum focusable target: 60px</li>
+              <li>Remote latency: never assume instant response</li>
+              <li>10-foot rule: all text ≥ 24px, all icons ≥ 32px</li>
+              <li>No hover interactions — all states must be focus-driven</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- §4 Token philosophy -->
+      <section class="ds-section" id="token-philosophy">
+        <h2 class="ds-section-title">Token Philosophy</h2>
+        <p class="ds-section-desc">Tokens are the bridge between design decisions and code. The system uses three layers — primitive, semantic, and component — so that a single colour change propagates everywhere it is used.</p>
+
+        <div class="ds-demo-surface" style="display:flex;align-items:center;gap:0;flex-wrap:wrap;justify-content:center;margin-bottom:24px">
+          <div style="background:var(--surface-2);border-radius:var(--r3);padding:12px 16px;text-align:center">
+            <div style="font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:6px">Primitive</div>
+            <span class="ds-code-inline">#00A859</span>
+          </div>
+          <div style="padding:0 12px;font-size:18px;color:var(--text4)">→</div>
+          <div style="background:var(--surface-2);border-radius:var(--r3);padding:12px 16px;text-align:center">
+            <div style="font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:6px">Semantic</div>
+            <span class="ds-code-inline">--jio</span>
+          </div>
+          <div style="padding:0 12px;font-size:18px;color:var(--text4)">→</div>
+          <div style="background:var(--surface-2);border-radius:var(--r3);padding:12px 16px;text-align:center">
+            <div style="font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:6px">Component</div>
+            <span class="ds-code-inline">--btn-primary-bg</span>
+          </div>
+        </div>
+
+        <div class="ds-doc-card-grid">
+          <div class="ds-doc-card">
+            <div class="ds-doc-card-title">Primitive</div>
+            <div class="ds-doc-card-desc">Raw values. Never referenced directly in component CSS. They exist only to feed semantic tokens. Example: <span class="ds-code-inline">--_green-500: #00A859</span></div>
+            <div class="ds-doc-card-meta">Layer 1</div>
+          </div>
+          <div class="ds-doc-card">
+            <div class="ds-doc-card-title">Semantic</div>
+            <div class="ds-doc-card-desc">Named by purpose, not value. This is what you use in all component CSS. Examples: <span class="ds-code-inline">--jio</span>, <span class="ds-code-inline">--text</span>, <span class="ds-code-inline">--bg</span>, <span class="ds-code-inline">--surface-1</span></div>
+            <div class="ds-doc-card-meta">Layer 2 — use this</div>
+          </div>
+          <div class="ds-doc-card">
+            <div class="ds-doc-card-title">Component</div>
+            <div class="ds-doc-card-desc">Scoped to a specific component. Aliases a semantic token with a component-specific name. Example: <span class="ds-code-inline">--btn-primary-bg</span> resolves to <span class="ds-code-inline">--jio</span></div>
+            <div class="ds-doc-card-meta">Layer 3</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- §5 Accessibility principles -->
+      <section class="ds-section" id="accessibility">
+        <h2 class="ds-section-title">Accessibility Principles</h2>
+        <p class="ds-section-desc">Accessibility is built in at the token and component level — not added after the fact. These four commitments apply to every component in the system.</p>
+        <div class="ds-doc-card-grid">
+          <div class="ds-doc-card">
+            <div class="ds-doc-card-title">WCAG 2.1 AA</div>
+            <div class="ds-doc-card-desc">Minimum target across all platforms and components. Contrast ratios, target sizes, and focus visibility are tested at every release.</div>
+            <div class="ds-doc-card-meta">Accessibility</div>
+          </div>
+          <div class="ds-doc-card">
+            <div class="ds-doc-card-title">Keyboard and remote</div>
+            <div class="ds-doc-card-desc">Every interaction is reachable by keyboard on web and by D-pad on TV. No interaction is pointer-exclusive.</div>
+            <div class="ds-doc-card-meta">Accessibility</div>
+          </div>
+          <div class="ds-doc-card">
+            <div class="ds-doc-card-title">Screen reader support</div>
+            <div class="ds-doc-card-desc">Semantic HTML, ARIA labels, live regions for dynamic content, and deliberate focus management on route transitions and sheet opens.</div>
+            <div class="ds-doc-card-meta">Accessibility</div>
+          </div>
+          <div class="ds-doc-card">
+            <div class="ds-doc-card-title">Reduced motion</div>
+            <div class="ds-doc-card-desc">All animations are gated on <span class="ds-code-inline">prefers-reduced-motion</span>. The token system collapses durations to <span class="ds-code-inline">0ms</span> automatically — no per-component handling required.</div>
+            <div class="ds-doc-card-meta">Accessibility</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- §6 Motion principles -->
+      <section class="ds-section" id="motion-principles">
+        <h2 class="ds-section-title">Motion Principles</h2>
+        <p class="ds-section-desc">Animation communicates state and creates cinematic weight. It is never decorative. Every duration and easing is a token.</p>
+        <div class="ds-doc-card-grid">
+          <div class="ds-doc-card">
+            <div class="ds-doc-card-title">Purposeful</div>
+            <div class="ds-doc-card-desc">Every animation communicates a state change — appearing, dismissing, selecting, confirming. Remove any animation that doesn't tell the user something.</div>
+            <div class="ds-doc-card-meta">Motion Principle</div>
+          </div>
+          <div class="ds-doc-card">
+            <div class="ds-doc-card-title">Fast entry</div>
+            <div class="ds-doc-card-desc">Elements appear in 150–200ms (<span class="ds-code-inline">--dur-fast</span> to <span class="ds-code-inline">--dur-default</span>). Exit can be slower — 300–420ms. Never block the user waiting for an animation to finish.</div>
+            <div class="ds-doc-card-meta">Motion Principle</div>
+          </div>
+          <div class="ds-doc-card">
+            <div class="ds-doc-card-title">Spring for interaction</div>
+            <div class="ds-doc-card-desc">Use <span class="ds-code-inline">--spring</span> or <span class="ds-code-inline">--spring-bounce</span> curves for direct manipulation — drag, press, release, selection celebration. Linear easing is never used.</div>
+            <div class="ds-doc-card-meta">Motion Principle</div>
+          </div>
+          <div class="ds-doc-card">
+            <div class="ds-doc-card-title">Reduced motion respected</div>
+            <div class="ds-doc-card-desc"><span class="ds-code-inline">prefers-reduced-motion: reduce</span> disables all non-essential animation automatically via <span class="ds-code-inline">tokens.css</span>. No additional component code needed.</div>
+            <div class="ds-doc-card-meta">Motion Principle</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- §7 Component maturity model -->
+      <section class="ds-section" id="maturity-model">
+        <h2 class="ds-section-title">Component Maturity Model</h2>
+        <p class="ds-section-desc">Every component carries a maturity level. Use only Level 3 (Ready) components in production. Levels 1–2 exist for design and engineering alignment — not user-facing code.</p>
+        <div class="ds-demo-surface">
+          <table class="ds-spec-table">
+            <thead>
+              <tr>
+                <th>Level</th>
+                <th>Name</th>
+                <th>Meaning</th>
+                <th>Badge</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0</td>
+                <td>Idea</td>
+                <td>Under discussion. Not yet designed or specified.</td>
+                <td><span style="color:var(--text4);font-size:12px">—</span></td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>Draft</td>
+                <td>Design in progress. No implementation. Do not use in production.</td>
+                <td><span class="ds-status ds-status--draft">Draft</span></td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Beta</td>
+                <td>Implemented and testable. Needs real usage to validate. API may change.</td>
+                <td><span class="ds-status ds-status--audit">Beta</span></td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Ready</td>
+                <td>Stable. Validated in production. Safe to use across all surfaces.</td>
+                <td><span class="ds-status ds-status--ready">Ready</span></td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Deprecated</td>
+                <td>Will be removed in the next major version. Migrate now.</td>
+                <td><span style="font-size:10px;font-weight:700;letter-spacing:.3px;padding:3px 8px;border-radius:var(--pill);background:rgba(107,114,128,.12);color:var(--text3);border:1px solid rgba(107,114,128,.2);">Deprecated</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- §8 Rules -->
+      <section class="ds-section" id="rules">
+        <h2 class="ds-section-title">Non-Negotiable Rules</h2>
+        <p class="ds-section-desc">These are hard constraints — not guidelines. Every violation degrades the system's integrity.</p>
+        <div class="ds-rules">
+          <div class="ds-rule ds-rule--pass">Always use semantic tokens — never raw hex values in component or screen CSS.</div>
+          <div class="ds-rule ds-rule--pass">Every interactive element must have a clearly visible focus state — <span class="ds-code-inline">outline: none</span> without a replacement glow is a bug.</div>
+          <div class="ds-rule ds-rule--pass">Every icon-only control must have an accessible label via <span class="ds-code-inline">aria-label</span> or <span class="ds-code-inline">title</span>.</div>
+          <div class="ds-rule ds-rule--pass">Dark backgrounds only — no white or light surfaces except semantic states (error, positive feedback) with defined tokens.</div>
+          <div class="ds-rule ds-rule--fail">Never use font weights outside 300 / 500 / 700 / 900. Weights 100, 200, 400, 600, 800 are banned.</div>
+          <div class="ds-rule ds-rule--fail">Never use Inter, Outfit, Roboto, or any non-JioType font. JioType is the only allowed typeface.</div>
+        </div>
+      </section>
+
+    </div><!-- /.ds-page -->
+  </main>
+
+  <!-- Right TOC -->
+  <aside class="ds-toc">
+    <span class="ds-toc-label">On this page</span>
+    <a href="#brand-principles" class="ds-toc-link">Brand Principles</a>
+    <a href="#product-principles" class="ds-toc-link">Product Principles</a>
+    <a href="#platform-principles" class="ds-toc-link">Platform Principles</a>
+    <a href="#token-philosophy" class="ds-toc-link">Token Philosophy</a>
+    <a href="#accessibility" class="ds-toc-link">Accessibility</a>
+    <a href="#motion-principles" class="ds-toc-link">Motion</a>
+    <a href="#maturity-model" class="ds-toc-link">Maturity Model</a>
+    <a href="#rules" class="ds-toc-link">Rules</a>
+  </aside>
+
+  <script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script>
+</body>
+</html>

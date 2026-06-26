@@ -1,0 +1,595 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navigation Menu — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    .nav-menu { display: flex; align-items: center; gap: 4px; }
+    .nav-menu-item { position: relative; }
+    .nav-menu-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 12px;
+      background: transparent;
+      border: none;
+      border-radius: var(--r3);
+      font-family: var(--jio-font);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text2);
+      cursor: pointer;
+      transition: all var(--dur-fast) var(--ease-out);
+    }
+    .nav-menu-trigger:hover { color: var(--text); background: var(--glass-1); }
+    .nav-menu-trigger.is-active { color: var(--jio); }
+    .nav-menu-trigger:focus-visible { outline: 2px solid var(--jio); outline-offset: 2px; }
+    .nav-menu-chevron { transition: transform var(--dur-fast) var(--ease-out); color: var(--text3); width: 12px; height: 12px; }
+    .nav-menu-trigger[aria-expanded="true"] .nav-menu-chevron { transform: rotate(180deg); color: var(--jio); }
+    .nav-menu-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      min-width: 200px;
+      background: var(--surface-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r5);
+      padding: 6px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.4);
+      z-index: 100;
+    }
+    .nav-menu-dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: var(--r3);
+      font-family: var(--jio-font);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text2);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all var(--dur-fast) var(--ease-out);
+    }
+    .nav-menu-dropdown-item:hover { background: var(--glass-1); color: var(--text); }
+    .nav-menu-dropdown-item.is-active { color: var(--jio); font-weight: 700; }
+    .nav-menu-dropdown-sep {
+      height: 1px;
+      background: var(--border-subtle);
+      margin: 4px 6px;
+    }
+    .nav-menu-dropdown-header {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--text4);
+      padding: 8px 12px 4px;
+    }
+  </style>
+</head><body><main class="ds-main">
+
+  <!-- PAGE HEADER -->
+  <header class="component-page-header">
+    <nav class="component-page-header" style="border:none; padding-bottom:0; margin-bottom:0;">
+      <nav class="component-breadcrumb">
+        <span>JioGames DLS</span>
+        <span class="component-breadcrumb-sep">›</span>
+        <span>Components</span>
+        <span class="component-breadcrumb-sep">›</span>
+        <span>Navigation Menu</span>
+      </nav>
+    </nav>
+    <h1 class="component-page-title">Navigation Menu</h1>
+    <p class="component-page-def">Horizontal top-level navigation for web contexts. Contains primary sections with optional dropdown sub-menus. Not used on Mobile or TV — use Bottom Nav / D-pad sidebar instead.</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web only</span>
+      </div>
+      <span class="component-maturity component-maturity--draft"><span class="component-maturity--dot"></span>Draft</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:320px;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="align-items:flex-start; width:100%; max-width:600px;">
+
+      <!-- Nav bar simulation -->
+      <div style="width:100%; background:var(--bg2); border:1px solid var(--border-subtle); border-radius:var(--r4); padding:10px 16px; display:flex; align-items:center; gap:0;">
+        <!-- Logo stub -->
+        <div style="display:flex; align-items:center; gap:8px; margin-right:16px; flex-shrink:0;">
+          <div style="width:28px; height:28px; border-radius:6px; background:var(--jio); display:flex; align-items:center; justify-content:center;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_gaming_controllers"></use></svg>
+          </div>
+          <span style="font-size:13px; font-weight:800; color:var(--text); letter-spacing:-.3px;">JioGames</span>
+        </div>
+
+        <!-- Nav items -->
+        <nav class="nav-menu" aria-label="Main navigation" role="menubar">
+          <div class="nav-menu-item">
+            <button class="nav-menu-trigger is-active" role="menuitem" aria-current="page">Home</button>
+          </div>
+          <div class="nav-menu-item" style="position:relative;">
+            <button class="nav-menu-trigger" role="menuitem" aria-haspopup="true" aria-expanded="true">
+              Games
+              <svg class="nav-menu-chevron" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" aria-hidden="true" style="transform:rotate(180deg); color:var(--jio);">
+                <use href="../sprite.svg#ic_chevron_down"></use>
+              </svg>
+            </button>
+            <!-- Dropdown open in hero -->
+            <div class="nav-menu-dropdown" style="position:absolute; top:calc(100% + 6px); left:0;">
+              <div class="nav-menu-dropdown-header">Genre</div>
+              <a class="nav-menu-dropdown-item is-active" href="#">Action</a>
+              <a class="nav-menu-dropdown-item" href="#">Adventure</a>
+              <a class="nav-menu-dropdown-item" href="#">Racing</a>
+              <a class="nav-menu-dropdown-item" href="#">Strategy</a>
+            </div>
+          </div>
+          <div class="nav-menu-item">
+            <button class="nav-menu-trigger" role="menuitem">Pass</button>
+          </div>
+          <div class="nav-menu-item">
+            <button class="nav-menu-trigger" role="menuitem">Profile</button>
+          </div>
+        </nav>
+      </div>
+
+    </div>
+    <p class="component-hero-caption">Navigation Menu · Home active, Games dropdown open with genre group</p>
+  </section>
+
+  <!-- INTRO -->
+  <section class="component-intro">
+    <p>Navigation Menu is the primary horizontal navigation bar for JioGames web. It surfaces the top-level sections of the product and optionally exposes sub-sections via keyboard- and mouse-triggered dropdowns. It is web-only — Mobile uses a Bottom Navigation Bar and TV uses a D-pad–navigable sidebar. Do not render this component in mobile or TV contexts.</p>
+    <ul class="component-summary-list">
+      <li><strong>Simple links</strong> — flat nav items with no dropdown. Each item is an anchor or button with <code class="ds-code">aria-current="page"</code> on the active section.</li>
+      <li><strong>With dropdown</strong> — trigger opens a floating panel with sub-items. Max 8 items per dropdown. Section headers allowed.</li>
+      <li><strong>With icon + text</strong> — 16px leading icon alongside label. Use sparingly for high-value sections (Pass, Profile).</li>
+      <li><strong>Compact</strong> — tighter padding, 13px font. For secondary nav bars or sub-headers.</li>
+    </ul>
+  </section>
+
+  <!-- BEST PRACTICES -->
+  <section class="component-best-practices">
+    <div class="component-bp-card component-bp-card--do">
+      <span class="component-bp-label component-bp-label--do">Do</span>
+      <ul class="component-bp-list">
+        <li>Keep top-level items to a maximum of 6. More than 6 adds cognitive load and crowds the bar.</li>
+        <li>Mark the active page with <code class="ds-code">aria-current="page"</code> and the green <code class="ds-code">is-active</code> color.</li>
+        <li>Group dropdown items with section headers when there are more than 4 options in a category.</li>
+        <li>Close dropdowns on Escape, on outside click, and on focus leaving the nav entirely.</li>
+        <li>Use <code class="ds-code">&lt;nav&gt;</code> element with a descriptive <code class="ds-code">aria-label</code> — "Main navigation".</li>
+      </ul>
+    </div>
+    <div class="component-bp-card component-bp-card--dont">
+      <span class="component-bp-label component-bp-label--dont">Don't</span>
+      <ul class="component-bp-list">
+        <li>Use Navigation Menu on Mobile — render the Bottom Navigation Bar instead.</li>
+        <li>Use Navigation Menu on TV — render the D-pad sidebar instead.</li>
+        <li>Go deeper than 2 levels — no dropdowns inside dropdowns.</li>
+        <li>Put more than 8 items in a single dropdown — split into grouped sections or a new top-level item.</li>
+        <li>Use only icon without text for top-level items — icon + label is required at this level.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <div class="ds-anatomy" style="margin-bottom:64px;">
+    <div class="ds-anatomy-preview">
+      <div class="ds-anatomy-component" style="position:relative; display:flex; flex-direction:column; gap:0;">
+        <div style="display:flex; align-items:center; gap:4px; background:var(--bg2); border:1px solid var(--border-subtle); border-radius:var(--r4); padding:8px 12px; position:relative;">
+          <button class="nav-menu-trigger is-active" style="pointer-events:none; position:relative;">
+            Home
+            <span class="ds-anatomy-callout-dot" style="position:absolute; top:-14px; left:50%; transform:translateX(-50%);"><span class="ds-anatomy-callout-num">1</span></span>
+          </button>
+          <button class="nav-menu-trigger" style="pointer-events:none; position:relative;">
+            Games
+            <svg class="nav-menu-chevron" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" aria-hidden="true"><use href="../sprite.svg#ic_chevron_down"></use></svg>
+            <span class="ds-anatomy-callout-dot" style="position:absolute; top:-14px; right:0;"><span class="ds-anatomy-callout-num">2</span></span>
+          </button>
+          <button class="nav-menu-trigger" style="pointer-events:none;">Pass</button>
+          <span class="ds-anatomy-callout-dot" style="position:absolute; bottom:-12px; left:50%; transform:translateX(-50%);"><span class="ds-anatomy-callout-num">3</span></span>
+        </div>
+        <div class="nav-menu-dropdown" style="position:relative; top:8px; max-width:180px; width:180px;">
+          <a class="nav-menu-dropdown-item" href="#" style="position:relative;">
+            Action
+            <span class="ds-anatomy-callout-dot" style="position:absolute; top:50%; right:-12px; transform:translateY(-50%);"><span class="ds-anatomy-callout-num">4</span></span>
+          </a>
+          <a class="nav-menu-dropdown-item" href="#">Adventure</a>
+        </div>
+      </div>
+    </div>
+    <ol class="ds-anatomy-list">
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">1</span>
+        <div>
+          <div class="ds-anatomy-label">Active trigger <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">14px / weight 600 / <code class="ds-code">var(--jio)</code>. Marks the current page. Use <code class="ds-code">aria-current="page"</code> on the element.</div>
+          <code class="ds-anatomy-token ds-code">color: var(--jio); aria-current="page"</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">2</span>
+        <div>
+          <div class="ds-anatomy-label">Dropdown trigger <span class="ds-anatomy-optional">Optional</span></div>
+          <div class="ds-anatomy-desc">Trigger with trailing chevron. <code class="ds-code">aria-haspopup="true"</code> and <code class="ds-code">aria-expanded</code> communicate dropdown state. Chevron rotates 180° when open.</div>
+          <code class="ds-anatomy-token ds-code">aria-haspopup="true" aria-expanded="true/false"</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">3</span>
+        <div>
+          <div class="ds-anatomy-label">Nav container <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc"><code class="ds-code">&lt;nav&gt;</code> wrapping a flex row. <code class="ds-code">role="menubar"</code> for full ARIA menu pattern. <code class="ds-code">aria-label="Main navigation"</code>.</div>
+          <code class="ds-anatomy-token ds-code">&lt;nav role="menubar" aria-label="..."&gt;</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">4</span>
+        <div>
+          <div class="ds-anatomy-label">Dropdown item <span class="ds-anatomy-optional">Optional</span></div>
+          <div class="ds-anatomy-desc">14px / weight 500. Can be <code class="ds-code">&lt;a&gt;</code> or <code class="ds-code">&lt;button&gt;</code>. Hover: <code class="ds-code">var(--glass-1)</code> background. Active: <code class="ds-code">var(--jio)</code> text.</div>
+          <code class="ds-anatomy-token ds-code">role="menuitem" inside role="menu"</code>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- VARIANTS -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">All variants share the same horizontal flex container. Dropdown and icon presence are the only structural differences.</p>
+
+    <div class="ds-section-stack" style="gap:32px;">
+
+      <!-- Simple links -->
+      <div>
+        <div class="ds-sub-label">Simple links — no dropdowns</div>
+        <div class="ds-demo ds-demo--dark">
+          <nav class="nav-menu" aria-label="Main navigation" role="menubar">
+            <div class="nav-menu-item"><button class="nav-menu-trigger is-active" role="menuitem" aria-current="page">Home</button></div>
+            <div class="nav-menu-item"><button class="nav-menu-trigger" role="menuitem">Games</button></div>
+            <div class="nav-menu-item"><button class="nav-menu-trigger" role="menuitem">Pass</button></div>
+            <div class="nav-menu-item"><button class="nav-menu-trigger" role="menuitem">Leaderboard</button></div>
+            <div class="nav-menu-item"><button class="nav-menu-trigger" role="menuitem">Profile</button></div>
+          </nav>
+        </div>
+      </div>
+
+      <!-- With dropdown -->
+      <div>
+        <div class="ds-sub-label">With dropdown — Games expanded</div>
+        <div class="ds-demo ds-demo--dark" style="min-height:200px; position:relative; overflow:visible;">
+          <nav class="nav-menu" aria-label="Main navigation" role="menubar">
+            <div class="nav-menu-item"><button class="nav-menu-trigger is-active" role="menuitem" aria-current="page">Home</button></div>
+            <div class="nav-menu-item" style="position:relative;">
+              <button class="nav-menu-trigger" role="menuitem" aria-haspopup="true" aria-expanded="true" style="color:var(--text);">
+                Games
+                <svg class="nav-menu-chevron" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" aria-hidden="true" style="transform:rotate(180deg);"><use href="../sprite.svg#ic_chevron_down"></use></svg>
+              </button>
+              <div class="nav-menu-dropdown" role="menu">
+                <div class="nav-menu-dropdown-header">Genre</div>
+                <a class="nav-menu-dropdown-item" href="#" role="menuitem">Action</a>
+                <a class="nav-menu-dropdown-item" href="#" role="menuitem">Adventure</a>
+                <a class="nav-menu-dropdown-item" href="#" role="menuitem">Racing</a>
+                <a class="nav-menu-dropdown-item" href="#" role="menuitem">Strategy</a>
+                <div class="nav-menu-dropdown-sep"></div>
+                <div class="nav-menu-dropdown-header">Platform</div>
+                <a class="nav-menu-dropdown-item" href="#" role="menuitem">Mobile games</a>
+                <a class="nav-menu-dropdown-item" href="#" role="menuitem">Browser games</a>
+              </div>
+            </div>
+            <div class="nav-menu-item"><button class="nav-menu-trigger" role="menuitem">Pass</button></div>
+            <div class="nav-menu-item"><button class="nav-menu-trigger" role="menuitem">Profile</button></div>
+          </nav>
+        </div>
+      </div>
+
+      <!-- With icon + text -->
+      <div>
+        <div class="ds-sub-label">With icon + text — high-value sections</div>
+        <div class="ds-demo ds-demo--dark">
+          <nav class="nav-menu" aria-label="Main navigation" role="menubar">
+            <div class="nav-menu-item">
+              <button class="nav-menu-trigger is-active" role="menuitem" aria-current="page" style="gap:6px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+                Home
+              </button>
+            </div>
+            <div class="nav-menu-item">
+              <button class="nav-menu-trigger" role="menuitem" style="gap:6px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_games"></use></svg>
+                Games
+              </button>
+            </div>
+            <div class="nav-menu-item">
+              <button class="nav-menu-trigger" role="menuitem" style="gap:6px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" aria-hidden="true"><use href="../sprite.svg#ic_star"></use></svg>
+                Pass
+              </button>
+            </div>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Compact -->
+      <div>
+        <div class="ds-sub-label">Compact — secondary / sub-nav bar</div>
+        <div class="ds-demo ds-demo--dark">
+          <nav class="nav-menu" aria-label="Section navigation" role="menubar">
+            <div class="nav-menu-item"><button class="nav-menu-trigger is-active" role="menuitem" style="font-size:13px; padding:6px 10px;">Overview</button></div>
+            <div class="nav-menu-item"><button class="nav-menu-trigger" role="menuitem" style="font-size:13px; padding:6px 10px;">News</button></div>
+            <div class="nav-menu-item"><button class="nav-menu-trigger" role="menuitem" style="font-size:13px; padding:6px 10px;">Community</button></div>
+            <div class="nav-menu-item"><button class="nav-menu-trigger" role="menuitem" style="font-size:13px; padding:6px 10px;">Support</button></div>
+          </nav>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SIZES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Two sizes. M is the default for primary nav bars. L for prominent marketing or landing page navigation.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div class="ds-section-stack" style="gap:24px; align-items:flex-start;">
+        <div style="display:flex; align-items:center; gap:20px;">
+          <span style="font-size:11px; color:var(--text3); width:48px;">M</span>
+          <nav class="nav-menu" role="menubar">
+            <button class="nav-menu-trigger is-active" style="pointer-events:none;">Home</button>
+            <button class="nav-menu-trigger" style="pointer-events:none;">Games</button>
+            <button class="nav-menu-trigger" style="pointer-events:none;">Pass</button>
+          </nav>
+          <span style="font-size:11px; color:var(--text3);">14px · 8px 12px (default)</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:20px;">
+          <span style="font-size:11px; color:var(--text3); width:48px;">L</span>
+          <nav class="nav-menu" role="menubar">
+            <button class="nav-menu-trigger is-active" style="font-size:16px; padding:10px 16px; pointer-events:none;">Home</button>
+            <button class="nav-menu-trigger" style="font-size:16px; padding:10px 16px; pointer-events:none;">Games</button>
+            <button class="nav-menu-trigger" style="font-size:16px; padding:10px 16px; pointer-events:none;">Pass</button>
+          </nav>
+          <span style="font-size:11px; color:var(--text3);">16px · 10px 16px</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Top-level triggers have 5 states. Dropdown items have their own hover and active states.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:32px; align-items:flex-end;">
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <button class="nav-menu-trigger" style="pointer-events:none;">Item</button>
+          <span style="font-size:11px; color:var(--text3);">Default</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <button class="nav-menu-trigger" style="pointer-events:none; color:var(--text); background:var(--glass-1);">Item</button>
+          <span style="font-size:11px; color:var(--text3);">Hover</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <button class="nav-menu-trigger is-active" style="pointer-events:none;">Item</button>
+          <span style="font-size:11px; color:var(--text3);">Active (current page)</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <button class="nav-menu-trigger" style="pointer-events:none; outline:2px solid var(--jio); outline-offset:2px;">Item</button>
+          <span style="font-size:11px; color:var(--text3);">Focus</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <button class="nav-menu-trigger" style="pointer-events:none; color:var(--text);">
+            Item
+            <svg class="nav-menu-chevron" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" aria-hidden="true" style="transform:rotate(180deg);"><use href="../sprite.svg#ic_chevron_down"></use></svg>
+          </button>
+          <span style="font-size:11px; color:var(--text3);">Dropdown open</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT GUIDANCE -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <p class="ds-section-desc">Max 6 top-level items. Dropdown max 8 items. Section grouping with headers allowed in dropdowns. Never more than 2 levels deep.</p>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Top-level labels</div>
+        <ul>
+          <li>1–2 words, title case. "Home", "Games", "Pass", "Profile".</li>
+          <li>Maximum 6 items. Extras should merge into an existing section or be demoted to a sub-page.</li>
+          <li>Keep labels short enough that the bar never wraps to two lines on a 1280px viewport.</li>
+          <li>The active page label should always be visible without scrolling or opening a dropdown.</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Dropdown structure</div>
+        <ul>
+          <li>Max 8 items per dropdown. Use section headers to group 5+ items.</li>
+          <li>Separator (<code class="ds-code">.nav-menu-dropdown-sep</code>) between groups when headers are not used.</li>
+          <li>Never place a dropdown inside a dropdown — max depth is 2 levels.</li>
+          <li>Dropdown items should be destinations (pages) not actions — actions belong in a toolbar or menu.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile — not used</div>
+        <ul>
+          <li>Do not render Navigation Menu on mobile viewports.</li>
+          <li>Use Bottom Navigation Bar for primary sections on mobile.</li>
+          <li>If a page has secondary sub-sections, use Tabs — not a horizontal nav bar.</li>
+          <li>Hide via CSS at breakpoint or render a separate mobile nav component.</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Primary platform for this component.</li>
+          <li>Keyboard: Tab enters nav, Arrow Left / Right moves between top-level items, Arrow Down opens dropdown, Escape closes dropdown and returns focus to trigger.</li>
+          <li>Dropdowns close on outside click and on focus leaving the entire <code class="ds-code">&lt;nav&gt;</code> element.</li>
+          <li>Position nav bar at the top of the viewport, sticky if the page scrolls.</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV — not used</div>
+        <ul>
+          <li>Do not render Navigation Menu on TV.</li>
+          <li>Use a D-pad–navigable left sidebar for primary sections on TV.</li>
+          <li>Horizontal nav bars are inaccessible with a TV remote at 3m viewing distance.</li>
+          <li>TV navigation must support spatial focus — sidebar pattern satisfies this.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">Implements the WAI-ARIA Menu Button / Menubar pattern. Full keyboard operability required.</p>
+    <table class="ds-spec-table">
+      <thead><tr><th>Element</th><th>Role / attribute</th><th>Guidance</th></tr></thead>
+      <tbody>
+        <tr><td>Nav wrapper</td><td><code class="ds-code">&lt;nav&gt;</code> + <code class="ds-code">role="menubar"</code></td><td>Landmark element with <code class="ds-code">aria-label="Main navigation"</code>. Multiple navs on a page must each have a unique label.</td></tr>
+        <tr><td>Top-level trigger</td><td><code class="ds-code">role="menuitem"</code></td><td>Add <code class="ds-code">aria-current="page"</code> to the active item. Triggers with dropdowns also need <code class="ds-code">aria-haspopup="true"</code> and <code class="ds-code">aria-expanded</code>.</td></tr>
+        <tr><td>Dropdown container</td><td><code class="ds-code">role="menu"</code></td><td>Appears when trigger <code class="ds-code">aria-expanded="true"</code>. Must be a sibling or child of the trigger's parent so focus management works.</td></tr>
+        <tr><td>Dropdown item</td><td><code class="ds-code">role="menuitem"</code></td><td>Can be <code class="ds-code">&lt;a&gt;</code> or <code class="ds-code">&lt;button&gt;</code>. Arrow Down / Up navigates. Enter / Space activates. Escape closes and returns focus to trigger.</td></tr>
+        <tr><td>Active page</td><td><code class="ds-code">aria-current="page"</code></td><td>Applied to the top-level trigger for the current route. Never apply to dropdown items — only to top-level section triggers.</td></tr>
+        <tr><td>Keyboard flow</td><td>Arrow keys</td><td>Arrow Left / Right between top-level items. Arrow Down opens dropdown and moves into it. Escape closes dropdown. Tab exits nav entirely.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- RELATED TOKENS -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <table class="ds-spec-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td><code class="ds-code">--jio</code></td><td><code class="ds-code">#00A859</code></td><td>Active trigger color, dropdown active item color</td></tr>
+        <tr><td><code class="ds-code">--text2</code></td><td><code class="ds-code">rgba(244,242,238,.55)</code></td><td>Default trigger label color</td></tr>
+        <tr><td><code class="ds-code">--text</code></td><td><code class="ds-code">#f4f2ee</code></td><td>Trigger hover label color</td></tr>
+        <tr><td><code class="ds-code">--text3</code></td><td><code class="ds-code">rgba(244,242,238,.32)</code></td><td>Chevron icon color</td></tr>
+        <tr><td><code class="ds-code">--text4</code></td><td><code class="ds-code">rgba(244,242,238,.2)</code></td><td>Dropdown section header color</td></tr>
+        <tr><td><code class="ds-code">--glass-1</code></td><td><code class="ds-code">rgba(255,255,255,.04)</code></td><td>Trigger hover background, dropdown item hover</td></tr>
+        <tr><td><code class="ds-code">--surface-2</code></td><td>—</td><td>Dropdown panel background</td></tr>
+        <tr><td><code class="ds-code">--border-subtle</code></td><td><code class="ds-code">rgba(255,255,255,.08)</code></td><td>Dropdown panel border, section separator</td></tr>
+        <tr><td><code class="ds-code">--r3</code></td><td><code class="ds-code">8px</code></td><td>Trigger and dropdown item border-radius</td></tr>
+        <tr><td><code class="ds-code">--r5</code></td><td><code class="ds-code">16px</code></td><td>Dropdown panel border-radius</td></tr>
+        <tr><td><code class="ds-code">--dur-fast</code></td><td><code class="ds-code">120ms</code></td><td>Trigger hover and chevron transitions</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CODE EXAMPLES -->
+  <section class="ds-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Simple nav — no dropdowns</div>
+      <pre class="component-code-pre"><code>&lt;nav class="nav-menu" role="menubar" aria-label="Main navigation"&gt;
+  &lt;div class="nav-menu-item"&gt;
+    &lt;button class="nav-menu-trigger is-active"
+            role="menuitem" aria-current="page"&gt;Home&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="nav-menu-item"&gt;
+    &lt;button class="nav-menu-trigger" role="menuitem"&gt;Games&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="nav-menu-item"&gt;
+    &lt;button class="nav-menu-trigger" role="menuitem"&gt;Pass&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="nav-menu-item"&gt;
+    &lt;button class="nav-menu-trigger" role="menuitem"&gt;Profile&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Nav item with dropdown</div>
+      <pre class="component-code-pre"><code>&lt;div class="nav-menu-item"&gt;
+  &lt;button class="nav-menu-trigger"
+          role="menuitem"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="games-menu"
+          id="games-trigger"&gt;
+    Games
+    &lt;svg class="nav-menu-chevron" aria-hidden="true"&gt;
+      &lt;!-- chevron-down --&gt;
+    &lt;/svg&gt;
+  &lt;/button&gt;
+
+  &lt;div class="nav-menu-dropdown"
+       role="menu"
+       id="games-menu"
+       aria-labelledby="games-trigger"
+       hidden&gt;
+    &lt;div class="nav-menu-dropdown-header"&gt;Genre&lt;/div&gt;
+    &lt;a class="nav-menu-dropdown-item" href="/games/action" role="menuitem"&gt;Action&lt;/a&gt;
+    &lt;a class="nav-menu-dropdown-item" href="/games/adventure" role="menuitem"&gt;Adventure&lt;/a&gt;
+    &lt;a class="nav-menu-dropdown-item" href="/games/racing" role="menuitem"&gt;Racing&lt;/a&gt;
+    &lt;div class="nav-menu-dropdown-sep"&gt;&lt;/div&gt;
+    &lt;div class="nav-menu-dropdown-header"&gt;Platform&lt;/div&gt;
+    &lt;a class="nav-menu-dropdown-item" href="/games/mobile" role="menuitem"&gt;Mobile games&lt;/a&gt;
+    &lt;a class="nav-menu-dropdown-item" href="/games/browser" role="menuitem"&gt;Browser games&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Full nav with icons</div>
+      <pre class="component-code-pre"><code>&lt;nav class="nav-menu" role="menubar" aria-label="Main navigation"&gt;
+  &lt;div class="nav-menu-item"&gt;
+    &lt;button class="nav-menu-trigger is-active" role="menuitem"
+            aria-current="page" style="gap:6px;"&gt;
+      &lt;svg width="14" height="14" aria-hidden="true"&gt;&lt;!-- home icon --&gt;&lt;/svg&gt;
+      Home
+    &lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="nav-menu-item"&gt;
+    &lt;button class="nav-menu-trigger" role="menuitem"
+            aria-haspopup="true" aria-expanded="false"
+            aria-controls="games-dd" style="gap:6px;"&gt;
+      &lt;svg width="14" height="14" aria-hidden="true"&gt;&lt;!-- games icon --&gt;&lt;/svg&gt;
+      Games
+      &lt;svg class="nav-menu-chevron" aria-hidden="true"&gt;&lt;!-- chevron --&gt;&lt;/svg&gt;
+    &lt;/button&gt;
+    &lt;div class="nav-menu-dropdown" role="menu" id="games-dd" hidden&gt;
+      &lt;a class="nav-menu-dropdown-item" href="#" role="menuitem"&gt;Action&lt;/a&gt;
+      &lt;a class="nav-menu-dropdown-item" href="#" role="menuitem"&gt;RPG&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="nav-menu-item"&gt;
+    &lt;button class="nav-menu-trigger" role="menuitem" style="gap:6px;"&gt;
+      &lt;svg width="14" height="14" aria-hidden="true"&gt;&lt;!-- pass icon --&gt;&lt;/svg&gt;
+      Pass
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- CHANGELOG -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Changelog</h2>
+    <div class="component-changelog">
+      <div class="component-changelog-entry">
+        <span class="component-changelog-version">v0.1</span>
+        <span class="component-changelog-date">Jun 2026</span>
+        <p class="component-changelog-desc">Initial draft. Web-only. Simple links, dropdown, icon+text, and compact variants. M and L sizes. Full WAI-ARIA menubar pattern documentation. Platform exclusion guidance for Mobile and TV.</p>
+      </div>
+    </div>
+  </section>
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drawer — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    body { background: var(--bg); color: var(--text); font-family: var(--jio-font); margin: 0; }
+
+    /* ── Hero demo ── */
+    .drawer-demo-wrap {
+      position: relative; width: 100%; height: 320px;
+      background: #060810; border-radius: var(--r4);
+      border: 1px solid var(--border-subtle); overflow: hidden;
+      background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+    .drawer-demo-scrim {
+      position: absolute; inset: 0; background: rgba(0,0,0,.6);
+      transition: opacity 300ms; pointer-events: none;
+    }
+    .drawer-panel {
+      position: absolute; top: 0; bottom: 0; width: 280px;
+      background: var(--surface-2); border-right: 1px solid var(--border-subtle);
+      display: flex; flex-direction: column;
+      transition: transform 320ms var(--ease-out, cubic-bezier(.2,0,0,1));
+      z-index: 10;
+    }
+    .drawer-panel--left  { left: 0; transform: translateX(0); }
+    .drawer-panel--right { right: 0; left: auto; border-right: none; border-left: 1px solid var(--border-subtle); transform: translateX(0); }
+    .drawer-panel--left.is-closed  { transform: translateX(-100%); }
+    .drawer-panel--right.is-closed { transform: translateX(100%); }
+    .drawer-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 20px 0; flex-shrink: 0;
+    }
+    .drawer-title { font-size: 16px; font-weight: 700; color: var(--text); }
+    .drawer-close-btn {
+      width: 32px; height: 32px; border-radius: 50%; border: none;
+      background: rgba(255,255,255,.07); color: var(--text2);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 16px; line-height: 1;
+      transition: background 150ms, color 150ms; flex-shrink: 0;
+    }
+    .drawer-close-btn:hover { background: rgba(255,255,255,.12); color: var(--text); }
+    .drawer-desc { font-size: 12px; color: var(--text3); padding: 6px 20px 0; }
+    .drawer-body { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 8px; }
+    .drawer-item {
+      background: var(--surface-1); border: 1px solid var(--border-subtle); border-radius: var(--r3);
+      padding: 12px 14px; font-size: 13px; font-weight: 500; color: var(--text2);
+    }
+    .drawer-footer {
+      padding: 12px 20px 20px; border-top: 1px solid var(--border-subtle); flex-shrink: 0;
+      display: flex; gap: 8px;
+    }
+    .drawer-btn {
+      flex: 1; height: 40px; border-radius: var(--r3); border: none; font-family: var(--jio-font);
+      font-size: 13px; font-weight: 700; cursor: pointer; transition: opacity 150ms;
+    }
+    .drawer-btn--primary { background: var(--jio); color: #000; }
+    .drawer-btn--ghost { background: rgba(255,255,255,.07); color: var(--text2); }
+
+    /* Demo controls */
+    .demo-controls { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 5; }
+    .demo-trigger {
+      height: 36px; padding: 0 16px; border-radius: var(--r3); border: 1px solid var(--border-subtle);
+      background: rgba(255,255,255,.07); color: var(--text); font-family: var(--jio-font);
+      font-size: 12px; font-weight: 600; cursor: pointer; transition: background 150ms, border-color 150ms;
+    }
+    .demo-trigger:hover { background: rgba(255,255,255,.12); border-color: var(--border); }
+
+    /* Variant tabs */
+    .variant-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+    .variant-tab {
+      height: 34px; padding: 0 14px; border-radius: var(--r3);
+      border: 1px solid var(--border-subtle); background: var(--surface-1);
+      color: var(--text3); font-family: var(--jio-font); font-size: 12px;
+      font-weight: 600; cursor: pointer; transition: all 150ms;
+    }
+    .variant-tab.active { background: rgba(0,168,89,.12); border-color: rgba(0,168,89,.4); color: var(--jio); }
+
+    /* Anatomy */
+    .anatomy-wrap { background: var(--surface-1); border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; }
+    .anatomy-row { display: grid; grid-template-columns: 180px 1fr auto; gap: 20px; align-items: center; padding: 14px 20px; border-bottom: 1px solid var(--border-subtle); }
+    .anatomy-row:last-child { border-bottom: none; }
+    .anatomy-num { width: 22px; height: 22px; border-radius: 50%; background: rgba(0,168,89,.15); border: 1px solid rgba(0,168,89,.3); font-size: 11px; font-weight: 700; color: var(--jio); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .anatomy-name { font-size: 13px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 10px; }
+    .anatomy-desc { font-size: 12px; color: var(--text3); line-height: 1.5; }
+    .anatomy-badge { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: var(--pill); flex-shrink: 0; }
+    .anatomy-badge--req { background: rgba(0,168,89,.12); color: var(--jio); }
+    .anatomy-badge--opt { background: rgba(255,255,255,.06); color: var(--text3); }
+
+    /* Code block */
+    .ds-code-block { background: var(--surface-1); border: 1px solid var(--border-subtle); border-radius: var(--r3); padding: 20px; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; line-height: 1.7; color: var(--text2); overflow-x: auto; margin-top: 16px; }
+    .ds-code-block .k { color: var(--code-green, #a8e6c5); }
+    .ds-code-block .c { color: var(--text4); font-style: italic; }
+    .ds-code-block .s { color: #fbbf24; }
+
+    /* Token table */
+    .ds-token-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .ds-token-table th { text-align: left; font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: .05em; padding: 8px 12px; border-bottom: 1px solid var(--border-subtle); }
+    .ds-token-table td { padding: 10px 12px; border-bottom: 1px solid var(--border-subtle); color: var(--text2); }
+    .ds-token-table tr:last-child td { border-bottom: none; }
+    .ds-token-table code { font-family: 'SF Mono', monospace; font-size: 11px; background: rgba(255,255,255,.06); padding: 2px 5px; border-radius: 4px; color: var(--text); }
+
+    .ds-section { margin-bottom: 56px; }
+    .ds-section-title { font-size: 20px; font-weight: 700; color: var(--text); margin: 0 0 8px; letter-spacing: -.2px; }
+    .ds-section-desc { font-size: 14px; color: var(--text2); margin: 0 0 24px; line-height: 1.6; }
+  </style>
+</head>
+<body><main class="ds-content">
+
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <a href="../index.html">JioGames DLS</a>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Drawer</span>
+    </nav>
+    <h1 class="component-page-title">Drawer</h1>
+    <p class="component-page-def">A panel that slides in from the left or right edge of the screen. Used for filters, contextual settings, and secondary navigation without leaving the current view.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+      <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+      <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+    </div>
+  </header>
+
+  <!-- 1. HERO DEMO -->
+  <section class="ds-section" id="demo" style="margin-top:40px">
+    <div class="drawer-demo-wrap" id="demo-wrap">
+      <div class="drawer-demo-scrim" id="demo-scrim" style="opacity:0"></div>
+
+      <!-- Left drawer -->
+      <div class="drawer-panel drawer-panel--left is-closed" id="panel-left">
+        <div class="drawer-header">
+          <span class="drawer-title">Filters</span>
+          <button class="drawer-close-btn" onclick="closeDrawer()" aria-label="Close">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><use href="../sprite.svg#ic_close"></use></svg>
+          </button>
+        </div>
+        <p class="drawer-desc">Narrow your game library</p>
+        <div class="drawer-body">
+          <div class="drawer-item">🎮 Genre — Action</div>
+          <div class="drawer-item">📱 Platform — Mobile</div>
+          <div class="drawer-item">⭐ Rating — 4.0+</div>
+          <div class="drawer-item">🆓 Free to Play</div>
+          <div class="drawer-item">🕹️ Multiplayer</div>
+        </div>
+        <div class="drawer-footer">
+          <button class="drawer-btn drawer-btn--ghost" onclick="closeDrawer()">Reset</button>
+          <button class="drawer-btn drawer-btn--primary" onclick="closeDrawer()">Apply</button>
+        </div>
+      </div>
+
+      <!-- Right drawer -->
+      <div class="drawer-panel drawer-panel--right is-closed" id="panel-right">
+        <div class="drawer-header">
+          <span class="drawer-title">Game Info</span>
+          <button class="drawer-close-btn" onclick="closeDrawer()" aria-label="Close">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><use href="../sprite.svg#ic_close"></use></svg>
+          </button>
+        </div>
+        <p class="drawer-desc">Tomb Raider · Action Adventure</p>
+        <div class="drawer-body">
+          <div class="drawer-item">⭐ 4.9 · 72% completed</div>
+          <div class="drawer-item">🏆 12 achievements</div>
+          <div class="drawer-item">👥 2.4M players</div>
+          <div class="drawer-item">🕒 Last played 2 days ago</div>
+          <div class="drawer-item">📦 Size — 1.8 GB</div>
+        </div>
+        <div class="drawer-footer">
+          <button class="drawer-btn drawer-btn--ghost" onclick="closeDrawer()">Share</button>
+          <button class="drawer-btn drawer-btn--primary" onclick="closeDrawer()">Play</button>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="demo-controls">
+        <button class="demo-trigger" onclick="openDrawer('left')">← Left drawer</button>
+        <button class="demo-trigger" onclick="openDrawer('right')">Right drawer →</button>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:12px">Click buttons to preview drawer directions</p>
+  </section>
+
+  <!-- 2. VARIANTS -->
+  <section class="ds-section" id="variants">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Two directions cover all JioGames surfaces. Direction is determined by content type — filters from the left, contextual detail from the right.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:20px">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">Left — Filters & navigation</div>
+        <div style="font-size:12px;color:var(--text3);margin-bottom:16px">Slides from left. Used for search filters, facets, and global navigation on mobile.</div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <div style="width:40px;height:80px;background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:var(--r2);flex-shrink:0"></div>
+          <div style="font-family:monospace;font-size:10px;color:var(--text3)">.drawer--left</div>
+        </div>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:20px">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">Right — Detail & actions</div>
+        <div style="font-size:12px;color:var(--text3);margin-bottom:16px">Slides from right. Used for game detail, profile settings, and contextual action panels.</div>
+        <div style="display:flex;gap:8px;align-items:center;justify-content:flex-end">
+          <div style="font-family:monospace;font-size:10px;color:var(--text3)">.drawer--right</div>
+          <div style="width:40px;height:80px;background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:var(--r2);flex-shrink:0"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. ANATOMY -->
+  <section class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <p class="ds-section-desc">The drawer is a layered system: scrim catches dismissal taps, the panel slides over content, and the internal layout follows header → scrollable body → fixed footer.</p>
+    <div class="anatomy-wrap">
+      <div class="anatomy-row">
+        <div class="anatomy-name"><div class="anatomy-num">1</div>Scrim</div>
+        <div class="anatomy-desc">Full-screen overlay behind the panel. <code>background: rgba(0,0,0,0.6)</code>. Tap to dismiss.</div>
+        <span class="anatomy-badge anatomy-badge--req">Required</span>
+      </div>
+      <div class="anatomy-row">
+        <div class="anatomy-name"><div class="anatomy-num">2</div>Panel</div>
+        <div class="anatomy-desc">Sliding container. Width: 280px mobile, 360px web. Uses <code>var(--surface-2)</code>. Slides via <code>translateX</code>.</div>
+        <span class="anatomy-badge anatomy-badge--req">Required</span>
+      </div>
+      <div class="anatomy-row">
+        <div class="anatomy-name"><div class="anatomy-num">3</div>Header</div>
+        <div class="anatomy-desc">Title + close button row. <code>padding: 20px 20px 0</code>. Title at 16px/700.</div>
+        <span class="anatomy-badge anatomy-badge--req">Required</span>
+      </div>
+      <div class="anatomy-row">
+        <div class="anatomy-name"><div class="anatomy-num">4</div>Description</div>
+        <div class="anatomy-desc">Subtext below header. 12px, <code>var(--text3)</code>. Gives context without consuming header space.</div>
+        <span class="anatomy-badge anatomy-badge--opt">Optional</span>
+      </div>
+      <div class="anatomy-row">
+        <div class="anatomy-name"><div class="anatomy-num">5</div>Body</div>
+        <div class="anatomy-desc">Scrollable content area. <code>flex: 1; overflow-y: auto; padding: 20px</code>. Never clips footer.</div>
+        <span class="anatomy-badge anatomy-badge--req">Required</span>
+      </div>
+      <div class="anatomy-row">
+        <div class="anatomy-name"><div class="anatomy-num">6</div>Footer</div>
+        <div class="anatomy-desc">Sticky action row. <code>border-top: 1px solid var(--border-subtle)</code>. Primary action always rightmost.</div>
+        <span class="anatomy-badge anatomy-badge--opt">Optional</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. CODE -->
+  <section class="ds-section" id="code">
+    <h2 class="ds-section-title">Code</h2>
+    <p class="ds-section-desc">HTML structure. Open/close is driven by toggling <code>.is-open</code> on the panel and scrim.</p>
+    <pre class="ds-code-block"><span class="c">&lt;!-- Scrim --&gt;</span>
+<span class="k">&lt;div</span> class=<span class="s">"drawer-scrim"</span> data-drawer-close<span class="k">&gt;&lt;/div&gt;</span>
+
+<span class="c">&lt;!-- Panel (left or right) --&gt;</span>
+<span class="k">&lt;aside</span> class=<span class="s">"drawer drawer--left"</span> role=<span class="s">"dialog"</span>
+       aria-modal=<span class="s">"true"</span> aria-label=<span class="s">"Filters"</span><span class="k">&gt;</span>
+
+  <span class="k">&lt;div</span> class=<span class="s">"drawer-header"</span><span class="k">&gt;</span>
+    <span class="k">&lt;h2</span> class=<span class="s">"drawer-title"</span><span class="k">&gt;</span>Filters<span class="k">&lt;/h2&gt;</span>
+    <span class="k">&lt;button</span> class=<span class="s">"drawer-close"</span> aria-label=<span class="s">"Close filters"</span><span class="k">&gt;</span>
+      <span class="k">&lt;svg&gt;&lt;use</span> href=<span class="s">"#ic_close"</span><span class="k">&gt;&lt;/use&gt;&lt;/svg&gt;</span>
+    <span class="k">&lt;/button&gt;</span>
+  <span class="k">&lt;/div&gt;</span>
+
+  <span class="k">&lt;div</span> class=<span class="s">"drawer-body"</span><span class="k">&gt;</span>
+    <span class="c">&lt;!-- Scrollable content --&gt;</span>
+  <span class="k">&lt;/div&gt;</span>
+
+  <span class="k">&lt;div</span> class=<span class="s">"drawer-footer"</span><span class="k">&gt;</span>
+    <span class="k">&lt;button</span> class=<span class="s">"btn btn--ghost"</span><span class="k">&gt;</span>Reset<span class="k">&lt;/button&gt;</span>
+    <span class="k">&lt;button</span> class=<span class="s">"btn btn--primary"</span><span class="k">&gt;</span>Apply<span class="k">&lt;/button&gt;</span>
+  <span class="k">&lt;/div&gt;</span>
+<span class="k">&lt;/aside&gt;</span></pre>
+
+    <pre class="ds-code-block"><span class="c">/* Open state */</span>
+.drawer { transform: translateX(-100%); transition: transform 320ms var(--ease-out); }
+.drawer--right { transform: translateX(100%); }
+.drawer.is-open { transform: translateX(0); }
+.drawer-scrim { opacity: 0; pointer-events: none; transition: opacity 280ms; }
+.drawer-scrim.is-open { opacity: 1; pointer-events: auto; }</pre>
+  </section>
+
+  <!-- 5. TOKENS -->
+  <section class="ds-section" id="tokens">
+    <h2 class="ds-section-title">Tokens</h2>
+    <div style="border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden">
+      <table class="ds-token-table">
+        <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td><code>--surface-2</code></td><td>Panel background</td><td>Drawer panel bg</td></tr>
+          <tr><td><code>--border-subtle</code></td><td>Panel edge border</td><td>Left/right border of panel</td></tr>
+          <tr><td><code>--ease-out</code></td><td>cubic-bezier(.2,0,0,1)</td><td>Slide-in easing</td></tr>
+          <tr><td>320ms</td><td>Duration</td><td>Open transition</td></tr>
+          <tr><td>280ms</td><td>Duration</td><td>Scrim fade</td></tr>
+          <tr><td>280px mobile / 360px web</td><td>Width</td><td>Panel width</td></tr>
+          <tr><td>rgba(0,0,0,.6)</td><td>Scrim</td><td>Backdrop overlay</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 6. BEST PRACTICES -->
+  <section class="ds-section" id="guidelines">
+    <h2 class="ds-section-title">Guidelines</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div style="border:1.5px solid rgba(0,168,89,.3);border-radius:var(--r3);overflow:hidden">
+        <div style="background:rgba(0,168,89,.08);color:var(--jio);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:10px 16px">✓ Do</div>
+        <ul style="list-style:none;padding:16px 20px;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:13px;color:var(--text2);padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text3)">·</span>Use left drawer for global filters and faceted search</li>
+          <li style="font-size:13px;color:var(--text2);padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text3)">·</span>Always provide a close button AND scrim tap to dismiss</li>
+          <li style="font-size:13px;color:var(--text2);padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text3)">·</span>Keep footer actions sticky — never let them scroll away</li>
+          <li style="font-size:13px;color:var(--text2);padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text3)">·</span>Trap focus inside the drawer while open</li>
+          <li style="font-size:13px;color:var(--text2);padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text3)">·</span>Use <code style="font-size:11px;background:rgba(255,255,255,.06);padding:1px 4px;border-radius:3px">aria-modal="true"</code> on the panel</li>
+        </ul>
+      </div>
+      <div style="border:1.5px solid rgba(255,71,87,.25);border-radius:var(--r3);overflow:hidden">
+        <div style="background:rgba(255,71,87,.07);color:#ff4757;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:10px 16px">✕ Don't</div>
+        <ul style="list-style:none;padding:16px 20px;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:13px;color:var(--text2);padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text3)">·</span>Don't stack multiple drawers — use a single layer</li>
+          <li style="font-size:13px;color:var(--text2);padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text3)">·</span>Don't open a drawer wider than 80% of the viewport</li>
+          <li style="font-size:13px;color:var(--text2);padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text3)">·</span>Don't use for primary content — use a full page instead</li>
+          <li style="font-size:13px;color:var(--text2);padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text3)">·</span>Don't skip the transition — abrupt appearance feels broken</li>
+          <li style="font-size:13px;color:var(--text2);padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text3)">·</span>Don't confuse with Bottom Sheet — Drawer is always side</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. ACCESSIBILITY -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em">Keyboard</div>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px">
+          <li style="font-size:13px;color:var(--text2);padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text3)">·</span><kbd style="font-size:10px;background:rgba(255,255,255,.08);padding:2px 5px;border-radius:3px">Esc</kbd> closes the drawer</li>
+          <li style="font-size:13px;color:var(--text2);padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text3)">·</span><kbd style="font-size:10px;background:rgba(255,255,255,.08);padding:2px 5px;border-radius:3px">Tab</kbd> cycles through focusable elements inside</li>
+          <li style="font-size:13px;color:var(--text2);padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text3)">·</span>Focus returns to trigger on close</li>
+        </ul>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em">ARIA</div>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px">
+          <li style="font-size:13px;color:var(--text2);padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text3)">·</span><code style="font-size:11px;background:rgba(255,255,255,.06);padding:1px 4px;border-radius:3px">role="dialog"</code> on panel</li>
+          <li style="font-size:13px;color:var(--text2);padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text3)">·</span><code style="font-size:11px;background:rgba(255,255,255,.06);padding:1px 4px;border-radius:3px">aria-modal="true"</code> to trap screen reader</li>
+          <li style="font-size:13px;color:var(--text2);padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text3)">·</span><code style="font-size:11px;background:rgba(255,255,255,.06);padding:1px 4px;border-radius:3px">aria-label</code> or <code style="font-size:11px;background:rgba(255,255,255,.06);padding:1px 4px;border-radius:3px">aria-labelledby</code> for title</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script>
+<script>
+  function openDrawer(side) {
+    var left  = document.getElementById('panel-left');
+    var right = document.getElementById('panel-right');
+    var scrim = document.getElementById('demo-scrim');
+    left.classList.add('is-closed');
+    right.classList.add('is-closed');
+    if (side === 'left') left.classList.remove('is-closed');
+    else right.classList.remove('is-closed');
+    scrim.style.opacity = '1';
+    scrim.style.pointerEvents = 'auto';
+  }
+  function closeDrawer() {
+    document.getElementById('panel-left').classList.add('is-closed');
+    document.getElementById('panel-right').classList.add('is-closed');
+    var scrim = document.getElementById('demo-scrim');
+    scrim.style.opacity = '0';
+    scrim.style.pointerEvents = 'none';
+  }
+  document.getElementById('demo-scrim').addEventListener('click', closeDrawer);
+</script>
+</body></html>

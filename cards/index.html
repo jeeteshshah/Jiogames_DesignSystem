@@ -1,0 +1,732 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cards — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+</head><body><main class="ds-content">
+
+<!-- 1. PAGE HEADER -->
+<header class="component-page-header">
+  <nav class="component-breadcrumb">
+    <a href="../index.html">JioGames DLS</a>
+    <span class="component-breadcrumb-sep">›</span>
+    <a href="../components.html">Components</a>
+    <span class="component-breadcrumb-sep">›</span>
+    <span>Cards</span>
+  </nav>
+  <h1 class="component-page-title">Cards</h1>
+  <p class="component-page-def">Cards are the primary surface for presenting games, passes, and content items across JioGames.</p>
+  <div style="display:flex;align-items:center;gap:12px;margin-top:16px;flex-wrap:wrap;">
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile">
+        <span class="component-platform-dot"></span>Mobile
+      </span>
+      <span class="component-platform component-platform--web">
+        <span class="component-platform-dot"></span>Web
+      </span>
+      <span class="component-platform component-platform--tv">
+        <span class="component-platform-dot"></span>TV
+      </span>
+    </div>
+    <span class="component-maturity component-maturity--stable">
+      <span class="component-maturity--dot"></span>Stable
+    </span>
+  </div>
+</header>
+
+<!-- 2. HERO -->
+<section class="component-hero component-hero--dark component-hero--grid" style="min-height:360px;position:relative;overflow:hidden;">
+  <div class="hero-glow" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);width:600px;height:300px;background:radial-gradient(ellipse,rgba(0,168,89,.18) 0%,transparent 70%);pointer-events:none;"></div>
+  <div class="component-hero-inner" style="display:flex;align-items:center;justify-content:center;gap:24px;padding:48px 24px;flex-wrap:wrap;position:relative;z-index:1;">
+
+    <!-- Card 1: Landscape Standard -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <div style="width:200px;height:128px;border-radius:16px;overflow:hidden;position:relative;background:#1a0820;box-shadow:0 8px 32px rgba(0,0,0,.6);">
+        <div style="width:100%;height:100px;background:linear-gradient(135deg,#1a0820,#3d1060);position:absolute;top:0;left:0;"></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;height:72px;background:linear-gradient(0deg,rgba(6,8,15,.88) 0%,transparent 100%);padding:8px 10px 8px;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;">
+          <div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:#F4F2EE;line-height:1.3;">Tomb Raider</div>
+          <div style="font-family:'Outfit',sans-serif;font-size:10px;color:#A8ADBA;line-height:1.3;">Action · ★4.9</div>
+        </div>
+      </div>
+      <span style="font-family:'Outfit',sans-serif;font-size:10px;color:#6B7280;">Landscape · Standard</span>
+    </div>
+
+    <!-- Card 2: Portrait with NEW badge -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <div style="width:110px;height:160px;border-radius:16px;overflow:hidden;position:relative;background:#0a1a30;box-shadow:0 8px 32px rgba(0,0,0,.6);">
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,#0a1a30,#1a4060);position:absolute;inset:0;"></div>
+        <!-- NEW badge -->
+        <div style="position:absolute;top:8px;left:8px;background:#00A859;color:#fff;font-family:'Outfit',sans-serif;font-size:9px;font-weight:700;letter-spacing:.6px;padding:2px 6px;border-radius:4px;line-height:1.4;z-index:2;">NEW</div>
+        <div style="position:absolute;bottom:0;left:0;right:0;height:56px;background:linear-gradient(0deg,rgba(6,8,15,.9) 0%,transparent 100%);padding:6px 8px 8px;display:flex;flex-direction:column;justify-content:flex-end;gap:1px;">
+          <div style="font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#F4F2EE;line-height:1.3;">Yooka-Laylee</div>
+          <div style="font-family:'Outfit',sans-serif;font-size:9px;color:#A8ADBA;">Platformer</div>
+        </div>
+      </div>
+      <span style="font-family:'Outfit',sans-serif;font-size:10px;color:#6B7280;">Portrait · NEW badge</span>
+    </div>
+
+    <!-- Card 3: Landscape Focus (TV) -->
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <div style="width:200px;height:128px;border-radius:16px;overflow:hidden;position:relative;background:#0a2010;box-shadow:0 0 0 2px #00A859,0 0 24px rgba(0,200,100,.4),0 8px 32px rgba(0,0,0,.6);">
+        <div style="width:100%;height:100px;background:linear-gradient(135deg,#0a2010,#1a5030);position:absolute;top:0;left:0;"></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;height:72px;background:linear-gradient(0deg,rgba(6,8,15,.88) 0%,transparent 100%);padding:8px 10px 8px;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;">
+          <div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:#F4F2EE;line-height:1.3;">War Thunder</div>
+          <div style="font-family:'Outfit',sans-serif;font-size:10px;color:#A8ADBA;line-height:1.3;">Action · ★4.7</div>
+        </div>
+      </div>
+      <span style="font-family:'Outfit',sans-serif;font-size:10px;color:#6B7280;">Landscape · TV Focus</span>
+    </div>
+
+  </div>
+  <p class="component-hero-caption">Cards · Landscape, Portrait, Focus state</p>
+</section>
+
+<!-- 3. INTRO -->
+<section class="component-intro ds-section">
+  <p style="font-family:'Outfit',sans-serif;font-size:15px;color:#A8ADBA;line-height:1.7;max-width:680px;margin:0 0 24px;">
+    Cards are the fundamental building block of game discovery in JioGames. They appear across every surface — home rails, genre pages, search results, and pass libraries — presenting just enough information for a player to decide whether to tap and learn more or launch directly. Every card consists of a media area backed by game art, a lightweight metadata footer, and a system of overlays for states like locked, premium, and unavailable.
+  </p>
+  <ul class="component-summary-list">
+    <li><strong>Media area</strong> — The art container. Maintains aspect ratio at all breakpoints. Uses a gradient placeholder during load.</li>
+    <li><strong>Title + metadata</strong> — Game name (2-line max with ellipsis), optional genre, rating, or duration row beneath.</li>
+    <li><strong>Badge overlays</strong> — Positioned chips in corner regions: NEW, PREMIUM, LIVE, or custom labels. Max two badges per card.</li>
+    <li><strong>Focus / selected states</strong> — Green glow ring on TV and web keyboard navigation. Scale animation on press for mobile.</li>
+  </ul>
+</section>
+
+<!-- 4. BEST PRACTICES -->
+<section class="ds-section">
+  <h2 class="ds-section-title">Best practices</h2>
+  <div class="component-best-practices">
+
+    <div class="component-bp-card component-bp-card--do">
+      <span class="component-bp-label component-bp-label--do">Do</span>
+      <ul class="component-bp-list">
+        <li>Maintain aspect ratio strictly — 16:9 for landscape, 2:3 for portrait. Never stretch or squish art.</li>
+        <li>Cap title to 2 lines maximum with <code class="ds-code">text-overflow: ellipsis</code> and <code class="ds-code">-webkit-line-clamp: 2</code>.</li>
+        <li>Include a skeleton at the exact card dimensions before art loads — width, height, and border-radius must match.</li>
+        <li>Use the lock icon alongside "Subscribe to unlock" copy for locked-state cards so the restriction is immediately clear.</li>
+      </ul>
+    </div>
+
+    <div class="component-bp-card component-bp-card--dont">
+      <span class="component-bp-label component-bp-label--dont">Don't</span>
+      <ul class="component-bp-list">
+        <li>Don't crop art unevenly — always use <code class="ds-code">object-fit: cover</code> centered on the image.</li>
+        <li>Don't show a blank white or transparent art area when the image fails to load; always fall back to the gradient placeholder.</li>
+        <li>Don't use cards for navigation links that have no media (use list rows or menu items instead).</li>
+        <li>Don't allow text overflow without truncation — a card with wrapping text breaks the grid alignment.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- 5. ANATOMY -->
+<section class="ds-section">
+  <h2 class="ds-section-title">Anatomy</h2>
+  <p class="ds-section-desc">A landscape card showing all optional and required zones. Most cards only render 1–4 of these layers.</p>
+
+  <div class="ds-anatomy">
+    <div class="ds-anatomy-preview">
+      <!-- Anatomy card demo with callout dots -->
+      <div style="position:relative;display:inline-block;">
+        <div class="ds-anatomy-component" style="width:240px;height:152px;border-radius:16px;overflow:visible;position:relative;background:#1a0830;box-shadow:0 8px 32px rgba(0,0,0,.5);">
+          <!-- Art area -->
+          <div style="width:240px;height:152px;border-radius:16px;overflow:hidden;position:absolute;top:0;left:0;">
+            <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a0830,#3d1070);"></div>
+            <!-- Badge overlay (callout 4) -->
+            <div style="position:absolute;top:8px;left:8px;background:#00A859;color:#fff;font-family:'Outfit',sans-serif;font-size:9px;font-weight:700;letter-spacing:.6px;padding:2px 7px;border-radius:4px;line-height:1.4;">NEW</div>
+            <!-- Locked overlay (callout 5) - subtle for anatomy display -->
+            <!-- Focus ring (callout 6) - shown as outer ring -->
+            <!-- Metadata overlay -->
+            <div style="position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(0deg,rgba(6,8,15,.9) 0%,transparent 100%);padding:8px 12px 10px;display:flex;flex-direction:column;justify-content:flex-end;gap:3px;">
+              <div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;line-height:1.3;">Tomb Raider</div>
+              <div style="font-family:'Outfit',sans-serif;font-size:10px;color:#A8ADBA;">Action Adventure · ★4.9</div>
+            </div>
+          </div>
+          <!-- Focus ring demo line -->
+          <div style="position:absolute;inset:-2px;border-radius:18px;border:2px solid rgba(0,168,89,.5);pointer-events:none;"></div>
+
+          <!-- Callout dot 1 - media area -->
+          <div class="ds-anatomy-callout-dot" style="position:absolute;top:28px;left:50%;transform:translateX(-50%);">
+            <div class="ds-anatomy-callout-num" style="background:#00A859;color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;box-shadow:0 0 0 2px rgba(0,168,89,.3);">1</div>
+          </div>
+          <!-- Callout dot 2 - title -->
+          <div class="ds-anatomy-callout-dot" style="position:absolute;bottom:28px;left:12px;">
+            <div class="ds-anatomy-callout-num" style="background:#00A859;color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;box-shadow:0 0 0 2px rgba(0,168,89,.3);">2</div>
+          </div>
+          <!-- Callout dot 3 - metadata -->
+          <div class="ds-anatomy-callout-dot" style="position:absolute;bottom:10px;left:12px;">
+            <div class="ds-anatomy-callout-num" style="background:#00A859;color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;box-shadow:0 0 0 2px rgba(0,168,89,.3);">3</div>
+          </div>
+          <!-- Callout dot 4 - badge -->
+          <div class="ds-anatomy-callout-dot" style="position:absolute;top:8px;right:8px;">
+            <div class="ds-anatomy-callout-num" style="background:#00A859;color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;box-shadow:0 0 0 2px rgba(0,168,89,.3);">4</div>
+          </div>
+          <!-- Callout dot 5 - locked overlay (top-right area) -->
+          <div class="ds-anatomy-callout-dot" style="position:absolute;top:44px;right:8px;">
+            <div class="ds-anatomy-callout-num" style="background:#00A859;color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;box-shadow:0 0 0 2px rgba(0,168,89,.3);">5</div>
+          </div>
+          <!-- Callout dot 6 - focus ring -->
+          <div class="ds-anatomy-callout-dot" style="position:absolute;top:-12px;right:50%;transform:translateX(50%);">
+            <div class="ds-anatomy-callout-num" style="background:#00A859;color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;box-shadow:0 0 0 2px rgba(0,168,89,.3);">6</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <ul class="ds-anatomy-list">
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num" style="background:#00A859;color:#fff;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;flex-shrink:0;">1</span>
+        <span>
+          <span class="ds-anatomy-label">Media area</span>
+          <span class="ds-anatomy-required">Required</span>
+          <span class="ds-anatomy-desc">The image or art container. Occupies the full card surface, always <code class="ds-code">object-fit: cover</code>. Falls back to gradient placeholder.</span>
+        </span>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num" style="background:#00A859;color:#fff;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;flex-shrink:0;">2</span>
+        <span>
+          <span class="ds-anatomy-label">Title</span>
+          <span class="ds-anatomy-required">Required</span>
+          <span class="ds-anatomy-desc">Game or content name. Maximum 2 lines, <code class="ds-code">-webkit-line-clamp: 2</code>. Positioned in the gradient overlay zone.</span>
+        </span>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num" style="background:#00A859;color:#fff;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;flex-shrink:0;">3</span>
+        <span>
+          <span class="ds-anatomy-label">Metadata row</span>
+          <span class="ds-anatomy-optional">Optional</span>
+          <span class="ds-anatomy-desc">Secondary information: genre, star rating, play duration. Rendered below title in muted text. Pattern: <code class="ds-code">Genre · ★Rating</code>.</span>
+        </span>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num" style="background:#00A859;color:#fff;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;flex-shrink:0;">4</span>
+        <span>
+          <span class="ds-anatomy-label">Badge overlay</span>
+          <span class="ds-anatomy-optional">Optional</span>
+          <span class="ds-anatomy-desc">Positioned chip in a card corner (top-left preferred). Labels: NEW, PREMIUM, LIVE, or custom. Max 2 words. Max 2 badges per card.</span>
+          <span class="ds-anatomy-token">--premium-gradient</span>
+        </span>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num" style="background:#00A859;color:#fff;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;flex-shrink:0;">5</span>
+        <span>
+          <span class="ds-anatomy-label">Locked overlay</span>
+          <span class="ds-anatomy-optional">Optional</span>
+          <span class="ds-anatomy-desc">Semi-transparent dark scrim over the media area with a lock icon and "Subscribe to unlock" text centred vertically.</span>
+          <span class="ds-anatomy-token">--locked-overlay</span>
+        </span>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num" style="background:#00A859;color:#fff;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;flex-shrink:0;">6</span>
+        <span>
+          <span class="ds-anatomy-label">Focus ring</span>
+          <span class="ds-anatomy-optional">Optional</span>
+          <span class="ds-anatomy-desc">Green glow ring applied on TV D-pad focus and web keyboard navigation. Meets 3:1 contrast. Uses <code class="ds-code">box-shadow: 0 0 0 2px #00A859, 0 0 24px rgba(0,200,100,.4)</code>.</span>
+        </span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- 6. VARIANTS -->
+<section class="ds-section">
+  <h2 class="ds-section-title">Variants</h2>
+  <p class="ds-section-desc">Five card variants cover all use cases across JioGames surfaces.</p>
+
+  <div class="ds-demo ds-demo--dark" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+
+    <!-- Landscape Standard -->
+    <div style="padding:20px;background:rgba(255,255,255,.03);border-radius:12px;border:1px solid rgba(255,255,255,.06);">
+      <div style="margin-bottom:12px;">
+        <div style="width:100%;max-width:200px;height:126px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#0d1a2e,#1a3a5c);position:relative;">
+          <div style="position:absolute;bottom:0;left:0;right:0;height:64px;background:linear-gradient(0deg,rgba(6,8,15,.88) 0%,transparent 100%);padding:6px 10px 8px;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;">
+            <div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:#F4F2EE;">Shadow of War</div>
+            <div style="font-family:'Outfit',sans-serif;font-size:10px;color:#A8ADBA;">RPG · ★4.8</div>
+          </div>
+        </div>
+      </div>
+      <div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;margin-bottom:4px;">.card--landscape</div>
+      <div style="font-family:'Outfit',sans-serif;font-size:12px;color:#6B7280;line-height:1.5;">16:9 aspect ratio. The primary browsing card used in horizontal rails on home, genre, and search surfaces.</div>
+    </div>
+
+    <!-- Portrait / Cover -->
+    <div style="padding:20px;background:rgba(255,255,255,.03);border-radius:12px;border:1px solid rgba(255,255,255,.06);">
+      <div style="margin-bottom:12px;display:flex;gap:10px;">
+        <div style="width:90px;height:134px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#1a1a0a,#3a3010);position:relative;flex-shrink:0;">
+          <div style="position:absolute;bottom:0;left:0;right:0;height:52px;background:linear-gradient(0deg,rgba(6,8,15,.9) 0%,transparent 100%);padding:4px 8px 7px;display:flex;flex-direction:column;justify-content:flex-end;gap:1px;">
+            <div style="font-family:'Outfit',sans-serif;font-size:10px;font-weight:600;color:#F4F2EE;">Vigilante</div>
+          </div>
+        </div>
+      </div>
+      <div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;margin-bottom:4px;">.card--portrait</div>
+      <div style="font-family:'Outfit',sans-serif;font-size:12px;color:#6B7280;line-height:1.5;">2:3 aspect ratio. Used for featured game covers on editorial, pass library, and genre spotlight rows.</div>
+    </div>
+
+    <!-- Square -->
+    <div style="padding:20px;background:rgba(255,255,255,.03);border-radius:12px;border:1px solid rgba(255,255,255,.06);">
+      <div style="margin-bottom:12px;display:flex;gap:10px;">
+        <div style="width:96px;height:96px;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#1a0a0a,#3a1010);position:relative;">
+          <div style="position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(0deg,rgba(6,8,15,.88) 0%,transparent 100%);padding:3px 6px 6px;display:flex;align-items:flex-end;">
+            <div style="font-family:'Outfit',sans-serif;font-size:9px;font-weight:600;color:#F4F2EE;">Chess</div>
+          </div>
+        </div>
+        <div style="width:96px;height:96px;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#0a0a1a,#101040);position:relative;">
+          <div style="position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(0deg,rgba(6,8,15,.88) 0%,transparent 100%);padding:3px 6px 6px;display:flex;align-items:flex-end;">
+            <div style="font-family:'Outfit',sans-serif;font-size:9px;font-weight:600;color:#F4F2EE;">Puzzles</div>
+          </div>
+        </div>
+      </div>
+      <div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;margin-bottom:4px;">.card--square</div>
+      <div style="font-family:'Outfit',sans-serif;font-size:12px;color:#6B7280;line-height:1.5;">1:1 aspect ratio, 96px default. Icon-style mini cards for quick-game grids and category chips.</div>
+    </div>
+
+    <!-- Mini -->
+    <div style="padding:20px;background:rgba(255,255,255,.03);border-radius:12px;border:1px solid rgba(255,255,255,.06);">
+      <div style="margin-bottom:12px;display:flex;flex-direction:column;gap:6px;">
+        <div style="display:flex;align-items:center;gap:10px;padding:8px;background:rgba(255,255,255,.04);border-radius:10px;">
+          <div style="width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,#0a1a0a,#1a4020);flex-shrink:0;"></div>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:#F4F2EE;line-height:1.3;">Carrom King</div>
+            <div style="font-family:'Outfit',sans-serif;font-size:10px;color:#6B7280;">Board · ★4.6</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;padding:8px;background:rgba(255,255,255,.04);border-radius:10px;">
+          <div style="width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,#1a0a10,#401020);flex-shrink:0;"></div>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:#F4F2EE;line-height:1.3;">Ludo King</div>
+            <div style="font-family:'Outfit',sans-serif;font-size:10px;color:#6B7280;">Board · ★4.4</div>
+          </div>
+        </div>
+      </div>
+      <div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;margin-bottom:4px;">.card--mini</div>
+      <div style="font-family:'Outfit',sans-serif;font-size:12px;color:#6B7280;line-height:1.5;">Compact horizontal layout for list-style surfaces: search results, recently played, and notification trays.</div>
+    </div>
+
+    <!-- Hero / Feature -->
+    <div style="padding:20px;background:rgba(255,255,255,.03);border-radius:12px;border:1px solid rgba(255,255,255,.06);grid-column:1/-1;">
+      <div style="margin-bottom:12px;">
+        <div style="width:100%;height:120px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#0d0520,#2a1060);position:relative;">
+          <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,8,15,.85) 0%,transparent 60%);"></div>
+          <div style="position:absolute;bottom:16px;left:16px;">
+            <div style="font-family:'Outfit',sans-serif;font-size:9px;font-weight:700;letter-spacing:1.2px;color:#00A859;text-transform:uppercase;margin-bottom:4px;">Featured · Action</div>
+            <div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:700;color:#F4F2EE;line-height:1.2;">Doom Eternal</div>
+            <div style="font-family:'Outfit',sans-serif;font-size:11px;color:#A8ADBA;margin-top:2px;">★4.9 · 2.4M plays</div>
+          </div>
+        </div>
+      </div>
+      <div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;margin-bottom:4px;">.card--hero</div>
+      <div style="font-family:'Outfit',sans-serif;font-size:12px;color:#6B7280;line-height:1.5;">Full-width feature card with large art canvas and left-anchored editorial text. Used for hero spotlights at the top of home, genre pages, and promotional surfaces.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 7. SIZES -->
+<section class="ds-section">
+  <h2 class="ds-section-title">Sizes</h2>
+  <p class="ds-section-desc">Card dimensions across size tiers and platforms. All values are width × height in pixels. Hero cards use full container width.</p>
+
+  <div style="overflow-x:auto;">
+    <table class="ds-spec-table" style="width:100%;border-collapse:collapse;">
+      <thead>
+        <tr>
+          <th style="padding:10px 14px;text-align:left;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Size</th>
+          <th style="padding:10px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">
+            <span style="display:inline-flex;align-items:center;gap:4px;"><span style="width:7px;height:7px;border-radius:50%;background:#00A859;display:inline-block;"></span>Mobile</span>
+          </th>
+          <th style="padding:10px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">
+            <span style="display:inline-flex;align-items:center;gap:4px;"><span style="width:7px;height:7px;border-radius:50%;background:#3B82F6;display:inline-block;"></span>Web</span>
+          </th>
+          <th style="padding:10px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">
+            <span style="display:inline-flex;align-items:center;gap:4px;"><span style="width:7px;height:7px;border-radius:50%;background:#A855F7;display:inline-block;"></span>TV</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);">Compact</td>
+          <td style="padding:12px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">152 × 96</code></td>
+          <td style="padding:12px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">168 × 106</code></td>
+          <td style="padding:12px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">240 × 150</code></td>
+        </tr>
+        <tr>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);">Standard</td>
+          <td style="padding:12px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">200 × 126</code></td>
+          <td style="padding:12px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">220 × 138</code></td>
+          <td style="padding:12px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">320 × 200</code></td>
+        </tr>
+        <tr>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);">Large</td>
+          <td style="padding:12px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">272 × 172</code></td>
+          <td style="padding:12px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">300 × 188</code></td>
+          <td style="padding:12px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">400 × 250</code></td>
+        </tr>
+        <tr>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;">Hero</td>
+          <td style="padding:12px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;"><code class="ds-code">100% × 200</code></td>
+          <td style="padding:12px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;"><code class="ds-code">100% × 320</code></td>
+          <td style="padding:12px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;"><code class="ds-code">100% × 540</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 8. STATES MATRIX -->
+<section class="ds-section">
+  <h2 class="ds-section-title">States</h2>
+  <p class="ds-section-desc">All interactive and visual states a card can express. Not all states apply to every variant.</p>
+
+  <div class="ds-matrix">
+    <div class="ds-matrix-scroll">
+      <div style="display:grid;grid-template-columns:140px 1fr 200px;gap:0;min-width:520px;">
+
+        <!-- Header row -->
+        <div class="ds-matrix-header" style="padding:10px 14px;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">State</div>
+        <div class="ds-matrix-header" style="padding:10px 14px;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Description</div>
+        <div class="ds-matrix-header" style="padding:10px 14px;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Visual</div>
+
+        <!-- Default -->
+        <div class="ds-matrix-row-label" style="padding:14px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">Default</div>
+        <div style="padding:14px;font-family:'Outfit',sans-serif;font-size:12px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);line-height:1.6;">Resting state. No elevation, no overlay. Art fills card, gradient overlay with title visible.</div>
+        <div style="padding:14px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">
+          <div style="width:80px;height:50px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,#0d1a2e,#1a3a5c);position:relative;">
+            <div style="position:absolute;bottom:0;left:0;right:0;height:28px;background:linear-gradient(0deg,rgba(6,8,15,.88) 0%,transparent 100%);padding:3px 6px;display:flex;flex-direction:column;justify-content:flex-end;">
+              <div style="font-family:'Outfit',sans-serif;font-size:8px;font-weight:600;color:#F4F2EE;">Game Title</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hover -->
+        <div class="ds-matrix-row-label" style="padding:14px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">Hover</div>
+        <div style="padding:14px;font-family:'Outfit',sans-serif;font-size:12px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);line-height:1.6;">Web only. Slight upward lift via <code class="ds-code">translateY(-2px)</code> + <code class="ds-code">box-shadow</code>. Transition 150ms ease-out.</div>
+        <div style="padding:14px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">
+          <div style="width:80px;height:50px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,#0d1a2e,#1a3a5c);position:relative;transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.5);">
+            <div style="position:absolute;bottom:0;left:0;right:0;height:28px;background:linear-gradient(0deg,rgba(6,8,15,.88) 0%,transparent 100%);padding:3px 6px;display:flex;flex-direction:column;justify-content:flex-end;">
+              <div style="font-family:'Outfit',sans-serif;font-size:8px;font-weight:600;color:#F4F2EE;">Game Title</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Focus -->
+        <div class="ds-matrix-row-label" style="padding:14px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">Focus</div>
+        <div style="padding:14px;font-family:'Outfit',sans-serif;font-size:12px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);line-height:1.6;">TV D-pad and web keyboard. Green ring: <code class="ds-code">box-shadow: 0 0 0 2px #00A859, 0 0 24px rgba(0,200,100,.4)</code>. Class <code class="ds-code">.is-tv-focused</code>.</div>
+        <div style="padding:14px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">
+          <div style="width:80px;height:50px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,#0a2010,#1a5030);position:relative;box-shadow:0 0 0 2px #00A859,0 0 16px rgba(0,200,100,.4);">
+            <div style="position:absolute;bottom:0;left:0;right:0;height:28px;background:linear-gradient(0deg,rgba(6,8,15,.88) 0%,transparent 100%);padding:3px 6px;display:flex;flex-direction:column;justify-content:flex-end;">
+              <div style="font-family:'Outfit',sans-serif;font-size:8px;font-weight:600;color:#F4F2EE;">Game Title</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Active -->
+        <div class="ds-matrix-row-label" style="padding:14px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">Active</div>
+        <div style="padding:14px;font-family:'Outfit',sans-serif;font-size:12px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);line-height:1.6;">Mobile tap / pointer press. Scales to <code class="ds-code">scale(0.97)</code> with 80ms transition. Provides tactile feedback.</div>
+        <div style="padding:14px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">
+          <div style="width:80px;height:50px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,#0d1a2e,#1a3a5c);position:relative;transform:scale(.97);">
+            <div style="position:absolute;bottom:0;left:0;right:0;height:28px;background:linear-gradient(0deg,rgba(6,8,15,.88) 0%,transparent 100%);padding:3px 6px;display:flex;flex-direction:column;justify-content:flex-end;">
+              <div style="font-family:'Outfit',sans-serif;font-size:8px;font-weight:600;color:#F4F2EE;">Game Title</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Locked -->
+        <div class="ds-matrix-row-label" style="padding:14px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">Locked</div>
+        <div style="padding:14px;font-family:'Outfit',sans-serif;font-size:12px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);line-height:1.6;">Game requires subscription. Dark scrim overlay (<code class="ds-code">--locked-overlay</code>) with lock icon + "Subscribe to unlock" centred.</div>
+        <div style="padding:14px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">
+          <div style="width:80px;height:50px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,#1a1020,#2a2040);position:relative;">
+            <div style="position:absolute;inset:0;background:rgba(6,8,15,.75);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;">
+              <div style="font-size:12px;">🔒</div>
+              <div style="font-family:'Outfit',sans-serif;font-size:7px;color:#A8ADBA;text-align:center;line-height:1.2;">Subscribe</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Premium -->
+        <div class="ds-matrix-row-label" style="padding:14px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">Premium</div>
+        <div style="padding:14px;font-family:'Outfit',sans-serif;font-size:12px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);line-height:1.6;">Included in pass. Gradient border (<code class="ds-code">--premium-border</code>) + green gradient PREMIUM badge. Accessible without lock.</div>
+        <div style="padding:14px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">
+          <div style="width:80px;height:50px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,#0a1a10,#1a4020);position:relative;box-shadow:0 0 0 1.5px rgba(0,204,101,.35);">
+            <div style="position:absolute;top:4px;left:4px;background:linear-gradient(135deg,#00cc65,#00E870);color:#06080F;font-family:'Outfit',sans-serif;font-size:7px;font-weight:700;letter-spacing:.5px;padding:1px 5px;border-radius:3px;line-height:1.4;">PREMIUM</div>
+            <div style="position:absolute;bottom:0;left:0;right:0;height:24px;background:linear-gradient(0deg,rgba(6,8,15,.88) 0%,transparent 100%);padding:2px 5px;display:flex;align-items:flex-end;">
+              <div style="font-family:'Outfit',sans-serif;font-size:8px;font-weight:600;color:#F4F2EE;">Game Title</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Unavailable -->
+        <div class="ds-matrix-row-label" style="padding:14px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">Unavailable</div>
+        <div style="padding:14px;font-family:'Outfit',sans-serif;font-size:12px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);line-height:1.6;">Not available in user's region or temporarily down. Whole card at <code class="ds-code">opacity: 0.4</code> (<code class="ds-code">--unavailable-opacity</code>). No interaction.</div>
+        <div style="padding:14px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">
+          <div style="width:80px;height:50px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,#0d1a2e,#1a3a5c);position:relative;opacity:.4;">
+            <div style="position:absolute;bottom:0;left:0;right:0;height:28px;background:linear-gradient(0deg,rgba(6,8,15,.88) 0%,transparent 100%);padding:3px 6px;display:flex;flex-direction:column;justify-content:flex-end;">
+              <div style="font-family:'Outfit',sans-serif;font-size:8px;font-weight:600;color:#F4F2EE;">Game Title</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Skeleton -->
+        <div class="ds-matrix-row-label" style="padding:14px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;display:flex;align-items:center;">Skeleton</div>
+        <div style="padding:14px;font-family:'Outfit',sans-serif;font-size:12px;color:#A8ADBA;line-height:1.6;">Loading placeholder at exact card dimensions. Background <code class="ds-code">--skeleton-bg</code> with shimmer animation. <code class="ds-code">aria-busy="true"</code>.</div>
+        <div style="padding:14px;display:flex;align-items:center;">
+          <div style="width:80px;height:50px;border-radius:10px;background:#161A24;position:relative;overflow:hidden;">
+            <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.06) 50%,transparent 100%);animation:shimmer 1.6s infinite;"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <style>@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}</style>
+</section>
+
+<!-- 9. CONTENT GUIDANCE -->
+<section class="ds-section">
+  <h2 class="ds-section-title">Content guidance</h2>
+  <p class="ds-section-desc">What goes on a card and how to present it correctly.</p>
+
+  <div class="component-content-grid">
+
+    <div class="component-content-card">
+      <h3 class="component-content-title">Title &amp; metadata</h3>
+      <ul style="font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;line-height:1.8;padding-left:18px;margin:0;">
+        <li>Maximum 2 lines — always truncate with <code class="ds-code">-webkit-line-clamp: 2</code> and an ellipsis. Never wrap to a third line.</li>
+        <li>Metadata row pattern: <code class="ds-code">Genre · ★Rating</code> or <code class="ds-code">Genre · Duration</code>. Use the interpunct (·) as separator, not a dash.</li>
+        <li>Star ratings use the ★ character followed by the numeric score to one decimal place (e.g. ★4.9).</li>
+        <li>Badges are ALL CAPS, maximum 2 words (e.g. NEW, LIVE NOW, EARLY ACCESS). Do not use sentence case.</li>
+        <li>Do not repeat the game name in both the badge and the title area — the title is always sufficient.</li>
+      </ul>
+    </div>
+
+    <div class="component-content-card">
+      <h3 class="component-content-title">Locked &amp; premium</h3>
+      <ul style="font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;line-height:1.8;padding-left:18px;margin:0;">
+        <li>A locked game must show the lock icon (🔒) alongside the text "Subscribe to unlock" — never use color alone to communicate the restriction.</li>
+        <li>Premium pass games show the gradient PREMIUM badge (<code class="ds-code">--premium-gradient</code>) in the top-left corner and a subtle green border (<code class="ds-code">--premium-border</code>).</li>
+        <li>Do not combine both a locked overlay and a premium badge — a game is either accessible (premium) or blocked (locked), not both.</li>
+        <li>Unavailable games must use opacity reduction only — do not add any overlay text or iconography; the reduced opacity signals the state passively.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- 10. PLATFORM CONSIDERATIONS -->
+<section class="ds-section">
+  <h2 class="ds-section-title">Platform considerations</h2>
+  <p class="ds-section-desc">Card behaviour adapts to the interaction model of each platform.</p>
+
+  <div class="component-platform-grid">
+
+    <div class="component-platform-card component-platform-card--mobile">
+      <div class="component-platform-card-title">
+        <span style="display:inline-flex;align-items:center;gap:6px;">
+          <span style="width:8px;height:8px;border-radius:50%;background:#00A859;display:inline-block;"></span>Mobile
+        </span>
+      </div>
+      <ul style="font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;line-height:1.8;padding-left:18px;margin:8px 0 0;">
+        <li>Cards sit in horizontally scrollable rails with <code class="ds-code">overflow-x: auto</code> and <code class="ds-code">scroll-snap-type: x mandatory</code>.</li>
+        <li>Left and right gutters are <code class="ds-code">20px</code> from the viewport edge.</li>
+        <li>Inter-card spacing is <code class="ds-code">10px</code>.</li>
+        <li>Tapping a card navigates directly to game detail. No hover state.</li>
+        <li>Active state uses <code class="ds-code">scale(0.97)</code> at 80ms for press feedback.</li>
+        <li>Swipe momentum must remain native — do not block <code class="ds-code">touchmove</code> on card scroll containers.</li>
+      </ul>
+    </div>
+
+    <div class="component-platform-card component-platform-card--web">
+      <div class="component-platform-card-title">
+        <span style="display:inline-flex;align-items:center;gap:6px;">
+          <span style="width:8px;height:8px;border-radius:50%;background:#3B82F6;display:inline-block;"></span>Web
+        </span>
+      </div>
+      <ul style="font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;line-height:1.8;padding-left:18px;margin:8px 0 0;">
+        <li>Hover state elevates the card with <code class="ds-code">translateY(-2px)</code> and a deeper shadow. Transition 150ms ease-out.</li>
+        <li>Cursor must be <code class="ds-code">pointer</code> on all interactive cards.</li>
+        <li>Gutter is <code class="ds-code">24px</code> each side. Cards in a grid use a <code class="ds-code">gap</code> of <code class="ds-code">16px</code>.</li>
+        <li>Keyboard focus (Tab key) shows the green focus ring — never suppress the outline without replacing it.</li>
+        <li>Right-click context menu can optionally surface "Add to wishlist" and "Share" actions.</li>
+      </ul>
+    </div>
+
+    <div class="component-platform-card component-platform-card--tv">
+      <div class="component-platform-card-title">
+        <span style="display:inline-flex;align-items:center;gap:6px;">
+          <span style="width:8px;height:8px;border-radius:50%;background:#A855F7;display:inline-block;"></span>TV
+        </span>
+      </div>
+      <ul style="font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;line-height:1.8;padding-left:18px;margin:8px 0 0;">
+        <li>Focus ring is mandatory — it is the primary interaction signal. Class <code class="ds-code">.is-tv-focused</code> applies the green glow.</li>
+        <li>D-pad navigation moves focus between cards. Left/right within a rail; up/down between rails.</li>
+        <li>Card sizes are the largest tier — use the TV column from the sizes table above.</li>
+        <li>Inter-card spacing increases to <code class="ds-code">20px</code> to allow the focus ring to breathe without overlapping adjacent cards.</li>
+        <li>Do not rely on hover — TV remotes have no pointer. All interactive states must be reachable via D-pad alone.</li>
+        <li>Long-press Select on a focused card opens a context action sheet (play, add to list, details).</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- 11. ACCESSIBILITY -->
+<section class="ds-section">
+  <h2 class="ds-section-title">Accessibility</h2>
+  <p class="ds-section-desc">Cards must be usable by screen readers, keyboard-only users, and assistive technology.</p>
+
+  <div style="overflow-x:auto;">
+    <table class="ds-spec-table" style="width:100%;border-collapse:collapse;">
+      <thead>
+        <tr>
+          <th style="padding:10px 14px;text-align:left;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Attribute / Pattern</th>
+          <th style="padding:10px 14px;text-align:left;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Value / Guidance</th>
+          <th style="padding:10px 14px;text-align:left;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">role</code></td>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">article</code> (static) or <code class="ds-code">button</code> (interactive)</td>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);">Use <code class="ds-code">button</code> when the card is the primary tap/click target. Never nest interactive elements inside a <code class="ds-code">button</code>-role card.</td>
+        </tr>
+        <tr>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">aria-label</code></td>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);">Include game name + status</td>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);">Example: <code class="ds-code">aria-label="Tomb Raider, Action, rated 4.9"</code>. Add status for premium: <code class="ds-code">"Doom Eternal, included in JioGames Pass"</code>.</td>
+        </tr>
+        <tr>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);">Locked state announcement</td>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">"Subscribe to unlock"</code> appended to label</td>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);">Screen readers must hear the restriction. Include in <code class="ds-code">aria-label</code>: <code class="ds-code">"War Thunder — Subscribe to unlock"</code>.</td>
+        </tr>
+        <tr>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);">Skeleton loading</td>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">aria-busy="true"</code></td>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);">Add <code class="ds-code">aria-label="Loading game"</code> on the skeleton container. Remove both attributes once content is populated.</td>
+        </tr>
+        <tr>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#F4F2EE;">Focus ring contrast</td>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;"><code class="ds-code">#00A859</code> on <code class="ds-code">#06080F</code></td>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;">Meets WCAG 2.1 SC 1.4.11 Non-text Contrast minimum of 3:1. The additional outer glow (<code class="ds-code">rgba(0,200,100,.4)</code>) is decorative only.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 12. RELATED TOKENS -->
+<section class="ds-section">
+  <h2 class="ds-section-title">Related tokens</h2>
+  <p class="ds-section-desc">Design tokens from <code class="ds-code">tokens.css</code> that directly govern card appearance.</p>
+
+  <div style="overflow-x:auto;">
+    <table class="ds-spec-table" style="width:100%;border-collapse:collapse;">
+      <thead>
+        <tr>
+          <th style="padding:10px 14px;text-align:left;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Token</th>
+          <th style="padding:10px 14px;text-align:left;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Value</th>
+          <th style="padding:10px 14px;text-align:left;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">--card-radius-landscape</code></td>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">16px</code></td>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);">Border-radius for all landscape (16:9) card containers.</td>
+        </tr>
+        <tr>
+          <td style="padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">--card-overlay</code></td>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);">gradient</td>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);">Bottom gradient overlay for title/metadata legibility. Fades from <code class="ds-code">rgba(6,8,15,.85)</code> to transparent at 55%.</td>
+        </tr>
+        <tr>
+          <td style="padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">--locked-overlay</code></td>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">rgba(6,8,15,.75)</code></td>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);">Full-card scrim for locked state. Applied as an absolute inset layer over the art.</td>
+        </tr>
+        <tr>
+          <td style="padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">--premium-gradient</code></td>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);">gradient</td>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);">Fill for PREMIUM badge chip. <code class="ds-code">linear-gradient(135deg, #00cc65, #00E870)</code>. Dark text (#06080F) on top.</td>
+        </tr>
+        <tr>
+          <td style="padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">--skeleton-bg</code></td>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">#161A24</code></td>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);">Base background colour for card skeleton / loading state. Maps to <code class="ds-code">--surface-2</code>.</td>
+        </tr>
+        <tr>
+          <td style="padding:12px 14px;"><code class="ds-code">--unavailable-opacity</code></td>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;"><code class="ds-code">0.4</code></td>
+          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;">Opacity applied to the entire card element when the game is unavailable in the user's region.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 13. CODE EXAMPLES -->
+<section class="component-section" id="code-examples">
+  <h2 class="ds-section-title">Code examples</h2>
+  <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
+  <div class="component-code-block">
+    <div class="component-code-label">Card — landscape (default)</div>
+    <pre class="component-code-pre"><code>&lt;div class="card"&gt;
+  &lt;div class="card__art"&gt;
+    &lt;img src="game-hero.jpg" alt="War Thunder" class="card__img"&gt;
+    &lt;div class="card__overlay"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="card__body"&gt;
+    &lt;div class="card__title"&gt;War Thunder&lt;/div&gt;
+    &lt;div class="card__meta"&gt;Action · Free to play&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+  <div class="component-code-block">
+    <div class="component-code-label">Card — with badge + hover state</div>
+    <pre class="component-code-pre"><code>&lt;div class="card is-hover"&gt;
+  &lt;div class="card__art"&gt;
+    &lt;img src="game-hero.jpg" alt="Tomb Raider" class="card__img"&gt;
+    &lt;div class="card__overlay"&gt;&lt;/div&gt;
+    &lt;span class="badge badge--new"&gt;New&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="card__body"&gt;
+    &lt;div class="card__title"&gt;Tomb Raider&lt;/div&gt;
+    &lt;div class="card__meta"&gt;Adventure · Pass included&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+</section>
+
+<!-- 14. CHANGELOG -->
+<section class="ds-section">
+  <h2 class="ds-section-title">Changelog</h2>
+
+  <div class="component-changelog">
+
+    <div class="component-changelog-entry">
+      <span class="component-changelog-version">v1.2</span>
+      <span class="component-changelog-date">May 2025</span>
+      <p class="component-changelog-desc">Added <code class="ds-code">--premium-gradient</code>, <code class="ds-code">--premium-border</code>, and <code class="ds-code">--locked-overlay</code> tokens. Introduced the premium badge pattern and the locked-state overlay specification. Updated anatomy diagram to include callouts 4 and 5.</p>
+    </div>
+
+    <div class="component-changelog-entry">
+      <span class="component-changelog-version">v1.1</span>
+      <span class="component-changelog-date">Feb 2025</span>
+      <p class="component-changelog-desc">Added TV focus glow state. Introduced <code class="ds-code">.is-tv-focused</code> class with green ring <code class="ds-code">box-shadow</code> pattern. Documented D-pad navigation requirements and TV size tier. Updated platform considerations section.</p>
+    </div>
+
+    <div class="component-changelog-entry">
+      <span class="component-changelog-version">v1.0</span>
+      <span class="component-changelog-date">Jan 2025</span>
+      <p class="component-changelog-desc">Initial component release. Landscape, portrait, square, mini, and hero variants. Default, hover, active, locked, unavailable, and skeleton states. Anatomy, best practices, sizes, and accessibility documentation.</p>
+    </div>
+
+  </div>
+</section>
+
+</main><script src="../sprite-loader.js"></script><script src="../shell.js"></script></body></html>

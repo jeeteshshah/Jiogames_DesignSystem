@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spacing — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    /* ── Page-specific: Spacing ── */
+
+    /* ── Scale bar rows ── */
+    .space-scale-wrap {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      overflow: hidden;
+    }
+    .space-scale-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-1-5) var(--space-3);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: background 120ms;
+    }
+    .space-scale-row:last-child { border-bottom: none; }
+    .space-scale-row:hover { background: var(--glass-1); }
+
+    .space-scale-token {
+      width: 128px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #a8e6c5;
+      flex-shrink: 0;
+    }
+    .space-scale-bar-wrap {
+      flex: 1;
+      min-width: 0;
+    }
+    .space-scale-bar {
+      height: 8px;
+      background: var(--jio);
+      border-radius: var(--pill);
+      opacity: .75;
+    }
+    .space-scale-val {
+      font-family: monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text2);
+      width: 40px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .space-scale-desc {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text4);
+      width: 200px;
+      text-align: right;
+      flex-shrink: 0;
+      line-height: 1.3;
+    }
+
+    /* ── Semantic token table ── */
+    .sem-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .sem-table th {
+      text-align: left;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--text3);
+      padding: var(--space-1) var(--space-2);
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--surface-1);
+    }
+    .sem-table td {
+      padding: 12px var(--space-2);
+      border-bottom: 1px solid var(--divider);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text2);
+      vertical-align: middle;
+    }
+    .sem-table tr:last-child td { border-bottom: none; }
+    .sem-table tr:hover td { background: var(--glass-1); }
+    .sem-table td:first-child {
+      font-family: monospace;
+      font-size: 12px;
+      color: #a8e6c5;
+      font-weight: 700;
+    }
+    .sem-table td.platform-val {
+      font-family: monospace;
+      font-size: 12px;
+      color: var(--text2);
+    }
+    .sem-table td.platform-val--mobile { color: var(--jio); font-weight: 700; }
+    .sem-table td.platform-val--tv { color: #fbbf24; }
+    .sem-table td.platform-usage {
+      font-size: 12px;
+      color: var(--text3);
+      font-family: var(--jio-font);
+    }
+    .sem-table td.na-val {
+      color: var(--text4);
+      font-size: 11px;
+    }
+
+    /* ── 8px grid visual ── */
+    .grid-demo {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      padding: var(--space-3);
+      overflow: hidden;
+    }
+    .grid-visual {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+      margin-bottom: var(--space-3);
+    }
+    .grid-cell {
+      width: 8px;
+      height: 8px;
+      background: rgba(0,168,89,.12);
+      border: 1px solid rgba(0,168,89,.18);
+      border-radius: 1px;
+      flex-shrink: 0;
+    }
+    .grid-cell--accent {
+      background: rgba(0,168,89,.35);
+      border-color: rgba(0,168,89,.5);
+    }
+    .grid-explanation {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.6;
+      margin-bottom: var(--space-3);
+      max-width: 560px;
+    }
+
+    /* ── Annotated card example ── */
+    .annotated-wrap {
+      background: var(--bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      padding: var(--space-4);
+      display: flex;
+      gap: var(--space-3);
+      align-items: flex-start;
+      position: relative;
+    }
+    .annotated-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      padding: var(--space-2);
+      width: 160px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+    .annotated-card-art {
+      width: 100%;
+      height: 90px;
+      background: linear-gradient(135deg, var(--surface-3), var(--surface-2));
+      border-radius: var(--r2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .annotated-card-art-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text4);
+      letter-spacing: .5px;
+    }
+    .annotated-card-title {
+      font-family: var(--jio-font);
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: -.2px;
+    }
+    .annotated-card-meta {
+      font-family: var(--jio-font);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text3);
+    }
+
+    .annotated-legend {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1-5);
+      flex: 1;
+      min-width: 0;
+    }
+    .annotated-legend-row {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-1);
+    }
+    .annotated-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: var(--pill);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    .annotated-dot--gutter  { background: var(--jio); }
+    .annotated-dot--padding { background: #93c5fd; }
+    .annotated-dot--gap     { background: #fbbf24; }
+    .annotated-dot--section { background: var(--negative); }
+    .annotated-legend-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .annotated-legend-token {
+      font-family: monospace;
+      font-size: 11px;
+      color: #a8e6c5;
+    }
+    .annotated-legend-desc {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text3);
+    }
+
+    /* ── Rail example ── -->
+    .rail-example {
+      background: var(--bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      padding: var(--space-3) 0;
+      overflow: hidden;
+      position: relative;
+    }
+    .rail-example-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--text4);
+      padding: 0 var(--space-3);
+      margin-bottom: var(--space-1-5);
+    }
+    .rail-example-row {
+      display: flex;
+      gap: var(--space-1-5);
+      padding: 0 var(--space-3);
+      overflow: hidden;
+    }
+    .rail-example-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r3);
+      padding: var(--space-2);
+      flex-shrink: 0;
+      width: 120px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+    .rail-example-card-art {
+      height: 68px;
+      background: var(--surface-3);
+      border-radius: var(--r1);
+    }
+    .rail-example-card-name {
+      font-family: var(--jio-font);
+      font-size: 11px;
+      font-weight: 900;
+      color: var(--text);
+    }
+
+    /* ── Quick reference ── */
+    .quick-ref-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-1-5);
+    }
+    .quick-ref-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-1) var(--space-2);
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r2);
+      gap: var(--space-1);
+    }
+    .quick-ref-token {
+      font-family: monospace;
+      font-size: 11px;
+      color: #a8e6c5;
+    }
+    .quick-ref-val {
+      font-family: monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text2);
+      background: var(--surface-2);
+      padding: 2px 7px;
+      border-radius: var(--pill);
+    }
+
+    /* ── Relationship diagram ── */
+    .rhythm-diagram {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      padding: var(--space-3);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+    .rhythm-block {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+    .rhythm-spacer {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding-left: 0;
+    }
+    .rhythm-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      width: 140px;
+      flex-shrink: 0;
+    }
+    .rhythm-bar-container {
+      flex: 1;
+      height: 32px;
+      background: var(--surface-2);
+      border-radius: var(--r1);
+      display: flex;
+      align-items: center;
+      padding: 0 var(--space-1);
+      overflow: hidden;
+    }
+    .rhythm-bar-content {
+      height: 20px;
+      background: var(--surface-3);
+      border-radius: 4px;
+      flex: 1;
+    }
+    .rhythm-gap-indicator {
+      width: 100%;
+      height: 2px;
+      background: var(--jio);
+      opacity: .4;
+      border-radius: var(--pill);
+      margin: 2px 0;
+    }
+    .rhythm-gap-label {
+      font-family: monospace;
+      font-size: 10px;
+      color: var(--jio);
+      width: 80px;
+      flex-shrink: 0;
+      text-align: right;
+    }
+
+    /* ── Section eyebrow ── */
+    .ds-section-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--jio);
+      margin-bottom: var(--space-0-5);
+    }
+
+    /* ── Info callout ── */
+    .spacing-callout {
+      background: var(--jio-soft);
+      border: 1px solid rgba(0,168,89,.2);
+      border-radius: var(--r4);
+      padding: var(--space-2) var(--space-3);
+      margin-bottom: var(--space-4);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+    .spacing-callout strong { font-weight: 700; color: var(--jio); }
+
+    /* Table wrapper */
+    .table-wrap {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <main class="ds-main">
+
+    <header class="component-page-header">
+      <nav class="component-breadcrumb" aria-label="Breadcrumb">
+        <a href="../" class="component-breadcrumb-link">JioGames DLS</a>
+        <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+        <span class="component-breadcrumb-current">Spacing</span>
+      </nav>
+      <h1 class="component-page-title">Spacing</h1>
+      <p class="component-page-def">8px-base spacing scale with semantic aliases for gutters, gaps, padding, and section rhythm across Mobile, Web, and TV.</p>
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+        <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+        <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+        <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <div class="component-hero component-hero--dark" style="padding:32px 40px;align-items:flex-start;gap:16px">
+      <div class="hero-glow"></div>
+      <div style="display:flex;flex-direction:column;gap:8px;position:relative;z-index:1;width:100%">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:4px;height:16px;background:var(--jio);border-radius:2px;flex-shrink:0"></div>
+          <div style="font-size:11px;font-weight:700;color:var(--text3)">--space-0-5 · 4px</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:8px;height:16px;background:var(--jio);border-radius:2px;flex-shrink:0"></div>
+          <div style="font-size:11px;font-weight:700;color:var(--text3)">--space-1 · 8px</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:12px;height:16px;background:var(--jio);border-radius:2px;flex-shrink:0"></div>
+          <div style="font-size:11px;font-weight:700;color:var(--text3)">--space-1-5 · 12px</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:16px;height:16px;background:var(--jio);border-radius:2px;flex-shrink:0"></div>
+          <div style="font-size:11px;font-weight:700;color:var(--text3)">--space-2 · 16px</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:24px;height:16px;background:var(--jio);border-radius:2px;flex-shrink:0"></div>
+          <div style="font-size:11px;font-weight:700;color:var(--text3)">--space-3 · 24px</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:32px;height:16px;background:var(--jio);border-radius:2px;flex-shrink:0"></div>
+          <div style="font-size:11px;font-weight:700;color:var(--text3)">--space-4 · 32px</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:48px;height:16px;background:var(--jio);border-radius:2px;flex-shrink:0"></div>
+          <div style="font-size:11px;font-weight:700;color:var(--text3)">--space-6 · 48px</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="width:64px;height:16px;background:var(--jio);border-radius:2px;flex-shrink:0"></div>
+          <div style="font-size:11px;font-weight:700;color:var(--text3)">--space-8 · 64px</div>
+        </div>
+      </div>
+      <p class="component-hero-caption">8PX BASE GRID · 13 STEPS · SEMANTIC ALIASES</p>
+    </div>
+
+    <!-- ── Callout ── -->
+    <div class="spacing-callout">
+      <strong>Spacing is semantic.</strong> Small gaps encode relationship. Large gaps encode separation. The token name communicates intent — choose the intent first, then the token resolves the size per platform automatically.
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 1 — SPACING SCALE
+    ═══════════════════════════════════════════════════════ -->
+    <section class="ds-section" id="spacing-scale">
+      <div class="ds-section-eyebrow">Section 01</div>
+      <h2 class="ds-section-title">Spacing scale</h2>
+      <p class="ds-section-desc">12 tokens built on an 8px base unit. Bar width equals the actual pixel value — the visual relationship between values is real.</p>
+
+      <div class="space-scale-wrap">
+
+        <div class="space-scale-row">
+          <span class="space-scale-token">--space-0-25</span>
+          <div class="space-scale-bar-wrap"><div class="space-scale-bar" style="width:2px"></div></div>
+          <span class="space-scale-val">2px</span>
+          <span class="space-scale-desc">Optical correction only</span>
+        </div>
+
+        <div class="space-scale-row">
+          <span class="space-scale-token">--space-0-5</span>
+          <div class="space-scale-bar-wrap"><div class="space-scale-bar" style="width:4px"></div></div>
+          <span class="space-scale-val">4px</span>
+          <span class="space-scale-desc">Icon→text, tiny internal gaps</span>
+        </div>
+
+        <div class="space-scale-row">
+          <span class="space-scale-token">--space-1</span>
+          <div class="space-scale-bar-wrap"><div class="space-scale-bar" style="width:8px"></div></div>
+          <span class="space-scale-val">8px</span>
+          <span class="space-scale-desc">Tight related items</span>
+        </div>
+
+        <div class="space-scale-row">
+          <span class="space-scale-token">--space-1-5</span>
+          <div class="space-scale-bar-wrap"><div class="space-scale-bar" style="width:12px"></div></div>
+          <span class="space-scale-val">12px</span>
+          <span class="space-scale-desc">Card item gap, compact groups</span>
+        </div>
+
+        <div class="space-scale-row">
+          <span class="space-scale-token">--space-2</span>
+          <div class="space-scale-bar-wrap"><div class="space-scale-bar" style="width:16px"></div></div>
+          <span class="space-scale-val">16px</span>
+          <span class="space-scale-desc">Default component padding</span>
+        </div>
+
+        <div class="space-scale-row">
+          <span class="space-scale-token">--space-3</span>
+          <div class="space-scale-bar-wrap"><div class="space-scale-bar" style="width:24px"></div></div>
+          <span class="space-scale-val">24px</span>
+          <span class="space-scale-desc">Internal section padding, form groups</span>
+        </div>
+
+        <div class="space-scale-row">
+          <span class="space-scale-token">--space-4</span>
+          <div class="space-scale-bar-wrap"><div class="space-scale-bar" style="width:32px"></div></div>
+          <span class="space-scale-val">32px</span>
+          <span class="space-scale-desc">Major section gap on mobile</span>
+        </div>
+
+        <div class="space-scale-row">
+          <span class="space-scale-token">--space-5</span>
+          <div class="space-scale-bar-wrap"><div class="space-scale-bar" style="width:40px"></div></div>
+          <span class="space-scale-val">40px</span>
+          <span class="space-scale-desc">Page block spacing on web</span>
+        </div>
+
+        <div class="space-scale-row">
+          <span class="space-scale-token">--space-6</span>
+          <div class="space-scale-bar-wrap"><div class="space-scale-bar" style="width:48px"></div></div>
+          <span class="space-scale-val">48px</span>
+          <span class="space-scale-desc">Major web section gap</span>
+        </div>
+
+        <div class="space-scale-row">
+          <span class="space-scale-token">--space-8</span>
+          <div class="space-scale-bar-wrap"><div class="space-scale-bar" style="width:64px"></div></div>
+          <span class="space-scale-val">64px</span>
+          <span class="space-scale-desc">Hero spacing, large web gaps</span>
+        </div>
+
+        <div class="space-scale-row">
+          <span class="space-scale-token">--space-10</span>
+          <div class="space-scale-bar-wrap"><div class="space-scale-bar" style="width:80px"></div></div>
+          <span class="space-scale-val">80px</span>
+          <span class="space-scale-desc">TV safe zone, large layout inset</span>
+        </div>
+
+        <div class="space-scale-row">
+          <span class="space-scale-token">--space-12</span>
+          <div class="space-scale-bar-wrap"><div class="space-scale-bar" style="width:96px"></div></div>
+          <span class="space-scale-val">96px</span>
+          <span class="space-scale-desc">TV hero or major separation</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 2 — SEMANTIC SPACING TOKENS
+    ═══════════════════════════════════════════════════════ -->
+    <section class="ds-section" id="semantic-tokens">
+      <div class="ds-section-eyebrow">Section 02</div>
+      <h2 class="ds-section-title">Semantic spacing tokens</h2>
+      <p class="ds-section-desc">Semantic aliases resolve to the correct value per platform via media queries. Use the alias — never the scale step directly — for all layout roles listed here.</p>
+
+      <div class="table-wrap" style="margin-bottom: var(--space-2);">
+        <table class="sem-table">
+          <thead>
+            <tr>
+              <th>Token</th>
+              <th>Mobile</th>
+              <th>Web ≥768px</th>
+              <th>TV ≥1280px</th>
+              <th>Usage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>--gutter</td>
+              <td class="platform-val platform-val--mobile">16px</td>
+              <td class="platform-val">40px</td>
+              <td class="platform-val platform-val--tv">80px</td>
+              <td class="platform-usage">Side margins for all content</td>
+            </tr>
+            <tr>
+              <td>--section-gap</td>
+              <td class="platform-val platform-val--mobile">32px</td>
+              <td class="platform-val">48px</td>
+              <td class="platform-val platform-val--tv">64px</td>
+              <td class="platform-usage">Gap between page sections / rails</td>
+            </tr>
+            <tr>
+              <td>--rail-gap</td>
+              <td class="platform-val platform-val--mobile">32px</td>
+              <td class="platform-val">48px</td>
+              <td class="platform-val platform-val--tv">64px</td>
+              <td class="platform-usage">Gap between rail rows</td>
+            </tr>
+            <tr>
+              <td>--card-gap</td>
+              <td class="platform-val platform-val--mobile">12px</td>
+              <td class="platform-val">24px</td>
+              <td class="platform-val platform-val--tv">24px</td>
+              <td class="platform-usage">Gap between cards in a rail</td>
+            </tr>
+            <tr>
+              <td>--component-padding</td>
+              <td class="platform-val platform-val--mobile">16px</td>
+              <td class="platform-val">24px</td>
+              <td class="platform-val platform-val--tv">32px</td>
+              <td class="platform-usage">Internal padding for most components</td>
+            </tr>
+            <tr>
+              <td>--card-padding</td>
+              <td class="platform-val platform-val--mobile">16px</td>
+              <td class="platform-val">24px</td>
+              <td class="platform-val platform-val--tv">32px</td>
+              <td class="platform-usage">Card internal padding</td>
+            </tr>
+            <tr>
+              <td>--sheet-padding</td>
+              <td class="platform-val platform-val--mobile">24px</td>
+              <td class="platform-val">32px</td>
+              <td class="na-val">—</td>
+              <td class="platform-usage">Bottom sheet / drawer internal padding</td>
+            </tr>
+            <tr>
+              <td>--hero-gap</td>
+              <td class="platform-val platform-val--mobile">32px</td>
+              <td class="platform-val">64px</td>
+              <td class="platform-val platform-val--tv">96px</td>
+              <td class="platform-usage">Gap below hero sections</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="padding: var(--space-1-5) var(--space-2); background: var(--surface-1); border-left: 2px solid var(--jio); border-radius: 0 var(--r2) var(--r2) 0; font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.6;">
+        Mobile values are the base (defined in <code style="font-family:monospace;color:#a8e6c5;">:root</code>). Web and TV values override via media queries in <code style="font-family:monospace;color:#a8e6c5;">tokens.css</code>. You never need to handle platform differences manually — use the alias and the token resolves automatically.
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 3 — 8PX BASE GRID
+    ═══════════════════════════════════════════════════════ -->
+    <section class="ds-section" id="base-grid">
+      <div class="ds-section-eyebrow">Section 03</div>
+      <h2 class="ds-section-title">8px base grid</h2>
+      <p class="ds-section-desc">Every spacing value is a multiple of 8px, or a half-step at 4px. This creates consistent vertical rhythm and aligns elements across different screen densities.</p>
+
+      <!-- Grid dot visualisation -->
+      <div class="grid-demo" style="margin-bottom: var(--space-3);">
+        <div class="grid-explanation">
+          The grid below represents an 8×8px cell. Every spacing token aligns to these cells — 1 cell = 8px, 2 cells = 16px, and so on. Half-steps (4px) are permitted only for tight component internals such as icon-to-label gaps.
+        </div>
+        <div class="grid-visual" style="width: 400px;">
+          <!-- 10 columns × 5 rows = 50 cells, representing the grid concept -->
+          <div class="grid-cell grid-cell--accent"></div><div class="grid-cell grid-cell--accent"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell grid-cell--accent"></div><div class="grid-cell grid-cell--accent"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell grid-cell--accent"></div><div class="grid-cell grid-cell--accent"></div>
+          <div class="grid-cell grid-cell--accent"></div><div class="grid-cell grid-cell--accent"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell grid-cell--accent"></div><div class="grid-cell grid-cell--accent"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell grid-cell--accent"></div><div class="grid-cell grid-cell--accent"></div>
+          <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+          <div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell"></div>
+          <div class="grid-cell grid-cell--accent"></div><div class="grid-cell grid-cell--accent"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell grid-cell--accent"></div><div class="grid-cell grid-cell--accent"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell grid-cell--accent"></div><div class="grid-cell grid-cell--accent"></div>
+          <div class="grid-cell grid-cell--accent"></div><div class="grid-cell grid-cell--accent"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell grid-cell--accent"></div><div class="grid-cell grid-cell--accent"></div><div class="grid-cell"></div><div class="grid-cell"></div><div class="grid-cell grid-cell--accent"></div><div class="grid-cell grid-cell--accent"></div>
+        </div>
+        <div style="font-size:11px;font-weight:500;color:var(--text4);">Each cell = 8×8px. Highlighted cells show 16px (--space-2) increments.</div>
+      </div>
+
+      <!-- Annotated card example -->
+      <div class="ds-sub">
+        <div class="ds-sub-label">Practical example — annotated card layout</div>
+        <div class="annotated-wrap">
+          <!-- Gutter marker left -->
+          <div style="position:absolute;left:0;top:0;bottom:0;width:var(--space-4);background:rgba(0,168,89,.06);border-right:1px dashed rgba(0,168,89,.3);border-radius:var(--r4) 0 0 var(--r4);"></div>
+
+          <!-- Spacer for gutter -->
+          <div style="width: var(--space-4); flex-shrink:0;"></div>
+
+          <!-- Card 1 -->
+          <div class="annotated-card">
+            <div class="annotated-card-art"><span class="annotated-card-art-label">ART</span></div>
+            <div class="annotated-card-title">Game Title</div>
+            <div class="annotated-card-meta">Action · 4.8★</div>
+          </div>
+
+          <!-- Gap marker -->
+          <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:var(--space-1);flex-shrink:0;width:var(--space-1-5);">
+            <div style="width:1px;flex:1;background:rgba(245,158,11,.4);"></div>
+            <div style="width:6px;height:6px;border-radius:var(--pill);background:var(--amber);flex-shrink:0;"></div>
+            <div style="width:1px;flex:1;background:rgba(245,158,11,.4);"></div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="annotated-card">
+            <div class="annotated-card-art"><span class="annotated-card-art-label">ART</span></div>
+            <div class="annotated-card-title">Game Title</div>
+            <div class="annotated-card-meta">RPG · 4.6★</div>
+          </div>
+
+          <!-- Gap marker -->
+          <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;gap:var(--space-1);flex-shrink:0;width:var(--space-1-5);">
+            <div style="width:1px;flex:1;background:rgba(245,158,11,.4);"></div>
+            <div style="width:6px;height:6px;border-radius:var(--pill);background:var(--amber);flex-shrink:0;"></div>
+            <div style="width:1px;flex:1;background:rgba(245,158,11,.4);"></div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="annotated-card">
+            <div class="annotated-card-art"><span class="annotated-card-art-label">ART</span></div>
+            <div class="annotated-card-title">Game Title</div>
+            <div class="annotated-card-meta">Racing · 4.9★</div>
+          </div>
+
+          <!-- Legend -->
+          <div class="annotated-legend" style="margin-left:var(--space-2);">
+            <div style="font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text4);margin-bottom:var(--space-1);">Spacing annotations</div>
+            <div class="annotated-legend-row">
+              <div class="annotated-dot annotated-dot--gutter"></div>
+              <div class="annotated-legend-text">
+                <span class="annotated-legend-token">--gutter (16px mobile)</span>
+                <span class="annotated-legend-desc">Page side margin</span>
+              </div>
+            </div>
+            <div class="annotated-legend-row">
+              <div class="annotated-dot annotated-dot--gap"></div>
+              <div class="annotated-legend-text">
+                <span class="annotated-legend-token">--card-gap (12px mobile)</span>
+                <span class="annotated-legend-desc">Gap between cards</span>
+              </div>
+            </div>
+            <div class="annotated-legend-row">
+              <div class="annotated-dot annotated-dot--padding"></div>
+              <div class="annotated-legend-text">
+                <span class="annotated-legend-token">--card-padding (16px mobile)</span>
+                <span class="annotated-legend-desc">Card internal padding</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vertical rhythm -->
+      <div class="ds-sub">
+        <div class="ds-sub-label">Vertical rhythm — gap encodes relationship</div>
+        <div class="rhythm-diagram">
+          <div style="font-size:12px;font-weight:500;color:var(--text3);margin-bottom:var(--space-1);line-height:1.5;">Tighter gap = more related. Looser gap = more separate. Never use one uniform gap for everything — that flattens hierarchy.</div>
+
+          <div style="display:flex;flex-direction:column;gap:0;margin-top:var(--space-2);">
+            <!-- Tight -->
+            <div style="display:flex;align-items:center;gap:var(--space-2);">
+              <span style="font-size:11px;font-weight:500;color:var(--text3);width:120px;flex-shrink:0;">Icon + label</span>
+              <div style="flex:1;height:24px;background:var(--surface-2);border-radius:var(--r1);display:flex;align-items:center;padding:0 var(--space-1);gap:4px;">
+                <div style="width:16px;height:16px;background:var(--surface-3);border-radius:2px;"></div>
+                <div style="width:2px;background:rgba(0,168,89,.5);height:16px;border-radius:var(--pill);"></div>
+                <div style="width:60px;height:8px;background:var(--surface-3);border-radius:2px;"></div>
+              </div>
+              <span style="font-family:monospace;font-size:11px;color:var(--jio);width:100px;text-align:right;">--space-0-5 (4px)</span>
+            </div>
+            <div style="height:var(--space-1);"></div>
+            <!-- Related -->
+            <div style="display:flex;align-items:center;gap:var(--space-2);">
+              <span style="font-size:11px;font-weight:500;color:var(--text3);width:120px;flex-shrink:0;">Title + body</span>
+              <div style="flex:1;display:flex;flex-direction:column;gap:8px;background:var(--surface-2);border-radius:var(--r1);padding:var(--space-1);">
+                <div style="height:10px;background:var(--surface-3);border-radius:2px;width:70%;"></div>
+                <div style="height:6px;background:var(--surface-3);border-radius:2px;opacity:.5;"></div>
+              </div>
+              <span style="font-family:monospace;font-size:11px;color:var(--jio);width:100px;text-align:right;">--space-1 (8px)</span>
+            </div>
+            <div style="height:var(--space-1);"></div>
+            <!-- Component -->
+            <div style="display:flex;align-items:center;gap:var(--space-2);">
+              <span style="font-size:11px;font-weight:500;color:var(--text3);width:120px;flex-shrink:0;">Between components</span>
+              <div style="flex:1;display:flex;flex-direction:column;gap:16px;background:var(--surface-2);border-radius:var(--r1);padding:var(--space-1);">
+                <div style="height:20px;background:var(--surface-3);border-radius:var(--r1);"></div>
+                <div style="height:20px;background:var(--surface-3);border-radius:var(--r1);"></div>
+              </div>
+              <span style="font-family:monospace;font-size:11px;color:var(--jio);width:100px;text-align:right;">--space-2 (16px)</span>
+            </div>
+            <div style="height:var(--space-1);"></div>
+            <!-- Section -->
+            <div style="display:flex;align-items:center;gap:var(--space-2);">
+              <span style="font-size:11px;font-weight:500;color:var(--text3);width:120px;flex-shrink:0;">Between sections</span>
+              <div style="flex:1;display:flex;flex-direction:column;gap:32px;background:var(--surface-2);border-radius:var(--r1);padding:var(--space-1);">
+                <div style="height:12px;background:var(--surface-3);border-radius:var(--r1);"></div>
+                <div style="height:12px;background:var(--surface-3);border-radius:var(--r1);"></div>
+              </div>
+              <span style="font-family:monospace;font-size:11px;color:var(--jio);width:100px;text-align:right;">--section-gap (32px)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 4 — USAGE RULES
+    ═══════════════════════════════════════════════════════ -->
+    <section class="ds-section" id="usage-rules">
+      <div class="ds-section-eyebrow">Section 04</div>
+      <h2 class="ds-section-title">Usage rules</h2>
+      <p class="ds-section-desc">Enforced by <code style="font-family:monospace;font-size:12px;color:#a8e6c5;background:var(--surface-2);padding:1px 5px;border-radius:4px;">tokens/validate.sh</code>. ERRs block shipping. WARNs must be justified in the QA report.</p>
+
+      <div class="ds-rules">
+        <div class="ds-rule ds-rule--pass">Use spacing tokens for all layout gaps, margins, and paddings — every spacing value must reference a CSS custom property.</div>
+        <div class="ds-rule ds-rule--pass">Use <code style="font-family:monospace;font-size:11px;color:#a8e6c5;">--gutter</code> for all side margins — it adapts from 16px (mobile) to 40px (web) to 80px (TV) automatically.</div>
+        <div class="ds-rule ds-rule--pass">Use 4px (--space-0-5) for sub-8px spacing only in tight component internals such as icon-to-label and badge-to-text gaps.</div>
+        <div class="ds-rule ds-rule--pass">Use stack utilities (.page-stack, .component-stack, .content-stack) for vertical rhythm — never hand-place margin-bottom on children.</div>
+        <div class="ds-rule ds-rule--pass">Use <code style="font-family:monospace;font-size:11px;color:#a8e6c5;">--section-gap</code> between rails and major content regions — not --space-4 or a bare 32px value.</div>
+        <div class="ds-rule ds-rule--fail">Use arbitrary px values like 10px, 15px, 18px, or 20px in new components — these are off the 8px scale and are never approved.</div>
+        <div class="ds-rule ds-rule--fail">Use rem or em for spacing — all spacing tokens are px; rem introduces font-size coupling that breaks the grid.</div>
+        <div class="ds-rule ds-rule--fail">Use hardcoded 20px as gutter — use var(--gutter) which adapts per platform. 20px is banned from the spacing scale.</div>
+        <div class="ds-rule ds-rule--fail">Skip spacing tokens for "one-off" adjustments — every spacing value must use a token or go through the exception approval process.</div>
+        <div class="ds-rule ds-rule--fail">Use child margin-bottom for vertical rhythm — always use gap on the parent flex/grid container (stack utilities).</div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 5 — QUICK REFERENCE
+    ═══════════════════════════════════════════════════════ -->
+    <section class="ds-section" id="quick-reference">
+      <div class="ds-section-eyebrow">Section 05</div>
+      <h2 class="ds-section-title">Quick reference</h2>
+      <p class="ds-section-desc">All 12 scale tokens at a glance. Bookmark this for day-to-day use.</p>
+
+      <div class="quick-ref-grid">
+        <div class="quick-ref-row">
+          <span class="quick-ref-token">--space-0-25</span>
+          <span class="quick-ref-val">2px</span>
+        </div>
+        <div class="quick-ref-row">
+          <span class="quick-ref-token">--space-0-5</span>
+          <span class="quick-ref-val">4px</span>
+        </div>
+        <div class="quick-ref-row">
+          <span class="quick-ref-token">--space-1</span>
+          <span class="quick-ref-val">8px</span>
+        </div>
+        <div class="quick-ref-row">
+          <span class="quick-ref-token">--space-1-5</span>
+          <span class="quick-ref-val">12px</span>
+        </div>
+        <div class="quick-ref-row">
+          <span class="quick-ref-token">--space-2</span>
+          <span class="quick-ref-val">16px</span>
+        </div>
+        <div class="quick-ref-row">
+          <span class="quick-ref-token">--space-3</span>
+          <span class="quick-ref-val">24px</span>
+        </div>
+        <div class="quick-ref-row">
+          <span class="quick-ref-token">--space-4</span>
+          <span class="quick-ref-val">32px</span>
+        </div>
+        <div class="quick-ref-row">
+          <span class="quick-ref-token">--space-5</span>
+          <span class="quick-ref-val">40px</span>
+        </div>
+        <div class="quick-ref-row">
+          <span class="quick-ref-token">--space-6</span>
+          <span class="quick-ref-val">48px</span>
+        </div>
+        <div class="quick-ref-row">
+          <span class="quick-ref-token">--space-8</span>
+          <span class="quick-ref-val">64px</span>
+        </div>
+        <div class="quick-ref-row">
+          <span class="quick-ref-token">--space-10</span>
+          <span class="quick-ref-val">80px</span>
+        </div>
+        <div class="quick-ref-row">
+          <span class="quick-ref-token">--space-12</span>
+          <span class="quick-ref-val">96px</span>
+        </div>
+      </div>
+
+      <!-- Stack utilities reference -->
+      <div style="margin-top: var(--space-3);">
+        <div class="ds-sub-label">Stack utilities — use instead of child margins</div>
+        <div class="table-wrap">
+          <table class="sem-table">
+            <thead>
+              <tr>
+                <th>Class</th>
+                <th>Gap token</th>
+                <th>When to use</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>.page-stack</td>
+                <td class="platform-val">--section-gap</td>
+                <td class="platform-usage">Major page sections, rails on the home screen</td>
+              </tr>
+              <tr>
+                <td>.hero-stack</td>
+                <td class="platform-val">--hero-gap</td>
+                <td class="platform-usage">Hero region to first content section</td>
+              </tr>
+              <tr>
+                <td>.component-stack</td>
+                <td class="platform-val">--component-padding</td>
+                <td class="platform-usage">Components stacked inside a section</td>
+              </tr>
+              <tr>
+                <td>.content-stack</td>
+                <td class="platform-val">--space-1-5 (12px)</td>
+                <td class="platform-usage">Related elements — title + body, label + value</td>
+              </tr>
+              <tr>
+                <td>.tight-stack</td>
+                <td class="platform-val">--space-1 (8px)</td>
+                <td class="platform-usage">Tight group — icon + label, badge + text</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- CHANGELOG -->
+
+  </main>
+  <script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script>
+</body>
+</html>

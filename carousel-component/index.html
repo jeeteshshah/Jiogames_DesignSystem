@@ -1,0 +1,655 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carousel — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    .carousel { position: relative; overflow: hidden; border-radius: var(--r5); }
+    .carousel-track { display: flex; transition: transform 320ms cubic-bezier(0.25,0.46,0.45,0.94); }
+    .carousel-slide { min-width: 100%; }
+    .carousel-slide img,
+    .carousel-slide .carousel-slide-inner { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; background: var(--surface-2); }
+    .carousel-controls { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; align-items: center; }
+    .carousel-dot { width: 6px; height: 6px; border-radius: var(--pill); background: rgba(255,255,255,.35); border: none; cursor: pointer; padding: 0; transition: all 200ms cubic-bezier(0.25,0.46,0.45,0.94); flex-shrink: 0; }
+    .carousel-dot.is-active { width: 20px; background: var(--text); }
+    .carousel-prev,
+    .carousel-next { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: var(--pill); background: rgba(0,0,0,.5); border: 1px solid var(--border-subtle); color: var(--text); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 150ms ease; font-size: 16px; line-height: 1; }
+    .carousel-prev { left: 12px; }
+    .carousel-next { right: 12px; }
+    .carousel-prev:hover, .carousel-next:hover { background: rgba(0,0,0,.75); }
+    .carousel-prev:disabled, .carousel-next:disabled { opacity: 0; pointer-events: none; }
+
+    /* Slide content overlays */
+    .carousel-slide-inner { position: relative; overflow: hidden; }
+    .carousel-slide-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
+    .carousel-slide-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.7) 0%, transparent 60%); }
+    .carousel-slide-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; }
+    .carousel-slide-label { font-size: 10px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: var(--jio); margin-bottom: 4px; }
+    .carousel-slide-title { font-size: 18px; font-weight: 900; color: var(--text); letter-spacing: -.3px; line-height: 1.2; }
+    .carousel-slide-sub { font-size: 12px; color: rgba(244,242,238,.7); margin-top: 4px; }
+
+    /* Thumbnail strip variant */
+    .carousel-thumbs { display: flex; gap: 6px; margin-top: 8px; overflow-x: auto; scrollbar-width: none; }
+    .carousel-thumbs::-webkit-scrollbar { display: none; }
+    .carousel-thumb { width: 64px; height: 40px; border-radius: 6px; background: var(--surface-2); flex-shrink: 0; cursor: pointer; border: 2px solid transparent; transition: border-color 150ms ease; overflow: hidden; position: relative; }
+    .carousel-thumb.is-active { border-color: var(--jio); }
+    .carousel-thumb-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
+
+    /* Fade transition variant */
+    .carousel--fade .carousel-track { transition: none; }
+    .carousel--fade .carousel-slide { position: absolute; top: 0; left: 0; width: 100%; opacity: 0; transition: opacity 400ms ease; pointer-events: none; }
+    .carousel--fade .carousel-slide.is-active { opacity: 1; position: relative; pointer-events: auto; }
+
+    /* Slide color backgrounds (placeholder art) */
+    .slide-bg--1 { background: linear-gradient(135deg, #0d1f12 0%, #091409 100%); }
+    .slide-bg--2 { background: linear-gradient(135deg, #1a0d24 0%, #0e0814 100%); }
+    .slide-bg--3 { background: linear-gradient(135deg, #1f0e0a 0%, #140908 100%); }
+    .slide-bg--4 { background: linear-gradient(135deg, #0a121f 0%, #080c14 100%); }
+
+    /* Slide count label */
+    .carousel-count { position: absolute; top: 12px; right: 14px; font-size: 10px; font-weight: 700; color: rgba(255,255,255,.6); background: rgba(0,0,0,.4); padding: 3px 8px; border-radius: var(--pill); }
+
+    /* Aspect ratio variants */
+    .carousel--4-3 .carousel-slide-inner { aspect-ratio: 4/3; }
+    .carousel--21-9 .carousel-slide-inner { aspect-ratio: 21/9; }
+  </style>
+</head><body><main class="ds-content">
+
+  <!-- 1. PAGE HEADER -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Carousel</span>
+    </nav>
+    <h1 class="component-page-title">Carousel</h1>
+    <p class="component-page-def">Standalone auto-advancing or manually controlled slide container for featured content, screenshots, and promotional banners. Different from game rails, which are scroll areas.</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile">
+          <span class="component-platform-dot"></span>Mobile
+        </span>
+        <span class="component-platform component-platform--web">
+          <span class="component-platform-dot"></span>Web
+        </span>
+        <span class="component-platform component-platform--tv">
+          <span class="component-platform-dot"></span>TV
+        </span>
+      </div>
+      <span class="component-maturity component-maturity--draft">
+        <span class="component-maturity--dot"></span>Draft
+      </span>
+    </div>
+  </header>
+
+  <!-- 2. HERO -->
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:380px; position:relative;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="padding:40px 48px; max-width:640px; width:100%;">
+      <!-- Live carousel demo: slide 2 of 4 -->
+      <div id="hero-carousel" class="carousel" role="region" aria-label="Game screenshots" aria-roledescription="carousel" style="width:100%;">
+        <div class="carousel-track" id="hero-track">
+          <div class="carousel-slide" role="group" aria-label="Slide 1 of 4" aria-hidden="true">
+            <div class="carousel-slide-inner slide-bg--1">
+              <div class="carousel-slide-overlay"></div>
+              <div class="carousel-slide-content">
+                <div class="carousel-slide-label">Featured</div>
+                <div class="carousel-slide-title">Tomb Raider</div>
+                <div class="carousel-slide-sub">Action Adventure · Slide 1</div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-slide" role="group" aria-label="Slide 2 of 4">
+            <div class="carousel-slide-inner slide-bg--2">
+              <div class="carousel-slide-overlay"></div>
+              <div class="carousel-slide-content">
+                <div class="carousel-slide-label">New Release</div>
+                <div class="carousel-slide-title">Yooka-Laylee</div>
+                <div class="carousel-slide-sub">Platformer · Slide 2</div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-slide" role="group" aria-label="Slide 3 of 4" aria-hidden="true">
+            <div class="carousel-slide-inner slide-bg--3">
+              <div class="carousel-slide-overlay"></div>
+              <div class="carousel-slide-content">
+                <div class="carousel-slide-label">Top Rated</div>
+                <div class="carousel-slide-title">Vigilante</div>
+                <div class="carousel-slide-sub">Action · Slide 3</div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-slide" role="group" aria-label="Slide 4 of 4" aria-hidden="true">
+            <div class="carousel-slide-inner slide-bg--4">
+              <div class="carousel-slide-overlay"></div>
+              <div class="carousel-slide-content">
+                <div class="carousel-slide-label">Trending</div>
+                <div class="carousel-slide-title">Shadow Force</div>
+                <div class="carousel-slide-sub">Stealth · Slide 4</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="carousel-count" aria-live="polite" aria-atomic="true" id="hero-count">2 / 4</span>
+        <button class="carousel-prev" id="hero-prev" aria-label="Previous slide">&#8592;</button>
+        <button class="carousel-next" id="hero-next" aria-label="Next slide">&#8594;</button>
+        <div class="carousel-controls" role="tablist" aria-label="Slides">
+          <button class="carousel-dot" role="tab" aria-label="Slide 1" aria-selected="false" data-index="0"></button>
+          <button class="carousel-dot is-active" role="tab" aria-label="Slide 2" aria-selected="true" data-index="1"></button>
+          <button class="carousel-dot" role="tab" aria-label="Slide 3" aria-selected="false" data-index="2"></button>
+          <button class="carousel-dot" role="tab" aria-label="Slide 4" aria-selected="false" data-index="3"></button>
+        </div>
+      </div>
+    </div>
+    <p class="component-hero-caption">Carousel · slide 2 of 4 · dot indicator · prev/next arrows</p>
+  </section>
+  <script>
+    (function() {
+      var track = document.getElementById('hero-track');
+      var dots = document.querySelectorAll('#hero-carousel .carousel-dot');
+      var prev = document.getElementById('hero-prev');
+      var next = document.getElementById('hero-next');
+      var count = document.getElementById('hero-count');
+      var current = 1;
+      var total = 4;
+      function goTo(i) {
+        current = i;
+        track.style.transform = 'translateX(-' + (i * 100) + '%)';
+        dots.forEach(function(d, idx) {
+          d.classList.toggle('is-active', idx === i);
+          d.setAttribute('aria-selected', idx === i ? 'true' : 'false');
+        });
+        count.textContent = (i + 1) + ' / ' + total;
+        prev.disabled = i === 0;
+        next.disabled = i === total - 1;
+      }
+      prev.addEventListener('click', function() { if (current > 0) goTo(current - 1); });
+      next.addEventListener('click', function() { if (current < total - 1) goTo(current + 1); });
+      dots.forEach(function(d) { d.addEventListener('click', function() { goTo(parseInt(d.dataset.index)); }); });
+      goTo(1);
+    })();
+  </script>
+
+  <!-- 3. INTRO -->
+  <section class="component-intro">
+    <p>Carousel is a structured slide container with explicit navigation controls. It differs from a game rail (which is a horizontally scrolling list of cards) in that Carousel presents one full-width slide at a time and is designed for featured or promotional content. Each slide has a defined identity — screenshot, banner, or feature announcement — and the user navigates between them deliberately or through auto-advance.</p>
+    <ul class="component-summary-list">
+      <li><strong>Auto-advance</strong> — cycles slides on a 3s interval; pauses on hover or focus</li>
+      <li><strong>Manual</strong> — prev/next arrows plus dot indicators; no auto-advance</li>
+      <li><strong>Screenshot gallery</strong> — thumbnail strip below for direct slide selection</li>
+      <li><strong>Full-bleed</strong> — no border-radius, used inside a card or panel that provides its own frame</li>
+    </ul>
+  </section>
+
+  <!-- 4. BEST PRACTICES -->
+  <section class="component-best-practices">
+    <div class="component-bp-card component-bp-card--do">
+      <span class="component-bp-label component-bp-label--do">Do</span>
+      <ul class="component-bp-list">
+        <li>Always show dots or a slide counter — never unlimited slides with no position indicator</li>
+        <li>Pause auto-advance on hover, focus, and when the page is not visible (Page Visibility API)</li>
+        <li>Cap at 8 slides maximum — more than 8 makes the dot row cognitively costly</li>
+        <li>Show thumbnail strip below for screenshot galleries so users can jump to any slide</li>
+        <li>Hide prev button on first slide; hide next button on last slide</li>
+      </ul>
+    </div>
+    <div class="component-bp-card component-bp-card--dont">
+      <span class="component-bp-label component-bp-label--dont">Don't</span>
+      <ul class="component-bp-list">
+        <li>Use Carousel for a scrollable list of game cards — use a Scroll Area rail instead</li>
+        <li>Loop infinitely without making that behaviour explicit to the user</li>
+        <li>Auto-advance faster than 3s — causes motion sickness and prevents reading content</li>
+        <li>Place Carousel inside another Carousel — nested slide containers create interaction conflict</li>
+        <li>Show more than 8 dots — at that count use a slide counter (2 / 4) instead</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. ANATOMY -->
+  <div class="ds-anatomy" style="margin:40px 0;">
+    <div class="ds-anatomy-preview" style="padding:16px; align-items:flex-start;">
+      <div style="width:100%; position:relative;">
+        <span style="position:absolute;top:-18px;left:50%;transform:translateX(-50%);z-index:2;"><span class="ds-anatomy-callout-num">1</span></span>
+        <div class="carousel" style="position:relative;">
+          <div style="position:relative; overflow:hidden; border-radius:var(--r5);">
+            <div class="carousel-slide-inner slide-bg--2" style="position:relative;">
+              <div class="carousel-slide-overlay"></div>
+              <div class="carousel-slide-content">
+                <div class="carousel-slide-label">Featured</div>
+                <div class="carousel-slide-title">Yooka-Laylee</div>
+              </div>
+            </div>
+            <span style="position:absolute;top:10px;right:-18px;z-index:2;"><span class="ds-anatomy-callout-num">4</span></span>
+            <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);"><span class="ds-anatomy-callout-num">5</span></span>
+            <span style="position:absolute;right:10px;top:50%;transform:translateY(-50%);"><span class="ds-anatomy-callout-num">5</span></span>
+          </div>
+          <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:6px;align-items:center;">
+            <span style="width:6px;height:6px;border-radius:var(--pill);background:rgba(255,255,255,.35);display:block;"></span>
+            <span style="width:20px;height:6px;border-radius:var(--pill);background:var(--text);display:block;"></span>
+            <span style="width:6px;height:6px;border-radius:var(--pill);background:rgba(255,255,255,.35);display:block;"></span>
+          </div>
+          <span style="position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);"><span class="ds-anatomy-callout-num">2</span></span>
+          <span style="position:absolute;top:8px;left:10px;background:rgba(0,0,0,.5);border-radius:var(--pill);padding:3px 8px;font-size:10px;color:rgba(255,255,255,.6);">2 / 3</span>
+          <span style="position:absolute;top:-18px;right:40px;"><span class="ds-anatomy-callout-num">3</span></span>
+        </div>
+      </div>
+    </div>
+    <ol class="ds-anatomy-list">
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">1</span>
+        <div>
+          <div class="ds-anatomy-label">Carousel track <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Flex row of slides. transform: translateX() drives the slide transition. overflow:hidden on the outer .carousel clips non-active slides.</div>
+          <code class="ds-anatomy-token ds-code">display:flex; transition:transform 320ms ease-out</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">2</span>
+        <div>
+          <div class="ds-anatomy-label">Dot indicators <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Active dot stretches to 20px width (pill pill shape) to communicate current position. Inactive dots are 6×6px circles at 35% opacity. Max 8 dots.</div>
+          <code class="ds-anatomy-token ds-code">width:6px → 20px on active; background:rgba(255,255,255,.35) → var(--text)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">3</span>
+        <div>
+          <div class="ds-anatomy-label">Slide counter <span class="ds-anatomy-optional">Optional</span></div>
+          <div class="ds-anatomy-desc">Text label "2 / 4" in top-right corner. Required when slide count exceeds 8. Updates with aria-live="polite" so screen readers announce position changes.</div>
+          <code class="ds-anatomy-token ds-code">aria-live="polite" aria-atomic="true"</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">4</span>
+        <div>
+          <div class="ds-anatomy-label">Slide content overlay <span class="ds-anatomy-optional">Optional</span></div>
+          <div class="ds-anatomy-desc">Gradient scrim from bottom covers the lower 40% of the slide. Content (label + title) sits inside this zone. Never overlay text on the upper 60% — that area is pure art.</div>
+          <code class="ds-anatomy-token ds-code">background: linear-gradient(to top, rgba(0,0,0,.7), transparent 60%)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">5</span>
+        <div>
+          <div class="ds-anatomy-label">Prev / Next buttons <span class="ds-anatomy-optional">Optional</span></div>
+          <div class="ds-anatomy-desc">Semi-transparent pill buttons on each side. Hidden (opacity:0) on first/last slide. Web only — mobile uses swipe; TV uses D-pad left/right.</div>
+          <code class="ds-anatomy-token ds-code">background:rgba(0,0,0,.5); width:40px; height:40px; border-radius:var(--pill)</code>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- 6. VARIANTS -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">All variants share the same .carousel base. Behaviour and additional elements (thumbs, auto-advance) are layered on top.</p>
+
+    <div style="display:flex; flex-direction:column; gap:32px;">
+
+      <!-- Manual -->
+      <div>
+        <div class="ds-sub-label" style="margin-bottom:12px;">Manual — prev/next + dots</div>
+        <div class="ds-demo ds-demo--dark">
+          <div id="c-manual" class="carousel" role="region" aria-label="Game screenshots" aria-roledescription="carousel" style="max-width:480px;">
+            <div class="carousel-track" id="c-manual-track">
+              <div class="carousel-slide" role="group" aria-label="Slide 1 of 3"><div class="carousel-slide-inner slide-bg--1"><div class="carousel-slide-overlay"></div><div class="carousel-slide-content"><div class="carousel-slide-label">Action</div><div class="carousel-slide-title">Tomb Raider</div></div></div></div>
+              <div class="carousel-slide" role="group" aria-label="Slide 2 of 3"><div class="carousel-slide-inner slide-bg--2"><div class="carousel-slide-overlay"></div><div class="carousel-slide-content"><div class="carousel-slide-label">Platformer</div><div class="carousel-slide-title">Yooka-Laylee</div></div></div></div>
+              <div class="carousel-slide" role="group" aria-label="Slide 3 of 3"><div class="carousel-slide-inner slide-bg--3"><div class="carousel-slide-overlay"></div><div class="carousel-slide-content"><div class="carousel-slide-label">Action</div><div class="carousel-slide-title">Vigilante</div></div></div></div>
+            </div>
+            <button class="carousel-prev" id="c-manual-prev" aria-label="Previous slide" disabled>&#8592;</button>
+            <button class="carousel-next" id="c-manual-next" aria-label="Next slide">&#8594;</button>
+            <div class="carousel-controls">
+              <button class="carousel-dot is-active" data-i="0" aria-label="Slide 1" aria-selected="true"></button>
+              <button class="carousel-dot" data-i="1" aria-label="Slide 2" aria-selected="false"></button>
+              <button class="carousel-dot" data-i="2" aria-label="Slide 3" aria-selected="false"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thumbnails below -->
+      <div>
+        <div class="ds-sub-label" style="margin-bottom:12px;">Screenshot gallery — thumbnail strip</div>
+        <div class="ds-demo ds-demo--dark">
+          <div style="max-width:480px;">
+            <div id="c-thumb" class="carousel" role="region" aria-label="Game screenshots" aria-roledescription="carousel">
+              <div class="carousel-track" id="c-thumb-track">
+                <div class="carousel-slide" role="group" aria-label="Slide 1 of 4"><div class="carousel-slide-inner slide-bg--1"></div></div>
+                <div class="carousel-slide" role="group" aria-label="Slide 2 of 4"><div class="carousel-slide-inner slide-bg--2"></div></div>
+                <div class="carousel-slide" role="group" aria-label="Slide 3 of 4"><div class="carousel-slide-inner slide-bg--3"></div></div>
+                <div class="carousel-slide" role="group" aria-label="Slide 4 of 4"><div class="carousel-slide-inner slide-bg--4"></div></div>
+              </div>
+              <span class="carousel-count" aria-live="polite" aria-atomic="true" id="c-thumb-count">1 / 4</span>
+            </div>
+            <div class="carousel-thumbs" id="c-thumb-strip">
+              <div class="carousel-thumb is-active" data-i="0" tabindex="0" role="button" aria-label="View slide 1"><div class="carousel-thumb-bg slide-bg--1"></div></div>
+              <div class="carousel-thumb" data-i="1" tabindex="0" role="button" aria-label="View slide 2"><div class="carousel-thumb-bg slide-bg--2"></div></div>
+              <div class="carousel-thumb" data-i="2" tabindex="0" role="button" aria-label="View slide 3"><div class="carousel-thumb-bg slide-bg--3"></div></div>
+              <div class="carousel-thumb" data-i="3" tabindex="0" role="button" aria-label="View slide 4"><div class="carousel-thumb-bg slide-bg--4"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Full-bleed (no border-radius) -->
+      <div>
+        <div class="ds-sub-label" style="margin-bottom:12px;">Full-bleed — no border-radius, flush inside a panel</div>
+        <div class="ds-demo ds-demo--dark" >
+          <div class="carousel" style="border-radius:0; max-width:100%;">
+            <div class="carousel-track">
+              <div class="carousel-slide"><div class="carousel-slide-inner slide-bg--4" style="aspect-ratio:21/9;"><div class="carousel-slide-overlay"></div><div class="carousel-slide-content"><div class="carousel-slide-label">Cinema banner</div><div class="carousel-slide-title">Shadow Force</div></div></div></div>
+            </div>
+            <div class="carousel-controls">
+              <button class="carousel-dot is-active" aria-label="Slide 1" aria-selected="true"></button>
+              <button class="carousel-dot" aria-label="Slide 2" aria-selected="false"></button>
+              <button class="carousel-dot" aria-label="Slide 3" aria-selected="false"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <script>
+    // Manual carousel
+    (function() {
+      var tr = document.getElementById('c-manual-track');
+      var ds = document.querySelectorAll('#c-manual .carousel-dot');
+      var pv = document.getElementById('c-manual-prev');
+      var nx = document.getElementById('c-manual-next');
+      var cur = 0; var tot = 3;
+      function go(i) {
+        cur = i;
+        tr.style.transform = 'translateX(-' + (i * 100) + '%)';
+        ds.forEach(function(d, idx) { d.classList.toggle('is-active', idx === i); d.setAttribute('aria-selected', idx === i ? 'true' : 'false'); });
+        pv.disabled = i === 0; nx.disabled = i === tot - 1;
+      }
+      pv.addEventListener('click', function() { if (cur > 0) go(cur - 1); });
+      nx.addEventListener('click', function() { if (cur < tot - 1) go(cur + 1); });
+      ds.forEach(function(d) { d.addEventListener('click', function() { go(parseInt(d.dataset.i)); }); });
+    })();
+    // Thumb carousel
+    (function() {
+      var tr = document.getElementById('c-thumb-track');
+      var ts = document.querySelectorAll('#c-thumb-strip .carousel-thumb');
+      var cnt = document.getElementById('c-thumb-count');
+      var cur = 0; var tot = 4;
+      function go(i) {
+        cur = i;
+        tr.style.transform = 'translateX(-' + (i * 100) + '%)';
+        ts.forEach(function(t, idx) { t.classList.toggle('is-active', idx === i); });
+        cnt.textContent = (i + 1) + ' / ' + tot;
+      }
+      ts.forEach(function(t) { t.addEventListener('click', function() { go(parseInt(t.dataset.i)); }); });
+    })();
+  </script>
+
+  <!-- 7. SIZES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Carousel width is always 100% of its container. Aspect ratio controls the height. Controls scale automatically.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Aspect ratio</th><th>Class modifier</th><th>Use case</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>16:9 (default)</td><td>none needed</td><td>Hero banners, game screenshots, promotional slides</td></tr>
+        <tr><td>4:3</td><td><code class="ds-code">.carousel--4-3</code></td><td>Older game screenshots, square-ish promo art</td></tr>
+        <tr><td>21:9 (cinema)</td><td><code class="ds-code">.carousel--21-9</code></td><td>Wide cinematic banners, immersive feature showcases</td></tr>
+      </tbody>
+    </table>
+    <div class="ds-demo ds-demo--dark" style="margin-top:16px;">
+      <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:flex-start;">
+        <div style="flex:1; min-width:160px;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-bottom:6px;">16:9 default</div>
+          <div class="carousel" style="border-radius:var(--r4);"><div class="carousel-track"><div class="carousel-slide"><div class="carousel-slide-inner slide-bg--1"></div></div></div></div>
+        </div>
+        <div style="flex:1; min-width:160px;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-bottom:6px;">4:3</div>
+          <div class="carousel carousel--4-3" style="border-radius:var(--r4);"><div class="carousel-track"><div class="carousel-slide"><div class="carousel-slide-inner slide-bg--2"></div></div></div></div>
+        </div>
+        <div style="flex:1; min-width:160px;">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-bottom:6px;">21:9 cinema</div>
+          <div class="carousel carousel--21-9" style="border-radius:var(--r4);"><div class="carousel-track"><div class="carousel-slide"><div class="carousel-slide-inner slide-bg--3"></div></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. STATES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Carousel state affects auto-advance behaviour and button visibility.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>State</th><th>Trigger</th><th>Behaviour</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Auto-playing</td><td>Default on mount (auto-advance variant)</td><td>Advances every 3s. Prev/next buttons visible. Dots update. Counter updates with aria-live.</td></tr>
+        <tr><td>Paused</td><td>User hovers or focuses any element inside carousel</td><td>Auto-advance timer suspended. Resumes on mouseleave / blur outside carousel.</td></tr>
+        <tr><td>Manual navigation</td><td>User clicks prev/next or a dot</td><td>Transitions to target slide instantly. Auto-advance resets its 3s timer after interaction.</td></tr>
+        <tr><td>First slide</td><td>Current index = 0</td><td>Prev button opacity:0, pointer-events:none. Not removed from DOM — screen readers skip it via disabled.</td></tr>
+        <tr><td>Last slide</td><td>Current index = total − 1</td><td>Next button opacity:0, pointer-events:none. Same pattern as first slide.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 9. CONTENT GUIDANCE -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Slide limits</div>
+        <ul>
+          <li>3–5 slides is the sweet spot — enough variety without overwhelming the dot row</li>
+          <li>Maximum 8 slides before the dot row becomes cognitively costly</li>
+          <li>Above 8 slides, replace dots with a numeric counter ("2 / 12")</li>
+          <li>Never show a carousel with only 1 slide — use a static hero image instead</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Overlay text</div>
+        <ul>
+          <li>Keep slide titles to 3 words maximum — they appear over artwork in a fixed band</li>
+          <li>Label line (genre, tag) maximum 20 characters</li>
+          <li>Ensure text contrast against the gradient scrim — always white or --text on dark overlay</li>
+          <li>Do not place interactive elements (buttons) inside a slide — the whole slide can be a tap target</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. PLATFORM CONSIDERATIONS -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Swipe left/right to navigate — no prev/next buttons needed</li>
+          <li>Show dots only (no arrow buttons) — they are too small to tap reliably</li>
+          <li>Auto-advance is acceptable but pause on any touch interaction</li>
+          <li>Use <code class="ds-code">touch-action: pan-y</code> on the carousel so vertical scroll still works</li>
+          <li>Ensure each slide is a minimum 44px tap target if the whole slide is interactive</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Show prev/next buttons + dots + optional auto-advance</li>
+          <li>Pause auto-advance on hover and when document.hidden is true</li>
+          <li>Support keyboard: left/right arrow keys navigate slides when carousel is focused</li>
+          <li>Thumbnail strip is web-primary — enough screen real estate for the extra row</li>
+          <li>All slide and control elements must be reachable via Tab key</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>D-pad left/right navigates between slides</li>
+          <li>Dots must be large — minimum 12px diameter for 3m legibility</li>
+          <li>Active dot should be clearly distinct — use a longer pill (32px) not just color change</li>
+          <li>No auto-advance on TV — the remote is slow; users need control</li>
+          <li>No thumbnail strip — it is too small at TV scale; use large labeled dots</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. ACCESSIBILITY -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Element</th><th>Attribute</th><th>Guidance</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Carousel wrapper</td><td><code class="ds-code">role="region" aria-roledescription="carousel" aria-label</code></td><td>Announces to screen readers that this is a carousel named by aria-label (e.g. "Game screenshots").</td></tr>
+        <tr><td>Each slide</td><td><code class="ds-code">role="group" aria-label="Slide 1 of 4"</code></td><td>Groups slide content. Non-active slides get aria-hidden="true" so their content is skipped.</td></tr>
+        <tr><td>Prev / Next buttons</td><td><code class="ds-code">aria-label="Previous slide"</code></td><td>Icon-only buttons must have descriptive aria-label. Never rely on the arrow character alone.</td></tr>
+        <tr><td>Dot buttons</td><td><code class="ds-code">role="tab" aria-label="Slide 2" aria-selected</code></td><td>Treat dots as a tablist. Active dot: aria-selected="true". Inactive: aria-selected="false".</td></tr>
+        <tr><td>Slide counter</td><td><code class="ds-code">aria-live="polite" aria-atomic="true"</code></td><td>Screen readers announce position updates without interrupting ongoing speech.</td></tr>
+        <tr><td>Auto-advance</td><td>Pause on focus</td><td>Animation must pause when any element inside the carousel receives keyboard focus (WCAG 2.1 2.2.2).</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 12. RELATED TOKENS -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Token</th><th>Value</th><th>Usage</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code class="ds-code">--r5</code></td><td><code class="ds-code">—</code></td><td>Carousel container border-radius (default)</td></tr>
+        <tr><td><code class="ds-code">--pill</code></td><td><code class="ds-code">100px</code></td><td>Dot border-radius and prev/next button shape</td></tr>
+        <tr><td><code class="ds-code">--text</code></td><td><code class="ds-code">#f4f2ee</code></td><td>Active dot fill color</td></tr>
+        <tr><td><code class="ds-code">--border-subtle</code></td><td><code class="ds-code">rgba(255,255,255,.08)</code></td><td>Prev/next button border</td></tr>
+        <tr><td><code class="ds-code">--surface-2</code></td><td><code class="ds-code">—</code></td><td>Slide placeholder background when no image is loaded</td></tr>
+        <tr><td><code class="ds-code">--dur-slow</code></td><td><code class="ds-code">320ms</code></td><td>Slide transition duration</td></tr>
+        <tr><td><code class="ds-code">--dur-fast</code></td><td><code class="ds-code">—</code></td><td>Dot expansion and button background transition</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CODE EXAMPLES -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Basic carousel structure</div>
+      <pre class="component-code-pre"><code>&lt;div class="carousel"
+     role="region"
+     aria-label="Game screenshots"
+     aria-roledescription="carousel"&gt;
+
+  &lt;div class="carousel-track" id="track"&gt;
+    &lt;div class="carousel-slide" role="group" aria-label="Slide 1 of 3"&gt;
+      &lt;div class="carousel-slide-inner"&gt;
+        &lt;!-- slide content --&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- more slides --&gt;
+  &lt;/div&gt;
+
+  &lt;span class="carousel-count"
+        aria-live="polite"
+        aria-atomic="true"&gt;1 / 3&lt;/span&gt;
+
+  &lt;button class="carousel-prev" aria-label="Previous slide" disabled&gt;&amp;#8592;&lt;/button&gt;
+  &lt;button class="carousel-next" aria-label="Next slide"&gt;&amp;#8594;&lt;/button&gt;
+
+  &lt;div class="carousel-controls" role="tablist" aria-label="Slides"&gt;
+    &lt;button class="carousel-dot is-active"
+            role="tab"
+            aria-label="Slide 1"
+            aria-selected="true"&gt;&lt;/button&gt;
+    &lt;button class="carousel-dot"
+            role="tab"
+            aria-label="Slide 2"
+            aria-selected="false"&gt;&lt;/button&gt;
+    &lt;button class="carousel-dot"
+            role="tab"
+            aria-label="Slide 3"
+            aria-selected="false"&gt;&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Auto-advance with pause on hover</div>
+      <pre class="component-code-pre"><code>var carousel = document.querySelector('.carousel');
+var track    = carousel.querySelector('.carousel-track');
+var dots     = carousel.querySelectorAll('.carousel-dot');
+var current  = 0;
+var total    = dots.length;
+var timer    = null;
+
+function goTo(i) {
+  current = (i + total) % total;
+  track.style.transform = 'translateX(-' + (current * 100) + '%)';
+  dots.forEach(function(d, idx) {
+    d.classList.toggle('is-active', idx === current);
+    d.setAttribute('aria-selected', idx === current ? 'true' : 'false');
+  });
+}
+
+function start() {
+  timer = setInterval(function() { goTo(current + 1); }, 3000);
+}
+
+function stop() { clearInterval(timer); }
+
+carousel.addEventListener('mouseenter', stop);
+carousel.addEventListener('mouseleave', start);
+carousel.addEventListener('focusin',    stop);
+carousel.addEventListener('focusout',   start);
+
+document.addEventListener('visibilitychange', function() {
+  document.hidden ? stop() : start();
+});
+
+start();</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Screenshot gallery with thumbnail strip</div>
+      <pre class="component-code-pre"><code>&lt;div class="carousel" role="region" aria-label="Game screenshots"&gt;
+  &lt;div class="carousel-track" id="ss-track"&gt;
+    &lt;div class="carousel-slide" role="group" aria-label="Slide 1 of 4"&gt;
+      &lt;img class="carousel-slide-inner" src="screenshot-1.jpg" alt="Gameplay showing..."&gt;
+    &lt;/div&gt;
+    &lt;!-- more slides --&gt;
+  &lt;/div&gt;
+  &lt;span class="carousel-count" aria-live="polite" aria-atomic="true"&gt;1 / 4&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;div class="carousel-thumbs"&gt;
+  &lt;div class="carousel-thumb is-active"
+       tabindex="0" role="button"
+       aria-label="View screenshot 1"&gt;
+    &lt;img src="screenshot-1-thumb.jpg" alt=""&gt;
+  &lt;/div&gt;
+  &lt;!-- more thumbs --&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- 13. CHANGELOG -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Changelog</h2>
+    <div class="component-changelog">
+      <div class="component-changelog-entry">
+        <span class="component-changelog-version">v0.1</span>
+        <span class="component-changelog-date">Jun 2026</span>
+        <p class="component-changelog-desc">Initial draft. Covers manual, auto-advance, screenshot gallery (thumbnail strip), full-bleed, and fade-transition variants. Aspect ratio sizes documented. Full WCAG carousel pattern implemented.</p>
+      </div>
+    </div>
+  </section>
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

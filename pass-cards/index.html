@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pass Cards — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    body { background: var(--bg); color: var(--text); font-family: var(--jio-font); margin: 0; }
+
+    .component-hero { border-radius: 20px; overflow: hidden; margin-bottom: 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; min-height: 320px; padding: 48px 32px 32px; }
+    .component-hero--dark { background: #060810; }
+    .component-hero--grid { background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: 32px 32px; background-color: #060810; border: 1px solid var(--border-subtle); }
+    .component-hero-inner { display: flex; flex-direction: column; align-items: center; gap: 28px; position: relative; z-index: 2; }
+    .component-hero-caption { display: block; font-size: 10px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--text4); margin-top: 24px; position: relative; z-index: 2; }
+    .hero-glow { position: absolute; width: 360px; height: 200px; border-radius: var(--pill); background: radial-gradient(ellipse, rgba(0,168,89,.15) 0%, transparent 70%); pointer-events: none; z-index: 1; }
+
+    .component-intro { margin-bottom: 48px; }
+    .component-intro p { font-size: 15px; font-weight: 500; color: var(--text2); line-height: 1.65; margin-bottom: 20px; max-width: 640px; }
+    .component-summary-list { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border-subtle); border-radius: 14px; overflow: hidden; list-style: none; padding: 0; margin: 0; }
+    .component-summary-list li { padding: 14px 20px; border-bottom: 1px solid var(--border-subtle); font-size: 13px; font-weight: 500; color: var(--text2); line-height: 1.55; }
+    .component-summary-list li:last-child { border-bottom: none; }
+    .component-summary-list li strong { color: var(--text); font-weight: 700; }
+
+    .component-best-practices { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+    .component-bp-card { border-radius: 14px; overflow: hidden; border: 1.5px solid; }
+    .component-bp-card--do { border-color: rgba(0,168,89,.3); }
+    .component-bp-card--dont { border-color: rgba(255,71,87,.3); }
+    .component-bp-label { display: flex; align-items: center; gap: 6px; padding: 10px 16px; font-size: 10px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; }
+    .component-bp-label--do { background: rgba(0,168,89,.07); color: var(--jio); }
+    .component-bp-label--dont { background: rgba(255,71,87,.07); color: var(--negative); }
+    .component-bp-label--do::before { content: '\2713'; font-size: 11px; }
+    .component-bp-label--dont::before { content: '\2715'; font-size: 11px; }
+    .component-bp-list { padding: 16px 20px 20px; background: var(--surface-1); margin: 0; display: flex; flex-direction: column; gap: 8px; list-style: none; }
+    .component-bp-list li { font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.5; padding-left: 14px; position: relative; }
+    .component-bp-list li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+
+    .component-platform-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+    .component-platform-card { background: var(--surface-1); border: 1px solid var(--border-subtle); border-radius: var(--r4); padding: 20px; }
+    .component-platform-card--mobile { border-top: 2px solid rgba(110,231,183,.4); }
+    .component-platform-card--web { border-top: 2px solid rgba(147,197,253,.4); }
+    .component-platform-card--tv { border-top: 2px solid rgba(251,191,36,.4); }
+    .component-platform-card-title { font-size: 11px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--text3); margin-bottom: 12px; }
+    .component-platform-card--mobile .component-platform-card-title { color: #6ee7b7; }
+    .component-platform-card--web .component-platform-card-title { color: #93c5fd; }
+    .component-platform-card--tv .component-platform-card-title { color: #fbbf24; }
+    .component-platform-card ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .component-platform-card li { font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.5; padding-left: 14px; position: relative; }
+    .component-platform-card li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+
+    .component-changelog { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; }
+    .component-changelog-entry { display: grid; grid-template-columns: 56px 80px 1fr; gap: 16px; align-items: start; padding: 14px 20px; border-bottom: 1px solid var(--border-subtle); font-size: 12px; }
+    .component-changelog-entry:last-child { border-bottom: none; }
+    .component-changelog-version { font-family: monospace; font-weight: 700; color: var(--jio); font-size: 11px; }
+    .component-changelog-date { color: var(--text3); font-weight: 500; }
+    .component-changelog-desc { color: var(--text2); line-height: 1.5; }
+
+    .a11y-grid { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; margin-top: 24px; }
+    .a11y-row { display: grid; grid-template-columns: 140px 1fr; gap: 0; border-bottom: 1px solid var(--border-subtle); }
+    .a11y-row:last-child { border-bottom: none; }
+    .a11y-label { padding: 16px 16px 14px; font-size: 11px; font-weight: 700; color: var(--text3); letter-spacing: .3px; background: var(--surface-2); text-transform: uppercase; display: flex; align-items: flex-start; }
+    .a11y-content { padding: 14px 20px; font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.6; background: var(--surface-1); }
+    .a11y-content ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 5px; }
+    .a11y-content li { padding-left: 14px; position: relative; }
+    .a11y-content li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+
+    .ds-token-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; font-size: 12px; }
+    .ds-token-table thead th { background: var(--surface-2); padding: 10px 16px; text-align: left; font-size: 9px; font-weight: 700; letter-spacing: .7px; text-transform: uppercase; color: var(--text3); border-bottom: 1px solid var(--border-subtle); }
+    .ds-token-table tbody td { padding: 12px 16px; border-bottom: 1px solid var(--border-subtle); color: var(--text2); vertical-align: middle; }
+    .ds-token-table tbody tr:last-child td { border-bottom: none; }
+    .ds-token-table tbody tr:hover td { background: var(--surface-2); }
+    .ds-token-name { font-family: monospace; color: #a8e6c5; font-size: 11px; }
+    .ds-token-value { font-family: monospace; color: var(--text3); font-size: 11px; }
+    .ds-token-swatch { display: inline-block; width: 16px; height: 16px; border-radius: 4px; border: 1px solid var(--border-subtle); vertical-align: middle; }
+
+    .ds-anatomy { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 24px; }
+    .ds-anatomy-preview { background: var(--surface-1); border: 1px solid var(--border-subtle); border-radius: var(--r4); padding: 24px; display: flex; align-items: center; justify-content: center; }
+    .ds-anatomy-list { display: flex; flex-direction: column; gap: 16px; }
+    .ds-anatomy-item { display: grid; grid-template-columns: 20px 1fr; gap: 12px; align-items: flex-start; }
+    .ds-anatomy-callout-num { width: 20px; height: 20px; border-radius: 50%; background: var(--jio); color: #000; font-size: 10px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ds-anatomy-callout-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--jio); flex-shrink: 0; }
+    .ds-anatomy-label { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .ds-anatomy-desc { font-size: 12px; color: var(--text2); line-height: 1.55; }
+    .ds-anatomy-token { font-size: 10px; font-family: monospace; color: var(--text4); margin-top: 4px; }
+    .ds-anatomy-required { display: inline-block; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: var(--pill); background: rgba(0,168,89,.1); color: var(--jio); letter-spacing: .3px; margin-left: 6px; text-transform: uppercase; }
+    .ds-anatomy-optional { display: inline-block; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: var(--pill); background: rgba(255,255,255,.06); color: var(--text3); letter-spacing: .3px; margin-left: 6px; text-transform: uppercase; }
+
+    @keyframes shimmer { 0% { background-position: -400px 0; } 100% { background-position: 400px 0; } }
+    .skeleton { background: linear-gradient(90deg, var(--surface-2) 25%, var(--surface-3) 50%, var(--surface-2) 75%); background-size: 800px 100%; animation: shimmer 1.4s infinite linear; border-radius: 6px; }
+
+    /* Benefit list item */
+    .benefit-item { font-size: 12px; color: var(--text2); padding-left: 14px; position: relative; line-height: 1.6; }
+    .benefit-item::before { content: ''; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 50%; background: var(--jio); }
+
+    @media (max-width: 760px) {
+      .component-best-practices, .component-platform-grid, .ds-anatomy { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<main class="ds-content">
+
+  <!-- 1. PAGE HEADER -->
+  <div class="component-page-header">
+    <div class="component-breadcrumb">
+      <a href="../index.html">JioGames DLS</a>
+      <span class="component-breadcrumb-sep">&#x203A;</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">&#x203A;</span>
+      <span>Pass Cards</span>
+    </div>
+    <h1 class="component-page-title">Pass Cards</h1>
+    <p class="component-page-def">Pass cards present JioGames subscription plans &#x2014; Mobile, Ultimate, and All Screen &#x2014; with pricing, benefits, and clear CTAs.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+      <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+      <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+      <span class="component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+    </div>
+  </div>
+
+  <!-- 2. HERO VISUAL -->
+  <section class="component-hero component-hero--dark component-hero--grid" id="overview">
+    <div class="hero-glow" style="top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+    <div class="component-hero-inner">
+      <div style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap;justify-content:center">
+
+        <!-- Mobile Pass Card -->
+        <div style="width:220px;border-radius:var(--r7);padding:24px;background:linear-gradient(145deg,#0a1f12,#0d2e1a);border:1px solid rgba(0,168,89,.3)">
+          <div style="font-size:9px;font-weight:900;letter-spacing:1.5px;color:var(--jio);text-transform:uppercase;margin-bottom:12px">Mobile Pass</div>
+          <div style="display:flex;align-items:baseline;gap:4px;margin-bottom:16px">
+            <span style="font-size:32px;font-weight:900;color:var(--text);line-height:1">&#x20B9;99</span>
+            <span style="font-size:13px;color:var(--text3)">/month</span>
+          </div>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px">
+            <li class="benefit-item">100+ games</li>
+            <li class="benefit-item">Mobile only</li>
+            <li class="benefit-item">Cancel anytime</li>
+            <li class="benefit-item">No ads</li>
+          </ul>
+          <button class="btn btn--primary btn--m btn--hug" style="width:100%;margin-top:20px;justify-content:center">Get Mobile Pass</button>
+        </div>
+
+        <!-- Ultimate Pass Card -->
+        <div style="width:220px;border-radius:var(--r7);padding:24px;background:linear-gradient(145deg,#0d0a20,#1a1040);border:1px solid rgba(138,91,255,.4);position:relative">
+          <!-- Ribbon -->
+          <div style="position:absolute;top:12px;right:-4px;background:var(--popular-gold);color:#000;font-size:9px;font-weight:900;padding:3px 10px;border-radius:3px;letter-spacing:.5px">MOST POPULAR</div>
+          <div style="font-size:9px;font-weight:900;letter-spacing:1.5px;color:#a78bfa;text-transform:uppercase;margin-bottom:12px">Ultimate Pass</div>
+          <div style="display:flex;align-items:baseline;gap:4px;margin-bottom:16px">
+            <span style="font-size:32px;font-weight:900;color:var(--text);line-height:1">&#x20B9;199</span>
+            <span style="font-size:13px;color:var(--text3)">/month</span>
+          </div>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px">
+            <li style="font-size:12px;color:var(--text2);padding-left:14px;position:relative;line-height:1.6"><span style="position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:#a78bfa;display:block"></span>300+ games</li>
+            <li style="font-size:12px;color:var(--text2);padding-left:14px;position:relative;line-height:1.6"><span style="position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:#a78bfa;display:block"></span>Mobile + TV + Web</li>
+            <li style="font-size:12px;color:var(--text2);padding-left:14px;position:relative;line-height:1.6"><span style="position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:#a78bfa;display:block"></span>Family sharing</li>
+            <li style="font-size:12px;color:var(--text2);padding-left:14px;position:relative;line-height:1.6"><span style="position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:#a78bfa;display:block"></span>No ads</li>
+            <li style="font-size:12px;color:var(--text2);padding-left:14px;position:relative;line-height:1.6"><span style="position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%;background:#a78bfa;display:block"></span>Early access</li>
+          </ul>
+          <button class="btn btn--ultimate btn--m btn--hug" style="width:100%;margin-top:20px;justify-content:center">Get Ultimate Pass</button>
+        </div>
+
+      </div>
+    </div>
+    <span class="component-hero-caption">Mobile Pass (green) &#xB7; Ultimate Pass (premium) &#xB7; 1:1 scale</span>
+  </section>
+
+  <!-- 3. INTRO -->
+  <section class="component-intro" id="intro">
+    <p>Pass cards are the primary conversion surface for JioGames subscriptions. They must communicate value clearly, highlight differentiation, and drive confident subscription decisions.</p>
+    <ul class="component-summary-list">
+      <li><strong>Three pass tiers</strong> &#x2014; Mobile, Ultimate, and All Screen &#x2014; each with distinct visual treatment.</li>
+      <li><strong>Current plan state</strong> suppresses the CTA and shows a &#x22;Current plan&#x22; badge instead.</li>
+      <li><strong>Expired state</strong> uses muted treatment and a &#x22;Renew&#x22; CTA.</li>
+      <li><strong>Recommended pass</strong> gets visual emphasis via the &#x22;Most Popular&#x22; ribbon and elevated shadow.</li>
+    </ul>
+  </section>
+
+  <!-- 4. BEST PRACTICES -->
+  <section class="ds-section" id="best-practices">
+    <h2 class="ds-section-title">Best practices</h2>
+    <p class="ds-section-desc">Pass cards are conversion-critical. Clarity and hierarchy drive decisions &#x2014; never sacrifice either for decoration.</p>
+    <div class="component-best-practices">
+      <div class="component-bp-card component-bp-card--do">
+        <span class="component-bp-label component-bp-label--do">Do</span>
+        <ul class="component-bp-list">
+          <li>Lead with plan name, then price, then benefits</li>
+          <li>Highlight the recommended plan with a &#x22;Most Popular&#x22; ribbon</li>
+          <li>Keep benefits to 3&#x2013;5 items</li>
+          <li>Use specific CTAs (&#x22;Get Mobile Pass&#x22; not &#x22;Subscribe&#x22;)</li>
+          <li>Show current plan state clearly with a badge</li>
+        </ul>
+      </div>
+      <div class="component-bp-card component-bp-card--dont">
+        <span class="component-bp-label component-bp-label--dont">Don&#x27;t</span>
+        <ul class="component-bp-list">
+          <li>Use identical visual weight for all pass tiers</li>
+          <li>Show price without billing period (always &#x22;&#x20B9;99/month&#x22;)</li>
+          <li>List more than 5 benefits &#x2014; overwhelming</li>
+          <li>Use a generic &#x22;Subscribe&#x22; CTA</li>
+          <li>Show expired and active plans at the same visual prominence</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. ANATOMY -->
+  <section class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <p class="ds-section-desc">All pass cards share the same six-slot structure. The container, plan badge, price display, benefits list, and CTA are required. The ribbon is optional.</p>
+    <div class="ds-anatomy">
+      <div class="ds-anatomy-preview">
+        <div style="position:relative;width:180px">
+          <!-- Card -->
+          <div style="border-radius:var(--r7);padding:20px;background:linear-gradient(145deg,#0a1f12,#0d2e1a);border:1px solid rgba(0,168,89,.3);position:relative">
+            <!-- Callout 1: container -->
+            <div style="position:absolute;top:-12px;right:-12px">
+              <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">1</div>
+            </div>
+            <!-- Plan badge with callout 2 -->
+            <div style="position:relative;margin-bottom:10px">
+              <div style="font-size:8px;font-weight:900;letter-spacing:1.5px;color:var(--jio);text-transform:uppercase;background:rgba(0,168,89,.07);display:inline-block;padding:2px 6px;border-radius:4px">Mobile Pass</div>
+              <div style="position:absolute;top:-10px;left:-12px">
+                <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">2</div>
+              </div>
+            </div>
+            <!-- Price with callout 3 -->
+            <div style="position:relative;display:flex;align-items:baseline;gap:3px;margin-bottom:12px">
+              <span style="font-size:22px;font-weight:900;color:var(--text);line-height:1">&#x20B9;99</span>
+              <span style="font-size:10px;color:var(--text3)">/month</span>
+              <div style="position:absolute;top:-10px;right:-12px">
+                <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">3</div>
+              </div>
+            </div>
+            <!-- Benefits with callout 4 -->
+            <div style="position:relative;margin-bottom:12px">
+              <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:4px">
+                <li style="font-size:9px;color:var(--text2);padding-left:10px;position:relative"><span style="position:absolute;left:0;top:5px;width:5px;height:5px;border-radius:50%;background:var(--jio);display:block"></span>100+ games</li>
+                <li style="font-size:9px;color:var(--text2);padding-left:10px;position:relative"><span style="position:absolute;left:0;top:5px;width:5px;height:5px;border-radius:50%;background:var(--jio);display:block"></span>Mobile only</li>
+                <li style="font-size:9px;color:var(--text2);padding-left:10px;position:relative"><span style="position:absolute;left:0;top:5px;width:5px;height:5px;border-radius:50%;background:var(--jio);display:block"></span>Cancel anytime</li>
+              </ul>
+              <div style="position:absolute;top:-10px;left:-12px">
+                <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">4</div>
+              </div>
+            </div>
+            <!-- CTA with callout 5 -->
+            <div style="position:relative">
+              <button class="btn btn--primary btn--s btn--hug" style="width:100%;justify-content:center;pointer-events:none">Get Mobile Pass</button>
+              <div style="position:absolute;top:-10px;right:-12px">
+                <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">5</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ds-anatomy-list">
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">1</div>
+          <div>
+            <div class="ds-anatomy-label">Container <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Gradient background, <code class="ds-code">border-radius:var(--r7)</code>, 1px border per plan accent color.</div>
+            <div class="ds-anatomy-token">Token: --r7 (20px)</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">2</div>
+          <div>
+            <div class="ds-anatomy-label">Plan badge <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Plan name in uppercase, 9px, letter-spacing 1.5px. Color varies per tier (green/violet/violet).</div>
+            <div class="ds-anatomy-token">Token: --jio, --violet</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">3</div>
+          <div>
+            <div class="ds-anatomy-label">Price display <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Large price (32px bold) + billing period (13px muted). Always include billing period &#x2014; never price alone.</div>
+            <div class="ds-anatomy-token">Token: --text (price), --text3 (period)</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">4</div>
+          <div>
+            <div class="ds-anatomy-label">Benefits list <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">3&#x2013;5 dot-prefixed items at 12px. Dot color matches plan accent. Sentence case, action-oriented.</div>
+            <div class="ds-anatomy-token">Token: --text2 (text), plan accent (dot)</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">5</div>
+          <div>
+            <div class="ds-anatomy-label">CTA button <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Full-width button. Verb phrase: &#x22;Get Mobile Pass&#x22;, &#x22;Manage plan&#x22;, &#x22;Renew Mobile Pass&#x22;.</div>
+            <div class="ds-anatomy-token">Class: .btn--primary / .btn--ultimate</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">6</div>
+          <div>
+            <div class="ds-anatomy-label">&#x22;Most Popular&#x22; ribbon <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc">Position absolute, top-right corner. <code class="ds-code">background:var(--popular-gold)</code>, black text. Max 2 words.</div>
+            <div class="ds-anatomy-token">Token: --popular-gold (#F7AB20)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. VARIANTS -->
+  <section class="ds-section" id="variants">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Five variants cover all subscription contexts. Each has distinct visual treatment to communicate tier, status, and availability.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px">
+
+      <!-- Mobile Pass -->
+      <div style="position:relative">
+        <div style="width:150px;border-radius:var(--r7);padding:18px;background:linear-gradient(145deg,#0a1f12,#0d2e1a);border:1px solid rgba(0,168,89,.3)">
+          <div style="font-size:8px;font-weight:900;letter-spacing:1.5px;color:var(--jio);text-transform:uppercase;margin-bottom:8px">Mobile Pass</div>
+          <div style="display:flex;align-items:baseline;gap:3px;margin-bottom:10px">
+            <span style="font-size:22px;font-weight:900;color:var(--text);line-height:1">&#x20B9;99</span>
+            <span style="font-size:10px;color:var(--text3)">/mo</span>
+          </div>
+          <ul style="list-style:none;padding:0;margin:0 0 12px;display:flex;flex-direction:column;gap:4px">
+            <li style="font-size:9px;color:var(--text2);padding-left:10px;position:relative"><span style="position:absolute;left:0;top:5px;width:5px;height:5px;border-radius:50%;background:var(--jio);display:block"></span>100+ games</li>
+            <li style="font-size:9px;color:var(--text2);padding-left:10px;position:relative"><span style="position:absolute;left:0;top:5px;width:5px;height:5px;border-radius:50%;background:var(--jio);display:block"></span>Mobile only</li>
+            <li style="font-size:9px;color:var(--text2);padding-left:10px;position:relative"><span style="position:absolute;left:0;top:5px;width:5px;height:5px;border-radius:50%;background:var(--jio);display:block"></span>No ads</li>
+          </ul>
+          <button class="btn btn--primary btn--s btn--hug" style="width:100%;justify-content:center;font-size:10px;pointer-events:none">Get Mobile Pass</button>
+        </div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-top:10px">Mobile Pass</div>
+      </div>
+
+      <!-- Ultimate Pass -->
+      <div style="position:relative">
+        <div style="width:150px;border-radius:var(--r7);padding:18px;background:linear-gradient(145deg,#0d0a20,#1a1040);border:1px solid rgba(138,91,255,.4);position:relative">
+          <div style="position:absolute;top:10px;right:-4px;background:var(--popular-gold);color:#000;font-size:7px;font-weight:900;padding:2px 8px;border-radius:3px">MOST POPULAR</div>
+          <div style="font-size:8px;font-weight:900;letter-spacing:1.5px;color:#a78bfa;text-transform:uppercase;margin-bottom:8px">Ultimate Pass</div>
+          <div style="display:flex;align-items:baseline;gap:3px;margin-bottom:10px">
+            <span style="font-size:22px;font-weight:900;color:var(--text);line-height:1">&#x20B9;199</span>
+            <span style="font-size:10px;color:var(--text3)">/mo</span>
+          </div>
+          <ul style="list-style:none;padding:0;margin:0 0 12px;display:flex;flex-direction:column;gap:4px">
+            <li style="font-size:9px;color:var(--text2);padding-left:10px;position:relative"><span style="position:absolute;left:0;top:5px;width:5px;height:5px;border-radius:50%;background:#a78bfa;display:block"></span>300+ games</li>
+            <li style="font-size:9px;color:var(--text2);padding-left:10px;position:relative"><span style="position:absolute;left:0;top:5px;width:5px;height:5px;border-radius:50%;background:#a78bfa;display:block"></span>All platforms</li>
+            <li style="font-size:9px;color:var(--text2);padding-left:10px;position:relative"><span style="position:absolute;left:0;top:5px;width:5px;height:5px;border-radius:50%;background:#a78bfa;display:block"></span>Family sharing</li>
+          </ul>
+          <button class="btn btn--ultimate btn--s btn--hug" style="width:100%;justify-content:center;font-size:10px;pointer-events:none">Get Ultimate Pass</button>
+        </div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-top:10px">Ultimate Pass</div>
+      </div>
+
+      <!-- All Screen Pass -->
+      <div style="position:relative">
+        <div style="width:150px;border-radius:var(--r7);padding:18px;background:linear-gradient(145deg,#0a0a20,#12103a);border:1px solid rgba(138,91,255,.3);position:relative">
+          <div style="font-size:8px;font-weight:900;letter-spacing:1.5px;color:var(--violet);text-transform:uppercase;margin-bottom:8px">All Screen Pass</div>
+          <div style="display:flex;align-items:baseline;gap:3px;margin-bottom:10px">
+            <span style="font-size:22px;font-weight:900;color:var(--text);line-height:1">&#x20B9;349</span>
+            <span style="font-size:10px;color:var(--text3)">/mo</span>
+          </div>
+          <ul style="list-style:none;padding:0;margin:0 0 12px;display:flex;flex-direction:column;gap:4px">
+            <li style="font-size:9px;color:var(--text2);padding-left:10px;position:relative"><span style="position:absolute;left:0;top:5px;width:5px;height:5px;border-radius:50%;background:var(--violet);display:block"></span>500+ games</li>
+            <li style="font-size:9px;color:var(--text2);padding-left:10px;position:relative"><span style="position:absolute;left:0;top:5px;width:5px;height:5px;border-radius:50%;background:var(--violet);display:block"></span>All screens</li>
+            <li style="font-size:9px;color:var(--text2);padding-left:10px;position:relative"><span style="position:absolute;left:0;top:5px;width:5px;height:5px;border-radius:50%;background:var(--violet);display:block"></span>6 profiles</li>
+          </ul>
+          <button class="btn btn--ultimate btn--s btn--hug" style="width:100%;justify-content:center;font-size:10px;pointer-events:none">Get All Screen</button>
+        </div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-top:10px">All Screen Pass</div>
+      </div>
+
+      <!-- Expired / Lapsed -->
+      <div>
+        <div style="width:150px;border-radius:var(--r7);padding:18px;background:linear-gradient(145deg,#0a1f12,#0d2e1a);border:1px solid rgba(0,168,89,.15);opacity:0.6;position:relative">
+          <div style="font-size:8px;font-weight:900;letter-spacing:1.5px;color:var(--text3);text-transform:uppercase;margin-bottom:8px">Mobile Pass</div>
+          <div style="display:flex;align-items:baseline;gap:3px;margin-bottom:10px">
+            <span style="font-size:22px;font-weight:900;color:var(--text3);line-height:1">&#x20B9;99</span>
+            <span style="font-size:10px;color:var(--text4)">/mo</span>
+          </div>
+          <div style="font-size:9px;color:var(--negative);margin-bottom:10px;font-weight:600">Expired</div>
+          <button class="btn btn--secondary btn--s btn--hug" style="width:100%;justify-content:center;font-size:10px;pointer-events:none">Renew Mobile Pass</button>
+        </div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-top:10px">Expired / Lapsed</div>
+      </div>
+
+      <!-- Current Plan -->
+      <div>
+        <div style="width:150px;border-radius:var(--r7);padding:18px;background:linear-gradient(145deg,#0a1f12,#0d2e1a);border:1px solid rgba(0,168,89,.3);box-shadow:0 0 0 2px var(--jio)">
+          <div style="font-size:8px;font-weight:900;letter-spacing:1.5px;color:var(--jio);text-transform:uppercase;margin-bottom:8px">Mobile Pass</div>
+          <div style="display:flex;align-items:baseline;gap:3px;margin-bottom:10px">
+            <span style="font-size:22px;font-weight:900;color:var(--text);line-height:1">&#x20B9;99</span>
+            <span style="font-size:10px;color:var(--text3)">/mo</span>
+          </div>
+          <div style="font-size:9px;color:var(--jio);font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:4px"><span style="width:6px;height:6px;border-radius:50%;background:var(--jio);display:inline-block"></span>Current plan</div>
+          <button class="btn btn--secondary btn--s btn--hug" style="width:100%;justify-content:center;font-size:10px;pointer-events:none">Manage plan</button>
+        </div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-top:10px">Current Plan</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 7. SIZES -->
+  <section class="ds-section" id="sizes">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Pass cards have two sizes. Use the full card on selection and upsell screens; use the compact card inside bottom sheets, drawers, and account summary rows.</p>
+    <div class="component-platform-grid" style="margin-top:24px">
+      <div class="component-platform component-platform--mobile">
+        <div class="component-platform-label">Full card</div>
+        <ul class="component-platform-list">
+          <li>Min width: 280px · max width: 100% of container</li>
+          <li>Internal padding: <code>var(--card-padding)</code> = 20px</li>
+          <li>Border-radius: <code>var(--r5)</code></li>
+          <li>Used on: pass selection, upsell sheet, onboarding</li>
+        </ul>
+      </div>
+      <div class="component-platform component-platform--web">
+        <div class="component-platform-label">Compact card</div>
+        <ul class="component-platform-list">
+          <li>Fixed height: 72px · full width of container</li>
+          <li>Internal padding: 12px 16px</li>
+          <li>Border-radius: <code>var(--r4)</code></li>
+          <li>Used on: account summary, bottom sheet header, plan row in settings</li>
+        </ul>
+      </div>
+      <div class="component-platform component-platform--tv">
+        <div class="component-platform-label">TV card</div>
+        <ul class="component-platform-list">
+          <li>Min width: 360px · full card layout</li>
+          <li>Larger text: pass name 20px, price 36px</li>
+          <li>All interactive elements must be focus-ring navigable</li>
+          <li>Used on: TV pass selection screen only</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. STATES -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Pass cards respond to five states. The current and recommended states use visual emphasis; expired and loading suppress or simplify the card.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;align-items:flex-start">
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+        <div style="width:120px;border-radius:14px;padding:14px;background:linear-gradient(145deg,#0a1f12,#0d2e1a);border:1px solid rgba(0,168,89,.3)">
+          <div style="font-size:7px;font-weight:900;letter-spacing:1px;color:var(--jio);text-transform:uppercase;margin-bottom:6px">Mobile Pass</div>
+          <div style="font-size:18px;font-weight:900;color:var(--text);margin-bottom:8px">&#x20B9;99<span style="font-size:9px;color:var(--text3);font-weight:400">/mo</span></div>
+          <button class="btn btn--primary btn--s btn--hug" style="width:100%;justify-content:center;font-size:9px;pointer-events:none">Get Pass</button>
+        </div>
+        <span style="font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Default</span>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+        <div style="width:120px;border-radius:14px;padding:14px;background:linear-gradient(145deg,#0a1f12,#0d2e1a);border:1px solid rgba(0,168,89,.3);box-shadow:0 0 0 2px var(--jio)">
+          <div style="font-size:7px;font-weight:900;letter-spacing:1px;color:var(--jio);text-transform:uppercase;margin-bottom:6px">Mobile Pass</div>
+          <div style="font-size:18px;font-weight:900;color:var(--text);margin-bottom:4px">&#x20B9;99<span style="font-size:9px;color:var(--text3);font-weight:400">/mo</span></div>
+          <div style="font-size:8px;color:var(--jio);font-weight:700;margin-bottom:8px">&#x2713; Current plan</div>
+          <button class="btn btn--secondary btn--s btn--hug" style="width:100%;justify-content:center;font-size:9px;pointer-events:none">Manage</button>
+        </div>
+        <span style="font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Active</span>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+        <div style="width:120px;border-radius:14px;padding:14px;background:linear-gradient(145deg,#0a1f12,#0d2e1a);border:1px solid rgba(0,168,89,.15);opacity:.6">
+          <div style="font-size:7px;font-weight:900;letter-spacing:1px;color:var(--text3);text-transform:uppercase;margin-bottom:6px">Mobile Pass</div>
+          <div style="font-size:18px;font-weight:900;color:var(--text3);margin-bottom:4px">&#x20B9;99<span style="font-size:9px;color:var(--text4);font-weight:400">/mo</span></div>
+          <div style="font-size:8px;color:var(--negative);margin-bottom:8px">Expired</div>
+          <button class="btn btn--secondary btn--s btn--hug" style="width:100%;justify-content:center;font-size:9px;pointer-events:none">Renew</button>
+        </div>
+        <span style="font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Expired</span>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+        <div style="width:120px;border-radius:14px;padding:14px;background:linear-gradient(145deg,#0d0a20,#1a1040);border:1px solid rgba(138,91,255,.4);position:relative">
+          <div style="position:absolute;top:8px;right:-3px;background:var(--popular-gold);color:#000;font-size:6px;font-weight:900;padding:2px 6px;border-radius:2px">POPULAR</div>
+          <div style="font-size:7px;font-weight:900;letter-spacing:1px;color:#a78bfa;text-transform:uppercase;margin-bottom:6px">Ultimate</div>
+          <div style="font-size:18px;font-weight:900;color:var(--text);margin-bottom:8px">&#x20B9;199<span style="font-size:9px;color:var(--text3);font-weight:400">/mo</span></div>
+          <button class="btn btn--ultimate btn--s btn--hug" style="width:100%;justify-content:center;font-size:9px;pointer-events:none">Get Pass</button>
+        </div>
+        <span style="font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Recommended</span>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+        <div style="width:120px;border-radius:14px;padding:14px;background:linear-gradient(145deg,#0a1f12,#0d2e1a);border:1px solid rgba(0,168,89,.15)">
+          <div class="skeleton" style="width:70px;height:8px;margin-bottom:10px"></div>
+          <div class="skeleton" style="width:50px;height:20px;margin-bottom:12px"></div>
+          <div class="skeleton" style="width:100%;height:32px;border-radius:var(--pill)"></div>
+        </div>
+        <span style="font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Loading</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 8. CONTENT GUIDANCE -->
+  <section class="ds-section" id="content">
+    <h2 class="ds-section-title">Content</h2>
+    <p class="ds-section-desc">Pass card copy must be precise and action-oriented. Every word affects conversion.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px">
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:20px">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text);margin-bottom:10px">Plan names</div>
+        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>All caps, 9px, letter-spacing 1.5px</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Color per tier (green / violet / violet)</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Never abbreviate &#x2014; &#x22;Mobile Pass&#x22; not &#x22;Mobile&#x22;</li>
+        </ul>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:20px">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text);margin-bottom:10px">Pricing</div>
+        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Large price: 32px, weight 900</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Always include billing period (&#x20B9;99/month)</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Show savings badge for annual plans if applicable</li>
+        </ul>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:20px">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text);margin-bottom:10px">Benefits</div>
+        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Present tense, action-oriented (&#x22;Play on mobile&#x22;)</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>3&#x2013;5 items maximum</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Lead with the most differentiating benefit</li>
+        </ul>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:20px">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text);margin-bottom:10px">CTA copy</div>
+        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Default: &#x22;Get [Plan Name]&#x22;</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Current: &#x22;Manage plan&#x22;</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Expired: &#x22;Renew [Plan Name]&#x22;</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. PLATFORM CONSIDERATIONS -->
+  <section class="ds-section" id="platform-considerations">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <p class="ds-section-desc">Pass card layout adapts significantly across platforms. Mobile shows one card at a time; web compares side-by-side; TV uses a full-screen format.</p>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Full-width stacked cards, one per screen</li>
+          <li>Swipe between plans (carousel)</li>
+          <li>Sticky CTA at bottom</li>
+          <li>Progress dots show plan position</li>
+          <li>Touch target on CTA: min 54px height</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>2&#x2013;3 cards side-by-side</li>
+          <li>Max-width 480px each card</li>
+          <li>Hover state: slight scale (1.01) + shadow</li>
+          <li>Recommended card is visually elevated</li>
+          <li>CTA triggers subscription flow in drawer</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>Full-screen plan comparison layout</li>
+          <li>Card width 640px for 10-foot readability</li>
+          <li>Focus ring 3px, clearly visible</li>
+          <li>D-pad left/right switches plans</li>
+          <li>Selected state + focused states combined</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. ACCESSIBILITY -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">Pass cards present financial decisions. Every element must be correctly announced to screen reader users, with pricing clearly labeled.</p>
+    <div class="a11y-grid">
+      <div class="a11y-row">
+        <div class="a11y-label">Card label</div>
+        <div class="a11y-content">
+          <code class="ds-code">aria-label</code> on the card container describing plan and price: <code class="ds-code">aria-label="Mobile Pass, &#x20B9;99 per month"</code>. Lets screen reader users skim plan options quickly.
+        </div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Current plan</div>
+        <div class="a11y-content">
+          <code class="ds-code">aria-current="true"</code> on the current plan card so screen readers announce it as the active selection. &#x22;Current plan&#x22; badge text must also be in the DOM (not CSS-only).
+        </div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">CTA button</div>
+        <div class="a11y-content">
+          <code class="ds-code">aria-label</code> on the CTA includes the plan name: <code class="ds-code">aria-label="Get Mobile Pass, &#x20B9;99 per month"</code>. Prevents screen readers from only announcing &#x22;Get Mobile Pass&#x22; without price context.
+        </div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Price</div>
+        <div class="a11y-content">
+          Price span: <code class="ds-code">aria-label="99 rupees per month"</code>. The &#x20B9; symbol is not consistently read by all screen readers &#x2014; use an explicit label for price amounts.
+        </div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Keyboard nav</div>
+        <div class="a11y-content">
+          <ul>
+            <li><kbd>Tab</kbd> &#x2014; moves between plan cards and CTAs</li>
+            <li><kbd>Enter</kbd> &#x2014; activates the CTA</li>
+            <li>Focus ring 2px solid <code class="ds-code">var(--jio)</code>, offset 3px on CTA button</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. RELATED TOKENS -->
+  <section class="ds-section" id="tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-desc">Pass card visual treatment is defined via these design tokens. Tier-specific gradient and border values are set per plan.</p>
+    <table class="ds-token-table">
+      <thead>
+        <tr><th>Token</th><th>Value</th><th>Swatch</th><th>Usage</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="ds-token-name">--jio</span></td>
+          <td><span class="ds-token-value">#00A859</span></td>
+          <td><span class="ds-token-swatch" style="background:#00A859"></span></td>
+          <td>Mobile Pass accent, benefits dot, CTA</td>
+        </tr>
+        <tr>
+          <td><span class="ds-token-name">--violet</span></td>
+          <td><span class="ds-token-value">#8E5BFF</span></td>
+          <td><span class="ds-token-swatch" style="background:#8E5BFF"></span></td>
+          <td>Ultimate + All Screen Pass accent</td>
+        </tr>
+        <tr>
+          <td><span class="ds-token-name">--popular-gold</span></td>
+          <td><span class="ds-token-value">#F7AB20</span></td>
+          <td><span class="ds-token-swatch" style="background:#F7AB20"></span></td>
+          <td>&#x22;Most Popular&#x22; ribbon background</td>
+        </tr>
+        <tr>
+          <td><span class="ds-token-name">--r7</span></td>
+          <td><span class="ds-token-value">20px</span></td>
+          <td>&#x2014;</td>
+          <td>Pass card border-radius</td>
+        </tr>
+        <tr>
+          <td><span class="ds-token-name">--premium-gradient</span></td>
+          <td><span class="ds-token-value">linear-gradient(145deg, #0d0a20, #1a1040)</span></td>
+          <td><span class="ds-token-swatch" style="background:linear-gradient(145deg,#0d0a20,#1a1040)"></span></td>
+          <td>Ultimate / All Screen card background</td>
+        </tr>
+        <tr>
+          <td><span class="ds-token-name">--premium-border</span></td>
+          <td><span class="ds-token-value">rgba(138,91,255,.4)</span></td>
+          <td><span class="ds-token-swatch" style="background:rgba(138,91,255,.4)"></span></td>
+          <td>Ultimate Pass card border</td>
+        </tr>
+        <tr>
+          <td><span class="ds-token-name">--premium-glow</span></td>
+          <td><span class="ds-token-value">0 0 24px rgba(142,91,255,.25)</span></td>
+          <td>&#x2014;</td>
+          <td>Recommended card elevated shadow</td>
+        </tr>
+        <tr>
+          <td><span class="ds-token-name">--negative</span></td>
+          <td><span class="ds-token-value">#FF4757</span></td>
+          <td><span class="ds-token-swatch" style="background:#FF4757"></span></td>
+          <td>&#x22;Expired&#x22; status label</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 12. CODE EXAMPLES -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
+    <div class="component-code-block">
+      <div class="component-code-label">Pass card — Mobile Pass</div>
+      <pre class="component-code-pre"><code>&lt;div class="pass-mobile"&gt;
+  &lt;div class="pass-card__eyebrow"&gt;Mobile Pass&lt;/div&gt;
+  &lt;div class="pass-card__price"&gt;
+    &lt;span class="pass-card__currency"&gt;₹&lt;/span&gt;
+    &lt;span class="pass-card__amount"&gt;99&lt;/span&gt;
+    &lt;span class="pass-card__period"&gt;/month&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;ul class="pass-card__perks"&gt;
+    &lt;li&gt;Play on 1 mobile device&lt;/li&gt;
+    &lt;li&gt;300+ games included&lt;/li&gt;
+    &lt;li&gt;Cancel anytime&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;button class="btn btn--primary btn--m btn--full"&gt;Get Mobile Pass&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+    <div class="component-code-block">
+      <div class="component-code-label">Pass card — Ultimate Pass</div>
+      <pre class="component-code-pre"><code>&lt;div class="pass-ultimate"&gt;
+  &lt;div class="pass-card__eyebrow"&gt;
+    Ultimate Pass
+    &lt;span class="upsell-popular"&gt;Most popular&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="pass-card__price"&gt;
+    &lt;span class="pass-card__currency"&gt;₹&lt;/span&gt;
+    &lt;span class="pass-card__amount"&gt;199&lt;/span&gt;
+    &lt;span class="pass-card__period"&gt;/month&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;ul class="pass-card__perks"&gt;
+    &lt;li&gt;Play on 5 screens&lt;/li&gt;
+    &lt;li&gt;Mobile + TV + Web&lt;/li&gt;
+    &lt;li&gt;Exclusive titles included&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;button class="btn btn--primary btn--m btn--full"&gt;Get Ultimate Pass&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- 13. CHANGELOG -->
+
+</main>
+<script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script>
+</body>
+</html>

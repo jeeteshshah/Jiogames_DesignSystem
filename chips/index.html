@@ -1,0 +1,589 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chips — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+</head><body><main class="ds-content">
+
+  <!-- ── 1. PAGE HEADER ─────────────────────────────────────────── -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Chips</span>
+    </nav>
+    <h1 class="component-page-title">Chips</h1>
+    <p class="component-page-def">Chips are compact, interactive labels for filtering, selecting, and displaying categorized content.</p>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:16px">
+      <span class="component-platform component-platform--mobile">
+        <span class="component-platform-dot"></span>Mobile
+      </span>
+      <span class="component-platform component-platform--web">
+        <span class="component-platform-dot"></span>Web
+      </span>
+      <span class="component-platform component-platform--tv">
+        <span class="component-platform-dot"></span>TV
+      </span>
+      <span class="component-maturity component-maturity--stable">
+        <span class="component-maturity--dot"></span>Stable
+      </span>
+    </div>
+  </header>
+
+  <!-- ── 2. HERO ────────────────────────────────────────────────── -->
+  <div class="component-hero component-hero--dark component-hero--grid">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;padding:40px 24px">
+
+      <!-- Default chip -->
+      <span style="height:36px;padding:0 14px;border-radius:100px;background:#0c0f14;border:1px solid rgba(255,255,255,.1);font-size:13px;color:var(--text2);display:inline-flex;align-items:center;gap:6px;font-family:inherit">
+        Action
+      </span>
+
+      <!-- Selected chip -->
+      <span class="chip chip--filter is-active">Racing</span>
+
+      <!-- With SVG leading icon -->
+      <span style="height:36px;padding:0 14px;border-radius:100px;background:#0c0f14;border:1px solid rgba(255,255,255,.1);font-size:13px;color:var(--text2);display:inline-flex;align-items:center;gap:6px;font-family:inherit">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><use href="../sprite.svg#ic_multiple_user"></use></svg>
+        Multiplayer
+      </span>
+
+      <!-- Removable chip -->
+      <span style="height:36px;padding:0 10px 0 14px;border-radius:100px;background:#0c0f14;border:1px solid rgba(255,255,255,.1);font-size:13px;color:var(--text2);display:inline-flex;align-items:center;gap:6px;font-family:inherit">
+        Free to play
+        <button style="display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:inherit;cursor:pointer;font-size:12px;padding:0;line-height:1" aria-label="Remove Free to play">×</button>
+      </span>
+
+      <!-- Skeleton chip -->
+      <span style="height:36px;width:80px;border-radius:100px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.04);display:inline-flex;animation:pulse 1.6s ease-in-out infinite alternate">
+      </span>
+
+    </div>
+    <p class="component-hero-caption">Filter chips · 1:1 scale at Mobile M</p>
+  </div>
+
+  <!-- ── 3. INTRO ───────────────────────────────────────────────── -->
+  <section class="component-intro">
+    <p>Chips are the primary filter affordance in JioGames horizontal rails. They appear in scrollable rows above game catalogues, letting users narrow content by genre, platform, price, or other attributes without navigating away. Unlike buttons, chips represent persistent state — a selected chip stays active until explicitly dismissed or replaced.</p>
+    <ul class="component-summary-list">
+      <li><strong>Filter</strong> — narrow a game catalogue by genre, price tier, or platform in a horizontal scroll rail</li>
+      <li><strong>Select</strong> — indicate a chosen preference during onboarding (genre or platform selection flows)</li>
+      <li><strong>Tag</strong> — display non-interactive metadata labels on game cards (e.g. "Free", "New", "Beta")</li>
+      <li><strong>Remove</strong> — let users clear an applied filter via a trailing dismiss button on removable chips</li>
+    </ul>
+  </section>
+
+  <!-- ── 4. BEST PRACTICES ──────────────────────────────────────── -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Best practices</h2>
+    <div class="component-best-practices">
+
+      <div class="component-bp-card component-bp-card--do">
+        <div class="component-bp-label component-bp-label--do">Do</div>
+        <ul class="component-bp-list">
+          <li>Use nouns for filter labels — "Action", "Racing", "Free to play"</li>
+          <li>Keep labels 1–2 words for scannability in dense rails</li>
+          <li>Always pair colour change with text colour change for selection state (never rely on colour alone)</li>
+          <li>Use <code class="ds-code">.is-active</code> for the selected state so states.css handles all visual changes</li>
+          <li>Maintain a minimum 44px touch target height on Mobile using internal padding when chip visual size is smaller</li>
+        </ul>
+      </div>
+
+      <div class="component-bp-card component-bp-card--dont">
+        <div class="component-bp-label component-bp-label--dont">Don't</div>
+        <ul class="component-bp-list">
+          <li>Don't use chips for primary CTAs — use Button components instead</li>
+          <li>Don't use verb labels ("Filter by", "Choose genre") — chips name content, not actions</li>
+          <li>Don't allow chip labels to exceed 2 lines of text — truncate with ellipsis at max-width</li>
+          <li>Don't repurpose chips as navigation tabs — use a Tab Bar component for destination switching</li>
+          <li>Don't mix chip variants in the same horizontal row (e.g. filter chips and genre chips together)</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 5. ANATOMY ────────────────────────────────────────────── -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <p class="ds-section-desc">A chip is built from up to five named parts. Container and label are always present; leading icon, trailing remove, and selection indicator appear per variant.</p>
+    <div class="ds-anatomy">
+      <div class="ds-anatomy-preview">
+        <!-- Rendered chip with callout numbers -->
+        <div style="position:relative;display:inline-flex;align-items:center;margin:40px 32px">
+          <!-- Container callout -->
+          <span class="ds-anatomy-callout-num ds-anatomy-callout-dot" style="position:absolute;top:-28px;left:0">1</span>
+          <!-- Leading icon callout -->
+          <span class="ds-anatomy-callout-num ds-anatomy-callout-dot" style="position:absolute;top:-28px;left:20px">2</span>
+          <!-- Label callout -->
+          <span class="ds-anatomy-callout-num ds-anatomy-callout-dot" style="position:absolute;top:calc(100% + 12px);left:24px">3</span>
+          <!-- Trailing callout -->
+          <span class="ds-anatomy-callout-num ds-anatomy-callout-dot" style="position:absolute;top:-28px;right:0">4</span>
+          <!-- Selection indicator callout -->
+          <span class="ds-anatomy-callout-num ds-anatomy-callout-dot" style="position:absolute;top:calc(100% + 12px);right:-8px">5</span>
+
+          <span class="chip chip--filter chip--removable is-active" style="padding:0 10px 0 12px">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><use href="../sprite.svg#ic_star"></use></svg>
+            Top Rated
+            <button style="display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:rgba(0,0,0,.2);border:none;color:inherit;cursor:pointer;font-size:11px;padding:0;line-height:1" aria-label="Remove Top Rated">×</button>
+          </span>
+        </div>
+      </div>
+
+      <ol class="ds-anatomy-list">
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">1</span>
+          <div>
+            <div class="ds-anatomy-label">Container <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Pill-shaped boundary with full border-radius. Fill, border, and opacity shift across states.</div>
+            <code class="ds-anatomy-token">--chip-bg · --chip-border · --pill</code>
+          </div>
+        </li>
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">2</span>
+          <div>
+            <div class="ds-anatomy-label">Leading icon <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc">12–14px SVG icon using <code class="ds-code">fill:currentColor</code>. Only present on <code class="ds-code">.chip--icon</code> variant. Icon must be from the DLS icon set.</div>
+            <code class="ds-anatomy-token">--chip-text</code>
+          </div>
+        </li>
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">3</span>
+          <div>
+            <div class="ds-anatomy-label">Label text <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Noun-based label, 1–2 words, max 20 characters. Never wraps. Truncate with ellipsis if necessary. Colour changes to <code class="ds-code">var(--text-inv)</code> on solid <code class="ds-code">var(--jio)</code> background when selected.</div>
+            <code class="ds-anatomy-token">--chip-text · --state-selected-text</code>
+          </div>
+        </li>
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">4</span>
+          <div>
+            <div class="ds-anatomy-label">Trailing icon / remove <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc">Remove button (×) on <code class="ds-code">.chip--removable</code>. Must carry <code class="ds-code">aria-label="Remove [name]"</code>. A trailing chevron may be used on dropdown-trigger chips.</div>
+            <code class="ds-anatomy-token">--chip-border</code>
+          </div>
+        </li>
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">5</span>
+          <div>
+            <div class="ds-anatomy-label">Selection indicator <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc">Active state visual — background and border become <code class="ds-code">var(--jio)</code>, text becomes <code class="ds-code">var(--text-inv)</code> (black). Matches the primary button for strong selection affordance.</div>
+            <code class="ds-anatomy-token">--jio · --text-inv</code>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ── 6. VARIANTS ───────────────────────────────────────────── -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Five chip variants cover filtering, selection, icon-led labelling, removable tags, and loading skeleton use cases.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end">
+
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="chip chip--filter">Action</div>
+          <span style="font-size:10px;color:var(--text3);text-align:center">Default filter<br><code class="ds-code">.chip.chip--filter</code></span>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="chip chip--filter is-active">Racing</div>
+          <span style="font-size:10px;color:var(--text3);text-align:center">Selected<br><code class="ds-code">.chip.chip--filter.is-active</code></span>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="chip chip--icon chip--filter">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><use href="../sprite.svg#ic_multiple_user"></use></svg>
+            Multiplayer
+          </div>
+          <span style="font-size:10px;color:var(--text3);text-align:center">With icon<br><code class="ds-code">.chip.chip--icon</code></span>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="chip chip--removable chip--filter">
+            Free to play
+            <button style="display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.1);border:none;color:inherit;cursor:pointer;font-size:11px;padding:0;line-height:1;margin-left:2px" aria-label="Remove Free to play">×</button>
+          </div>
+          <span style="font-size:10px;color:var(--text3);text-align:center">Removable<br><code class="ds-code">.chip.chip--removable</code></span>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="chip chip--skeleton" style="width:72px;height:36px;border-radius:100px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.04);animation:pulse 1.6s ease-in-out infinite alternate"></div>
+          <span style="font-size:10px;color:var(--text3);text-align:center">Skeleton<br><code class="ds-code">.chip.chip--skeleton</code></span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 7. SIZES ──────────────────────────────────────────────── -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Four height tiers across three platforms. TV values are significantly larger for legibility at 10-foot viewing distance and comfortable D-pad tap targets.</p>
+
+    <div class="platform-size-grid" style="grid-template-columns:auto 1fr 1fr 1fr">
+      <div class="platform-size-cell platform-size-cell--header">Size</div>
+      <div class="platform-size-cell platform-size-cell--header platform-size-cell--mobile">Mobile</div>
+      <div class="platform-size-cell platform-size-cell--header platform-size-cell--web">Web</div>
+      <div class="platform-size-cell platform-size-cell--header platform-size-cell--tv">TV</div>
+
+      <!-- XS row -->
+      <div class="platform-size-cell platform-size-cell--label">XS<br><span class="platform-size-token">--chip-xs-h</span></div>
+      <div class="platform-size-cell platform-size-cell--mobile">
+        <span style="height:24px;padding:0 10px;border-radius:100px;background:#0c0f14;border:1px solid rgba(255,255,255,.1);font-size:11px;color:var(--text2);display:inline-flex;align-items:center;font-family:inherit">Action</span>
+        <span class="platform-size-value" style="display:block;margin-top:6px">24px</span>
+        <span class="platform-size-note">Dense metadata rows</span>
+      </div>
+      <div class="platform-size-cell platform-size-cell--web">
+        <span style="height:24px;padding:0 10px;border-radius:100px;background:#0c0f14;border:1px solid rgba(255,255,255,.1);font-size:11px;color:var(--text2);display:inline-flex;align-items:center;font-family:inherit">Action</span>
+        <span class="platform-size-value" style="display:block;margin-top:6px">24px</span>
+        <span class="platform-size-note">Inline tags</span>
+      </div>
+      <div class="platform-size-cell platform-size-cell--tv">
+        <span style="height:44px;padding:0 16px;border-radius:100px;background:#0c0f14;border:1px solid rgba(255,255,255,.1);font-size:14px;color:var(--text2);display:inline-flex;align-items:center;font-family:inherit">Action</span>
+        <span class="platform-size-value" style="display:block;margin-top:6px">44px</span>
+        <span class="platform-size-note">Dense rows</span>
+      </div>
+
+      <!-- S row -->
+      <div class="platform-size-cell platform-size-cell--label">S<br><span class="platform-size-token">--chip-s-h</span></div>
+      <div class="platform-size-cell platform-size-cell--mobile">
+        <span style="height:30px;padding:0 12px;border-radius:100px;background:#0c0f14;border:1px solid rgba(255,255,255,.1);font-size:12px;color:var(--text2);display:inline-flex;align-items:center;font-family:inherit">Action</span>
+        <span class="platform-size-value" style="display:block;margin-top:6px">30px</span>
+        <span class="platform-size-note">Secondary rails</span>
+      </div>
+      <div class="platform-size-cell platform-size-cell--web">
+        <span style="height:30px;padding:0 12px;border-radius:100px;background:#0c0f14;border:1px solid rgba(255,255,255,.1);font-size:12px;color:var(--text2);display:inline-flex;align-items:center;font-family:inherit">Action</span>
+        <span class="platform-size-value" style="display:block;margin-top:6px">30px</span>
+        <span class="platform-size-note">Compact bars</span>
+      </div>
+      <div class="platform-size-cell platform-size-cell--tv">
+        <span style="height:52px;padding:0 20px;border-radius:100px;background:#0c0f14;border:1px solid rgba(255,255,255,.1);font-size:16px;color:var(--text2);display:inline-flex;align-items:center;font-family:inherit">Action</span>
+        <span class="platform-size-value" style="display:block;margin-top:6px">52px</span>
+        <span class="platform-size-note">Secondary rails</span>
+      </div>
+
+      <!-- M row -->
+      <div class="platform-size-cell platform-size-cell--label">M — default<br><span class="platform-size-token">--chip-m-h</span></div>
+      <div class="platform-size-cell platform-size-cell--mobile">
+        <span style="height:36px;padding:0 14px;border-radius:100px;background:#0c0f14;border:1px solid rgba(255,255,255,.1);font-size:13px;color:var(--text2);display:inline-flex;align-items:center;font-family:inherit">Action</span>
+        <span class="platform-size-value" style="display:block;margin-top:6px">36px</span>
+        <span class="platform-size-note">Default filter</span>
+      </div>
+      <div class="platform-size-cell platform-size-cell--web">
+        <span style="height:36px;padding:0 14px;border-radius:100px;background:#0c0f14;border:1px solid rgba(255,255,255,.1);font-size:13px;color:var(--text2);display:inline-flex;align-items:center;font-family:inherit">Action</span>
+        <span class="platform-size-value" style="display:block;margin-top:6px">36px</span>
+        <span class="platform-size-note">Default filter</span>
+      </div>
+      <div class="platform-size-cell platform-size-cell--tv">
+        <span style="height:60px;padding:0 24px;border-radius:100px;background:#0c0f14;border:1px solid rgba(255,255,255,.1);font-size:18px;color:var(--text2);display:inline-flex;align-items:center;font-family:inherit">Action</span>
+        <span class="platform-size-value" style="display:block;margin-top:6px">60px</span>
+        <span class="platform-size-note">Default filter</span>
+      </div>
+
+      <!-- L row -->
+      <div class="platform-size-cell platform-size-cell--label">L<br><span class="platform-size-token">--chip-l-h</span></div>
+      <div class="platform-size-cell platform-size-cell--mobile">
+        <span style="height:44px;padding:0 18px;border-radius:100px;background:#0c0f14;border:1px solid rgba(255,255,255,.1);font-size:14px;color:var(--text2);display:inline-flex;align-items:center;font-family:inherit">Action</span>
+        <span class="platform-size-value" style="display:block;margin-top:6px">44px</span>
+        <span class="platform-size-note">Genre pickers</span>
+      </div>
+      <div class="platform-size-cell platform-size-cell--web">
+        <span style="height:42px;padding:0 18px;border-radius:100px;background:#0c0f14;border:1px solid rgba(255,255,255,.1);font-size:14px;color:var(--text2);display:inline-flex;align-items:center;font-family:inherit">Action</span>
+        <span class="platform-size-value" style="display:block;margin-top:6px">42px</span>
+        <span class="platform-size-note">Onboarding</span>
+      </div>
+      <div class="platform-size-cell platform-size-cell--tv">
+        <span style="height:68px;padding:0 28px;border-radius:100px;background:#0c0f14;border:1px solid rgba(255,255,255,.1);font-size:20px;color:var(--text2);display:inline-flex;align-items:center;font-family:inherit">Action</span>
+        <span class="platform-size-value" style="display:block;margin-top:6px">68px</span>
+        <span class="platform-size-note">Genre pickers</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 8. STATES ─────────────────────────────────────────────── -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">All interactive states are applied via <code class="ds-code">.is-*</code> helper classes from <code class="ds-code">states.css</code>. Never hardcode state colours inline.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:grid;grid-template-columns:repeat(3,auto);gap:24px 32px;align-items:center">
+
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="chip chip--filter">Action</div>
+          <span style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Default</span>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="chip chip--filter is-hover">Action</div>
+          <span style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Hover</span>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="chip chip--filter is-pressed">Action</div>
+          <span style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Pressed</span>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="chip chip--filter is-active">Action</div>
+          <span style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Active / Selected</span>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="chip chip--filter is-disabled">Action</div>
+          <span style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Disabled</span>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div class="chip chip--filter is-loading" style="min-width:72px">
+            <span style="width:40px;height:10px;border-radius:4px;background:rgba(255,255,255,.1);display:inline-block;animation:pulse 1.4s ease-in-out infinite alternate"></span>
+          </div>
+          <span style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Loading</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 9. CONTENT GUIDANCE ───────────────────────────────────── -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <div class="component-content-grid">
+
+      <div class="component-content-card">
+        <h3 class="component-content-title">Label writing</h3>
+        <ul style="margin:0;padding-left:18px;font-size:13px;color:var(--text2);line-height:1.7">
+          <li>Use nouns: "Action", "Racing", "Free to play", "Multiplayer"</li>
+          <li>1–2 words is ideal — 3 words maximum</li>
+          <li>No verbs: avoid "Filter by genre" or "Choose platform"</li>
+          <li>No punctuation: no periods, commas, or exclamation marks</li>
+          <li>Title case for genres; sentence case for descriptive tags</li>
+          <li>Truncate with ellipsis if label must exceed 20 characters</li>
+        </ul>
+      </div>
+
+      <div class="component-content-card">
+        <h3 class="component-content-title">Accessibility</h3>
+        <ul style="margin:0;padding-left:18px;font-size:13px;color:var(--text2);line-height:1.7">
+          <li>Use <code class="ds-code">aria-pressed="true/false"</code> on toggle chips to announce selected state</li>
+          <li>Remove buttons must carry <code class="ds-code">aria-label="Remove [chip name]"</code></li>
+          <li>Minimum 44×44px touch target on Mobile — use padding on smaller visual sizes</li>
+          <li>Never rely on colour alone — pair colour change with text weight or icon change</li>
+          <li>Icon-only chips must carry a visible label or <code class="ds-code">aria-label</code></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 10. PLATFORM CONSIDERATIONS ──────────────────────────── -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <div class="component-platform-grid">
+
+      <div class="component-platform-card component-platform-card--mobile">
+        <h3 class="component-platform-card-title">Mobile</h3>
+        <ul style="margin:0;padding-left:18px;font-size:13px;color:var(--text2);line-height:1.7">
+          <li>Chips live in horizontal scroll rails with <code class="ds-code">overflow-x:auto</code> and no visible scrollbar</li>
+          <li>Touch target minimum 44px — pad vertically when chip visual height is M (36px) or smaller</li>
+          <li>Default size tier is M (36px height)</li>
+          <li>Swipe momentum must feel native — do not block scroll propagation</li>
+          <li>First chip in a filter rail is always "All" in active state</li>
+        </ul>
+      </div>
+
+      <div class="component-platform-card component-platform-card--web">
+        <h3 class="component-platform-card-title">Web</h3>
+        <ul style="margin:0;padding-left:18px;font-size:13px;color:var(--text2);line-height:1.7">
+          <li>Apply <code class="ds-code">cursor:pointer</code> on all interactive chips</li>
+          <li>Hover state via <code class="ds-code">:hover</code> pseudo-class or <code class="ds-code">.is-hover</code> for JS-driven states</li>
+          <li>Tooltip via <code class="ds-code">title</code> attribute when label is truncated</li>
+          <li>Web size tier uses M (36px) by default, same as mobile</li>
+          <li>Keyboard navigation: Tab to focus, Space or Enter to toggle</li>
+        </ul>
+      </div>
+
+      <div class="component-platform-card component-platform-card--tv">
+        <h3 class="component-platform-card-title">TV</h3>
+        <ul style="margin:0;padding-left:18px;font-size:13px;color:var(--text2);line-height:1.7">
+          <li>Minimum size L (68px) — never use XS or S on TV</li>
+          <li>Focus ring is mandatory — use <code class="ds-code">--tv-focus-ring</code> token for the high-contrast glow</li>
+          <li>D-pad left/right navigation within chip rows using <code class="ds-code">role="toolbar"</code></li>
+          <li>Selected state must be clearly legible at 10-foot viewing distance</li>
+          <li>Increase gap between chips to 12px minimum for TV layouts</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 11. ACCESSIBILITY ─────────────────────────────────────── -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">Chips must be fully operable by keyboard, assistive technology, and D-pad on TV. The table below specifies the required ARIA roles and interaction model.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr>
+          <th>Concern</th>
+          <th>Requirement</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Role</td>
+          <td><code class="ds-code">button</code> or inside <code class="ds-code">listbox</code></td>
+          <td>Use <code class="ds-code">role="button"</code> for toggle chips; <code class="ds-code">role="option"</code> inside a <code class="ds-code">role="listbox"</code> for single-select filter rows</td>
+        </tr>
+        <tr>
+          <td>Selection state</td>
+          <td><code class="ds-code">aria-pressed="true|false"</code></td>
+          <td>Announces toggle state to screen readers on each change. Update dynamically via JS.</td>
+        </tr>
+        <tr>
+          <td>Remove button</td>
+          <td><code class="ds-code">aria-label="Remove [name]"</code></td>
+          <td>Without a visible label, the × button is meaningless to screen readers. Always include the chip name in the label.</td>
+        </tr>
+        <tr>
+          <td>Keyboard — toggle</td>
+          <td>Space or Enter</td>
+          <td>Both keys must activate the chip. Do not intercept other keys within the chip itself.</td>
+        </tr>
+        <tr>
+          <td>Keyboard — remove</td>
+          <td>Delete or Backspace</td>
+          <td>When focus is on the chip container, Delete removes it. When focus is on the × button, Enter or Space removes it.</td>
+        </tr>
+        <tr>
+          <td>Focus visible</td>
+          <td>2px <code class="ds-code">outline</code> using <code class="ds-code">var(--jio)</code></td>
+          <td>Never suppress <code class="ds-code">:focus-visible</code>. TV focus ring must meet 3:1 contrast on dark backgrounds.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── 12. RELATED TOKENS ────────────────────────────────────── -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-desc">Token set governing chip appearance across all states. Resolved from <code class="ds-code">tokens/tokens.css</code>.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>Value</th>
+          <th>Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="ds-code">--chip-m-h</code></td>
+          <td>36px (mobile)</td>
+          <td>Default height — game catalogue filter rows</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--state-selected-bg</code></td>
+          <td>var(--jio) — #00A859</td>
+          <td>Active / selected background fill</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--state-selected-border</code></td>
+          <td>var(--jio) — #00A859</td>
+          <td>Active / selected border stroke</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--chip-bg</code></td>
+          <td>#0c0f14</td>
+          <td>Chip surface — resting fill</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--pill</code></td>
+          <td>100px</td>
+          <td>Border radius — full pill rounding</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--chip-xs-h-mobile</code></td>
+          <td>24px</td>
+          <td>XS height on mobile — dense metadata rows</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--chip-s-h-mobile</code></td>
+          <td>30px</td>
+          <td>S height on mobile — compact filter bars</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--chip-l-h-mobile</code></td>
+          <td>44px</td>
+          <td>L height on mobile — onboarding preference pickers</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--chip-m-h-tv</code></td>
+          <td>60px</td>
+          <td>Default TV height — meets D-pad tap target spec</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--chip-l-h-tv</code></td>
+          <td>68px</td>
+          <td>L height on TV — genre pickers, prominent filters</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--state-selected-text</code></td>
+          <td>var(--jio) / #00A859</td>
+          <td>Label colour in selected state</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── 13. CODE EXAMPLES ────────────────────────────────────── -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
+    <div class="component-code-block">
+      <div class="component-code-label">Chip — filter (unselected / selected)</div>
+      <pre class="component-code-pre"><code>&lt;!-- Unselected --&gt;
+&lt;button class="chip" type="button"&gt;Action&lt;/button&gt;
+
+&lt;!-- Selected --&gt;
+&lt;button class="chip is-selected" type="button" aria-pressed="true"&gt;Adventure&lt;/button&gt;</code></pre>
+    </div>
+    <div class="component-code-block">
+      <div class="component-code-label">Chip group — horizontal scroll</div>
+      <pre class="component-code-pre"><code>&lt;div role="group" aria-label="Genre filters" style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none"&gt;
+  &lt;button class="chip is-selected" type="button" aria-pressed="true"&gt;All&lt;/button&gt;
+  &lt;button class="chip" type="button" aria-pressed="false"&gt;Action&lt;/button&gt;
+  &lt;button class="chip" type="button" aria-pressed="false"&gt;Adventure&lt;/button&gt;
+  &lt;button class="chip" type="button" aria-pressed="false"&gt;Racing&lt;/button&gt;
+  &lt;button class="chip" type="button" aria-pressed="false"&gt;Sports&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- ── 14. CHANGELOG ─────────────────────────────────────────── -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Changelog</h2>
+    <div class="component-changelog">
+
+      <div class="component-changelog-entry">
+        <span class="component-changelog-version">v1.1</span>
+        <span class="component-changelog-date">Jun 2025</span>
+        <p class="component-changelog-desc">Added <code class="ds-code">.is-active</code> state tokens to align with states.css v2 naming. Deprecated <code class="ds-code">.is-selected</code> class — use <code class="ds-code">.is-active</code> going forward. Updated <code class="ds-code">--state-selected-bg</code> opacity from 0.08 to 0.12 for improved contrast on dark backgrounds.</p>
+      </div>
+
+      <div class="component-changelog-entry">
+        <span class="component-changelog-version">v1.0</span>
+        <span class="component-changelog-date">Mar 2025</span>
+        <p class="component-changelog-desc">Initial component. Defines filter, icon, removable, and skeleton variants. Establishes XS/S/M/L size tiers with separate token values for Mobile, Web, and TV platforms.</p>
+      </div>
+
+    </div>
+  </section>
+
+</main><script src="../sprite-loader.js"></script><script src="../shell.js"></script></body></html>

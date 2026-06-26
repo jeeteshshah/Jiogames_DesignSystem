@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dialogs — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    /* ── Page-specific styles ── */
+    body { background: var(--bg); color: var(--text); font-family: var(--jio-font); margin: 0; }
+
+    /* Hero */
+    .component-hero {
+      border-radius: 20px; overflow: hidden; margin-bottom: 48px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      position: relative; min-height: 320px; padding: 48px 32px 32px;
+    }
+    .component-hero--dark { background: #060810; }
+    .component-hero--grid {
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 32px 32px;
+      background-color: #060810;
+      border: 1px solid var(--border-subtle);
+    }
+    .component-hero-inner {
+      display: flex; flex-direction: column; align-items: center; gap: 28px;
+      position: relative; z-index: 2;
+    }
+    .component-hero-caption {
+      display: block; font-size: 10px; font-weight: 700; letter-spacing: .6px;
+      text-transform: uppercase; color: var(--text4); margin-top: 24px; position: relative; z-index: 2;
+    }
+    .hero-glow {
+      position: absolute; width: 320px; height: 180px; border-radius: var(--pill);
+      background: radial-gradient(ellipse, rgba(255,71,87,.15) 0%, transparent 70%);
+      pointer-events: none; z-index: 1;
+    }
+
+    /* Intro */
+    .component-intro { margin-bottom: 48px; }
+    .component-intro p { font-size: 15px; font-weight: 500; color: var(--text2); line-height: 1.65; margin-bottom: 20px; max-width: 640px; }
+    .component-summary-list {
+      display: flex; flex-direction: column; gap: 0;
+      border: 1px solid var(--border-subtle); border-radius: 14px;
+      overflow: hidden; list-style: none; padding: 0; margin: 0;
+    }
+    .component-summary-list li {
+      padding: 14px 20px; border-bottom: 1px solid var(--border-subtle);
+      font-size: 13px; font-weight: 500; color: var(--text2); line-height: 1.55;
+    }
+    .component-summary-list li:last-child { border-bottom: none; }
+    .component-summary-list li strong { color: var(--text); font-weight: 700; }
+
+    /* Best practices */
+    .component-best-practices { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+    .component-bp-card { border-radius: 14px; overflow: hidden; border: 1.5px solid; }
+    .component-bp-card--do   { border-color: rgba(0,168,89,.3); }
+    .component-bp-card--dont { border-color: rgba(255,71,87,.3); }
+    .component-bp-label {
+      display: flex; align-items: center; gap: 6px; padding: 10px 16px;
+      font-size: 10px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase;
+    }
+    .component-bp-label--do   { background: rgba(0,168,89,.07);  color: var(--jio); }
+    .component-bp-label--dont { background: rgba(255,71,87,.07); color: var(--negative); }
+    .component-bp-label--do::before   { content: '\2713'; font-size: 11px; }
+    .component-bp-label--dont::before { content: '\2715'; font-size: 11px; }
+    .component-bp-list {
+      padding: 16px 20px 20px; background: var(--surface-1); margin: 0;
+      display: flex; flex-direction: column; gap: 8px; list-style: none;
+    }
+    .component-bp-list li {
+      font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.5;
+      padding-left: 14px; position: relative;
+    }
+    .component-bp-list li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+
+    /* Platform cards */
+    .component-platform-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+    .component-platform-card { background: var(--surface-1); border: 1px solid var(--border-subtle); border-radius: var(--r4); padding: 20px; }
+    .component-platform-card--mobile { border-top: 2px solid rgba(110,231,183,.4); }
+    .component-platform-card--web    { border-top: 2px solid rgba(147,197,253,.4); }
+    .component-platform-card--tv     { border-top: 2px solid rgba(251,191,36,.4); }
+    .component-platform-card-title { font-size: 11px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--text3); margin-bottom: 12px; }
+    .component-platform-card--mobile .component-platform-card-title { color: #6ee7b7; }
+    .component-platform-card--web    .component-platform-card-title { color: #93c5fd; }
+    .component-platform-card--tv     .component-platform-card-title { color: #fbbf24; }
+    .component-platform-card ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .component-platform-card li { font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.5; padding-left: 14px; position: relative; }
+    .component-platform-card li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+
+    /* Changelog */
+    .component-changelog { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; }
+    .component-changelog-entry { display: grid; grid-template-columns: 56px 80px 1fr; gap: 16px; align-items: start; padding: 14px 20px; border-bottom: 1px solid var(--border-subtle); font-size: 12px; }
+    .component-changelog-entry:last-child { border-bottom: none; }
+    .component-changelog-version { font-family: monospace; font-weight: 700; color: var(--jio); font-size: 11px; }
+    .component-changelog-date { color: var(--text3); font-weight: 500; }
+    .component-changelog-desc { color: var(--text2); line-height: 1.5; }
+
+    /* A11y */
+    .a11y-grid { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; margin-top: 24px; }
+    .a11y-row { display: grid; grid-template-columns: 160px 1fr; gap: 0; border-bottom: 1px solid var(--border-subtle); }
+    .a11y-row:last-child { border-bottom: none; }
+    .a11y-label { padding: 14px 16px; font-size: 11px; font-weight: 700; color: var(--text3); letter-spacing: .3px; background: var(--surface-2); text-transform: uppercase; display: flex; align-items: flex-start; padding-top: 16px; }
+    .a11y-content { padding: 14px 20px; font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.6; background: var(--surface-1); }
+    .a11y-content code { font-family: monospace; font-size: 11px; color: #a8e6c5; background: rgba(0,168,89,.08); padding: 1px 5px; border-radius: 3px; }
+
+    /* Token table */
+    .ds-token-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; font-size: 12px; }
+    .ds-token-table th { background: var(--surface-2); padding: 10px 16px; text-align: left; font-size: 10px; font-weight: 700; letter-spacing: .7px; text-transform: uppercase; color: var(--text3); border-bottom: 1px solid var(--border-subtle); }
+    .ds-token-table td { padding: 12px 16px; border-bottom: 1px solid var(--border-subtle); color: var(--text2); vertical-align: top; background: var(--surface-1); }
+    .ds-token-table tr:last-child td { border-bottom: none; }
+    .ds-token-table code { font-family: monospace; font-size: 11px; color: #a8e6c5; background: rgba(0,168,89,.08); padding: 1px 5px; border-radius: 3px; }
+
+    /* Sizes table */
+    .sizes-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; font-size: 12px; }
+    .sizes-table th { background: var(--surface-2); padding: 10px 16px; text-align: left; font-size: 10px; font-weight: 700; letter-spacing: .7px; text-transform: uppercase; color: var(--text3); border-bottom: 1px solid var(--border-subtle); }
+    .sizes-table th:nth-child(2) { color: #6ee7b7; }
+    .sizes-table th:nth-child(3) { color: #93c5fd; }
+    .sizes-table th:nth-child(4) { color: #fbbf24; }
+    .sizes-table td { padding: 12px 16px; border-bottom: 1px solid var(--border-subtle); color: var(--text2); vertical-align: top; background: var(--surface-1); }
+    .sizes-table tr:last-child td { border-bottom: none; }
+    .sizes-table td:first-child { font-weight: 600; color: var(--text); background: var(--surface-2); }
+
+    /* Content grid */
+    .component-content-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+    .component-content-card { background: var(--surface-1); border: 1px solid var(--border-subtle); border-radius: var(--r4); padding: 20px; }
+    .component-content-title { font-size: 12px; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 12px; }
+    .component-content-card ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .component-content-card li { font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.5; padding-left: 14px; position: relative; }
+    .component-content-card li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+
+    /* Note */
+    .ds-note { background: rgba(0,168,89,.06); border: 1px solid rgba(0,168,89,.2); border-radius: var(--r3); padding: 14px 18px; font-size: 13px; font-weight: 500; color: var(--text2); line-height: 1.55; }
+    .ds-note strong { color: var(--jio); }
+
+    /* States demo */
+    .states-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; margin-top: 20px; }
+    .state-cell { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .state-label { font-size: 10px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--text3); }
+
+    /* Variants demo */
+    .variants-grid { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; margin-top: 20px; }
+    .variant-row { display: grid; grid-template-columns: 160px 260px 1fr; gap: 20px; align-items: center; padding: 20px; border-bottom: 1px solid var(--border-subtle); background: var(--surface-1); }
+    .variant-row:last-child { border-bottom: none; }
+    .variant-name { font-size: 13px; font-weight: 700; color: var(--text); }
+    .variant-class { font-family: monospace; font-size: 11px; color: #a8e6c5; margin-top: 3px; }
+    .variant-desc { font-size: 12px; color: var(--text2); line-height: 1.55; }
+
+    @media (max-width: 760px) {
+      .component-best-practices,
+      .component-content-grid,
+      .component-platform-grid { grid-template-columns: 1fr; }
+      .variant-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<main class="ds-content">
+
+  <!-- ===================================================
+       1. PAGE HEADER
+  =================================================== -->
+  <div class="component-page-header">
+    <div class="component-breadcrumb">
+      <a href="../index.html">JioGames DLS</a>
+      <span class="component-breadcrumb-sep">&#x203A;</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">&#x203A;</span>
+      <span>Dialogs</span>
+    </div>
+    <h1 class="component-page-title">Dialogs</h1>
+    <p class="component-page-def">Dialogs present focused tasks or critical decisions that require player confirmation before proceeding.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+      <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+      <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+      <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+    </div>
+  </div>
+
+  <!-- ===================================================
+       2. HERO VISUAL
+  =================================================== -->
+  <section class="component-hero component-hero--dark component-hero--grid" id="overview">
+    <div class="hero-glow" style="top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+    <div class="component-hero-inner">
+      <!-- Phone-context wrapper -->
+      <div style="position:relative;width:320px;height:260px;background:var(--bg);border-radius:24px;border:1px solid var(--border-subtle);overflow:hidden;display:flex;align-items:center;justify-content:center">
+        <!-- Scrim -->
+        <div style="position:absolute;inset:0;background:rgba(0,0,0,.55);border-radius:24px;z-index:1"></div>
+        <!-- Game content behind scrim — faint suggestion -->
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg,#0e1118 0%,#151a25 100%);border-radius:24px"></div>
+        <div style="position:absolute;top:16px;left:16px;right:16px;height:80px;background:linear-gradient(135deg,rgba(0,168,89,.15),rgba(142,91,255,.1));border-radius:12px;z-index:0"></div>
+        <!-- Dialog card -->
+        <div style="position:relative;z-index:2;background:var(--surface-2);border-radius:20px;border:1px solid var(--border);max-width:288px;width:100%;padding:28px;box-shadow:0 24px 48px rgba(0,0,0,.6)">
+          <!-- Warning icon -->
+          <div style="width:44px;height:44px;border-radius:50%;background:rgba(251,140,0,.12);border:1px solid rgba(251,140,0,.3);display:flex;align-items:center;justify-content:center;margin-bottom:16px">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="#fb8c00" aria-hidden="true"><use href="../sprite.svg#ic_warning"></use></svg>
+          </div>
+          <!-- Title -->
+          <div style="font-size:18px;font-weight:900;color:var(--text);line-height:1.2;margin-bottom:12px">Delete save data?</div>
+          <!-- Body -->
+          <div style="font-size:14px;color:var(--text2);line-height:1.5;margin-bottom:24px">This will permanently remove your progress for all levels. This cannot be undone.</div>
+          <!-- Buttons -->
+          <div style="display:flex;gap:12px;justify-content:flex-end">
+            <button class="btn btn--ghost btn--m btn--hug">Cancel</button>
+            <button class="btn btn--destructive btn--m btn--hug">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="component-hero-caption">Confirmation dialog &#xB7; Destructive variant &#xB7; Mobile</span>
+  </section>
+
+  <!-- ===================================================
+       3. INTRO
+  =================================================== -->
+  <section class="component-intro" id="intro">
+    <p>Dialogs interrupt the player with a focused question or task. They block background interaction until resolved. Use sparingly &#x2014; every dialog adds friction.</p>
+    <ul class="component-summary-list">
+      <li><strong>When to use.</strong> Confirmation for destructive or irreversible actions, collecting short input, and surfacing critical alerts that require an immediate response.</li>
+      <li><strong>When not to use.</strong> Informational toasts or snackbars, navigation decisions, non-urgent notifications, and confirmations for reversible actions.</li>
+      <li><strong>Interruption cost.</strong> Every dialog pauses the player&#x27;s primary task. Reserve dialogs for moments where the risk of proceeding without confirmation is high.</li>
+    </ul>
+  </section>
+
+  <!-- ===================================================
+       4. BEST PRACTICES
+  =================================================== -->
+  <section class="ds-section" id="best-practices">
+    <h2 class="ds-section-title">Best practices</h2>
+    <p class="ds-section-desc">Follow these rules to keep dialog usage consistent and respectful of the player&#x27;s attention.</p>
+    <div class="component-best-practices">
+      <div class="component-bp-card component-bp-card--do">
+        <span class="component-bp-label component-bp-label--do">Do</span>
+        <ul class="component-bp-list">
+          <li>Use for irreversible or high-stakes actions only</li>
+          <li>Keep body copy to 2 sentences maximum</li>
+          <li>Lead with the most important information in the title</li>
+          <li>Use specific button labels — &#x22;Delete save data&#x22;, not &#x22;OK&#x22;</li>
+          <li>Animate in with fade + scale (0.92 &#x2192; 1, 200ms ease-out)</li>
+          <li>Return focus to the trigger element on dismiss</li>
+          <li>Always include a Cancel or dismissal path</li>
+        </ul>
+      </div>
+      <div class="component-bp-card component-bp-card--dont">
+        <span class="component-bp-label component-bp-label--dont">Don&#x27;t</span>
+        <ul class="component-bp-list">
+          <li>Use for non-blocking messages &#x2014; use toasts instead</li>
+          <li>Stack multiple dialogs on top of each other</li>
+          <li>Use full-screen for simple 2-button confirmation</li>
+          <li>Use vague labels like &#x22;OK&#x22;, &#x22;Yes&#x22;, or &#x22;No&#x22;</li>
+          <li>Block dialogs with inline loading spinners on the scrim</li>
+          <li>Auto-open dialogs without a clear user trigger</li>
+          <li>Exceed 4 interactive elements inside the dialog</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       5. ANATOMY
+  =================================================== -->
+  <section class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <p class="ds-section-desc">Every dialog is built from five parts. The Scrim, Container, Body, and Button row are required. The Icon slot is optional but strongly recommended for destructive and alert variants.</p>
+    <div class="ds-anatomy">
+      <div class="ds-anatomy-preview">
+        <!-- Annotated dialog preview -->
+        <div style="position:relative;width:280px;height:280px;display:flex;align-items:center;justify-content:center;padding:24px">
+          <!-- Scrim layer hint -->
+          <div style="position:absolute;inset:0;background:rgba(0,0,0,.45);border-radius:12px;z-index:0"></div>
+          <!-- Dialog container -->
+          <div style="position:relative;z-index:1;background:var(--surface-2);border-radius:20px;border:1px solid var(--border);width:100%;padding:22px">
+            <!-- Icon area -->
+            <div style="width:36px;height:36px;border-radius:50%;background:rgba(251,140,0,.12);border:1px solid rgba(251,140,0,.25);display:flex;align-items:center;justify-content:center;margin-bottom:12px">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="#fb8c00" aria-hidden="true"><use href="../sprite.svg#ic_warning"></use></svg>
+            </div>
+            <!-- Title + body -->
+            <div style="font-size:14px;font-weight:900;color:var(--text);margin-bottom:6px">Delete save data?</div>
+            <div style="font-size:11px;color:var(--text2);line-height:1.5;margin-bottom:16px">Permanently removes your progress for all levels.</div>
+            <!-- Buttons -->
+            <div style="display:flex;gap:8px;justify-content:flex-end">
+              <button class="btn btn--ghost btn--m btn--hug" style="font-size:12px;height:34px;padding:0 12px">Cancel</button>
+              <button class="btn btn--destructive btn--m btn--hug" style="font-size:12px;height:34px;padding:0 12px">Delete</button>
+            </div>
+          </div>
+          <!-- Callout 1 — Scrim -->
+          <div style="position:absolute;top:6px;left:6px;display:flex;align-items:center;gap:4px;z-index:3">
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">1</div>
+          </div>
+          <!-- Callout 2 — Container -->
+          <div style="position:absolute;top:38px;right:4px;z-index:3">
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">2</div>
+          </div>
+          <!-- Callout 3 — Icon -->
+          <div style="position:absolute;top:58px;left:6px;z-index:3">
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">3</div>
+          </div>
+          <!-- Callout 4 — Body -->
+          <div style="position:absolute;bottom:80px;left:6px;z-index:3">
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">4</div>
+          </div>
+          <!-- Callout 5 — Button row -->
+          <div style="position:absolute;bottom:22px;left:6px;z-index:3">
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">5</div>
+          </div>
+        </div>
+      </div>
+      <div class="ds-anatomy-list">
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">1</div>
+          <div>
+            <div class="ds-anatomy-label">Scrim <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Full-viewport overlay behind the dialog. Blocks background interaction. Tapping it dismisses non-critical dialogs.</div>
+            <div class="ds-anatomy-token">Token: --overlay-scrim · rgba(0,0,0,.55)</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">2</div>
+          <div>
+            <div class="ds-anatomy-label">Container <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Dark card with <code class="ds-code">border-radius: var(--r7)</code>, <code class="ds-code">background: var(--surface-2)</code>, and <code class="ds-code">border: 1px solid var(--border)</code>. Max-width varies by platform.</div>
+            <div class="ds-anatomy-token">Token: --surface-2 · --r7 · --border</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">3</div>
+          <div>
+            <div class="ds-anatomy-label">Icon / illustration <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc">40px circle communicating dialog type visually. Amber = warning, red = destructive, green = success, blue = info. Never use purely decorative icons.</div>
+            <div class="ds-anatomy-token">Size: 40px · border-radius: 50%</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">4</div>
+          <div>
+            <div class="ds-anatomy-label">Body <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Title (max 8 words, sentence case, question format for confirmations) + body text (max 2 sentences, plain language, consequence stated).</div>
+            <div class="ds-anatomy-token">Title: 18px/700 · Body: 14px/400 · color: --text2</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">5</div>
+          <div>
+            <div class="ds-anatomy-label">Button row <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Cancel / secondary action on the left, primary or destructive action on the right. Never swap this order. Use <code class="ds-code">.btn--m</code> size.</div>
+            <div class="ds-anatomy-token">Layout: flex · gap: 12px · justify: flex-end</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       6. VARIANTS
+  =================================================== -->
+  <section class="ds-section" id="variants">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Five dialog variants cover the full range of blocking interactions. Choose the lowest-weight variant that still communicates urgency accurately.</p>
+
+    <div class="variants-grid">
+      <div class="variant-row">
+        <div>
+          <div class="variant-name">Confirmation</div>
+          <div class="variant-class">default</div>
+        </div>
+        <div style="background:var(--surface-3);border-radius:14px;padding:16px;position:relative">
+          <div style="font-size:13px;font-weight:900;color:var(--text);margin-bottom:6px">Remove from library?</div>
+          <div style="font-size:11px;color:var(--text2);line-height:1.5;margin-bottom:14px">The game will be removed from your library but you can re-add it any time.</div>
+          <div style="display:flex;gap:8px;justify-content:flex-end">
+            <button class="btn btn--ghost btn--m btn--hug" style="font-size:11px;height:32px;padding:0 10px">Cancel</button>
+            <button class="btn btn--primary btn--m btn--hug" style="font-size:11px;height:32px;padding:0 10px">Remove</button>
+          </div>
+        </div>
+        <div class="variant-desc">Standard two-button dialog for reversible or moderate-consequence actions. Uses primary CTA on the right. No icon required.</div>
+      </div>
+
+      <div class="variant-row">
+        <div>
+          <div class="variant-name">Destructive confirm</div>
+          <div class="variant-class">--destructive</div>
+        </div>
+        <div style="background:var(--surface-3);border-radius:14px;padding:16px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+            <div style="width:32px;height:32px;border-radius:50%;background:rgba(255,71,87,.1);border:1px solid rgba(255,71,87,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="var(--negative)" aria-hidden="true"><use href="../sprite.svg#ic_trash"></use></svg>
+            </div>
+            <div style="font-size:13px;font-weight:900;color:var(--text)">Delete save data?</div>
+          </div>
+          <div style="font-size:11px;color:var(--text2);line-height:1.5;margin-bottom:14px">Permanently removes all progress. Cannot be undone.</div>
+          <div style="display:flex;gap:8px;justify-content:flex-end">
+            <button class="btn btn--ghost btn--m btn--hug" style="font-size:11px;height:32px;padding:0 10px">Cancel</button>
+            <button class="btn btn--destructive btn--m btn--hug" style="font-size:11px;height:32px;padding:0 10px">Delete</button>
+          </div>
+        </div>
+        <div class="variant-desc">Red CTA for irreversible actions. Amber or red icon reinforces severity. Body must state the consequence explicitly.</div>
+      </div>
+
+      <div class="variant-row">
+        <div>
+          <div class="variant-name">Info / alert</div>
+          <div class="variant-class">--info</div>
+        </div>
+        <div style="background:var(--surface-3);border-radius:14px;padding:16px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+            <div style="width:32px;height:32px;border-radius:50%;background:rgba(147,197,253,.1);border:1px solid rgba(147,197,253,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="#93c5fd" aria-hidden="true"><use href="../sprite.svg#ic_info"></use></svg>
+            </div>
+            <div style="font-size:13px;font-weight:900;color:var(--text)">Session expired</div>
+          </div>
+          <div style="font-size:11px;color:var(--text2);line-height:1.5;margin-bottom:14px">Your session timed out after 30 minutes of inactivity. Please sign in again.</div>
+          <div style="display:flex;justify-content:flex-end">
+            <button class="btn btn--primary btn--m btn--hug" style="font-size:11px;height:32px;padding:0 10px">Got it</button>
+          </div>
+        </div>
+        <div class="variant-desc">Single-action dialog for critical alerts. Blue info icon. One OK/Got it button only — no cancel path needed.</div>
+      </div>
+
+      <div class="variant-row">
+        <div>
+          <div class="variant-name">Input dialog</div>
+          <div class="variant-class">--input</div>
+        </div>
+        <div style="background:var(--surface-3);border-radius:14px;padding:16px">
+          <div style="font-size:13px;font-weight:900;color:var(--text);margin-bottom:6px">Name your save slot</div>
+          <div style="font-size:11px;color:var(--text2);line-height:1.5;margin-bottom:12px">Enter a name for this save point.</div>
+          <input type="text" placeholder="e.g. Before final boss" value="Chapter 8 — Rift Gate" style="width:100%;box-sizing:border-box;background:var(--surface-4);border:1px solid var(--border);border-radius:10px;padding:10px 12px;font-size:12px;color:var(--text);font-family:var(--jio-font);margin-bottom:12px;outline:none" />
+          <div style="display:flex;gap:8px;justify-content:flex-end">
+            <button class="btn btn--ghost btn--m btn--hug" style="font-size:11px;height:32px;padding:0 10px">Cancel</button>
+            <button class="btn btn--primary btn--m btn--hug" style="font-size:11px;height:32px;padding:0 10px">Save</button>
+          </div>
+        </div>
+        <div class="variant-desc">Embeds a single input field for short text collection. No multi-field forms — use a dedicated screen for complex input.</div>
+      </div>
+
+      <div class="variant-row">
+        <div>
+          <div class="variant-name">Full-screen</div>
+          <div class="variant-class">--fullscreen</div>
+        </div>
+        <div style="background:var(--surface-3);border-radius:14px;padding:16px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+            <div style="font-size:13px;font-weight:900;color:var(--text)">Rate this game</div>
+            <div style="width:28px;height:28px;border-radius:50%;background:var(--glass-1);display:flex;align-items:center;justify-content:center;cursor:pointer">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="var(--text3)" aria-hidden="true"><use href="../sprite.svg#ic_close"></use></svg>
+            </div>
+          </div>
+          <div style="font-size:11px;color:var(--text2);line-height:1.5;margin-bottom:14px">Full-screen on mobile. Fills the viewport for richer content or longer forms.</div>
+          <div style="font-size:10px;font-weight:700;color:var(--text4);text-transform:uppercase;letter-spacing:.5px">Mobile only — uses 100% viewport height</div>
+        </div>
+        <div class="variant-desc">Mobile-only. Fills the full viewport for complex tasks like ratings, long confirmations, or multi-step flows that don&#x27;t warrant a new screen.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       7. SIZES
+  =================================================== -->
+  <section class="ds-section" id="sizes">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Dialog dimensions are fixed per platform. Do not resize dialogs dynamically — use the platform-specific values below.</p>
+    <table class="sizes-table" style="margin-top:20px">
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>&#x1F4F1; Mobile</th>
+          <th>&#x1F4BB; Web</th>
+          <th>&#x1F4FA; TV</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Max-width</td><td>360px</td><td>480px</td><td>640px</td></tr>
+        <tr><td>Padding</td><td>24px</td><td>32px</td><td>40px</td></tr>
+        <tr><td>Title font-size</td><td>18px</td><td>20px</td><td>28px</td></tr>
+        <tr><td>Body font-size</td><td>14px</td><td>15px</td><td>20px</td></tr>
+        <tr><td>Border-radius</td><td>20px (var(--r7))</td><td>20px (var(--r7))</td><td>28px</td></tr>
+        <tr><td>Button size</td><td>.btn--m</td><td>.btn--m</td><td>.btn--l</td></tr>
+        <tr><td>Scrim opacity</td><td>0.55</td><td>0.55</td><td>0.7</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ===================================================
+       8. STATES
+  =================================================== -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Dialogs have three lifecycle states. Use CSS transitions to smooth the opening and closing experience.</p>
+    <div class="ds-demo ds-demo--dark" style="margin-top:20px">
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-end">
+        <!-- Opening -->
+        <div class="state-cell">
+          <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:16px 20px;opacity:.65;transform:scale(.92);width:180px">
+            <div style="font-size:12px;font-weight:800;color:var(--text);margin-bottom:4px">Opening</div>
+            <div style="font-size:10px;color:var(--text3)">Fade 0&#x2192;1 + scale .92&#x2192;1</div>
+            <div style="font-size:10px;color:var(--text4);margin-top:2px">200ms ease-out</div>
+          </div>
+          <span class="state-label">Opening</span>
+        </div>
+        <!-- Arrow -->
+        <div style="color:var(--text4);font-size:20px;padding-bottom:24px">&#x2192;</div>
+        <!-- Default -->
+        <div class="state-cell">
+          <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:16px 20px;opacity:1;transform:scale(1);width:180px;box-shadow:0 12px 32px rgba(0,0,0,.5)">
+            <div style="font-size:12px;font-weight:800;color:var(--text);margin-bottom:4px">Default</div>
+            <div style="font-size:10px;color:var(--text3)">Fully visible, interactive</div>
+            <div style="font-size:10px;color:var(--text4);margin-top:2px">opacity:1 · scale:1</div>
+          </div>
+          <span class="state-label" style="color:var(--jio)">Default</span>
+        </div>
+        <!-- Arrow -->
+        <div style="color:var(--text4);font-size:20px;padding-bottom:24px">&#x2192;</div>
+        <!-- Closing -->
+        <div class="state-cell">
+          <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:16px 20px;opacity:.2;transform:scale(.96);width:180px">
+            <div style="font-size:12px;font-weight:800;color:var(--text);margin-bottom:4px">Closing</div>
+            <div style="font-size:10px;color:var(--text3)">Fade 1&#x2192;0 · no scale</div>
+            <div style="font-size:10px;color:var(--text4);margin-top:2px">150ms ease-in</div>
+          </div>
+          <span class="state-label">Closing</span>
+        </div>
+      </div>
+    </div>
+    <div class="ds-note" style="margin-top:20px">
+      <strong>Performance.</strong> Animate only <code style="font-family:monospace;font-size:12px;color:#a8e6c5">opacity</code> and <code style="font-family:monospace;font-size:12px;color:#a8e6c5">transform</code>. Never animate <code style="font-family:monospace;font-size:12px;color:#a8e6c5">width</code>, <code style="font-family:monospace;font-size:12px;color:#a8e6c5">height</code>, or <code style="font-family:monospace;font-size:12px;color:#a8e6c5">top/left</code> — these trigger layout reflow.
+    </div>
+  </section>
+
+  <!-- ===================================================
+       9. CONTENT GUIDANCE
+  =================================================== -->
+  <section class="ds-section" id="content">
+    <h2 class="ds-section-title">Content</h2>
+    <p class="ds-section-desc">Dialog copy must be direct, specific, and consequential. Vague language increases hesitation and erodes player trust.</p>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Title rules</div>
+        <ul>
+          <li>Maximum 8 words</li>
+          <li>Sentence case throughout</li>
+          <li>Question format for confirmations: &#x22;Delete save data?&#x22;</li>
+          <li>Statement for alerts: &#x22;Session expired&#x22;</li>
+          <li>Match the action exactly &#x2014; no metaphors</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Body rules</div>
+        <ul>
+          <li>Maximum 2 sentences</li>
+          <li>Plain language &#x2014; no jargon or technical terms</li>
+          <li>State what happens AND the consequence</li>
+          <li>&#x22;This will permanently remove&#x2026;&#x22; not &#x22;Data will be deleted&#x22;</li>
+          <li>Avoid repeating the title in the body</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Button rules</div>
+        <ul>
+          <li>Use verb phrases, not nouns</li>
+          <li>Match the action exactly: &#x22;Delete save data&#x22; not &#x22;Delete&#x22;</li>
+          <li>Secondary / cancel is always &#x22;Cancel&#x22;</li>
+          <li>Primary is always the action verb</li>
+          <li>Never &#x22;OK&#x22;, &#x22;Yes&#x22;, &#x22;No&#x22;, or &#x22;Confirm&#x22;</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       10. PLATFORM
+  =================================================== -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform guidance</h2>
+    <p class="ds-section-desc">Dialog behavior adapts per platform. The visual structure stays consistent; scale and interaction model differ.</p>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">&#x1F4F1; Mobile</div>
+        <ul>
+          <li>Max-width: 360px, centered in viewport</li>
+          <li>Appears centered or as full-screen on small phones</li>
+          <li>Border-radius: 20px (var(--r7))</li>
+          <li>Scrim tap dismisses non-critical dialogs</li>
+          <li>Full-screen variant available for complex tasks</li>
+          <li>Minimum touch target: 44px for buttons</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">&#x1F4BB; Web</div>
+        <ul>
+          <li>Max-width: 480px, always centered</li>
+          <li>Never bottom-sheet style on desktop</li>
+          <li>Border-radius: 20px (var(--r7))</li>
+          <li>Escape key always dismisses</li>
+          <li>Full-screen variant not used</li>
+          <li>Backdrop click dismisses non-critical dialogs</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">&#x1F4FA; TV</div>
+        <ul>
+          <li>Max-width: 640px, centered</li>
+          <li>Never use bottom sheet style</li>
+          <li>Border-radius: 28px for legibility at distance</li>
+          <li>Use .btn--l size, never .btn--m or smaller</li>
+          <li>D-pad navigates between buttons</li>
+          <li>Back button on remote dismisses</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       11. ACCESSIBILITY
+  =================================================== -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">Dialogs must be usable by keyboard, screen reader, and assistive technology. These requirements are non-negotiable.</p>
+    <div class="a11y-grid">
+      <div class="a11y-row">
+        <span class="a11y-label">ARIA role</span>
+        <div class="a11y-content">Set <code>role="dialog"</code> and <code>aria-modal="true"</code> on the dialog container. Use <code>aria-labelledby</code> pointing to the title element&#x27;s ID.</div>
+      </div>
+      <div class="a11y-row">
+        <span class="a11y-label">Focus trap</span>
+        <div class="a11y-content">When the dialog opens, focus must move inside the dialog. Tab key cycles only through interactive elements inside the dialog &#x2014; never to background content.</div>
+      </div>
+      <div class="a11y-row">
+        <span class="a11y-label">Keyboard dismiss</span>
+        <div class="a11y-content">Pressing <kbd>Escape</kbd> dismisses the dialog and returns focus to the triggering element. Applies to all dialog variants including destructive.</div>
+      </div>
+      <div class="a11y-row">
+        <span class="a11y-label">Screen reader</span>
+        <div class="a11y-content">Announce dialog content on open via <code>aria-live="assertive"</code> or by moving focus. The title must be read immediately. Body is read when focus moves to it.</div>
+      </div>
+      <div class="a11y-row">
+        <span class="a11y-label">Touch targets</span>
+        <div class="a11y-content">Minimum 44&#xD7;44px for all interactive elements inside the dialog, including the icon-only close button. Buttons use <code>.btn--m</code> which meets this requirement.</div>
+      </div>
+      <div class="a11y-row">
+        <span class="a11y-label">Focus return</span>
+        <div class="a11y-content">When the dialog closes (any path &#x2014; confirm, cancel, Escape, scrim tap), focus returns to the element that triggered the dialog. Store a <code>triggerRef</code> before opening.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       12. PLATFORM CONSIDERATIONS
+  =================================================== -->
+  <section id="platform-considerations" class="component-section">
+  <h2 class="ds-section-title">Platform considerations</h2>
+  <div class="component-platform-grid">
+    <div class="component-platform component-platform--mobile">
+      <div class="component-platform-label">Mobile</div>
+      <ul class="component-platform-list">
+        <li>Appears centred with dark backdrop; max width 320px</li>
+        <li>Touch outside backdrop dismisses when isDismissible is true</li>
+        <li>Limit to 2 actions; stack vertically if labels are long</li>
+        <li>Avoid dialogs during active gameplay — use toast or banner instead</li>
+      </ul>
+    </div>
+    <div class="component-platform component-platform--web">
+      <div class="component-platform-label">Web</div>
+      <ul class="component-platform-list">
+        <li>Max width 400px; centred with semi-transparent backdrop</li>
+        <li>Keyboard: Tab cycles focus; Esc dismisses; Enter confirms primary action</li>
+        <li>Focus traps inside dialog while open</li>
+        <li>Scroll lock on body while dialog is open</li>
+      </ul>
+    </div>
+    <div class="component-platform component-platform--tv">
+      <div class="component-platform-label">TV</div>
+      <ul class="component-platform-list">
+        <li>Render as full-width centred card; avoid small text</li>
+        <li>Minimum 2 D-pad-focusable action buttons</li>
+        <li>Back button on remote = cancel/dismiss</li>
+        <li>Use size L or XL buttons inside TV dialogs</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+  <!-- ===================================================
+       13. CONTENT GUIDANCE
+  =================================================== -->
+  <section id="content" class="component-section">
+  <h2 class="ds-section-title">Content guidance</h2>
+  <div class="component-content-grid">
+    <div>
+      <h3 class="ds-subsection-title">Title</h3>
+      <p class="ds-body">State the decision clearly in 4–6 words. Phrase as a question or outcome: "Remove this game?" not "Confirm action".</p>
+    </div>
+    <div>
+      <h3 class="ds-subsection-title">Body</h3>
+      <p class="ds-body">One sentence maximum. Explain the consequence, not the mechanism. "This will remove all your saved progress." not "This triggers a DELETE call."</p>
+    </div>
+    <div>
+      <h3 class="ds-subsection-title">Actions</h3>
+      <p class="ds-body">Confirm action on the right (primary), dismiss on the left (ghost or secondary). Never use "Yes/No" — use specific verbs like "Remove" and "Keep".</p>
+    </div>
+    <div>
+      <h3 class="ds-subsection-title">Tone</h3>
+      <p class="ds-body">Dialogs interrupt — keep them calm and direct. Avoid exclamation marks. Never use alarming language for non-destructive prompts.</p>
+    </div>
+  </div>
+</section>
+
+  <!-- ===================================================
+       14. RELATED TOKENS
+  =================================================== -->
+  <section class="ds-section" id="tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-desc">The following design tokens control dialog appearance. Override at the platform-specific token layer, never inline.</p>
+    <table class="ds-token-table" style="margin-top:20px">
+      <thead>
+        <tr><th>Token</th><th>Default value</th><th>Usage</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>--overlay-scrim</code></td><td>rgba(0,0,0,.55)</td><td>Scrim background behind the dialog</td></tr>
+        <tr><td><code>--r7</code></td><td>20px</td><td>Dialog container border-radius</td></tr>
+        <tr><td><code>--surface-2</code></td><td>#0e1118 approx.</td><td>Dialog card background</td></tr>
+        <tr><td><code>--border</code></td><td>rgba(255,255,255,.1) approx.</td><td>Dialog card border</td></tr>
+        <tr><td><code>--shadow-4</code></td><td>0 24px 48px rgba(0,0,0,.6)</td><td>Elevation shadow on dialog card</td></tr>
+        <tr><td><code>--dur-pop</code></td><td>200ms</td><td>Open animation duration</td></tr>
+        <tr><td><code>--dur-default</code></td><td>150ms</td><td>Close animation duration</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ===================================================
+       CODE EXAMPLES
+  =================================================== -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
+    <div class="component-code-block">
+      <div class="component-code-label">Dialog — confirmation</div>
+      <pre class="component-code-pre"><code>&lt;!-- Backdrop --&gt;
+&lt;div class="dialog-backdrop" aria-hidden="true"&gt;&lt;/div&gt;
+
+&lt;!-- Dialog --&gt;
+&lt;div
+  class="dialog"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="dialog-title"
+  aria-describedby="dialog-desc"
+&gt;
+  &lt;h2 id="dialog-title" class="dialog__title"&gt;Remove game?&lt;/h2&gt;
+  &lt;p id="dialog-desc" class="dialog__body"&gt;This will remove War Thunder from your library.&lt;/p&gt;
+  &lt;div class="dialog__actions"&gt;
+    &lt;button class="btn btn--ghost btn--m btn--hug"&gt;Keep&lt;/button&gt;
+    &lt;button class="btn btn--primary btn--m btn--hug"&gt;Remove&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+    <div class="component-code-block">
+      <div class="component-code-label">Dialog — focus trap (JS)</div>
+      <pre class="component-code-pre"><code>// Trap focus inside dialog while open
+function trapFocus(dialogEl) {
+  const focusable = dialogEl.querySelectorAll(
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+  );
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  dialogEl.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab') return;
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+    } else {
+      if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  first.focus();
+}</code></pre>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       13. CHANGELOG
+  =================================================== -->
+
+</main>
+<script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script>
+</body>
+</html>

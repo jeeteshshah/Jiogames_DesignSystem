@@ -1,0 +1,562 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    .select-wrap { position: relative; width: 100%; }
+    .select {
+      width: 100%;
+      height: var(--input-h, 48px);
+      background: var(--input-bg, var(--glass-1));
+      border: 1.5px solid var(--input-border, var(--border-subtle));
+      border-radius: var(--input-radius, var(--r5));
+      color: var(--input-text, var(--text));
+      font-family: var(--jio-font);
+      font-size: 15px;
+      font-weight: 500;
+      padding: 0 var(--space-5, 40px) 0 var(--space-2);
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+    }
+    .select:focus { border-color: var(--jio); box-shadow: 0 0 0 3px rgba(0,168,89,.12); }
+    .select:disabled { opacity: var(--state-disabled-opacity); pointer-events: none; }
+    .select.is-invalid { border-color: var(--negative); }
+    .select-icon {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: var(--text3);
+    }
+
+    /* Sizes */
+    .select--s { height: 36px; font-size: 13px; }
+    .select--m { height: 48px; font-size: 15px; }
+    .select--l { height: 56px; font-size: 16px; }
+
+    /* Utility */
+    .field-group { display: flex; flex-direction: column; gap: 6px; }
+    .field-label { font-size: 12px; font-weight: 500; color: var(--text2); }
+    .field-hint { font-size: 11px; color: var(--negative); margin-top: 2px; }
+
+    /* Custom chevron icon inline SVG */
+    .select-chevron {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+  </style>
+</head><body><main class="ds-main">
+
+  <!-- PAGE HEADER -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Select</span>
+    </nav>
+    <h1 class="component-page-title">Select</h1>
+    <p class="component-page-def">Dropdown for choosing one option from a list. Used for sort order, platform filter, language, and settings with 5+ options.</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile">
+          <span class="component-platform-dot"></span>Mobile
+        </span>
+        <span class="component-platform component-platform--web">
+          <span class="component-platform-dot"></span>Web
+        </span>
+        <span class="component-platform component-platform--tv">
+          <span class="component-platform-dot"></span>TV
+        </span>
+      </div>
+      <span class="component-maturity component-maturity--draft">
+        <span class="component-maturity--dot"></span>Draft
+      </span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:280px;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="gap:20px;">
+      <div style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center; width:100%; max-width:560px;">
+
+        <div style="flex:1; min-width:200px;">
+          <div class="field-group">
+            <label class="field-label">Sort by</label>
+            <div class="select-wrap">
+              <select class="select">
+                <option value="popular" selected>Most Popular</option>
+                <option value="new">Newest First</option>
+                <option value="rating">Top Rated</option>
+                <option value="az">A – Z</option>
+              </select>
+              <span class="select-icon">
+                <svg class="select-chevron" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_chevron_down"></use></svg>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex:1; min-width:200px;">
+          <div class="field-group">
+            <label class="field-label">Genre</label>
+            <div class="select-wrap">
+              <select class="select" style="border-color:var(--jio); box-shadow:0 0 0 3px rgba(0,168,89,.12);">
+                <option value="">Select a genre</option>
+                <option value="action" selected>Action</option>
+                <option value="rpg">RPG</option>
+                <option value="sports">Sports</option>
+                <option value="racing">Racing</option>
+              </select>
+              <span class="select-icon" style="color:var(--jio);">
+                <svg class="select-chevron" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_chevron_down"></use></svg>
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <p class="component-hero-caption">Select in filter context · Sort by (default) · Genre (focused)</p>
+  </section>
+
+  <!-- INTRO -->
+  <section class="component-intro">
+    <p>The Select is a native <code class="ds-code">&lt;select&gt;</code> element with a custom visual shell — arrow icon, border, and typography are overridden; the dropdown list is rendered by the OS. Use Select when users must choose exactly one option from a closed list of 5–15 items. For fewer than 5 items, use Radio buttons or Chips. For more than 15 items or when search is needed, use Combobox.</p>
+    <ul class="component-summary-list">
+      <li><strong>Sort controls</strong> — Most Popular, Newest, Top Rated, A–Z in a browse header</li>
+      <li><strong>Filter selectors</strong> — Platform, Genre, Language dropdowns in search/filter panels</li>
+      <li><strong>Settings</strong> — Display language, region, audio output device</li>
+      <li><strong>Forms</strong> — Country, state, payment method in checkout or profile flows</li>
+    </ul>
+  </section>
+
+  <!-- BEST PRACTICES -->
+  <section class="component-best-practices">
+    <div class="component-bp-card component-bp-card--do">
+      <span class="component-bp-label component-bp-label--do">Do</span>
+      <ul class="component-bp-list">
+        <li>Always use a neutral first option: "Select a genre" — never a blank <code class="ds-code">&lt;option&gt;</code></li>
+        <li>Pair with a visible <code class="ds-code">&lt;label&gt;</code> — <code class="ds-code">aria-label</code> only when the visual context makes it obvious</li>
+        <li>Use for lists of 5–15 options — below 5, use Radio; above 15, use Combobox with search</li>
+        <li>Apply <code class="ds-code">is-invalid</code> class and error hint text on validation failure</li>
+        <li>Pre-select the most common or recommended option as the default</li>
+      </ul>
+    </div>
+    <div class="component-bp-card component-bp-card--dont">
+      <span class="component-bp-label component-bp-label--dont">Don't</span>
+      <ul class="component-bp-list">
+        <li>Use a blank first <code class="ds-code">&lt;option value=""&gt;&lt;/option&gt;</code> — always label the placeholder state</li>
+        <li>Use Select for lists longer than 15 items — scanning an OS dropdown past 15 options is slow</li>
+        <li>Use Select for binary choices — use a Toggle or two Radio buttons instead</li>
+        <li>Style the OS dropdown list panel — it renders in the OS context; only the trigger element is styleable</li>
+        <li>Use Select for navigation actions — it is a form control, not a nav element</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <div class="ds-anatomy" style="margin-bottom:64px;">
+    <div class="ds-anatomy-preview">
+      <div class="ds-anatomy-component" style="width:260px; position:relative;">
+        <label class="field-label" style="display:block; margin-bottom:6px;">Sort by</label>
+        <div class="select-wrap">
+          <select class="select" style="pointer-events:none;">
+            <option selected>Most Popular</option>
+          </select>
+          <span class="select-icon">
+            <svg class="select-chevron" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_chevron_down"></use></svg>
+          </span>
+        </div>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:0; left:-24px;"><span class="ds-anatomy-callout-num">1</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:32px; left:-24px;"><span class="ds-anatomy-callout-num">2</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:32px; right:-24px;"><span class="ds-anatomy-callout-num">3</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; bottom:-10px; left:50%; transform:translateX(-50%);"><span class="ds-anatomy-callout-num">4</span></span>
+      </div>
+    </div>
+    <ol class="ds-anatomy-list">
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">1</span>
+        <div>
+          <div class="ds-anatomy-label">Label <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Visible <code class="ds-code">&lt;label&gt;</code> linked via <code class="ds-code">for</code>/<code class="ds-code">id</code>. 12px/500, above the trigger. Never inside the trigger as placeholder-only.</div>
+          <code class="ds-anatomy-token ds-code">font-size: 12px; color: var(--text2)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">2</span>
+        <div>
+          <div class="ds-anatomy-label">Trigger container <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">The styled <code class="ds-code">&lt;select&gt;</code> element. 48px height (M), glass background, 1.5px border. Opens OS native dropdown on interaction.</div>
+          <code class="ds-anatomy-token ds-code">height: 48px; border-radius: var(--r5)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">3</span>
+        <div>
+          <div class="ds-anatomy-label">Chevron icon <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">16px SVG chevron, absolutely positioned right 14px, vertically centered. <code class="ds-code">pointer-events: none</code> so clicks pass through to the <code class="ds-code">&lt;select&gt;</code>.</div>
+          <code class="ds-anatomy-token ds-code">color: var(--text3); pointer-events: none</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">4</span>
+        <div>
+          <div class="ds-anatomy-label">OS dropdown list <span class="ds-anatomy-optional">Optional</span></div>
+          <div class="ds-anatomy-desc">Rendered entirely by the OS — cannot be styled with CSS. On mobile this is a bottom sheet picker; on web a floating list panel.</div>
+          <code class="ds-anatomy-token ds-code">/* not styleable — OS rendered */</code>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- VARIANTS -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Five variants cover all standard select use cases. Icon prefix requires the select to be wrapped in a custom shell (see code examples).</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-direction:column; gap:24px; max-width:360px;">
+
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:8px;">Default</span>
+          <div class="select-wrap">
+            <select class="select">
+              <option>Most Popular</option>
+              <option>Newest First</option>
+            </select>
+            <span class="select-icon"><svg class="select-chevron" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_chevron_down"></use></svg></span>
+          </div>
+        </div>
+
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:8px;">Focused</span>
+          <div class="select-wrap">
+            <select class="select" style="border-color:var(--jio); box-shadow:0 0 0 3px rgba(0,168,89,.12); pointer-events:none;">
+              <option>Action</option>
+            </select>
+            <span class="select-icon" style="color:var(--jio);"><svg class="select-chevron" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_chevron_down"></use></svg></span>
+          </div>
+        </div>
+
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:8px;">Disabled</span>
+          <div class="select-wrap">
+            <select class="select" disabled>
+              <option>English</option>
+            </select>
+            <span class="select-icon" style="opacity:.38;"><svg class="select-chevron" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_chevron_down"></use></svg></span>
+          </div>
+        </div>
+
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:8px;">With placeholder</span>
+          <div class="select-wrap">
+            <select class="select">
+              <option value="" selected disabled>Select a genre</option>
+              <option>Action</option>
+              <option>RPG</option>
+              <option>Sports</option>
+            </select>
+            <span class="select-icon"><svg class="select-chevron" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_chevron_down"></use></svg></span>
+          </div>
+        </div>
+
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:8px;">Invalid</span>
+          <div class="select-wrap">
+            <select class="select is-invalid">
+              <option value="" selected>Select a platform</option>
+            </select>
+            <span class="select-icon" style="color:var(--negative);"><svg class="select-chevron" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_chevron_down"></use></svg></span>
+          </div>
+          <div class="field-hint">Platform is required before you can save.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SIZES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Three height tiers. M is the default for all contexts. S fits dense filter bars. L is for prominent standalone filter controls.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-direction:column; gap:20px; max-width:360px;">
+
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:8px;">S — 36px · Dense filter rows</span>
+          <div class="select-wrap">
+            <select class="select select--s">
+              <option>Most Popular</option>
+            </select>
+            <span class="select-icon"><svg class="select-chevron" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_chevron_down"></use></svg></span>
+          </div>
+        </div>
+
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:8px;">M — 48px · Default</span>
+          <div class="select-wrap">
+            <select class="select select--m">
+              <option>Most Popular</option>
+            </select>
+            <span class="select-icon"><svg class="select-chevron" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_chevron_down"></use></svg></span>
+          </div>
+        </div>
+
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:8px;">L — 56px · Prominent filters</span>
+          <div class="select-wrap">
+            <select class="select select--l">
+              <option>Most Popular</option>
+            </select>
+            <span class="select-icon"><svg class="select-chevron" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_chevron_down"></use></svg></span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- STATES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Five states. Hover and focus only apply to the trigger element — the dropdown list is OS-rendered and carries its own system focus styles.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>State</th><th>Visual change</th><th>When</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Default</td><td>Border <code class="ds-code">var(--border-subtle)</code>, muted chevron</td><td>Unfocused, value selected</td></tr>
+        <tr><td>Hover</td><td>Border brightens to <code class="ds-code">var(--border)</code></td><td>Pointer over trigger</td></tr>
+        <tr><td>Focus</td><td>Border <code class="ds-code">var(--jio)</code>, green glow ring, chevron turns green</td><td>Keyboard focus or after OS dropdown closes</td></tr>
+        <tr><td>Disabled</td><td>Opacity <code class="ds-code">var(--state-disabled-opacity)</code>, no pointer events</td><td>Option locked by permission or state</td></tr>
+        <tr><td>Invalid</td><td>Border <code class="ds-code">var(--negative)</code>, chevron turns red, error hint below</td><td>Required field not selected on form submit</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CONTENT GUIDANCE -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <p class="ds-section-desc">Option copy and placeholder text are the primary editorial surfaces in a Select.</p>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Placeholder option</div>
+        <ul>
+          <li>Always provide a labeled placeholder: "Select a genre", "Sort by"</li>
+          <li>Never use an empty first option — screen readers will announce a blank</li>
+          <li>Mark the placeholder <code class="ds-code">disabled</code> so it can't be re-selected after a value is chosen</li>
+          <li>Placeholder copy: "Select a [noun]" — short, no punctuation</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Option list copy</div>
+        <ul>
+          <li>Write options in sentence case, not title case: "Most popular", not "Most Popular"</li>
+          <li>Keep options under 32 characters — long text truncates in native OS list on some platforms</li>
+          <li>Avoid lists longer than 15 items — switch to Combobox with search above that threshold</li>
+          <li>Sort options logically: most used first, or alphabetical for reference lists (languages, countries)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <p class="ds-section-desc">The dropdown list rendering is entirely platform-controlled. Only the trigger element is styled by the design system.</p>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>iOS renders a bottom sheet wheel picker; Android shows a dialog list — both are OS-native and cannot be styled</li>
+          <li>For a fully custom appearance on mobile, replace with a bottom sheet using Radio buttons or Chips inside it</li>
+          <li>Minimum touch target on the trigger: full width, 48px height — ensure the <code class="ds-code">&lt;select&gt;</code> itself fills the wrapper</li>
+          <li>Never show a custom dropdown panel on mobile — it conflicts with the OS picker</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>OS dropdown renders a floating list below the trigger — position, colors, and font are all OS-controlled</li>
+          <li>For a fully custom dropdown with styled options, use the custom select pattern (see code examples) with <code class="ds-code">role="combobox"</code></li>
+          <li>Max-width in browse filters: 200px; in forms: full column width</li>
+          <li>Keyboard: Space/Enter opens, arrow keys navigate, Enter selects, Escape closes</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>Do not use native <code class="ds-code">&lt;select&gt;</code> on TV — OS dropdown is not navigable with d-pad in all webviews</li>
+          <li>Replace with a full-screen selection overlay: list of options with d-pad navigation and green focus ring</li>
+          <li>Selected value displayed inline in the settings row; overlay opens on d-pad confirm (OK/Enter)</li>
+          <li>TV selection overlay is always full-screen — never an inline dropdown panel</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">Native <code class="ds-code">&lt;select&gt;</code> is fully accessible by default. Custom select patterns require explicit ARIA.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Requirement</th><th>Implementation</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Label association</td>
+          <td><code class="ds-code">&lt;label for="id"&gt;</code></td>
+          <td>Native <code class="ds-code">&lt;select&gt;</code> inherits the label automatically. For icon-only trigger, add <code class="ds-code">aria-label</code>.</td>
+        </tr>
+        <tr>
+          <td>Error state</td>
+          <td><code class="ds-code">aria-invalid="true"</code> + <code class="ds-code">aria-describedby</code></td>
+          <td>Point to the error hint element. Screen readers announce label → value → error message on focus.</td>
+        </tr>
+        <tr>
+          <td>Disabled</td>
+          <td><code class="ds-code">disabled</code> attribute on <code class="ds-code">&lt;select&gt;</code></td>
+          <td>Disabled selects are skipped by keyboard navigation. If visibility is needed, use <code class="ds-code">aria-disabled="true"</code> instead and handle pointer events manually.</td>
+        </tr>
+        <tr>
+          <td>Custom select</td>
+          <td><code class="ds-code">role="combobox"</code>, <code class="ds-code">aria-expanded</code>, <code class="ds-code">aria-haspopup="listbox"</code></td>
+          <td>Each option needs <code class="ds-code">role="option"</code>. The listbox container needs <code class="ds-code">role="listbox"</code> and <code class="ds-code">aria-labelledby</code>.</td>
+        </tr>
+        <tr>
+          <td>Keyboard</td>
+          <td>Native on <code class="ds-code">&lt;select&gt;</code></td>
+          <td>Space/Enter opens, arrows navigate options, Enter confirms, Escape cancels. Never suppress default key events on native select.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- RELATED TOKENS -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-desc">Tokens used to implement the select trigger element.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Token</th><th>Value</th><th>Usage</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code class="ds-code">--input-bg</code></td><td><code class="ds-code">var(--glass-1)</code></td><td>Trigger background fill</td></tr>
+        <tr><td><code class="ds-code">--input-border</code></td><td><code class="ds-code">var(--border-subtle)</code></td><td>Default trigger border</td></tr>
+        <tr><td><code class="ds-code">--input-text</code></td><td><code class="ds-code">var(--text)</code></td><td>Selected value text color</td></tr>
+        <tr><td><code class="ds-code">--jio</code></td><td><code class="ds-code">#00A859</code></td><td>Focus border and glow ring</td></tr>
+        <tr><td><code class="ds-code">--negative</code></td><td><code class="ds-code">#FF4757</code></td><td>Invalid state border and chevron</td></tr>
+        <tr><td><code class="ds-code">--r5</code></td><td>Border radius tier 5</td><td>Trigger container border-radius</td></tr>
+        <tr><td><code class="ds-code">--text3</code></td><td><code class="ds-code">rgba(244,242,238,.32)</code></td><td>Chevron icon default color</td></tr>
+        <tr><td><code class="ds-code">--state-disabled-opacity</code></td><td><code class="ds-code">.38</code></td><td>Disabled opacity on trigger</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CODE EXAMPLES -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-body">Link <code class="ds-code">tokens.css</code>, <code class="ds-code">components.css</code>, and <code class="ds-code">states.css</code> before using component classes.</p>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Native select</div>
+      <pre class="component-code-pre"><code>&lt;div class="select-wrap"&gt;
+  &lt;select id="sort" class="select" aria-label="Sort by"&gt;
+    &lt;option value="popular" selected&gt;Most popular&lt;/option&gt;
+    &lt;option value="new"&gt;Newest first&lt;/option&gt;
+    &lt;option value="rating"&gt;Top rated&lt;/option&gt;
+    &lt;option value="az"&gt;A – Z&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;span class="select-icon" aria-hidden="true"&gt;
+    &lt;svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"&gt;
+      &lt;path d="M4 6l4 4 4-4" stroke="currentColor"
+        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/&gt;
+    &lt;/svg&gt;
+  &lt;/span&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Select with label and error state</div>
+      <pre class="component-code-pre"><code>&lt;div class="field-group"&gt;
+  &lt;label class="field-label" for="genre"&gt;Genre&lt;/label&gt;
+  &lt;div class="select-wrap"&gt;
+    &lt;select
+      id="genre"
+      class="select is-invalid"
+      aria-invalid="true"
+      aria-describedby="genre-err"
+    &gt;
+      &lt;option value="" disabled selected&gt;Select a genre&lt;/option&gt;
+      &lt;option value="action"&gt;Action&lt;/option&gt;
+      &lt;option value="rpg"&gt;RPG&lt;/option&gt;
+      &lt;option value="sports"&gt;Sports&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;span class="select-icon" aria-hidden="true"&gt;…chevron svg…&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div id="genre-err" class="field-hint"&gt;
+    Genre is required before you can save your profile.
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Custom select pattern — HTML structure only (no JS)</div>
+      <pre class="component-code-pre"><code>&lt;!-- Use when OS dropdown styling is required (web only) --&gt;
+&lt;div
+  class="select-wrap"
+  role="combobox"
+  aria-expanded="false"
+  aria-haspopup="listbox"
+  aria-labelledby="platform-label"
+  tabindex="0"
+&gt;
+  &lt;span id="platform-label" class="field-label"&gt;Platform&lt;/span&gt;
+  &lt;div class="select select--m" style="display:flex; align-items:center;"&gt;
+    &lt;span style="flex:1;"&gt;All platforms&lt;/span&gt;
+    &lt;svg class="select-icon" …&gt;…&lt;/svg&gt;
+  &lt;/div&gt;
+  &lt;!-- Hidden when aria-expanded="false" --&gt;
+  &lt;ul
+    role="listbox"
+    aria-labelledby="platform-label"
+    style="display:none; position:absolute; top:calc(100% + 4px); left:0; right:0;
+           background:var(--surface-2); border:1px solid var(--border-subtle);
+           border-radius:var(--r5); z-index:100; list-style:none; padding:4px 0; margin:0;"
+  &gt;
+    &lt;li role="option" aria-selected="true"  style="padding:10px 14px;"&gt;All platforms&lt;/li&gt;
+    &lt;li role="option" aria-selected="false" style="padding:10px 14px;"&gt;Mobile&lt;/li&gt;
+    &lt;li role="option" aria-selected="false" style="padding:10px 14px;"&gt;PC&lt;/li&gt;
+    &lt;li role="option" aria-selected="false" style="padding:10px 14px;"&gt;Console&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;!-- Add JS: toggle aria-expanded, handle arrow keys, Enter selects, Escape closes --&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- CHANGELOG -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Changelog</h2>
+    <div class="component-changelog">
+      <div class="component-changelog-entry">
+        <span class="component-changelog-version">v0.1</span>
+        <span class="component-changelog-date">Jun 2026</span>
+        <p class="component-changelog-desc">Initial draft. Includes Default, Focused, Disabled, Placeholder, and Invalid variants. S / M / L size tiers. Five states. Platform guidance covering OS-native picker behavior on mobile and TV overlay pattern. Three code examples including custom select ARIA pattern.</p>
+      </div>
+    </div>
+  </section>
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

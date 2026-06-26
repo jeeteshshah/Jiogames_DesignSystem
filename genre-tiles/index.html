@@ -1,0 +1,1360 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Genre Tiles — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    /* ── Page-specific styles ── */
+    body { background: var(--bg); color: var(--text); font-family: var(--jio-font); margin: 0; }
+
+    /* Component page header */
+
+    /* Hero */
+    .component-hero {
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      min-height: 280px;
+      padding: 48px 32px 32px;
+    }
+    .component-hero--dark { background: #060810; }
+    .component-hero--grid {
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 32px 32px;
+      background-color: #060810;
+      border: 1px solid var(--border-subtle);
+    }
+    .component-hero-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+      position: relative;
+      z-index: 2;
+    }
+    .component-hero-caption {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: var(--text4);
+      margin-top: 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Intro */
+    .component-intro {
+      margin-bottom: 48px;
+    }
+    .component-intro p {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.65;
+      margin-bottom: 20px;
+      max-width: 640px;
+    }
+    .component-summary-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      overflow: hidden;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .component-summary-list li {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.55;
+    }
+    .component-summary-list li:last-child { border-bottom: none; }
+    .component-summary-list li strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    /* Best practices */
+    .component-best-practices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .component-bp-card {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1.5px solid;
+    }
+    .component-bp-card--do   { border-color: rgba(0,168,89,.3); }
+    .component-bp-card--dont { border-color: rgba(255,71,87,.3); }
+    .component-bp-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 16px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+    }
+    .component-bp-label--do   { background: rgba(0,168,89,.07);  color: var(--jio); }
+    .component-bp-label--dont { background: rgba(255,71,87,.07); color: var(--negative); }
+    .component-bp-label--do::before   { content: '\2713'; font-size: 11px; }
+    .component-bp-label--dont::before { content: '\2715'; font-size: 11px; }
+    .component-bp-list {
+      padding: 16px 20px 20px;
+      background: var(--surface-1);
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      list-style: none;
+    }
+    .component-bp-list li {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+    .component-bp-list li::before {
+      content: '\00B7';
+      position: absolute;
+      left: 3px;
+      color: var(--text4);
+    }
+
+    /* Content grid */
+    .component-content-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .component-content-card {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      padding: 20px;
+    }
+    .component-content-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-bottom: 12px;
+    }
+    .component-content-card ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .component-content-card li {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+    .component-content-card li::before {
+      content: '\00B7';
+      position: absolute;
+      left: 3px;
+      color: var(--text4);
+    }
+
+    /* Platform cards */
+    .component-platform-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .component-platform-card {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      padding: 20px;
+    }
+    .component-platform-card--mobile { border-top: 2px solid rgba(110,231,183,.4); }
+    .component-platform-card--web    { border-top: 2px solid rgba(147,197,253,.4); }
+    .component-platform-card--tv     { border-top: 2px solid rgba(251,191,36,.4); }
+    .component-platform-card-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 12px;
+    }
+    .component-platform-card--mobile .component-platform-card-title { color: #6ee7b7; }
+    .component-platform-card--web    .component-platform-card-title { color: #93c5fd; }
+    .component-platform-card--tv     .component-platform-card-title { color: #fbbf24; }
+    .component-platform-card ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .component-platform-card li {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+    .component-platform-card li::before {
+      content: '\00B7';
+      position: absolute;
+      left: 3px;
+      color: var(--text4);
+    }
+
+    /* Changelog */
+    .component-changelog {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      overflow: hidden;
+    }
+    .component-changelog-entry {
+      display: grid;
+      grid-template-columns: 56px 80px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 12px;
+    }
+    .component-changelog-entry:last-child { border-bottom: none; }
+    .component-changelog-version {
+      font-family: monospace;
+      font-weight: 700;
+      color: var(--jio);
+      font-size: 11px;
+    }
+    .component-changelog-date {
+      color: var(--text3);
+      font-weight: 500;
+    }
+    .component-changelog-desc {
+      color: var(--text2);
+      line-height: 1.5;
+    }
+
+    /* Note box */
+    .ds-note {
+      background: rgba(0,168,89,.06);
+      border: 1px solid rgba(0,168,89,.2);
+      border-radius: var(--r3);
+      padding: 14px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.55;
+    }
+    .ds-note strong { color: var(--jio); }
+
+    /* Size matrix */
+    .tile-size-matrix {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      overflow: hidden;
+    }
+    .tile-size-matrix-head {
+      display: grid;
+      grid-template-columns: 120px 1fr 1fr 1fr;
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .tile-size-matrix-head > div {
+      padding: 10px 16px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+    .tile-size-matrix-row {
+      display: grid;
+      grid-template-columns: 120px 1fr 1fr 1fr;
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--surface-1);
+    }
+    .tile-size-matrix-row:last-child { border-bottom: none; }
+    .tile-size-matrix-row:hover { background: var(--glass-1); }
+    .tile-size-matrix-label {
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 3px;
+      border-right: 1px solid var(--border-subtle);
+      background: var(--surface-2);
+    }
+    .tile-size-matrix-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .tile-size-matrix-token {
+      font-family: monospace;
+      font-size: 10px;
+      color: #a8e6c5;
+    }
+    .tile-size-matrix-cell {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      justify-content: center;
+    }
+    .tile-size-matrix-px {
+      font-family: monospace;
+      font-size: 10px;
+      color: var(--text3);
+    }
+
+    /* State matrix */
+    .tile-state-matrix {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      overflow: hidden;
+    }
+    .tile-state-matrix-scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .tile-state-matrix-scroll::-webkit-scrollbar { height: 4px; }
+    .tile-state-matrix-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--pill); }
+    .tile-state-matrix-grid {
+      display: grid;
+      grid-template-columns: 120px repeat(7, 1fr);
+      min-width: min(900px, 100%);
+      background: var(--border-subtle);
+      gap: 1px;
+    }
+    .tile-state-matrix-header {
+      background: var(--surface-2);
+      padding: 10px 12px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--text3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      text-align: center;
+    }
+    .tile-state-matrix-row-label {
+      background: var(--surface-2);
+      padding: 12px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text2);
+      display: flex;
+      align-items: center;
+      min-height: 100px;
+      white-space: nowrap;
+    }
+    .tile-state-matrix-cell {
+      background: var(--surface-1);
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-height: 100px;
+      overflow: hidden;
+    }
+    .tile-state-matrix-cell--dark { background: var(--bg); }
+    .tile-state-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+      color: var(--text4);
+      text-align: center;
+    }
+
+    /* Accessibility */
+    .a11y-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      overflow: hidden;
+      margin-top: 24px;
+    }
+    .a11y-row {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .a11y-row:last-child { border-bottom: none; }
+    .a11y-label {
+      padding: 14px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text3);
+      letter-spacing: .3px;
+      background: var(--surface-2);
+      text-transform: uppercase;
+      display: flex;
+      align-items: flex-start;
+      padding-top: 16px;
+    }
+    .a11y-content {
+      padding: 14px 20px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.6;
+      background: var(--surface-1);
+    }
+    .a11y-content ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .a11y-content li {
+      padding-left: 14px;
+      position: relative;
+    }
+    .a11y-content li::before {
+      content: '\00B7';
+      position: absolute;
+      left: 3px;
+      color: var(--text4);
+    }
+
+    /* Related tokens table */
+    .related-tokens-table {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      overflow: hidden;
+      margin-top: 24px;
+    }
+    .related-tokens-head {
+      display: grid;
+      grid-template-columns: 220px 180px 1fr;
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .related-tokens-head > div {
+      padding: 10px 16px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+    .related-tokens-row {
+      display: grid;
+      grid-template-columns: 220px 180px 1fr;
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--surface-1);
+    }
+    .related-tokens-row:last-child { border-bottom: none; }
+    .related-tokens-row:hover { background: var(--glass-1); }
+    .related-tokens-token {
+      padding: 12px 16px;
+      font-family: monospace;
+      font-size: 11px;
+      color: #a8e6c5;
+      display: flex;
+      align-items: center;
+      border-right: 1px solid var(--border-subtle);
+    }
+    .related-tokens-value {
+      padding: 12px 16px;
+      font-family: monospace;
+      font-size: 11px;
+      color: var(--text3);
+      display: flex;
+      align-items: center;
+      border-right: 1px solid var(--border-subtle);
+    }
+    .related-tokens-desc {
+      padding: 12px 16px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.5;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Variant rows */
+    .variant-row {
+      display: grid;
+      grid-template-columns: 180px 1fr 2fr;
+      gap: 16px;
+      align-items: center;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+    .variant-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+    .variant-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .variant-token {
+      font-family: monospace;
+      font-size: 11px;
+      color: var(--text3);
+      margin-top: 2px;
+    }
+    .variant-desc {
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.5;
+    }
+
+    kbd {
+      display: inline-block;
+      padding: 1px 6px;
+      background: var(--surface-3);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 11px;
+      color: var(--text2);
+    }
+
+    @media (max-width: 760px) {
+      .component-best-practices,
+      .component-content-grid,
+      .component-platform-grid { grid-template-columns: 1fr; }
+      .tile-size-matrix { overflow-x: auto; }
+      .tile-size-matrix-head,
+      .tile-size-matrix-row { min-width: 520px; }
+      .related-tokens-head,
+      .related-tokens-row { grid-template-columns: 180px 140px 1fr; min-width: 540px; }
+    }
+  </style>
+</head>
+<body>
+<main class="ds-content">
+
+  <!-- ===================================================
+       1. PAGE HEADER
+  =================================================== -->
+  <div class="component-page-header" id="page-header">
+    <div class="component-breadcrumb">
+      <a href="../index.html">JioGames DLS</a>
+      <span class="component-breadcrumb-sep">&#x203A;</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">&#x203A;</span>
+      <span>Genre Tiles</span>
+    </div>
+    <h1 class="component-page-title">Genre Tiles</h1>
+    <p class="component-page-def">Genre tiles are square, art-forward tiles that let players browse and select game categories across JioGames.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+      <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+      <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+      <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+    </div>
+  </div>
+
+  <!-- ===================================================
+       2. HERO VISUAL
+  =================================================== -->
+  <section class="component-hero component-hero--dark component-hero--grid" id="overview">
+    <div class="component-hero-inner">
+      <div style="display:grid;grid-template-columns:repeat(3,96px);gap:8px">
+        <!-- Action — selected -->
+        <div style="width:96px;height:96px;border-radius:var(--r4);background:linear-gradient(135deg,#c0392b,#e74c3c);position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:8px;border:1.5px solid var(--jio)">
+          <span style="font-size:11px;font-weight:800;color:#fff;letter-spacing:.3px">Action</span>
+        </div>
+        <!-- Racing -->
+        <div style="width:96px;height:96px;border-radius:var(--r4);background:linear-gradient(135deg,#1a78c2,#3498db);position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:8px">
+          <span style="font-size:11px;font-weight:800;color:#fff;letter-spacing:.3px">Racing</span>
+        </div>
+        <!-- Adventure -->
+        <div style="width:96px;height:96px;border-radius:var(--r4);background:linear-gradient(135deg,#00A859,#00d876);position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:8px">
+          <span style="font-size:11px;font-weight:800;color:#fff;letter-spacing:.3px">Adventure</span>
+        </div>
+        <!-- Sports -->
+        <div style="width:96px;height:96px;border-radius:var(--r4);background:linear-gradient(135deg,#16a085,#1abc9c);position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:8px">
+          <span style="font-size:11px;font-weight:800;color:#fff;letter-spacing:.3px">Sports</span>
+        </div>
+        <!-- Puzzle -->
+        <div style="width:96px;height:96px;border-radius:var(--r4);background:linear-gradient(135deg,#6c3483,#9b59b6);position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:8px">
+          <span style="font-size:11px;font-weight:800;color:#fff;letter-spacing:.3px">Puzzle</span>
+        </div>
+        <!-- Casual -->
+        <div style="width:96px;height:96px;border-radius:var(--r4);background:linear-gradient(135deg,#c0392b,#ff6b9d);position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:8px">
+          <span style="font-size:11px;font-weight:800;color:#fff;letter-spacing:.3px">Casual</span>
+        </div>
+      </div>
+    </div>
+    <span class="component-hero-caption">Genre tile grid &#xB7; Action tile selected &#xB7; Mobile standard</span>
+  </section>
+
+  <!-- ===================================================
+       3. INTRO
+  =================================================== -->
+  <section class="component-intro" id="intro">
+    <p>Genre tiles give players an art-forward way to explore JioGames content by category. They appear in the home page browse rail, onboarding genre preference flows, and search filter surfaces. Each tile pairs a rich gradient background with a bold white label for instant scannability at any size.</p>
+    <ul class="component-summary-list">
+      <li><strong>Art-forward.</strong> Each tile uses a unique CSS gradient keyed to its genre — no two tiles share the same palette in the same view.</li>
+      <li><strong>Selection.</strong> A 1.5px green border plus a subtle green-tinted background communicates the selected state without relying on color alone. Label color also shifts to green.</li>
+      <li><strong>Platform-adaptive.</strong> Square 96px on mobile, wide 160&#xD7;80px on web, 120px+ square on TV. Same component, different size token per platform.</li>
+      <li><strong>Premium gating.</strong> Locked genres display a semi-transparent scrim overlay with a lock icon, communicating that the Pass is required before the category becomes browsable.</li>
+    </ul>
+  </section>
+
+  <!-- ===================================================
+       4. BEST PRACTICES
+  =================================================== -->
+  <section class="ds-section" id="best-practices">
+    <h2 class="ds-section-title">Best practices</h2>
+    <p class="ds-section-desc">Follow these rules to keep genre tile usage consistent across JioGames surfaces.</p>
+    <div class="component-best-practices">
+      <div class="component-bp-card component-bp-card--do">
+        <span class="component-bp-label component-bp-label--do">Do</span>
+        <ul class="component-bp-list">
+          <li>Use unique gradient palette per genre — never repeat in the same grid</li>
+          <li>Keep genre names to 1&#x2013;2 words in title case: "Action", "Open World"</li>
+          <li>Show the full selected state: green border + green bg + green label</li>
+          <li>Ensure genre label text always renders over the gradient with sufficient contrast</li>
+          <li>Minimum tile size 96px on mobile — meets touch-min 44px touch target</li>
+          <li>On TV, increase tile to 120px+ and use tv-focus-shadow on focused state</li>
+          <li>Use <code class="ds-code">aria-pressed</code> for selection state, not <code class="ds-code">aria-checked</code></li>
+        </ul>
+      </div>
+      <div class="component-bp-card component-bp-card--dont">
+        <span class="component-bp-label component-bp-label--dont">Don&#x27;t</span>
+        <ul class="component-bp-list">
+          <li>Don&#x27;t use the same gradient hue for two different genres in one view</li>
+          <li>Don&#x27;t write genre names longer than 2 words — tiles cannot truncate</li>
+          <li>Don&#x27;t rely on color alone to show selection — green label text is required</li>
+          <li>Don&#x27;t use solid saturated fills — they overpower the dark surface</li>
+          <li>Don&#x27;t omit the lock icon on premium tiles — grayed-out alone is insufficient</li>
+          <li>Don&#x27;t disable locked tiles with HTML <code class="ds-code">disabled</code> — use <code class="ds-code">aria-disabled</code> so they remain focusable</li>
+          <li>Don&#x27;t place tiles smaller than 72px — readability and tap target both suffer</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       5. ANATOMY
+  =================================================== -->
+  <section class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <p class="ds-section-desc">Every genre tile is built from five slots. The container, background, and label are always required. The selection indicator and lock overlay are conditional.</p>
+    <div class="ds-anatomy">
+      <div class="ds-anatomy-preview">
+        <div class="ds-anatomy-component" style="position:relative;display:inline-flex;padding:52px 60px">
+          <!-- Tile -->
+          <div style="position:relative;width:96px;height:96px;border-radius:var(--r4);background:linear-gradient(135deg,#c0392b,#e74c3c);overflow:hidden;display:flex;align-items:flex-end;padding:8px;border:1.5px solid var(--jio);pointer-events:none">
+            <span style="font-size:11px;font-weight:800;color:#fff;letter-spacing:.3px;position:relative;z-index:2">Action</span>
+            <!-- Lock overlay (partial, demo) -->
+            <div style="position:absolute;top:0;right:0;width:32px;height:32px;background:rgba(6,8,15,.7);display:flex;align-items:center;justify-content:center;border-bottom-left-radius:var(--r3)">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="rgba(255,255,255,.5)" aria-hidden="true"><use href="../sprite.svg#ic_lock"></use></svg>
+            </div>
+          </div>
+          <!-- Callout 1: container top -->
+          <div style="position:absolute;top:6px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0">
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">1</div>
+            <div style="width:1px;height:18px;background:var(--jio);opacity:.5"></div>
+            <div class="ds-anatomy-callout-dot"></div>
+          </div>
+          <!-- Callout 2: gradient bg (right side) -->
+          <div style="position:absolute;top:50%;right:6px;transform:translateY(-50%);display:flex;align-items:center;gap:0">
+            <div class="ds-anatomy-callout-dot"></div>
+            <div style="height:1px;width:12px;background:var(--jio);opacity:.5"></div>
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">2</div>
+          </div>
+          <!-- Callout 3: label bottom -->
+          <div style="position:absolute;bottom:6px;left:40%;display:flex;flex-direction:column;align-items:center;gap:0">
+            <div class="ds-anatomy-callout-dot"></div>
+            <div style="width:1px;height:14px;background:var(--jio);opacity:.5"></div>
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">3</div>
+          </div>
+          <!-- Callout 4: selection indicator left -->
+          <div style="position:absolute;top:50%;left:6px;transform:translateY(-50%);display:flex;align-items:center;gap:0">
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">4</div>
+            <div style="height:1px;width:12px;background:var(--jio);opacity:.5"></div>
+            <div class="ds-anatomy-callout-dot"></div>
+          </div>
+          <!-- Callout 5: lock overlay top-right -->
+          <div style="position:absolute;top:14px;right:6px;display:flex;align-items:center;gap:0">
+            <div class="ds-anatomy-callout-dot"></div>
+            <div style="height:1px;width:6px;background:var(--jio);opacity:.5"></div>
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">5</div>
+          </div>
+        </div>
+      </div>
+      <div class="ds-anatomy-list">
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">1</div>
+          <div>
+            <div class="ds-anatomy-label">Tile container <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Square tile with <code class="ds-code">width: var(--card-sq)</code> (96px), <code class="ds-code">border-radius: var(--r4)</code> (14px). Height always equals width.</div>
+            <div class="ds-anatomy-token">Token: --card-sq &#xB7; --r4 &#xB7; Figma: Genre Tile / Container</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">2</div>
+          <div>
+            <div class="ds-anatomy-label">Background art / gradient <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Rich CSS gradient unique to the genre. Covers the full tile face. In future phases, replaced by game art imagery with a gradient scrim overlay.</div>
+            <div class="ds-anatomy-token">Figma: Genre Tile / Background</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">3</div>
+          <div>
+            <div class="ds-anatomy-label">Genre label <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Bottom-left overlay text. Font: <code class="ds-code">var(--jio-font)</code>, size 11px, weight 800, color white. Must be visible at all times — gradient ensures contrast.</div>
+            <div class="ds-anatomy-token">Figma: Genre Tile / Label</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">4</div>
+          <div>
+            <div class="ds-anatomy-label">Selection indicator <span class="ds-anatomy-optional">Conditional</span></div>
+            <div class="ds-anatomy-desc">1.5px solid <code class="ds-code">var(--jio)</code> border on the container, plus a subtle <code class="ds-code">var(--jio-soft)</code> inner glow. Applied when <code class="ds-code">aria-pressed="true"</code>.</div>
+            <div class="ds-anatomy-token">Token: --jio &#xB7; --jio-soft &#xB7; --state-selected-border</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">5</div>
+          <div>
+            <div class="ds-anatomy-label">Lock overlay <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc">Semi-transparent dark scrim <code class="ds-code">var(--overlay-locked)</code> covering the full tile, plus a centered lock icon. Used for premium-gated genres.</div>
+            <div class="ds-anatomy-token">Token: --overlay-locked &#xB7; Figma: Genre Tile / Locked</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       6. VARIANTS
+  =================================================== -->
+  <section class="ds-section" id="variants">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Five variants cover every use context across surfaces and selection states.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex;flex-direction:column;gap:20px">
+
+        <div class="variant-row">
+          <div>
+            <div class="variant-name">Standard square</div>
+            <div class="variant-token">default</div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <div style="width:80px;height:80px;border-radius:var(--r4);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:7px;border:1px solid var(--border-subtle)">
+              <span style="font-size:10px;font-weight:800;color:#fff">Action</span>
+            </div>
+            <div style="width:80px;height:80px;border-radius:var(--r4);background:linear-gradient(135deg,#1a78c2,#3498db);display:flex;align-items:flex-end;padding:7px;border:1px solid var(--border-subtle)">
+              <span style="font-size:10px;font-weight:800;color:#fff">Racing</span>
+            </div>
+            <div style="width:80px;height:80px;border-radius:var(--r4);background:linear-gradient(135deg,#6c3483,#9b59b6);display:flex;align-items:flex-end;padding:7px;border:1px solid var(--border-subtle)">
+              <span style="font-size:10px;font-weight:800;color:#fff">Puzzle</span>
+            </div>
+          </div>
+          <div class="variant-desc">Default home-page browse grid tile. 96&#xD7;96px on mobile, each tile has a unique genre gradient.</div>
+        </div>
+
+        <div class="variant-row">
+          <div>
+            <div class="variant-name">Wide (2:1)</div>
+            <div class="variant-token">Web / TV</div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <div style="width:160px;height:80px;border-radius:var(--r4);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:10px;border:1px solid var(--border-subtle)">
+              <span style="font-size:12px;font-weight:800;color:#fff">Action</span>
+            </div>
+            <div style="width:160px;height:80px;border-radius:var(--r4);background:linear-gradient(135deg,#16a085,#1abc9c);display:flex;align-items:flex-end;padding:10px;border:1px solid var(--border-subtle)">
+              <span style="font-size:12px;font-weight:800;color:#fff">Sports</span>
+            </div>
+          </div>
+          <div class="variant-desc">Wide horizontal tile for web sidebar filters or TV horizontal rail. Icon + label sit left-aligned.</div>
+        </div>
+
+        <div class="variant-row">
+          <div>
+            <div class="variant-name">Compact / mini</div>
+            <div class="variant-token">Rail context</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <div style="width:64px;height:64px;border-radius:var(--r3);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:5px;border:1px solid var(--border-subtle)">
+              <span style="font-size:8px;font-weight:800;color:#fff">Action</span>
+            </div>
+            <div style="width:64px;height:64px;border-radius:var(--r3);background:linear-gradient(135deg,#1a78c2,#3498db);display:flex;align-items:flex-end;padding:5px;border:1px solid var(--border-subtle)">
+              <span style="font-size:8px;font-weight:800;color:#fff">Racing</span>
+            </div>
+            <div style="width:64px;height:64px;border-radius:var(--r3);background:linear-gradient(135deg,#6c3483,#9b59b6);display:flex;align-items:flex-end;padding:5px;border:1px solid var(--border-subtle)">
+              <span style="font-size:8px;font-weight:800;color:#fff">Puzzle</span>
+            </div>
+            <div style="width:64px;height:64px;border-radius:var(--r3);background:linear-gradient(135deg,#16a085,#1abc9c);display:flex;align-items:flex-end;padding:5px;border:1px solid var(--border-subtle)">
+              <span style="font-size:8px;font-weight:800;color:#fff">Sports</span>
+            </div>
+          </div>
+          <div class="variant-desc">64&#xD7;64px mini tile used inside horizontal filter rails, search chips, or compact preference pickers.</div>
+        </div>
+
+        <div class="variant-row">
+          <div>
+            <div class="variant-name">Selected</div>
+            <div class="variant-token">aria-pressed="true"</div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <div style="width:80px;height:80px;border-radius:var(--r4);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:7px;border:1.5px solid var(--jio);box-shadow:inset 0 0 0 1px rgba(0,168,89,.15)">
+              <span style="font-size:10px;font-weight:800;color:#fff">Action</span>
+            </div>
+            <div style="width:80px;height:80px;border-radius:var(--r4);background:linear-gradient(135deg,#16a085,#1abc9c);display:flex;align-items:flex-end;padding:7px;border:1.5px solid var(--jio);box-shadow:inset 0 0 0 1px rgba(0,168,89,.15)">
+              <span style="font-size:10px;font-weight:800;color:#fff">Sports</span>
+            </div>
+          </div>
+          <div class="variant-desc">1.5px green border + inner green glow communicates active selection. Multiple tiles can be selected simultaneously in preference flows.</div>
+        </div>
+
+        <div class="variant-row">
+          <div>
+            <div class="variant-name">Locked / Premium</div>
+            <div class="variant-token">aria-disabled="true"</div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <div style="position:relative;width:80px;height:80px;border-radius:var(--r4);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:7px;border:1px solid var(--border-subtle);overflow:hidden">
+              <span style="font-size:10px;font-weight:800;color:rgba(255,255,255,.4)">Action</span>
+              <div style="position:absolute;inset:0;background:var(--overlay-locked);display:flex;align-items:center;justify-content:center">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="rgba(255,255,255,.7)" aria-hidden="true"><use href="../sprite.svg#ic_lock"></use></svg>
+              </div>
+            </div>
+            <div style="position:relative;width:80px;height:80px;border-radius:var(--r4);background:linear-gradient(135deg,#6c3483,#9b59b6);display:flex;align-items:flex-end;padding:7px;border:1px solid var(--border-subtle);overflow:hidden">
+              <span style="font-size:10px;font-weight:800;color:rgba(255,255,255,.4)">Exclusive</span>
+              <div style="position:absolute;inset:0;background:var(--overlay-locked);display:flex;align-items:center;justify-content:center">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="rgba(255,255,255,.7)" aria-hidden="true"><use href="../sprite.svg#ic_lock"></use></svg>
+              </div>
+            </div>
+          </div>
+          <div class="variant-desc">Full-tile dark scrim <code class="ds-code">var(--overlay-locked)</code> with centered lock icon. Uses <code class="ds-code">aria-disabled="true"</code> — NOT <code class="ds-code">disabled</code> — so tile remains keyboard-focusable.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       7. SIZES — PLATFORM SIZE GRID
+  =================================================== -->
+  <section class="ds-section" id="sizes">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Tile size is determined by platform context. The same component renders at different pixel dimensions on Mobile, Web, and TV via the size token system.</p>
+
+    <div class="ds-note" style="margin-bottom:20px">
+      <strong>Square tile token.</strong> <code class="ds-code">--card-sq</code> (96px) is the base mobile tile size. TV contexts use a larger override. Wide tiles (2:1 ratio) are defined separately per platform.
+    </div>
+
+    <div class="tile-size-matrix">
+      <div class="tile-size-matrix-head">
+        <div>Size / Context</div>
+        <div style="color:#6ee7b7">Mobile</div>
+        <div style="color:#93c5fd">Web</div>
+        <div style="color:#fbbf24">TV</div>
+      </div>
+
+      <div class="tile-size-matrix-row">
+        <div class="tile-size-matrix-label">
+          <span class="tile-size-matrix-name">Standard square</span>
+          <span class="tile-size-matrix-token">--card-sq</span>
+        </div>
+        <div class="tile-size-matrix-cell">
+          <div style="width:64px;height:64px;border-radius:var(--r3);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:5px">
+            <span style="font-size:8px;font-weight:800;color:#fff">Action</span>
+          </div>
+          <span class="tile-size-matrix-px">96&#xD7;96px &#xB7; r4 &#xB7; label 11px</span>
+        </div>
+        <div class="tile-size-matrix-cell">
+          <div style="width:64px;height:64px;border-radius:var(--r3);background:linear-gradient(135deg,#1a78c2,#3498db);display:flex;align-items:flex-end;padding:5px">
+            <span style="font-size:8px;font-weight:800;color:#fff">Racing</span>
+          </div>
+          <span class="tile-size-matrix-px">96&#xD7;96px &#xB7; r4 &#xB7; label 12px</span>
+        </div>
+        <div class="tile-size-matrix-cell">
+          <div style="width:64px;height:64px;border-radius:var(--r3);background:linear-gradient(135deg,#6c3483,#9b59b6);display:flex;align-items:flex-end;padding:5px">
+            <span style="font-size:8px;font-weight:800;color:#fff">Puzzle</span>
+          </div>
+          <span class="tile-size-matrix-px">120&#xD7;120px &#xB7; r5 &#xB7; label 14px</span>
+        </div>
+      </div>
+
+      <div class="tile-size-matrix-row">
+        <div class="tile-size-matrix-label">
+          <span class="tile-size-matrix-name">Wide (2:1)</span>
+          <span class="tile-size-matrix-token">explicit</span>
+        </div>
+        <div class="tile-size-matrix-cell">
+          <div style="width:100px;height:50px;border-radius:var(--r3);background:linear-gradient(135deg,#16a085,#1abc9c);display:flex;align-items:flex-end;padding:5px">
+            <span style="font-size:8px;font-weight:800;color:#fff">Sports</span>
+          </div>
+          <span class="tile-size-matrix-px">N/A — square preferred on mobile</span>
+        </div>
+        <div class="tile-size-matrix-cell">
+          <div style="width:100px;height:50px;border-radius:var(--r3);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:5px">
+            <span style="font-size:8px;font-weight:800;color:#fff">Action</span>
+          </div>
+          <span class="tile-size-matrix-px">160&#xD7;80px &#xB7; r4 &#xB7; label 13px</span>
+        </div>
+        <div class="tile-size-matrix-cell">
+          <div style="width:100px;height:50px;border-radius:var(--r3);background:linear-gradient(135deg,#1a78c2,#3498db);display:flex;align-items:flex-end;padding:5px">
+            <span style="font-size:8px;font-weight:800;color:#fff">Racing</span>
+          </div>
+          <span class="tile-size-matrix-px">200&#xD7;100px &#xB7; r5 &#xB7; label 16px</span>
+        </div>
+      </div>
+
+      <div class="tile-size-matrix-row">
+        <div class="tile-size-matrix-label">
+          <span class="tile-size-matrix-name">Mini / compact</span>
+          <span class="tile-size-matrix-token">rail context</span>
+        </div>
+        <div class="tile-size-matrix-cell">
+          <div style="width:48px;height:48px;border-radius:var(--r2);background:linear-gradient(135deg,#c0392b,#ff6b9d);display:flex;align-items:flex-end;padding:4px">
+            <span style="font-size:7px;font-weight:800;color:#fff">Casual</span>
+          </div>
+          <span class="tile-size-matrix-px">64&#xD7;64px &#xB7; r3 &#xB7; label 8px</span>
+        </div>
+        <div class="tile-size-matrix-cell">
+          <div style="width:48px;height:48px;border-radius:var(--r2);background:linear-gradient(135deg,#00A859,#00d876);display:flex;align-items:flex-end;padding:4px">
+            <span style="font-size:7px;font-weight:800;color:#fff">Adventure</span>
+          </div>
+          <span class="tile-size-matrix-px">72&#xD7;72px &#xB7; r3 &#xB7; label 9px</span>
+        </div>
+        <div class="tile-size-matrix-cell">
+          <span class="tile-size-matrix-px" style="color:var(--text4)">Not recommended — use standard square on TV</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       8. STATES
+  =================================================== -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Genre tiles respond to seven interaction states. Use the <code class="ds-code">.is-*</code> helpers from <code class="ds-code">states.css</code> to simulate states in prototypes and docs.</p>
+
+    <div class="tile-state-matrix">
+      <div class="tile-state-matrix-scroll">
+        <div class="tile-state-matrix-grid">
+
+          <div class="tile-state-matrix-header" style="background:var(--surface-1)"></div>
+          <div class="tile-state-matrix-header">Default</div>
+          <div class="tile-state-matrix-header">Hover</div>
+          <div class="tile-state-matrix-header">Pressed</div>
+          <div class="tile-state-matrix-header">Selected</div>
+          <div class="tile-state-matrix-header">Disabled</div>
+          <div class="tile-state-matrix-header">Locked</div>
+          <div class="tile-state-matrix-header">TV Focus</div>
+
+          <div class="tile-state-matrix-row-label">Action tile</div>
+
+          <!-- Default -->
+          <div class="tile-state-matrix-cell tile-state-matrix-cell--dark">
+            <div style="width:68px;height:68px;border-radius:var(--r3);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:6px;border:1px solid var(--border-subtle);overflow:hidden">
+              <span style="font-size:9px;font-weight:800;color:#fff">Action</span>
+            </div>
+          </div>
+
+          <!-- Hover -->
+          <div class="tile-state-matrix-cell tile-state-matrix-cell--dark">
+            <div style="width:68px;height:68px;border-radius:var(--r3);background:linear-gradient(135deg,#d44236,#f05547);display:flex;align-items:flex-end;padding:6px;border:1px solid var(--border);overflow:hidden;filter:brightness(1.08)">
+              <span style="font-size:9px;font-weight:800;color:#fff">Action</span>
+            </div>
+            <span class="tile-state-label">scale+brightness</span>
+          </div>
+
+          <!-- Pressed -->
+          <div class="tile-state-matrix-cell tile-state-matrix-cell--dark">
+            <div style="width:68px;height:68px;border-radius:var(--r3);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:6px;border:1px solid var(--border-subtle);overflow:hidden;transform:scale(.95);opacity:.9">
+              <span style="font-size:9px;font-weight:800;color:#fff">Action</span>
+            </div>
+            <span class="tile-state-label">scale(.95)</span>
+          </div>
+
+          <!-- Selected -->
+          <div class="tile-state-matrix-cell tile-state-matrix-cell--dark">
+            <div style="width:68px;height:68px;border-radius:var(--r3);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:6px;border:1.5px solid var(--jio);box-shadow:inset 0 0 0 1px rgba(0,168,89,.15);overflow:hidden">
+              <span style="font-size:9px;font-weight:800;color:#fff">Action</span>
+            </div>
+            <span class="tile-state-label" style="color:var(--jio)">1.5px jio border</span>
+          </div>
+
+          <!-- Disabled -->
+          <div class="tile-state-matrix-cell tile-state-matrix-cell--dark">
+            <div style="width:68px;height:68px;border-radius:var(--r3);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:6px;border:1px solid var(--border-subtle);overflow:hidden;opacity:var(--state-disabled-opacity);cursor:not-allowed">
+              <span style="font-size:9px;font-weight:800;color:#fff">Action</span>
+            </div>
+            <span class="tile-state-label">opacity:.32</span>
+          </div>
+
+          <!-- Locked -->
+          <div class="tile-state-matrix-cell tile-state-matrix-cell--dark">
+            <div style="position:relative;width:68px;height:68px;border-radius:var(--r3);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:6px;border:1px solid var(--border-subtle);overflow:hidden">
+              <span style="font-size:9px;font-weight:800;color:rgba(255,255,255,.3)">Action</span>
+              <div style="position:absolute;inset:0;background:var(--overlay-locked);display:flex;align-items:center;justify-content:center">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="rgba(255,255,255,.7)" aria-hidden="true"><use href="../sprite.svg#ic_lock"></use></svg>
+              </div>
+            </div>
+            <span class="tile-state-label">overlay-locked</span>
+          </div>
+
+          <!-- TV Focus -->
+          <div class="tile-state-matrix-cell tile-state-matrix-cell--dark">
+            <div style="width:68px;height:68px;border-radius:var(--r3);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:6px;border:1px solid var(--jio);overflow:hidden;box-shadow:var(--tv-focus-shadow);transform:scale(1.06)">
+              <span style="font-size:9px;font-weight:800;color:#fff">Action</span>
+            </div>
+            <span class="tile-state-label" style="color:var(--jio)">tv-focus-shadow</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:20px">
+      <div class="ds-note">
+        <strong>Skeleton state.</strong> Before genre data loads, render a plain <code class="ds-code">var(--skeleton-bg)</code> square at <code class="ds-code">var(--card-sq)</code> with animated shimmer. Use <code class="ds-code">border-radius: var(--r4)</code> to match tile shape. No label or icon during skeleton.
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       9. CONTENT GUIDANCE
+  =================================================== -->
+  <section class="ds-section" id="content">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <p class="ds-section-desc">Genre label copy must be short, clear, and scannable at a glance. Each tile communicates a single category.</p>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Genre naming</div>
+        <ul>
+          <li>1&#x2013;2 words maximum, title case: "Action", "Open World", "Tower Defense"</li>
+          <li>Use the player-facing genre name, not internal taxonomy</li>
+          <li>Prefer "Sports" over "Sport Games" — shorter is more scannable</li>
+          <li>Avoid abbreviations unless universally understood: "RPG" is acceptable</li>
+          <li>Do not number genres: "Action 1" is never correct</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Visual copy rules</div>
+        <ul>
+          <li>Label is always white on gradient — never colored to match the gradient</li>
+          <li>When selected, label stays white on art background — green border carries the state</li>
+          <li>Gradient must provide at least 4.5:1 contrast ratio beneath the label</li>
+          <li>Avoid label text that visually blends with gradient highlight colors</li>
+          <li>Lock overlay text: use <code class="ds-code">aria-label</code> only — no visible extra text on tile face</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Premium / locked copy</div>
+        <ul>
+          <li>Show lock icon only — no "Premium" text label on the tile face</li>
+          <li>Tooltip or modal on tap should explain which Pass unlocks the genre</li>
+          <li>Do not say "Locked" in the aria-label — say "[Genre] — requires JioGames Pass"</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Count badges</div>
+        <ul>
+          <li>Optional top-right badge showing number of titles in that genre</li>
+          <li>Format: plain number, e.g. "48" — no "games" suffix at small sizes</li>
+          <li>Hide badge if count is 0 or unknown — do not show "0"</li>
+          <li>Max display value: "99+" for counts above 99</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       10. PLATFORM CONSIDERATIONS
+  =================================================== -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <p class="ds-section-desc">Genre tiles adapt across Mobile, Web, and TV contexts. Size, interaction model, and focus treatment each differ per platform.</p>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Default: 96&#xD7;96px square (<code class="ds-code">--card-sq</code>), 4-column grid</li>
+          <li>Narrow phones (&#x3C;360px): fall back to 3-column grid</li>
+          <li>Tap to toggle selection; tap again to deselect</li>
+          <li>Multi-select supported in onboarding preference flows</li>
+          <li>Minimum tile must meet <code class="ds-code">--touch-min</code> (44px) in both axes — 96px far exceeds this</li>
+          <li>Grid gap: 10px minimum — larger gaps cause accidental deselection on swipe</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Wide 160&#xD7;80px tile preferred — icon + label horizontal layout</li>
+          <li>Hover state: <code class="ds-code">brightness(1.08)</code> + subtle <code class="ds-code">scale(1.02)</code></li>
+          <li>Click to toggle selection; <kbd>Space</kbd> or <kbd>Enter</kbd> via keyboard</li>
+          <li>Focus ring: <code class="ds-code">var(--focus-shadow)</code> on <code class="ds-code">:focus-visible</code></li>
+          <li>Grid adapts to container width — avoid fixed column counts</li>
+          <li>Tooltip on locked tile with Pass upgrade CTA</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>120&#xD7;120px+ square for 10-foot legibility — label bumped to 14px min</li>
+          <li>D-pad navigation — focus memory persists per row when returning from another section</li>
+          <li>Focused tile: <code class="ds-code">var(--tv-focus-shadow)</code> + <code class="ds-code">scale(1.06)</code></li>
+          <li>OK / Select button toggles selection state</li>
+          <li>No hover state on TV — focus is the primary interactive signal</li>
+          <li>Minimum 8px gap between tiles — D-pad navigation needs clear boundaries</li>
+          <li>Never use mini / compact variant on TV — insufficient legibility at distance</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       11. ACCESSIBILITY
+  =================================================== -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">Genre tiles are interactive selection controls. Every tile needs a role, state, and label that works without visual context.</p>
+    <div class="a11y-grid">
+      <div class="a11y-row">
+        <div class="a11y-label">Role</div>
+        <div class="a11y-content">Use <code class="ds-code">role="button"</code> with <code class="ds-code">aria-pressed="true|false"</code> for toggle-selection tiles. Use <code class="ds-code">type="button"</code> if implemented as a <code class="ds-code">&lt;button&gt;</code> element.</div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Label</div>
+        <div class="a11y-content">
+          <ul>
+            <li><code class="ds-code">aria-label="[Genre] genre"</code> — e.g. "Action genre"</li>
+            <li>With count badge: <code class="ds-code">aria-label="Action genre, 48 games"</code></li>
+            <li>Locked tile: <code class="ds-code">aria-label="Action — requires JioGames Pass"</code></li>
+          </ul>
+        </div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Selection</div>
+        <div class="a11y-content"><code class="ds-code">aria-pressed="false"</code> on default, <code class="ds-code">aria-pressed="true"</code> on selected. Do not use <code class="ds-code">aria-checked</code> — that implies a checkbox pattern with a distinct label element.</div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Locked tiles</div>
+        <div class="a11y-content">Use <code class="ds-code">aria-disabled="true"</code> — NOT the HTML <code class="ds-code">disabled</code> attribute. This keeps the tile in the focus order so keyboard and D-pad users can discover it and trigger the Pass upsell flow.</div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Color contrast</div>
+        <div class="a11y-content">White label text on gradient must achieve 4.5:1 contrast. Gradient dark regions near the bottom of the tile where the label sits typically exceed this — validate per genre palette. Do not rely on gradient color alone to signal selection.</div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Focus</div>
+        <div class="a11y-content">On web: <code class="ds-code">:focus-visible</code> triggers <code class="ds-code">var(--focus-shadow)</code>. On TV: <code class="ds-code">var(--tv-focus-shadow)</code> with green glow halo. Focus ring must be visible against both light and dark adjacent tiles.</div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Motion</div>
+        <div class="a11y-content">Hover scale and press scale transitions must respect <code class="ds-code">prefers-reduced-motion</code> — disable transforms when reduced motion is preferred. Selection border and color changes are always safe (no motion).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       12. RELATED TOKENS
+  =================================================== -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-desc">All design tokens used by genre tiles. Semantic aliases should be preferred in component code over raw primitives.</p>
+    <div class="related-tokens-table">
+      <div class="related-tokens-head">
+        <div>Token</div>
+        <div>Value</div>
+        <div>Usage</div>
+      </div>
+      <div class="related-tokens-row">
+        <div class="related-tokens-token">--card-sq</div>
+        <div class="related-tokens-value">96px</div>
+        <div class="related-tokens-desc">Default square tile size (width and height) on mobile</div>
+      </div>
+      <div class="related-tokens-row">
+        <div class="related-tokens-token">--r4</div>
+        <div class="related-tokens-value">14px</div>
+        <div class="related-tokens-desc">Standard tile border-radius on mobile and web</div>
+      </div>
+      <div class="related-tokens-row">
+        <div class="related-tokens-token">--r5</div>
+        <div class="related-tokens-value">16px</div>
+        <div class="related-tokens-desc">Tile border-radius on TV (larger tile, larger radius)</div>
+      </div>
+      <div class="related-tokens-row">
+        <div class="related-tokens-token">--jio</div>
+        <div class="related-tokens-value">#00A859</div>
+        <div class="related-tokens-desc">Selected border color (1.5px) and TV focus ring color</div>
+      </div>
+      <div class="related-tokens-row">
+        <div class="related-tokens-token">--jio-soft</div>
+        <div class="related-tokens-value">rgba(0,168,89,.12)</div>
+        <div class="related-tokens-desc">Inner glow on selected tile — applied as inset box-shadow</div>
+      </div>
+      <div class="related-tokens-row">
+        <div class="related-tokens-token">--state-selected-bg</div>
+        <div class="related-tokens-value">var(--jio-soft)</div>
+        <div class="related-tokens-desc">Semantic alias for selected background — prefer this in component code</div>
+      </div>
+      <div class="related-tokens-row">
+        <div class="related-tokens-token">--state-selected-border</div>
+        <div class="related-tokens-value">rgba(0,168,89,.4)</div>
+        <div class="related-tokens-desc">Semantic alias for selected border — use for subtle selection borders</div>
+      </div>
+      <div class="related-tokens-row">
+        <div class="related-tokens-token">--overlay-locked</div>
+        <div class="related-tokens-value">rgba(6,8,15,.72)</div>
+        <div class="related-tokens-desc">Semi-transparent scrim over locked / premium tiles</div>
+      </div>
+      <div class="related-tokens-row">
+        <div class="related-tokens-token">--focus-shadow</div>
+        <div class="related-tokens-value">0 0 0 2px var(--jio)</div>
+        <div class="related-tokens-desc">Keyboard focus ring on web (applied via :focus-visible)</div>
+      </div>
+      <div class="related-tokens-row">
+        <div class="related-tokens-token">--tv-focus-shadow</div>
+        <div class="related-tokens-value">0 0 0 3px var(--jio), 0 0 24px var(--jio-glow), 0 0 48px rgba(0,200,100,.2)</div>
+        <div class="related-tokens-desc">D-pad focus ring on TV — green glow halo with outer bloom</div>
+      </div>
+      <div class="related-tokens-row">
+        <div class="related-tokens-token">--state-disabled-opacity</div>
+        <div class="related-tokens-value">0.32</div>
+        <div class="related-tokens-desc">Opacity for disabled tile state (not used for locked — locked uses overlay)</div>
+      </div>
+      <div class="related-tokens-row">
+        <div class="related-tokens-token">--card-gap</div>
+        <div class="related-tokens-value">12px (mobile) · 24px (web)</div>
+        <div class="related-tokens-desc">Gap between tiles in the grid — use 10px minimum on mobile for tap safety</div>
+      </div>
+      <div class="related-tokens-row">
+        <div class="related-tokens-token">--touch-min</div>
+        <div class="related-tokens-value">44px</div>
+        <div class="related-tokens-desc">Minimum touch target size — tile must meet this in both dimensions</div>
+      </div>
+      <div class="related-tokens-row">
+        <div class="related-tokens-token">--surface-3</div>
+        <div class="related-tokens-value">#1F2432</div>
+        <div class="related-tokens-desc">Gradient base for default tile backgrounds (older icon-style tiles)</div>
+      </div>
+      <div class="related-tokens-row">
+        <div class="related-tokens-token">--border-subtle</div>
+        <div class="related-tokens-value">rgba(255,255,255,.08)</div>
+        <div class="related-tokens-desc">Default 1px tile border in unselected state</div>
+      </div>
+      <div class="related-tokens-row">
+        <div class="related-tokens-token">--skeleton-bg</div>
+        <div class="related-tokens-value">var(--surface-2)</div>
+        <div class="related-tokens-desc">Background for skeleton loading state tile</div>
+      </div>
+      <div class="related-tokens-row">
+        <div class="related-tokens-token">--dur-fast</div>
+        <div class="related-tokens-value">120ms</div>
+        <div class="related-tokens-desc">Transition duration for hover/press state changes</div>
+      </div>
+      <div class="related-tokens-row">
+        <div class="related-tokens-token">--spring</div>
+        <div class="related-tokens-value">cubic-bezier(.22,1,.36,1)</div>
+        <div class="related-tokens-desc">Easing curve for selection pop and TV focus transitions</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       13. CODE EXAMPLES
+  =================================================== -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
+    <div class="component-code-block">
+      <div class="component-code-label">Genre tile — selectable grid</div>
+      <pre class="component-code-pre"><code>&lt;div
+  role="group"
+  aria-label="Select genres"
+  style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px"
+&gt;
+  &lt;button class="genre-tile is-selected" type="button" aria-pressed="true"&gt;
+    &lt;span class="genre-tile__emoji" aria-hidden="true"&gt;⚔️&lt;/span&gt;
+    &lt;span class="genre-tile__label"&gt;Action&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;button class="genre-tile" type="button" aria-pressed="false"&gt;
+    &lt;span class="genre-tile__emoji" aria-hidden="true"&gt;🏎️&lt;/span&gt;
+    &lt;span class="genre-tile__label"&gt;Racing&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;button class="genre-tile" type="button" aria-pressed="false"&gt;
+    &lt;span class="genre-tile__emoji" aria-hidden="true"&gt;🎯&lt;/span&gt;
+    &lt;span class="genre-tile__label"&gt;Shooter&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+    <div class="component-code-block">
+      <div class="component-code-label">Genre tile — toggle selection (JS)</div>
+      <pre class="component-code-pre"><code>document.querySelectorAll('.genre-tile').forEach(tile => {
+  tile.addEventListener('click', () => {
+    const selected = tile.getAttribute('aria-pressed') === 'true';
+    tile.setAttribute('aria-pressed', String(!selected));
+    tile.classList.toggle('is-selected', !selected);
+  });
+});</code></pre>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       14. CHANGELOG
+  =================================================== -->
+
+</main>
+<script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script>
+</body>
+</html>

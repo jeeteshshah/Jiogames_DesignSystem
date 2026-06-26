@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elevation — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    /* ── Shadow scale cards ── */
+    .shadow-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: var(--space-3);
+    }
+    .shadow-card {
+      background: var(--card-bg);
+      border-radius: var(--r5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-1);
+      padding: var(--space-4) var(--space-2);
+      height: 120px;
+    }
+    .shadow-level-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -.1px;
+    }
+    .shadow-token-label {
+      font-family: monospace;
+      font-size: 10px;
+      color: var(--text3);
+      text-align: center;
+    }
+    .shadow-card--l0 { background: var(--card-bg); }
+    .shadow-card--l1 { box-shadow: 0 1px 4px rgba(0,0,0,.3); }
+    .shadow-card--l2 { box-shadow: 0 4px 12px rgba(0,0,0,.4); }
+    .shadow-card--l3 { box-shadow: 0 8px 24px rgba(0,0,0,.5); }
+    .shadow-card--l4 { box-shadow: 0 16px 48px rgba(0,0,0,.6); }
+    .shadow-card--glow { box-shadow: var(--jio-glow); border: 1px solid rgba(0,168,89,.3); }
+    .shadow-card--tv  { box-shadow: 0 16px 64px rgba(0,0,0,.8); }
+    .shadow-note {
+      margin-top: var(--space-3);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text3);
+      line-height: 1.6;
+    }
+    .shadow-note code {
+      font-family: monospace;
+      color: #a8e6c5;
+      font-size: 11px;
+    }
+
+    /* ── Surface ladder ── */
+    .surface-ladder {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      border-radius: var(--r5);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+    }
+    .surface-rung {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-2) var(--space-3);
+    }
+    .surface-swatch {
+      width: 48px;
+      height: 32px;
+      border-radius: var(--r2);
+      border: 1px solid rgba(255,255,255,.08);
+      flex-shrink: 0;
+    }
+    .surface-info { flex: 1; }
+    .surface-token-name {
+      font-family: monospace;
+      font-size: 12px;
+      color: #a8e6c5;
+      margin-bottom: 2px;
+    }
+    .surface-desc {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+    }
+    .surface-hex {
+      font-family: monospace;
+      font-size: 11px;
+      color: var(--text3);
+      flex-shrink: 0;
+    }
+
+    /* ── Pairing table ── */
+    .pair-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .pair-table th {
+      text-align: left;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--text3);
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--surface-1);
+    }
+    .pair-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--divider);
+      color: var(--text2);
+      font-weight: 500;
+      vertical-align: middle;
+    }
+    .pair-table tr:last-child td { border-bottom: none; }
+    .pair-table td:first-child { color: var(--text); font-weight: 700; }
+    .pair-table .t { font-family: monospace; font-size: 12px; color: #a8e6c5; }
+    .pair-table tbody tr:hover { background: var(--glass-1); }
+
+    /* ── Active / selected demo ── */
+    .active-demo {
+      display: flex;
+      gap: var(--space-3);
+      align-items: flex-start;
+    }
+    .active-demo-card {
+      flex: 1;
+      border-radius: var(--r5);
+      padding: var(--space-3);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+    .active-demo-card--inactive {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0,0,0,.4);
+    }
+    .active-demo-card--active {
+      background: var(--card-bg);
+      border: 1px solid rgba(0,168,89,.4);
+      box-shadow: var(--jio-glow);
+    }
+    .active-card-state {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+    }
+    .active-card-state--inactive { color: var(--text3); }
+    .active-card-state--active   { color: var(--jio); }
+    .active-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -.2px;
+    }
+    .active-card-sub {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text3);
+    }
+    .active-card-shadow-label {
+      font-family: monospace;
+      font-size: 10px;
+      color: var(--text4);
+      margin-top: var(--space-1);
+    }
+  </style>
+</head>
+<body>
+  <main class="ds-main">
+
+    <header class="component-page-header">
+      <nav class="component-breadcrumb" aria-label="Breadcrumb">
+        <a href="../" class="component-breadcrumb-link">JioGames DLS</a>
+        <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+        <span class="component-breadcrumb-current">Elevation</span>
+      </nav>
+      <h1 class="component-page-title">Elevation</h1>
+      <p class="component-page-def">Surface ladder, shadow scale, and elevation pairing rules for JioGames dark UI.</p>
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+        <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+        <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+        <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <div class="component-hero component-hero--dark" style="padding:32px 40px;align-items:flex-start;gap:16px">
+      <div class="hero-glow"></div>
+      <div style="display:flex;gap:12px;align-items:flex-end;position:relative;z-index:1;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:80px;height:80px;border-radius:var(--r5);background:var(--bg);border:1px solid var(--border-subtle)"></div>
+          <div style="font-size:9px;font-weight:700;color:var(--text3)">--bg<br><span style="color:var(--text4)">#06080F</span></div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:80px;height:80px;border-radius:var(--r5);background:var(--surface-1);border:1px solid var(--border-subtle)"></div>
+          <div style="font-size:9px;font-weight:700;color:var(--text3)">surface-1<br><span style="color:var(--text4)">#0E1119</span></div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:80px;height:80px;border-radius:var(--r5);background:var(--surface-2);border:1px solid var(--border-subtle)"></div>
+          <div style="font-size:9px;font-weight:700;color:var(--text3)">surface-2<br><span style="color:var(--text4)">#161A24</span></div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:80px;height:80px;border-radius:var(--r5);background:var(--surface-3);border:1px solid var(--border-subtle)"></div>
+          <div style="font-size:9px;font-weight:700;color:var(--text3)">surface-3<br><span style="color:var(--text4)">#1F2432</span></div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:80px;height:80px;border-radius:var(--r5);background:var(--surface-4);border:1px solid var(--border-subtle)"></div>
+          <div style="font-size:9px;font-weight:700;color:var(--text3)">surface-4<br><span style="color:var(--text4)">#2A3142</span></div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:80px;height:80px;border-radius:var(--r5);background:var(--glass-1);border:1px solid var(--border)"></div>
+          <div style="font-size:9px;font-weight:700;color:var(--text3)">glass-1<br><span style="color:var(--text4)">rgba white .055</span></div>
+        </div>
+      </div>
+      <p class="component-hero-caption">SURFACE LADDER · bg → surface-4 → glass · TOKEN-BASED</p>
+    </div>
+
+    <!-- Section 1: Shadow scale -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Shadow scale</h2>
+      <p class="ds-section-desc">Seven shadow levels cover every use case from flat page elements to top-of-stack TV cards. Use shadow tokens from tokens.css — not raw box-shadow values.</p>
+
+      <div class="ds-demo ds-demo--dark" style="margin-bottom:var(--space-3);">
+        <div class="shadow-grid">
+          <div class="shadow-card shadow-card--l0">
+            <span class="shadow-level-label">Level 0</span>
+            <span class="shadow-token-label">no shadow</span>
+          </div>
+          <div class="shadow-card shadow-card--l1">
+            <span class="shadow-level-label">Level 1</span>
+            <span class="shadow-token-label">--shadow-1</span>
+          </div>
+          <div class="shadow-card shadow-card--l2">
+            <span class="shadow-level-label">Level 2</span>
+            <span class="shadow-token-label">--shadow-2</span>
+          </div>
+          <div class="shadow-card shadow-card--l3">
+            <span class="shadow-level-label">Level 3</span>
+            <span class="shadow-token-label">--shadow-3</span>
+          </div>
+          <div class="shadow-card shadow-card--l4">
+            <span class="shadow-level-label">Level 4</span>
+            <span class="shadow-token-label">--shadow-4</span>
+          </div>
+          <div class="shadow-card shadow-card--glow">
+            <span class="shadow-level-label" style="color:var(--jio);">Glow</span>
+            <span class="shadow-token-label">--jio-glow</span>
+          </div>
+          <div class="shadow-card shadow-card--tv">
+            <span class="shadow-level-label">TV</span>
+            <span class="shadow-token-label">--shadow-tv</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-demo">
+        <div style="display:flex;gap:var(--space-4);">
+          <div>
+            <div class="ds-sub-label">Level 0</div>
+            <div style="font-size:12px;color:var(--text2);font-weight:500;">Flat. Inline content, in-page elements.</div>
+          </div>
+          <div>
+            <div class="ds-sub-label">Level 1</div>
+            <div style="font-size:12px;color:var(--text2);font-weight:500;">Subtle depth. Inline cards, list items.</div>
+          </div>
+          <div>
+            <div class="ds-sub-label">Level 2</div>
+            <div style="font-size:12px;color:var(--text2);font-weight:500;">Standard cards. Game cards, content tiles.</div>
+          </div>
+          <div>
+            <div class="ds-sub-label">Level 3</div>
+            <div style="font-size:12px;color:var(--text2);font-weight:500;">Floating panels. Dropdowns, tooltips.</div>
+          </div>
+          <div>
+            <div class="ds-sub-label">Level 4</div>
+            <div style="font-size:12px;color:var(--text2);font-weight:500;">Modals and sheets. Bottom sheets, dialogs.</div>
+          </div>
+          <div>
+            <div class="ds-sub-label">Glow</div>
+            <div style="font-size:12px;color:var(--text2);font-weight:500;">Brand highlight. Active cards, selected state.</div>
+          </div>
+          <div>
+            <div class="ds-sub-label">TV</div>
+            <div style="font-size:12px;color:var(--text2);font-weight:500;">TV cards. Focused card on large screen.</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="shadow-note">Shadow tokens <code>--shadow-1</code> through <code>--shadow-4</code> are defined in tokens.css. Use these tokens, not raw <code>box-shadow</code> values.</p>
+
+      <pre class="ds-code" style="margin-top:var(--space-2);">
+<span class="k">.card</span>           { <span class="p">box-shadow</span>: <span class="t">var(--shadow-2)</span>; }
+<span class="k">.card:hover</span>     { <span class="p">box-shadow</span>: <span class="t">var(--shadow-3)</span>; }
+<span class="k">.card.active</span>    { <span class="p">box-shadow</span>: <span class="t">var(--jio-glow)</span>; }</pre>
+    </section>
+
+    <!-- Section 2: Surface ladder -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Surface ladder</h2>
+      <p class="ds-section-desc">Six opaque surface tokens create the depth ramp. Each step is slightly lighter than the one below it — communicating that it sits on top of it.</p>
+
+      <div class="surface-ladder">
+        <div class="surface-rung" style="background:#06080F;">
+          <div class="surface-swatch" style="background:#06080F;"></div>
+          <div class="surface-info">
+            <div class="surface-token-name">--bg</div>
+            <div class="surface-desc">Page background. Always the darkest surface.</div>
+          </div>
+          <span class="surface-hex">#06080F</span>
+        </div>
+        <div class="surface-rung" style="background:#111115;">
+          <div class="surface-swatch" style="background:#111115;"></div>
+          <div class="surface-info">
+            <div class="surface-token-name">--card-bg</div>
+            <div class="surface-desc">Default card surface. 1 level above page.</div>
+          </div>
+          <span class="surface-hex">#111115</span>
+        </div>
+        <div class="surface-rung" style="background:#0E1119;">
+          <div class="surface-swatch" style="background:#0E1119;"></div>
+          <div class="surface-info">
+            <div class="surface-token-name">--surface-1</div>
+            <div class="surface-desc">Elevated surface. Nav overlays.</div>
+          </div>
+          <span class="surface-hex">#0E1119</span>
+        </div>
+        <div class="surface-rung" style="background:#161A24;">
+          <div class="surface-swatch" style="background:#161A24;"></div>
+          <div class="surface-info">
+            <div class="surface-token-name">--surface-2</div>
+            <div class="surface-desc">Mid-elevation. Tooltips, popovers.</div>
+          </div>
+          <span class="surface-hex">#161A24</span>
+        </div>
+        <div class="surface-rung" style="background:#1F2432;">
+          <div class="surface-swatch" style="background:#1F2432;"></div>
+          <div class="surface-info">
+            <div class="surface-token-name">--surface-3</div>
+            <div class="surface-desc">High elevation. Modals, dialogs.</div>
+          </div>
+          <span class="surface-hex">#1F2432</span>
+        </div>
+        <div class="surface-rung" style="background:#2A3142;">
+          <div class="surface-swatch" style="background:#2A3142;"></div>
+          <div class="surface-info">
+            <div class="surface-token-name">--surface-4</div>
+            <div class="surface-desc">Highest surface. Keyboard, top overlays.</div>
+          </div>
+          <span class="surface-hex">#2A3142</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Elevation + surface pairing -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Elevation + surface pairing</h2>
+      <p class="ds-section-desc">Shadow and surface are always used together. Each layer has a canonical surface token and shadow token pair. Do not mix levels.</p>
+
+      <div class="ds-demo" >
+        <table class="pair-table">
+          <thead>
+            <tr>
+              <th>Layer</th>
+              <th>Surface token</th>
+              <th>Shadow token</th>
+              <th>Typical component</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>0 — Page</td>
+              <td class="t">--bg</td>
+              <td class="t">none</td>
+              <td>Page background</td>
+            </tr>
+            <tr>
+              <td>1 — Content</td>
+              <td class="t">--card-bg</td>
+              <td class="t">--shadow-2</td>
+              <td>Game cards, list items</td>
+            </tr>
+            <tr>
+              <td>2 — Float</td>
+              <td class="t">--surface-2</td>
+              <td class="t">--shadow-3</td>
+              <td>Dropdowns, popovers</td>
+            </tr>
+            <tr>
+              <td>3 — Overlay</td>
+              <td class="t">--surface-3</td>
+              <td class="t">--shadow-4</td>
+              <td>Bottom sheets, dialogs</td>
+            </tr>
+            <tr>
+              <td>4 — Top</td>
+              <td class="t">--surface-4</td>
+              <td class="t">--shadow-4</td>
+              <td>On-screen keyboard</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section 4: Active / selected states -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Active / selected states</h2>
+      <p class="ds-section-desc">Active and selected states use <code style="font-family:monospace;font-size:12px;color:#a8e6c5;">var(--jio-glow)</code> instead of grey shadows. A green border at reduced opacity accompanies the glow. Never use grey box-shadows on selected elements.</p>
+
+      <div class="ds-demo ds-demo--dark">
+        <div class="active-demo">
+          <div class="active-demo-card active-demo-card--inactive">
+            <span class="active-card-state active-card-state--inactive">Inactive</span>
+            <span class="active-card-title">Tomb Raider</span>
+            <span class="active-card-sub">Action Adventure · 8.4GB</span>
+            <span class="active-card-shadow-label">box-shadow: var(--shadow-2)</span>
+          </div>
+          <div class="active-demo-card active-demo-card--active">
+            <span class="active-card-state active-card-state--active">Selected</span>
+            <span class="active-card-title">Tomb Raider</span>
+            <span class="active-card-sub">Action Adventure · 8.4GB</span>
+            <span class="active-card-shadow-label" style="color:var(--jio);">box-shadow: var(--jio-glow)</span>
+          </div>
+        </div>
+      </div>
+
+      <pre class="ds-code" style="margin-top:var(--space-2);">
+<span class="c">/* Standard card — grey shadow */</span>
+<span class="k">.card</span> {
+  <span class="p">background</span>:  <span class="t">var(--card-bg)</span>;
+  <span class="p">box-shadow</span>:  <span class="t">var(--shadow-2)</span>;
+  <span class="p">border</span>:      <span class="v">1px solid</span> <span class="t">var(--border)</span>;
+}
+
+<span class="c">/* Active / selected card — green glow, no grey shadow */</span>
+<span class="k">.card.selected</span> {
+  <span class="p">box-shadow</span>:  <span class="t">var(--jio-glow)</span>;
+  <span class="p">border-color</span>: <span class="v">rgba(0,168,89,.4)</span>;
+}</pre>
+    </section>
+
+    <!-- Section 5: Usage rules -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Usage rules</h2>
+      <div class="ds-rules">
+        <div class="ds-rule ds-rule--pass">Use shadow tokens (<code>--shadow-1</code> through <code>--shadow-4</code>) — not raw box-shadow values.</div>
+        <div class="ds-rule ds-rule--pass">Use <code>--jio-glow</code> for active, selected, and focused interactive elements.</div>
+        <div class="ds-rule ds-rule--pass">Pair shadow level with the matching surface token from the ladder.</div>
+        <div class="ds-rule ds-rule--fail">Use grey box-shadows on active or selected states — use <code>--jio-glow</code>.</div>
+        <div class="ds-rule ds-rule--fail">Apply <code>box-shadow</code> to <code>--bg</code> (page background has no shadow).</div>
+        <div class="ds-rule ds-rule--fail">Use white or coloured box-shadows — shadows are black at varying opacity only.</div>
+        <div class="ds-rule ds-rule--fail">Use <code>--shadow-4</code> on inline content — it is for modals and overlays only.</div>
+      </div>
+    </section>
+
+
+    <!-- CHANGELOG -->
+
+  </main>
+  <script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script>
+</body>
+</html>

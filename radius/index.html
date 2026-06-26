@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radius — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    /* ── Demo swatch sizes (illustration only — not UI controls) ── */
+    :root {
+      --demo-swatch: 72px;
+      --demo-pill-w: 160px;
+      --demo-pill-h: 48px;
+    }
+    /* ── Radius scale grid ── */
+    .radius-scale {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      align-items: flex-end;
+    }
+    .radius-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-1);
+    }
+    .radius-shape {
+      width: var(--demo-swatch);
+      height: var(--demo-swatch);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+    }
+    .radius-pill-shape {
+      width: var(--demo-pill-w);
+      height: var(--demo-pill-h);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+    }
+    .radius-token {
+      font-family: monospace;
+      font-size: 11px;
+      color: var(--text3);
+      text-align: center;
+    }
+    .radius-px {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text2);
+      text-align: center;
+    }
+    .pill-row {
+      margin-top: var(--space-3);
+      padding-top: var(--space-3);
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .pill-label {
+      font-size: 12px;
+      color: var(--text3);
+      font-weight: 500;
+    }
+    /* ── Mapping table ── */
+    .mapping-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .mapping-table th {
+      text-align: left;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--text3);
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--surface-1);
+    }
+    .mapping-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--divider);
+      color: var(--text2);
+      font-weight: 500;
+      vertical-align: middle;
+    }
+    .mapping-table tr:last-child td { border-bottom: none; }
+    .mapping-table td:first-child { color: var(--text); font-weight: 700; }
+    .mapping-table tbody tr:hover { background: var(--glass-1); }
+    .mapping-table .token-cell {
+      font-family: monospace;
+      font-size: 12px;
+      color: #a8e6c5;
+    }
+    .mapping-table .px-cell {
+      font-family: monospace;
+      font-size: 12px;
+      color: var(--text3);
+    }
+    /* ── Corner specific code ── */
+    .corner-diagram {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2);
+      margin-bottom: var(--space-3);
+    }
+    .corner-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r3);
+      padding: var(--space-2);
+    }
+    .corner-card-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text3);
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      margin-bottom: var(--space-1);
+    }
+    .corner-demo {
+      height: 48px;
+      background: var(--surface-3);
+      border: 1px solid var(--border);
+    }
+    .corner-demo--top {
+      border-radius: var(--r7) var(--r7) 0 0;
+    }
+    .corner-demo--bottom {
+      border-radius: 0 0 var(--r5) var(--r5);
+    }
+  </style>
+</head>
+<body>
+  <main class="ds-main">
+
+    <header class="component-page-header">
+      <nav class="component-breadcrumb" aria-label="Breadcrumb">
+        <a href="../" class="component-breadcrumb-link">JioGames DLS</a>
+        <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+        <span class="component-breadcrumb-current">Radius</span>
+      </nav>
+      <h1 class="component-page-title">Radius</h1>
+      <p class="component-page-def">Nine graduated radius tokens plus a pill token. Components never use bare pixel values for border-radius.</p>
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+        <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+        <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+        <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <div class="component-hero component-hero--dark" style="padding:32px 40px;align-items:flex-start;gap:16px">
+      <div class="hero-glow"></div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end;position:relative;z-index:1">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:56px;height:56px;background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:var(--r1)"></div>
+          <div style="font-size:9px;font-weight:700;color:var(--text3)">--r1 · 8px</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:56px;height:56px;background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:var(--r2)"></div>
+          <div style="font-size:9px;font-weight:700;color:var(--text3)">--r2 · 10px</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:56px;height:56px;background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:var(--r3)"></div>
+          <div style="font-size:9px;font-weight:700;color:var(--text3)">--r3 · 12px</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:56px;height:56px;background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:var(--r4)"></div>
+          <div style="font-size:9px;font-weight:700;color:var(--text3)">--r4 · 14px</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:56px;height:56px;background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:var(--r5)"></div>
+          <div style="font-size:9px;font-weight:700;color:var(--text3)">--r5 · 16px</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:56px;height:56px;background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:var(--r6)"></div>
+          <div style="font-size:9px;font-weight:700;color:var(--text3)">--r6 · 18px</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:56px;height:56px;background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:var(--r7)"></div>
+          <div style="font-size:9px;font-weight:700;color:var(--text3)">--r7 · 20px</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:56px;height:56px;background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:var(--pill)"></div>
+          <div style="font-size:9px;font-weight:700;color:var(--jio)">--pill</div>
+        </div>
+      </div>
+      <p class="component-hero-caption">9 GRADUATED STEPS + PILL · COMPONENT MAPPING</p>
+    </div>
+
+    <!-- Section 1: Radius scale -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Radius scale</h2>
+      <p class="ds-section-desc">Each token represents a step in the radius hierarchy. Smaller values anchor artwork-led surfaces; larger values belong to interactive chrome and overlay layers.</p>
+
+      <div class="ds-demo ds-demo--dark">
+        <div class="radius-scale">
+          <div class="radius-cell">
+            <div class="radius-shape" style="border-radius:var(--r1)"></div>
+            <span class="radius-token">--r1</span>
+            <span class="radius-px">8px</span>
+          </div>
+          <div class="radius-cell">
+            <div class="radius-shape" style="border-radius:var(--r2)"></div>
+            <span class="radius-token">--r2</span>
+            <span class="radius-px">10px</span>
+          </div>
+          <div class="radius-cell">
+            <div class="radius-shape" style="border-radius:var(--r3)"></div>
+            <span class="radius-token">--r3</span>
+            <span class="radius-px">12px</span>
+          </div>
+          <div class="radius-cell">
+            <div class="radius-shape" style="border-radius:var(--r4)"></div>
+            <span class="radius-token">--r4</span>
+            <span class="radius-px">14px</span>
+          </div>
+          <div class="radius-cell">
+            <div class="radius-shape" style="border-radius:var(--r5)"></div>
+            <span class="radius-token">--r5</span>
+            <span class="radius-px">16px</span>
+          </div>
+          <div class="radius-cell">
+            <div class="radius-shape" style="border-radius:var(--r6)"></div>
+            <span class="radius-token">--r6</span>
+            <span class="radius-px">18px</span>
+          </div>
+          <div class="radius-cell">
+            <div class="radius-shape" style="border-radius:var(--r7)"></div>
+            <span class="radius-token">--r7</span>
+            <span class="radius-px">20px</span>
+          </div>
+          <div class="radius-cell">
+            <div class="radius-shape" style="border-radius:var(--r8)"></div>
+            <span class="radius-token">--r8</span>
+            <span class="radius-px">22px</span>
+          </div>
+          <div class="radius-cell">
+            <div class="radius-shape" style="border-radius:var(--r9)"></div>
+            <span class="radius-token">--r9</span>
+            <span class="radius-px">28px</span>
+          </div>
+        </div>
+        <div class="pill-row">
+          <div class="radius-cell">
+            <div class="radius-pill-shape" style="border-radius:var(--pill)"></div>
+            <span class="radius-token">--pill</span>
+            <span class="radius-px">100px</span>
+          </div>
+          <span class="pill-label">Use for buttons, chips, badges, search bar, progress bar track.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Component mapping -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Component → radius mapping</h2>
+      <p class="ds-section-desc">One component, one token. Deviations from this table require a governance update.</p>
+
+      <div class="ds-demo" >
+        <table class="mapping-table">
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Token</th>
+              <th>Value</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Buttons</td>
+              <td class="token-cell">--pill</td>
+              <td class="px-cell">100px</td>
+              <td>Full pill shape always</td>
+            </tr>
+            <tr>
+              <td>Primary CTA</td>
+              <td class="token-cell">--pill</td>
+              <td class="px-cell">100px</td>
+              <td>Never use --r9 for buttons</td>
+            </tr>
+            <tr>
+              <td>Cards (default)</td>
+              <td class="token-cell">--r4</td>
+              <td class="px-cell">14px</td>
+              <td>Standard landscape/square game card</td>
+            </tr>
+            <tr>
+              <td>Cover portrait card</td>
+              <td class="token-cell">--r5</td>
+              <td class="px-cell">16px</td>
+              <td>Portrait artwork image</td>
+            </tr>
+            <tr>
+              <td>Hero / marquee cards</td>
+              <td class="token-cell">--r2</td>
+              <td class="px-cell">10px</td>
+              <td>Larger canvas — smaller radius</td>
+            </tr>
+            <tr>
+              <td>Bottom sheets</td>
+              <td class="token-cell">--r9 --r9 0 0</td>
+              <td class="px-cell">28px</td>
+              <td>Top corners only; bottom is flush</td>
+            </tr>
+            <tr>
+              <td>Inputs &amp; text fields</td>
+              <td class="token-cell">--r5</td>
+              <td class="px-cell">16px</td>
+              <td>Phone input, text fields</td>
+            </tr>
+            <tr>
+              <td>OTP boxes</td>
+              <td class="token-cell">--r4</td>
+              <td class="px-cell">14px</td>
+              <td>Individual digit cell</td>
+            </tr>
+            <tr>
+              <td>Chips &amp; tags</td>
+              <td class="token-cell">--pill</td>
+              <td class="px-cell">100px</td>
+              <td>Action chips always pill</td>
+            </tr>
+            <tr>
+              <td>Platform chips (tile)</td>
+              <td class="token-cell">--r4</td>
+              <td class="px-cell">14px</td>
+              <td>Taller tile format — pill looks wrong</td>
+            </tr>
+            <tr>
+              <td>Dialogs &amp; modals</td>
+              <td class="token-cell">--r7</td>
+              <td class="px-cell">20px</td>
+              <td>All corners</td>
+            </tr>
+            <tr>
+              <td>Pass cards</td>
+              <td class="token-cell">--r7</td>
+              <td class="px-cell">20px</td>
+              <td>Premium surface</td>
+            </tr>
+            <tr>
+              <td>Upsell cards</td>
+              <td class="token-cell">--r7</td>
+              <td class="px-cell">20px</td>
+              <td>Same tier as pass card</td>
+            </tr>
+            <tr>
+              <td>Genre tiles</td>
+              <td class="token-cell">--r5</td>
+              <td class="px-cell">16px</td>
+              <td>Interactive overlay</td>
+            </tr>
+            <tr>
+              <td>USP tiles</td>
+              <td class="token-cell">--r6</td>
+              <td class="px-cell">18px</td>
+              <td>Between card and pass tier</td>
+            </tr>
+            <tr>
+              <td>Notifications / toast</td>
+              <td class="token-cell">--r3</td>
+              <td class="px-cell">12px</td>
+              <td>Toast + in-app banners</td>
+            </tr>
+            <tr>
+              <td>Tooltips</td>
+              <td class="token-cell">--r2</td>
+              <td class="px-cell">10px</td>
+              <td>Small transient callout</td>
+            </tr>
+            <tr>
+              <td>Tab bar container</td>
+              <td class="token-cell">--pill</td>
+              <td class="px-cell">100px</td>
+              <td>Floating pill tab bar</td>
+            </tr>
+            <tr>
+              <td>Search bar</td>
+              <td class="token-cell">--pill</td>
+              <td class="px-cell">100px</td>
+              <td>Always pill</td>
+            </tr>
+            <tr>
+              <td>Badge / pill</td>
+              <td class="token-cell">--pill</td>
+              <td class="px-cell">100px</td>
+              <td>Inline count or label</td>
+            </tr>
+            <tr>
+              <td>Progress bar</td>
+              <td class="token-cell">--pill</td>
+              <td class="px-cell">100px</td>
+              <td>Track + fill both pill</td>
+            </tr>
+            <tr>
+              <td>GFF / info card</td>
+              <td class="token-cell">--r3</td>
+              <td class="px-cell">12px</td>
+              <td>Compact info module</td>
+            </tr>
+            <tr>
+              <td>Avatar / profile image</td>
+              <td class="token-cell">50%</td>
+              <td class="px-cell">circular</td>
+              <td>Only case where 50% is allowed</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section 3: Corner-specific radii -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Corner-specific radii</h2>
+      <p class="ds-section-desc">Some components use partial radius — top-only for sheets entering from the bottom, bottom-only for surfaces attached to the AppBar.</p>
+
+      <div class="corner-diagram">
+        <div class="corner-card">
+          <div class="corner-card-label">Bottom sheet — top corners only</div>
+          <div class="corner-demo corner-demo--top"></div>
+        </div>
+        <div class="corner-card">
+          <div class="corner-card-label">AppBar card — bottom corners only</div>
+          <div class="corner-demo corner-demo--bottom"></div>
+        </div>
+      </div>
+
+      <pre class="ds-code"><span class="c">/* Bottom sheet: top corners only */</span>
+<span class="k">.bottom-sheet</span> {
+  <span class="p">border-radius</span>: <span class="t">var(--r9)</span> <span class="t">var(--r9)</span> <span class="v">0</span> <span class="v">0</span>;
+}
+
+<span class="c">/* AppBar attached card: bottom corners only */</span>
+<span class="k">.appbar-card</span> {
+  <span class="p">border-radius</span>: <span class="v">0</span> <span class="v">0</span> <span class="t">var(--r5)</span> <span class="t">var(--r5)</span>;
+}</pre>
+    </section>
+
+    <!-- Section 4: Usage rules -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Usage rules</h2>
+      <div class="ds-rules">
+        <div class="ds-rule ds-rule--pass">Use <code>var(--pill)</code> for all button shapes — primary, small CTA, ghost, and action chips.</div>
+        <div class="ds-rule ds-rule--pass">Use <code>var(--r4)</code> for standard landscape and square game cards.</div>
+        <div class="ds-rule ds-rule--pass">Use <code>var(--r7)</code> for overlays, modals, and drawers.</div>
+        <div class="ds-rule ds-rule--pass">Use <code>var(--r9) var(--r9) 0 0</code> for bottom sheets — top corners only.</div>
+        <div class="ds-rule ds-rule--fail">Use raw px values like <code>border-radius: 8px</code>, <code>12px</code>, or <code>20px</code> — always use a token.</div>
+        <div class="ds-rule ds-rule--fail">Use <code>var(--r9)</code> for buttons — too squared. Use <code>--pill</code>.</div>
+        <div class="ds-rule ds-rule--fail">Mix token and raw values on a single element.</div>
+        <div class="ds-rule ds-rule--fail">Use <code>border-radius: 50%</code> on cards or non-circular elements — reserved for avatars only.</div>
+        <div class="ds-rule ds-rule--fail">Use <code>border-radius: 0</code> on interactive components — minimum is <code>--r1</code>.</div>
+      </div>
+    </section>
+
+
+    <!-- CHANGELOG -->
+
+  </main>
+  <script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script>
+</body>
+</html>

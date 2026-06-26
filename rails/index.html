@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rails — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    body { background: var(--bg); color: var(--text); font-family: var(--jio-font); margin: 0; }
+
+    .component-hero { border-radius: 20px; overflow: hidden; margin-bottom: 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; min-height: 280px; padding: 48px 32px 32px; }
+    .component-hero--dark { background: #060810; }
+    .component-hero--grid { background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: 32px 32px; background-color: #060810; border: 1px solid var(--border-subtle); }
+    .component-hero-inner { display: flex; flex-direction: column; align-items: center; gap: 28px; position: relative; z-index: 2; }
+    .component-hero-caption { display: block; font-size: 10px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--text4); margin-top: 24px; position: relative; z-index: 2; }
+    .hero-glow { position: absolute; width: 320px; height: 180px; border-radius: var(--pill); background: radial-gradient(ellipse, rgba(0,168,89,.2) 0%, transparent 70%); pointer-events: none; z-index: 1; }
+
+    .component-intro { margin-bottom: 48px; }
+    .component-intro p { font-size: 15px; font-weight: 500; color: var(--text2); line-height: 1.65; margin-bottom: 20px; max-width: 640px; }
+    .component-summary-list { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border-subtle); border-radius: 14px; overflow: hidden; list-style: none; padding: 0; margin: 0; }
+    .component-summary-list li { padding: 14px 20px; border-bottom: 1px solid var(--border-subtle); font-size: 13px; font-weight: 500; color: var(--text2); line-height: 1.55; }
+    .component-summary-list li:last-child { border-bottom: none; }
+    .component-summary-list li strong { color: var(--text); font-weight: 700; }
+
+    .component-best-practices { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+    .component-bp-card { border-radius: 14px; overflow: hidden; border: 1.5px solid; }
+    .component-bp-card--do { border-color: rgba(0,168,89,.3); }
+    .component-bp-card--dont { border-color: rgba(255,71,87,.3); }
+    .component-bp-label { display: flex; align-items: center; gap: 6px; padding: 10px 16px; font-size: 10px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; }
+    .component-bp-label--do { background: rgba(0,168,89,.07); color: var(--jio); }
+    .component-bp-label--dont { background: rgba(255,71,87,.07); color: var(--negative); }
+    .component-bp-label--do::before { content: '\2713'; font-size: 11px; }
+    .component-bp-label--dont::before { content: '\2715'; font-size: 11px; }
+    .component-bp-list { padding: 16px 20px 20px; background: var(--surface-1); margin: 0; display: flex; flex-direction: column; gap: 8px; list-style: none; }
+    .component-bp-list li { font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.5; padding-left: 14px; position: relative; }
+    .component-bp-list li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+
+    .component-platform-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+    .component-platform-card { background: var(--surface-1); border: 1px solid var(--border-subtle); border-radius: var(--r4); padding: 20px; }
+    .component-platform-card--mobile { border-top: 2px solid rgba(110,231,183,.4); }
+    .component-platform-card--web { border-top: 2px solid rgba(147,197,253,.4); }
+    .component-platform-card--tv { border-top: 2px solid rgba(251,191,36,.4); }
+    .component-platform-card-title { font-size: 11px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--text3); margin-bottom: 12px; }
+    .component-platform-card--mobile .component-platform-card-title { color: #6ee7b7; }
+    .component-platform-card--web .component-platform-card-title { color: #93c5fd; }
+    .component-platform-card--tv .component-platform-card-title { color: #fbbf24; }
+    .component-platform-card ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .component-platform-card li { font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.5; padding-left: 14px; position: relative; }
+    .component-platform-card li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+
+    .component-changelog { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; }
+    .component-changelog-entry { display: grid; grid-template-columns: 56px 80px 1fr; gap: 16px; align-items: start; padding: 14px 20px; border-bottom: 1px solid var(--border-subtle); font-size: 12px; }
+    .component-changelog-entry:last-child { border-bottom: none; }
+    .component-changelog-version { font-family: monospace; font-weight: 700; color: var(--jio); font-size: 11px; }
+    .component-changelog-date { color: var(--text3); font-weight: 500; }
+    .component-changelog-desc { color: var(--text2); line-height: 1.5; }
+
+    .a11y-grid { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; margin-top: 24px; }
+    .a11y-row { display: grid; grid-template-columns: 140px 1fr; gap: 0; border-bottom: 1px solid var(--border-subtle); }
+    .a11y-row:last-child { border-bottom: none; }
+    .a11y-label { padding: 16px 16px 14px; font-size: 11px; font-weight: 700; color: var(--text3); letter-spacing: .3px; background: var(--surface-2); text-transform: uppercase; display: flex; align-items: flex-start; }
+    .a11y-content { padding: 14px 20px; font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.6; background: var(--surface-1); }
+    .a11y-content ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 5px; }
+    .a11y-content li { padding-left: 14px; position: relative; }
+    .a11y-content li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+
+    kbd { display: inline-block; padding: 1px 6px; background: var(--surface-3); border: 1px solid var(--border); border-radius: 4px; font-family: monospace; font-size: 11px; color: var(--text2); }
+
+    .ds-token-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; font-size: 12px; }
+    .ds-token-table thead th { background: var(--surface-2); padding: 10px 16px; text-align: left; font-size: 9px; font-weight: 700; letter-spacing: .7px; text-transform: uppercase; color: var(--text3); border-bottom: 1px solid var(--border-subtle); }
+    .ds-token-table tbody td { padding: 12px 16px; border-bottom: 1px solid var(--border-subtle); color: var(--text2); vertical-align: middle; }
+    .ds-token-table tbody tr:last-child td { border-bottom: none; }
+    .ds-token-table tbody tr:hover td { background: var(--surface-2); }
+    .ds-token-name { font-family: monospace; color: #a8e6c5; font-size: 11px; }
+    .ds-token-value { font-family: monospace; color: var(--text3); font-size: 11px; }
+    .ds-token-swatch { display: inline-block; width: 16px; height: 16px; border-radius: 4px; border: 1px solid var(--border-subtle); vertical-align: middle; }
+
+    .ds-anatomy { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 24px; }
+    .ds-anatomy-preview { background: var(--surface-1); border: 1px solid var(--border-subtle); border-radius: var(--r4); padding: 24px; display: flex; align-items: center; justify-content: center; }
+    .ds-anatomy-list { display: flex; flex-direction: column; gap: 16px; }
+    .ds-anatomy-item { display: grid; grid-template-columns: 20px 1fr; gap: 12px; align-items: flex-start; }
+    .ds-anatomy-callout-num { width: 20px; height: 20px; border-radius: 50%; background: var(--jio); color: #000; font-size: 10px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ds-anatomy-callout-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--jio); flex-shrink: 0; }
+    .ds-anatomy-label { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .ds-anatomy-desc { font-size: 12px; color: var(--text2); line-height: 1.55; }
+    .ds-anatomy-token { font-size: 10px; font-family: monospace; color: var(--text4); margin-top: 4px; }
+    .ds-anatomy-required { display: inline-block; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: var(--pill); background: rgba(0,168,89,.1); color: var(--jio); letter-spacing: .3px; margin-left: 6px; text-transform: uppercase; }
+    .ds-anatomy-optional { display: inline-block; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: var(--pill); background: rgba(255,255,255,.06); color: var(--text3); letter-spacing: .3px; margin-left: 6px; text-transform: uppercase; }
+
+    @keyframes shimmer { 0% { background-position: -400px 0; } 100% { background-position: 400px 0; } }
+    .skeleton { background: linear-gradient(90deg, var(--surface-2) 25%, var(--surface-3) 50%, var(--surface-2) 75%); background-size: 800px 100%; animation: shimmer 1.4s infinite linear; border-radius: 6px; }
+
+    @media (max-width: 760px) {
+      .component-best-practices, .component-platform-grid, .ds-anatomy { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<main class="ds-content">
+
+  <!-- 1. PAGE HEADER -->
+  <div class="component-page-header">
+    <div class="component-breadcrumb">
+      <a href="../index.html">JioGames DLS</a>
+      <span class="component-breadcrumb-sep">&#x203A;</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">&#x203A;</span>
+      <span>Rails</span>
+    </div>
+    <h1 class="component-page-title">Rails</h1>
+    <p class="component-page-def">Rails are horizontal-scrolling rows of cards that organize game collections into discoverable, swipeable sections.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+      <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+      <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+      <span class="component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+    </div>
+  </div>
+
+  <!-- 2. HERO VISUAL -->
+  <section class="component-hero component-hero--dark component-hero--grid" id="overview">
+    <div class="hero-glow" style="top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+    <div class="component-hero-inner">
+      <div style="background:var(--surface-1);border-radius:var(--r5);padding:20px 20px 16px;width:100%;max-width:560px;position:relative;overflow:hidden">
+        <!-- Rail header -->
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;width:100%">
+          <span style="font-size:16px;font-weight:900;color:var(--text)">Because you love Tomb Raider</span>
+          <span style="font-size:13px;color:var(--jio);cursor:pointer;font-weight:600">See all</span>
+        </div>
+        <!-- Card row -->
+        <div style="display:flex;gap:12px;overflow:hidden">
+          <!-- Card 1 -->
+          <div style="width:160px;flex-shrink:0">
+            <div style="height:100px;border-radius:var(--r5);background:linear-gradient(135deg,#1a0a0a,#3d1515)"></div>
+            <div style="font-size:12px;font-weight:700;color:var(--text);margin-top:6px">Shadow Warrior 3</div>
+            <div style="font-size:10px;color:var(--text3)">Action &#xB7; 4.7&#x2605;</div>
+          </div>
+          <!-- Card 2 -->
+          <div style="width:160px;flex-shrink:0">
+            <div style="height:100px;border-radius:var(--r5);background:linear-gradient(135deg,#0a1020,#101a40)"></div>
+            <div style="font-size:12px;font-weight:700;color:var(--text);margin-top:6px">Dead Cells</div>
+            <div style="font-size:10px;color:var(--text3)">Roguelike &#xB7; 4.9&#x2605;</div>
+          </div>
+          <!-- Card 3 -->
+          <div style="width:160px;flex-shrink:0">
+            <div style="height:100px;border-radius:var(--r5);background:linear-gradient(135deg,#0a1a0a,#153020)"></div>
+            <div style="font-size:12px;font-weight:700;color:var(--text);margin-top:6px">Hollow Knight</div>
+            <div style="font-size:10px;color:var(--text3)">Adventure &#xB7; 4.8&#x2605;</div>
+          </div>
+          <!-- Card 4 partial -->
+          <div style="width:160px;flex-shrink:0;opacity:.65">
+            <div style="height:100px;border-radius:var(--r5);background:linear-gradient(135deg,#1a150a,#302510)"></div>
+          </div>
+        </div>
+        <!-- Scroll dots -->
+        <div style="display:flex;gap:4px;justify-content:center;margin-top:12px">
+          <div style="width:20px;height:3px;border-radius:var(--pill);background:var(--jio)"></div>
+          <div style="width:6px;height:3px;border-radius:var(--pill);background:var(--border)"></div>
+          <div style="width:6px;height:3px;border-radius:var(--pill);background:var(--border)"></div>
+        </div>
+        <!-- Edge fade -->
+        <div style="position:absolute;right:0;top:0;bottom:0;width:40px;background:linear-gradient(90deg,transparent,var(--surface-1));pointer-events:none"></div>
+      </div>
+    </div>
+    <span class="component-hero-caption">Standard game rail &#xB7; 4 cards visible &#xB7; Mobile</span>
+  </section>
+
+  <!-- 3. INTRO -->
+  <section class="component-intro" id="intro">
+    <p>Rails let players scan large game catalogs without leaving the current screen. The horizontal orientation creates a natural swipe gesture on touch and a directional browse on TV remotes.</p>
+    <ul class="component-summary-list">
+      <li><strong>Section header</strong> identifies the rail&#x27;s theme and curation logic in 2&#x2013;4 words.</li>
+      <li><strong>Cards are sized consistently</strong> within a rail &#x2014; never mix card widths in one row.</li>
+      <li><strong>Partial card at edge</strong> signals more content is available to the right.</li>
+      <li><strong>Gradient edge fade</strong> reinforces scrollability and maintains the dark aesthetic.</li>
+      <li><strong>Empty / loading states</strong> maintain rail height so layout does not shift.</li>
+    </ul>
+  </section>
+
+  <!-- 4. BEST PRACTICES -->
+  <section class="ds-section" id="best-practices">
+    <h2 class="ds-section-title">Best practices</h2>
+    <p class="ds-section-desc">Follow these rules to keep rails consistent and scannable across the JioGames product surface.</p>
+    <div class="component-best-practices">
+      <div class="component-bp-card component-bp-card--do">
+        <span class="component-bp-label component-bp-label--do">Do</span>
+        <ul class="component-bp-list">
+          <li>Use section titles that describe the curation logic (&#x22;Because you played X&#x22;)</li>
+          <li>Always show &#x22;See all&#x22; when the rail has more than 8 items</li>
+          <li>Use consistent card sizes within a single rail</li>
+          <li>Show loading skeletons at the correct card size</li>
+          <li>Use a Continue playing rail for in-progress games</li>
+        </ul>
+      </div>
+      <div class="component-bp-card component-bp-card--dont">
+        <span class="component-bp-label component-bp-label--dont">Don&#x27;t</span>
+        <ul class="component-bp-list">
+          <li>Mix card sizes within one rail</li>
+          <li>Use more than 3 words for &#x22;See all&#x22; &#x2014; never &#x22;View more items&#x22;</li>
+          <li>Show empty rails &#x2014; hide the rail or show a placeholder</li>
+          <li>Autoplay video in rail cards</li>
+          <li>Use rails on TV without D-pad focus handling</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. ANATOMY -->
+  <section class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <p class="ds-section-desc">Every rail is composed of the same core slots. The section header, card row, and gradient edge fade are required; scroll indicators and progress bars are optional enhancements.</p>
+    <div class="ds-anatomy">
+      <div class="ds-anatomy-preview">
+        <div style="width:100%;max-width:300px;position:relative;padding:4px 0 12px">
+          <!-- Header row with callout 1 -->
+          <div style="position:relative;margin-bottom:10px">
+            <div style="display:flex;justify-content:space-between;align-items:center;background:rgba(0,168,89,.07);border:1px solid rgba(0,168,89,.2);border-radius:8px;padding:6px 10px">
+              <span style="font-size:11px;font-weight:900;color:var(--text)">Action Picks</span>
+              <span style="font-size:10px;color:var(--jio)">See all</span>
+            </div>
+            <div style="position:absolute;top:-10px;left:8px">
+              <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">1</div>
+            </div>
+          </div>
+          <!-- Card row with callouts -->
+          <div style="position:relative;display:flex;gap:8px;overflow:hidden">
+            <!-- Card with callout 3 -->
+            <div style="flex-shrink:0;width:80px;position:relative">
+              <div style="height:50px;border-radius:8px;background:linear-gradient(135deg,#1a0a0a,#3d1515);border:1px solid rgba(0,168,89,.25)"></div>
+              <div style="font-size:8px;font-weight:700;color:var(--text);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Shadow Warrior</div>
+              <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%)">
+                <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">3</div>
+              </div>
+            </div>
+            <div style="flex-shrink:0;width:80px">
+              <div style="height:50px;border-radius:8px;background:linear-gradient(135deg,#0a1020,#101a40)"></div>
+              <div style="font-size:8px;font-weight:700;color:var(--text);margin-top:3px">Dead Cells</div>
+            </div>
+            <!-- Partial card -->
+            <div style="flex-shrink:0;width:45px;overflow:hidden;opacity:.6">
+              <div style="height:50px;width:80px;border-radius:8px;background:linear-gradient(135deg,#0a1a0a,#153020)"></div>
+            </div>
+            <!-- Fade with callout 4 -->
+            <div style="position:absolute;right:0;top:0;bottom:0;width:50px;background:linear-gradient(90deg,transparent,var(--surface-1))">
+              <div style="position:absolute;right:0;top:50%;transform:translateY(-50%)">
+                <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">4</div>
+              </div>
+            </div>
+          </div>
+          <!-- Card row callout 2 -->
+          <div style="position:absolute;left:-12px;top:54px">
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">2</div>
+          </div>
+          <!-- Scroll dots with callout 5 -->
+          <div style="display:flex;gap:3px;justify-content:center;margin-top:8px;position:relative">
+            <div style="width:16px;height:2px;border-radius:var(--pill);background:var(--jio)"></div>
+            <div style="width:5px;height:2px;border-radius:var(--pill);background:var(--border)"></div>
+            <div style="width:5px;height:2px;border-radius:var(--pill);background:var(--border)"></div>
+            <div style="position:absolute;right:-18px;top:-4px">
+              <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">5</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ds-anatomy-list">
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">1</div>
+          <div>
+            <div class="ds-anatomy-label">Section header <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Title + &#x22;See all&#x22; link row. Title describes the curation logic in 2&#x2013;4 words.</div>
+            <div class="ds-anatomy-token">Token: ds-section-header</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">2</div>
+          <div>
+            <div class="ds-anatomy-label">Card row <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Horizontal flex container, <code class="ds-code">overflow-x:scroll</code>, scrollbar hidden via CSS, <code class="ds-code">-webkit-overflow-scrolling:touch</code>.</div>
+            <div class="ds-anatomy-token">Token: --card-gap (12px)</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">3</div>
+          <div>
+            <div class="ds-anatomy-label">Game card <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Media art block + title (14px bold, max 2 lines) + metadata (12px muted). Size determined by rail variant.</div>
+            <div class="ds-anatomy-token">Token: --card-wide-w (272px) or --card-sq (96px)</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">4</div>
+          <div>
+            <div class="ds-anatomy-label">Gradient edge fade <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Right-side absolute overlay, width 40px, <code class="ds-code">linear-gradient(90deg, transparent, var(--bg))</code>. Signals more cards exist.</div>
+            <div class="ds-anatomy-token">Token: --rail-fade-width</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">5</div>
+          <div>
+            <div class="ds-anatomy-label">Scroll indicator <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc">Progress dots or track below card row. Active dot uses <code class="ds-code">var(--jio)</code>, inactive uses <code class="ds-code">var(--border)</code>.</div>
+            <div class="ds-anatomy-token">Token: --scroll-indicator</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">6</div>
+          <div>
+            <div class="ds-anatomy-label">Continue progress bar <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc">Inside card art at bottom, height 3px. Green fill shows % completed. Only used in the Continue playing rail variant.</div>
+            <div class="ds-anatomy-token">Token: --progress-bar-h</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. VARIANTS -->
+  <section class="ds-section" id="variants">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Five rail types cover the full range of curation needs. Card shape and metadata adapt per variant while the header and scroll pattern stay constant.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px">
+
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:16px">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-bottom:12px">Standard game rail</div>
+        <div style="display:flex;gap:8px;overflow:hidden">
+          <div style="flex-shrink:0">
+            <div style="width:100px;height:62px;border-radius:10px;background:linear-gradient(135deg,#1a0a0a,#3d1515)"></div>
+            <div style="font-size:9px;font-weight:700;color:var(--text);margin-top:4px">Shadow Warrior 3</div>
+            <div style="font-size:8px;color:var(--text3)">Action &#xB7; 4.7&#x2605;</div>
+          </div>
+          <div style="flex-shrink:0">
+            <div style="width:100px;height:62px;border-radius:10px;background:linear-gradient(135deg,#0a1020,#101a40)"></div>
+            <div style="font-size:9px;font-weight:700;color:var(--text);margin-top:4px">Dead Cells</div>
+            <div style="font-size:8px;color:var(--text3)">Roguelike &#xB7; 4.9&#x2605;</div>
+          </div>
+        </div>
+        <div style="font-size:11px;color:var(--text3);line-height:1.5;margin-top:10px">Landscape 272&#xD7;160 cards. Title + meta below. Most common rail type.</div>
+      </div>
+
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:16px">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-bottom:12px">Continue playing</div>
+        <div style="display:flex;gap:8px;overflow:hidden">
+          <div style="flex-shrink:0">
+            <div style="width:100px;height:62px;border-radius:10px;background:linear-gradient(135deg,#0d2010,#1a4020);overflow:hidden;position:relative">
+              <div style="position:absolute;bottom:0;left:0;width:65%;height:3px;background:var(--jio)"></div>
+              <div style="position:absolute;bottom:0;right:0;width:35%;height:3px;background:rgba(255,255,255,.15)"></div>
+            </div>
+            <div style="font-size:9px;font-weight:700;color:var(--text);margin-top:4px">Hollow Knight</div>
+            <div style="font-size:8px;color:var(--jio)">65% complete</div>
+          </div>
+          <div style="flex-shrink:0">
+            <div style="width:100px;height:62px;border-radius:10px;background:linear-gradient(135deg,#1a150a,#302510);overflow:hidden;position:relative">
+              <div style="position:absolute;bottom:0;left:0;width:30%;height:3px;background:var(--jio)"></div>
+              <div style="position:absolute;bottom:0;right:0;width:70%;height:3px;background:rgba(255,255,255,.15)"></div>
+            </div>
+            <div style="font-size:9px;font-weight:700;color:var(--text);margin-top:4px">Hades</div>
+            <div style="font-size:8px;color:var(--jio)">30% complete</div>
+          </div>
+        </div>
+        <div style="font-size:11px;color:var(--text3);line-height:1.5;margin-top:10px">Landscape cards with green progress bar. &#x22;Jump back in&#x22; heading.</div>
+      </div>
+
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:16px">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-bottom:12px">Featured (large)</div>
+        <div style="display:flex;gap:8px;overflow:hidden">
+          <div style="flex-shrink:0">
+            <div style="width:130px;height:80px;border-radius:10px;background:linear-gradient(135deg,#1a0820,#3d1050)"></div>
+            <div style="font-size:9px;font-weight:700;color:var(--text);margin-top:4px">Tomb Raider</div>
+            <div style="font-size:8px;color:var(--text3)">Action &#xB7; 4.8&#x2605;</div>
+          </div>
+          <div style="flex-shrink:0;opacity:.55">
+            <div style="width:130px;height:80px;border-radius:10px;background:linear-gradient(135deg,#0d1020,#202040)"></div>
+          </div>
+        </div>
+        <div style="font-size:11px;color:var(--text3);line-height:1.5;margin-top:10px">340&#xD7;200 cards. 2&#x2013;3 visible. For editorially curated spotlights.</div>
+      </div>
+
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:16px">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-bottom:12px">Quick play</div>
+        <div style="display:flex;gap:8px;overflow:hidden">
+          <div style="flex-shrink:0;text-align:center">
+            <div style="width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,#1a0a0a,#3d1515)"></div>
+            <div style="font-size:8px;font-weight:700;color:var(--text);margin-top:4px">Solitaire</div>
+          </div>
+          <div style="flex-shrink:0;text-align:center">
+            <div style="width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,#082d12,#153020)"></div>
+            <div style="font-size:8px;font-weight:700;color:var(--text);margin-top:4px">Sudoku</div>
+          </div>
+          <div style="flex-shrink:0;text-align:center">
+            <div style="width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,#080d2d,#10205a)"></div>
+            <div style="font-size:8px;font-weight:700;color:var(--text);margin-top:4px">2048</div>
+          </div>
+          <div style="flex-shrink:0;text-align:center;opacity:.5">
+            <div style="width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,#1a150a,#302510)"></div>
+          </div>
+        </div>
+        <div style="font-size:11px;color:var(--text3);line-height:1.5;margin-top:10px">Square 96&#xD7;96 cards (--card-sq). More cards visible per screen.</div>
+      </div>
+
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:16px;grid-column:1/-1">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-bottom:12px">Genre tile rail</div>
+        <div style="display:flex;gap:8px;overflow:hidden">
+          <div style="flex-shrink:0;width:80px;height:80px;border-radius:12px;background:linear-gradient(135deg,#2d0808,#5a1010);display:flex;align-items:flex-end;padding:6px 8px">
+            <span style="font-size:10px;font-weight:900;color:#fff">Action</span>
+          </div>
+          <div style="flex-shrink:0;width:80px;height:80px;border-radius:12px;background:linear-gradient(135deg,#080d2d,#10205a);display:flex;align-items:flex-end;padding:6px 8px">
+            <span style="font-size:10px;font-weight:900;color:#fff">Racing</span>
+          </div>
+          <div style="flex-shrink:0;width:80px;height:80px;border-radius:12px;background:linear-gradient(135deg,#082d12,#153020);display:flex;align-items:flex-end;padding:6px 8px">
+            <span style="font-size:10px;font-weight:900;color:#fff">Adventure</span>
+          </div>
+          <div style="flex-shrink:0;width:80px;height:80px;border-radius:12px;background:linear-gradient(135deg,#1a082d,#35104a);display:flex;align-items:flex-end;padding:6px 8px">
+            <span style="font-size:10px;font-weight:900;color:#fff">Puzzle</span>
+          </div>
+          <div style="flex-shrink:0;width:80px;height:80px;border-radius:12px;background:linear-gradient(135deg,#082d2d,#105050);display:flex;align-items:flex-end;padding:6px 8px;opacity:.65">
+            <span style="font-size:10px;font-weight:900;color:#fff">Sports</span>
+          </div>
+        </div>
+        <div style="font-size:11px;color:var(--text3);line-height:1.5;margin-top:10px">Square tiles with art-forward gradient background and white text overlay. Used in Browse and genre discovery surfaces.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 7. SIZES -->
+  <section class="ds-section" id="sizes">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Card sizes follow a named scale across platforms. The same size name resolves to different pixel values on Mobile, Web, and TV via CSS token aliases.</p>
+    <div style="border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;margin-top:24px">
+      <div style="display:grid;grid-template-columns:110px 1fr 1fr 1fr;background:var(--surface-2);border-bottom:1px solid var(--border-subtle)">
+        <div style="padding:10px 14px;font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3)">Size</div>
+        <div style="padding:10px 14px;font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#6ee7b7">Mobile</div>
+        <div style="padding:10px 14px;font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#93c5fd">Web</div>
+        <div style="padding:10px 14px;font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#fbbf24">TV</div>
+      </div>
+      <div style="display:grid;grid-template-columns:110px 1fr 1fr 1fr;border-bottom:1px solid var(--border-subtle);background:var(--surface-1)">
+        <div style="padding:14px;font-size:12px;font-weight:700;color:var(--text);background:var(--surface-2);border-right:1px solid var(--border-subtle);display:flex;align-items:center">Compact</div>
+        <div style="padding:14px;font-size:11px;color:var(--text2);font-family:monospace;display:flex;align-items:center">150&#xD7;96</div>
+        <div style="padding:14px;font-size:11px;color:var(--text2);font-family:monospace;display:flex;align-items:center">180&#xD7;108</div>
+        <div style="padding:14px;font-size:11px;color:var(--text2);font-family:monospace;display:flex;align-items:center">240&#xD7;144</div>
+      </div>
+      <div style="display:grid;grid-template-columns:110px 1fr 1fr 1fr;border-bottom:1px solid var(--border-subtle);background:var(--surface-1)">
+        <div style="padding:14px;font-size:12px;font-weight:700;color:var(--text);background:var(--surface-2);border-right:1px solid var(--border-subtle);display:flex;align-items:center">Standard</div>
+        <div style="padding:14px;font-size:11px;color:var(--text2);font-family:monospace;display:flex;align-items:center">176&#xD7;112</div>
+        <div style="padding:14px;font-size:11px;color:var(--text2);font-family:monospace;display:flex;align-items:center">220&#xD7;138</div>
+        <div style="padding:14px;font-size:11px;color:var(--text2);font-family:monospace;display:flex;align-items:center">320&#xD7;192</div>
+      </div>
+      <div style="display:grid;grid-template-columns:110px 1fr 1fr 1fr;border-bottom:1px solid var(--border-subtle);background:var(--surface-1)">
+        <div style="padding:14px;font-size:12px;font-weight:700;color:var(--text);background:var(--surface-2);border-right:1px solid var(--border-subtle);display:flex;align-items:center">Large</div>
+        <div style="padding:14px;font-size:11px;color:var(--text2);font-family:monospace;display:flex;align-items:center">240&#xD7;150</div>
+        <div style="padding:14px;font-size:11px;color:var(--text2);font-family:monospace;display:flex;align-items:center">300&#xD7;188</div>
+        <div style="padding:14px;font-size:11px;color:var(--text2);font-family:monospace;display:flex;align-items:center">420&#xD7;260</div>
+      </div>
+      <div style="display:grid;grid-template-columns:110px 1fr 1fr 1fr;background:var(--surface-1)">
+        <div style="padding:14px;font-size:12px;font-weight:700;color:var(--text);background:var(--surface-2);border-right:1px solid var(--border-subtle);display:flex;align-items:center">Hero</div>
+        <div style="padding:14px;font-size:11px;color:var(--text2);font-family:monospace;display:flex;align-items:center">272&#xD7;160</div>
+        <div style="padding:14px;font-size:11px;color:var(--text2);font-family:monospace;display:flex;align-items:center">340&#xD7;200</div>
+        <div style="padding:14px;font-size:11px;color:var(--text2);font-family:monospace;display:flex;align-items:center">480&#xD7;300</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. STATES -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Rails respond to five states. Loading and empty states must maintain rail height to prevent layout shift.</p>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:24px;align-items:flex-start">
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+        <div style="width:160px;background:var(--surface-1);border-radius:var(--r4);padding:10px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+            <span style="font-size:9px;font-weight:900;color:var(--text)">Action Picks</span>
+            <span style="font-size:8px;color:var(--jio)">See all</span>
+          </div>
+          <div style="display:flex;gap:6px;overflow:hidden">
+            <div style="width:68px;height:42px;border-radius:8px;background:linear-gradient(135deg,#1a0a0a,#3d1515);flex-shrink:0"></div>
+            <div style="width:68px;height:42px;border-radius:8px;background:linear-gradient(135deg,#0a1020,#101a40);flex-shrink:0"></div>
+          </div>
+        </div>
+        <span style="font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Default</span>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+        <div style="width:160px;background:var(--surface-1);border-radius:var(--r4);padding:10px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+            <div class="skeleton" style="width:80px;height:9px"></div>
+            <div class="skeleton" style="width:28px;height:9px"></div>
+          </div>
+          <div style="display:flex;gap:6px;overflow:hidden">
+            <div class="skeleton" style="width:68px;height:42px;border-radius:8px;flex-shrink:0"></div>
+            <div class="skeleton" style="width:68px;height:42px;border-radius:8px;flex-shrink:0"></div>
+          </div>
+        </div>
+        <span style="font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Loading</span>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+        <div style="width:160px;background:var(--surface-1);border-radius:var(--r4);padding:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:72px">
+          <div style="font-size:20px;margin-bottom:5px">&#x1F3AE;</div>
+          <div style="font-size:9px;font-weight:700;color:var(--text3);text-align:center;line-height:1.4">No games here yet</div>
+        </div>
+        <span style="font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Empty</span>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+        <div style="width:160px;background:var(--surface-1);border-radius:var(--r4);padding:10px;border:1px solid rgba(245,158,11,.2)">
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+            <span style="font-size:9px;font-weight:900;color:var(--text3)">Action Picks</span>
+          </div>
+          <div style="display:flex;gap:6px;overflow:hidden;opacity:.5">
+            <div style="width:68px;height:42px;border-radius:8px;background:var(--surface-3);flex-shrink:0"></div>
+            <div style="width:68px;height:42px;border-radius:8px;background:var(--surface-3);flex-shrink:0"></div>
+          </div>
+          <div style="font-size:8px;color:var(--amber);margin-top:6px">Cached &#xB7; offline</div>
+        </div>
+        <span style="font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Offline</span>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+        <div style="width:160px;background:var(--surface-1);border-radius:var(--r4);padding:10px;border:1px solid rgba(255,71,87,.2)">
+          <div style="margin-bottom:8px">
+            <span style="font-size:9px;font-weight:900;color:var(--text3)">Action Picks</span>
+          </div>
+          <div style="height:42px;display:flex;align-items:center;justify-content:center">
+            <span style="font-size:9px;color:var(--negative)">Failed to load</span>
+          </div>
+          <div style="font-size:8px;color:var(--jio);margin-top:4px;text-align:center;cursor:pointer">Retry</div>
+        </div>
+        <span style="font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Error</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 9. CONTENT GUIDANCE -->
+  <section class="ds-section" id="content">
+    <h2 class="ds-section-title">Content</h2>
+    <p class="ds-section-desc">Rail titles and card copy follow a short, direct style to aid scannability in fast-scrolling contexts.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px">
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:20px">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text);margin-bottom:10px">Rail titles</div>
+        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>2&#x2013;4 words, sentence case</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>&#x22;See all&#x22; &#x2014; never &#x22;View more&#x22; or &#x22;View all items&#x22;</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Describe curation logic: &#x22;Because you love Tomb Raider&#x22;</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Genre tiles: 1&#x2013;2 words, title case (&#x22;Open World&#x22;)</li>
+        </ul>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:20px">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text);margin-bottom:10px">Card copy</div>
+        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Title: max 2 lines, 14px bold</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Meta: 1 line, 12px muted (genre &#xB7; rating)</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Continue: show &#x22;X% complete&#x22; in green</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:14px;position:relative"><span style="position:absolute;left:3px;color:var(--text4)">&#xB7;</span>Empty: no placeholder text inside card art</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. PLATFORM CONSIDERATIONS -->
+  <section class="ds-section" id="platform-considerations">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <p class="ds-section-desc">Each platform has a different interaction model. Scroll affordances and card sizes adapt while the rail structure stays constant.</p>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Touch-swipe, momentum scrolling</li>
+          <li>Hide scrollbar via CSS</li>
+          <li>Gradient edge fade right (40px)</li>
+          <li>16px horizontal gutter padding</li>
+          <li>Partial 4th card visible as affordance</li>
+          <li>Scroll indicator dots optional</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Mouse drag or arrow chevron buttons at edges</li>
+          <li>Wider cards &#x2014; Standard = 220&#xD7;138</li>
+          <li>40px horizontal gutter</li>
+          <li>Hover: scale 1.02, card shadow</li>
+          <li>Chevron nav buttons appear on hover</li>
+          <li>Keyboard Tab + arrow to navigate</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>D-pad focus moves between cards</li>
+          <li>Focused card scales 1.05 with glow</li>
+          <li>No horizontal scroll on Y-axis nav</li>
+          <li>Standard = 320&#xD7;192</li>
+          <li>Focus ring: 3px <code class="ds-code">var(--jio)</code></li>
+          <li>Left/right D-pad wraps to adjacent rail</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. ACCESSIBILITY -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">Rails must be fully navigable by keyboard, screen reader, and remote control. Semantic roles ensure scroll regions and cards are correctly announced.</p>
+    <div class="a11y-grid">
+      <div class="a11y-row">
+        <div class="a11y-label">ARIA roles</div>
+        <div class="a11y-content">
+          <ul>
+            <li><code class="ds-code">role="list"</code> on the card row container</li>
+            <li><code class="ds-code">role="listitem"</code> on each card element</li>
+            <li>Rail section: <code class="ds-code">&lt;section aria-label="[Rail title]"&gt;</code></li>
+          </ul>
+        </div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">See all link</div>
+        <div class="a11y-content">
+          <code class="ds-code">aria-label="See all games in Because you love Tomb Raider"</code> &#x2014; include the rail title so screen reader users have full context without reading the heading first.
+        </div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Keyboard nav</div>
+        <div class="a11y-content">
+          <ul>
+            <li><kbd>Tab</kbd> &#x2014; moves to the first card in the rail</li>
+            <li><kbd>Arrow Left / Right</kbd> &#x2014; navigate between cards within the rail</li>
+            <li><kbd>Arrow Up / Down</kbd> &#x2014; move focus to the next/previous rail section</li>
+            <li><kbd>Enter</kbd> &#x2014; activates the focused card</li>
+          </ul>
+        </div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Focus ring</div>
+        <div class="a11y-content">
+          Visible focus ring on each card: 2px solid <code class="ds-code">var(--jio)</code>, offset 2px. On TV, augmented with glow shadow from <code class="ds-code">--tv-focus-shadow</code> and scale(1.05). Never suppress the focus ring.
+        </div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Reduced motion</div>
+        <div class="a11y-content">
+          Skeleton shimmer animation is paused when <code class="ds-code">prefers-reduced-motion: reduce</code> is set. Scroll snap animation collapses to instant. No auto-advancing carousels or autoplay video.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. RELATED TOKENS -->
+  <section class="ds-section" id="tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-desc">All rail layout values are defined in <code class="ds-code">tokens/tokens.css</code>. Change a token once and all rail instances update automatically.</p>
+    <table class="ds-token-table">
+      <thead>
+        <tr><th>Token</th><th>Value</th><th>Swatch</th><th>Usage</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="ds-token-name">--card-wide-w</span></td>
+          <td><span class="ds-token-value">272px</span></td>
+          <td>&#x2014;</td>
+          <td>Hero / standard landscape card width</td>
+        </tr>
+        <tr>
+          <td><span class="ds-token-name">--card-sq</span></td>
+          <td><span class="ds-token-value">96px</span></td>
+          <td>&#x2014;</td>
+          <td>Square card side (quick play, genre tile)</td>
+        </tr>
+        <tr>
+          <td><span class="ds-token-name">--card-radius-landscape</span></td>
+          <td><span class="ds-token-value">16px</span></td>
+          <td>&#x2014;</td>
+          <td>Border-radius on landscape cards</td>
+        </tr>
+        <tr>
+          <td><span class="ds-token-name">--card-gap</span></td>
+          <td><span class="ds-token-value">12px</span></td>
+          <td>&#x2014;</td>
+          <td>Gap between cards in a rail</td>
+        </tr>
+        <tr>
+          <td><span class="ds-token-name">--rail-gap</span></td>
+          <td><span class="ds-token-value">28px</span></td>
+          <td>&#x2014;</td>
+          <td>Vertical gap between rail sections</td>
+        </tr>
+        <tr>
+          <td><span class="ds-token-name">--gutter</span></td>
+          <td><span class="ds-token-value">20px</span></td>
+          <td>&#x2014;</td>
+          <td>Left/right page padding (Mobile)</td>
+        </tr>
+        <tr>
+          <td><span class="ds-token-name">--card-overlay</span></td>
+          <td><span class="ds-token-value">linear-gradient(0deg, rgba(0,0,0,.7), transparent)</span></td>
+          <td><span class="ds-token-swatch" style="background:linear-gradient(0deg,rgba(0,0,0,.7),transparent)"></span></td>
+          <td>Text scrim on card art</td>
+        </tr>
+        <tr>
+          <td><span class="ds-token-name">--jio</span></td>
+          <td><span class="ds-token-value">#00A859</span></td>
+          <td><span class="ds-token-swatch" style="background:#00A859"></span></td>
+          <td>Progress bar, scroll indicator active dot</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 13. CODE EXAMPLES -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
+    <div class="component-code-block">
+      <div class="component-code-label">Rail — horizontal scroll</div>
+      <pre class="component-code-pre"><code>&lt;section aria-label="Popular in Mumbai"&gt;
+  &lt;div class="rail-header"&gt;
+    &lt;h2 class="rail-title"&gt;Popular in Mumbai&lt;/h2&gt;
+    &lt;button class="btn btn--text btn--xs btn--hug" style="color:var(--jio)"&gt;See all&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="rail-scroll"&gt;
+    &lt;div class="card" style="width:160px;flex-shrink:0"&gt;...&lt;/div&gt;
+    &lt;div class="card" style="width:160px;flex-shrink:0"&gt;...&lt;/div&gt;
+    &lt;div class="card" style="width:160px;flex-shrink:0"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </div>
+    <div class="component-code-block">
+      <div class="component-code-label">Rail — loading skeleton</div>
+      <pre class="component-code-pre"><code>&lt;section aria-label="Loading games" aria-busy="true"&gt;
+  &lt;div class="rail-header"&gt;
+    &lt;div class="skeleton skeleton--text" style="width:160px;height:18px"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="rail-scroll"&gt;
+    &lt;div class="skeleton skeleton--card" style="width:160px;height:90px;flex-shrink:0;border-radius:var(--r4)"&gt;&lt;/div&gt;
+    &lt;div class="skeleton skeleton--card" style="width:160px;height:90px;flex-shrink:0;border-radius:var(--r4)"&gt;&lt;/div&gt;
+    &lt;div class="skeleton skeleton--card" style="width:160px;height:90px;flex-shrink:0;border-radius:var(--r4)"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- 14. CHANGELOG -->
+
+</main>
+<script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script>
+</body>
+</html>

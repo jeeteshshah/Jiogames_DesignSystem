@@ -1,0 +1,577 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll Area — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    .scroll-area {
+      overflow: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+    .scroll-area::-webkit-scrollbar { width: 6px; height: 6px; }
+    .scroll-area::-webkit-scrollbar-track { background: transparent; }
+    .scroll-area::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--pill); }
+    .scroll-area::-webkit-scrollbar-thumb:hover { background: var(--text3); }
+    .scroll-area--x { overflow-x: auto; overflow-y: hidden; }
+    .scroll-area--y { overflow-y: auto; overflow-x: hidden; }
+    .scroll-area--hidden-bar { scrollbar-width: none; }
+    .scroll-area--hidden-bar::-webkit-scrollbar { display: none; }
+
+    /* Fade edge for hidden-bar horizontal scroll */
+    .scroll-fade-wrap {
+      position: relative;
+    }
+    .scroll-fade-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 48px;
+      background: linear-gradient(to right, transparent, var(--bg));
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Demo friend list item */
+    .friend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .friend-item:last-child { border-bottom: none; }
+    .friend-avatar {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700;
+    }
+    .friend-name { font-size: 13px; font-weight: 500; color: var(--text); }
+    .friend-status { font-size: 11px; color: var(--text3); }
+    .friend-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+
+    /* Genre chip for horizontal demo */
+    .genre-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 14px;
+      border-radius: var(--pill);
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .genre-chip--active {
+      background: var(--jio);
+      color: #000;
+    }
+    .genre-chip--muted {
+      background: var(--surface-2);
+      border: 1px solid var(--border-subtle);
+      color: var(--text2);
+    }
+  </style>
+</head><body><main class="ds-content">
+
+  <!-- 1. PAGE HEADER -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Scroll Area</span>
+    </nav>
+    <h1 class="component-page-title">Scroll Area</h1>
+    <p class="component-page-def">Custom scrollable container with styled scrollbars that match the JioGames dark theme. Replaces native scrollbars in panels, sidebars, and horizontal rails.</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile">
+          <span class="component-platform-dot"></span>Mobile
+        </span>
+        <span class="component-platform component-platform--web">
+          <span class="component-platform-dot"></span>Web
+        </span>
+        <span class="component-platform component-platform--tv">
+          <span class="component-platform-dot"></span>TV
+        </span>
+      </div>
+      <span class="component-maturity component-maturity--draft">
+        <span class="component-maturity--dot"></span>Draft
+      </span>
+    </div>
+  </header>
+
+  <!-- 2. HERO -->
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:340px; position:relative;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="flex-direction:row; align-items:flex-start; justify-content:center; gap:40px; padding:40px 32px; flex-wrap:wrap;">
+
+      <!-- Vertical scroll area — friend list -->
+      <div style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);">Vertical — Friend List</div>
+        <div class="scroll-area scroll-area--y"
+             style="height:200px; width:220px; background:var(--surface-1); border:1px solid var(--border-subtle); border-radius:var(--r4);"
+             tabindex="0" aria-label="Friends list, scrollable">
+          <div class="friend-item"><div class="friend-avatar" style="background:rgba(0,168,89,.15);color:var(--jio);">AK</div><div><div class="friend-name">ArjunKing99</div><div class="friend-status">Tomb Raider</div></div><span class="friend-dot" style="background:var(--jio);"></span></div>
+          <div class="friend-item"><div class="friend-avatar" style="background:rgba(99,179,237,.15);color:#63b3ed;">PS</div><div><div class="friend-name">PriyaStar</div><div class="friend-status">In menus</div></div><span class="friend-dot" style="background:var(--jio);"></span></div>
+          <div class="friend-item"><div class="friend-avatar" style="background:rgba(246,173,85,.15);color:#f6ad55;">RV</div><div><div class="friend-name">RocketVeer</div><div class="friend-status">Offline</div></div><span class="friend-dot" style="background:var(--text4);"></span></div>
+          <div class="friend-item"><div class="friend-avatar" style="background:rgba(255,71,87,.15);color:var(--negative);">NM</div><div><div class="friend-name">NightMira</div><div class="friend-status">Vigilante</div></div><span class="friend-dot" style="background:var(--jio);"></span></div>
+          <div class="friend-item"><div class="friend-avatar" style="background:rgba(167,139,250,.15);color:#a78bfa;">KZ</div><div><div class="friend-name">KaranZap</div><div class="friend-status">Offline</div></div><span class="friend-dot" style="background:var(--text4);"></span></div>
+          <div class="friend-item"><div class="friend-avatar" style="background:rgba(0,168,89,.15);color:var(--jio);">SM</div><div><div class="friend-name">SkyMaster</div><div class="friend-status">Yooka-Laylee</div></div><span class="friend-dot" style="background:var(--jio);"></span></div>
+          <div class="friend-item"><div class="friend-avatar" style="background:rgba(99,179,237,.15);color:#63b3ed;">DX</div><div><div class="friend-name">DarkXero</div><div class="friend-status">Offline</div></div><span class="friend-dot" style="background:var(--text4);"></span></div>
+        </div>
+      </div>
+
+      <!-- Horizontal scroll area — genre chips -->
+      <div style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);">Horizontal — Genre Chips</div>
+        <div style="width:260px;">
+          <div class="scroll-area scroll-area--x"
+               style="padding:4px 0 10px;"
+               tabindex="0" aria-label="Genre filter chips, scrollable">
+            <div style="display:flex; gap:8px; width:max-content; padding:0 4px;">
+              <span class="genre-chip genre-chip--active">All</span>
+              <span class="genre-chip genre-chip--muted">Action</span>
+              <span class="genre-chip genre-chip--muted">Adventure</span>
+              <span class="genre-chip genre-chip--muted">Racing</span>
+              <span class="genre-chip genre-chip--muted">RPG</span>
+              <span class="genre-chip genre-chip--muted">Strategy</span>
+              <span class="genre-chip genre-chip--muted">Puzzle</span>
+              <span class="genre-chip genre-chip--muted">Sports</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <p class="component-hero-caption">Scroll Area · Vertical (thin bar on right) and horizontal (bar on bottom) variants</p>
+  </section>
+
+  <!-- 3. INTRO -->
+  <section class="component-intro">
+    <p>Scroll Area is a thin wrapper that replaces the browser's default native scrollbar with a styled alternative that matches the JioGames dark theme. The scrollbar track is transparent; the thumb uses the system border color and rounds to a pill shape. On mobile and TV, the native scrollbar behavior is preserved but the bar is hidden — content communicates scrollability through fade-edge gradients or context.</p>
+    <ul class="component-summary-list">
+      <li><strong>Vertical (--y)</strong> — friend lists, settings panels, notification feeds, sidebars</li>
+      <li><strong>Horizontal (--x)</strong> — genre chip rows, tab lists, filter bars, compact image rails</li>
+      <li><strong>Both axes</strong> — code blocks, map views, large media previews</li>
+      <li><strong>Hidden bar (--hidden-bar)</strong> — game rails, carousels, swipeable card rows where the fade edge signals more content</li>
+    </ul>
+  </section>
+
+  <!-- 4. BEST PRACTICES -->
+  <section class="component-best-practices">
+    <div class="component-bp-card component-bp-card--do">
+      <span class="component-bp-label component-bp-label--do">Do</span>
+      <ul class="component-bp-list">
+        <li>Use <code class="ds-code">--hidden-bar</code> for horizontal game rails — the fade-edge gradient is a more native signal</li>
+        <li>Add <code class="ds-code">tabindex="0"</code> so keyboard users can focus and scroll the region</li>
+        <li>Add <code class="ds-code">aria-label</code> describing what the region contains and that it is scrollable</li>
+        <li>Set an explicit height on vertical scroll areas — never let them grow unbounded</li>
+        <li>Use <code class="ds-code">-webkit-overflow-scrolling: touch</code> for momentum scrolling on iOS</li>
+      </ul>
+    </div>
+    <div class="component-bp-card component-bp-card--dont">
+      <span class="component-bp-label component-bp-label--dont">Don't</span>
+      <ul class="component-bp-list">
+        <li>Show a thin scrollbar on horizontal game rails — the bar obscures art; use hidden bar instead</li>
+        <li>Nest scroll areas — inner and outer both scrolling creates a scroll trap</li>
+        <li>Use scroll area on TV — replace with D-pad pagination or carousel navigation</li>
+        <li>Rely on scrollbar visibility alone to indicate more content — always pair with a fade edge or "scroll to see more" label</li>
+        <li>Override scrollbar color to a brand-green thumb — the muted border color is intentional; it should not compete with content</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. ANATOMY -->
+  <div class="ds-anatomy" style="margin:40px 0;">
+    <div class="ds-anatomy-preview">
+      <div style="position:relative; width:200px;">
+        <!-- Callout 1 — wrapper -->
+        <span style="position:absolute;top:-20px;left:50%;transform:translateX(-50%);"><span class="ds-anatomy-callout-num">1</span></span>
+        <div class="scroll-area scroll-area--y"
+             style="height:160px; background:var(--surface-1); border:1px solid var(--border-subtle); border-radius:var(--r4); position:relative;">
+          <!-- Callout 2 — scrollbar thumb (right edge) -->
+          <span style="position:absolute;top:50%;right:-20px;transform:translateY(-50%);"><span class="ds-anatomy-callout-num">2</span></span>
+          <div class="friend-item"><div class="friend-avatar" style="background:rgba(0,168,89,.15);color:var(--jio);">AK</div><div><div class="friend-name">ArjunKing99</div><div class="friend-status">Tomb Raider</div></div></div>
+          <div class="friend-item"><div class="friend-avatar" style="background:rgba(99,179,237,.15);color:#63b3ed;">PS</div><div><div class="friend-name">PriyaStar</div><div class="friend-status">In menus</div></div></div>
+          <div class="friend-item"><div class="friend-avatar" style="background:rgba(246,173,85,.15);color:#f6ad55;">RV</div><div><div class="friend-name">RocketVeer</div><div class="friend-status">Offline</div></div></div>
+          <div class="friend-item"><div class="friend-avatar" style="background:rgba(255,71,87,.15);color:var(--negative);">NM</div><div><div class="friend-name">NightMira</div><div class="friend-status">Vigilante</div></div></div>
+        </div>
+        <!-- Callout 3 — content area -->
+        <span style="position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);"><span class="ds-anatomy-callout-num">3</span></span>
+      </div>
+    </div>
+    <ol class="ds-anatomy-list">
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">1</span>
+        <div>
+          <div class="ds-anatomy-label">Scroll container <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">The wrapper element with overflow set. Must have an explicit height (vertical) or width (horizontal). Use .scroll-area as the base class plus a direction modifier.</div>
+          <code class="ds-anatomy-token ds-code">overflow: auto; scrollbar-width: thin</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">2</span>
+        <div>
+          <div class="ds-anatomy-label">Scrollbar thumb <span class="ds-anatomy-optional">Optional</span></div>
+          <div class="ds-anatomy-desc">6px wide, pill-shaped, --border color. Brightens on hover to --text3. Hidden entirely with --hidden-bar modifier. Transparent track — never shows a track background color.</div>
+          <code class="ds-anatomy-token ds-code">width:6px; background:var(--border); border-radius:var(--pill)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">3</span>
+        <div>
+          <div class="ds-anatomy-label">Scrollable content <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Any content placed inside the scroll area. For horizontal rails, use a flex row with width: max-content. For vertical panels, use a flex column or block flow.</div>
+          <code class="ds-anatomy-token ds-code">width: max-content (horizontal) | height: auto (vertical)</code>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- 6. VARIANTS -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">All variants share the same base .scroll-area class. Modifiers control axis and scrollbar visibility.</p>
+
+    <div style="display:flex; flex-direction:column; gap:32px;">
+
+      <!-- Vertical -->
+      <div>
+        <div class="ds-sub-label" style="margin-bottom:12px;">Vertical — .scroll-area.scroll-area--y</div>
+        <div class="ds-demo ds-demo--dark">
+          <div style="display:flex; gap:32px; flex-wrap:wrap; align-items:flex-start;">
+            <div>
+              <div class="scroll-area scroll-area--y"
+                   style="height:160px; width:220px; background:var(--surface-1); border:1px solid var(--border-subtle); border-radius:var(--r4);"
+                   tabindex="0" aria-label="Scrollable panel">
+                <div class="friend-item"><div class="friend-avatar" style="background:rgba(0,168,89,.15);color:var(--jio);">AK</div><div><div class="friend-name">ArjunKing99</div><div class="friend-status">Tomb Raider</div></div><span class="friend-dot" style="background:var(--jio);margin-left:auto;"></span></div>
+                <div class="friend-item"><div class="friend-avatar" style="background:rgba(99,179,237,.15);color:#63b3ed;">PS</div><div><div class="friend-name">PriyaStar</div><div class="friend-status">In menus</div></div><span class="friend-dot" style="background:var(--jio);margin-left:auto;"></span></div>
+                <div class="friend-item"><div class="friend-avatar" style="background:rgba(246,173,85,.15);color:#f6ad55;">RV</div><div><div class="friend-name">RocketVeer</div><div class="friend-status">Offline</div></div><span class="friend-dot" style="background:var(--text4);margin-left:auto;"></span></div>
+                <div class="friend-item"><div class="friend-avatar" style="background:rgba(255,71,87,.15);color:var(--negative);">NM</div><div><div class="friend-name">NightMira</div><div class="friend-status">Vigilante</div></div><span class="friend-dot" style="background:var(--jio);margin-left:auto;"></span></div>
+                <div class="friend-item"><div class="friend-avatar" style="background:rgba(167,139,250,.15);color:#a78bfa;">KZ</div><div><div class="friend-name">KaranZap</div><div class="friend-status">Offline</div></div><span class="friend-dot" style="background:var(--text4);margin-left:auto;"></span></div>
+              </div>
+              <div style="font-size:11px;color:var(--text3);margin-top:8px;">Thin bar · sidebar / panel</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Horizontal -->
+      <div>
+        <div class="ds-sub-label" style="margin-bottom:12px;">Horizontal — .scroll-area.scroll-area--x</div>
+        <div class="ds-demo ds-demo--dark">
+          <div class="scroll-area scroll-area--x"
+               style="padding-bottom:8px;"
+               tabindex="0" aria-label="Genre filter chips, scrollable">
+            <div style="display:flex; gap:8px; width:max-content; padding:2px 2px 4px;">
+              <span class="genre-chip genre-chip--active">All</span>
+              <span class="genre-chip genre-chip--muted">Action</span>
+              <span class="genre-chip genre-chip--muted">Adventure</span>
+              <span class="genre-chip genre-chip--muted">Racing</span>
+              <span class="genre-chip genre-chip--muted">RPG</span>
+              <span class="genre-chip genre-chip--muted">Strategy</span>
+              <span class="genre-chip genre-chip--muted">Puzzle</span>
+              <span class="genre-chip genre-chip--muted">Sports</span>
+              <span class="genre-chip genre-chip--muted">Shooter</span>
+              <span class="genre-chip genre-chip--muted">Indie</span>
+            </div>
+          </div>
+          <div style="font-size:11px;color:var(--text3);margin-top:8px;">Thin bar below · filter chips / tab rows</div>
+        </div>
+      </div>
+
+      <!-- Both axes -->
+      <div>
+        <div class="ds-sub-label" style="margin-bottom:12px;">Both axes — .scroll-area (no modifier)</div>
+        <div class="ds-demo ds-demo--dark">
+          <div class="scroll-area"
+               style="height:100px; width:100%; max-width:400px; background:var(--surface-1); border:1px solid var(--border-subtle); border-radius:var(--r4); padding:12px 14px;"
+               tabindex="0" aria-label="Code block, scrollable">
+            <pre style="margin:0;font-family:monospace;font-size:12px;color:var(--code-green);white-space:pre;width:max-content;">function initLeaderboard(gameId, limit = 10) {
+  return fetch('/api/leaderboard?game=' + gameId + '&limit=' + limit)
+    .then(r =&gt; r.json())
+    .then(data =&gt; renderTable(data.entries));
+}</pre>
+          </div>
+          <div style="font-size:11px;color:var(--text3);margin-top:8px;">Both bars · code blocks / large tables</div>
+        </div>
+      </div>
+
+      <!-- Hidden bar -->
+      <div>
+        <div class="ds-sub-label" style="margin-bottom:12px;">Hidden bar — .scroll-area.scroll-area--x.scroll-area--hidden-bar</div>
+        <div class="ds-demo ds-demo--dark">
+          <div class="scroll-fade-wrap">
+            <div class="scroll-area scroll-area--x scroll-area--hidden-bar"
+                 tabindex="0" aria-label="Game cards rail, scrollable">
+              <div style="display:flex; gap:10px; width:max-content; padding:4px 2px 4px;">
+                <div style="width:130px;height:80px;border-radius:10px;background:linear-gradient(135deg,#0d1f0d,#0a180a);border:1px solid rgba(0,168,89,.15);flex-shrink:0;"></div>
+                <div style="width:130px;height:80px;border-radius:10px;background:linear-gradient(135deg,#1a1020,#100a18);border:1px solid rgba(167,139,250,.15);flex-shrink:0;"></div>
+                <div style="width:130px;height:80px;border-radius:10px;background:linear-gradient(135deg,#200a0a,#180808);border:1px solid rgba(255,71,87,.15);flex-shrink:0;"></div>
+                <div style="width:130px;height:80px;border-radius:10px;background:linear-gradient(135deg,#10181a,#080e10);border:1px solid rgba(99,179,237,.15);flex-shrink:0;"></div>
+                <div style="width:130px;height:80px;border-radius:10px;background:linear-gradient(135deg,#1a1500,#100e00);border:1px solid rgba(246,173,85,.15);flex-shrink:0;"></div>
+              </div>
+            </div>
+          </div>
+          <div style="font-size:11px;color:var(--text3);margin-top:8px;">No scrollbar · fade-edge signals more content · game rails / carousels</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 7. SIZES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Only the scrollbar thumb has a fixed size. The container dimensions are always application-defined — the scroll area adapts to whatever size you give it.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Thin (default)</th>
+          <th>None (hidden)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Scrollbar width (vertical)</td><td><code class="ds-code">6px</code></td><td><code class="ds-code">none</code></td></tr>
+        <tr><td>Scrollbar height (horizontal)</td><td><code class="ds-code">6px</code></td><td><code class="ds-code">none</code></td></tr>
+        <tr><td>Thumb color</td><td><code class="ds-code">var(--border)</code></td><td>N/A</td></tr>
+        <tr><td>Thumb hover color</td><td><code class="ds-code">var(--text3)</code></td><td>N/A</td></tr>
+        <tr><td>Container height/width</td><td colspan="2">Set by the consuming component — not defined by Scroll Area</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 8. STATES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">The scrollbar has three visual states. The container itself has no additional states beyond what the browser provides.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; gap:40px; flex-wrap:wrap; align-items:flex-start;">
+
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:center;">
+          <div class="scroll-area scroll-area--y"
+               style="height:100px;width:180px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);"
+               tabindex="0">
+            <div style="height:200px;display:flex;flex-direction:column;gap:8px;padding:12px;">
+              <div style="height:12px;background:var(--surface-3);border-radius:4px;"></div>
+              <div style="height:12px;background:var(--surface-3);border-radius:4px;width:80%;"></div>
+              <div style="height:12px;background:var(--surface-3);border-radius:4px;width:60%;"></div>
+              <div style="height:12px;background:var(--surface-3);border-radius:4px;"></div>
+            </div>
+          </div>
+          <span style="font-size:11px;color:var(--text3);">Idle — thin, muted thumb</span>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:center;">
+          <div style="height:100px;width:180px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;position:relative;">
+            <div style="height:200px;display:flex;flex-direction:column;gap:8px;padding:12px;">
+              <div style="height:12px;background:var(--surface-3);border-radius:4px;"></div>
+              <div style="height:12px;background:var(--surface-3);border-radius:4px;width:80%;"></div>
+              <div style="height:12px;background:var(--surface-3);border-radius:4px;width:60%;"></div>
+              <div style="height:12px;background:var(--surface-3);border-radius:4px;"></div>
+            </div>
+            <!-- Simulated scrollbar thumb scrolling state -->
+            <div style="position:absolute;right:2px;top:20px;width:6px;height:36px;border-radius:var(--pill);background:var(--text3);"></div>
+          </div>
+          <span style="font-size:11px;color:var(--text3);">Scrolling — thumb visible, positioned</span>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:center;">
+          <div style="height:100px;width:180px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;position:relative;">
+            <div style="height:200px;display:flex;flex-direction:column;gap:8px;padding:12px;">
+              <div style="height:12px;background:var(--surface-3);border-radius:4px;"></div>
+              <div style="height:12px;background:var(--surface-3);border-radius:4px;width:80%;"></div>
+              <div style="height:12px;background:var(--surface-3);border-radius:4px;width:60%;"></div>
+              <div style="height:12px;background:var(--surface-3);border-radius:4px;"></div>
+            </div>
+            <!-- Simulated scrollbar thumb hover state — brighter -->
+            <div style="position:absolute;right:2px;top:20px;width:6px;height:36px;border-radius:var(--pill);background:var(--text2);"></div>
+          </div>
+          <span style="font-size:11px;color:var(--text3);">Hover on thumb — brighter color</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. CONTENT GUIDANCE -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Horizontal rails</div>
+        <ul>
+          <li>Always use <code class="ds-code">--hidden-bar</code> — the scrollbar competes with card art</li>
+          <li>Pair with a right-side fade-edge gradient to signal overflowing content</li>
+          <li>The fade color must match the background behind the rail exactly</li>
+          <li>Never show scroll affordance text ("Scroll to see more") — the fade is sufficient</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Vertical panels</div>
+        <ul>
+          <li>Use the thin bar (default) so users know the panel is scrollable</li>
+          <li>Set a max-height relative to the viewport — avoid panels taller than 80vh</li>
+          <li>Content inside must never be wider than the panel — prevents unwanted horizontal scroll</li>
+          <li>Add <code class="ds-code">padding-right: 8px</code> to content so text doesn't sit under the scrollbar thumb</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. PLATFORM CONSIDERATIONS -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Use native momentum scrolling: <code class="ds-code">-webkit-overflow-scrolling: touch</code></li>
+          <li>Always hide scrollbars on mobile — native touch scroll is self-evident</li>
+          <li>Use fade edges for horizontal rails to indicate off-screen content</li>
+          <li>Ensure scroll containers have a minimum swipe target of 44px height</li>
+          <li>Avoid nested scrollable regions — creates scroll trap UX issues</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Show the thin styled scrollbar for vertical panels — users expect mouse-draggable thumb</li>
+          <li>Hide bar for horizontal chip rows and rails — use fade edge instead</li>
+          <li>Ensure the container has <code class="ds-code">tabindex="0"</code> and keyboard scroll (arrow keys)</li>
+          <li>Test in Firefox — <code class="ds-code">scrollbar-width: thin</code> controls both width and color there</li>
+          <li>Do not auto-scroll on page load — respect user's scroll position</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>Do not use Scroll Area on TV — use D-pad pagination or carousel instead</li>
+          <li>Scrollbars are invisible at 3m viewing distance and non-interactive with remote</li>
+          <li>Replace vertical lists with paginated grids</li>
+          <li>Replace horizontal chip rows with a focused tab component</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. ACCESSIBILITY -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Requirement</th><th>Implementation</th><th>Guidance</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Keyboard focus</td><td><code class="ds-code">tabindex="0"</code></td><td>All scroll regions must be reachable by Tab key. Once focused, arrow keys scroll the container.</td></tr>
+        <tr><td>Region label</td><td><code class="ds-code">aria-label</code></td><td>Describe the content and scrollability: "Friend list, scrollable". Screen readers announce this when the user tabs into the region.</td></tr>
+        <tr><td>Content semantics</td><td>Semantic HTML inside</td><td>Scroll Area is a layout wrapper only — the content inside must use correct semantic elements (ul/li, table, etc).</td></tr>
+        <tr><td>Color contrast</td><td>Thumb color</td><td>The scrollbar thumb uses --border which meets AA contrast against the transparent track. Do not lighten further.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 12. RELATED TOKENS -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Token</th><th>Value</th><th>Usage</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code class="ds-code">--border</code></td><td><code class="ds-code">rgba(255,255,255,.12)</code></td><td>Scrollbar thumb default color</td></tr>
+        <tr><td><code class="ds-code">--text3</code></td><td><code class="ds-code">rgba(244,242,238,.32)</code></td><td>Scrollbar thumb hover color</td></tr>
+        <tr><td><code class="ds-code">--pill</code></td><td><code class="ds-code">100px</code></td><td>Scrollbar thumb border-radius</td></tr>
+        <tr><td><code class="ds-code">--bg</code></td><td><code class="ds-code">#080a10</code></td><td>Fade-edge gradient end color (must match surrounding background)</td></tr>
+        <tr><td><code class="ds-code">--r4</code></td><td><code class="ds-code">—</code></td><td>Scroll container border-radius for card-like panels</td></tr>
+        <tr><td><code class="ds-code">--border-subtle</code></td><td><code class="ds-code">rgba(255,255,255,.08)</code></td><td>Container border for framed scroll areas</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CODE EXAMPLES -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Vertical panel — friend list</div>
+      <pre class="component-code-pre"><code>&lt;div class="scroll-area scroll-area--y"
+     style="height: 300px;"
+     tabindex="0"
+     aria-label="Friends list, scrollable"&gt;
+  &lt;ul&gt;
+    &lt;li&gt;ArjunKing99 — Tomb Raider&lt;/li&gt;
+    &lt;li&gt;PriyaStar — In menus&lt;/li&gt;
+    &lt;!-- more items --&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Horizontal rail — genre chips</div>
+      <pre class="component-code-pre"><code>&lt;div class="scroll-area scroll-area--x"
+     tabindex="0"
+     aria-label="Genre filter chips, scrollable"&gt;
+  &lt;div style="display:flex; gap:8px; width:max-content;"&gt;
+    &lt;button class="genre-chip genre-chip--active"&gt;All&lt;/button&gt;
+    &lt;button class="genre-chip genre-chip--muted"&gt;Action&lt;/button&gt;
+    &lt;button class="genre-chip genre-chip--muted"&gt;Adventure&lt;/button&gt;
+    &lt;!-- more chips --&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Hidden bar with fade edge — game rail</div>
+      <pre class="component-code-pre"><code>&lt;!-- Wrap in a position:relative container for the fade --&gt;
+&lt;div class="scroll-fade-wrap"&gt;
+  &lt;div class="scroll-area scroll-area--x scroll-area--hidden-bar"
+       tabindex="0"
+       aria-label="Featured games, scrollable"&gt;
+    &lt;div style="display:flex; gap:10px; width:max-content;"&gt;
+      &lt;!-- game cards --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+.scroll-fade-wrap { position: relative; }
+.scroll-fade-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: 48px;
+  background: linear-gradient(to right, transparent, var(--bg));
+  pointer-events: none;
+  z-index: 1;
+}
+&lt;/style&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- 13. CHANGELOG -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Changelog</h2>
+    <div class="component-changelog">
+      <div class="component-changelog-entry">
+        <span class="component-changelog-version">v0.1</span>
+        <span class="component-changelog-date">Jun 2026</span>
+        <p class="component-changelog-desc">Initial draft. Covers vertical, horizontal, both-axes, and hidden-bar variants. Includes fade-edge pattern for game rails, keyboard accessibility guidance, and platform notes.</p>
+      </div>
+    </div>
+  </section>
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

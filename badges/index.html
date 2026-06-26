@@ -1,0 +1,528 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Badges — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    @keyframes pulse-live {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .4; }
+    }
+    .badge-live-pulse { animation: pulse-live 1.4s ease-in-out infinite; }
+  </style>
+</head><body><main class="ds-content">
+
+  <!-- 1. PAGE HEADER -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Badges</span>
+    </nav>
+    <h1 class="component-page-title">Badges</h1>
+    <p class="component-page-def">Badges are compact indicators that signal status, counts, categories, or premium access.</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile">
+          <span class="component-platform-dot"></span>Mobile
+        </span>
+        <span class="component-platform component-platform--web">
+          <span class="component-platform-dot"></span>Web
+        </span>
+        <span class="component-platform component-platform--tv">
+          <span class="component-platform-dot"></span>TV
+        </span>
+      </div>
+      <span class="component-maturity component-maturity--stable">
+        <span class="component-maturity--dot"></span>Stable
+      </span>
+    </div>
+  </header>
+
+  <!-- 2. HERO -->
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:340px; position:relative; overflow:hidden;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="display:flex; align-items:center; justify-content:center; gap:40px; flex-wrap:wrap; padding:48px 32px;">
+
+      <!-- Column 1: Game card with NEW badge overlay -->
+      <div style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+        <div style="position:relative; display:inline-block;">
+          <div style="width:120px; height:80px; border-radius:12px; background:linear-gradient(135deg,#1a2a1a 0%,#0d2010 40%,#0a1a0a 100%); border:1px solid rgba(0,168,89,.2); overflow:hidden; position:relative;">
+            <div style="position:absolute; inset:0; background:linear-gradient(160deg, rgba(0,168,89,.08) 0%, transparent 60%);"></div>
+            <div style="position:absolute; bottom:6px; left:8px; right:8px; height:2px; background:rgba(0,168,89,.15); border-radius:1px;"></div>
+          </div>
+          <!-- NEW badge overlaid top-left -->
+          <span style="position:absolute; top:8px; left:8px; display:inline-flex; align-items:center; justify-content:center; border-radius:100px; font-size:9px; font-weight:900; letter-spacing:.6px; text-transform:uppercase; white-space:nowrap; line-height:1; background:rgba(0,168,89,.15); color:#00A859; border:1px solid rgba(0,168,89,.3); padding:3px 7px;">NEW</span>
+          <!-- Rating overlay bottom-right -->
+          <span style="position:absolute; bottom:6px; right:6px; display:inline-flex; align-items:center; gap:3px; border-radius:100px; font-size:9px; font-weight:900; letter-spacing:.4px; white-space:nowrap; line-height:1; background:rgba(0,0,0,.7); color:#F4F2EE; padding:3px 6px;">4.9 ★</span>
+        </div>
+        <span style="font-size:11px; color:rgba(244,242,238,.45); letter-spacing:.4px;">Game card</span>
+      </div>
+
+      <!-- Column 2: Notification bell with count badge -->
+      <div style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+        <div style="position:relative; display:inline-block;">
+          <div style="width:44px; height:44px; border-radius:50%; background:#161A24; border:1px solid rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center; font-size:20px;">🔔</div>
+          <span style="position:absolute; top:-4px; right:-4px; display:inline-flex; align-items:center; justify-content:center; border-radius:100px; font-size:10px; font-weight:900; letter-spacing:.4px; text-transform:uppercase; white-space:nowrap; line-height:1; background:#FF4757; color:#fff; min-width:18px; height:18px; padding:0 5px;">3</span>
+        </div>
+        <span style="font-size:11px; color:rgba(244,242,238,.45); letter-spacing:.4px;">Count badge</span>
+      </div>
+
+      <!-- Column 3: LIVE + dot + PREMIUM stacked -->
+      <div style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:8px;">
+          <span class="badge-live-pulse" style="display:inline-flex; align-items:center; justify-content:center; border-radius:100px; font-size:9px; font-weight:900; letter-spacing:.6px; text-transform:uppercase; white-space:nowrap; line-height:1; background:#FF4757; color:#fff; padding:3px 7px;">LIVE</span>
+          <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#00A859;"></span>
+          <span style="display:inline-flex; align-items:center; justify-content:center; border-radius:100px; font-size:9px; font-weight:900; letter-spacing:.6px; text-transform:uppercase; white-space:nowrap; line-height:1; background:linear-gradient(135deg,#00cc65,#00E870); color:#000; padding:3px 7px;">PREMIUM</span>
+        </div>
+        <span style="font-size:11px; color:rgba(244,242,238,.45); letter-spacing:.4px;">Status variants</span>
+      </div>
+
+    </div>
+    <p class="component-hero-caption">Badges in context · NEW, LIVE, Count, Status dot, Premium</p>
+  </section>
+
+  <!-- 3. INTRO -->
+  <section class="component-intro">
+    <p>Badges are non-interactive, overlaid indicators that communicate status, counts, or categories without interrupting a user's flow. They sit on top of or alongside other elements — game cards, icons, rail items — and convey information at a glance. Because they are purely informational, badges should never be tappable. For interactive labels, use Chips instead.</p>
+    <ul class="component-summary-list">
+      <li><strong>Informational</strong> — NEW, LIVE, SALE, HOT signal freshness or real-time state</li>
+      <li><strong>Count / notification</strong> — numeric indicators on icons or avatars showing unread items</li>
+      <li><strong>Status dot</strong> — minimal single-pixel presence indicator (online, active, in-game)</li>
+      <li><strong>Premium / category</strong> — gradient or glass-style labels marking pass access or genre tags</li>
+    </ul>
+  </section>
+
+  <!-- 4. BEST PRACTICES -->
+  <section class="component-best-practices">
+    <div class="component-bp-card component-bp-card--do">
+      <span class="component-bp-label component-bp-label--do">Do</span>
+      <ul class="component-bp-list">
+        <li>Keep informational labels to 4 characters or fewer — NEW, LIVE, HOT, TOP, SALE</li>
+        <li>Pair a status dot with a visible text label or icon; never rely on color alone to convey meaning</li>
+        <li>Display "99+" when a count exceeds 99 — prevent layout overflow and cognitive overload</li>
+        <li>Animate the LIVE badge with the pulse animation so users register real-time state at a glance</li>
+        <li>Provide a meaningful aria-label on every badge for screen-reader users</li>
+      </ul>
+    </div>
+    <div class="component-bp-card component-bp-card--dont">
+      <span class="component-bp-label component-bp-label--dont">Don't</span>
+      <ul class="component-bp-list">
+        <li>Use badges as interactive controls — they are not buttons; use Chips for tappable labels</li>
+        <li>Exceed 4 characters in informational badges — "NEWEST" or "STREAMING" break the pill shape</li>
+        <li>Use color as the sole status signal — always add an icon or label alongside any colored dot</li>
+        <li>Stack more than 2 badges in the same corner of a card — occludes art and creates visual noise</li>
+        <li>Show a count badge with value "0" — hide the badge entirely when there is nothing to report</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. ANATOMY -->
+  <div class="ds-anatomy">
+    <div class="ds-anatomy-preview">
+      <div class="ds-anatomy-component" style="position:relative; display:inline-flex; align-items:center; justify-content:center;">
+        <!-- Anatomy badge: NEW -->
+        <span style="display:inline-flex; align-items:center; justify-content:center; border-radius:100px; font-size:9px; font-weight:900; letter-spacing:.6px; text-transform:uppercase; white-space:nowrap; line-height:1; background:rgba(0,168,89,.15); color:#00A859; border:1px solid rgba(0,168,89,.3); padding:3px 7px; position:relative;">
+          NEW
+        </span>
+        <!-- Callout dots -->
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:-18px; left:50%; transform:translateX(-50%);">
+          <span class="ds-anatomy-callout-num">1</span>
+        </span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; bottom:-18px; left:50%; transform:translateX(-50%);">
+          <span class="ds-anatomy-callout-num">2</span>
+        </span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:50%; right:-28px; transform:translateY(-50%);">
+          <span class="ds-anatomy-callout-num">3</span>
+        </span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:50%; left:-28px; transform:translateY(-50%);">
+          <span class="ds-anatomy-callout-num">4</span>
+        </span>
+      </div>
+    </div>
+    <ol class="ds-anatomy-list">
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">1</span>
+        <div>
+          <div class="ds-anatomy-label">Container shape <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Pill (border-radius: 100px) for informational and count variants. Dot (border-radius: 50%) for status indicator. Shape must remain consistent per variant across all platforms.</div>
+          <code class="ds-anatomy-token ds-code">border-radius: var(--pill)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">2</span>
+        <div>
+          <div class="ds-anatomy-label">Label text or count <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Uppercase text for informational badges (max 4 chars). Numeric string for count badges. No text for dot badges.</div>
+          <code class="ds-anatomy-token ds-code">font-size: 9px; font-weight: 900; text-transform: uppercase</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">3</span>
+        <div>
+          <div class="ds-anatomy-label">Dot indicator <span class="ds-anatomy-optional">Optional</span></div>
+          <div class="ds-anatomy-desc">Used only in the dot/status variant. An 8×8px filled circle — no text, no border. Appears standalone or alongside a label in a list row.</div>
+          <code class="ds-anatomy-token ds-code">width: 8px; height: 8px; border-radius: 50%</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">4</span>
+        <div>
+          <div class="ds-anatomy-label">Color fill <span class="ds-anatomy-optional">Optional</span></div>
+          <div class="ds-anatomy-desc">Semantic background color carries meaning. Green for positive/new, red for live/alert, gradient for premium, glass for genre. Always paired with text or aria-label — never color alone.</div>
+          <code class="ds-anatomy-token ds-code">background: var(--jio-soft) | var(--negative) | var(--premium-gradient)</code>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- 6. VARIANTS -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">All badge variants share the same base pill shape. Each variant has a fixed semantic meaning — do not repurpose colors across variant types.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:32px; align-items:flex-end; padding:8px 0;">
+
+        <!-- NEW / Informational -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <span style="display:inline-flex; align-items:center; justify-content:center; border-radius:100px; font-size:9px; font-weight:900; letter-spacing:.6px; text-transform:uppercase; white-space:nowrap; line-height:1; background:rgba(0,168,89,.15); color:#00A859; border:1px solid rgba(0,168,89,.3); padding:3px 7px;">NEW</span>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Informational</span>
+        </div>
+
+        <!-- LIVE -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <span class="badge-live-pulse" style="display:inline-flex; align-items:center; justify-content:center; border-radius:100px; font-size:9px; font-weight:900; letter-spacing:.6px; text-transform:uppercase; white-space:nowrap; line-height:1; background:#FF4757; color:#fff; padding:3px 7px;">LIVE</span>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">LIVE</span>
+        </div>
+
+        <!-- Count -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <span style="display:inline-flex; align-items:center; justify-content:center; border-radius:100px; font-size:10px; font-weight:900; letter-spacing:.4px; white-space:nowrap; line-height:1; background:#FF4757; color:#fff; min-width:18px; height:18px; padding:0 5px;">3</span>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Count</span>
+        </div>
+
+        <!-- Dot -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#00A859;"></span>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Status dot</span>
+        </div>
+
+        <!-- Premium -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <span style="display:inline-flex; align-items:center; justify-content:center; border-radius:100px; font-size:9px; font-weight:900; letter-spacing:.6px; text-transform:uppercase; white-space:nowrap; line-height:1; background:linear-gradient(135deg,#00cc65,#00E870); color:#000; padding:3px 7px;">PREMIUM</span>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Premium</span>
+        </div>
+
+        <!-- Genre tag -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <span style="display:inline-flex; align-items:center; justify-content:center; border-radius:100px; font-size:10px; font-weight:700; white-space:nowrap; line-height:1; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.1); color:rgba(244,242,238,.7); padding:3px 8px;">Action</span>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Genre tag</span>
+        </div>
+
+        <!-- Overflow -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <span style="display:inline-flex; align-items:center; justify-content:center; border-radius:100px; font-size:10px; font-weight:900; letter-spacing:.4px; white-space:nowrap; line-height:1; background:#FF4757; color:#fff; min-width:18px; height:18px; padding:0 5px;">99+</span>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Overflow</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. SIZES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Badge size scales with context. Most surfaces use the default size. Compact fits count dots on dense icon rows. Large works for hero labels on a game detail page. TV scale ensures legibility at 3-metre viewing distance.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:32px; align-items:flex-end; padding:8px 0;">
+
+        <!-- Compact -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <span style="display:inline-flex; align-items:center; justify-content:center; border-radius:100px; font-size:8px; font-weight:900; letter-spacing:.5px; text-transform:uppercase; white-space:nowrap; line-height:1; background:rgba(0,168,89,.15); color:#00A859; border:1px solid rgba(0,168,89,.3); padding:2px 5px;">NEW</span>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Compact<br><span style="font-size:10px; color:rgba(244,242,238,.3);">2px 5px · 8px</span></span>
+        </div>
+
+        <!-- Default -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <span style="display:inline-flex; align-items:center; justify-content:center; border-radius:100px; font-size:9px; font-weight:900; letter-spacing:.6px; text-transform:uppercase; white-space:nowrap; line-height:1; background:rgba(0,168,89,.15); color:#00A859; border:1px solid rgba(0,168,89,.3); padding:3px 7px;">NEW</span>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Default<br><span style="font-size:10px; color:rgba(244,242,238,.3);">3px 7px · 9px</span></span>
+        </div>
+
+        <!-- Large -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <span style="display:inline-flex; align-items:center; justify-content:center; border-radius:100px; font-size:10px; font-weight:900; letter-spacing:.6px; text-transform:uppercase; white-space:nowrap; line-height:1; background:rgba(0,168,89,.15); color:#00A859; border:1px solid rgba(0,168,89,.3); padding:4px 10px;">NEW</span>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Large<br><span style="font-size:10px; color:rgba(244,242,238,.3);">4px 10px · 10px</span></span>
+        </div>
+
+        <!-- TV -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <span style="display:inline-flex; align-items:center; justify-content:center; border-radius:100px; font-size:11px; font-weight:900; letter-spacing:.7px; text-transform:uppercase; white-space:nowrap; line-height:1; background:rgba(0,168,89,.15); color:#00A859; border:1px solid rgba(0,168,89,.3); padding:6px 14px;">NEW</span>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">TV scale<br><span style="font-size:10px; color:rgba(244,242,238,.3);">6px 14px · 11px</span></span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. STATES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Badges are stateless by nature — they don't have hover, focus, or pressed states. The only behavioral variation is the animated pulse for LIVE, overflow truncation for count, and inactive dimming for status dots.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:32px; align-items:flex-end; padding:8px 0;">
+
+        <!-- Default -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <span style="display:inline-flex; align-items:center; justify-content:center; border-radius:100px; font-size:9px; font-weight:900; letter-spacing:.6px; text-transform:uppercase; white-space:nowrap; line-height:1; background:rgba(0,168,89,.15); color:#00A859; border:1px solid rgba(0,168,89,.3); padding:3px 7px;">NEW</span>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Default</span>
+        </div>
+
+        <!-- Animated pulse -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <span class="badge-live-pulse" style="display:inline-flex; align-items:center; justify-content:center; border-radius:100px; font-size:9px; font-weight:900; letter-spacing:.6px; text-transform:uppercase; white-space:nowrap; line-height:1; background:#FF4757; color:#fff; padding:3px 7px;">LIVE</span>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Animated pulse</span>
+        </div>
+
+        <!-- Overflow -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <span style="display:inline-flex; align-items:center; justify-content:center; border-radius:100px; font-size:10px; font-weight:900; white-space:nowrap; line-height:1; background:#FF4757; color:#fff; min-width:18px; height:18px; padding:0 5px;">99+</span>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Overflow 99+</span>
+        </div>
+
+        <!-- Dot active -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#00A859;"></span>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Dot active</span>
+        </div>
+
+        <!-- Dot inactive -->
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:rgba(244,242,238,.2);"></span>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Dot inactive</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. CONTENT GUIDANCE -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <p class="ds-section-desc">Badge copy is one of the highest-density text surfaces in the system. Every character costs proportionally more space. Follow these rules to stay consistent.</p>
+    <div class="component-content-grid">
+
+      <div class="component-content-card">
+        <div class="component-content-title">Informational labels</div>
+        <ul style="margin:0; padding-left:18px; font-size:13px; line-height:1.7; color:rgba(244,242,238,.7);">
+          <li>Always uppercase, always max 4 characters</li>
+          <li>Write <strong>NEW</strong>, not NEWEST or RECENT</li>
+          <li>Write <strong>LIVE</strong>, not STREAMING or AIRING</li>
+          <li>Write <strong>HOT</strong>, not POPULAR or TRENDING</li>
+          <li>Use genre names (Action, RPG) not descriptors (Fun, Cool)</li>
+          <li>Localize label text for regional builds — keep same character limit</li>
+        </ul>
+      </div>
+
+      <div class="component-content-card">
+        <div class="component-content-title">Count &amp; overflow</div>
+        <ul style="margin:0; padding-left:18px; font-size:13px; line-height:1.7; color:rgba(244,242,238,.7);">
+          <li>Show numeric value from 1–99 directly: "3", "42", "99"</li>
+          <li>When count exceeds 99, always show <strong>99+</strong> — never "100" or higher</li>
+          <li>When count is 0, hide the badge entirely — don't show "0"</li>
+          <li>Use <code class="ds-code">aria-label="3 notifications"</code> not <code class="ds-code">aria-label="3"</code></li>
+          <li>Don't pad single digits: "3" not "03"</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 10. PLATFORM CONSIDERATIONS -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <p class="ds-section-desc">Badges adapt in size and positioning across surfaces. Core semantics stay fixed — only scale and interaction affordances vary.</p>
+    <div class="component-platform-grid">
+
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul style="margin:0; padding-left:18px; font-size:13px; line-height:1.7; color:rgba(244,242,238,.7);">
+          <li>Overlay badges use <code class="ds-code">position:absolute</code> relative to parent container</li>
+          <li>Offset 8px from the nearest edge — never flush to the corner</li>
+          <li>Do not obscure the visual center or main focal point of game art</li>
+          <li>Limit to 1 overlay badge per card edge (max 2 badges total per card)</li>
+          <li>Use default size (3px 7px padding, 9px font)</li>
+        </ul>
+      </div>
+
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul style="margin:0; padding-left:18px; font-size:13px; line-height:1.7; color:rgba(244,242,238,.7);">
+          <li>Add a <code class="ds-code">title</code> attribute or tooltip on hover to expand short labels for accessibility</li>
+          <li>Count badges on icon buttons get <code class="ds-code">aria-live="polite"</code> when count updates dynamically</li>
+          <li>LIVE badge tooltip: "This stream is currently live"</li>
+          <li>Cursor remains default (not pointer) — badges are not interactive</li>
+          <li>Use default size; large size only on hero/detail page headers</li>
+        </ul>
+      </div>
+
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul style="margin:0; padding-left:18px; font-size:13px; line-height:1.7; color:rgba(244,242,238,.7);">
+          <li>Always use TV scale (6px 14px padding, 11px font) — default is unreadable at 3m</li>
+          <li>Avoid count badges on TV — replace with inline text "3 new" in a list row</li>
+          <li>LIVE badge must remain fully visible even when card is in an unfocused state</li>
+          <li>Do not use dot-only status on TV — too small; use a colored pill label instead</li>
+          <li>Pulse animation is safe for TV — it is slow enough to avoid flicker thresholds</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 11. ACCESSIBILITY -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">Badges carry meaning that may not be perceivable to all users. Every badge must provide a programmatic text equivalent — do not rely on visual shape or color alone.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr>
+          <th>Variant</th>
+          <th>Role / attribute</th>
+          <th>Guidance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Informational (NEW, LIVE)</td>
+          <td><code class="ds-code">aria-label</code></td>
+          <td>Describe the content state, not just the word. Use <code class="ds-code">aria-label="New game added"</code> not <code class="ds-code">aria-label="NEW"</code>.</td>
+        </tr>
+        <tr>
+          <td>Count badge</td>
+          <td><code class="ds-code">aria-label</code></td>
+          <td>Include the noun. <code class="ds-code">aria-label="3 notifications"</code> — not just <code class="ds-code">aria-label="3"</code>. Use "99 or more notifications" for overflow.</td>
+        </tr>
+        <tr>
+          <td>LIVE badge</td>
+          <td><code class="ds-code">aria-live="polite"</code></td>
+          <td>Add <code class="ds-code">aria-live="polite"</code> to the parent container when LIVE badge appears/disappears dynamically so screen readers announce the state change.</td>
+        </tr>
+        <tr>
+          <td>Status dot</td>
+          <td><code class="ds-code">role="status"</code> + visually hidden text</td>
+          <td>The dot itself has no readable text. Add a visually hidden <code class="ds-code">&lt;span class="sr-only"&gt;Online&lt;/span&gt;</code> sibling. Never use dot color alone for meaning.</td>
+        </tr>
+        <tr>
+          <td>Premium badge</td>
+          <td><code class="ds-code">aria-label</code></td>
+          <td><code class="ds-code">aria-label="JioGames Pass required"</code> — gradient fill alone does not convey gate status to assistive tech.</td>
+        </tr>
+        <tr>
+          <td>All variants</td>
+          <td>Color contrast</td>
+          <td>All badge text must meet WCAG AA minimum 4.5:1 against badge background. The green-on-dark-green informational style passes at 4.7:1 — do not lighten the background further.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 12. DESIGN TOKENS -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-desc">Reference these tokens when implementing badge styles. Never hardcode hex values directly — always use the token to stay in sync with theme updates.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>Value</th>
+          <th>Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="ds-code">--jio</code></td>
+          <td><code class="ds-code">#00A859</code></td>
+          <td>NEW badge text color, active status dot fill</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--jio-soft</code></td>
+          <td><code class="ds-code">rgba(0,168,89,.12)</code></td>
+          <td>NEW badge background fill (informational variant)</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--negative</code></td>
+          <td><code class="ds-code">#FF4757</code></td>
+          <td>Count badge background, LIVE badge background</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--premium-gradient</code></td>
+          <td><code class="ds-code">linear-gradient(135deg, #00cc65, #00E870)</code></td>
+          <td>Premium badge background fill</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--premium-border</code></td>
+          <td><code class="ds-code">rgba(0,204,101,.35)</code></td>
+          <td>Premium badge border stroke (optional, use for outlined variant)</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--pill</code></td>
+          <td><code class="ds-code">100px</code></td>
+          <td>Border-radius for all pill-shaped badge variants</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--border-subtle</code></td>
+          <td><code class="ds-code">rgba(255,255,255,.08)</code></td>
+          <td>Genre tag background fill (glass/frosted variant)</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CODE EXAMPLES -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
+    <div class="component-code-block">
+      <div class="component-code-label">Badge — label variants</div>
+      <pre class="component-code-pre"><code>&lt;span class="badge badge--new"&gt;New&lt;/span&gt;
+&lt;span class="badge badge--live"&gt;Live&lt;/span&gt;
+&lt;span class="badge badge--premium"&gt;Pass&lt;/span&gt;
+&lt;span class="badge badge--free"&gt;Free&lt;/span&gt;
+&lt;span class="badge badge--sale"&gt;Sale&lt;/span&gt;</code></pre>
+    </div>
+    <div class="component-code-block">
+      <div class="component-code-label">Badge — count (notification dot)</div>
+      <pre class="component-code-pre"><code>&lt;span style="position:relative;display:inline-flex"&gt;
+  &lt;svg class="icon icon--m" aria-hidden="true"&gt;
+    &lt;use href="/sprite.svg#ic_bell"&gt;&lt;/use&gt;
+  &lt;/svg&gt;
+  &lt;span class="badge-count" aria-label="3 notifications"&gt;3&lt;/span&gt;
+&lt;/span&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- 13. CHANGELOG -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Changelog</h2>
+    <div class="component-changelog">
+
+      <div class="component-changelog-entry">
+        <span class="component-changelog-version">v1.1</span>
+        <span class="component-changelog-date">Apr 2025</span>
+        <p class="component-changelog-desc">Added <code class="ds-code">badge-live-pulse</code> CSS animation for LIVE badge. Added TV scale size tier (6px 14px padding, 11px font-size). Updated accessibility table with <code class="ds-code">aria-live</code> guidance for dynamic count badges.</p>
+      </div>
+
+      <div class="component-changelog-entry">
+        <span class="component-changelog-version">v1.0</span>
+        <span class="component-changelog-date">Jan 2025</span>
+        <p class="component-changelog-desc">Initial component release. Includes Informational, Count, Status dot, Premium, and Genre tag variants. Default and compact size tiers. Full anatomy documentation and best practices.</p>
+      </div>
+
+    </div>
+  </section>
+
+</main><script src="../sprite-loader.js"></script><script src="../shell.js"></script></body></html>

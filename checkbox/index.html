@@ -1,0 +1,534 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkbox — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    .checkbox-wrap { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; user-select: none; }
+    .checkbox { width: 20px; height: 20px; border-radius: var(--r2); border: 2px solid var(--border); background: transparent; display: flex; align-items: center; justify-content: center; transition: all var(--dur-fast) var(--ease-out); flex-shrink: 0; }
+    .checkbox.is-checked { background: var(--jio); border-color: var(--jio); }
+    .checkbox.is-indeterminate { background: var(--surface-3); border-color: var(--jio); }
+    .checkbox.is-disabled { opacity: var(--state-disabled-opacity); pointer-events: none; }
+    .checkbox__icon { display: none; color: #000; }
+    .checkbox.is-checked .checkbox__icon { display: block; }
+    .checkbox-label { font-family: var(--jio-font); font-size: 15px; font-weight: 500; color: var(--text); }
+    .checkbox-hint { font-size: 12px; color: var(--text3); margin-top: 2px; display: block; }
+    .checkbox-group { display: flex; flex-direction: column; gap: 12px; }
+    /* Size variants */
+    .checkbox--s { width: 16px; height: 16px; }
+    .checkbox--l { width: 24px; height: 24px; }
+    /* Indeterminate dash icon */
+    .checkbox-dash { display: none; width: 10px; height: 2px; background: var(--jio); border-radius: 1px; }
+    .checkbox.is-indeterminate .checkbox-dash { display: block; }
+  </style>
+</head><body><main class="ds-content">
+
+  <!-- PAGE HEADER -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Checkbox</span>
+    </nav>
+    <h1 class="component-page-title">Checkbox</h1>
+    <p class="component-page-def">Binary selection for settings, filters, and multi-select lists. Used independently or in groups.</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:16px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+        <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+        <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+      </div>
+      <span class="component-maturity component-maturity--draft"><span class="component-maturity--dot"></span>Draft</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:300px;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner">
+      <div class="checkbox-group" style="position:relative; z-index:1;">
+        <label class="checkbox-wrap">
+          <span class="checkbox is-checked" role="checkbox" aria-checked="true">
+            <svg class="checkbox__icon" width="12" height="10" viewBox="0 0 12 10" fill="none">
+              <use href="../sprite.svg#ic_confirm"></use>
+            </svg>
+          </span>
+          <span class="checkbox-label">Action</span>
+        </label>
+        <label class="checkbox-wrap">
+          <span class="checkbox" role="checkbox" aria-checked="false"></span>
+          <span class="checkbox-label">Strategy</span>
+        </label>
+        <label class="checkbox-wrap">
+          <span class="checkbox is-indeterminate" role="checkbox" aria-checked="mixed">
+            <span class="checkbox-dash"></span>
+          </span>
+          <span class="checkbox-label">All genres</span>
+        </label>
+      </div>
+    </div>
+    <p class="component-hero-caption">Checkbox states · Checked, Unchecked, Indeterminate</p>
+  </section>
+
+  <!-- INTRO -->
+  <section class="component-intro" id="intro">
+    <p>Checkboxes let users select one or more options from a set. Each checkbox operates independently — selecting one does not affect others. Use them for multi-select filters, settings toggles, and permission acceptance flows. For a single binary toggle that controls a live setting instantly, prefer the Toggle component instead.</p>
+    <ul class="component-summary-list">
+      <li><strong>Binary selection</strong> — checked or unchecked, with an optional indeterminate third state for parent nodes</li>
+      <li><strong>Multi-select groups</strong> — genre filters, notification preferences, content settings</li>
+      <li><strong>Indeterminate parent</strong> — shows a dash when some but not all children in a nested list are checked</li>
+      <li><strong>With hint text</strong> — additional context below the label for complex options</li>
+    </ul>
+  </section>
+
+  <!-- BEST PRACTICES -->
+  <section class="ds-section" id="best-practices">
+    <h2 class="ds-section-title">Best practices</h2>
+    <div class="component-best-practices">
+      <div class="component-bp-card component-bp-card--do">
+        <span class="component-bp-label component-bp-label--do">Do</span>
+        <ul class="component-bp-list">
+          <li>Use checkboxes when users can select multiple items from a list simultaneously</li>
+          <li>Always provide a visible text label alongside every checkbox</li>
+          <li>Use the indeterminate state when a parent checkbox has a mix of checked and unchecked children</li>
+          <li>Maintain a minimum touch target of 44×44px on mobile even if the visual control is smaller</li>
+          <li>Group related checkboxes under a shared heading or fieldset legend</li>
+        </ul>
+      </div>
+      <div class="component-bp-card component-bp-card--dont">
+        <span class="component-bp-label component-bp-label--dont">Don't</span>
+        <ul class="component-bp-list">
+          <li>Use a checkbox for mutually exclusive options — use Radio buttons instead</li>
+          <li>Use a standalone checkbox as a primary action trigger — it's a state indicator, not a button</li>
+          <li>Change the label text based on checked state — the label always describes the option</li>
+          <li>Nest more than 2 levels of checkbox hierarchies — it creates confusing tree selection semantics</li>
+          <li>Disable a checkbox without explaining why the option is unavailable</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <section class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <p class="ds-section-desc">A checkbox consists of the control box, optional check icon, and a text label. Hint text is an optional fourth element below the label.</p>
+    <div class="ds-anatomy">
+      <div class="ds-anatomy-preview">
+        <div class="ds-anatomy-component" style="position:relative; display:inline-flex; align-items:center; gap:10px; padding:12px 16px;">
+          <span class="checkbox is-checked" style="position:relative;">
+            <svg class="checkbox__icon" width="12" height="10" viewBox="0 0 12 10" fill="none">
+              <use href="../sprite.svg#ic_confirm"></use>
+            </svg>
+            <span class="ds-anatomy-callout-dot" style="position:absolute; top:-20px; left:50%; transform:translateX(-50%);"><span class="ds-anatomy-callout-num">1</span></span>
+            <span class="ds-anatomy-callout-dot" style="position:absolute; top:50%; left:-20px; transform:translateY(-50%);"><span class="ds-anatomy-callout-num">2</span></span>
+          </span>
+          <span style="font-family:var(--jio-font); font-size:15px; font-weight:500; color:var(--text); position:relative;">
+            Action
+            <span class="ds-anatomy-callout-dot" style="position:absolute; top:-20px; left:50%; transform:translateX(-50%);"><span class="ds-anatomy-callout-num">3</span></span>
+          </span>
+        </div>
+      </div>
+      <ol class="ds-anatomy-list">
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">1</span>
+          <div>
+            <div class="ds-anatomy-label">Control box <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">20×20px square with rounded corners (r2). Stroke border when unchecked; solid green fill when checked. Inherits border-radius: var(--r2).</div>
+            <code class="ds-anatomy-token ds-code">width:20px; height:20px; border-radius:var(--r2)</code>
+          </div>
+        </li>
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">2</span>
+          <div>
+            <div class="ds-anatomy-label">Check icon <span class="ds-anatomy-optional">Conditional</span></div>
+            <div class="ds-anatomy-desc">SVG tick in black (#000) on green fill. Hidden when unchecked; block when checked. Replaced by a dash (—) in indeterminate state.</div>
+            <code class="ds-anatomy-token ds-code">color: #000; display: none → block</code>
+          </div>
+        </li>
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">3</span>
+          <div>
+            <div class="ds-anatomy-label">Label <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">15px/500 weight text in var(--text). Clicking the label must toggle the checkbox — always associate via a wrapping label element or for/id pair.</div>
+            <code class="ds-anatomy-token ds-code">font-size:15px; font-weight:500; color:var(--text)</code>
+          </div>
+        </li>
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">4</span>
+          <div>
+            <div class="ds-anatomy-label">Hint text <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc">12px muted text below the label. Provides additional context for complex options. Use sparingly — if every option needs a hint, reconsider the information architecture.</div>
+            <code class="ds-anatomy-token ds-code">font-size:12px; color:var(--text3); margin-top:2px</code>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- VARIANTS -->
+  <section class="ds-section" id="variants">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">All checkbox variants share the same 20px control box. Visual treatment changes only the fill, border, and icon visibility.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:40px; align-items:flex-start; padding:8px 0;">
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <label class="checkbox-wrap">
+            <span class="checkbox" role="checkbox" aria-checked="false"></span>
+            <span class="checkbox-label">Default</span>
+          </label>
+          <span style="font-size:11px; color:var(--text3);">Unchecked</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <label class="checkbox-wrap">
+            <span class="checkbox is-checked" role="checkbox" aria-checked="true">
+              <svg class="checkbox__icon" width="12" height="10" viewBox="0 0 12 10" fill="none">
+                <use href="../sprite.svg#ic_confirm"></use>
+              </svg>
+            </span>
+            <span class="checkbox-label">Checked</span>
+          </label>
+          <span style="font-size:11px; color:var(--text3);">Checked</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <label class="checkbox-wrap">
+            <span class="checkbox is-indeterminate" role="checkbox" aria-checked="mixed">
+              <span class="checkbox-dash"></span>
+            </span>
+            <span class="checkbox-label">Indeterminate</span>
+          </label>
+          <span style="font-size:11px; color:var(--text3);">Indeterminate</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <label class="checkbox-wrap">
+            <span class="checkbox is-disabled" role="checkbox" aria-checked="false" aria-disabled="true"></span>
+            <span class="checkbox-label" style="opacity:0.4;">Disabled</span>
+          </label>
+          <span style="font-size:11px; color:var(--text3);">Disabled</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <label class="checkbox-wrap" style="align-items:flex-start;">
+            <span class="checkbox is-checked" role="checkbox" aria-checked="true" style="margin-top:2px;">
+              <svg class="checkbox__icon" width="12" height="10" viewBox="0 0 12 10" fill="none">
+                <use href="../sprite.svg#ic_confirm"></use>
+              </svg>
+            </span>
+            <span>
+              <span class="checkbox-label">Auto-download replays</span>
+              <span class="checkbox-hint">Uses mobile data when Wi-Fi is unavailable</span>
+            </span>
+          </label>
+          <span style="font-size:11px; color:var(--text3);">With hint</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SIZES -->
+  <section class="ds-section" id="sizes">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Three sizes are available. M (20px) is the default for all surfaces. S (16px) is for dense compact lists. L (24px) is for settings pages where the control needs to be more prominent.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:40px; align-items:center; padding:8px 0;">
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <label class="checkbox-wrap">
+            <span class="checkbox is-checked checkbox--s" role="checkbox" aria-checked="true">
+              <svg class="checkbox__icon" width="9" height="8" viewBox="0 0 9 8" fill="none">
+                <path d="M1 4l2.5 2.5L8 1" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="checkbox-label" style="font-size:13px;">Small</span>
+          </label>
+          <span style="font-size:11px; color:var(--text3);">S — 16px</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <label class="checkbox-wrap">
+            <span class="checkbox is-checked" role="checkbox" aria-checked="true">
+              <svg class="checkbox__icon" width="12" height="10" viewBox="0 0 12 10" fill="none">
+                <use href="../sprite.svg#ic_confirm"></use>
+              </svg>
+            </span>
+            <span class="checkbox-label">Medium</span>
+          </label>
+          <span style="font-size:11px; color:var(--text3);">M — 20px (default)</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <label class="checkbox-wrap">
+            <span class="checkbox is-checked checkbox--l" role="checkbox" aria-checked="true">
+              <svg class="checkbox__icon" width="14" height="12" viewBox="0 0 14 12" fill="none">
+                <path d="M1 6l4 4.5L13 1" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="checkbox-label" style="font-size:17px;">Large</span>
+          </label>
+          <span style="font-size:11px; color:var(--text3);">L — 24px</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- STATES -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Checkboxes have six distinct visual states. Focus ring uses the system's 2px green outline offset by 2px. Hover slightly brightens the border. Disabled reduces opacity to 0.35 and blocks interaction.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:40px; align-items:flex-start; padding:8px 0;">
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <span class="checkbox"></span>
+          <span style="font-size:11px; color:var(--text3);">Default</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <span class="checkbox" style="border-color:var(--text2);"></span>
+          <span style="font-size:11px; color:var(--text3);">Hover</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <span class="checkbox is-checked">
+            <svg class="checkbox__icon" width="12" height="10" viewBox="0 0 12 10" fill="none">
+              <use href="../sprite.svg#ic_confirm"></use>
+            </svg>
+          </span>
+          <span style="font-size:11px; color:var(--text3);">Checked</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <span class="checkbox sim-focus"></span>
+          <span style="font-size:11px; color:var(--text3);">Focus</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <span class="checkbox is-indeterminate">
+            <span class="checkbox-dash"></span>
+          </span>
+          <span style="font-size:11px; color:var(--text3);">Indeterminate</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <span class="checkbox is-disabled"></span>
+          <span style="font-size:11px; color:var(--text3);">Disabled</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="ds-section" id="content">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <p class="ds-section-desc">Checkbox labels should be concise and describe the option clearly. The label always describes what happens when the box is checked.</p>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Label copy</div>
+        <ul>
+          <li>Use sentence case — "Save login" not "save login" or "SAVE LOGIN"</li>
+          <li>Start with a noun or verb — "Receive tournament alerts", "Auto-save replays"</li>
+          <li>Keep labels under 5 words where possible; use hint text for detail</li>
+          <li>Never use negative framing — "Do not notify me" causes double-negative confusion when checked</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Hint text</div>
+        <ul>
+          <li>Use hint text to explain consequences or constraints, not to repeat the label</li>
+          <li>Good: "Uses mobile data when Wi-Fi is unavailable"</li>
+          <li>Bad: "Check this box to receive alerts" — redundant restatement of the label</li>
+          <li>Keep hint text to one line where possible; two lines maximum</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <p class="ds-section-desc">Checkbox behaviour and scale vary across platforms. Core semantics stay fixed — only touch target size and TV replacement guidance differ.</p>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Wrap in a <code class="ds-code">&lt;label&gt;</code> that covers at least 44×44px tap area</li>
+          <li>Extend the touch zone by expanding the wrapping label, not the visual control</li>
+          <li>Stack checkboxes vertically in a group — never side by side on mobile</li>
+          <li>Use M (20px) size — S is too small for confident tapping on glass</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Keyboard Space toggles the focused checkbox</li>
+          <li>Tab moves focus between checkboxes; Shift+Tab reverses</li>
+          <li>Show a 2px green focus ring offset 2px from the control box edge</li>
+          <li>Use M or L sizes; cursor changes to <code class="ds-code">pointer</code> on the label area</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>Do not use Checkbox on TV — use a Toggle or a highlighted row selector instead</li>
+          <li>Checkboxes are not legible at 3-metre viewing distance even at L size</li>
+          <li>For multi-select on TV, use a card grid where selected cards show a green border and tick overlay</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">Every checkbox must be operable by keyboard and screen reader. The native HTML checkbox element handles most requirements automatically — use it in preference to ARIA roles where possible.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Requirement</th><th>Implementation</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Role</td>
+          <td><code class="ds-code">role="checkbox"</code></td>
+          <td>Provided automatically by <code class="ds-code">&lt;input type="checkbox"&gt;</code>. Required on custom elements.</td>
+        </tr>
+        <tr>
+          <td>Checked state</td>
+          <td><code class="ds-code">aria-checked="true|false|mixed"</code></td>
+          <td>Use <code class="ds-code">mixed</code> for indeterminate. Native <code class="ds-code">indeterminate</code> property must also be set in JS.</td>
+        </tr>
+        <tr>
+          <td>Disabled state</td>
+          <td><code class="ds-code">aria-disabled="true"</code> + <code class="ds-code">disabled</code></td>
+          <td>Both attributes needed — <code class="ds-code">disabled</code> removes from tab order; <code class="ds-code">aria-disabled</code> preserves focus if needed.</td>
+        </tr>
+        <tr>
+          <td>Label association</td>
+          <td><code class="ds-code">&lt;label for="..."&gt;</code> or wrapping <code class="ds-code">&lt;label&gt;</code></td>
+          <td>Never use placeholder or sibling text as the sole label without an explicit association.</td>
+        </tr>
+        <tr>
+          <td>Keyboard toggle</td>
+          <td>Space key</td>
+          <td>Native checkbox handles this. Custom elements must intercept <code class="ds-code">keydown</code> Space and call <code class="ds-code">click()</code>.</td>
+        </tr>
+        <tr>
+          <td>Group labelling</td>
+          <td><code class="ds-code">&lt;fieldset&gt;</code> + <code class="ds-code">&lt;legend&gt;</code></td>
+          <td>Wrap checkbox groups in a fieldset. Screen readers announce the legend before each checkbox in the group.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- RELATED TOKENS -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-desc">Always use tokens — never hard-code hex values. These are the tokens that drive checkbox visual styles.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Token</th><th>Value</th><th>Usage</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code class="ds-code">--jio</code></td><td><code class="ds-code">#00A859</code></td><td>Checked fill and border color</td></tr>
+        <tr><td><code class="ds-code">--border</code></td><td><code class="ds-code">rgba(255,255,255,.16)</code></td><td>Unchecked control box border</td></tr>
+        <tr><td><code class="ds-code">--surface-3</code></td><td><code class="ds-code">—</code></td><td>Indeterminate fill background</td></tr>
+        <tr><td><code class="ds-code">--text</code></td><td><code class="ds-code">#f4f2ee</code></td><td>Label text color</td></tr>
+        <tr><td><code class="ds-code">--text3</code></td><td><code class="ds-code">rgba(244,242,238,.32)</code></td><td>Hint text color</td></tr>
+        <tr><td><code class="ds-code">--r2</code></td><td><code class="ds-code">4px</code></td><td>Control box border-radius</td></tr>
+        <tr><td><code class="ds-code">--state-disabled-opacity</code></td><td><code class="ds-code">0.35</code></td><td>Disabled control and label opacity</td></tr>
+        <tr><td><code class="ds-code">--dur-fast</code></td><td><code class="ds-code">120ms</code></td><td>Check/uncheck transition duration</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CODE EXAMPLES -->
+  <section class="ds-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-section-desc">Copy these snippets as starting points. Always include <code class="ds-code">tokens.css</code>, <code class="ds-code">components.css</code>, and <code class="ds-code">states.css</code>.</p>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Single checkbox</div>
+      <pre class="component-code-pre"><code>&lt;label class="checkbox-wrap"&gt;
+  &lt;input type="checkbox" id="autoSave" class="sr-only"&gt;
+  &lt;span class="checkbox" aria-hidden="true"&gt;
+    &lt;svg class="checkbox__icon" width="12" height="10" viewBox="0 0 12 10" fill="none"&gt;
+      &lt;path d="M1 5l3.5 3.5L11 1" stroke="#000" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"/&gt;
+    &lt;/svg&gt;
+  &lt;/span&gt;
+  &lt;span class="checkbox-label"&gt;Auto-save replays&lt;/span&gt;
+&lt;/label&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Checkbox group with fieldset</div>
+      <pre class="component-code-pre"><code>&lt;fieldset style="border:none; padding:0;"&gt;
+  &lt;legend style="font-size:13px; font-weight:700; color:var(--text2); margin-bottom:12px;"&gt;
+    Preferred genres
+  &lt;/legend&gt;
+  &lt;div class="checkbox-group"&gt;
+    &lt;label class="checkbox-wrap"&gt;
+      &lt;input type="checkbox" checked&gt;
+      &lt;span class="checkbox is-checked"&gt;&lt;!-- svg icon --&gt;&lt;/span&gt;
+      &lt;span class="checkbox-label"&gt;Action&lt;/span&gt;
+    &lt;/label&gt;
+    &lt;label class="checkbox-wrap"&gt;
+      &lt;input type="checkbox"&gt;
+      &lt;span class="checkbox"&gt;&lt;/span&gt;
+      &lt;span class="checkbox-label"&gt;Strategy&lt;/span&gt;
+    &lt;/label&gt;
+    &lt;label class="checkbox-wrap"&gt;
+      &lt;input type="checkbox"&gt;
+      &lt;span class="checkbox"&gt;&lt;/span&gt;
+      &lt;span class="checkbox-label"&gt;Sports&lt;/span&gt;
+    &lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Indeterminate parent checkbox (JavaScript)</div>
+      <pre class="component-code-pre"><code>&lt;label class="checkbox-wrap"&gt;
+  &lt;input type="checkbox" id="selectAll"&gt;
+  &lt;span class="checkbox" id="selectAllBox"&gt;
+    &lt;span class="checkbox-dash"&gt;&lt;/span&gt;
+  &lt;/span&gt;
+  &lt;span class="checkbox-label"&gt;All genres&lt;/span&gt;
+&lt;/label&gt;
+
+&lt;script&gt;
+  const input = document.getElementById('selectAll');
+  const box   = document.getElementById('selectAllBox');
+
+  function syncParent(checkedCount, total) {
+    if (checkedCount === 0) {
+      input.indeterminate = false;
+      input.checked = false;
+      box.className = 'checkbox';
+    } else if (checkedCount === total) {
+      input.indeterminate = false;
+      input.checked = true;
+      box.className = 'checkbox is-checked';
+    } else {
+      input.indeterminate = true;
+      box.className = 'checkbox is-indeterminate';
+    }
+  }
+&lt;/script&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- CHANGELOG -->
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

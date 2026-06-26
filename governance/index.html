@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Governance — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+</head>
+<body>
+  <main class="ds-main">
+    <header class="component-page-header">
+      <nav class="component-breadcrumb" aria-label="Breadcrumb">
+        <a href="../">JioGames DLS</a>
+        <span class="component-breadcrumb-sep" aria-hidden="true">›</span>
+        <span>Governance</span>
+      </nav>
+      <h1 class="component-page-title">Governance</h1>
+      <p class="component-page-def">Token naming conventions, versioning policy, the process for adding new tokens, component contracts, and deprecation patterns.</p>
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+        <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+        <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+        <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <div class="component-hero component-hero--dark" style="padding:32px 40px;align-items:flex-start;gap:20px">
+      <div class="hero-glow"></div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;position:relative;z-index:1">
+        <!-- Step 1 -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:48px;height:48px;border-radius:var(--pill);background:var(--jio);display:flex;align-items:center;justify-content:center">
+            <span style="font-size:20px;font-weight:900;color:#000">1</span>
+          </div>
+          <div style="font-size:10px;font-weight:700;color:var(--text3);text-align:center;max-width:64px">RFC<br>Proposal</div>
+        </div>
+        <!-- Arrow -->
+        <div style="font-size:18px;color:var(--text4);padding-bottom:20px">→</div>
+        <!-- Step 2 -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:48px;height:48px;border-radius:var(--pill);background:var(--surface-3);border:2px solid var(--jio);display:flex;align-items:center;justify-content:center">
+            <span style="font-size:20px;font-weight:900;color:var(--jio)">2</span>
+          </div>
+          <div style="font-size:10px;font-weight:700;color:var(--text3);text-align:center;max-width:64px">Design<br>Review</div>
+        </div>
+        <!-- Arrow -->
+        <div style="font-size:18px;color:var(--text4);padding-bottom:20px">→</div>
+        <!-- Step 3 -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:48px;height:48px;border-radius:var(--pill);background:var(--surface-3);border:2px solid var(--border);display:flex;align-items:center;justify-content:center">
+            <span style="font-size:20px;font-weight:900;color:var(--text2)">3</span>
+          </div>
+          <div style="font-size:10px;font-weight:700;color:var(--text3);text-align:center;max-width:64px">Build &amp;<br>Token</div>
+        </div>
+        <!-- Arrow -->
+        <div style="font-size:18px;color:var(--text4);padding-bottom:20px">→</div>
+        <!-- Step 4 -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:48px;height:48px;border-radius:var(--pill);background:var(--surface-3);border:2px solid var(--border);display:flex;align-items:center;justify-content:center">
+            <span style="font-size:20px;font-weight:900;color:var(--text2)">4</span>
+          </div>
+          <div style="font-size:10px;font-weight:700;color:var(--text3);text-align:center;max-width:64px">Ship &amp;<br>Changelog</div>
+        </div>
+      </div>
+      <p class="component-hero-caption">RFC → REVIEW → BUILD → SHIP · SEMVER · DEPRECATION POLICY</p>
+    </div>
+
+    <!-- CONTRIBUTION PROCESS -->
+    <section class="ds-section">
+      <h2 class="ds-section-title" id="contribution">Contribution Process</h2>
+      <p class="ds-section-desc">All new components and tokens follow this four-step process. Nothing ships without completing each gate.</p>
+
+      <div class="ds-doc-card-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:16px">
+        <div style="background:var(--surface-1);border-radius:var(--r4);padding:20px;border:1px solid var(--border-subtle);position:relative">
+          <div style="font-size:28px;font-weight:800;color:var(--jio);opacity:.3;position:absolute;top:12px;right:16px;line-height:1">01</div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--jio);margin-bottom:8px">Proposal RFC</div>
+          <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">Write an RFC</div>
+          <div style="font-size:13px;color:var(--text2);line-height:1.5">Document the component name, rationale, target platforms, tokens needed, and reference examples. Post to the DLS channel.</div>
+        </div>
+        <div style="background:var(--surface-1);border-radius:var(--r4);padding:20px;border:1px solid var(--border-subtle);position:relative">
+          <div style="font-size:28px;font-weight:800;color:var(--jio);opacity:.3;position:absolute;top:12px;right:16px;line-height:1">02</div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--jio);margin-bottom:8px">Review</div>
+          <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">2 engineers + 1 designer</div>
+          <div style="font-size:13px;color:var(--text2);line-height:1.5">Reviewers check: token hierarchy, naming conventions, WCAG compliance, TV applicability. Min. 2 approvals to proceed.</div>
+        </div>
+        <div style="background:var(--surface-1);border-radius:var(--r4);padding:20px;border:1px solid var(--border-subtle);position:relative">
+          <div style="font-size:28px;font-weight:800;color:var(--jio);opacity:.3;position:absolute;top:12px;right:16px;line-height:1">03</div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--jio);margin-bottom:8px">Implementation</div>
+          <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">Build + document</div>
+          <div style="font-size:13px;color:var(--text2);line-height:1.5">Add tokens to <code>tokens.css</code>, component to <code>components.css</code>, states to <code>states.css</code>. Write the DLS page with all required sections.</div>
+        </div>
+        <div style="background:var(--surface-1);border-radius:var(--r4);padding:20px;border:1px solid var(--border-subtle);position:relative">
+          <div style="font-size:28px;font-weight:800;color:var(--jio);opacity:.3;position:absolute;top:12px;right:16px;line-height:1">04</div>
+          <div style="font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--jio);margin-bottom:8px">Release</div>
+          <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">Bump version + changelog</div>
+          <div style="font-size:13px;color:var(--text2);line-height:1.5">Update semver, write changelog entry, set component status to <span style="background:var(--jio-soft);color:var(--jio);font-size:11px;padding:1px 6px;border-radius:var(--pill);font-weight:700">Ready</span>.</div>
+        </div>
+      </div>
+
+      <h3 class="ds-subsection-title" style="margin-top:24px">RFC template</h3>
+      <div style="background:var(--surface-1);border-radius:var(--r4);padding:20px;border:1px solid var(--border-subtle);font-size:13px;color:var(--text2);line-height:1.8">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--text3);margin-bottom:12px">RFC: [Component Name]</div>
+        <div><strong style="color:var(--text)">Component name</strong> — canonical name used in class, token, and docs</div>
+        <div><strong style="color:var(--text)">Rationale</strong> — what problem it solves, why existing components cannot cover it</div>
+        <div><strong style="color:var(--text)">Platform scope</strong> — Mobile / Web / TV (check all that apply, with caveats)</div>
+        <div><strong style="color:var(--text)">Tokens needed</strong> — list new tokens; map existing tokens where possible</div>
+        <div><strong style="color:var(--text)">Reference examples</strong> — links to Figma frames or screenshots showing intended usage</div>
+        <div><strong style="color:var(--text)">Open questions</strong> — anything requiring reviewer input before implementation begins</div>
+      </div>
+    </section>
+
+    <!-- VERSIONING -->
+    <section class="ds-section">
+      <h2 class="ds-section-title" id="versioning">Versioning</h2>
+      <p class="ds-section-desc">The DLS follows semver. Every release must include a changelog entry. Breaking changes require a migration guide in the changelog.</p>
+      <table class="ds-token-table">
+        <thead><tr><th>Version bump</th><th>Triggers</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span style="background:var(--error-text);color:var(--bg);font-size:11px;font-weight:700;padding:2px 8px;border-radius:var(--pill)">MAJOR</span></td>
+            <td style="color:var(--text2)">Token or component API breaking change — rename, removal, semantic meaning change</td>
+            <td style="color:var(--text2);font-family:monospace;font-size:12px"><code>--ctrl-h</code> renamed to <code>--btn-h-lg</code></td>
+          </tr>
+          <tr>
+            <td><span style="background:var(--jio-soft);color:var(--jio);font-size:11px;font-weight:700;padding:2px 8px;border-radius:var(--pill);border:1px solid var(--jio)">MINOR</span></td>
+            <td style="color:var(--text2)">New component added, new token added, new platform variant</td>
+            <td style="color:var(--text2);font-family:monospace;font-size:12px">Adding <code>--card-continue-progress</code></td>
+          </tr>
+          <tr>
+            <td><span style="background:var(--surface-2);color:var(--text2);font-size:11px;font-weight:700;padding:2px 8px;border-radius:var(--pill);border:1px solid var(--border-subtle)">PATCH</span></td>
+            <td style="color:var(--text2)">Bug fix, doc update, correcting a wrong token value</td>
+            <td style="color:var(--text2);font-family:monospace;font-size:12px">Fixing <code>--r5</code> from 14px to 16px</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="ds-subsection-title" style="margin-top:24px">Deprecation policy</h3>
+      <ul class="ds-rules">
+        <li class="ds-rule ds-rule--pass">Deprecated tokens and components are kept for <strong>2 minor versions</strong> after deprecation, with a <code>console.warn</code> in JS tooling pointing to the replacement.</li>
+        <li class="ds-rule ds-rule--pass">On removal (MAJOR version), the old name is kept as a CSS alias for <strong>1 full major version</strong> pointing to the new token: <code>--old-token: var(--new-token);</code></li>
+        <li class="ds-rule ds-rule--pass">Every deprecated item gets a deprecation notice in its DLS page — yellow banner with the version it was deprecated in and the replacement name.</li>
+        <li class="ds-rule ds-rule--fail">Removing a token or component without a migration guide in the changelog.</li>
+      </ul>
+    </section>
+
+    <!-- COMPONENT MATURITY -->
+    <section class="ds-section">
+      <h2 class="ds-section-title" id="maturity">Component Maturity</h2>
+      <p class="ds-section-desc">Every component has a maturity status. Status gates what teams can do with it — Experimental components may change without notice.</p>
+
+      <h3 class="ds-subsection-title">Maturity levels</h3>
+      <table style="width:100%;border-collapse:collapse;margin-top:16px">
+        <thead>
+          <tr style="background:var(--surface-2)">
+            <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border-subtle)">Status</th>
+            <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border-subtle)">Chip</th>
+            <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border-subtle)">Meaning</th>
+            <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border-subtle)">Can teams adopt?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border-subtle)">
+            <td style="padding:10px 14px;font-size:13px;color:var(--text)">Experimental</td>
+            <td style="padding:10px 14px"><span class="ds-status ds-status--experimental">Experimental</span></td>
+            <td style="padding:10px 14px;font-size:13px;color:var(--text2)">Under active design/development. API and tokens may change without notice. No migration guarantee.</td>
+            <td style="padding:10px 14px;font-size:13px;color:var(--warning-text);font-weight:600">Opt-in only — expect churn</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border-subtle)">
+            <td style="padding:10px 14px;font-size:13px;color:var(--text)">Ready</td>
+            <td style="padding:10px 14px"><span class="ds-status ds-status--ready">Ready</span></td>
+            <td style="padding:10px 14px;font-size:13px;color:var(--text2)">Stable contract, documented states, WCAG checked, TV variant specified. Safe to adopt.</td>
+            <td style="padding:10px 14px;font-size:13px;color:var(--success-text);font-weight:600">Yes — stable API</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 14px;font-size:13px;color:var(--text)">Deprecated</td>
+            <td style="padding:10px 14px"><span class="ds-status ds-status--deprecated">Deprecated</span></td>
+            <td style="padding:10px 14px;font-size:13px;color:var(--text2)">Scheduled for removal. Replacement documented. Do not adopt in new work.</td>
+            <td style="padding:10px 14px;font-size:13px;color:var(--error-text);font-weight:600">Migrate away — removal scheduled</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="ds-subsection-title" style="margin-top:24px">How maturity appears in nav</h3>
+      <div class="ds-demo">
+        <div style="display:flex;flex-direction:column;gap:8px;max-width:260px">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--surface-1);border-radius:var(--r3);border:1px solid var(--border-subtle)">
+            <span style="font-size:13px;color:var(--text)">Button</span>
+            <span style="font-size:10px;font-weight:700;letter-spacing:.3px;background:var(--jio-soft);color:var(--jio);padding:2px 7px;border-radius:var(--pill)">Deep</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--surface-1);border-radius:var(--r3);border:1px solid var(--border-subtle)">
+            <span style="font-size:13px;color:var(--text)">Continue Card</span>
+            <span style="font-size:10px;font-weight:700;letter-spacing:.3px;background:rgba(0,232,112,.12);color:var(--jio-light);padding:2px 7px;border-radius:var(--pill)">New</span>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--surface-1);border-radius:var(--r3);border:1px solid var(--border-subtle)">
+            <span style="font-size:13px;color:var(--text)">Icon</span>
+            <span style="font-size:10px;color:var(--text3)">Standard</span>
+          </div>
+        </div>
+        <div style="margin-top:12px;font-size:12px;color:var(--text3);line-height:1.6">
+          <strong style="color:var(--text2)">Deep</strong> = stable, full reference page with all states.<br>
+          <strong style="color:var(--text2)">New</strong> = recently reached Ready, may still be expanding.<br>
+          <strong style="color:var(--text2)">Standard</strong> = no badge, fully settled.
+        </div>
+      </div>
+    </section>
+
+    <!-- TOKEN GOVERNANCE -->
+    <section class="ds-section">
+      <h2 class="ds-section-title" id="token-governance">Token Governance</h2>
+      <p class="ds-section-desc">Tokens follow a strict three-tier hierarchy. Component CSS must never reference primitive tokens directly.</p>
+
+      <h3 class="ds-subsection-title">Three-tier model</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:12px">
+        <div style="background:var(--surface-1);border-radius:var(--r4);padding:16px 18px;border:1px solid var(--border-subtle)">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--text3);margin-bottom:6px">Tier 1</div>
+          <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:6px">Primitive</div>
+          <div style="font-size:12px;color:var(--text2);line-height:1.5">Raw values. Never referenced directly in component CSS. <br>e.g. <code>--green-500</code>, <code>--space-4</code></div>
+        </div>
+        <div style="background:var(--surface-1);border-radius:var(--r4);padding:16px 18px;border:1px solid var(--jio);box-shadow:0 0 0 1px var(--jio)">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--jio);margin-bottom:6px">Tier 2</div>
+          <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:6px">Semantic</div>
+          <div style="font-size:12px;color:var(--text2);line-height:1.5">Named by purpose, aliases primitives. This is the layer component CSS must use. <br>e.g. <code>--jio</code>, <code>--surface-1</code>, <code>--text</code></div>
+        </div>
+        <div style="background:var(--surface-1);border-radius:var(--r4);padding:16px 18px;border:1px solid var(--border-subtle)">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--text3);margin-bottom:6px">Tier 3</div>
+          <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:6px">Component</div>
+          <div style="font-size:12px;color:var(--text2);line-height:1.5">Component-scoped aliases of semantic tokens. Optional — only when a component genuinely needs a named override. <br>e.g. <code>--btn-primary-bg</code></div>
+        </div>
+      </div>
+
+      <h3 class="ds-subsection-title" style="margin-top:24px">Rules for new tokens</h3>
+      <ul class="ds-rules">
+        <li class="ds-rule ds-rule--pass">A value warrants a token only when it is used in <strong>3 or more</strong> distinct places — otherwise hard-code the semantic token directly.</li>
+        <li class="ds-rule ds-rule--pass">Component CSS must reference Tier 2 (semantic) or Tier 3 (component) tokens only — never raw Tier 1 primitives.</li>
+        <li class="ds-rule ds-rule--fail">Raw hex values in component CSS — always go through a semantic token.</li>
+        <li class="ds-rule ds-rule--fail">Raw <code>px</code> values for controlled dimensions (radius, spacing, icon sizes) — use a spacing or radius token.</li>
+        <li class="ds-rule ds-rule--fail">Font family strings other than <code>JioType</code> — never reference <code>Outfit</code>, <code>Inter</code>, or any other font name in component CSS.</li>
+      </ul>
+    </section>
+
+    <!-- RELEASE CHECKLIST -->
+    <section class="ds-section">
+      <h2 class="ds-section-title" id="release-checklist">Release Checklist</h2>
+      <p class="ds-section-desc">Every component or token release must clear all items before the version is tagged. This is the minimum bar — not a suggested shortcut list.</p>
+      <div class="ds-checklist">
+        <div class="ds-check-item ds-check-item--pass"><div class="ds-check-icon">✓</div>Tokens validated — all new tokens follow the three-tier model. No raw hex. No raw px for controlled dimensions.</div>
+        <div class="ds-check-item ds-check-item--pass"><div class="ds-check-icon">✓</div>DLS page updated — all sections complete: overview, anatomy, states, tokens, do/don't, ARIA, rules.</div>
+        <div class="ds-check-item ds-check-item--pass"><div class="ds-check-icon">✓</div>No raw hex in component CSS — confirmed by grep over <code>components.css</code> and <code>states.css</code>.</div>
+        <div class="ds-check-item ds-check-item--pass"><div class="ds-check-icon">✓</div>WCAG contrast checked — all text/background pairings confirmed at 4.5:1 (normal) or 3:1 (large / UI).</div>
+        <div class="ds-check-item ds-check-item--pass"><div class="ds-check-icon">✓</div>TV focus tested — <code>.is-tv-focused</code> glow visible at simulated 3m; no <code>overflow:hidden</code> clips the ring.</div>
+        <div class="ds-check-item ds-check-item--pass"><div class="ds-check-icon">✓</div>Changelog entry written — includes semver bump type, summary of change, migration path if breaking.</div>
+        <div class="ds-check-item ds-check-item--pass"><div class="ds-check-icon">✓</div>Version bumped in <code>package.json</code> (or equivalent) — matches changelog entry.</div>
+        <div class="ds-check-item ds-check-item--fail"><div class="ds-check-icon">✗</div>Shipping without running the DLS preview on all three platforms (Mobile 390px, Web 1280px, TV 1920px).</div>
+        <div class="ds-check-item ds-check-item--fail"><div class="ds-check-icon">✗</div>Setting component status to Ready before screen reader test with VoiceOver or TalkBack.</div>
+      </div>
+    </section>
+
+    <section class="ds-section">
+      <h2 class="ds-section-title">Token Naming</h2>
+      <p class="ds-section-desc">Format: <code>--[category]-[property]-[modifier]</code>. Categories keep tokens grouped and discoverable.</p>
+      <div class="ds-demo">
+        <div style="background:var(--surface-1);border-radius:var(--r4);padding:20px;font-family:monospace;font-size:13px;line-height:2;border:1px solid var(--border-subtle)">
+          <div style="color:var(--text3);font-size:11px;font-weight:700;letter-spacing:.5px;margin-bottom:8px">EXAMPLES</div>
+          <div><span style="color:var(--jio)">--btn-primary-bg</span> <span style="color:var(--text3)">/* category=btn, property=primary, modifier=bg */</span></div>
+          <div><span style="color:var(--jio)">--focus-ring-color</span> <span style="color:var(--text3)">/* category=focus, property=ring, modifier=color */</span></div>
+          <div><span style="color:var(--jio)">--card-radius-landscape</span> <span style="color:var(--text3)">/* category=card, property=radius, modifier=landscape */</span></div>
+          <div><span style="color:var(--jio)">--text-secondary</span> <span style="color:var(--text3)">/* category=text, property=secondary */</span></div>
+        </div>
+        <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px">
+          <span style="background:var(--surface-2);border-radius:var(--pill);padding:4px 12px;font-size:12px;color:var(--text2);font-weight:500">btn</span>
+          <span style="background:var(--surface-2);border-radius:var(--pill);padding:4px 12px;font-size:12px;color:var(--text2);font-weight:500">card</span>
+          <span style="background:var(--surface-2);border-radius:var(--pill);padding:4px 12px;font-size:12px;color:var(--text2);font-weight:500">input</span>
+          <span style="background:var(--surface-2);border-radius:var(--pill);padding:4px 12px;font-size:12px;color:var(--text2);font-weight:500">icon</span>
+          <span style="background:var(--surface-2);border-radius:var(--pill);padding:4px 12px;font-size:12px;color:var(--text2);font-weight:500">focus</span>
+          <span style="background:var(--surface-2);border-radius:var(--pill);padding:4px 12px;font-size:12px;color:var(--text2);font-weight:500">surface</span>
+          <span style="background:var(--surface-2);border-radius:var(--pill);padding:4px 12px;font-size:12px;color:var(--text2);font-weight:500">text</span>
+          <span style="background:var(--surface-2);border-radius:var(--pill);padding:4px 12px;font-size:12px;color:var(--text2);font-weight:500">shadow</span>
+          <span style="background:var(--surface-2);border-radius:var(--pill);padding:4px 12px;font-size:12px;color:var(--text2);font-weight:500">border</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="ds-section">
+      <h2 class="ds-section-title">Versioning</h2>
+      <p class="ds-section-desc">The DLS follows semver. Breaking changes require a major bump and migration guide.</p>
+      <table class="ds-token-table">
+        <thead><tr><th>Type</th><th>What changes</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>PATCH</td><td>Bug fix, documentation update</td><td>Fixing wrong value stored in a token</td></tr>
+          <tr><td>MINOR</td><td>New component, new token added</td><td>Adding <code>--card-continue-progress</code></td></tr>
+          <tr><td>MAJOR</td><td>Breaking: token rename or removal</td><td><code>--ctrl-h</code> → <code>--btn-h-lg</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="ds-section">
+      <h2 class="ds-section-title">Adding a New Token</h2>
+      <p class="ds-section-desc">Follow this process to avoid token sprawl.</p>
+      <div class="ds-demo">
+        <ol style="font-size:14px;color:var(--text2);line-height:2.2;padding-left:20px;margin:0">
+          <li><strong style="color:var(--text)">Check primitives</strong> — does an existing primitive already cover this? If yes, create a semantic alias pointing to it.</li>
+          <li><strong style="color:var(--text)">Check semantics</strong> — does a semantic token already exist? If yes, use it directly — do not create a duplicate.</li>
+          <li><strong style="color:var(--text)">RFC</strong> — if a new primitive is genuinely needed, open an RFC and get review from at least one other platform engineer.</li>
+          <li><strong style="color:var(--text)">Document</strong> — record name, value, purpose, and which platforms it applies to.</li>
+          <li><strong style="color:var(--text)">Ship</strong> — add to <code>tokens.css</code>, update CHANGELOG with version bump.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="ds-section">
+      <h2 class="ds-section-title">Component Contract</h2>
+      <p class="ds-section-desc">Every shipped component must have a filled contract. This is the minimum required documentation.</p>
+      <div class="ds-demo">
+        <div style="background:var(--surface-1);border-radius:var(--r5);padding:24px;border:1px solid var(--border-subtle)">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--jio);margin-bottom:12px">Component Contract</div>
+          <table style="width:100%;border-collapse:collapse;font-size:13px">
+            <tr><td style="padding:6px 0;color:var(--text3);font-weight:700;width:140px">Component</td><td style="color:var(--text)">Toggle</td></tr>
+            <tr><td style="padding:6px 0;color:var(--text3);font-weight:700">Status</td><td style="color:var(--text)">Ready</td></tr>
+            <tr><td style="padding:6px 0;color:var(--text3);font-weight:700">Platforms</td><td style="color:var(--text)">Mobile, Web</td></tr>
+            <tr><td style="padding:6px 0;color:var(--text3);font-weight:700">Touch target</td><td style="color:var(--text)">52×44px (visual 52×30px + padding)</td></tr>
+            <tr><td style="padding:6px 0;color:var(--text3);font-weight:700">Tokens</td><td style="color:var(--text);font-family:monospace;font-size:12px">--jio, --surface-3, --text-inv</td></tr>
+            <tr><td style="padding:6px 0;color:var(--text3);font-weight:700">States</td><td style="color:var(--text)">default-off, default-on, hover, focus, disabled</td></tr>
+            <tr><td style="padding:6px 0;color:var(--text3);font-weight:700">ARIA</td><td style="color:var(--text);font-family:monospace;font-size:12px">role="switch" aria-checked="true|false"</td></tr>
+            <tr><td style="padding:6px 0;color:var(--text3);font-weight:700">TV</td><td style="color:var(--text)">Not recommended — use segmented control</td></tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="ds-section">
+      <h2 class="ds-section-title">Deprecation Notice</h2>
+      <p class="ds-section-desc">Use this banner pattern when a token or component is deprecated but not yet removed.</p>
+      <div class="ds-demo">
+        <div style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:var(--r3);padding:12px 16px;display:flex;gap:10px;align-items:flex-start">
+          <span style="font-size:16px">⚠</span>
+          <div style="font-size:13px;color:var(--amber);line-height:1.5">
+            <strong>Deprecated in v1.2.</strong> Use <code style="background:rgba(245,158,11,.1);padding:1px 5px;border-radius:4px">--btn-h-lg</code> instead of <code style="background:rgba(245,158,11,.1);padding:1px 5px;border-radius:4px">--ctrl-h</code>. Will be removed in v2.0.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ds-section">
+      <h2 class="ds-section-title">Review Checklist</h2>
+      <p class="ds-section-desc">Every component must pass this checklist before status is set to Ready.</p>
+      <div class="ds-checklist">
+        <div class="ds-check-item ds-check-item--pass"><div class="ds-check-icon">✓</div>All states documented and demo'd (default, hover, focus, active, disabled, loading).</div>
+        <div class="ds-check-item ds-check-item--pass"><div class="ds-check-icon">✓</div>Token table complete — no hardcoded values in CSS.</div>
+        <div class="ds-check-item ds-check-item--pass"><div class="ds-check-icon">✓</div>ARIA pattern specified and tested with a screen reader.</div>
+        <div class="ds-check-item ds-check-item--pass"><div class="ds-check-icon">✓</div>Touch targets measured — 44px minimum on mobile.</div>
+        <div class="ds-check-item ds-check-item--pass"><div class="ds-check-icon">✓</div>Reduced motion handled — no animation without @media check.</div>
+        <div class="ds-check-item ds-check-item--pass"><div class="ds-check-icon">✓</div>TV variant specified or explicitly excluded with rationale.</div>
+        <div class="ds-check-item ds-check-item--pass"><div class="ds-check-icon">✓</div>Do/Don't documented with real use-case examples.</div>
+        <div class="ds-check-item ds-check-item--fail"><div class="ds-check-icon">✗</div>Shipping component without QA run on all target platforms.</div>
+      </div>
+    </section>
+
+    <!-- CHANGELOG -->
+
+  </main>
+  <script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script>
+</body>
+</html>

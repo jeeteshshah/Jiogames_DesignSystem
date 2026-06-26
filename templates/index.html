@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Templates — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+</head>
+<body>
+  <main class="ds-main">
+
+    <!-- PAGE HEADER -->
+    <header class="component-page-header">
+      <nav class="component-breadcrumb" aria-label="Breadcrumb">
+        <a href="../" class="component-breadcrumb-link">JioGames DLS</a>
+        <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+        <span class="component-breadcrumb-current">Templates</span>
+      </nav>
+      <h1 class="component-page-title">Templates</h1>
+      <p class="component-page-def">Reusable page templates for common JioGames screens. Each defines layout, component composition, CTA placement, and state handling.</p>
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+        <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+        <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+        <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <div class="component-hero component-hero--dark">
+      <div class="hero-glow"></div>
+      <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
+
+        <!-- Mobile Home template preview -->
+        <div style="width:200px;background:var(--bg);border:1px solid var(--border-subtle);border-radius:var(--r5);overflow:hidden;flex-shrink:0">
+          <div style="height:40px;background:var(--surface-1);border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;padding:0 10px">
+            <span style="font-size:11px;font-weight:900;color:var(--jio)">JioGames</span>
+          </div>
+          <div style="height:80px;background:linear-gradient(135deg,var(--surface-3),var(--violet));position:relative">
+            <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(6,8,15,.85) 0%,transparent 60%)"></div>
+            <div style="position:absolute;bottom:8px;left:10px">
+              <div style="font-size:8px;font-weight:700;text-transform:uppercase;color:var(--jio);letter-spacing:1px">Featured</div>
+              <div style="font-size:13px;font-weight:900;color:var(--text)">War Thunder</div>
+            </div>
+          </div>
+          <div style="padding:10px;display:flex;flex-direction:column;gap:8px">
+            <div style="font-size:10px;font-weight:700;color:var(--text)">Popular in Mumbai</div>
+            <div style="display:flex;gap:6px">
+              <div style="width:60px;height:36px;background:linear-gradient(135deg,var(--surface-3),var(--violet));border-radius:var(--r3)"></div>
+              <div style="width:60px;height:36px;background:linear-gradient(135deg,var(--jio-soft),var(--surface-3));border-radius:var(--r3)"></div>
+              <div style="width:60px;height:36px;background:linear-gradient(135deg,var(--surface-2),var(--amber));border-radius:var(--r3)"></div>
+            </div>
+          </div>
+          <div style="height:36px;background:var(--surface-2);border-top:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:space-around;padding:0 6px">
+            <div style="font-size:8px;font-weight:700;color:var(--jio);text-align:center">Home</div>
+            <div style="font-size:8px;color:var(--text4);text-align:center">Games</div>
+            <div style="font-size:8px;color:var(--text4);text-align:center">Search</div>
+            <div style="font-size:8px;color:var(--text4);text-align:center">Library</div>
+          </div>
+        </div>
+
+        <!-- Game Detail template preview -->
+        <div style="width:200px;background:var(--bg);border:1px solid var(--border-subtle);border-radius:var(--r5);overflow:hidden;flex-shrink:0">
+          <div style="height:120px;background:linear-gradient(135deg,var(--surface-3),var(--jio-soft));position:relative">
+            <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(6,8,15,.85) 0%,rgba(6,8,15,.2) 60%,transparent 100%)"></div>
+            <div style="position:absolute;top:8px;left:8px;width:24px;height:24px;background:rgba(6,8,15,.5);border-radius:var(--pill);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text)">←</div>
+            <div style="position:absolute;bottom:10px;left:10px">
+              <div style="font-size:8px;font-weight:700;text-transform:uppercase;color:var(--jio);letter-spacing:1px">Adventure</div>
+              <div style="font-size:14px;font-weight:900;color:var(--text)">Tomb Raider</div>
+              <div style="font-size:8px;color:var(--text3)">★ 4.8 · PEGI 16</div>
+            </div>
+          </div>
+          <div style="padding:10px;display:flex;gap:6px">
+            <div style="flex:1;height:28px;background:var(--jio);border-radius:var(--pill);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--text-inv)">Play Now</div>
+            <div style="width:28px;height:28px;border:1px solid var(--border);border-radius:var(--pill);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text)">+</div>
+          </div>
+          <div style="border-bottom:1px solid var(--border-subtle);display:flex;padding:0 10px">
+            <div style="padding:6px 8px;font-size:9px;font-weight:700;color:var(--jio);border-bottom:2px solid var(--jio)">Overview</div>
+            <div style="padding:6px 8px;font-size:9px;color:var(--text3)">Details</div>
+            <div style="padding:6px 8px;font-size:9px;color:var(--text3)">Related</div>
+          </div>
+          <div style="padding:10px;display:flex;flex-direction:column;gap:6px">
+            <div class="skeleton skeleton--text" style="width:100%;height:8px"></div>
+            <div class="skeleton skeleton--text" style="width:80%;height:8px"></div>
+          </div>
+        </div>
+
+        <!-- Empty state preview -->
+        <div style="width:200px;background:var(--bg);border:1px solid var(--border-subtle);border-radius:var(--r5);overflow:hidden;flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;text-align:center;gap:10px">
+          <div style="width:48px;height:48px;border-radius:var(--pill);background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:22px">🎮</div>
+          <div style="font-size:13px;font-weight:900;color:var(--text)">Library empty</div>
+          <div style="font-size:10px;color:var(--text3);line-height:1.5">Browse 300+ games and start playing</div>
+          <button class="btn btn--primary btn--sm btn--hug">Browse games</button>
+        </div>
+
+      </div>
+      <p class="component-hero-caption">MOBILE HOME · GAME DETAIL · EMPTY STATE</p>
+    </div>
+
+    <!-- ── Template catalog ── -->
+    <section class="ds-section" id="catalog">
+      <h2 class="ds-section-title">Template catalog</h2>
+      <p class="ds-section-desc">12 screen templates covering the full JioGames user journey.</p>
+      <div class="ds-doc-card-grid">
+        <div class="ds-doc-card">
+          <div class="ds-doc-card-title">Mobile Home</div>
+          <div class="ds-doc-card-desc">Hero + horizontal rails + bottom tab bar. Primary discovery surface.</div>
+          <div class="ds-doc-card-meta">AppBar · Hero · Card · Rail · TabBar</div>
+        </div>
+        <div class="ds-doc-card">
+          <div class="ds-doc-card-title">Web Home</div>
+          <div class="ds-doc-card-desc">Sticky header + left sidebar + content grid. Full-width discovery.</div>
+          <div class="ds-doc-card-meta">Header · Sidebar · Hero · Grid</div>
+        </div>
+        <div class="ds-doc-card">
+          <div class="ds-doc-card-title">Game Detail</div>
+          <div class="ds-doc-card-desc">Full-bleed hero + metadata + CTAs + related rails.</div>
+          <div class="ds-doc-card-meta">AppBar · Hero · Button · Tabs · Rail</div>
+        </div>
+        <div class="ds-doc-card">
+          <div class="ds-doc-card-title">Search Results</div>
+          <div class="ds-doc-card-desc">Search bar + filter chips + result grid or list.</div>
+          <div class="ds-doc-card-meta">SearchBar · Chip · Card · List</div>
+        </div>
+        <div class="ds-doc-card">
+          <div class="ds-doc-card-title">Login / OTP</div>
+          <div class="ds-doc-card-desc">Centered phone input + OTP boxes + bottom sheet flow.</div>
+          <div class="ds-doc-card-meta">Input · OTPBox · Button · Sheet</div>
+        </div>
+        <div class="ds-doc-card">
+          <div class="ds-doc-card-title">Pass Selection</div>
+          <div class="ds-doc-card-desc">3-column pass cards with pricing and feature comparison.</div>
+          <div class="ds-doc-card-meta">PassCard · Button · Badge</div>
+        </div>
+        <div class="ds-doc-card">
+          <div class="ds-doc-card-title">Onboarding / Genre Prefs</div>
+          <div class="ds-doc-card-desc">Grid of selectable genre tiles + progress dots + CTA.</div>
+          <div class="ds-doc-card-meta">GenreTile · ProgressDots · Button</div>
+        </div>
+        <div class="ds-doc-card">
+          <div class="ds-doc-card-title">Empty State</div>
+          <div class="ds-doc-card-desc">Icon + heading + body + single primary CTA. Used for empty library, no results.</div>
+          <div class="ds-doc-card-meta">Icon · Typography · Button</div>
+        </div>
+        <div class="ds-doc-card">
+          <div class="ds-doc-card-title">Error State</div>
+          <div class="ds-doc-card-desc">Error icon + message + retry + fallback action.</div>
+          <div class="ds-doc-card-meta">Icon · Typography · Button · Button--ghost</div>
+        </div>
+        <div class="ds-doc-card">
+          <div class="ds-doc-card-title">Offline State</div>
+          <div class="ds-doc-card-desc">Network error + cached content indicator + retry.</div>
+          <div class="ds-doc-card-meta">Icon · Typography · Button--secondary</div>
+        </div>
+        <div class="ds-doc-card">
+          <div class="ds-doc-card-title">Settings</div>
+          <div class="ds-doc-card-desc">List-based grouped settings with chevrons, toggles, and labels.</div>
+          <div class="ds-doc-card-meta">List · Toggle · ListGroup · AppBar</div>
+        </div>
+        <div class="ds-doc-card">
+          <div class="ds-doc-card-title">Profile</div>
+          <div class="ds-doc-card-desc">Avatar + stats + library grid + account actions.</div>
+          <div class="ds-doc-card-meta">Avatar · Badge · Card · List · Button</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Mobile home template ── -->
+    <section class="ds-section" id="mobile-home">
+      <h2 class="ds-section-title">Mobile Home template</h2>
+      <p class="ds-section-desc">The primary discovery screen. Full-bleed hero auto-advances; rails scroll horizontally. Tab bar fixed to bottom.</p>
+      <div class="ds-demo ds-demo--dark" style="display:flex;align-items:flex-start;gap:40px;flex-wrap:wrap">
+        <!-- Phone wireframe -->
+        <div style="width:393px;min-height:700px;background:var(--bg);border:1px solid var(--border-subtle);border-radius:var(--r7);overflow:hidden;display:flex;flex-direction:column">
+          <!-- AppBar -->
+          <div style="height:56px;background:var(--surface-1);border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;padding:0 16px;gap:12px;flex-shrink:0">
+            <div style="font-size:18px;font-weight:900;color:var(--jio);letter-spacing:-.5px">JioGames</div>
+            <div style="flex:1"></div>
+            <button class="btn btn--icon" style="width:36px;height:36px" aria-label="Search">
+              <svg viewBox="0 0 24 24" class="icon icon--m" aria-hidden="true"><use href="../sprite.svg#ic_search"></use></svg>
+            </button>
+          </div>
+          <!-- Hero section -->
+          <div style="position:relative;height:220px;background:linear-gradient(135deg,var(--surface-3),var(--violet));flex-shrink:0">
+            <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(6,8,15,.9) 0%,transparent 60%)"></div>
+            <div style="position:absolute;bottom:16px;left:16px;right:16px">
+              <div style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--jio);margin-bottom:4px">Action Adventure · Featured</div>
+              <div style="font-size:22px;font-weight:900;color:var(--text);letter-spacing:-.5px;margin-bottom:12px">War Thunder</div>
+              <div style="display:flex;gap:8px">
+                <button class="btn btn--primary btn--sm btn--hug">Play Now</button>
+                <button class="btn btn--ghost btn--sm btn--hug">Details</button>
+              </div>
+            </div>
+          </div>
+          <!-- Rail section -->
+          <div style="flex:1;padding:16px;overflow-y:auto;display:flex;flex-direction:column;gap:20px">
+            <div>
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+                <div style="font-size:14px;font-weight:700;color:var(--text)">Popular in Mumbai</div>
+                <button class="btn btn--text btn--xs btn--hug" style="color:var(--jio)">See all</button>
+              </div>
+              <div style="display:flex;gap:10px;overflow-x:auto;scrollbar-width:none">
+                <div class="card" style="width:160px;flex-shrink:0"><div class="card__art" style="height:90px;background:linear-gradient(135deg,var(--surface-3),var(--violet))"><div class="card__overlay"></div></div><div class="card__body"><div class="card__title">War Thunder</div><div class="card__meta">Action</div></div></div>
+                <div class="card" style="width:160px;flex-shrink:0"><div class="card__art" style="height:90px;background:linear-gradient(135deg,var(--jio-soft),var(--surface-3))"><div class="card__overlay"></div></div><div class="card__body"><div class="card__title">Tomb Raider</div><div class="card__meta">Adventure</div></div></div>
+                <div class="card" style="width:160px;flex-shrink:0"><div class="card__art" style="height:90px;background:linear-gradient(135deg,var(--surface-2),var(--amber))"><div class="card__overlay"></div></div><div class="card__body"><div class="card__title">Yooka-Laylee</div><div class="card__meta">Platformer</div></div></div>
+              </div>
+            </div>
+            <div>
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+                <div style="font-size:14px;font-weight:700;color:var(--text)">Free to play</div>
+                <button class="btn btn--text btn--xs btn--hug" style="color:var(--jio)">See all</button>
+              </div>
+              <div style="display:flex;gap:10px;overflow-x:auto;scrollbar-width:none">
+                <div class="card" style="width:160px;flex-shrink:0"><div class="card__art" style="height:90px;background:linear-gradient(135deg,var(--surface-3),var(--jio-soft))"><div class="card__overlay"></div></div><div class="card__body"><div class="card__title">Game Four</div><div class="card__meta">Racing</div></div></div>
+                <div class="card" style="width:160px;flex-shrink:0"><div class="card__art" style="height:90px;background:linear-gradient(135deg,var(--surface-2),var(--surface-3))"><div class="card__overlay"></div></div><div class="card__body"><div class="card__title">Game Five</div><div class="card__meta">Sports</div></div></div>
+              </div>
+            </div>
+          </div>
+          <!-- Tab bar -->
+          <div style="height:64px;background:var(--surface-2);border-top:1px solid var(--border-subtle);display:flex;align-items:center;padding:0 8px;flex-shrink:0">
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px"><svg viewBox="0 0 24 24" class="icon icon--m" style="color:var(--jio)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg><span style="font-size:10px;font-weight:700;color:var(--jio)">Home</span></div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px"><svg viewBox="0 0 24 24" class="icon icon--m" style="color:var(--text4)" aria-hidden="true"><use href="../sprite.svg#ic_games"></use></svg><span style="font-size:10px;font-weight:500;color:var(--text4)">Games</span></div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px"><svg viewBox="0 0 24 24" class="icon icon--m" style="color:var(--text4)" aria-hidden="true"><use href="../sprite.svg#ic_search"></use></svg><span style="font-size:10px;font-weight:500;color:var(--text4)">Search</span></div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px"><svg viewBox="0 0 24 24" class="icon icon--m" style="color:var(--text4)" aria-hidden="true"><use href="../sprite.svg#ic_bookmark"></use></svg><span style="font-size:10px;font-weight:500;color:var(--text4)">Library</span></div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px"><div style="width:20px;height:20px;border-radius:var(--pill);background:var(--surface-3);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text4)">J</div><span style="font-size:10px;font-weight:500;color:var(--text4)">Profile</span></div>
+          </div>
+        </div>
+        <!-- Spec table -->
+        <div style="flex:1;min-width:280px">
+          <table class="ds-spec-table">
+            <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td>Primary CTA</td><td>btn--primary</td></tr>
+              <tr><td>Secondary CTA</td><td>btn--ghost</td></tr>
+              <tr><td>Layout</td><td>Full-bleed hero + rails</td></tr>
+              <tr><td>Hero height</td><td>220px mobile</td></tr>
+              <tr><td>Rail card width</td><td>160px (var(--card-wide-w))</td></tr>
+              <tr><td>Tab bar</td><td>✓ Fixed bottom, 64px</td></tr>
+              <tr><td>AppBar</td><td>✓ Sticky top, 56px</td></tr>
+              <tr><td>Components</td><td>AppBar, Hero, Card, Rail, TabBar</td></tr>
+              <tr><td>Scroll</td><td>Vertical page, horizontal rails</td></tr>
+              <tr><td>Safe area</td><td>Tab bar: env(safe-area-inset-bottom)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Game Detail template ── -->
+    <section class="ds-section" id="game-detail">
+      <h2 class="ds-section-title">Game Detail template</h2>
+      <p class="ds-section-desc">Full-bleed hero with an overlay AppBar. Game metadata, rating, Play CTA, and content tabs below the fold.</p>
+      <div class="ds-demo ds-demo--dark" style="display:flex;align-items:flex-start;gap:40px;flex-wrap:wrap">
+        <!-- Phone wireframe -->
+        <div style="width:393px;min-height:580px;background:var(--bg);border:1px solid var(--border-subtle);border-radius:var(--r7);overflow:hidden;display:flex;flex-direction:column">
+          <!-- Hero + overlay AppBar -->
+          <div style="position:relative;height:240px;background:linear-gradient(135deg,var(--surface-3),var(--jio-soft));flex-shrink:0">
+            <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(6,8,15,.85) 0%,rgba(6,8,15,.2) 50%,transparent 100%)"></div>
+            <!-- Overlay AppBar -->
+            <div style="position:absolute;top:0;left:0;right:0;height:56px;display:flex;align-items:center;padding:0 16px;gap:8px">
+              <button class="btn btn--icon" style="background:rgba(6,8,15,.5);border-radius:var(--pill)">
+                <svg viewBox="0 0 24 24" class="icon icon--m" style="color:white" aria-hidden="true"><use href="../sprite.svg#ic_back"></use></svg>
+              </button>
+              <div style="flex:1"></div>
+              <button class="btn btn--icon" style="background:rgba(6,8,15,.5);border-radius:var(--pill)">
+                <svg viewBox="0 0 24 24" class="icon icon--m" style="color:white" aria-hidden="true"><use href="../sprite.svg#ic_share"></use></svg>
+              </button>
+            </div>
+            <!-- Title area -->
+            <div style="position:absolute;bottom:16px;left:16px;right:16px">
+              <div style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--jio);margin-bottom:4px">Adventure · Pass Included</div>
+              <div style="font-size:24px;font-weight:900;color:var(--text);letter-spacing:-.5px;margin-bottom:4px">Tomb Raider</div>
+              <div style="font-size:12px;color:var(--text3)">★ 4.8 &nbsp;·&nbsp; 2.1 GB &nbsp;·&nbsp; PEGI 16</div>
+            </div>
+          </div>
+          <!-- CTA row -->
+          <div style="padding:16px;display:flex;gap:10px;flex-shrink:0">
+            <button class="btn btn--primary btn--hug" style="flex:1">Play Now</button>
+            <button class="btn btn--ghost btn--hug btn--icon" style="width:48px;height:var(--ctrl-h);flex-shrink:0" aria-label="Add to library">
+              <svg viewBox="0 0 24 24" class="icon icon--m" aria-hidden="true"><use href="../sprite.svg#ic_bookmark"></use></svg>
+            </button>
+          </div>
+          <!-- Content tabs -->
+          <div style="border-bottom:1px solid var(--border-subtle);display:flex;flex-shrink:0">
+            <div style="padding:12px 20px;font-size:13px;font-weight:700;color:var(--jio);border-bottom:2px solid var(--jio)">Overview</div>
+            <div style="padding:12px 20px;font-size:13px;font-weight:500;color:var(--text3);border-bottom:2px solid transparent">Details</div>
+            <div style="padding:12px 20px;font-size:13px;font-weight:500;color:var(--text3);border-bottom:2px solid transparent">Related</div>
+          </div>
+          <!-- Content body -->
+          <div style="flex:1;padding:16px;display:flex;flex-direction:column;gap:10px">
+            <div class="skeleton skeleton--text" style="width:100%"></div>
+            <div class="skeleton skeleton--text" style="width:90%"></div>
+            <div class="skeleton skeleton--text" style="width:80%"></div>
+            <div class="skeleton skeleton--text" style="width:60%;margin-top:8px"></div>
+          </div>
+        </div>
+        <!-- Spec table -->
+        <div style="flex:1;min-width:280px">
+          <table class="ds-spec-table">
+            <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td>Primary CTA</td><td>btn--primary full-width</td></tr>
+              <tr><td>Secondary CTA</td><td>btn--ghost icon-only (add to library)</td></tr>
+              <tr><td>Hero height</td><td>240px with overlay AppBar</td></tr>
+              <tr><td>AppBar style</td><td>Overlay — transparent on hero</td></tr>
+              <tr><td>Tab bar</td><td>✗ Not present on detail</td></tr>
+              <tr><td>Content tabs</td><td>Underline style — Overview, Details, Related</td></tr>
+              <tr><td>Components</td><td>AppBar (overlay), Hero, Button, Tabs, Rail</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Empty state template ── -->
+    <section class="ds-section" id="empty-state">
+      <h2 class="ds-section-title">Empty State template</h2>
+      <p class="ds-section-desc">Used when no content is available — empty library, no search results, no notifications. Single primary CTA guides the user to action.</p>
+      <div class="ds-demo">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 24px;text-align:center;max-width:360px;margin:0 auto">
+          <div style="width:80px;height:80px;border-radius:var(--pill);background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:36px;margin-bottom:20px">🎮</div>
+          <div style="font-size:20px;font-weight:900;color:var(--text);margin-bottom:8px;letter-spacing:-.3px">Your library is empty</div>
+          <div style="font-size:14px;color:var(--text3);line-height:1.6;margin-bottom:24px">Games you add will appear here. Browse 300+ games and start playing.</div>
+          <button class="btn btn--primary btn--hug">Browse games</button>
+        </div>
+      </div>
+      <table class="ds-spec-table" style="margin-top:24px">
+        <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Icon container</td><td>80×80px, border-radius:var(--pill), background:var(--surface-2)</td></tr>
+          <tr><td>Heading</td><td>20px, weight 900, letter-spacing:-.3px</td></tr>
+          <tr><td>Body</td><td>14px, var(--text3), line-height:1.6, max 2 lines</td></tr>
+          <tr><td>CTA</td><td>btn--primary, btn--hug (not full width)</td></tr>
+          <tr><td>Alignment</td><td>Centered vertically and horizontally</td></tr>
+          <tr><td>Components</td><td>Icon, Typography, Button</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ── Error state template ── -->
+    <section class="ds-section" id="error-state">
+      <h2 class="ds-section-title">Error State template</h2>
+      <p class="ds-section-desc">Shown when a screen fails to load. Primary action: retry. Secondary action: fallback navigation. Error icon tinted with var(--negative).</p>
+      <div class="ds-demo">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 24px;text-align:center;max-width:360px;margin:0 auto">
+          <div style="width:80px;height:80px;border-radius:var(--pill);background:rgba(255,71,87,.1);display:flex;align-items:center;justify-content:center;font-size:36px;margin-bottom:20px">⚠️</div>
+          <div style="font-size:20px;font-weight:900;color:var(--text);margin-bottom:8px;letter-spacing:-.3px">Something went wrong</div>
+          <div style="font-size:14px;color:var(--text3);line-height:1.6;margin-bottom:24px">We couldn't load your games. This is usually temporary.</div>
+          <div style="display:flex;gap:10px">
+            <button class="btn btn--primary btn--sm btn--hug">Try again</button>
+            <button class="btn btn--ghost btn--sm btn--hug">Go home</button>
+          </div>
+        </div>
+      </div>
+      <table class="ds-spec-table" style="margin-top:24px">
+        <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Icon container</td><td>80×80px, background:rgba(255,71,87,.1) — approved gradient recipe</td></tr>
+          <tr><td>Primary CTA</td><td>btn--primary btn--sm — "Try again"</td></tr>
+          <tr><td>Secondary CTA</td><td>btn--ghost btn--sm — "Go home"</td></tr>
+          <tr><td>CTA layout</td><td>Row, gap:10px, both btn--hug</td></tr>
+          <tr><td>Message tone</td><td>Neutral, factual — never alarming copy</td></tr>
+          <tr><td>Components</td><td>Icon, Typography, Button, Button--ghost</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ── Offline state template ── -->
+    <section class="ds-section" id="offline-state">
+      <h2 class="ds-section-title">Offline State template</h2>
+      <p class="ds-section-desc">Shown when network is unavailable. Single retry CTA. Neutral grey icon tinted — not red (error is different from offline).</p>
+      <div class="ds-demo">
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 24px;text-align:center;max-width:360px;margin:0 auto">
+          <div style="width:80px;height:80px;border-radius:var(--pill);background:rgba(107,114,128,.1);display:flex;align-items:center;justify-content:center;font-size:36px;margin-bottom:20px">📡</div>
+          <div style="font-size:20px;font-weight:900;color:var(--text);margin-bottom:8px;letter-spacing:-.3px">You're offline</div>
+          <div style="font-size:14px;color:var(--text3);line-height:1.6;margin-bottom:24px">Check your connection. Some previously loaded content may still be available.</div>
+          <button class="btn btn--ghost btn--sm btn--hug">Retry</button>
+        </div>
+      </div>
+      <table class="ds-spec-table" style="margin-top:24px">
+        <thead><tr><th>Attribute</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Icon container</td><td>80×80px, background:rgba(107,114,128,.1) — neutral, not var(--negative)</td></tr>
+          <tr><td>CTA</td><td>btn--ghost btn--sm btn--hug — single "Retry"</td></tr>
+          <tr><td>Differentiation</td><td>Grey icon = offline; red icon = error — never swap</td></tr>
+          <tr><td>Components</td><td>Icon, Typography, Button--ghost</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ── Template usage guidelines ── -->
+    <section class="ds-section" id="guidelines">
+      <h2 class="ds-section-title">Template usage guidelines</h2>
+      <p class="ds-section-desc">Rules that apply across all templates.</p>
+      <div class="ds-demo-grid ds-demo-grid--2" style="gap:16px">
+        <div class="ds-demo-surface">
+          <div style="font-size:12px;font-weight:700;color:var(--jio);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">CTA hierarchy</div>
+          <div class="ds-rules">
+            <div class="ds-rule ds-rule--pass">One primary CTA per screen (btn--primary)</div>
+            <div class="ds-rule ds-rule--pass">Secondary: btn--ghost or btn--text</div>
+            <div class="ds-rule ds-rule--pass">Destructive: btn--ghost + var(--negative) color</div>
+            <div class="ds-rule ds-rule--fail">Never two btn--primary on same screen</div>
+          </div>
+        </div>
+        <div class="ds-demo-surface">
+          <div style="font-size:12px;font-weight:700;color:var(--jio);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">Layout rules</div>
+          <div class="ds-rules">
+            <div class="ds-rule ds-rule--pass">AppBar: always var(--surface-1) unless overlay on hero</div>
+            <div class="ds-rule ds-rule--pass">Tab bar: only on mobile home-level screens</div>
+            <div class="ds-rule ds-rule--pass">Content max-width 393px on mobile, 1200px on web</div>
+            <div class="ds-rule ds-rule--fail">Never place tab bar on detail or settings screens</div>
+          </div>
+        </div>
+        <div class="ds-demo-surface">
+          <div style="font-size:12px;font-weight:700;color:var(--jio);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">State variants</div>
+          <div class="ds-rules">
+            <div class="ds-rule ds-rule--pass">Every template needs: default, loading (skeleton), error, empty</div>
+            <div class="ds-rule ds-rule--pass">Loading: skeleton placeholders at same size as real content</div>
+            <div class="ds-rule ds-rule--pass">Error and empty: centered, icon + heading + CTA</div>
+            <div class="ds-rule ds-rule--fail">Do not reuse error template for offline — use separate offline template</div>
+          </div>
+        </div>
+        <div class="ds-demo-surface">
+          <div style="font-size:12px;font-weight:700;color:var(--jio);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">Typography</div>
+          <div class="ds-rules">
+            <div class="ds-rule ds-rule--pass">Screen titles: 24–36px weight 900, letter-spacing:-.5px</div>
+            <div class="ds-rule ds-rule--pass">Eyebrow labels: 9px weight 700, uppercase, var(--jio), letter-spacing:1.5px</div>
+            <div class="ds-rule ds-rule--pass">Body copy: 14px weight 500, var(--text2), line-height:1.6</div>
+            <div class="ds-rule ds-rule--fail">Never use font-weight 400, 600, or 800</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Do / Don't ── -->
+    <section class="ds-section" id="do-dont">
+      <h2 class="ds-section-title">Do / Don't</h2>
+      <div class="ds-do-dont-grid">
+        <div class="ds-do-card">
+          <div class="ds-do-body">
+            <div style="display:flex;flex-direction:column;gap:6px;max-width:280px">
+              <div style="height:60px;background:linear-gradient(135deg,var(--surface-3),var(--violet));border-radius:var(--r4);position:relative">
+                <div style="position:absolute;bottom:8px;left:10px;font-size:10px;font-weight:900;color:var(--text)">War Thunder</div>
+              </div>
+              <div style="display:flex;gap:8px">
+                <div style="flex:1;height:36px;background:var(--jio);border-radius:var(--pill);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--text-inv)">Play Now</div>
+                <div style="width:36px;height:36px;background:transparent;border:1px solid var(--border);border-radius:var(--pill);display:flex;align-items:center;justify-content:center">
+                  <svg viewBox="0 0 24 24" class="icon icon--m" style="color:var(--text)" aria-hidden="true"><use href="../sprite.svg#ic_bookmark"></use></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ds-do-footer">✓ One primary CTA, one ghost secondary — clear hierarchy</div>
+        </div>
+        <div class="ds-dont-card">
+          <div class="ds-dont-body">
+            <div style="display:flex;flex-direction:column;gap:6px;max-width:280px">
+              <div style="height:60px;background:linear-gradient(135deg,var(--surface-3),var(--violet));border-radius:var(--r4)"></div>
+              <div style="display:flex;gap:8px">
+                <div style="flex:1;height:36px;background:var(--jio);border-radius:var(--pill);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--text-inv)">Play Now</div>
+                <div style="flex:1;height:36px;background:var(--jio);border-radius:var(--pill);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--text-inv)">Add</div>
+              </div>
+            </div>
+          </div>
+          <div class="ds-dont-footer">✗ Don't use two primary buttons — always one primary, one secondary</div>
+        </div>
+        <div class="ds-do-card">
+          <div class="ds-do-body">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px;max-width:200px;margin:0 auto;text-align:center">
+              <div style="width:48px;height:48px;border-radius:var(--pill);background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:22px">🎮</div>
+              <div style="font-size:13px;font-weight:900;color:var(--text)">Library is empty</div>
+              <div style="font-size:11px;color:var(--text3)">Browse 300+ games</div>
+              <div style="padding:8px 16px;background:var(--jio);border-radius:var(--pill);font-size:11px;font-weight:700;color:var(--text-inv)">Browse games</div>
+            </div>
+          </div>
+          <div class="ds-do-footer">✓ Empty state: icon + heading + body + single CTA, centered</div>
+        </div>
+        <div class="ds-dont-card">
+          <div class="ds-dont-body">
+            <div style="display:flex;flex-direction:column;gap:4px;max-width:280px;text-align:center;padding:16px">
+              <div style="font-size:13px;font-weight:500;color:var(--text3)">Nothing here yet.</div>
+            </div>
+          </div>
+          <div class="ds-dont-footer">✗ Don't show empty text alone — always include an icon and a CTA</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Template structure ── -->
+    <section class="ds-section" id="structure">
+      <h2 class="ds-section-title" id="structure">Template Structure</h2>
+      <p class="ds-section-desc">Every mobile template is composed of three fixed layers stacked in a column. Content layer scrolls between the fixed AppBar and Tab Bar.</p>
+      <div class="ds-demo ds-demo--dark" style="display:flex;align-items:flex-start;gap:40px;flex-wrap:wrap">
+        <!-- Layer diagram -->
+        <div style="display:flex;flex-direction:column;gap:0;width:240px;border:1px solid var(--border-subtle);border-radius:var(--r5);overflow:hidden;font-size:12px">
+          <!-- AppBar layer -->
+          <div style="background:var(--surface-1);border-bottom:1px solid var(--border-subtle);padding:14px 16px;display:flex;align-items:center;justify-content:space-between">
+            <span style="font-weight:700;color:var(--text)">AppBar</span>
+            <span style="font-size:10px;color:var(--text3)">56px fixed</span>
+          </div>
+          <!-- Content layer -->
+          <div style="background:var(--bg);padding:20px 16px;display:flex;flex-direction:column;gap:8px;min-height:120px;justify-content:center;align-items:center">
+            <span style="font-weight:700;color:var(--jio)">Content</span>
+            <span style="font-size:10px;color:var(--text3);text-align:center">Scrollable · flex:1<br>Hero, rails, lists</span>
+          </div>
+          <!-- Tab Bar layer -->
+          <div style="background:var(--surface-2);border-top:1px solid var(--border-subtle);padding:14px 16px;display:flex;align-items:center;justify-content:space-between">
+            <span style="font-weight:700;color:var(--text)">Tab Bar</span>
+            <span style="font-size:10px;color:var(--text3)">64px fixed</span>
+          </div>
+        </div>
+        <!-- Layer specs table -->
+        <div style="flex:1;min-width:240px">
+          <table class="ds-spec-table">
+            <thead><tr><th>Layer</th><th>Height</th><th>Position</th><th>Present on</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>AppBar</td>
+                <td>56px</td>
+                <td>sticky top / overlay on hero</td>
+                <td>All mobile templates</td>
+              </tr>
+              <tr>
+                <td>Content</td>
+                <td>flex:1 (fills viewport)</td>
+                <td>scrollable, between bars</td>
+                <td>All templates</td>
+              </tr>
+              <tr>
+                <td>Tab Bar</td>
+                <td>64px + safe-area-inset-bottom</td>
+                <td>fixed bottom</td>
+                <td>Home-level screens only</td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="margin-top:12px;font-size:12px;color:var(--text3);line-height:1.6">
+            Detail screens (Game Detail, Settings, Profile) omit the Tab Bar. The AppBar switches to an overlay style when the content begins with a full-bleed hero image.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACCESSIBILITY -->
+    <section class="component-section" id="accessibility">
+      <h2 class="ds-section-title">Accessibility</h2>
+      <div class="ds-rules">
+        <div class="ds-rule ds-rule--pass">Every template screen must have a visible, unique <code>&lt;h1&gt;</code> as the page title</div>
+        <div class="ds-rule ds-rule--pass">AppBar back button: <code>aria-label="Go back"</code>; icon buttons always labelled</div>
+        <div class="ds-rule ds-rule--pass">Carousel / rail: <code>role="region"</code> with <code>aria-label="Popular games"</code></div>
+        <div class="ds-rule ds-rule--pass">Tab bar: <code>role="navigation"</code>; active tab: <code>aria-current="page"</code></div>
+        <div class="ds-rule ds-rule--pass">Hero image: <code>alt</code> text describes game; decorative overlays are <code>aria-hidden="true"</code></div>
+        <div class="ds-rule ds-rule--pass">Empty, error, and offline states: use <code>role="status"</code> or <code>role="alert"</code> so screen readers announce them</div>
+        <div class="ds-rule ds-rule--pass">Skeleton loading: <code>aria-label="Loading content"</code> on the skeleton container; announce when loading completes via <code>aria-live</code></div>
+        <div class="ds-rule ds-rule--fail">Never hide AppBar or Tab Bar from screen readers — they are primary navigation</div>
+        <div class="ds-rule ds-rule--fail">Never rely on colour alone to indicate active state in Tab Bar or Navigation — always include a label change or icon fill</div>
+      </div>
+    </section>
+
+    <!-- ── Related tokens ── -->
+    <section class="ds-section" id="related-tokens">
+      <h2 class="ds-section-title" id="related-tokens">Related Tokens</h2>
+      <p class="ds-section-desc">Tokens that govern template-level layout. Do not hardcode these values in template HTML.</p>
+      <div class="ds-demo-surface">
+        <table class="ds-spec-table">
+          <thead><tr><th>Token</th><th>Default value</th><th>Usage</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code class="ds-code-inline">--bg</code></td>
+              <td>#06080F</td>
+              <td>Page-level background — the darkest surface, used behind all content</td>
+            </tr>
+            <tr>
+              <td><code class="ds-code-inline">--surface-1</code></td>
+              <td>#0E1119</td>
+              <td>AppBar and card backgrounds — one step above page bg</td>
+            </tr>
+            <tr>
+              <td><code class="ds-code-inline">--surface-2</code></td>
+              <td>#161A24</td>
+              <td>Tab bar background and secondary surface areas</td>
+            </tr>
+            <tr>
+              <td><code class="ds-code-inline">--gutter</code></td>
+              <td>16px (mobile) · 40px (web) · 80px (TV)</td>
+              <td>Horizontal page padding — applied to AppBar and all content sections</td>
+            </tr>
+            <tr>
+              <td><code class="ds-code-inline">--section-gap</code></td>
+              <td>32px (mobile) · 48px (web) · 64px (TV)</td>
+              <td>Vertical spacing between major page sections (rails, heroes)</td>
+            </tr>
+            <tr>
+              <td><code class="ds-code-inline">--card-gap</code></td>
+              <td>12px (mobile) · 24px (web)</td>
+              <td>Gap between cards inside rails and grids</td>
+            </tr>
+            <tr>
+              <td><code class="ds-code-inline">--hero-gap</code></td>
+              <td>32px (mobile) · 64px (web) · 96px (TV)</td>
+              <td>Spacing below the hero section before the first content rail</td>
+            </tr>
+            <tr>
+              <td><code class="ds-code-inline">--app-bar-h</code></td>
+              <td>64px</td>
+              <td>AppBar height token — use for scroll threshold and layout offset calculations</td>
+            </tr>
+            <tr>
+              <td><code class="ds-code-inline">--tab-bar-h</code></td>
+              <td>64px</td>
+              <td>Tab bar height — add to scroll container bottom padding to prevent content obscuring</td>
+            </tr>
+            <tr>
+              <td><code class="ds-code-inline">--safe-top</code></td>
+              <td>env(safe-area-inset-top, 0px)</td>
+              <td>iOS status bar safe area — add to AppBar padding-top</td>
+            </tr>
+            <tr>
+              <td><code class="ds-code-inline">--safe-bot</code></td>
+              <td>env(safe-area-inset-bottom, 0px)</td>
+              <td>iOS home indicator safe area — add to tab bar padding-bottom</td>
+            </tr>
+            <tr>
+              <td><code class="ds-code-inline">--container-web</code></td>
+              <td>1280px</td>
+              <td>Max content width on web. Center with <code class="ds-code-inline">margin:0 auto</code>.</td>
+            </tr>
+            <tr>
+              <td><code class="ds-code-inline">--overlay-image</code></td>
+              <td>linear-gradient(180deg, transparent 40%, rgba(6,8,15,.9) 100%)</td>
+              <td>Hero image bottom gradient overlay — fades game art into page background</td>
+            </tr>
+            <tr>
+              <td><code class="ds-code-inline">--card-overlay</code></td>
+              <td>linear-gradient(0deg, rgba(6,8,15,.85) 0%, transparent 55%)</td>
+              <td>Bottom overlay on card art — keeps title legible over game imagery</td>
+            </tr>
+            <tr>
+              <td><code class="ds-code-inline">--frame-mobile-w</code></td>
+              <td>393px</td>
+              <td>Reference mobile frame width — use for prototype phone frames and max-width caps</td>
+            </tr>
+            <tr>
+              <td><code class="ds-code-inline">--tv-safe</code></td>
+              <td>80px</td>
+              <td>TV overscan safe area inset — all content must stay inside this margin</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ── Rules ── -->
+    <section class="ds-section" id="rules">
+      <h2 class="ds-section-title">Rules</h2>
+      <div class="ds-rules">
+        <div class="ds-rule ds-rule--pass">Every template defines: default, loading, error, and empty states</div>
+        <div class="ds-rule ds-rule--pass">One btn--primary per screen, one supporting action maximum</div>
+        <div class="ds-rule ds-rule--pass">Hero eyebrow: uppercase, var(--jio), letter-spacing:1.5px, font-weight:700</div>
+        <div class="ds-rule ds-rule--pass">Tab bar only on mobile home-level screens — not detail, search, settings</div>
+        <div class="ds-rule ds-rule--pass">Error icon container: rgba(255,71,87,.1); Offline: rgba(107,114,128,.1)</div>
+        <div class="ds-rule ds-rule--pass">Empty + error + offline: center-aligned, max-width 360px, icon + heading + body + CTA</div>
+        <div class="ds-rule ds-rule--pass">Overlay AppBar on hero: semi-transparent bg rgba(6,8,15,.5) on icon buttons</div>
+        <div class="ds-rule ds-rule--fail">Do not reuse error template for offline</div>
+        <div class="ds-rule ds-rule--fail">Do not place two btn--primary on the same screen</div>
+        <div class="ds-rule ds-rule--fail">Do not use raw hex — all backgrounds, text, and border values must use tokens</div>
+        <div class="ds-rule ds-rule--fail">Do not use font-weight 400, 600, or 800 in any template</div>
+      </div>
+    </section>
+
+
+    <!-- CHANGELOG -->
+  </main>
+
+  <script src="../sprite-loader.js"></script>
+  <script src="../shell.js"></script>
+</body>
+</html>

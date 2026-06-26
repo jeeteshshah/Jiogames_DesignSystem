@@ -1,0 +1,1338 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Dots — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    /* ── Page-specific styles ── */
+    body { background: var(--bg); color: var(--text); font-family: var(--jio-font); margin: 0; }
+
+    /* Component page header */
+
+    /* ── Hero ── */
+    .component-hero {
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      min-height: 280px;
+      padding: 48px 32px 32px;
+    }
+    .component-hero--grid {
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 32px 32px;
+      background-color: #060810;
+      border: 1px solid var(--border-subtle);
+    }
+    .component-hero-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+    .component-hero-caption {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: var(--text4);
+      margin-top: 16px;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 320px;
+      height: 180px;
+      border-radius: var(--pill);
+      background: radial-gradient(ellipse, rgba(0,168,89,.18) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* ── Dot primitives ── */
+    .dot-inactive {
+      width: 8px;
+      height: 8px;
+      border-radius: 100px;
+      background: rgba(244,242,238,.15);
+      flex-shrink: 0;
+      display: block;
+    }
+    .dot-inactive--sm {
+      width: 6px;
+      height: 6px;
+    }
+    .dot-active-pill {
+      width: 20px;
+      height: 8px;
+      border-radius: 100px;
+      background: var(--jio);
+      flex-shrink: 0;
+      display: block;
+    }
+    .dot-active-pill--lg {
+      width: 28px;
+      height: 10px;
+    }
+    .dot-active--sm {
+      width: 6px;
+      height: 6px;
+      border-radius: 100px;
+      background: var(--jio);
+      flex-shrink: 0;
+      display: block;
+    }
+    .dot-track {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── Hero rows ── */
+    .dot-hero-rows {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      position: relative;
+      z-index: 2;
+    }
+    .dot-hero-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .dot-hero-row-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: var(--text4);
+    }
+
+    /* ── Bar variant ── */
+    .bar-track {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      width: 240px;
+    }
+    .bar-segment {
+      flex: 1;
+      height: 3px;
+      border-radius: 100px;
+      background: rgba(244,242,238,.15);
+    }
+    .bar-segment--active {
+      background: var(--jio);
+    }
+
+    /* ── Numbered ── */
+    .dot-numbered {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -.3px;
+    }
+    .dot-numbered-cur  { color: var(--jio); }
+    .dot-numbered-sep  { color: var(--text3); padding: 0 3px; }
+    .dot-numbered-total { color: var(--text3); }
+
+    /* ── Intro ── */
+    .component-intro { margin-bottom: 48px; }
+    .component-intro p {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.65;
+      margin-bottom: 20px;
+      max-width: 640px;
+    }
+    .component-summary-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      overflow: hidden;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .component-summary-list li {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.55;
+    }
+    .component-summary-list li:last-child { border-bottom: none; }
+    .component-summary-list li strong { color: var(--text); font-weight: 700; }
+
+    /* ── Best practices ── */
+    .component-best-practices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .component-bp-card {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1.5px solid;
+    }
+    .component-bp-card--do   { border-color: rgba(0,168,89,.3); }
+    .component-bp-card--dont { border-color: rgba(255,71,87,.3); }
+    .component-bp-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 16px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+    }
+    .component-bp-label--do   { background: rgba(0,168,89,.07);  color: var(--jio); }
+    .component-bp-label--dont { background: rgba(255,71,87,.07); color: #ff4757; }
+    .component-bp-label--do::before   { content: '\2713'; font-size: 11px; }
+    .component-bp-label--dont::before { content: '\2715'; font-size: 11px; }
+    .component-bp-list {
+      padding: 16px 20px 20px;
+      background: var(--surface-1);
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      list-style: none;
+    }
+    .component-bp-list li {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+    .component-bp-list li::before {
+      content: '\00B7';
+      position: absolute;
+      left: 3px;
+      color: var(--text4);
+    }
+
+    /* ── Section heading ── */
+    .ds-section-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -.4px;
+      margin-bottom: 8px;
+    }
+    .ds-section-sub {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text3);
+      margin-bottom: 24px;
+      line-height: 1.55;
+    }
+
+    /* ── Anatomy ── */
+    .anatomy-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .anatomy-item {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .anatomy-item:last-child { border-bottom: none; }
+    .anatomy-index {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(0,168,89,.12);
+      border: 1px solid rgba(0,168,89,.25);
+      color: var(--jio);
+      font-size: 11px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .anatomy-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+    .anatomy-required {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      color: var(--jio);
+      background: rgba(0,168,89,.1);
+      border-radius: 4px;
+      padding: 1px 5px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .anatomy-desc {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text3);
+      line-height: 1.55;
+      margin-bottom: 6px;
+    }
+    .anatomy-token {
+      font-family: monospace;
+      font-size: 11px;
+      color: #a8e6c5;
+      background: rgba(168,230,197,.07);
+      border-radius: 5px;
+      padding: 3px 7px;
+      display: inline-block;
+    }
+
+    /* ── Variants ── */
+    .variants-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .variant-card {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+    }
+    .variant-demo {
+      background: #060810;
+      background-image:
+        linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+      background-size: 24px 24px;
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .variant-info {
+      padding: 14px 16px 16px;
+      background: var(--surface-1);
+    }
+    .variant-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .variant-use {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text3);
+      line-height: 1.5;
+    }
+    .variant-default-badge {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+      color: var(--jio);
+      background: rgba(0,168,89,.1);
+      border-radius: 4px;
+      padding: 1px 6px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    /* ── Sizes table ── */
+    .sizes-table {
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-top: 24px;
+    }
+    .sizes-table-head {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .sizes-table-head > div {
+      padding: 10px 16px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+    .sizes-table-row {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .sizes-table-row:last-child { border-bottom: none; }
+    .sizes-table-row:nth-child(even) { background: var(--surface-1); }
+    .sizes-table-label {
+      padding: 12px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      border-right: 1px solid var(--border-subtle);
+      background: var(--surface-2);
+    }
+    .sizes-table-val {
+      padding: 12px 16px;
+      font-family: monospace;
+      font-size: 11px;
+      color: #a8e6c5;
+    }
+
+    /* ── States demo ── */
+    .states-demo {
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-top: 24px;
+    }
+    .state-row {
+      display: grid;
+      grid-template-columns: 148px 1fr;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .state-row:last-child { border-bottom: none; }
+    .state-label-cell {
+      padding: 20px;
+      background: var(--surface-2);
+      border-right: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+    }
+    .state-label-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .state-label-desc {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text3);
+      line-height: 1.45;
+    }
+    .state-demo-cell {
+      padding: 20px 24px;
+      background: #060810;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    /* Overflow fade effect */
+    .dot-track--overflow {
+      position: relative;
+      overflow: hidden;
+      max-width: 112px;
+    }
+    .dot-track--overflow::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 32px;
+      background: linear-gradient(90deg, transparent, #060810);
+      pointer-events: none;
+    }
+
+    /* Transitioning animation */
+    @keyframes pill-expand {
+      0%   { width: 8px; }
+      45%  { width: 22px; }
+      100% { width: 20px; }
+    }
+    .dot-active-pill--anim {
+      animation: pill-expand 700ms cubic-bezier(.22,1,.36,1) infinite alternate;
+    }
+
+    /* ── Content / spec blocks ── */
+    .spec-block {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-top: 16px;
+    }
+    .spec-block + .spec-block { margin-top: 12px; }
+    .spec-block-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 10px;
+    }
+    .spec-block pre {
+      font-family: monospace;
+      font-size: 13px;
+      color: #a8e6c5;
+      margin: 0;
+      white-space: pre-wrap;
+    }
+    .spec-rule-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .spec-rule-list li {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.55;
+      padding-left: 16px;
+      position: relative;
+    }
+    .spec-rule-list li::before {
+      content: '\00B7';
+      position: absolute;
+      left: 4px;
+      color: var(--text4);
+    }
+
+    /* ── Platform ── */
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .platform-card {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 20px;
+    }
+    .platform-card--mobile { border-top: 2px solid rgba(110,231,183,.4); }
+    .platform-card--web    { border-top: 2px solid rgba(147,197,253,.4); }
+    .platform-card--tv     { border-top: 2px solid rgba(251,191,36,.4); }
+    .platform-card-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .platform-card--mobile .platform-card-title { color: #6ee7b7; }
+    .platform-card--web    .platform-card-title { color: #93c5fd; }
+    .platform-card--tv     .platform-card-title { color: #fbbf24; }
+    .platform-card ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .platform-card li {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+    .platform-card li::before {
+      content: '\00B7';
+      position: absolute;
+      left: 3px;
+      color: var(--text4);
+    }
+
+    /* ── Accessibility ── */
+    .a11y-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .a11y-card {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 20px;
+    }
+    .a11y-card-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 12px;
+    }
+    .a11y-card ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .a11y-card li {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+    .a11y-card li::before {
+      content: '\00B7';
+      position: absolute;
+      left: 3px;
+      color: var(--text4);
+    }
+    .a11y-code {
+      font-family: monospace;
+      font-size: 11px;
+      color: #a8e6c5;
+      background: rgba(168,230,197,.07);
+      border-radius: 4px;
+      padding: 1px 5px;
+    }
+
+    /* ── Related tokens ── */
+    .tokens-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 20px;
+    }
+    .token-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border-radius: 10px;
+      background: var(--surface-2);
+      border: 1px solid var(--border-subtle);
+    }
+    .token-chip-swatch {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .token-chip-name {
+      font-family: monospace;
+      font-size: 12px;
+      color: #a8e6c5;
+    }
+    .token-chip-desc {
+      font-size: 11px;
+      color: var(--text3);
+    }
+
+    /* ── Changelog ── */
+    .component-changelog {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .component-changelog-entry {
+      display: grid;
+      grid-template-columns: 56px 80px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 12px;
+    }
+    .component-changelog-entry:last-child { border-bottom: none; }
+    .component-changelog-version {
+      font-family: monospace;
+      font-weight: 700;
+      color: var(--jio);
+      font-size: 11px;
+    }
+    .component-changelog-date {
+      color: var(--text3);
+      font-weight: 500;
+    }
+    .component-changelog-desc {
+      color: var(--text2);
+      line-height: 1.5;
+    }
+
+    /* ── Note ── */
+    .ds-note {
+      background: rgba(0,168,89,.06);
+      border: 1px solid rgba(0,168,89,.2);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.55;
+      margin-top: 16px;
+    }
+    .ds-note strong { color: var(--jio); }
+  </style>
+</head><body><main class="ds-content">
+
+  <!-- ═══════════════════════════════════════════ PAGE HEADER -->
+  <div class="component-page-header">
+    <nav class="component-breadcrumb">
+      <a href="../index.html">JioGames DLS</a>
+      <span class="component-breadcrumb-sep">›</span>
+      <a href="../index.html#components">Components</a>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Page Dots</span>
+    </nav>
+    <h1 class="component-page-title">Page Dots</h1>
+    <p class="component-page-def">Page dots indicate position within a paginated sequence such as hero carousels and onboarding flows.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile">
+        <span class="component-platform-dot"></span>Mobile
+      </span>
+      <span class="component-platform component-platform--web">
+        <span class="component-platform-dot"></span>Web
+      </span>
+      <span class="component-platform component-platform--tv">
+        <span class="component-platform-dot"></span>TV
+      </span>
+      <span class="component-maturity component-maturity--stable">
+        <span class="component-maturity--dot"></span>Stable
+      </span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ HERO -->
+  <div class="component-hero component-hero--grid">
+    <div class="hero-glow"></div>
+    <div class="dot-hero-rows">
+
+      <!-- Row 1: Default pill — pos 2 active -->
+      <div class="dot-hero-row">
+        <div class="dot-hero-row-label">Default pill</div>
+        <div class="dot-track">
+          <span class="dot-inactive"></span>
+          <span class="dot-active-pill"></span>
+          <span class="dot-inactive"></span>
+          <span class="dot-inactive"></span>
+          <span class="dot-inactive"></span>
+        </div>
+      </div>
+
+      <!-- Row 2: Minimal — pos 3 active -->
+      <div class="dot-hero-row">
+        <div class="dot-hero-row-label">Minimal</div>
+        <div class="dot-track">
+          <span class="dot-inactive dot-inactive--sm"></span>
+          <span class="dot-inactive dot-inactive--sm"></span>
+          <span class="dot-active--sm"></span>
+          <span class="dot-inactive dot-inactive--sm"></span>
+          <span class="dot-inactive dot-inactive--sm"></span>
+        </div>
+      </div>
+
+      <!-- Row 3: Bar — pos 1 active -->
+      <div class="dot-hero-row">
+        <div class="dot-hero-row-label">Bar</div>
+        <div class="bar-track">
+          <div class="bar-segment bar-segment--active"></div>
+          <div class="bar-segment"></div>
+          <div class="bar-segment"></div>
+        </div>
+      </div>
+
+      <!-- Row 4: Numbered -->
+      <div class="dot-hero-row">
+        <div class="dot-hero-row-label">Numbered</div>
+        <div class="dot-numbered">
+          <span class="dot-numbered-cur">2</span>
+          <span class="dot-numbered-sep">/</span>
+          <span class="dot-numbered-total">5</span>
+        </div>
+      </div>
+
+    </div>
+    <span class="component-hero-caption">Four variants — pill (default), minimal, bar, numbered</span>
+  </div>
+
+  <!-- ═══════════════════════════════════════════ INTRO -->
+  <section class="component-intro">
+    <h2 class="ds-section-title">Overview</h2>
+    <p>Page dots give players an instant spatial read of their position in a sequence — carousels, onboarding flows, image galleries. The active dot expands into a pill to draw the eye without adding visual weight.</p>
+    <ul class="component-summary-list">
+      <li><strong>Active pill not dot.</strong> Active position uses an expanded pill (20×8px mobile) not a filled dot, for clearer affordance.</li>
+      <li><strong>Minimal footprint.</strong> Dots live below content, never over it. Max 9 dots visible; use overflow clipping beyond that.</li>
+      <li><strong>Carousel use only.</strong> Don't use page dots for vertical scroll position — use a progress bar instead.</li>
+      <li><strong>Auto-advance timing.</strong> When a carousel auto-advances, animate the active pill's width, not just its position.</li>
+    </ul>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ BEST PRACTICES -->
+  <section style="margin-bottom:48px;">
+    <h2 class="ds-section-title">Best practices</h2>
+    <p class="ds-section-sub">What to do and what to avoid.</p>
+    <div class="component-best-practices">
+      <div class="component-bp-card component-bp-card--do">
+        <div class="component-bp-label component-bp-label--do">Do</div>
+        <ul class="component-bp-list">
+          <li>Use the pill variant (active dot expands) for hero carousels</li>
+          <li>Center dot tracks horizontally beneath the carousel</li>
+          <li>Keep inactive dots at 8px (mobile) or proportionally smaller</li>
+          <li>Use the bar variant for full-width coverage like stories</li>
+          <li>Limit to 9 visible dots max; clip or use numbered variant for more</li>
+          <li>Animate active state with CSS transition (not JS)</li>
+        </ul>
+      </div>
+      <div class="component-bp-card component-bp-card--dont">
+        <div class="component-bp-label component-bp-label--dont">Don't</div>
+        <ul class="component-bp-list">
+          <li>Don't use same-size dots for active and inactive — loses affordance</li>
+          <li>Don't place dots over image content (use semi-transparent overlay region)</li>
+          <li>Don't use page dots for vertical pagination</li>
+          <li>Don't show dots when there's only 1 page</li>
+          <li>Don't animate beyond 200ms — should feel instant not sluggish</li>
+          <li>Don't use dots as buttons without adequate 44px touch targets</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ ANATOMY -->
+  <section style="margin-bottom:48px;">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <p class="ds-section-sub">The four required parts of every page dots track.</p>
+    <div class="anatomy-list">
+
+      <div class="anatomy-item">
+        <div class="anatomy-index">1</div>
+        <div>
+          <div class="anatomy-name">Dot track <span class="anatomy-required">Required</span></div>
+          <div class="anatomy-desc">Flex row that holds all dots and maintains consistent gap. Centered horizontally below the carousel.</div>
+          <code class="anatomy-token">display:flex; gap:6px; align-items:center</code>
+        </div>
+      </div>
+
+      <div class="anatomy-item">
+        <div class="anatomy-index">2</div>
+        <div>
+          <div class="anatomy-name">Inactive dot <span class="anatomy-required">Required</span></div>
+          <div class="anatomy-desc">Represents all non-current slides. Muted so it doesn't compete with the active pill. Opacity 0.5 on dark surfaces.</div>
+          <code class="anatomy-token">width:8px; height:8px; border-radius:100px; background:var(--text4)</code>
+        </div>
+      </div>
+
+      <div class="anatomy-item">
+        <div class="anatomy-index">3</div>
+        <div>
+          <div class="anatomy-name">Active dot <span class="anatomy-required">Required</span></div>
+          <div class="anatomy-desc">Expands into a pill on activation. Width transition communicates position change and direction of travel.</div>
+          <code class="anatomy-token">width:20px; height:8px; border-radius:100px; background:var(--jio)</code>
+        </div>
+      </div>
+
+      <div class="anatomy-item">
+        <div class="anatomy-index">4</div>
+        <div>
+          <div class="anatomy-name">Gap between dots <span class="anatomy-required">Required</span></div>
+          <div class="anatomy-desc">Consistent spacing between all dots including the active pill. Larger on TV to account for viewing distance.</div>
+          <code class="anatomy-token">6px (mobile/web) — 8px (TV)</code>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ VARIANTS -->
+  <section style="margin-bottom:48px;">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-sub">Choose the variant that fits the surface density and scroll direction.</p>
+    <div class="variants-grid">
+
+      <div class="variant-card">
+        <div class="variant-demo">
+          <div class="dot-track">
+            <span class="dot-inactive"></span>
+            <span class="dot-inactive"></span>
+            <span class="dot-active-pill"></span>
+            <span class="dot-inactive"></span>
+            <span class="dot-inactive"></span>
+          </div>
+        </div>
+        <div class="variant-info">
+          <div class="variant-name">Dot / Pill <span class="variant-default-badge">Default</span></div>
+          <div class="variant-use">Inactive 8px round, active 20×8px pill. Use for hero carousels.</div>
+        </div>
+      </div>
+
+      <div class="variant-card">
+        <div class="variant-demo">
+          <div class="dot-track">
+            <span class="dot-inactive dot-inactive--sm"></span>
+            <span class="dot-inactive dot-inactive--sm"></span>
+            <span class="dot-inactive dot-inactive--sm"></span>
+            <span class="dot-active--sm"></span>
+            <span class="dot-inactive dot-inactive--sm"></span>
+          </div>
+        </div>
+        <div class="variant-info">
+          <div class="variant-name">Minimal</div>
+          <div class="variant-use">All dots same 6×6px size, active is green. Use in content-dense contexts.</div>
+        </div>
+      </div>
+
+      <div class="variant-card">
+        <div class="variant-demo">
+          <div class="bar-track" style="width:200px;">
+            <div class="bar-segment"></div>
+            <div class="bar-segment bar-segment--active"></div>
+            <div class="bar-segment"></div>
+            <div class="bar-segment"></div>
+          </div>
+        </div>
+        <div class="variant-info">
+          <div class="variant-name">Bar</div>
+          <div class="variant-use">Full-width bars, equal width, active is green. Use for stories and full-screen flows.</div>
+        </div>
+      </div>
+
+      <div class="variant-card">
+        <div class="variant-demo">
+          <div class="dot-numbered">
+            <span class="dot-numbered-cur">3</span>
+            <span class="dot-numbered-sep">/</span>
+            <span class="dot-numbered-total">7</span>
+          </div>
+        </div>
+        <div class="variant-info">
+          <div class="variant-name">Numbered</div>
+          <div class="variant-use">Use when sequence length matters — onboarding steps, multi-step forms.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ SIZES -->
+  <section style="margin-bottom:48px;">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-sub">Dot dimensions scale across platforms to match interaction modality and viewing distance.</p>
+    <div class="sizes-table">
+      <div class="sizes-table-head">
+        <div>Property</div>
+        <div>Mobile</div>
+        <div>Web</div>
+        <div>TV</div>
+      </div>
+      <div class="sizes-table-row">
+        <div class="sizes-table-label">Active dot</div>
+        <div class="sizes-table-val">20 × 8px</div>
+        <div class="sizes-table-val">20 × 8px</div>
+        <div class="sizes-table-val">28 × 12px</div>
+      </div>
+      <div class="sizes-table-row">
+        <div class="sizes-table-label">Inactive dot</div>
+        <div class="sizes-table-val">8 × 8px</div>
+        <div class="sizes-table-val">8 × 8px</div>
+        <div class="sizes-table-val">10 × 10px</div>
+      </div>
+      <div class="sizes-table-row">
+        <div class="sizes-table-label">Gap between dots</div>
+        <div class="sizes-table-val">6px</div>
+        <div class="sizes-table-val">6px</div>
+        <div class="sizes-table-val">8px</div>
+      </div>
+      <div class="sizes-table-row">
+        <div class="sizes-table-label">Touch target (per dot)</div>
+        <div class="sizes-table-val">44 × 44px</div>
+        <div class="sizes-table-val">32 × 32px</div>
+        <div class="sizes-table-val">60 × 60px</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ STATES -->
+  <section style="margin-bottom:48px;">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-sub">All states a dot track can enter during a user session.</p>
+    <div class="states-demo">
+
+      <div class="state-row">
+        <div class="state-label-cell">
+          <div class="state-label-name">Default</div>
+          <div class="state-label-desc">Position 1 active. Initial load state.</div>
+        </div>
+        <div class="state-demo-cell">
+          <div class="dot-track">
+            <span class="dot-active-pill"></span>
+            <span class="dot-inactive"></span>
+            <span class="dot-inactive"></span>
+            <span class="dot-inactive"></span>
+            <span class="dot-inactive"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="state-row">
+        <div class="state-label-cell">
+          <div class="state-label-name">Active</div>
+          <div class="state-label-desc">Position 3 active. User swiped or auto-advanced.</div>
+        </div>
+        <div class="state-demo-cell">
+          <div class="dot-track">
+            <span class="dot-inactive"></span>
+            <span class="dot-inactive"></span>
+            <span class="dot-active-pill"></span>
+            <span class="dot-inactive"></span>
+            <span class="dot-inactive"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="state-row">
+        <div class="state-label-cell">
+          <div class="state-label-name">Transitioning</div>
+          <div class="state-label-desc">Pill width animates during slide change. Spring easing.</div>
+        </div>
+        <div class="state-demo-cell">
+          <div class="dot-track">
+            <span class="dot-inactive"></span>
+            <span class="dot-active-pill dot-active-pill--anim"></span>
+            <span class="dot-inactive"></span>
+            <span class="dot-inactive"></span>
+            <span class="dot-inactive"></span>
+          </div>
+          <code style="font-family:monospace;font-size:10px;color:var(--text3);">transition: width 200ms var(--spring)</code>
+        </div>
+      </div>
+
+      <div class="state-row">
+        <div class="state-label-cell">
+          <div class="state-label-name">Overflow</div>
+          <div class="state-label-desc">8+ dots clip with right-side fade. Switch to Numbered variant.</div>
+        </div>
+        <div class="state-demo-cell">
+          <div class="dot-track dot-track--overflow">
+            <span class="dot-active-pill" style="flex-shrink:0;"></span>
+            <span class="dot-inactive" style="flex-shrink:0;"></span>
+            <span class="dot-inactive" style="flex-shrink:0;"></span>
+            <span class="dot-inactive" style="flex-shrink:0;"></span>
+            <span class="dot-inactive" style="flex-shrink:0;"></span>
+            <span class="dot-inactive" style="flex-shrink:0;"></span>
+            <span class="dot-inactive" style="flex-shrink:0;"></span>
+            <span class="dot-inactive" style="flex-shrink:0;"></span>
+            <span class="dot-inactive" style="flex-shrink:0;"></span>
+            <span class="dot-inactive" style="flex-shrink:0;"></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ CONTENT / MOTION -->
+  <section style="margin-bottom:48px;">
+    <h2 class="ds-section-title">Content &amp; Motion</h2>
+    <p class="ds-section-sub">There is no text in this component. These specs govern its behaviour.</p>
+
+    <div class="spec-block">
+      <div class="spec-block-title">Active dot transition</div>
+      <pre>transition: width 200ms cubic-bezier(.22,1,.36,1);</pre>
+    </div>
+
+    <div class="spec-block">
+      <div class="spec-block-title">Show / hide rules</div>
+      <ul class="spec-rule-list">
+        <li>Hide the entire dot track when page count = 1. A single page has no position to indicate.</li>
+        <li>Show at 2 or more pages.</li>
+        <li>Maximum 9 visible dots. For sequences of 10+ pages, switch to the Numbered variant.</li>
+      </ul>
+    </div>
+
+    <div class="ds-note">
+      <strong>Auto-advance:</strong> When the carousel advances automatically, animate the pill width using the same spring easing. This signals the transition is system-driven, not user-initiated.
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ PLATFORM -->
+  <section style="margin-bottom:48px;">
+    <h2 class="ds-section-title">Platform guidance</h2>
+    <p class="ds-section-sub">Sizes and interaction models differ across Mobile, Web, and TV.</p>
+    <div class="platform-grid">
+
+      <div class="platform-card platform-card--mobile">
+        <div class="platform-card-title">Mobile</div>
+        <ul>
+          <li>8px inactive dots, 20×8px active pill</li>
+          <li>44px touch targets via wrapper <code style="font-family:monospace;font-size:10px;color:#a8e6c5;">&lt;button&gt;</code> per dot</li>
+          <li>Gap 6px between dots</li>
+          <li>Track sits 12px below carousel bottom edge</li>
+        </ul>
+      </div>
+
+      <div class="platform-card platform-card--web">
+        <div class="platform-card-title">Web</div>
+        <ul>
+          <li>Same dot sizes as mobile (20×8px active, 8×8px inactive)</li>
+          <li>32px touch area acceptable — mouse users click precisely</li>
+          <li>Mouse hover can preview next slide (cursor: pointer)</li>
+          <li>Gap 6px between dots</li>
+        </ul>
+      </div>
+
+      <div class="platform-card platform-card--tv">
+        <div class="platform-card-title">TV</div>
+        <ul>
+          <li>10px inactive, 28×12px active pill</li>
+          <li>Gap 8px to aid readability at distance</li>
+          <li>Purely visual indicator — not interactive</li>
+          <li>D-pad controls slides directly, not the dot track</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ ACCESSIBILITY -->
+  <section style="margin-bottom:48px;">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-sub">Semantic markup and ARIA requirements for interactive and decorative use.</p>
+    <div class="a11y-grid">
+
+      <div class="a11y-card">
+        <div class="a11y-card-title">Interactive (Mobile / Web)</div>
+        <ul>
+          <li><code class="a11y-code">role="tablist"</code> on the dot track wrapper</li>
+          <li><code class="a11y-code">role="tab"</code> on each individual dot button</li>
+          <li><code class="a11y-code">aria-selected="true"</code> on the active dot</li>
+          <li><code class="a11y-code">aria-label="Slide 2 of 5"</code> on each dot button</li>
+          <li>Arrow keys navigate between slides; dots are tab stops</li>
+        </ul>
+      </div>
+
+      <div class="a11y-card">
+        <div class="a11y-card-title">Decorative (TV)</div>
+        <ul>
+          <li><code class="a11y-code">role="presentation"</code> on the track</li>
+          <li><code class="a11y-code">aria-hidden="true"</code> on the entire track</li>
+          <li>Announce slide changes via <code class="a11y-code">aria-live="polite"</code> region elsewhere in layout</li>
+          <li>D-pad navigation controls the carousel, not the dots</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="platform-considerations" class="component-section">
+  <h2 class="ds-section-title">Platform considerations</h2>
+  <div class="component-platform-grid">
+    <div class="component-platform component-platform--mobile">
+      <div class="component-platform-label">Mobile</div>
+      <ul class="component-platform-list">
+        <li>Swipe gesture on carousel drives dot state</li>
+        <li>Tap on dot navigates to that slide</li>
+        <li>Standard size: 6px inactive, 18px active</li>
+        <li>Place below carousel with 12px gap</li>
+      </ul>
+    </div>
+    <div class="component-platform component-platform--web">
+      <div class="component-platform-label">Web</div>
+      <ul class="component-platform-list">
+        <li>Click on dot navigates to slide</li>
+        <li>Arrow key left/right drives carousel and syncs dots</li>
+        <li>Each dot is a focusable button with aria-label</li>
+        <li>Hover state: dot lightens slightly</li>
+      </ul>
+    </div>
+    <div class="component-platform component-platform--tv">
+      <div class="component-platform-label">TV</div>
+      <ul class="component-platform-list">
+        <li>Dots are decorative only — D-pad drives carousel directly</li>
+        <li>Do not make individual dots focusable on TV</li>
+        <li>Increase dot size to 10px / 28px for 10-foot legibility</li>
+        <li>Active dot may use a progress-bar style for timed carousels</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="content" class="component-section">
+  <h2 class="ds-section-title">Content guidance</h2>
+  <div class="component-content-grid">
+    <div>
+      <h3 class="ds-subsection-title">Count</h3>
+      <p class="ds-body">Use page dots for 2–8 slides. Above 8 slides, switch to a numeric indicator ("3 / 12") or remove entirely and rely on gesture affordance.</p>
+    </div>
+    <div>
+      <h3 class="ds-subsection-title">Accessible labels</h3>
+      <p class="ds-body">Each dot button needs an aria-label: "Slide 1 of 5", "Slide 2 of 5". The active dot gets aria-current="true".</p>
+    </div>
+    <div>
+      <h3 class="ds-subsection-title">Placement</h3>
+      <p class="ds-body">Always centred below the carousel. Do not place inside the carousel content area. Minimum 12px gap from bottom of carousel.</p>
+    </div>
+  </div>
+</section>
+
+  <!-- ═══════════════════════════════════════════ RELATED TOKENS -->
+  <section style="margin-bottom:48px;">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-sub">Design tokens consumed by this component.</p>
+    <div class="tokens-grid">
+      <div class="token-chip">
+        <div class="token-chip-swatch" style="background:#00A859;"></div>
+        <span class="token-chip-name">--jio</span>
+        <span class="token-chip-desc">Active pill fill</span>
+      </div>
+      <div class="token-chip">
+        <div class="token-chip-swatch" style="background:rgba(244,242,238,.2);border:1px solid rgba(244,242,238,.15);"></div>
+        <span class="token-chip-name">--text4</span>
+        <span class="token-chip-desc">Inactive dot fill</span>
+      </div>
+      <div class="token-chip">
+        <div class="token-chip-swatch" style="background:rgba(244,242,238,.08);border:1px solid rgba(244,242,238,.12);"></div>
+        <span class="token-chip-name">--pill</span>
+        <span class="token-chip-desc">Border-radius for pill shape</span>
+      </div>
+      <div class="token-chip">
+        <div class="token-chip-swatch" style="background:rgba(0,168,89,.5);"></div>
+        <span class="token-chip-name">--dur-default</span>
+        <span class="token-chip-desc">Base transition duration</span>
+      </div>
+      <div class="token-chip">
+        <div class="token-chip-swatch" style="background:rgba(147,197,253,.3);"></div>
+        <span class="token-chip-name">--spring</span>
+        <span class="token-chip-desc">cubic-bezier(.22,1,.36,1) easing</span>
+      </div>
+      <div class="token-chip">
+        <div class="token-chip-swatch" style="background:rgba(251,191,36,.3);"></div>
+        <span class="token-chip-name">--touch-min</span>
+        <span class="token-chip-desc">44px minimum touch target size</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ CODE EXAMPLES -->
+  <section class="component-section" id="code-examples" style="margin-bottom:48px;">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
+    <div class="component-code-block">
+      <div class="component-code-label">Page dots — carousel indicator</div>
+      <pre class="component-code-pre"><code>&lt;div
+  class="page-dots"
+  role="tablist"
+  aria-label="Slide navigation"
+&gt;
+  &lt;button
+    class="page-dot page-dot--active"
+    role="tab"
+    aria-selected="true"
+    aria-label="Slide 1 of 4"
+    aria-current="true"
+  &gt;&lt;/button&gt;
+  &lt;button
+    class="page-dot"
+    role="tab"
+    aria-selected="false"
+    aria-label="Slide 2 of 4"
+  &gt;&lt;/button&gt;
+  &lt;button
+    class="page-dot"
+    role="tab"
+    aria-selected="false"
+    aria-label="Slide 3 of 4"
+  &gt;&lt;/button&gt;
+  &lt;button
+    class="page-dot"
+    role="tab"
+    aria-selected="false"
+    aria-label="Slide 4 of 4"
+  &gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+    <div class="component-code-block">
+      <div class="component-code-label">Page dots — sync with carousel (JS)</div>
+      <pre class="component-code-pre"><code>const dots = document.querySelectorAll('.page-dot');
+const carousel = document.querySelector('.carousel');
+
+function setActiveDot(index) {
+  dots.forEach((dot, i) => {
+    const active = i === index;
+    dot.classList.toggle('page-dot--active', active);
+    dot.setAttribute('aria-selected', String(active));
+    dot.setAttribute('aria-current', active ? 'true' : 'false');
+  });
+}
+
+// Call on carousel scroll/swipe
+carousel.addEventListener('scroll', () => {
+  const index = Math.round(carousel.scrollLeft / carousel.offsetWidth);
+  setActiveDot(index);
+});</code></pre>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ CHANGELOG -->
+  <section style="margin-bottom:64px;">
+    <h2 class="ds-section-title">Changelog</h2>
+    <p class="ds-section-sub">Version history for this component.</p>
+    <div class="component-changelog">
+      <div class="component-changelog-entry">
+        <div class="component-changelog-version">v2.1</div>
+        <div class="component-changelog-date">Apr 2025</div>
+        <div class="component-changelog-desc">Bar variant added; TV platform gets larger inactive (10px) and active (28×12px) sizes with 8px gap.</div>
+      </div>
+      <div class="component-changelog-entry">
+        <div class="component-changelog-version">v2.0</div>
+        <div class="component-changelog-date">Feb 2025</div>
+        <div class="component-changelog-desc">Pill variant replaced filled dot as the active state. Spring easing (cubic-bezier .22,1,.36,1) replaces linear for width transition.</div>
+      </div>
+      <div class="component-changelog-entry">
+        <div class="component-changelog-version">v1.0</div>
+        <div class="component-changelog-date">Nov 2024</div>
+        <div class="component-changelog-desc">Initial release. Dot/pill and minimal variants. Mobile and web only.</div>
+      </div>
+    </div>
+  </section>
+
+</main><script src="../sprite-loader.js"></script><script src="../shell.js"></script></body></html>

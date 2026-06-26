@@ -1,0 +1,940 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toast — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    /* ── Toast component ── */
+    .toast-demo-screen {
+      position: relative;
+      width: 320px;
+      height: 240px;
+      background: var(--surface-1);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+    }
+    .toast-stack {
+      position: absolute;
+      bottom: 16px;
+      left: 12px;
+      right: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .toast {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 24px rgba(0,0,0,.5);
+      position: relative;
+      overflow: hidden;
+    }
+    .toast-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+    .toast-msg {
+      flex: 1;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .toast-action {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--jio);
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+      white-space: nowrap;
+    }
+    .toast-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      background: var(--jio);
+      border-radius: 0;
+      animation: toast-timer 4s linear forwards;
+    }
+    @keyframes toast-timer {
+      from { width: 100%; }
+      to   { width: 0%; }
+    }
+    .toast--success .toast-icon { color: var(--jio); }
+    .toast--error   .toast-icon { color: var(--negative); }
+    .toast--error   .toast-progress { background: var(--negative); }
+    .toast--warning .toast-icon { color: var(--amber); }
+    .toast--warning .toast-progress { background: var(--amber); }
+    .toast--info    .toast-icon { color: var(--text3); }
+    .toast--loading .toast-icon { color: var(--text3); }
+    .spinner {
+      width: 14px;
+      height: 14px;
+      border: 2px solid var(--text4, rgba(244,242,238,.16));
+      border-top-color: var(--jio);
+      border-radius: 50%;
+      animation: spin 800ms linear infinite;
+      flex-shrink: 0;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Hero fake-screen placeholder UI */
+    .fake-ui {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      right: 16px;
+    }
+    .fake-ui-bar {
+      height: 10px;
+      border-radius: 6px;
+      background: var(--border);
+      margin-bottom: 10px;
+    }
+    .fake-ui-bar--wide  { width: 80%; }
+    .fake-ui-bar--med   { width: 55%; }
+    .fake-ui-bar--short { width: 35%; }
+    .fake-ui-card {
+      height: 64px;
+      border-radius: 10px;
+      background: var(--border-subtle, rgba(244,242,238,.06));
+      margin-top: 14px;
+    }
+
+    /* Variant grid */
+    .toast-variant-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 380px;
+    }
+    .toast-variant-grid .toast { animation: none; }
+    .toast-variant-grid .toast-progress { animation: toast-timer 8s linear forwards; }
+
+    /* States flow */
+    .states-flow {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .state-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .state-step-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text3);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .state-step-arrow {
+      font-size: 20px;
+      color: var(--text3);
+      margin-top: 12px;
+    }
+    .state-toast-enter {
+      opacity: .35;
+      transform: translateY(12px);
+    }
+    .state-toast-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .state-toast-exit {
+      opacity: .15;
+      transform: translateY(6px);
+    }
+
+    /* Sizes table */
+    .sizes-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .sizes-table th,
+    .sizes-table td {
+      padding: 10px 14px;
+      border: 1px solid var(--border-subtle);
+      text-align: left;
+    }
+    .sizes-table th {
+      background: var(--surface-1);
+      color: var(--text2);
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .sizes-table td { color: var(--text); }
+    .sizes-table .na { color: var(--text3); font-style: italic; }
+
+    /* Content grid */
+    .content-examples {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .content-ex {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text2);
+    }
+    .content-ex-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .content-ex-dot--green  { background: var(--jio); }
+    .content-ex-dot--red    { background: var(--negative); }
+    .content-ex-dot--strike { background: var(--text3); }
+    .content-ex--strike     { text-decoration: line-through; color: var(--text3); }
+
+    /* Platform grid */
+    .toast-platform-notes {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+    .toast-platform-note {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      padding: 18px 16px;
+    }
+    .toast-platform-note-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text2);
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .toast-platform-note p {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.55;
+      margin: 0;
+    }
+    .badge-beta {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--amber);
+      background: rgba(245,158,11,.12);
+      border: 1px solid rgba(245,158,11,.3);
+      padding: 2px 6px;
+      border-radius: 20px;
+      letter-spacing: .04em;
+    }
+    .badge-na {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text3);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 20px;
+      letter-spacing: .04em;
+    }
+    .platform-tv-note {
+      font-size: 13px;
+      color: var(--text3);
+      font-style: italic;
+      margin-top: 8px;
+      display: block;
+    }
+
+    /* Token pills */
+    .token-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .token-chip {
+      font-size: 12px;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      color: var(--jio);
+      background: rgba(0,168,89,.1);
+      border: 1px solid rgba(0,168,89,.25);
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    /* A11y table */
+    .a11y-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .a11y-table th,
+    .a11y-table td {
+      padding: 10px 14px;
+      border: 1px solid var(--border-subtle);
+      text-align: left;
+      vertical-align: top;
+    }
+    .a11y-table th {
+      background: var(--surface-1);
+      color: var(--text2);
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .a11y-table td { color: var(--text2); line-height: 1.55; }
+    .code-inline {
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 11px;
+      color: var(--jio);
+      background: rgba(0,168,89,.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    /* Keyframe code block */
+    .code-block {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r3);
+      padding: 16px 18px;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.7;
+      overflow-x: auto;
+      margin-top: 16px;
+    }
+    .code-block .kw  { color: #a78bfa; }
+    .code-block .val { color: var(--jio); }
+    .code-block .prop { color: #7dd3fc; }
+    .code-block .comment { color: var(--text3); }
+
+    /* TV warning banner */
+    .tv-note-banner {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: rgba(245,158,11,.07);
+      border: 1px solid rgba(245,158,11,.22);
+      border-radius: var(--r3);
+      padding: 14px 16px;
+      margin-top: 0;
+    }
+    .tv-note-banner-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .tv-note-banner p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.55;
+    }
+    .tv-note-banner strong { color: var(--text); }
+
+    @media (max-width: 640px) {
+      .toast-platform-notes { grid-template-columns: 1fr; }
+    }
+  </style>
+</head><body><main class="ds-content">
+
+  <!-- ── PAGE HEADER ── -->
+  <div class="component-breadcrumb">JioGames DLS &rsaquo; Components &rsaquo; Toast</div>
+
+  <div class="component-page-header">
+    <h1 class="component-page-title">Toast</h1>
+    <p class="component-page-def">Toasts provide brief, non-blocking feedback after a player completes an action.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile">
+        <span class="component-platform-dot"></span>Mobile
+      </span>
+      <span class="component-platform component-platform--web">
+        <span class="component-platform-dot"></span>Web
+      </span>
+      <span class="component-platform component-platform--tv">
+        <span class="component-platform-dot"></span>TV <span class="badge-na">N/A</span>
+      </span>
+    </div>
+    <div class="tv-note-banner" style="margin-top:14px;">
+      <span class="tv-note-banner-icon">📺</span>
+      <p><strong>TV platform:</strong> The Toast component is not used on TV. Use the <strong>Banner</strong> component for persistent feedback on the TV surface.</p>
+    </div>
+  </div>
+
+  <!-- ── HERO ── -->
+  <div class="component-hero component-hero--dark component-hero--grid" style="min-height:320px;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;padding:32px 24px;">
+      <div class="toast-demo-screen">
+        <!-- Fake background UI -->
+        <div class="fake-ui">
+          <div class="fake-ui-bar fake-ui-bar--wide"></div>
+          <div class="fake-ui-bar fake-ui-bar--med"></div>
+          <div class="fake-ui-card"></div>
+        </div>
+        <!-- Live toast stack -->
+        <div class="toast-stack">
+          <!-- Toast 1: Success -->
+          <div class="toast toast--success">
+            <span class="toast-icon">✓</span>
+            <span class="toast-msg">Game added to library</span>
+            <div class="toast-progress" style="animation-delay:0s;"></div>
+          </div>
+          <!-- Toast 2: Error -->
+          <div class="toast toast--error">
+            <span class="toast-icon">✕</span>
+            <span class="toast-msg">Can't connect to servers</span>
+            <div class="toast-progress" style="animation-delay:.4s;"></div>
+          </div>
+          <!-- Toast 3: Loading -->
+          <div class="toast toast--loading">
+            <span class="toast-icon"><span class="spinner"></span></span>
+            <span class="toast-msg">Downloading...</span>
+            <div class="toast-progress" style="animation-delay:.8s;"></div>
+          </div>
+        </div>
+      </div>
+      <p class="component-hero-caption" style="margin-top:16px;text-align:center;">Three toast variants stacked at the bottom of a screen. Oldest dismisses first.</p>
+    </div>
+  </div>
+
+  <!-- ── INTRO ── -->
+  <div class="ds-section" id="intro">
+    <div class="component-intro">
+      <p>Toasts appear briefly at the bottom of the screen to confirm that an action completed — successfully or otherwise. They are non-blocking: the player can keep interacting with the app while the toast is visible. Toasts auto-dismiss after 4 seconds. For persistent feedback, use a Banner instead.</p>
+      <ul class="component-summary-list">
+        <li><strong>Bottom-anchored.</strong> Toasts always appear at the bottom, above the nav bar.</li>
+        <li><strong>Auto-dismiss.</strong> Visible for 4 seconds. Never require a player action to dismiss.</li>
+        <li><strong>Non-blocking.</strong> Never cover primary interactive content or navigation.</li>
+        <li><strong>Brief message.</strong> Max 60 characters. No punctuation at end.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── BEST PRACTICES ── -->
+  <div class="ds-section" id="best-practices">
+    <h2 class="ds-section-title">Best practices</h2>
+    <div class="component-best-practices">
+      <div class="component-bp-card component-bp-card--do">
+        <div class="component-bp-label--do">Do</div>
+        <ul class="component-bp-list">
+          <li>Keep message under 60 characters</li>
+          <li>Use past tense for success: "Game added", "Pass activated"</li>
+          <li>Use present tense for errors: "Can't connect", "Download failed"</li>
+          <li>Stack toasts (max 3 visible at once); oldest dismisses first</li>
+          <li>Include action link only when undo or follow-up is meaningful</li>
+          <li>Match icon to semantic meaning (green check, red ×, spinner)</li>
+        </ul>
+      </div>
+      <div class="component-bp-card component-bp-card--dont">
+        <div class="component-bp-label--dont">Don't</div>
+        <ul class="component-bp-list">
+          <li>Don't use toasts for errors that require user resolution — use a Banner or dialog</li>
+          <li>Don't end toast messages with periods</li>
+          <li>Don't use toasts on TV (use Banner component instead)</li>
+          <li>Don't show more than 3 toasts simultaneously</li>
+          <li>Don't use toasts for promotional content</li>
+          <li>Don't change toast position (must be bottom of screen, above tab bar)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ANATOMY ── -->
+  <div class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <p class="ds-section-desc">Five distinct parts make up a toast. Container and message are always required; icon is strongly recommended; action link and timer bar are optional.</p>
+    <div class="ds-anatomy">
+      <div class="ds-anatomy-demo">
+        <div class="toast" style="max-width:340px;position:relative;overflow:hidden;">
+          <span style="position:absolute;top:-8px;left:6px;font-size:9px;font-weight:700;color:var(--jio);letter-spacing:.05em;">① CONTAINER</span>
+          <span class="toast-icon toast--success" style="color:var(--jio);position:relative;">✓
+            <span style="position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:700;color:var(--jio);white-space:nowrap;">② ICON</span>
+          </span>
+          <span class="toast-msg" style="position:relative;">Game added to library
+            <span style="position:absolute;bottom:-16px;left:0;font-size:9px;font-weight:700;color:var(--text3);white-space:nowrap;">③ MESSAGE</span>
+          </span>
+          <button class="toast-action" style="position:relative;">Undo
+            <span style="position:absolute;bottom:-16px;right:0;font-size:9px;font-weight:700;color:var(--text3);white-space:nowrap;">④ ACTION</span>
+          </button>
+          <div class="toast-progress" style="animation:none;width:60%;"></div>
+        </div>
+        <div style="margin-top:4px;font-size:9px;font-weight:700;color:var(--text3);letter-spacing:.05em;text-align:right;padding-right:8px;">⑤ TIMER BAR</div>
+      </div>
+      <ol class="ds-anatomy-list">
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-num">1</span>
+          <div>
+            <strong>Toast container</strong> — Required. <span class="code-inline">border-radius: 14px; padding: 12px 14px</span>. Background <span class="code-inline">--surface-2</span> with a <span class="code-inline">--border</span> stroke and elevation shadow.
+          </div>
+        </li>
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-num">2</span>
+          <div>
+            <strong>Icon (status)</strong> — Required. 18 × 18px. Green check for success, red × for error, amber ! for warning, gray ℹ for info, spinner for loading. <span class="code-inline">flex-shrink: 0</span>.
+          </div>
+        </li>
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-num">3</span>
+          <div>
+            <strong>Message text</strong> — Required. Max 60 characters. <span class="code-inline">font-size: 13px; font-weight: 500</span>. One line preferred; two lines maximum.
+          </div>
+        </li>
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-num">4</span>
+          <div>
+            <strong>Action link</strong> — Optional. 1–2 words only. Green color (<span class="code-inline">--jio</span>). "Undo", "View", "Retry". No button chrome. Keyboard-focusable while toast is visible.
+          </div>
+        </li>
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-num">5</span>
+          <div>
+            <strong>Auto-dismiss timer bar</strong> — Optional. 2px bar anchored to the bottom edge of the container. Animates from 100% to 0% width over 4 seconds, providing a visual countdown.
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ── VARIANTS ── -->
+  <div class="ds-section" id="variants">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Six semantic variants cover all feedback scenarios in JioGames.</p>
+
+    <div class="component-content-grid" style="grid-template-columns:1fr 1fr;gap:20px;">
+
+      <!-- Success -->
+      <div class="component-content-card">
+        <div class="component-content-title">Success</div>
+        <p style="font-size:13px;color:var(--text2);margin:0 0 12px;">Past tense. Confirms the action completed. Green icon.</p>
+        <div class="ds-demo ds-demo--dark" style="padding:16px;">
+          <div class="toast toast--success" style="max-width:340px;">
+            <span class="toast-icon">✓</span>
+            <span class="toast-msg">Game added to library</span>
+            <div class="toast-progress"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error -->
+      <div class="component-content-card">
+        <div class="component-content-title">Error</div>
+        <p style="font-size:13px;color:var(--text2);margin:0 0 12px;">Present tense. Describes the problem. Red icon and timer bar.</p>
+        <div class="ds-demo ds-demo--dark" style="padding:16px;">
+          <div class="toast toast--error" style="max-width:340px;">
+            <span class="toast-icon">✕</span>
+            <span class="toast-msg">Can't connect to servers</span>
+            <div class="toast-progress" style="animation-delay:.2s;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Warning -->
+      <div class="component-content-card">
+        <div class="component-content-title">Warning</div>
+        <p style="font-size:13px;color:var(--text2);margin:0 0 12px;">Amber icon. Non-critical issue that may require attention.</p>
+        <div class="ds-demo ds-demo--dark" style="padding:16px;">
+          <div class="toast toast--warning" style="max-width:340px;">
+            <span class="toast-icon">!</span>
+            <span class="toast-msg">Storage almost full</span>
+            <div class="toast-progress" style="animation-delay:.4s;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="component-content-card">
+        <div class="component-content-title">Info</div>
+        <p style="font-size:13px;color:var(--text2);margin:0 0 12px;">Neutral. Communicates status without success or failure.</p>
+        <div class="ds-demo ds-demo--dark" style="padding:16px;">
+          <div class="toast toast--info" style="max-width:340px;">
+            <span class="toast-icon">ℹ</span>
+            <span class="toast-msg">Available for offline play</span>
+            <div class="toast-progress" style="animation-delay:.6s;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading -->
+      <div class="component-content-card">
+        <div class="component-content-title">Loading</div>
+        <p style="font-size:13px;color:var(--text2);margin:0 0 12px;">Spinner icon. Present-continuous message. Progress bar active.</p>
+        <div class="ds-demo ds-demo--dark" style="padding:16px;">
+          <div class="toast toast--loading" style="max-width:340px;">
+            <span class="toast-icon"><span class="spinner"></span></span>
+            <span class="toast-msg">Downloading...</span>
+            <div class="toast-progress" style="animation-delay:.8s;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action -->
+      <div class="component-content-card">
+        <div class="component-content-title">Action</div>
+        <p style="font-size:13px;color:var(--text2);margin:0 0 12px;">Adds a green action link for undo or follow-up. 1–2 words.</p>
+        <div class="ds-demo ds-demo--dark" style="padding:16px;">
+          <div class="toast toast--success" style="max-width:340px;">
+            <span class="toast-icon">✓</span>
+            <span class="toast-msg">Game removed</span>
+            <button class="toast-action">Undo</button>
+            <div class="toast-progress" style="animation-delay:1s;"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── SIZES ── -->
+  <div class="ds-section" id="sizes">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Two height profiles exist: Compact (icon + text only) and Standard (with an action link). Heights are the natural height with defined padding — do not hardcode.</p>
+    <table class="sizes-table">
+      <thead>
+        <tr>
+          <th>Size</th>
+          <th>Content</th>
+          <th>Mobile height</th>
+          <th>Web height</th>
+          <th>TV</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Compact</strong></td>
+          <td>Icon + message text</td>
+          <td>44px</td>
+          <td>44px</td>
+          <td class="na">Not applicable — use Banner</td>
+        </tr>
+        <tr>
+          <td><strong>Standard</strong></td>
+          <td>Icon + message + action link</td>
+          <td>48px</td>
+          <td>48px</td>
+          <td class="na">Not applicable — use Banner</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px;color:var(--text3);margin-top:10px;">Heights assume single-line message. A two-line message will increase height naturally. Padding is always <span class="code-inline">12px 14px</span>.</p>
+  </div>
+
+  <!-- ── STATES ── -->
+  <div class="ds-section" id="states">
+    <h2 class="ds-section-title">States &amp; motion</h2>
+    <p class="ds-section-desc">Toasts have three motion phases: Enter, Visible, and Exit. All animations respect <span class="code-inline">prefers-reduced-motion</span>.</p>
+
+    <div class="states-flow">
+      <!-- Enter -->
+      <div class="state-step">
+        <div class="state-step-label">Enter <span style="color:var(--text3);">(280ms)</span></div>
+        <div class="toast toast--success state-toast-enter" style="max-width:260px;transition:none;">
+          <span class="toast-icon">✓</span>
+          <span class="toast-msg">Game added to library</span>
+        </div>
+      </div>
+
+      <div class="state-step-arrow">→</div>
+
+      <!-- Visible -->
+      <div class="state-step">
+        <div class="state-step-label">Visible <span style="color:var(--text3);">(4s)</span></div>
+        <div class="toast toast--success state-toast-visible" style="max-width:260px;transition:none;">
+          <span class="toast-icon">✓</span>
+          <span class="toast-msg">Game added to library</span>
+          <div class="toast-progress"></div>
+        </div>
+      </div>
+
+      <div class="state-step-arrow">→</div>
+
+      <!-- Exit -->
+      <div class="state-step">
+        <div class="state-step-label">Exit <span style="color:var(--text3);">(200ms)</span></div>
+        <div class="toast toast--success state-toast-exit" style="max-width:260px;transition:none;">
+          <span class="toast-icon">✓</span>
+          <span class="toast-msg">Game added to library</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-block">
+<span class="comment">/* Enter: slide up from bottom + fade in */</span>
+<span class="kw">@keyframes</span> toast-enter {
+  <span class="kw">from</span> { <span class="prop">transform</span>: <span class="val">translateY(20px)</span>; <span class="prop">opacity</span>: <span class="val">0</span>; }
+  <span class="kw">to</span>   { <span class="prop">transform</span>: <span class="val">translateY(0)</span>;   <span class="prop">opacity</span>: <span class="val">1</span>; }
+}
+
+<span class="comment">/* Exit: fade out + slide down */</span>
+<span class="kw">@keyframes</span> toast-exit {
+  <span class="kw">from</span> { <span class="prop">transform</span>: <span class="val">translateY(0)</span>;    <span class="prop">opacity</span>: <span class="val">1</span>; }
+  <span class="kw">to</span>   { <span class="prop">transform</span>: <span class="val">translateY(10px)</span>; <span class="prop">opacity</span>: <span class="val">0</span>; }
+}
+
+.toast { <span class="prop">animation</span>: <span class="val">toast-enter 280ms var(--spring) forwards</span>; }
+.toast.is-exiting { <span class="prop">animation</span>: <span class="val">toast-exit 200ms ease-in forwards</span>; }
+
+<span class="comment">/* Respect reduced motion */</span>
+<span class="kw">@media</span> (prefers-reduced-motion: reduce) {
+  .toast, .toast.is-exiting { <span class="prop">animation</span>: <span class="val">none</span>; }
+}</div>
+  </div>
+
+  <!-- ── CONTENT ── -->
+  <div class="ds-section" id="content">
+    <h2 class="ds-section-title">Content guidelines</h2>
+    <p class="ds-section-desc">Toast messages are short confirmations, not explanations. Match tense to semantic type and keep to the point.</p>
+    <div class="component-content-grid" style="grid-template-columns:1fr 1fr 1fr;gap:20px;">
+
+      <div class="component-content-card">
+        <div class="component-content-title" style="color:var(--jio);">Success messages</div>
+        <p style="font-size:13px;color:var(--text2);margin:0 0 12px;">Past tense. Confirm the object that was acted on.</p>
+        <div class="content-examples">
+          <div class="content-ex"><span class="content-ex-dot content-ex-dot--green"></span>Game added</div>
+          <div class="content-ex"><span class="content-ex-dot content-ex-dot--green"></span>Pass activated</div>
+          <div class="content-ex"><span class="content-ex-dot content-ex-dot--green"></span>Download complete</div>
+          <div class="content-ex"><span class="content-ex-dot content-ex-dot--green"></span>Review submitted</div>
+        </div>
+      </div>
+
+      <div class="component-content-card">
+        <div class="component-content-title" style="color:var(--negative);">Error messages</div>
+        <p style="font-size:13px;color:var(--text2);margin:0 0 12px;">Present tense. Describe the problem, not the cause.</p>
+        <div class="content-examples">
+          <div class="content-ex"><span class="content-ex-dot content-ex-dot--red"></span>Can't connect</div>
+          <div class="content-ex"><span class="content-ex-dot content-ex-dot--red"></span>Download failed</div>
+          <div class="content-ex"><span class="content-ex-dot content-ex-dot--red"></span>Sign-in required</div>
+          <div class="content-ex"><span class="content-ex-dot content-ex-dot--red"></span>Storage full</div>
+        </div>
+      </div>
+
+      <div class="component-content-card">
+        <div class="component-content-title">What not to write</div>
+        <p style="font-size:13px;color:var(--text2);margin:0 0 12px;">These patterns are banned in JioGames toasts.</p>
+        <div class="content-examples">
+          <div class="content-ex content-ex--strike"><span class="content-ex-dot content-ex-dot--strike"></span>Game added to library.</div>
+          <div class="content-ex content-ex--strike"><span class="content-ex-dot content-ex-dot--strike"></span>Successfully added!</div>
+          <div class="content-ex content-ex--strike"><span class="content-ex-dot content-ex-dot--strike"></span>Error: connection failed</div>
+          <div class="content-ex content-ex--strike"><span class="content-ex-dot content-ex-dot--strike"></span>Your game has been added to your library</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── PLATFORM ── -->
+  <div class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform behaviour</h2>
+    <p class="ds-section-desc">Toasts adapt their position and width based on the platform surface.</p>
+    <div class="toast-platform-notes">
+
+      <div class="toast-platform-note">
+        <div class="toast-platform-note-title">
+          <span class="component-platform-dot" style="background:#4ade80;box-shadow:0 0 6px #4ade8088;width:8px;height:8px;border-radius:50%;flex-shrink:0;"></span>
+          Mobile
+        </div>
+        <p>Anchored <strong>bottom: 16px above the tab bar</strong> (or screen bottom if no tab bar present). Full width with <strong>16px horizontal margins</strong>. Bottom safe-area inset is always respected on notched devices. Stacks upward when multiple toasts are queued.</p>
+      </div>
+
+      <div class="toast-platform-note">
+        <div class="toast-platform-note-title">
+          <span class="component-platform-dot" style="background:#60a5fa;box-shadow:0 0 6px #60a5fa88;width:8px;height:8px;border-radius:50%;flex-shrink:0;"></span>
+          Web <span class="badge-beta">Beta</span>
+        </div>
+        <p>Floats in the <strong>bottom-right corner</strong> of the viewport. <strong>Max-width: 360px</strong>. Not full-width. Positioned above any sticky footers. Right-aligned stack; newer toasts push older ones upward. Hover pauses the auto-dismiss timer.</p>
+      </div>
+
+      <div class="toast-platform-note" style="border-color:rgba(255,71,87,.2);background:rgba(255,71,87,.04);">
+        <div class="toast-platform-note-title">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--text3);flex-shrink:0;display:inline-block;"></span>
+          TV <span class="badge-na">N/A</span>
+        </div>
+        <p>Toast is <strong>not available on the TV surface.</strong></p>
+        <span class="platform-tv-note">Use the Banner component for all persistent and transient feedback on TV. Toasts' auto-dismiss timing and bottom-anchor placement do not map to 10-foot UI patterns.</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── ACCESSIBILITY ── -->
+  <div class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">Toasts must be announced to screen readers without interrupting the current interaction flow unnecessarily.</p>
+    <table class="a11y-table">
+      <thead>
+        <tr>
+          <th>Attribute</th>
+          <th>Value</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="code-inline">role</span></td>
+          <td><span class="code-inline">status</span> (success, info)<br><span class="code-inline">alert</span> (error, warning)</td>
+          <td>Use <span class="code-inline">role="alert"</span> for errors and warnings — this interrupts the screen reader. Use <span class="code-inline">role="status"</span> for polite announcements.</td>
+        </tr>
+        <tr>
+          <td><span class="code-inline">aria-live</span></td>
+          <td>Auto-set by role</td>
+          <td>For loading toasts, explicitly set <span class="code-inline">aria-live="polite"</span>. Do not set <span class="code-inline">aria-live="assertive"</span> unless the variant is error or warning.</td>
+        </tr>
+        <tr>
+          <td>Focus management</td>
+          <td>Non-focusable container</td>
+          <td>The toast container itself is not in the tab order. Only the optional action link receives focus (via Tab) while the toast is visible.</td>
+        </tr>
+        <tr>
+          <td>Action link keyboard</td>
+          <td>Focusable via Tab</td>
+          <td>When an action link is present, it must be reachable by keyboard tab while the toast is on screen. Activating it should dismiss the toast.</td>
+        </tr>
+        <tr>
+          <td><span class="code-inline">prefers-reduced-motion</span></td>
+          <td>Instant appear/disappear</td>
+          <td>Enter and exit animations are disabled. Toasts still appear and disappear; only the translate+fade transitions are suppressed. The timer bar animation is also stopped.</td>
+        </tr>
+        <tr>
+          <td>Live region</td>
+          <td>Outside main content</td>
+          <td>The toast container element should be placed at the end of the document body, outside <span class="code-inline">&lt;main&gt;</span>, so live region announcements do not interfere with in-page ARIA landmarks.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <section id="platform-considerations" class="component-section">
+  <h2 class="ds-section-title">Platform considerations</h2>
+  <div class="component-platform-grid">
+    <div class="component-platform component-platform--mobile">
+      <div class="component-platform-label">Mobile</div>
+      <ul class="component-platform-list">
+        <li>Appears at bottom, above navigation bar with 16px gap</li>
+        <li>Auto-dismiss after 3–5s; swipe up to dismiss early</li>
+        <li>Max one toast visible at a time; queue additional toasts</li>
+        <li>Never use toasts for errors that require user action — use dialog or banner</li>
+      </ul>
+    </div>
+    <div class="component-platform component-platform--web">
+      <div class="component-platform-label">Web</div>
+      <ul class="component-platform-list">
+        <li>Appears bottom-right on desktop; bottom-centre on narrow web</li>
+        <li>Auto-dismiss after 4–6s; close button always visible</li>
+        <li>Role="status" for info; role="alert" for error/warning</li>
+        <li>Stack vertically if multiple; newest on top</li>
+      </ul>
+    </div>
+    <div class="component-platform component-platform--tv">
+      <div class="component-platform-label">TV</div>
+      <ul class="component-platform-list">
+        <li>Appears top-right; never obscures primary content area</li>
+        <li>Not focusable — TV user cannot interact with toast</li>
+        <li>Longer dismiss time: 6–8s to account for reading at distance</li>
+        <li>Keep message under 60 characters; large font (min 18px)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="content" class="component-section">
+  <h2 class="ds-section-title">Content guidance</h2>
+  <div class="component-content-grid">
+    <div>
+      <h3 class="ds-subsection-title">Message length</h3>
+      <p class="ds-body">Keep toast messages to 1 line, 60 characters max. If more explanation is needed, use a banner or dialog instead.</p>
+    </div>
+    <div>
+      <h3 class="ds-subsection-title">Tone</h3>
+      <p class="ds-body">Be direct and calm. "Game added to library" not "Great! Your game was successfully added to your library!"</p>
+    </div>
+    <div>
+      <h3 class="ds-subsection-title">Action label</h3>
+      <p class="ds-body">If the toast has an action, use a specific verb: "Undo", "View", "Retry". Never use "Click here" or "Learn more".</p>
+    </div>
+    <div>
+      <h3 class="ds-subsection-title">Error toasts</h3>
+      <p class="ds-body">Error toasts must have a Retry action or explain what to do next. "Failed to save — Retry" is correct. "Error occurred" alone is not.</p>
+    </div>
+  </div>
+</section>
+
+  <!-- ── RELATED TOKENS ── -->
+  <div class="ds-section" id="tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-desc">These design tokens are consumed directly by the Toast component. Do not hard-code their values.</p>
+    <div class="token-list">
+      <span class="token-chip">--jio</span>
+      <span class="token-chip">--negative</span>
+      <span class="token-chip">--amber</span>
+      <span class="token-chip">--surface-2</span>
+      <span class="token-chip">--border</span>
+      <span class="token-chip">--r4</span>
+      <span class="token-chip">--shadow-3</span>
+      <span class="token-chip">--dur-pop: 280ms</span>
+      <span class="token-chip">--spring</span>
+    </div>
+  </div>
+
+  <!-- ── CODE EXAMPLES ── -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
+    <div class="component-code-block">
+      <div class="component-code-label">Toast — HTML</div>
+      <pre class="component-code-pre"><code>&lt;div class="toast toast--success" role="status" aria-live="polite"&gt;
+  &lt;svg class="icon icon--m" aria-hidden="true"&gt;&lt;use href="/sprite.svg#ic_check"&gt;&lt;/use&gt;&lt;/svg&gt;
+  &lt;span class="toast__message"&gt;Game added to library&lt;/span&gt;
+  &lt;button class="btn btn--text btn--xs btn--hug toast__action"&gt;Undo&lt;/button&gt;
+  &lt;button class="btn btn--icon toast__close" aria-label="Dismiss"&gt;✕&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+    <div class="component-code-block">
+      <div class="component-code-label">Toast — show/auto-dismiss (JS)</div>
+      <pre class="component-code-pre"><code>function showToast(message, type = 'success', duration = 4000) {
+  const toast = document.createElement('div');
+  toast.className = `toast toast--${type}`;
+  toast.setAttribute('role', type === 'error' ? 'alert' : 'status');
+  toast.setAttribute('aria-live', type === 'error' ? 'assertive' : 'polite');
+  toast.innerHTML = `&lt;span class="toast__message"&gt;${message}&lt;/span&gt;`;
+  document.body.appendChild(toast);
+  requestAnimationFrame(() => toast.classList.add('is-visible'));
+  setTimeout(() => {
+    toast.classList.remove('is-visible');
+    toast.addEventListener('transitionend', () => toast.remove(), { once: true });
+  }, duration);
+}
+
+// Usage
+showToast('Game added to library', 'success');
+showToast('Failed to save — check connection', 'error');</code></pre>
+    </div>
+  </section>
+
+
+</main><script src="../sprite-loader.js"></script><script src="../shell.js"></script></body></html>

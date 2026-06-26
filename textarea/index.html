@@ -1,0 +1,444 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Textarea — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    .textarea {
+      width: 100%;
+      min-height: 96px;
+      background: var(--input-bg, var(--glass-1));
+      border: 1.5px solid var(--input-border, var(--border-subtle));
+      border-radius: var(--r5);
+      color: var(--input-text, var(--text));
+      font-family: var(--jio-font);
+      font-size: 15px;
+      font-weight: 500;
+      padding: var(--space-2);
+      outline: none;
+      resize: vertical;
+      line-height: 1.5;
+      transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+      -webkit-appearance: none;
+    }
+    .textarea:focus { border-color: var(--jio); box-shadow: 0 0 0 3px rgba(0,168,89,.12); }
+    .textarea.is-error { border-color: var(--negative); }
+    .textarea.is-disabled { opacity: var(--state-disabled-opacity); pointer-events: none; }
+    .textarea-count { font-size: 11px; color: var(--text3); text-align: right; margin-top: 4px; }
+    .textarea-count.is-over { color: var(--negative); }
+
+    .textarea--s { min-height: 64px; }
+    .textarea--m { min-height: 96px; }
+    .textarea--l { min-height: 144px; }
+
+    .demo-field { width: 100%; max-width: 400px; }
+    .demo-label { font-size: 12px; font-weight: 500; color: var(--text3); margin-bottom: 6px; display: block; }
+    .demo-hint { font-size: 11px; color: var(--negative); margin-top: 4px; }
+  </style>
+</head><body><main class="ds-main">
+
+  <!-- PAGE HEADER -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Textarea</span>
+    </nav>
+    <h1 class="component-page-title">Textarea</h1>
+    <p class="component-page-def">Multi-line text input for game reviews, support messages, and profile bios. Always resizable vertically, never horizontally.</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile">
+          <span class="component-platform-dot"></span>Mobile
+        </span>
+        <span class="component-platform component-platform--web">
+          <span class="component-platform-dot"></span>Web
+        </span>
+        <span class="component-platform component-platform--tv">
+          <span class="component-platform-dot"></span>TV
+        </span>
+      </div>
+      <span class="component-maturity component-maturity--draft">
+        <span class="component-maturity--dot"></span>Draft
+      </span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:300px;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner">
+      <div class="demo-field">
+        <label class="demo-label">Your review</label>
+        <textarea class="textarea" style="border-color:var(--jio); box-shadow:0 0 0 3px rgba(0,168,89,.12);" readonly>Tomb Raider is one of the most atmospheric action-adventure games I've played this year. The pacing is excellent and the combat feels surprisingly deep once you unlock the full skill tree.</textarea>
+        <div class="textarea-count">124 / 500</div>
+      </div>
+    </div>
+    <p class="component-hero-caption">Focused textarea with character counter · Tomb Raider review</p>
+  </section>
+
+  <!-- INTRO -->
+  <section class="component-intro">
+    <p>The Textarea is a multi-line text input element. It accepts freeform text across game reviews, bug reports, player bios, and support forms. Unlike a single-line Input, the Textarea grows vertically and signals to users that a longer response is expected. Horizontal resizing is always disabled to protect layout integrity.</p>
+    <ul class="component-summary-list">
+      <li><strong>Reviews and ratings</strong> — long-form player feedback with optional character counter</li>
+      <li><strong>Profile bio</strong> — up to 160 characters, compact height</li>
+      <li><strong>Support and bug reports</strong> — uncapped or generous limit, error state on validation failure</li>
+      <li><strong>Community posts</strong> — L size at 144px min-height, full-width on mobile</li>
+    </ul>
+  </section>
+
+  <!-- BEST PRACTICES -->
+  <section class="component-best-practices">
+    <div class="component-bp-card component-bp-card--do">
+      <span class="component-bp-label component-bp-label--do">Do</span>
+      <ul class="component-bp-list">
+        <li>Always pair with a visible <code class="ds-code">&lt;label&gt;</code> — placeholder alone is not sufficient</li>
+        <li>Show a character counter when there is a limit users need to be aware of</li>
+        <li>Use the L size (144px) for reviews and bios; M for shorter structured inputs</li>
+        <li>Apply <code class="ds-code">aria-invalid="true"</code> and <code class="ds-code">aria-describedby</code> on the error state</li>
+        <li>Disable horizontal resize via <code class="ds-code">resize: vertical</code> to protect layout</li>
+      </ul>
+    </div>
+    <div class="component-bp-card component-bp-card--dont">
+      <span class="component-bp-label component-bp-label--dont">Don't</span>
+      <ul class="component-bp-list">
+        <li>Use placeholder copy like "Enter text here" — write format hints instead</li>
+        <li>Show a counter that starts at 0/500 before the user has typed — add it on first keystroke</li>
+        <li>Allow horizontal resize — it breaks column layouts on web</li>
+        <li>Use Textarea for single-line inputs — use Input instead</li>
+        <li>Set <code class="ds-code">resize: none</code> — vertical resize is expected and helps users on web</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <div class="ds-anatomy" style="margin-bottom:64px;">
+    <div class="ds-anatomy-preview">
+      <div class="ds-anatomy-component" style="width:260px;">
+        <label style="font-size:12px; font-weight:500; color:var(--text2); display:block; margin-bottom:6px;">Your review</label>
+        <textarea class="textarea" style="pointer-events:none; resize:none;" readonly>Share what you loved or didn't…</textarea>
+        <div class="textarea-count">0 / 500</div>
+        <!-- callout dots -->
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:0; left:-24px;"><span class="ds-anatomy-callout-num">1</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:32px; right:-24px;"><span class="ds-anatomy-callout-num">2</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; bottom:24px; left:-24px;"><span class="ds-anatomy-callout-num">3</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; bottom:0; right:-24px;"><span class="ds-anatomy-callout-num">4</span></span>
+      </div>
+    </div>
+    <ol class="ds-anatomy-list">
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">1</span>
+        <div>
+          <div class="ds-anatomy-label">Label <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Visible <code class="ds-code">&lt;label&gt;</code> element linked via <code class="ds-code">for</code>/<code class="ds-code">id</code>. Displayed above the field at 12px/500 weight.</div>
+          <code class="ds-anatomy-token ds-code">font-size: 12px; color: var(--text2)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">2</span>
+        <div>
+          <div class="ds-anatomy-label">Container <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">The <code class="ds-code">&lt;textarea&gt;</code> element with glass-tinted background and 1.5px border. Vertically resizable. Border color changes on focus and error.</div>
+          <code class="ds-anatomy-token ds-code">border-radius: var(--r5); resize: vertical</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">3</span>
+        <div>
+          <div class="ds-anatomy-label">Placeholder <span class="ds-anatomy-optional">Optional</span></div>
+          <div class="ds-anatomy-desc">Copy that shows expected format, not just "Enter text". Disappears on first keystroke.</div>
+          <code class="ds-anatomy-token ds-code">color: var(--text3); font-weight: 500</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">4</span>
+        <div>
+          <div class="ds-anatomy-label">Character counter <span class="ds-anatomy-optional">Optional</span></div>
+          <div class="ds-anatomy-desc">Right-aligned count below the field. Turns red when over limit. Linked via <code class="ds-code">aria-describedby</code>.</div>
+          <code class="ds-anatomy-token ds-code">font-size: 11px; color: var(--text3)</code>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- VARIANTS -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Five variants cover all standard textarea states. Each maps to a distinct visual treatment — never mix error and disabled styles.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-direction:column; gap:28px; max-width:440px;">
+
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:8px;">Default</span>
+          <textarea class="textarea" placeholder="Share what you loved or didn't…" style="pointer-events:none; resize:none;" readonly></textarea>
+        </div>
+
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:8px;">Focused</span>
+          <textarea class="textarea" style="border-color:var(--jio); box-shadow:0 0 0 3px rgba(0,168,89,.12); pointer-events:none; resize:none;" readonly>Tomb Raider is one of the best…</textarea>
+        </div>
+
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:8px;">Error</span>
+          <textarea class="textarea is-error" style="pointer-events:none; resize:none;" readonly>This review contains banned words.</textarea>
+          <div class="demo-hint">Your review contains restricted content. Please revise before submitting.</div>
+        </div>
+
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:8px;">Disabled</span>
+          <textarea class="textarea is-disabled" style="resize:none;" disabled readonly placeholder="Reviews are disabled for this game."></textarea>
+        </div>
+
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:8px;">With character count</span>
+          <textarea class="textarea" style="pointer-events:none; resize:none;" readonly>Tell the JioGames community about yourself and what you love to play.</textarea>
+          <div class="textarea-count">68 / 160</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SIZES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Three height tiers. Match size to the expected input length — S for short structured answers, M for default, L for long-form reviews and bios.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-direction:column; gap:24px; max-width:440px;">
+
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:8px;">S — 64px · Short answers, quick feedback</span>
+          <textarea class="textarea textarea--s" placeholder="One thing you'd change…" style="pointer-events:none; resize:none;" readonly></textarea>
+        </div>
+
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:8px;">M — 96px · Default</span>
+          <textarea class="textarea textarea--m" placeholder="Describe your experience…" style="pointer-events:none; resize:none;" readonly></textarea>
+        </div>
+
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:8px;">L — 144px · Long reviews, profile bio</span>
+          <textarea class="textarea textarea--l" placeholder="Share what you loved or didn't love about this game. Be specific — your review helps other players decide." style="pointer-events:none; resize:none;" readonly></textarea>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- STATES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Six interactive states. The count-over-limit state works in conjunction with the error state when the user exceeds the maximum character count.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>State</th><th>Visual change</th><th>When</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Default</td><td>Border <code class="ds-code">var(--border-subtle)</code></td><td>Unfocused, no value</td></tr>
+        <tr><td>Hover</td><td>Border <code class="ds-code">var(--border)</code></td><td>Pointer over field</td></tr>
+        <tr><td>Focus</td><td>Border <code class="ds-code">var(--jio)</code>, green glow ring</td><td>Field is active / caret visible</td></tr>
+        <tr><td>Error</td><td>Border <code class="ds-code">var(--negative)</code>, red hint text</td><td>Validation fails on submit or blur</td></tr>
+        <tr><td>Disabled</td><td>Opacity <code class="ds-code">var(--state-disabled-opacity)</code>, no events</td><td>Feature locked or read-only context</td></tr>
+        <tr><td>Count over limit</td><td>Counter text turns <code class="ds-code">var(--negative)</code>, border turns error red</td><td>User types past <code class="ds-code">maxlength</code> enforced by JS</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CONTENT GUIDANCE -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <p class="ds-section-desc">Placeholder copy is the only editorial text in the textarea. Write it to model the expected format, not to restate the label.</p>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Placeholder copy rules</div>
+        <ul>
+          <li>Show the <em>format</em> expected: "Share what you loved or didn't…"</li>
+          <li>Never write "Enter text here" or "Type something"</li>
+          <li>For reviews: "Share what you loved or didn't…"</li>
+          <li>For bio: "Tell the JioGames community about yourself…"</li>
+          <li>For bug reports: "Describe what happened and when…"</li>
+          <li>Keep placeholder under 10 words — it vanishes on first keystroke</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Character limit display</div>
+        <ul>
+          <li>Show counter only when there is a meaningful limit (e.g., 160 bio, 500 review)</li>
+          <li>Display as "used / max" format: "124 / 500"</li>
+          <li>Reveal counter on first keystroke, not on page load</li>
+          <li>When over limit: counter turns red, submit button disables</li>
+          <li>Error message: "Review must be under 500 characters" — never just turn the counter red with no label</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <p class="ds-section-desc">Resize behavior and input method vary significantly across platforms. Textarea is a web-first component.</p>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Disable horizontal resize — it is the default on mobile but verify in custom implementations</li>
+          <li>Set <code class="ds-code">inputmode="text"</code> to trigger the correct soft keyboard</li>
+          <li>The field will auto-scroll into view when focused; account for keyboard offset in bottom-sheet contexts</li>
+          <li>Use full-width layout — never constrain to less than 100% column width on mobile</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Allow vertical resize only — <code class="ds-code">resize: vertical</code> is the expected system behavior</li>
+          <li>Set a <code class="ds-code">max-height</code> so the textarea doesn't grow to fill the viewport on long pastes</li>
+          <li>Character counter updates on every <code class="ds-code">input</code> event, not just blur</li>
+          <li>Max-width 640px in single-column document layout; full width in form contexts</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>No Textarea on TV — use voice input flow or route to mobile companion app for long text</li>
+          <li>If a physical keyboard is connected, the field renders but without resize handle (TV cursor model doesn't support drag)</li>
+          <li>Never show character counter on TV — text is too small at 3m viewing distance</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">Always associate a label and link error and counter messages programmatically.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Requirement</th><th>Implementation</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Label association</td>
+          <td><code class="ds-code">&lt;label for="id"&gt;</code></td>
+          <td>Never use <code class="ds-code">placeholder</code> as the only label. Label must remain visible at all times.</td>
+        </tr>
+        <tr>
+          <td>Error announcement</td>
+          <td><code class="ds-code">aria-invalid="true"</code> + <code class="ds-code">aria-describedby="err-id"</code></td>
+          <td>The error hint element carries the full message. Screen readers announce it after the field label on focus.</td>
+        </tr>
+        <tr>
+          <td>Character counter</td>
+          <td><code class="ds-code">aria-describedby="count-id"</code> + <code class="ds-code">aria-live="polite"</code> on counter</td>
+          <td>Counter updates must be announced without interrupting typing. Use <code class="ds-code">polite</code>, not <code class="ds-code">assertive</code>.</td>
+        </tr>
+        <tr>
+          <td>Disabled state</td>
+          <td><code class="ds-code">disabled</code> attribute</td>
+          <td>Prefer <code class="ds-code">readonly</code> when content should be visible but not editable — disabled fields are skipped by screen readers.</td>
+        </tr>
+        <tr>
+          <td>Focus visibility</td>
+          <td>Custom focus ring via <code class="ds-code">box-shadow</code></td>
+          <td>Do not suppress <code class="ds-code">:focus-visible</code> without a visible alternative. The green glow ring meets WCAG 2.4.11.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- RELATED TOKENS -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-desc">Use these tokens to implement textarea styles. Never hardcode hex values.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Token</th><th>Value</th><th>Usage</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code class="ds-code">--input-bg</code></td><td><code class="ds-code">var(--glass-1)</code></td><td>Textarea background fill</td></tr>
+        <tr><td><code class="ds-code">--input-border</code></td><td><code class="ds-code">var(--border-subtle)</code></td><td>Default border color</td></tr>
+        <tr><td><code class="ds-code">--input-text</code></td><td><code class="ds-code">var(--text)</code></td><td>User-typed text color</td></tr>
+        <tr><td><code class="ds-code">--jio</code></td><td><code class="ds-code">#00A859</code></td><td>Focus border and glow accent</td></tr>
+        <tr><td><code class="ds-code">--negative</code></td><td><code class="ds-code">#FF4757</code></td><td>Error border and over-limit counter color</td></tr>
+        <tr><td><code class="ds-code">--r5</code></td><td>Border radius tier 5</td><td>Container border-radius</td></tr>
+        <tr><td><code class="ds-code">--text3</code></td><td><code class="ds-code">rgba(244,242,238,.32)</code></td><td>Placeholder and counter muted text</td></tr>
+        <tr><td><code class="ds-code">--state-disabled-opacity</code></td><td><code class="ds-code">.38</code></td><td>Disabled state opacity</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CODE EXAMPLES -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-body">Link <code class="ds-code">tokens.css</code>, <code class="ds-code">components.css</code>, and <code class="ds-code">states.css</code> before using component classes.</p>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Basic textarea</div>
+      <pre class="component-code-pre"><code>&lt;div class="field-wrap"&gt;
+  &lt;label class="input-label" for="review"&gt;Your review&lt;/label&gt;
+  &lt;textarea
+    id="review"
+    class="textarea textarea--l"
+    placeholder="Share what you loved or didn't…"
+    maxlength="500"
+  &gt;&lt;/textarea&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Textarea with live character counter</div>
+      <pre class="component-code-pre"><code>&lt;div class="field-wrap"&gt;
+  &lt;label class="input-label" for="bio"&gt;Profile bio&lt;/label&gt;
+  &lt;textarea
+    id="bio"
+    class="textarea textarea--m"
+    placeholder="Tell the JioGames community about yourself…"
+    aria-describedby="bio-count"
+    maxlength="160"
+    oninput="
+      const c = document.getElementById('bio-count');
+      const n = this.value.length;
+      c.textContent = n + ' / 160';
+      c.classList.toggle('is-over', n &gt; 160);
+    "
+  &gt;&lt;/textarea&gt;
+  &lt;div id="bio-count" class="textarea-count" aria-live="polite"&gt;0 / 160&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Textarea — error state</div>
+      <pre class="component-code-pre"><code>&lt;div class="field-wrap"&gt;
+  &lt;label class="input-label" for="report"&gt;Describe the issue&lt;/label&gt;
+  &lt;textarea
+    id="report"
+    class="textarea is-error"
+    aria-invalid="true"
+    aria-describedby="report-err"
+    placeholder="Describe what happened and when…"
+  &gt;This review contains banned words.&lt;/textarea&gt;
+  &lt;div id="report-err" class="input-hint" style="color:var(--negative);"&gt;
+    Your text contains restricted content. Please revise before submitting.
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- CHANGELOG -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Changelog</h2>
+    <div class="component-changelog">
+      <div class="component-changelog-entry">
+        <span class="component-changelog-version">v0.1</span>
+        <span class="component-changelog-date">Jun 2026</span>
+        <p class="component-changelog-desc">Initial draft. Includes Default, Focused, Error, Disabled, and Character-count variants. S / M / L size tiers. Anatomy, platform guidance, accessibility table, and three code examples.</p>
+      </div>
+    </div>
+  </section>
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

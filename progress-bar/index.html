@@ -1,0 +1,644 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Progress Bar — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    @keyframes progress-indeterminate {
+      0% { left: -40%; }
+      100% { left: 110%; }
+    }
+    .progress-bar {
+      position: relative;
+      width: 100%;
+      height: 6px;
+      background: var(--surface-3);
+      border-radius: var(--pill);
+      overflow: hidden;
+    }
+    .progress-bar__fill {
+      height: 100%;
+      background: var(--jio);
+      border-radius: var(--pill);
+      min-width: 4px;
+      transition: width 0.3s var(--ease-out, ease-out);
+    }
+    .progress-bar__fill--gold { background: var(--popular-gold); }
+    .progress-bar__fill--error { background: var(--negative); }
+    .progress-bar__fill--indeterminate {
+      position: absolute;
+      width: 40%;
+      background: var(--jio-bright, var(--jio));
+      animation: progress-indeterminate 1.4s infinite linear;
+    }
+    .progress-bar--thin { height: 3px; }
+    .progress-bar--thick { height: 10px; }
+    @media (prefers-reduced-motion: reduce) {
+      .progress-bar__fill--indeterminate { animation: none; width: 100%; opacity: 0.4; }
+    }
+
+    /* Hero animation */
+    @keyframes progress-slide {
+      0% { left: -40%; }
+      100% { left: 100%; }
+    }
+  </style>
+</head><body><main class="ds-main">
+
+  <!-- PAGE HEADER -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <a href="../" class="component-breadcrumb-link">JioGames DLS</a>
+      <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="component-breadcrumb-current">Progress Bar</span>
+    </nav>
+    <h1 class="component-page-title">Progress Bar</h1>
+    <p class="component-page-def">Linear indicators for determinate progress — game completion, download status, achievement fill, and streaming buffer.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile">
+        <span class="component-platform-dot"></span>Mobile
+      </span>
+      <span class="component-platform component-platform--web">
+        <span class="component-platform-dot"></span>Web
+      </span>
+      <span class="component-platform component-platform--tv">
+        <span class="component-platform-dot"></span>TV
+      </span>
+      <span class="component-maturity component-maturity--draft">
+        <span class="component-maturity--dot"></span>Draft
+      </span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:320px; position:relative; overflow:hidden;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="max-width:440px; width:100%; gap:20px;">
+
+      <!-- Bar 1: 72% green -->
+      <div style="display:flex; flex-direction:column; gap:6px; width:100%;">
+        <div style="position:relative; width:100%; height:6px; background:var(--surface-3,#1F2432); border-radius:100px; overflow:hidden;">
+          <div style="width:72%; height:100%; background:var(--jio,#00A859); border-radius:100px; min-width:4px;"></div>
+        </div>
+        <span style="font-size:11px; color:rgba(244,242,238,.45); letter-spacing:.3px;">72% completed</span>
+      </div>
+
+      <!-- Bar 2: 40% gold (achievement) -->
+      <div style="display:flex; flex-direction:column; gap:6px; width:100%;">
+        <div style="position:relative; width:100%; height:6px; background:var(--surface-3,#1F2432); border-radius:100px; overflow:hidden;">
+          <div style="width:40%; height:100%; background:var(--popular-gold,#FFCF5C); border-radius:100px; min-width:4px;"></div>
+        </div>
+        <span style="font-size:11px; color:rgba(244,242,238,.45); letter-spacing:.3px;">Achievement — 40 / 100 XP</span>
+      </div>
+
+      <!-- Bar 3: 100% green, thin 4px -->
+      <div style="display:flex; flex-direction:column; gap:6px; width:100%;">
+        <div style="position:relative; width:100%; height:4px; background:var(--surface-3,#1F2432); border-radius:100px; overflow:hidden;">
+          <div style="width:100%; height:100%; background:var(--jio,#00A859); border-radius:100px;"></div>
+        </div>
+        <span style="font-size:11px; color:rgba(244,242,238,.45); letter-spacing:.3px;">Complete — thin variant</span>
+      </div>
+
+      <!-- Bar 4: indeterminate -->
+      <div style="display:flex; flex-direction:column; gap:6px; width:100%;">
+        <div style="position:relative; width:100%; height:6px; background:var(--surface-3,#1F2432); border-radius:100px; overflow:hidden;">
+          <div style="position:absolute; width:40%; height:100%; background:var(--jio-bright,#00E870); animation:progress-slide 1.4s infinite linear; border-radius:100px;"></div>
+        </div>
+        <span style="font-size:11px; color:rgba(244,242,238,.45); letter-spacing:.3px;">Indeterminate — loading</span>
+      </div>
+
+    </div>
+    <p class="component-hero-caption">DETERMINATE · INDETERMINATE · ACHIEVEMENT · THIN</p>
+  </section>
+
+  <!-- 1. INTRODUCTION -->
+  <section class="component-intro" id="intro">
+    <h2 class="ds-section-title">Introduction</h2>
+    <p>Progress bars communicate linear advancement toward a known or unknown endpoint. Use them in JioGames for game completion percentage displayed on card overlays, download and install progress, achievement or XP fill, and video buffering state. Do not use progress bars for video scrubber/seek controls — use a dedicated media scrubber component for those. Do not use them for step indicators (use page-dots), ratings (use star or score display), or any non-linear state.</p>
+  </section>
+
+  <!-- 2. BEST PRACTICES -->
+  <section class="ds-section" id="best-practices">
+    <h2 class="ds-section-title">Best practices</h2>
+    <p class="ds-section-desc">Rules that govern correct usage across all progress bar contexts.</p>
+    <div class="component-best-practices">
+      <div class="component-bp-card component-bp-card--do">
+        <span class="component-bp-label component-bp-label--do">Do</span>
+        <ul class="component-bp-list">
+          <li>Always show a percentage label alongside the bar when space allows — bar alone lacks precision for values like 72%</li>
+          <li>Use green fill for positive progress, gold for achievement or XP, and red (--negative) strictly for error or limit states</li>
+          <li>Set a minimum fill width of 4px to prevent invisible progress for values near 0%</li>
+          <li>Use the indeterminate variant when duration is genuinely unknown — never fake animation on a determinate bar</li>
+          <li>TV: increase bar height to 8px minimum for legibility at 10-foot viewing distance</li>
+        </ul>
+      </div>
+      <div class="component-bp-card component-bp-card--dont">
+        <span class="component-bp-label component-bp-label--dont">Don't</span>
+        <ul class="component-bp-list">
+          <li>Animate the fill of a determinate bar — fill width is data-driven, not decorative</li>
+          <li>Use a progress bar for navigation step count — use page-dots instead</li>
+          <li>Use color as the only state signal — always pair fill color with a label or ARIA attribute</li>
+          <li>Show a determinate bar for truly unknown durations — use the indeterminate variant</li>
+          <li>Stack multiple progress bars on a single card — it creates visual noise and dilutes meaning</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ds-do-dont-grid" style="margin-top:24px;">
+      <div class="ds-do-card">
+        <div class="ds-do-body">
+          <div style="background:var(--surface-1); border:1px solid var(--border-subtle); border-radius:12px; overflow:hidden; width:160px;">
+            <div style="height:90px; background:linear-gradient(135deg,#0a1a28,#102030);"></div>
+            <div style="padding:10px 12px;">
+              <div style="font-size:12px; font-weight:700; color:var(--text); margin-bottom:6px;">Tomb Raider</div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <div style="flex:1; height:4px; background:var(--surface-3,#1F2432); border-radius:100px; overflow:hidden;">
+                  <div style="width:72%; height:100%; background:var(--jio,#00A859); border-radius:100px;"></div>
+                </div>
+                <span style="font-size:10px; color:rgba(244,242,238,.55); white-space:nowrap;">72%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ds-do-footer">Progress bar on game card — shows 72% completion with label</div>
+      </div>
+      <div class="ds-dont-card">
+        <div class="ds-dont-body">
+          <div style="display:flex; align-items:center; gap:12px; padding:12px 16px; background:var(--surface-1); border-radius:12px; border:1px solid var(--border-subtle);">
+            <div style="display:flex; flex-direction:column; gap:6px; flex:1;">
+              <span style="font-size:12px; color:var(--text2);">Step 2 of 4</span>
+              <div style="width:100%; height:6px; background:var(--surface-3,#1F2432); border-radius:100px; overflow:hidden;">
+                <div style="width:50%; height:100%; background:var(--jio,#00A859); border-radius:100px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ds-dont-footer">Progress bar for navigation step count — use page-dots instead</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. ANATOMY -->
+  <section class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <p class="ds-section-desc">The progress bar is composed of a track and a fill. Labels are always external to the component.</p>
+
+    <div class="ds-anatomy" style="margin-bottom:24px;">
+      <div class="ds-anatomy-preview">
+        <div class="ds-anatomy-component" style="width:260px; position:relative; padding:32px 0;">
+          <!-- Callout 1 — Track -->
+          <div style="position:absolute; top:10px; left:0; right:0; display:flex; align-items:center; gap:6px; pointer-events:none;">
+            <span class="ds-anatomy-callout-num">1</span>
+            <span style="font-size:10px; color:var(--text3);">Track</span>
+          </div>
+          <!-- Bar -->
+          <div style="position:relative; width:100%; height:6px; background:var(--surface-3,#1F2432); border-radius:100px; overflow:hidden;">
+            <div style="width:65%; height:100%; background:var(--jio,#00A859); border-radius:100px;" id="anatomy-fill"></div>
+          </div>
+          <!-- Callout 2 — Fill -->
+          <div style="position:absolute; bottom:10px; left:0; display:flex; align-items:center; gap:6px; pointer-events:none;">
+            <span class="ds-anatomy-callout-num">2</span>
+            <span style="font-size:10px; color:var(--text3);">Fill</span>
+          </div>
+        </div>
+      </div>
+      <ol class="ds-anatomy-list">
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">1</span>
+          <div>
+            <div class="ds-anatomy-label">Track <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Full-width background container. Always pill-shaped. Defines the maximum extent of progress.</div>
+            <code class="ds-anatomy-token ds-code">background: var(--surface-3)</code>
+          </div>
+        </li>
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">2</span>
+          <div>
+            <div class="ds-anatomy-label">Fill <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Colored bar inside the track, width driven by the progress value (0–100%). Minimum 4px width.</div>
+            <code class="ds-anatomy-token ds-code">background: var(--jio); min-width: 4px</code>
+          </div>
+        </li>
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">—</span>
+          <div>
+            <div class="ds-anatomy-label">Label <span class="ds-anatomy-optional">External</span></div>
+            <div class="ds-anatomy-desc">Not part of the component element — rendered outside. Format: "72% completed", "1.2 GB of 4.5 GB".</div>
+            <code class="ds-anatomy-token ds-code">font-size: 11px; color: var(--text3)</code>
+          </div>
+        </li>
+      </ol>
+    </div>
+
+    <table class="ds-spec-table">
+      <thead>
+        <tr>
+          <th>Part</th>
+          <th>Element</th>
+          <th>Token</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Track</td>
+          <td><code class="ds-code">div.progress-bar</code></td>
+          <td><code class="ds-code">background: var(--surface-3)</code></td>
+        </tr>
+        <tr>
+          <td>Fill</td>
+          <td><code class="ds-code">div.progress-bar__fill</code></td>
+          <td><code class="ds-code">background: var(--jio)</code></td>
+        </tr>
+        <tr>
+          <td>Fill — achievement</td>
+          <td><code class="ds-code">div.progress-bar__fill--gold</code></td>
+          <td><code class="ds-code">background: var(--popular-gold)</code></td>
+        </tr>
+        <tr>
+          <td>Fill — error</td>
+          <td><code class="ds-code">div.progress-bar__fill--error</code></td>
+          <td><code class="ds-code">background: var(--negative)</code></td>
+        </tr>
+        <tr>
+          <td>Fill — indeterminate</td>
+          <td><code class="ds-code">div.progress-bar__fill--indeterminate</code></td>
+          <td>animated <code class="ds-code">var(--jio-bright)</code></td>
+        </tr>
+        <tr>
+          <td>Label</td>
+          <td>outside component</td>
+          <td><code class="ds-code">font-size: 11px; color: var(--text3)</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 4. VARIANTS -->
+  <section class="ds-section" id="variants">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Four variants cover all progress bar use cases in the JioGames product. Each has a fixed semantic meaning — do not repurpose colors across variants.</p>
+    <div class="ds-demo ds-demo--dark" style="display:flex; flex-direction:column; gap:28px; padding:32px;">
+
+      <!-- Default -->
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
+          <span style="font-size:11px; font-weight:700; color:var(--text); letter-spacing:.3px;">Default</span>
+          <span style="font-size:11px; color:var(--text3);">Game completion, general progress</span>
+        </div>
+        <div class="progress-bar" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" aria-label="Game completion progress">
+          <div class="progress-bar__fill" style="width:72%;"></div>
+        </div>
+        <span style="font-size:11px; color:rgba(244,242,238,.45);">72% completed</span>
+      </div>
+
+      <!-- Achievement -->
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
+          <span style="font-size:11px; font-weight:700; color:var(--text); letter-spacing:.3px;">Achievement</span>
+          <span style="font-size:11px; color:var(--text3);">XP, trophies, milestone fill</span>
+        </div>
+        <div class="progress-bar" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" aria-label="Achievement progress">
+          <div class="progress-bar__fill progress-bar__fill--gold" style="width:40%;"></div>
+        </div>
+        <span style="font-size:11px; color:rgba(244,242,238,.45);">40 / 100 XP</span>
+      </div>
+
+      <!-- Error -->
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
+          <span style="font-size:11px; font-weight:700; color:var(--text); letter-spacing:.3px;">Error</span>
+          <span style="font-size:11px; color:var(--text3);">Storage limit, download failure</span>
+        </div>
+        <div class="progress-bar" role="progressbar" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100" aria-label="Storage used — almost full">
+          <div class="progress-bar__fill progress-bar__fill--error" style="width:95%;"></div>
+        </div>
+        <span style="font-size:11px; color:rgba(244,242,238,.45);">4.75 GB of 5 GB — storage full</span>
+      </div>
+
+      <!-- Indeterminate -->
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px;">
+          <span style="font-size:11px; font-weight:700; color:var(--text); letter-spacing:.3px;">Indeterminate</span>
+          <span style="font-size:11px; color:var(--text3);">Unknown duration loads</span>
+        </div>
+        <div class="progress-bar" role="progressbar" aria-label="Loading game data">
+          <div class="progress-bar__fill progress-bar__fill--indeterminate"></div>
+        </div>
+        <span style="font-size:11px; color:rgba(244,242,238,.45);">Loading game data…</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5. SIZES -->
+  <section class="ds-section" id="sizes">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Bar height adapts to context. Thin for dense overlays, default for standard cards, thick for prominent download screens, TV for 10-foot legibility.</p>
+
+    <table class="ds-spec-table" style="margin-bottom:24px;">
+      <thead>
+        <tr>
+          <th>Size</th>
+          <th>Height</th>
+          <th>Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Thin</td>
+          <td><code class="ds-code">3px</code></td>
+          <td>Video overlay, card micro-progress</td>
+        </tr>
+        <tr>
+          <td>Default</td>
+          <td><code class="ds-code">6px</code></td>
+          <td>Standard usage — game cards, profiles</td>
+        </tr>
+        <tr>
+          <td>Thick</td>
+          <td><code class="ds-code">10px</code></td>
+          <td>Prominent progress — download screens</td>
+        </tr>
+        <tr>
+          <td>TV</td>
+          <td><code class="ds-code">8px min</code></td>
+          <td>All TV contexts, 10-foot legibility requirement</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ds-demo ds-demo--dark" style="display:flex; flex-direction:column; gap:20px; padding:32px;">
+      <div style="display:flex; flex-direction:column; gap:6px;">
+        <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase;">Thin — 3px</span>
+        <div class="progress-bar progress-bar--thin" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" aria-label="60%">
+          <div class="progress-bar__fill" style="width:60%;"></div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:6px;">
+        <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase;">Default — 6px</span>
+        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" aria-label="60%">
+          <div class="progress-bar__fill" style="width:60%;"></div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:6px;">
+        <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase;">Thick — 10px</span>
+        <div class="progress-bar progress-bar--thick" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" aria-label="60%">
+          <div class="progress-bar__fill" style="width:60%;"></div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:6px;">
+        <span style="font-size:10px; font-weight:700; color:#f6ad55; letter-spacing:.5px; text-transform:uppercase;">TV — 8px minimum</span>
+        <div class="progress-bar" style="height:8px;" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" aria-label="60%">
+          <div class="progress-bar__fill" style="width:60%;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. STATES -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Progress bars have four behavioral states. State is always conveyed through fill width, fill color, and label — never through the bar alone.</p>
+    <div class="ds-demo ds-demo--dark" style="display:flex; flex-direction:column; gap:24px; padding:32px;">
+
+      <!-- Active -->
+      <div style="display:flex; flex-direction:column; gap:6px;">
+        <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase;">Active — indeterminate sliding fill</span>
+        <div class="progress-bar" role="progressbar" aria-label="Installing game">
+          <div class="progress-bar__fill progress-bar__fill--indeterminate"></div>
+        </div>
+      </div>
+
+      <!-- Complete -->
+      <div style="display:flex; flex-direction:column; gap:6px;">
+        <span style="font-size:10px; font-weight:700; color:var(--jio); letter-spacing:.5px; text-transform:uppercase;">Complete — 100% green fill</span>
+        <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="Download complete">
+          <div class="progress-bar__fill" style="width:100%;"></div>
+        </div>
+        <span style="font-size:11px; color:rgba(244,242,238,.45);">Download complete</span>
+      </div>
+
+      <!-- Error -->
+      <div style="display:flex; flex-direction:column; gap:6px;">
+        <span style="font-size:10px; font-weight:700; color:var(--negative,#FF4757); letter-spacing:.5px; text-transform:uppercase;">Error — negative color fill</span>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <div class="progress-bar" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" aria-label="Download failed at 45%">
+            <div class="progress-bar__fill progress-bar__fill--error" style="width:45%;"></div>
+          </div>
+          <span style="font-size:13px; color:var(--negative,#FF4757); flex-shrink:0;">✕</span>
+        </div>
+        <span style="font-size:11px; color:var(--negative,#FF4757);">Download failed — retry</span>
+      </div>
+
+      <!-- Paused -->
+      <div style="display:flex; flex-direction:column; gap:6px;">
+        <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase;">Paused — reduced opacity fill (0.6)</span>
+        <div class="progress-bar" role="progressbar" aria-valuenow="58" aria-valuemin="0" aria-valuemax="100" aria-label="Download paused at 58%">
+          <div class="progress-bar__fill" style="width:58%; opacity:0.6;"></div>
+        </div>
+        <span style="font-size:11px; color:rgba(244,242,238,.45);">Paused — 58%</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 7. CONTENT -->
+  <section class="ds-section" id="content">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <p class="ds-section-desc">Progress labels communicate quantity and completion. Precision matters — vague labels erode trust.</p>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Label format</div>
+        <ul>
+          <li>Use numeric format: "72% completed", "1.2 GB of 4.5 GB", "Level 34/50"</li>
+          <li>Never use vague labels like "Almost done" or "Loading…" without a number</li>
+          <li>Always pair a percentage or ratio with the bar when the container allows</li>
+          <li>Right-align short percentage labels alongside the bar end to save vertical space</li>
+          <li>Place longer labels (e.g. "1.2 GB of 4.5 GB") below the bar</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Localization</div>
+        <ul>
+          <li>Percentage symbol placement varies by locale — use the platform locale formatter</li>
+          <li>File size units (GB/MB) should follow regional convention</li>
+          <li>Keep labels concise — translated strings can run 30% longer than English</li>
+          <li>"Completed" may be omitted in compact contexts — "72%" alone is acceptable if space is tight</li>
+          <li>RTL: the bar fill direction reverses; labels stay in reading order</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. PLATFORM -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <p class="ds-section-desc">Bar height and label placement adapt per platform. Semantics and color tokens remain constant.</p>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>6px default height for game cards and profile screens</li>
+          <li>3px thin on card art overlays where space is constrained</li>
+          <li>Label placed below bar, or right-aligned on same row for short percentages</li>
+          <li>Touch targets don't apply — progress bars are non-interactive</li>
+          <li>Indeterminate animation safe at 1.4s — slow enough to not feel jittery</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Same 6px default height as mobile</li>
+          <li>Wide layout allows label to sit right of the bar on the same line</li>
+          <li>Native <code class="ds-code">&lt;progress&gt;</code> element preferred — degrades gracefully without JS</li>
+          <li>Cursor remains default — bars are not interactive elements</li>
+          <li>Large download screens may use 10px thick variant for prominence</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>8px minimum height — 6px is unreadable at 3-metre viewing distance</li>
+          <li>Bold label placed above bar, not below — easier to read top-down</li>
+          <li>Indeterminate preferred for loads — avoids stalling animation perception</li>
+          <li>D-pad focus never lands on the bar — ensure adjacent interactive element holds focus</li>
+          <li>Do not use thin (3px) variant on TV under any context</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. ACCESSIBILITY -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">Progress bars must be perceivable without relying on color or visual position. Use native elements where possible; apply ARIA when using custom markup.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr>
+          <th>Case</th>
+          <th>Attribute / approach</th>
+          <th>Guidance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Native element</td>
+          <td><code class="ds-code">&lt;progress value="72" max="100"&gt;</code></td>
+          <td>Preferred — browser exposes value to assistive tech automatically. Include fallback text content: <code class="ds-code">72%</code> inside the element.</td>
+        </tr>
+        <tr>
+          <td>Custom div — determinate</td>
+          <td><code class="ds-code">role="progressbar"</code>, <code class="ds-code">aria-valuenow</code>, <code class="ds-code">aria-valuemin="0"</code>, <code class="ds-code">aria-valuemax="100"</code>, <code class="ds-code">aria-label</code></td>
+          <td>All four attributes required. <code class="ds-code">aria-label</code> should describe the context — "Game download progress", not just "Progress bar".</td>
+        </tr>
+        <tr>
+          <td>Indeterminate</td>
+          <td>Omit <code class="ds-code">aria-valuenow</code></td>
+          <td>When duration is unknown, omit <code class="ds-code">aria-valuenow</code> — screen readers will announce the bar as indeterminate.</td>
+        </tr>
+        <tr>
+          <td>Color-only states</td>
+          <td>Always pair with label text</td>
+          <td>Color alone never conveys state — error red must be accompanied by an error label. Achievement gold must have a label like "40 / 100 XP".</td>
+        </tr>
+        <tr>
+          <td>Reduced motion</td>
+          <td><code class="ds-code">@media (prefers-reduced-motion)</code></td>
+          <td>Indeterminate animation stops; fill set to 100% at 0.4 opacity to signal loading without motion. Implemented in the component CSS.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 10. RELATED TOKENS -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-desc">Always reference tokens — never hardcode hex values. Tokens update with the theme; hardcoded values do not.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>Value</th>
+          <th>Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="ds-code">--jio</code></td>
+          <td><code class="ds-code">#00A859</code></td>
+          <td>Default fill — positive progress, game completion</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--jio-bright</code></td>
+          <td>lighter green</td>
+          <td>Indeterminate fill — animated sliding indicator</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--popular-gold</code></td>
+          <td><code class="ds-code">#FFCF5C</code></td>
+          <td>Achievement fill — XP bars, trophy progress</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--negative</code></td>
+          <td>red</td>
+          <td>Error fill — storage limit, download failure</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--surface-3</code></td>
+          <td><code class="ds-code">#1F2432</code></td>
+          <td>Track background on dark surfaces</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--pill</code></td>
+          <td><code class="ds-code">100px</code></td>
+          <td>Border-radius for track and fill — maintains pill shape at all heights</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 11. CODE EXAMPLES -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-section-desc">Copy these as starting points. Always link <code class="ds-code">tokens/tokens.css</code>, <code class="ds-code">components.css</code>, and <code class="ds-code">states.css</code> before using component classes.</p>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Native progress element (preferred)</div>
+      <pre class="component-code-pre"><code>&lt;!-- Native progress element (preferred) --&gt;
+&lt;div class="progress-bar" role="none"&gt;
+  &lt;progress class="progress-bar__fill" value="72" max="100"&gt;72%&lt;/progress&gt;
+&lt;/div&gt;
+&lt;span class="progress-label"&gt;72% completed&lt;/span&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Custom div with ARIA — determinate</div>
+      <pre class="component-code-pre"><code>&lt;!-- Custom div with ARIA --&gt;
+&lt;div class="progress-bar"
+     role="progressbar"
+     aria-valuenow="40"
+     aria-valuemin="0"
+     aria-valuemax="100"
+     aria-label="Achievement progress"&gt;
+  &lt;div class="progress-bar__fill progress-bar__fill--gold"
+       style="width: 40%"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Indeterminate loading</div>
+      <pre class="component-code-pre"><code>&lt;!-- Indeterminate loading --&gt;
+&lt;div class="progress-bar"
+     role="progressbar"
+     aria-label="Loading game data"&gt;
+  &lt;div class="progress-bar__fill progress-bar__fill--indeterminate"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- 12. CHANGELOG -->
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

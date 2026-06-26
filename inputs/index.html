@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inputs — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    body { background: var(--bg); color: var(--text); font-family: var(--jio-font); margin: 0; }
+
+    .component-hero { border-radius: 20px; overflow: hidden; margin-bottom: 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; min-height: 280px; padding: 48px 32px 32px; }
+    .component-hero--dark { background: #060810; }
+    .component-hero--grid {
+      background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 32px 32px; background-color: #060810; border: 1px solid var(--border-subtle);
+    }
+    .component-hero-inner { display: flex; flex-direction: column; align-items: center; gap: 28px; position: relative; z-index: 2; width: 100%; max-width: 480px; }
+    .component-hero-caption { display: block; font-size: 10px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--text4); margin-top: 24px; position: relative; z-index: 2; }
+    .hero-glow { position: absolute; width: 320px; height: 180px; border-radius: var(--pill); background: radial-gradient(ellipse, rgba(0,168,89,.2) 0%, transparent 70%); pointer-events: none; z-index: 1; }
+
+    .component-intro { margin-bottom: 48px; }
+    .component-intro p { font-size: 15px; font-weight: 500; color: var(--text2); line-height: 1.65; margin-bottom: 20px; max-width: 640px; }
+    .component-summary-list { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border-subtle); border-radius: 14px; overflow: hidden; list-style: none; padding: 0; margin: 0; }
+    .component-summary-list li { padding: 14px 20px; border-bottom: 1px solid var(--border-subtle); font-size: 13px; font-weight: 500; color: var(--text2); line-height: 1.55; }
+    .component-summary-list li:last-child { border-bottom: none; }
+    .component-summary-list li strong { color: var(--text); font-weight: 700; }
+
+    .component-best-practices { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+    .component-bp-card { border-radius: 14px; overflow: hidden; border: 1.5px solid; }
+    .component-bp-card--do   { border-color: rgba(0,168,89,.3); }
+    .component-bp-card--dont { border-color: rgba(255,71,87,.3); }
+    .component-bp-label { display: flex; align-items: center; gap: 6px; padding: 10px 16px; font-size: 10px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; }
+    .component-bp-label--do   { background: rgba(0,168,89,.07);  color: var(--jio); }
+    .component-bp-label--dont { background: rgba(255,71,87,.07); color: var(--negative); }
+    .component-bp-label--do::before   { content: '\2713'; font-size: 11px; }
+    .component-bp-label--dont::before { content: '\2715'; font-size: 11px; }
+    .component-bp-list { padding: 16px 20px 20px; background: var(--surface-1); margin: 0; display: flex; flex-direction: column; gap: 8px; list-style: none; }
+    .component-bp-list li { font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.5; padding-left: 14px; position: relative; }
+    .component-bp-list li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+
+    .component-content-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px; }
+    .component-content-card { background: var(--surface-1); border: 1px solid var(--border-subtle); border-radius: var(--r4); padding: 20px; }
+    .component-content-title { font-size: 12px; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 12px; }
+    .component-content-card ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .component-content-card li { font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.5; padding-left: 14px; position: relative; }
+    .component-content-card li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+
+    .component-platform-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+    .component-platform-card { background: var(--surface-1); border: 1px solid var(--border-subtle); border-radius: var(--r4); padding: 20px; }
+    .component-platform-card--mobile { border-top: 2px solid rgba(110,231,183,.4); }
+    .component-platform-card--web    { border-top: 2px solid rgba(147,197,253,.4); }
+    .component-platform-card--tv     { border-top: 2px solid rgba(251,191,36,.4); }
+    .component-platform-card-title { font-size: 11px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--text3); margin-bottom: 12px; }
+    .component-platform-card--mobile .component-platform-card-title { color: #6ee7b7; }
+    .component-platform-card--web    .component-platform-card-title { color: #93c5fd; }
+    .component-platform-card--tv     .component-platform-card-title { color: #fbbf24; }
+    .component-platform-card ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .component-platform-card li { font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.5; padding-left: 14px; position: relative; }
+    .component-platform-card li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+
+    .component-changelog { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; }
+    .component-changelog-entry { display: grid; grid-template-columns: 56px 80px 1fr; gap: 16px; align-items: start; padding: 14px 20px; border-bottom: 1px solid var(--border-subtle); font-size: 12px; }
+    .component-changelog-entry:last-child { border-bottom: none; }
+    .component-changelog-version { font-family: monospace; font-weight: 700; color: var(--jio); font-size: 11px; }
+    .component-changelog-date { color: var(--text3); font-weight: 500; }
+    .component-changelog-desc { color: var(--text2); line-height: 1.5; }
+
+    .ds-note { background: rgba(0,168,89,.06); border: 1px solid rgba(0,168,89,.2); border-radius: var(--r3); padding: 14px 18px; font-size: 13px; font-weight: 500; color: var(--text2); line-height: 1.55; }
+    .ds-note strong { color: var(--jio); }
+
+    /* Input field mockup styles */
+    .field-mockup {
+      display: flex; flex-direction: column; gap: 6px; width: 100%;
+    }
+    .field-label {
+      font-size: 12px; font-weight: 600; color: var(--text2); letter-spacing: .2px;
+    }
+    .field-wrap {
+      position: relative; display: flex; align-items: center;
+      height: 54px; background: var(--surface-1); border: 1px solid var(--border);
+      border-radius: var(--r4); overflow: hidden;
+    }
+    .field-wrap--focus { border-color: var(--jio); box-shadow: 0 0 0 3px rgba(0,168,89,.15); }
+    .field-wrap--error { border-color: var(--negative); box-shadow: 0 0 0 3px rgba(255,71,87,.12); }
+    .field-wrap--success { border-color: var(--jio); }
+    .field-wrap--disabled { opacity: .38; pointer-events: none; }
+    .field-icon { padding: 0 12px; flex-shrink: 0; color: var(--text3); display: flex; align-items: center; }
+    .field-text { flex: 1; font-size: 15px; font-family: var(--jio-font); color: var(--text); padding: 0 14px; background: transparent; }
+    .field-text--placeholder { color: var(--text4); }
+    .field-trailing { padding: 0 12px; flex-shrink: 0; color: var(--text3); display: flex; align-items: center; cursor: pointer; }
+    .field-helper { font-size: 11px; color: var(--text3); }
+    .field-error-text { font-size: 11px; color: var(--negative); }
+    .field-success-text { font-size: 11px; color: var(--jio); }
+
+    /* Size matrix */
+    .input-size-matrix { border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; }
+    .input-size-matrix-head { display: grid; grid-template-columns: 100px 1fr 1fr 1fr; background: var(--surface-2); border-bottom: 1px solid var(--border-subtle); }
+    .input-size-matrix-head > div { padding: 10px 16px; font-size: 9px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: var(--text3); }
+    .input-size-matrix-row { display: grid; grid-template-columns: 100px 1fr 1fr 1fr; border-bottom: 1px solid var(--border-subtle); background: var(--surface-1); }
+    .input-size-matrix-row:last-child { border-bottom: none; }
+    .input-size-matrix-row:hover { background: var(--glass-1); }
+    .input-size-matrix-label { padding: 16px; display: flex; flex-direction: column; justify-content: center; gap: 3px; border-right: 1px solid var(--border-subtle); background: var(--surface-2); }
+    .input-size-matrix-name { font-size: 12px; font-weight: 700; color: var(--text); }
+    .input-size-matrix-class { font-family: monospace; font-size: 10px; color: #a8e6c5; }
+    .input-size-matrix-cell { padding: 14px 16px; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; justify-content: center; }
+    .input-size-matrix-px { font-family: monospace; font-size: 10px; color: var(--text3); }
+
+    /* State grid */
+    .state-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-top: 16px; }
+
+    /* Accessibility */
+    .a11y-grid { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; margin-top: 24px; }
+    .a11y-row { display: grid; grid-template-columns: 140px 1fr; gap: 0; border-bottom: 1px solid var(--border-subtle); }
+    .a11y-row:last-child { border-bottom: none; }
+    .a11y-label { padding: 14px 16px; font-size: 11px; font-weight: 700; color: var(--text3); letter-spacing: .3px; background: var(--surface-2); text-transform: uppercase; display: flex; align-items: flex-start; padding-top: 16px; }
+    .a11y-content { padding: 14px 20px; font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.6; background: var(--surface-1); }
+    .a11y-content ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 5px; }
+    .a11y-content li { padding-left: 14px; position: relative; }
+    .a11y-content li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+
+    kbd { display: inline-block; padding: 1px 6px; background: var(--surface-3); border: 1px solid var(--border); border-radius: 4px; font-family: monospace; font-size: 11px; color: var(--text2); }
+
+    @media (max-width: 760px) {
+      .component-best-practices, .component-content-grid, .component-platform-grid { grid-template-columns: 1fr; }
+      .input-size-matrix { overflow-x: auto; }
+      .input-size-matrix-head, .input-size-matrix-row { min-width: 480px; }
+    }
+  </style>
+</head>
+<body>
+<main class="ds-content">
+
+  <!-- ===================================================
+       1. PAGE HEADER
+  =================================================== -->
+  <div class="component-page-header">
+    <div class="component-breadcrumb">
+      <a href="../index.html">JioGames DLS</a>
+      <span class="component-breadcrumb-sep">&#x203A;</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">&#x203A;</span>
+      <span>Inputs</span>
+    </div>
+    <h1 class="component-page-title">Inputs</h1>
+    <p class="component-page-def">Inputs let players enter text, search for games, and provide information across JioGames.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+      <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+      <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+      <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+    </div>
+  </div>
+
+  <!-- ===================================================
+       2. HERO VISUAL
+  =================================================== -->
+  <section class="component-hero component-hero--dark component-hero--grid" id="overview">
+    <div class="hero-glow" style="top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+    <div class="component-hero-inner">
+      <!-- Annotated full input field -->
+      <div class="field-mockup">
+        <div class="field-label">Mobile number</div>
+        <div class="field-wrap field-wrap--focus">
+          <div class="field-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_user"></use></svg>
+          </div>
+          <div class="field-text">9876543210</div>
+          <div class="field-trailing">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_close"></use></svg>
+          </div>
+        </div>
+        <div class="field-helper">We&#x27;ll send a one-time password to this number</div>
+      </div>
+      <!-- Error state below -->
+      <div class="field-mockup">
+        <div class="field-label">Email address</div>
+        <div class="field-wrap field-wrap--error">
+          <div class="field-text">user@badformat</div>
+          <div class="field-trailing" style="color:var(--negative)">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_close"></use></svg>
+          </div>
+        </div>
+        <div class="field-error-text">Enter a valid email address</div>
+      </div>
+    </div>
+    <span class="component-hero-caption">Focus state with leading icon &#xB7; Clear action &#xB7; Error state &#xB7; 1:1 scale Mobile L</span>
+  </section>
+
+  <!-- ===================================================
+       3. INTRO
+  =================================================== -->
+  <section class="component-intro" id="intro">
+    <p>Inputs are used in authentication flows (phone number, OTP), search, profile editing, and any form that requires player-supplied information. The system covers three size tiers, seven visual states, and optional icon affordances for leading icons and trailing actions.</p>
+    <ul class="component-summary-list">
+      <li><strong>Size.</strong> Three canonical sizes &#x2014; S, M, L &#x2014; resolve to different heights on Mobile, Web, and TV via token aliases.</li>
+      <li><strong>States.</strong> Seven states: Default, Focus, Filled, Disabled, Error, Success, Loading &#x2014; driven by CSS classes from <code class="ds-code">states.css</code>.</li>
+      <li><strong>Slots.</strong> Label, leading icon, field container, placeholder/value, trailing action, and helper/error text. Only the field container is required.</li>
+      <li><strong>Token-driven.</strong> All sizing and color tokens live in <code class="ds-code">tokens/tokens.css</code>. Changing <code class="ds-code">--input-border-focus</code> updates every focused input across all surfaces.</li>
+      <li><strong>Platform-aware.</strong> Same class resolves to different pixel heights on Mobile (54px), Web (52px), and TV (72px) for the L size via platform token aliases.</li>
+    </ul>
+  </section>
+
+  <!-- ===================================================
+       4. BEST PRACTICES
+  =================================================== -->
+  <section class="ds-section" id="best-practices">
+    <h2 class="ds-section-title">Best practices</h2>
+    <p class="ds-section-desc">Inputs are high-friction components. Every decision &#x2014; label, placeholder, validation timing &#x2014; directly affects completion rate.</p>
+    <div class="component-best-practices">
+      <div class="component-bp-card component-bp-card--do">
+        <span class="component-bp-label component-bp-label--do">Do</span>
+        <ul class="component-bp-list">
+          <li>Always show a visible label above the field</li>
+          <li>Use M (44px) or L (54px) on mobile &#x2014; never S for primary inputs</li>
+          <li>Show error text inline below the field, not in a toast</li>
+          <li>Validate on blur, not on every keystroke</li>
+          <li>Use a leading icon to reinforce the input type (search icon for search)</li>
+          <li>Persist the label when the field is focused &#x2014; never hide it</li>
+          <li>On TV, use L size and make the focus ring clearly visible</li>
+        </ul>
+      </div>
+      <div class="component-bp-card component-bp-card--dont">
+        <span class="component-bp-label component-bp-label--dont">Don&#x27;t</span>
+        <ul class="component-bp-list">
+          <li>Don&#x27;t use placeholder text as a substitute for a label</li>
+          <li>Don&#x27;t validate on each keystroke &#x2014; it frustrates players mid-type</li>
+          <li>Don&#x27;t show error state before the player has interacted with the field</li>
+          <li>Don&#x27;t use S inputs as primary form fields on mobile</li>
+          <li>Don&#x27;t leave inputs without helper text in authentication flows</li>
+          <li>Don&#x27;t auto-dismiss the keyboard when focus is still needed</li>
+          <li>Don&#x27;t place two inputs side by side on mobile without sufficient spacing</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       5. ANATOMY
+  =================================================== -->
+  <section class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <p class="ds-section-desc">A full input is composed of up to seven zones. Only the field container is required. Every other slot is optional but must be used intentionally.</p>
+    <div class="ds-anatomy">
+      <div class="ds-anatomy-preview">
+        <div class="ds-anatomy-component" style="position:relative;display:flex;flex-direction:column;gap:6px;padding:40px 32px;width:100%;max-width:360px">
+          <!-- Label -->
+          <div style="font-size:12px;font-weight:600;color:var(--text2);letter-spacing:.2px;position:relative">
+            Mobile number
+            <div style="position:absolute;right:-28px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:0">
+              <div style="width:20px;height:1px;background:var(--jio);opacity:.5"></div>
+              <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">1</div>
+            </div>
+          </div>
+          <!-- Field -->
+          <div style="position:relative;display:flex;align-items:center;height:54px;background:var(--surface-1);border:1.5px solid var(--jio);border-radius:var(--r4);box-shadow:0 0 0 3px rgba(0,168,89,.15)">
+            <!-- leading icon -->
+            <div style="padding:0 12px;color:var(--jio);display:flex;align-items:center;flex-shrink:0">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_search"></use></svg>
+              <div style="position:absolute;left:-28px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:0">
+                <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">2</div>
+                <div style="width:20px;height:1px;background:var(--jio);opacity:.5"></div>
+              </div>
+            </div>
+            <!-- value text -->
+            <div style="flex:1;font-size:15px;color:var(--text)">9876543210</div>
+            <!-- callout 3 field -->
+            <div style="position:absolute;top:-20px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0">
+              <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">3</div>
+              <div style="width:1px;height:14px;background:var(--jio);opacity:.5"></div>
+            </div>
+            <!-- callout 4 value -->
+            <div style="position:absolute;bottom:-20px;left:44%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0">
+              <div style="width:1px;height:14px;background:var(--jio);opacity:.5"></div>
+              <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">4</div>
+            </div>
+            <!-- trailing -->
+            <div style="padding:0 12px;color:var(--text3);display:flex;align-items:center;flex-shrink:0">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_close"></use></svg>
+              <div style="position:absolute;right:-28px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:0">
+                <div style="width:20px;height:1px;background:var(--jio);opacity:.5"></div>
+                <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">5</div>
+              </div>
+            </div>
+          </div>
+          <!-- helper -->
+          <div style="font-size:11px;color:var(--text3);position:relative">
+            OTP will be sent to this number
+            <div style="position:absolute;left:-28px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:0">
+              <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">6</div>
+              <div style="width:20px;height:1px;background:var(--jio);opacity:.5"></div>
+            </div>
+          </div>
+          <!-- focus ring note -->
+          <div style="position:absolute;bottom:12px;right:8px;display:flex;flex-direction:column;align-items:flex-end;gap:0">
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">7</div>
+          </div>
+        </div>
+      </div>
+      <div class="ds-anatomy-list">
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">1</div>
+          <div>
+            <div class="ds-anatomy-label">Label <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc">Visible label above the field. Font: 12px, weight 600. Always present in form flows. Never use placeholder as the sole label.</div>
+            <div class="ds-anatomy-token">CSS: label element &#xB7; Figma: Input/Label</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">2</div>
+          <div>
+            <div class="ds-anatomy-label">Leading icon <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc">Icon positioned at the left interior edge. Signals input type (search icon, phone icon, lock icon). Uses M icon size (20px). Color matches field state.</div>
+            <div class="ds-anatomy-token">CSS: .input--icon-lead &#xB7; Figma: Input/LeadingIcon</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">3</div>
+          <div>
+            <div class="ds-anatomy-label">Field container <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">The visible input container. Height from <code class="ds-code">--input-l-h-mobile: 54px</code>. Background <code class="ds-code">var(--input-bg)</code>, border <code class="ds-code">var(--input-border)</code>, radius <code class="ds-code">var(--input-radius)</code>.</div>
+            <div class="ds-anatomy-token">CSS: .input &#xB7; Figma: Input/Container</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">4</div>
+          <div>
+            <div class="ds-anatomy-label">Placeholder / value text <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Placeholder: <code class="ds-code">var(--input-placeholder)</code> (#6B7280). Value: <code class="ds-code">var(--input-text)</code> (#F4F2EE). Font: 15px, weight 500. Placeholder disappears on focus.</div>
+            <div class="ds-anatomy-token">CSS: input::placeholder / input value &#xB7; Figma: Input/Text</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">5</div>
+          <div>
+            <div class="ds-anatomy-label">Trailing action <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc">Clear (&#xD7;) button that appears when the field has a value. Password show/hide toggle. 44px interactive target inside the field. Aria-labelled.</div>
+            <div class="ds-anatomy-token">CSS: .input__trailing &#xB7; Figma: Input/TrailingAction</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">6</div>
+          <div>
+            <div class="ds-anatomy-label">Helper / error text <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc">Shown below the field. Helper: <code class="ds-code">var(--text3)</code>, 11px. Error: <code class="ds-code">var(--negative)</code>. Success: <code class="ds-code">var(--jio)</code>. Always present in auth and form flows.</div>
+            <div class="ds-anatomy-token">CSS: .input__helper / .input__error &#xB7; Figma: Input/HelperText</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">7</div>
+          <div>
+            <div class="ds-anatomy-label">Focus ring <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc">Border switches to <code class="ds-code">var(--input-border-focus)</code> (#00A859) on focus. Box-shadow: <code class="ds-code">0 0 0 3px rgba(0,168,89,.15)</code> provides a soft ambient glow. TV uses <code class="ds-code">--tv-focus-shadow</code>.</div>
+            <div class="ds-anatomy-token">CSS: :focus-visible / .is-focused &#xB7; Figma: Input/FocusRing</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       6. VARIANTS
+  =================================================== -->
+  <section class="ds-section" id="variants">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Four input variants cover the full range of JioGames data-entry contexts. Choose the simplest variant that meets the task.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex;flex-direction:column;gap:24px;max-width:420px">
+
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="font-size:12px;font-weight:700;color:var(--text)">Default text field</div>
+          <div style="font-size:11px;color:var(--text3);margin-bottom:4px"><code class="ds-code">.input</code> &#x2014; For name, email, free text</div>
+          <div class="field-wrap">
+            <div class="field-text field-text--placeholder">Enter your name</div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="font-size:12px;font-weight:700;color:var(--text)">With leading icon</div>
+          <div style="font-size:11px;color:var(--text3);margin-bottom:4px"><code class="ds-code">.input .input--icon-lead</code> &#x2014; Reinforces input type</div>
+          <div class="field-wrap">
+            <div class="field-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_search"></use></svg></div>
+            <div class="field-text field-text--placeholder">Search games, genres&#x2026;</div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="font-size:12px;font-weight:700;color:var(--text)">Password field</div>
+          <div style="font-size:11px;color:var(--text3);margin-bottom:4px"><code class="ds-code">.input .input--password</code> &#x2014; With show/hide toggle</div>
+          <div class="field-wrap">
+            <div class="field-text">&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;</div>
+            <div class="field-trailing"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_settings"></use></svg></div>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="font-size:12px;font-weight:700;color:var(--text)">OTP field set</div>
+          <div style="font-size:11px;color:var(--text3);margin-bottom:4px"><code class="ds-code">.otp-field</code> &#x2014; One box per digit, auto-advance</div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <div style="width:50px;height:64px;border-radius:14px;background:var(--surface-1);border:1.5px solid var(--jio);box-shadow:0 0 0 3px rgba(0,168,89,.15);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;color:var(--text)">4</div>
+            <div style="width:50px;height:64px;border-radius:14px;background:var(--surface-1);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;color:var(--text)">2</div>
+            <div style="width:50px;height:64px;border-radius:14px;background:var(--surface-1);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;color:var(--text)">7</div>
+            <div style="width:50px;height:64px;border-radius:14px;background:var(--surface-1);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:26px;color:var(--text4)">&#x2014;</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       7. SIZES
+  =================================================== -->
+  <section class="ds-section" id="sizes">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Three canonical sizes cover all input use cases. Platform context resolves the actual pixel height via token aliases. Use L for primary inputs, M for secondary, S only in dense UI.</p>
+
+    <div class="ds-note" style="margin-bottom:20px">
+      <strong>Mobile baseline.</strong> Input heights default to mobile values. <code class="ds-code">--input-l-h</code> = 54px on mobile, 52px on web, 72px on TV. Same class everywhere &#x2014; platform context resolves the alias.
+    </div>
+
+    <div class="input-size-matrix">
+      <div class="input-size-matrix-head">
+        <div>Size</div>
+        <div style="color:#6ee7b7">Mobile</div>
+        <div style="color:#93c5fd">Web</div>
+        <div style="color:#fbbf24">TV</div>
+      </div>
+      <div class="input-size-matrix-row">
+        <div class="input-size-matrix-label">
+          <span class="input-size-matrix-name">S</span>
+          <span class="input-size-matrix-class">--input-s-h</span>
+        </div>
+        <div class="input-size-matrix-cell">
+          <div style="height:36px;background:var(--surface-1);border:1px solid var(--border);border-radius:var(--r3);display:flex;align-items:center;padding:0 12px;min-width:140px">
+            <span style="font-size:12px;color:var(--text4)">Coupon code</span>
+          </div>
+          <span class="input-size-matrix-px">h:36 &#xB7; var(--input-s-h-mobile)</span>
+        </div>
+        <div class="input-size-matrix-cell">
+          <div style="height:38px;background:var(--surface-1);border:1px solid var(--border);border-radius:var(--r3);display:flex;align-items:center;padding:0 12px;min-width:140px">
+            <span style="font-size:12px;color:var(--text4)">Coupon code</span>
+          </div>
+          <span class="input-size-matrix-px">h:38 &#xB7; var(--input-s-h-web)</span>
+        </div>
+        <div class="input-size-matrix-cell">
+          <div style="height:56px;background:var(--surface-1);border:1px solid var(--border);border-radius:var(--r4);display:flex;align-items:center;padding:0 16px;min-width:140px">
+            <span style="font-size:14px;color:var(--text4)">Coupon code</span>
+          </div>
+          <span class="input-size-matrix-px">h:56 &#xB7; var(--input-s-h-tv)</span>
+        </div>
+      </div>
+      <div class="input-size-matrix-row">
+        <div class="input-size-matrix-label">
+          <span class="input-size-matrix-name">M</span>
+          <span class="input-size-matrix-class">--input-m-h</span>
+        </div>
+        <div class="input-size-matrix-cell">
+          <div style="height:44px;background:var(--surface-1);border:1px solid var(--border);border-radius:var(--r4);display:flex;align-items:center;padding:0 14px;min-width:160px">
+            <span style="font-size:14px;color:var(--text4)">Search games</span>
+          </div>
+          <span class="input-size-matrix-px">h:44 &#xB7; var(--input-m-h-mobile)</span>
+        </div>
+        <div class="input-size-matrix-cell">
+          <div style="height:44px;background:var(--surface-1);border:1px solid var(--border);border-radius:var(--r4);display:flex;align-items:center;padding:0 14px;min-width:160px">
+            <span style="font-size:14px;color:var(--text4)">Search games</span>
+          </div>
+          <span class="input-size-matrix-px">h:44 &#xB7; var(--input-m-h-web)</span>
+        </div>
+        <div class="input-size-matrix-cell">
+          <div style="height:64px;background:var(--surface-1);border:1px solid var(--border);border-radius:var(--r4);display:flex;align-items:center;padding:0 18px;min-width:160px">
+            <span style="font-size:16px;color:var(--text4)">Search games</span>
+          </div>
+          <span class="input-size-matrix-px">h:64 &#xB7; var(--input-m-h-tv)</span>
+        </div>
+      </div>
+      <div class="input-size-matrix-row">
+        <div class="input-size-matrix-label">
+          <span class="input-size-matrix-name">L</span>
+          <span class="input-size-matrix-class">--input-l-h</span>
+        </div>
+        <div class="input-size-matrix-cell">
+          <div style="height:54px;background:var(--surface-1);border:1px solid var(--border);border-radius:var(--r4);display:flex;align-items:center;padding:0 14px;min-width:180px">
+            <span style="font-size:15px;color:var(--text4)">Mobile number</span>
+          </div>
+          <span class="input-size-matrix-px">h:54 &#xB7; var(--input-l-h-mobile)</span>
+        </div>
+        <div class="input-size-matrix-cell">
+          <div style="height:52px;background:var(--surface-1);border:1px solid var(--border);border-radius:var(--r4);display:flex;align-items:center;padding:0 14px;min-width:180px">
+            <span style="font-size:15px;color:var(--text4)">Mobile number</span>
+          </div>
+          <span class="input-size-matrix-px">h:52 &#xB7; var(--input-l-h-web)</span>
+        </div>
+        <div class="input-size-matrix-cell">
+          <div style="height:72px;background:var(--surface-1);border:1px solid var(--border);border-radius:var(--r4);display:flex;align-items:center;padding:0 20px;min-width:180px">
+            <span style="font-size:18px;color:var(--text4)">Mobile number</span>
+          </div>
+          <span class="input-size-matrix-px">h:72 &#xB7; var(--input-l-h-tv)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       8. STATES
+  =================================================== -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Seven states cover the full lifecycle of an input field. Apply <code class="ds-code">.is-*</code> classes from <code class="ds-code">states.css</code> to simulate states in prototypes and documentation.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex;flex-direction:column;gap:20px;max-width:420px;width:100%">
+
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-bottom:8px">Default</div>
+          <div class="field-wrap"><div class="field-text field-text--placeholder">Mobile number</div></div>
+        </div>
+
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--jio);margin-bottom:8px">Focus</div>
+          <div class="field-wrap field-wrap--focus"><div class="field-text field-text--placeholder">Mobile number</div></div>
+        </div>
+
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-bottom:8px">Filled</div>
+          <div class="field-wrap" style="border-color:var(--border-strong)">
+            <div class="field-text">9876543210</div>
+            <div class="field-trailing"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_close"></use></svg></div>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--negative);margin-bottom:8px">Error</div>
+          <div class="field-wrap field-wrap--error"><div class="field-text">98765abc</div></div>
+          <div class="field-error-text" style="margin-top:4px">Enter a valid 10-digit mobile number</div>
+        </div>
+
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--jio);margin-bottom:8px">Success</div>
+          <div class="field-wrap field-wrap--success"><div class="field-text">9876543210</div></div>
+          <div class="field-success-text" style="margin-top:4px">Number verified &#x2713;</div>
+        </div>
+
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-bottom:8px">Disabled</div>
+          <div class="field-wrap field-wrap--disabled"><div class="field-text field-text--placeholder">Not editable</div></div>
+        </div>
+
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-bottom:8px">Loading</div>
+          <div class="field-wrap" style="border-color:var(--border)">
+            <div class="field-text">Verifying&#x2026;</div>
+            <div class="field-trailing">
+              <div style="width:18px;height:18px;border:2px solid rgba(255,255,255,.1);border-top-color:var(--jio);border-radius:50%;animation:spin 700ms linear infinite"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
+  </section>
+
+  <!-- ===================================================
+       9. CONTENT GUIDANCE
+  =================================================== -->
+  <section class="ds-section" id="content">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <p class="ds-section-desc">Labels, placeholders, helper text, and error messages are just as much part of the input component as the visual field itself.</p>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Labels</div>
+        <ul>
+          <li>Always visible &#x2014; never replace a label with a placeholder</li>
+          <li>Title case: &#x22;Mobile Number&#x22; not &#x22;mobile number&#x22;</li>
+          <li>Keep to 1&#x2013;3 words; avoid parenthetical instructions in the label</li>
+          <li>Optional fields: add &#x22;(optional)&#x22; in muted text after the label</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Placeholder text</div>
+        <ul>
+          <li>Use for format hints: &#x22;9876543210&#x22; for phone, &#x22;user@email.com&#x22; for email</li>
+          <li>Don&#x27;t repeat the label as the placeholder</li>
+          <li>Placeholder disappears on focus &#x2014; don&#x27;t rely on it for critical info</li>
+          <li>Keep under 30 characters; placeholder crops in narrow inputs</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Helper text</div>
+        <ul>
+          <li>Use to provide context the player needs before typing: &#x22;We&#x27;ll send an OTP&#x22;</li>
+          <li>Keep to one line (11px) &#x2014; avoid multi-line helper text</li>
+          <li>Disappears when error or success state is shown</li>
+          <li>Always present in auth flows where players may be uncertain</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Error messages</div>
+        <ul>
+          <li>Specific: &#x22;Enter a valid 10-digit number&#x22; not &#x22;Invalid input&#x22;</li>
+          <li>Avoid blame: &#x22;Number not found&#x22; not &#x22;You entered the wrong number&#x22;</li>
+          <li>Show on blur, not on each keystroke</li>
+          <li>Never show error before the player has interacted with the field</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       10. PLATFORM CONSIDERATIONS
+  =================================================== -->
+  <section class="ds-section" id="platform-considerations">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <p class="ds-section-desc">Each platform requires distinct input behaviors. Same size tokens, different interaction patterns and keyboard behaviors.</p>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Use <code class="ds-code">type="tel"</code> for phone numbers &#x2014; triggers numeric keyboard</li>
+          <li>L size (54px) for primary inputs; M (44px) minimum for any input</li>
+          <li>Bottom sheet inputs must scroll above the keyboard</li>
+          <li>Auto-advance OTP fields on input</li>
+          <li>Validate on blur, not on each keystroke</li>
+          <li><code class="ds-code">inputmode="numeric"</code> for number-only fields</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Hover: subtle border brightness increase before focus</li>
+          <li>Focus: 1px green border + soft ambient glow</li>
+          <li>M size (44px) acceptable for secondary inputs in web forms</li>
+          <li>Auto-complete via <code class="ds-code">autocomplete</code> attributes where appropriate</li>
+          <li>Keyboard: <kbd>Tab</kbd> to advance, <kbd>Shift+Tab</kbd> to go back</li>
+          <li>Password: show/hide toggle required for password fields</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>L size only &#x2014; never S or M on TV</li>
+          <li>TV focus glow: <code class="ds-code">--tv-focus-shadow</code> replaces the subtle web ring</li>
+          <li>D-pad navigates between input fields and the on-screen keyboard</li>
+          <li>On-screen keyboard required &#x2014; no hardware keyboard assumption</li>
+          <li>Auto-fill from JioID profile where available to reduce TV input friction</li>
+          <li>OTP: use voice input shortcut if platform supports it</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       11. ACCESSIBILITY
+  =================================================== -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">Inputs must work with keyboard navigation, screen readers, and assistive touch. Authentication flows especially cannot afford accessibility failures.</p>
+    <div class="a11y-grid">
+      <div class="a11y-row">
+        <div class="a11y-label">Label binding</div>
+        <div class="a11y-content">Always associate a <code class="ds-code">&lt;label&gt;</code> with its input via <code class="ds-code">for</code> + <code class="ds-code">id</code> pairing, or use <code class="ds-code">aria-label</code> / <code class="ds-code">aria-labelledby</code> if a visual label isn&#x27;t present. Screen readers announce the label when the input receives focus.</div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Keyboard nav</div>
+        <div class="a11y-content">
+          <ul>
+            <li><kbd>Tab</kbd> &#x2014; moves focus to the next input</li>
+            <li><kbd>Shift+Tab</kbd> &#x2014; moves focus to the previous input</li>
+            <li><kbd>Escape</kbd> &#x2014; dismisses any inline suggestion panel</li>
+            <li>OTP fields: auto-advance on character entry; backspace returns to previous</li>
+          </ul>
+        </div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Error states</div>
+        <div class="a11y-content">
+          <ul>
+            <li>Add <code class="ds-code">aria-invalid="true"</code> to the input when error state is active</li>
+            <li>Link the error message via <code class="ds-code">aria-describedby</code> on the input</li>
+            <li>Use <code class="ds-code">aria-live="polite"</code> so screen readers announce new error text</li>
+            <li>Never rely on color alone to signal errors &#x2014; include text</li>
+          </ul>
+        </div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Contrast</div>
+        <div class="a11y-content">
+          <ul>
+            <li>Input value text: <code class="ds-code">#F4F2EE</code> on <code class="ds-code">#0E1119</code> &#x2014; 12.5:1 contrast ratio</li>
+            <li>Placeholder: <code class="ds-code">#6B7280</code> on <code class="ds-code">#0E1119</code> &#x2014; 4.9:1 (decorative threshold accepted)</li>
+            <li>Error text: <code class="ds-code">#FF4757</code> &#x2014; meets 4.5:1 on dark backgrounds</li>
+            <li>Disabled: 0.38 opacity &#x2014; decorative, not required to meet contrast</li>
+          </ul>
+        </div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Autocomplete</div>
+        <div class="a11y-content">Use appropriate <code class="ds-code">autocomplete</code> attribute values: <code class="ds-code">tel</code> for phone, <code class="ds-code">email</code> for email, <code class="ds-code">one-time-code</code> for OTP. These enable OS-level autofill, which significantly reduces input friction especially on mobile auth flows.</div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Reduced motion</div>
+        <div class="a11y-content">The loading spinner animation inside the trailing action slot uses <code class="ds-code">var(--dur-icon-spin)</code>. This token collapses to 0ms when <code class="ds-code">prefers-reduced-motion: reduce</code> is set. The spin animation pauses automatically &#x2014; no custom overrides needed.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       12. RELATED TOKENS
+  =================================================== -->
+  <section class="ds-section" id="tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-desc">All input sizing and color values come from <code class="ds-code">tokens/tokens.css</code>. Update once &#x2014; every input instance reflects the change.</p>
+
+    <div class="ds-sub-label" style="margin-bottom:12px;margin-top:8px">Color tokens</div>
+    <table class="ds-spec-table" style="margin-bottom:32px">
+      <thead>
+        <tr><th>Token</th><th>Value</th><th>Swatch</th><th>Usage</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="ds-code">--input-bg</code></td>
+          <td><code class="ds-code">var(--surface-1)</code> &#x2192; #0E1119</td>
+          <td><span class="ds-token-swatch" style="background:#0E1119;border:1px solid rgba(255,255,255,.1)"></span></td>
+          <td>Field background</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--input-border</code></td>
+          <td><code class="ds-code">var(--border)</code> &#x2192; rgba(255,255,255,.1)</td>
+          <td><span class="ds-token-swatch" style="background:rgba(255,255,255,.1)"></span></td>
+          <td>Default border color</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--input-border-focus</code></td>
+          <td><code class="ds-code">var(--jio)</code> &#x2192; #00A859</td>
+          <td><span class="ds-token-swatch" style="background:#00A859"></span></td>
+          <td>Focus state border</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--input-border-error</code></td>
+          <td><code class="ds-code">var(--negative)</code> &#x2192; #FF4757</td>
+          <td><span class="ds-token-swatch" style="background:#FF4757"></span></td>
+          <td>Error state border</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--input-text</code></td>
+          <td><code class="ds-code">var(--text)</code> &#x2192; #F4F2EE</td>
+          <td><span class="ds-token-swatch" style="background:#F4F2EE"></span></td>
+          <td>Input value text color</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--input-placeholder</code></td>
+          <td><code class="ds-code">var(--text3)</code> &#x2192; #6B7280</td>
+          <td><span class="ds-token-swatch" style="background:#6B7280"></span></td>
+          <td>Placeholder text color</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--input-radius</code></td>
+          <td><code class="ds-code">var(--r4)</code> &#x2192; 14px</td>
+          <td>&#x2014;</td>
+          <td>Field corner radius</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ds-sub-label" style="margin-bottom:12px">Size tokens &#x2014; Mobile / Web / TV</div>
+    <div style="overflow-x:auto">
+    <table class="ds-spec-table" style="margin-bottom:0;min-width:480px">
+      <thead>
+        <tr><th>Token</th><th>Mobile</th><th>Web</th><th>TV</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code class="ds-code">--input-s-h</code></td><td>36px</td><td>38px</td><td>56px</td></tr>
+        <tr><td><code class="ds-code">--input-m-h</code></td><td>44px</td><td>44px</td><td>64px</td></tr>
+        <tr><td><code class="ds-code">--input-l-h</code></td><td>54px</td><td>52px</td><td>72px</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       13. CODE EXAMPLES
+  =================================================== -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
+    <div class="component-code-block">
+      <div class="component-code-label">Input — text field</div>
+      <pre class="component-code-pre"><code>&lt;div class="input-wrap"&gt;
+  &lt;input
+    class="input-field"
+    type="text"
+    id="username"
+    placeholder="Enter username"
+    aria-label="Username"
+  &gt;
+&lt;/div&gt;</code></pre>
+    </div>
+    <div class="component-code-block">
+      <div class="component-code-label">Input — error state</div>
+      <pre class="component-code-pre"><code>&lt;div style="display:flex;flex-direction:column;gap:6px"&gt;
+  &lt;label for="email" style="font-size:13px;font-weight:700;color:var(--text)"&gt;
+    Email &lt;span style="color:var(--negative)"&gt;*&lt;/span&gt;
+  &lt;/label&gt;
+  &lt;div class="input-wrap"&gt;
+    &lt;input
+      class="input-field is-error"
+      type="email"
+      id="email"
+      value="bad@"
+      aria-invalid="true"
+      aria-describedby="email-error"
+    &gt;
+  &lt;/div&gt;
+  &lt;div id="email-error" style="font-size:11px;color:var(--error-text)" role="alert"&gt;
+    Enter a valid email address
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       14. CHANGELOG
+  =================================================== -->
+
+</main>
+<script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script>
+</body>
+</html>

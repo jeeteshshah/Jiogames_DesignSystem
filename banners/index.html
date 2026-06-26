@@ -1,0 +1,825 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banners — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    /* ── Banner component ── */
+    .banner {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 480px;
+    }
+    .banner-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+    .banner-msg {
+      flex: 1;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+    .banner-action {
+      border: none;
+      background: transparent;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+      font-family: var(--jio-font);
+    }
+    .banner-dismiss {
+      border: none;
+      background: transparent;
+      font-size: 18px;
+      color: var(--text3);
+      cursor: pointer;
+      line-height: 1;
+      padding: 0 4px;
+      flex-shrink: 0;
+    }
+    .banner--info { background: rgba(99,179,237,.08); border: 1px solid rgba(99,179,237,.2); }
+    .banner--info .banner-msg { color: var(--text); }
+    .banner--info .banner-action { color: #63b3ed; }
+    .banner--info .banner-icon { color: #63b3ed; }
+    .banner--success { background: var(--jio-soft); border: 1px solid rgba(0,168,89,.2); }
+    .banner--success .banner-icon { color: var(--jio); }
+    .banner--success .banner-msg { color: var(--text); }
+    .banner--success .banner-action { color: var(--jio); }
+    .banner--warning { background: rgba(245,158,11,.08); border: 1px solid rgba(245,158,11,.2); }
+    .banner--warning .banner-icon { color: var(--amber); }
+    .banner--warning .banner-msg { color: var(--text); }
+    .banner--warning .banner-action { color: var(--amber); }
+    .banner--error { background: rgba(255,71,87,.08); border: 1px solid rgba(255,71,87,.2); }
+    .banner--error .banner-icon { color: var(--negative); }
+    .banner--error .banner-msg { color: var(--text); }
+    .banner--error .banner-action { color: var(--negative); }
+    .banner--premium { background: rgba(0,168,89,.12); border: 1px solid rgba(0,204,101,.3); }
+    .banner--premium .banner-icon { color: var(--jio); }
+    .banner--premium .banner-msg { color: var(--text); }
+    .banner--premium .banner-action { color: var(--jio); }
+
+    /* ── Hero stack ── */
+    .banner-hero-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      width: 100%;
+    }
+
+    /* ── Sizes table ── */
+    .sizes-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .sizes-table th,
+    .sizes-table td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text2);
+    }
+    .sizes-table th {
+      color: var(--text3);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .sizes-table td:first-child { color: var(--text); font-weight: 600; }
+
+    /* ── Banner compact / rich ── */
+    .banner--compact {
+      padding: 10px 16px;
+    }
+    .banner--compact .banner-msg { font-size: 12px; }
+    .banner--rich {
+      align-items: flex-start;
+      padding: 16px;
+      min-height: 80px;
+    }
+    .banner-rich-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .banner-rich-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .banner-rich-sub {
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.4;
+    }
+    .banner-rich-thumb {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      background: var(--surface-2);
+      flex-shrink: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text3);
+      font-size: 20px;
+    }
+
+    /* ── States ── */
+    .banner--loading .banner-icon,
+    .banner--loading .banner-msg,
+    .banner--loading .banner-action {
+      background: var(--surface-2);
+      color: transparent;
+      border-radius: 4px;
+      animation: shimmer 1.4s ease-in-out infinite;
+      background-size: 200% 100%;
+      background-image: linear-gradient(90deg, var(--surface-2) 25%, var(--surface-3) 50%, var(--surface-2) 75%);
+    }
+    .banner--loading .banner-icon {
+      border-radius: 50%;
+      min-width: 20px;
+    }
+    .banner--loading .banner-msg {
+      min-width: 200px;
+    }
+    .banner--loading .banner-action {
+      min-width: 56px;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% center; }
+      100% { background-position: -200% center; }
+    }
+
+    .dismiss-demo {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .dismiss-demo-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--text3);
+      margin-bottom: 4px;
+    }
+    .banner--exiting {
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity 200ms ease, transform 200ms ease;
+    }
+
+    /* ── Content grid ── */
+    .content-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 640px) {
+      .content-grid-2 { grid-template-columns: 1fr; }
+    }
+
+    /* ── A11y table ── */
+    .a11y-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .a11y-table th,
+    .a11y-table td {
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .a11y-table th {
+      color: var(--text3);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .a11y-table td { color: var(--text2); }
+    .a11y-table td:first-child { color: var(--text); font-family: monospace; font-size: 12px; }
+    .a11y-table td code {
+      background: var(--surface-2);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      color: #63b3ed;
+    }
+
+    /* ── Token list ── */
+    .token-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .token-pill {
+      background: var(--surface-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--pill);
+      padding: 6px 14px;
+      font-family: monospace;
+      font-size: 12px;
+      color: var(--text2);
+    }
+  </style>
+</head><body><main class="ds-content">
+
+  <!-- ── PAGE HEADER ── -->
+  <div class="component-breadcrumb">JioGames DLS &rsaquo; Components &rsaquo; Banners</div>
+  <header class="component-page-header">
+    <div>
+      <h1 class="component-page-title">Banners</h1>
+      <p class="component-page-def">Banners communicate important information at the top of a screen or section without blocking the player's primary task.</p>
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+        <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+        <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+        <span class="component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── HERO ── -->
+  <section class="component-hero component-hero--dark component-hero--grid">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner">
+      <div class="banner-hero-stack">
+
+        <div class="banner banner--info" role="status" aria-live="polite">
+          <span class="banner-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="8" cy="8" r="7" stroke="#63b3ed" stroke-width="1.5"/>
+              <rect x="7.25" y="6.75" width="1.5" height="5.5" rx=".75" fill="#63b3ed"/>
+              <circle cx="8" cy="4.5" r=".875" fill="#63b3ed"/>
+            </svg>
+          </span>
+          <span class="banner-msg">Your JioGames Pass renews on July 3rd</span>
+          <button class="banner-action">Manage</button>
+          <button class="banner-dismiss" aria-label="Dismiss">×</button>
+        </div>
+
+        <div class="banner banner--success" role="status" aria-live="polite">
+          <span class="banner-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="8" cy="8" r="7" stroke="var(--jio)" stroke-width="1.5"/>
+              <use href="../sprite.svg#ic_confirm"></use>
+            </svg>
+          </span>
+          <span class="banner-msg">Tomb Raider added to your library</span>
+          <button class="banner-dismiss" aria-label="Dismiss">×</button>
+        </div>
+
+        <div class="banner banner--warning" role="alert" aria-live="assertive">
+          <span class="banner-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+              <use href="../sprite.svg#ic_alert"></use>
+              <rect x="7.25" y="6.25" width="1.5" height="4" rx=".75" fill="var(--amber)"/>
+              <circle cx="8" cy="11.5" r=".875" fill="var(--amber)"/>
+            </svg>
+          </span>
+          <span class="banner-msg">Download failed. Check your connection</span>
+          <button class="banner-action">Retry</button>
+        </div>
+
+      </div>
+    </div>
+    <p class="component-hero-caption">Info · Success · Warning — the three most common banner variants in context</p>
+  </section>
+
+  <!-- ── INTRO ── -->
+  <section class="ds-section component-intro">
+    <h2 class="ds-section-title">Overview</h2>
+    <p class="ds-section-desc">Banners communicate system-level information that affects the current screen or session. Unlike toasts (transient, bottom-anchored), banners persist at the top of a screen or section until the condition is resolved or dismissed.</p>
+    <ul class="component-summary-list">
+      <li><strong>Top-anchored.</strong> Banners sit at the top of a screen region, never floating or overlapping content.</li>
+      <li><strong>Semantic color + icon.</strong> Color alone is insufficient for accessibility. Always pair icon with color.</li>
+      <li><strong>Persistent by default.</strong> Banners stay visible until dismissed or condition resolves. Don't auto-dismiss.</li>
+      <li><strong>Max 1 banner per screen.</strong> Stack only if each banner requires separate resolution action.</li>
+    </ul>
+  </section>
+
+  <!-- ── BEST PRACTICES ── -->
+  <section class="ds-section component-best-practices">
+    <h2 class="ds-section-title">Best Practices</h2>
+    <div class="ds-demo">
+      <div class="component-bp-card component-bp-card--do">
+        <div class="component-bp-label--do">Do</div>
+        <ul class="component-bp-list">
+          <li>Pair icon with background color — never use color alone to convey meaning</li>
+          <li>Keep message under 80 characters</li>
+          <li>Use 1–2 word action labels ("Retry", "Manage", "View")</li>
+          <li>Use success banner to confirm a completed background action</li>
+          <li>Include dismiss button on informational and success banners</li>
+          <li>Allow error banners to persist until the error is resolved</li>
+        </ul>
+      </div>
+      <div class="component-bp-card component-bp-card--dont">
+        <div class="component-bp-label--dont">Don't</div>
+        <ul class="component-bp-list">
+          <li>Don't show more than 1 banner at a time on mobile</li>
+          <li>Don't use banners for promotional content — use a card or rail card</li>
+          <li>Don't auto-dismiss banners (use toast for transient feedback)</li>
+          <li>Don't use long sentences or multiple sentences in a banner</li>
+          <li>Don't use warning/error banners for non-actionable information</li>
+          <li>Don't place banners inside scrollable content — they scroll away</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ANATOMY ── -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <div class="ds-demo ds-demo--dark">
+      <div class="ds-anatomy">
+        <div class="banner banner--info" style="position:relative; max-width:480px;">
+          <span class="banner-icon" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <circle cx="8" cy="8" r="7" stroke="#63b3ed" stroke-width="1.5"/>
+              <rect x="7.25" y="6.75" width="1.5" height="5.5" rx=".75" fill="#63b3ed"/>
+              <circle cx="8" cy="4.5" r=".875" fill="#63b3ed"/>
+            </svg>
+          </span>
+          <span class="banner-msg">Your JioGames Pass renews on July 3rd</span>
+          <button class="banner-action">Manage</button>
+          <button class="banner-dismiss" aria-label="Dismiss">×</button>
+        </div>
+      </div>
+    </div>
+    <ol class="component-summary-list" style="margin-top:20px;">
+      <li><strong>Banner container</strong> — Required. Full-width. <code>border-radius: 12px</code>. Top-anchored.</li>
+      <li><strong>Status icon</strong> — Required. 20px. SVG. Matches semantic color. <code>flex-shrink: 0</code>.</li>
+      <li><strong>Message text</strong> — Required. Max 80 chars. <code>font-size: 13px; font-weight: 500</code>.</li>
+      <li><strong>Action button</strong> — Optional. 1–2 word label. Matches semantic color. Transparent background.</li>
+      <li><strong>Dismiss button</strong> — Optional. <code>×</code> icon. Omit on error/critical banners.</li>
+      <li><strong>Color/icon semantic encoding</strong> — Required for both. Info=blue, Success=green, Warning=amber, Error=red, Premium=gradient green.</li>
+    </ol>
+  </section>
+
+  <!-- ── VARIANTS ── -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Each variant maps to a semantic intent. Color and icon always appear together.</p>
+
+    <h3 style="font-size:13px;font-weight:700;color:var(--text2);margin:0 0 10px;">Informational</h3>
+    <p style="font-size:13px;color:var(--text3);margin:0 0 12px;">Use for system notices, reminders, and expiry dates. Not urgent — player can act at their own pace.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div class="banner banner--info" role="status" aria-live="polite">
+        <span class="banner-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <circle cx="8" cy="8" r="7" stroke="#63b3ed" stroke-width="1.5"/>
+            <rect x="7.25" y="6.75" width="1.5" height="5.5" rx=".75" fill="#63b3ed"/>
+            <circle cx="8" cy="4.5" r=".875" fill="#63b3ed"/>
+          </svg>
+        </span>
+        <span class="banner-msg">Your JioGames Pass renews on July 3rd</span>
+        <button class="banner-action">Manage</button>
+        <button class="banner-dismiss" aria-label="Dismiss">×</button>
+      </div>
+    </div>
+
+    <h3 style="font-size:13px;font-weight:700;color:var(--text2);margin:24px 0 10px;">Success</h3>
+    <p style="font-size:13px;color:var(--text3);margin:0 0 12px;">Use to confirm completed actions, pass activation, download completion. Dismissible.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div class="banner banner--success" role="status" aria-live="polite">
+        <span class="banner-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <circle cx="8" cy="8" r="7" stroke="var(--jio)" stroke-width="1.5"/>
+            <use href="../sprite.svg#ic_confirm"></use>
+          </svg>
+        </span>
+        <span class="banner-msg">Tomb Raider added to your library</span>
+        <button class="banner-dismiss" aria-label="Dismiss">×</button>
+      </div>
+    </div>
+
+    <h3 style="font-size:13px;font-weight:700;color:var(--text2);margin:24px 0 10px;">Warning</h3>
+    <p style="font-size:13px;color:var(--text3);margin:0 0 12px;">Use for connection issues, low storage, approaching expiry. Action usually provided.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div class="banner banner--warning" role="alert" aria-live="assertive">
+        <span class="banner-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <use href="../sprite.svg#ic_alert"></use>
+            <rect x="7.25" y="6.25" width="1.5" height="4" rx=".75" fill="var(--amber)"/>
+            <circle cx="8" cy="11.5" r=".875" fill="var(--amber)"/>
+          </svg>
+        </span>
+        <span class="banner-msg">Download failed. Check your connection</span>
+        <button class="banner-action">Retry</button>
+      </div>
+    </div>
+
+    <h3 style="font-size:13px;font-weight:700;color:var(--text2);margin:24px 0 10px;">Error</h3>
+    <p style="font-size:13px;color:var(--text3);margin:0 0 12px;">Use for failed actions requiring resolution. No dismiss button — error persists until resolved.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div class="banner banner--error" role="alert" aria-live="assertive">
+        <span class="banner-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <circle cx="8" cy="8" r="7" stroke="var(--negative)" stroke-width="1.5"/>
+            <use href="../sprite.svg#ic_close"></use>
+          </svg>
+        </span>
+        <span class="banner-msg">Payment failed. Update your payment method to continue</span>
+        <button class="banner-action">Fix Now</button>
+      </div>
+    </div>
+
+    <h3 style="font-size:13px;font-weight:700;color:var(--text2);margin:24px 0 10px;">Pass / Premium</h3>
+    <p style="font-size:13px;color:var(--text3);margin:0 0 12px;">Use for JioGames Pass activation confirmations and upsell confirmation messages.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div class="banner banner--premium" role="status" aria-live="polite">
+        <span class="banner-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <use href="../sprite.svg#ic_star"></use>
+          </svg>
+        </span>
+        <span class="banner-msg">JioGames Pass Mobile activated — enjoy 500+ games</span>
+        <button class="banner-action">Explore</button>
+        <button class="banner-dismiss" aria-label="Dismiss">×</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SIZES ── -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Three size tiers. Compact for tight contexts; Standard for most surfaces; Rich for action-heavy moments (rare).</p>
+
+    <h3 style="font-size:13px;font-weight:700;color:var(--text2);margin:0 0 10px;">Compact (~44px)</h3>
+    <p style="font-size:13px;color:var(--text3);margin:0 0 12px;">Icon + text only, no action. Use in dense contexts where vertical space is critical.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div class="banner banner--info banner--compact" role="status">
+        <span class="banner-icon" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <circle cx="8" cy="8" r="7" stroke="#63b3ed" stroke-width="1.5"/>
+            <rect x="7.25" y="6.75" width="1.5" height="5.5" rx=".75" fill="#63b3ed"/>
+            <circle cx="8" cy="4.5" r=".875" fill="#63b3ed"/>
+          </svg>
+        </span>
+        <span class="banner-msg">Your Pass renews in 3 days</span>
+      </div>
+    </div>
+
+    <h3 style="font-size:13px;font-weight:700;color:var(--text2);margin:24px 0 10px;">Standard (~52px)</h3>
+    <p style="font-size:13px;color:var(--text3);margin:0 0 12px;">Icon + text + action button + dismiss. The default for almost all surfaces.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div class="banner banner--warning" role="alert">
+        <span class="banner-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <use href="../sprite.svg#ic_alert"></use>
+            <rect x="7.25" y="6.25" width="1.5" height="4" rx=".75" fill="var(--amber)"/>
+            <circle cx="8" cy="11.5" r=".875" fill="var(--amber)"/>
+          </svg>
+        </span>
+        <span class="banner-msg">Storage almost full. Free up space to continue downloading</span>
+        <button class="banner-action">Manage</button>
+        <button class="banner-dismiss" aria-label="Dismiss">×</button>
+      </div>
+    </div>
+
+    <h3 style="font-size:13px;font-weight:700;color:var(--text2);margin:24px 0 10px;">Rich (~80px)</h3>
+    <p style="font-size:13px;color:var(--text3);margin:0 0 12px;">Icon + title + subtitle + image thumbnail + action. Reserve for high-value moments — Pass upsell, game launch confirmations.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div class="banner banner--premium banner--rich" role="status">
+        <span class="banner-icon" aria-hidden="true" style="margin-top:2px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <use href="../sprite.svg#ic_star"></use>
+          </svg>
+        </span>
+        <div class="banner-rich-body">
+          <div class="banner-rich-title">JioGames Pass Ultimate activated</div>
+          <div class="banner-rich-sub">Access 500+ games across mobile and TV. Enjoy offline play.</div>
+          <button class="banner-action" style="align-self:flex-start; padding:4px 0; margin-top:4px;">Explore Library</button>
+        </div>
+        <div class="banner-rich-thumb" aria-hidden="true">🎮</div>
+      </div>
+    </div>
+
+    <div class="ds-demo" style="margin-top:20px;">
+      <table class="sizes-table">
+        <thead>
+          <tr>
+            <th>Size</th>
+            <th>Mobile</th>
+            <th>Web</th>
+            <th>TV</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Compact</td>
+            <td>Icon + text only · ~44px</td>
+            <td>Icon + text only · ~44px</td>
+            <td>Text enlarged 15px · ~48px</td>
+          </tr>
+          <tr>
+            <td>Standard</td>
+            <td>Icon + text + action + dismiss · ~52px</td>
+            <td>Icon + text + action + dismiss · ~52px</td>
+            <td>No dismiss btn · ~56px · d-pad to dismiss</td>
+          </tr>
+          <tr>
+            <td>Rich</td>
+            <td>Icon + title + sub + thumb + action · ~80px</td>
+            <td>Wider layout · richer action buttons · ~80px</td>
+            <td>Rare on TV — use full-screen overlay instead</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── STATES ── -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">States</h2>
+
+    <h3 style="font-size:13px;font-weight:700;color:var(--text2);margin:0 0 10px;">Visible (default)</h3>
+    <div class="ds-demo ds-demo--dark">
+      <div class="banner banner--success" role="status">
+        <span class="banner-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <circle cx="8" cy="8" r="7" stroke="var(--jio)" stroke-width="1.5"/>
+            <use href="../sprite.svg#ic_confirm"></use>
+          </svg>
+        </span>
+        <span class="banner-msg">Game successfully added to your library</span>
+        <button class="banner-dismiss" aria-label="Dismiss">×</button>
+      </div>
+    </div>
+
+    <h3 style="font-size:13px;font-weight:700;color:var(--text2);margin:24px 0 10px;">Dismiss animation</h3>
+    <p style="font-size:13px;color:var(--text3);margin:0 0 12px;">When dismissed, the banner slides up and fades out simultaneously over 200ms, then is removed from the DOM. Use <code>transition: opacity 200ms ease, transform 200ms ease</code> with <code>opacity: 0; transform: translateY(-8px)</code> on the exiting state.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div class="dismiss-demo">
+        <div>
+          <div class="dismiss-demo-label">Before dismiss</div>
+          <div class="banner banner--info" role="status">
+            <span class="banner-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <circle cx="8" cy="8" r="7" stroke="#63b3ed" stroke-width="1.5"/>
+                <rect x="7.25" y="6.75" width="1.5" height="5.5" rx=".75" fill="#63b3ed"/>
+                <circle cx="8" cy="4.5" r=".875" fill="#63b3ed"/>
+              </svg>
+            </span>
+            <span class="banner-msg">Your JioGames Pass renews on July 3rd</span>
+            <button class="banner-action">Manage</button>
+            <button class="banner-dismiss" aria-label="Dismiss">×</button>
+          </div>
+        </div>
+        <div>
+          <div class="dismiss-demo-label">After dismiss (200ms)</div>
+          <div class="banner banner--info banner--exiting" aria-hidden="true">
+            <span class="banner-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <circle cx="8" cy="8" r="7" stroke="#63b3ed" stroke-width="1.5"/>
+                <rect x="7.25" y="6.75" width="1.5" height="5.5" rx=".75" fill="#63b3ed"/>
+                <circle cx="8" cy="4.5" r=".875" fill="#63b3ed"/>
+              </svg>
+            </span>
+            <span class="banner-msg">Your JioGames Pass renews on July 3rd</span>
+            <button class="banner-action">Manage</button>
+            <button class="banner-dismiss" aria-label="Dismiss">×</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size:13px;font-weight:700;color:var(--text2);margin:24px 0 10px;">Loading (async)</h3>
+    <p style="font-size:13px;color:var(--text3);margin:0 0 12px;">Use when banner content is fetched asynchronously. Shimmer skeleton fills the icon, message, and action slot.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div class="banner banner--info banner--loading" style="border-color:var(--border-subtle); background:var(--surface-1);" aria-busy="true" aria-label="Loading banner content">
+        <span class="banner-icon">&nbsp;</span>
+        <span class="banner-msg">&nbsp;</span>
+        <span class="banner-action">&nbsp;</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTENT ── -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Content</h2>
+    <div class="component-content-grid content-grid-2">
+      <div class="component-content-card">
+        <div class="component-content-title">Message writing</div>
+        <ul class="component-bp-list">
+          <li>Keep under 80 characters</li>
+          <li>Present tense for ongoing conditions: "Your pass expires in 3 days"</li>
+          <li>Past tense for completed actions: "Game added to library"</li>
+          <li>Imperative for errors: "Check your connection"</li>
+          <li>No punctuation at end unless it's a question</li>
+          <li>Sentence case, not title case</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Action labels</div>
+        <ul class="component-bp-list">
+          <li>Max 2 words — verb + noun: "View Plan", "Retry", "Manage"</li>
+          <li>Never "Click here" or "Learn more" in a banner</li>
+          <li>Action should be directly related to the banner message</li>
+          <li>Use "Retry" not "Try Again" — brevity aids scan speed</li>
+          <li>Primary action only — secondary action belongs in a sheet</li>
+          <li>Capitalize first word only (sentence case)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PLATFORM ── -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Platform Considerations</h2>
+    <div class="component-platform-grid">
+
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">
+          <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+        </div>
+        <ul class="component-bp-list">
+          <li>Full-width; top of screen below status bar</li>
+          <li>Stays fixed above scrollable content — does not scroll away</li>
+          <li><code>border-radius: 0</code> if the banner bleeds edge-to-edge</li>
+          <li>Max 1 banner visible at a time</li>
+          <li>Dismiss button for info/success; no dismiss for error</li>
+          <li>Touch target on dismiss: minimum 44×44px</li>
+        </ul>
+      </div>
+
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">
+          <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+        </div>
+        <ul class="component-bp-list">
+          <li>Max-width container; <code>border-radius: 12px</code></li>
+          <li>Richer action buttons (outlined style allowed)</li>
+          <li>Can use inline hyperlink style for action when appropriate</li>
+          <li>Banner sticks to top of content region, not browser viewport</li>
+          <li>On wide screens, constrain max-width to 780px</li>
+          <li>Hover state on dismiss: lighten to <code>--text2</code></li>
+        </ul>
+      </div>
+
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">
+          <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+        </div>
+        <ul class="component-bp-list">
+          <li>Full-width; larger message text: <code>font-size: 15px</code></li>
+          <li>No dismiss button — d-pad to dismiss, or auto-dismiss when condition resolves</li>
+          <li>Action button must be focus-navigable via d-pad</li>
+          <li>Focused action button: solid fill matching semantic color, dark text</li>
+          <li>Ensure 3:1 contrast on focus ring against banner background</li>
+          <li>Error banners should also expose a voice/remote-friendly action</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── ACCESSIBILITY ── -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <div class="ds-demo">
+      <table class="a11y-table">
+        <thead>
+          <tr>
+            <th>Attribute</th>
+            <th>Value</th>
+            <th>When to use</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>role</code></td>
+            <td><code>"alert"</code></td>
+            <td>Error and warning banners — announces immediately to screen readers</td>
+          </tr>
+          <tr>
+            <td><code>role</code></td>
+            <td><code>"status"</code></td>
+            <td>Info and success banners — less urgent, waits for a pause</td>
+          </tr>
+          <tr>
+            <td><code>aria-live</code></td>
+            <td><code>"assertive"</code></td>
+            <td>Error banners — interrupts current announcement</td>
+          </tr>
+          <tr>
+            <td><code>aria-live</code></td>
+            <td><code>"polite"</code></td>
+            <td>Info/success banners — waits for idle before announcing</td>
+          </tr>
+          <tr>
+            <td><code>aria-label</code></td>
+            <td><code>"Dismiss"</code></td>
+            <td>Dismiss × button — the × glyph has no semantic meaning on its own</td>
+          </tr>
+          <tr>
+            <td><code>aria-hidden</code></td>
+            <td><code>"true"</code></td>
+            <td>Status icon SVG — text already conveys meaning; icon is decorative</td>
+          </tr>
+          <tr>
+            <td><code>aria-busy</code></td>
+            <td><code>"true"</code></td>
+            <td>Loading skeleton banner — indicates content has not yet loaded</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <ul class="component-summary-list" style="margin-top:16px;">
+      <li><strong>Focus management.</strong> When a banner is injected via JavaScript, move focus to the banner element or announce it via an <code>aria-live</code> region. Don't leave focus stranded.</li>
+      <li><strong>Color contrast.</strong> Ensure message text meets WCAG AA (4.5:1 against banner background). All semantic colors in the DLS are pre-validated.</li>
+      <li><strong>Reduced motion.</strong> Honour <code>prefers-reduced-motion</code> — skip the <code>translateY</code> on dismiss, keep opacity transition only.</li>
+    </ul>
+  </section>
+
+  <!-- ── RELATED TOKENS ── -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Related Tokens</h2>
+    <div class="ds-demo">
+      <div class="token-grid">
+        <span class="token-pill">--jio</span>
+        <span class="token-pill">--jio-soft</span>
+        <span class="token-pill">--negative</span>
+        <span class="token-pill">--amber</span>
+        <span class="token-pill">--r3</span>
+        <span class="token-pill">--text</span>
+        <span class="token-pill">--text2</span>
+        <span class="token-pill">--text3</span>
+        <span class="token-pill">--border-subtle</span>
+        <span class="token-pill">--dur-default</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CODE EXAMPLES ── -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
+    <div class="component-code-block">
+      <div class="component-code-label">Banner — informational</div>
+      <pre class="component-code-pre"><code>&lt;div class="banner banner--info" role="status"&gt;
+  &lt;svg class="icon icon--m" aria-hidden="true"&gt;&lt;use href="/sprite.svg#ic_info"&gt;&lt;/use&gt;&lt;/svg&gt;
+  &lt;div class="banner__body"&gt;
+    &lt;div class="banner__title"&gt;Your pass renews on 15 July&lt;/div&gt;
+    &lt;div class="banner__desc"&gt;Auto-renewal is enabled. Manage in settings.&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;button class="btn btn--text btn--xs btn--hug banner__dismiss" aria-label="Dismiss"&gt;✕&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+    <div class="component-code-block">
+      <div class="component-code-label">Banner — error</div>
+      <pre class="component-code-pre"><code>&lt;div class="banner banner--error" role="alert"&gt;
+  &lt;svg class="icon icon--m" aria-hidden="true"&gt;&lt;use href="/sprite.svg#ic_warning"&gt;&lt;/use&gt;&lt;/svg&gt;
+  &lt;div class="banner__body"&gt;
+    &lt;div class="banner__title"&gt;Payment failed&lt;/div&gt;
+    &lt;div class="banner__desc"&gt;Update your payment method to continue your pass.&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;button class="btn btn--primary btn--xs btn--hug"&gt;Update&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- ── CHANGELOG ── -->
+  <section class="ds-section component-changelog">
+    <h2 class="ds-section-title">Changelog</h2>
+    <div class="component-changelog-entry">
+      <span class="component-changelog-version">v2.1</span>
+      <span class="component-changelog-date">May 2025</span>
+      <span class="component-changelog-desc">Added Premium/Pass variant. Rich size spec documented. Shimmer loading state added.</span>
+    </div>
+    <div class="component-changelog-entry">
+      <span class="component-changelog-version">v2.0</span>
+      <span class="component-changelog-date">Feb 2025</span>
+      <span class="component-changelog-desc">TV platform spec. Added <code>role="alert"</code> guidance. Dismiss animation formalized at 200ms.</span>
+    </div>
+    <div class="component-changelog-entry">
+      <span class="component-changelog-version">v1.0</span>
+      <span class="component-changelog-date">Oct 2024</span>
+      <span class="component-changelog-desc">Initial release: info, success, warning, and error variants. Mobile and Web specs.</span>
+    </div>
+  </section>
+
+</main><script src="../sprite-loader.js"></script><script src="../shell.js"></script></body></html>

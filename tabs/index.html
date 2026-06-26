@@ -1,0 +1,449 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabs — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    .tabs { display: flex; flex-direction: column; }
+    .tab-list { display: flex; border-bottom: 1px solid var(--border-subtle); gap: 0; overflow-x: auto; scrollbar-width: none; }
+    .tab-list::-webkit-scrollbar { display: none; }
+    .tab-trigger {
+      padding: 12px 16px;
+      font-family: var(--jio-font);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text3);
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+    }
+    .tab-trigger:hover { color: var(--text2); }
+    .tab-trigger.is-active { color: var(--text); border-bottom-color: var(--jio); }
+    .tab-trigger:disabled { opacity: 0.38; pointer-events: none; }
+    .tab-content { display: none; padding: var(--space-3) 0; }
+    .tab-content.is-active { display: block; }
+    .tab-badge { display: inline-flex; align-items: center; justify-content: center; min-width: 18px; height: 18px; padding: 0 5px; border-radius: var(--pill); background: var(--jio); color: #000; font-size: 10px; font-weight: 900; margin-left: 6px; }
+  </style>
+</head><body><main class="ds-main">
+
+  <!-- PAGE HEADER -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Tabs</span>
+    </nav>
+    <h1 class="component-page-title">Tabs</h1>
+    <p class="component-page-def">Horizontal navigation between content panels. Used on game detail pages (Overview / Screenshots / Reviews), profile pages (Library / Activity / Friends), and settings.</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+        <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+        <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+      </div>
+      <span class="component-maturity component-maturity--draft"><span class="component-maturity--dot"></span>Draft</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:300px;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="align-items:flex-start; max-width:480px; width:100%;">
+      <div class="tabs" style="width:100%;">
+        <div class="tab-list" role="tablist">
+          <button class="tab-trigger" role="tab" aria-selected="false">Overview</button>
+          <button class="tab-trigger is-active" role="tab" aria-selected="true">Screenshots</button>
+          <button class="tab-trigger" role="tab" aria-selected="false">Reviews <span class="tab-badge">12</span></button>
+          <button class="tab-trigger" role="tab" aria-selected="false">Similar</button>
+        </div>
+        <div class="tab-content is-active" role="tabpanel" style="padding:20px 0;">
+          <p style="font-size:14px; color:var(--text2); line-height:1.6; margin:0;">Screenshots showcase environments, gameplay, and UI. Tap any image to expand it to full screen.</p>
+        </div>
+      </div>
+    </div>
+    <p class="component-hero-caption">Tabs in context · active indicator, badge count, scrollable</p>
+  </section>
+
+  <!-- INTRO -->
+  <section class="component-intro">
+    <p>Tabs let users switch between distinct views of related content without leaving the current page. They are always visible — unlike accordions — so users can see all available sections at a glance. Tabs work best when each panel contains substantively different content that a user would want to navigate between repeatedly.</p>
+    <ul class="component-summary-list">
+      <li><strong>Default / Underline</strong> — tab strip with green bottom-border on active tab; default for all surfaces</li>
+      <li><strong>With badge</strong> — count indicator showing unread items or totals in a panel</li>
+      <li><strong>With icon + label</strong> — pairs a 16px icon with text for richer context on wider layouts</li>
+      <li><strong>Pill style</strong> — rounded background on active tab; use only in card surfaces, not page-level navigation</li>
+    </ul>
+  </section>
+
+  <!-- BEST PRACTICES -->
+  <section class="component-best-practices">
+    <div class="component-bp-card component-bp-card--do">
+      <span class="component-bp-label component-bp-label--do">Do</span>
+      <ul class="component-bp-list">
+        <li>Use 2–7 tabs. Below 2, use a toggle. Above 7, collapse extras into a "More" menu.</li>
+        <li>Keep tab labels to 1–3 words. "Screenshots" not "Game Screenshots Gallery".</li>
+        <li>Preserve tab scroll position when returning to a tab — don't reset the panel.</li>
+        <li>Use badge counts only when a panel has genuinely new or countable items.</li>
+        <li>Provide keyboard arrow-key navigation between tabs.</li>
+      </ul>
+    </div>
+    <div class="component-bp-card component-bp-card--dont">
+      <span class="component-bp-label component-bp-label--dont">Don't</span>
+      <ul class="component-bp-list">
+        <li>Use tabs for 2 mutually exclusive states — use a Toggle Group instead.</li>
+        <li>Place tabs inside a scrollable modal with other stacked tabs — causes navigation confusion.</li>
+        <li>Use tabs as breadcrumbs or step indicators — use a Stepper component instead.</li>
+        <li>Vary the visual weight of tab labels — all tabs should use the same font-size and weight.</li>
+        <li>Hide tabs that have no content — disable them with <code class="ds-code">disabled</code> instead.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <div class="ds-anatomy" style="margin-bottom:64px;">
+    <div class="ds-anatomy-preview">
+      <div class="ds-anatomy-component" style="position:relative; width:260px;">
+        <div style="border-bottom:1px solid var(--border-subtle); display:flex; gap:0;">
+          <button class="tab-trigger" style="pointer-events:none;">Overview</button>
+          <button class="tab-trigger is-active" style="pointer-events:none; position:relative;">
+            Screenshots
+            <span class="ds-anatomy-callout-dot" style="position:absolute; top:-10px; left:50%; transform:translateX(-50%);"><span class="ds-anatomy-callout-num">1</span></span>
+          </button>
+          <button class="tab-trigger" style="pointer-events:none; position:relative;">
+            Reviews <span class="tab-badge">3</span>
+            <span class="ds-anatomy-callout-dot" style="position:absolute; top:-10px; right:0;"><span class="ds-anatomy-callout-num">2</span></span>
+          </button>
+        </div>
+        <div style="height:32px; position:relative;">
+          <span class="ds-anatomy-callout-dot" style="position:absolute; bottom:0; left:20%;"><span class="ds-anatomy-callout-num">3</span></span>
+        </div>
+      </div>
+    </div>
+    <ol class="ds-anatomy-list">
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">1</span>
+        <div>
+          <div class="ds-anatomy-label">Active indicator <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">2px bottom border in <code class="ds-code">var(--jio)</code> on the active tab. Sits on top of the strip border using <code class="ds-code">margin-bottom: -1px</code>.</div>
+          <code class="ds-anatomy-token ds-code">border-bottom: 2px solid var(--jio)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">2</span>
+        <div>
+          <div class="ds-anatomy-label">Badge count <span class="ds-anatomy-optional">Optional</span></div>
+          <div class="ds-anatomy-desc">Compact pill showing a count. Background <code class="ds-code">var(--jio)</code>, text black, 10px/900. Hide when count is 0.</div>
+          <code class="ds-anatomy-token ds-code">.tab-badge — min-width:18px; height:18px</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">3</span>
+        <div>
+          <div class="ds-anatomy-label">Strip border <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Full-width 1px bottom border on the tab list container. Provides visual floor for all tabs.</div>
+          <code class="ds-anatomy-token ds-code">border-bottom: 1px solid var(--border-subtle)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">4</span>
+        <div>
+          <div class="ds-anatomy-label">Tab label <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">14px / weight 600. Active tab uses <code class="ds-code">var(--text)</code>. Inactive uses <code class="ds-code">var(--text3)</code>. Hover: <code class="ds-code">var(--text2)</code>.</div>
+          <code class="ds-anatomy-token ds-code">font-size:14px; font-weight:600</code>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- VARIANTS -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">All variants share the same tab-list structure. Only the active indicator and container background differ.</p>
+
+    <div class="ds-section-stack">
+      <!-- Underline (default) -->
+      <div>
+        <div class="ds-sub-label">Underline — default</div>
+        <div class="ds-demo ds-demo--dark">
+          <div class="tabs">
+            <div class="tab-list" role="tablist">
+              <button class="tab-trigger" role="tab">Overview</button>
+              <button class="tab-trigger is-active" role="tab">Screenshots</button>
+              <button class="tab-trigger" role="tab">Reviews <span class="tab-badge">12</span></button>
+              <button class="tab-trigger" role="tab">Similar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- With icon + label -->
+      <div>
+        <div class="ds-sub-label">With icon + label</div>
+        <div class="ds-demo ds-demo--dark">
+          <div class="tabs">
+            <div class="tab-list" role="tablist">
+              <button class="tab-trigger is-active" role="tab" style="display:inline-flex;align-items:center;gap:6px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_library"></use></svg>
+                Library
+              </button>
+              <button class="tab-trigger" role="tab" style="display:inline-flex;align-items:center;gap:6px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_time"></use></svg>
+                Activity
+              </button>
+              <button class="tab-trigger" role="tab" style="display:inline-flex;align-items:center;gap:6px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_multiple_user"></use></svg>
+                Friends
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pill style -->
+      <div>
+        <div class="ds-sub-label">Pill style — for card surfaces</div>
+        <div class="ds-demo ds-demo--dark">
+          <div style="display:flex; gap:4px; background:var(--surface-2); padding:4px; border-radius:var(--r4); width:fit-content;">
+            <button class="btn btn--primary btn--sm">Overview</button>
+            <button class="btn btn--ghost btn--sm">Reviews</button>
+            <button class="btn btn--ghost btn--sm">Similar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIZES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Three sizes for different surface densities. S for compact headers, M (default) for most surfaces, L for prominent page-level navigation.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div class="ds-section-stack" style="gap:32px;">
+        <!-- S -->
+        <div>
+          <div class="ds-sub-label" style="margin-bottom:8px;">S — 12px / 10px padding</div>
+          <div class="tab-list" role="tablist" style="width:fit-content;">
+            <button class="tab-trigger" role="tab" style="font-size:12px; padding:10px 12px;">Overview</button>
+            <button class="tab-trigger is-active" role="tab" style="font-size:12px; padding:10px 12px;">Screenshots</button>
+            <button class="tab-trigger" role="tab" style="font-size:12px; padding:10px 12px;">Reviews</button>
+          </div>
+        </div>
+        <!-- M -->
+        <div>
+          <div class="ds-sub-label" style="margin-bottom:8px;">M — 14px / 12px padding (default)</div>
+          <div class="tab-list" role="tablist" style="width:fit-content;">
+            <button class="tab-trigger" role="tab">Overview</button>
+            <button class="tab-trigger is-active" role="tab">Screenshots</button>
+            <button class="tab-trigger" role="tab">Reviews</button>
+          </div>
+        </div>
+        <!-- L -->
+        <div>
+          <div class="ds-sub-label" style="margin-bottom:8px;">L — 16px / 16px padding</div>
+          <div class="tab-list" role="tablist" style="width:fit-content;">
+            <button class="tab-trigger" role="tab" style="font-size:16px; padding:16px 20px;">Overview</button>
+            <button class="tab-trigger is-active" role="tab" style="font-size:16px; padding:16px 20px;">Screenshots</button>
+            <button class="tab-trigger" role="tab" style="font-size:16px; padding:16px 20px;">Reviews</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Each tab trigger has 5 states. Disabled tabs remain visible but non-interactive — never hide them.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:40px; align-items:flex-end;">
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <button class="tab-trigger" style="pointer-events:none;">Tab</button>
+          <span style="font-size:11px; color:var(--text3);">Default</span>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <button class="tab-trigger sim-hover" style="pointer-events:none; color:var(--text2);">Tab</button>
+          <span style="font-size:11px; color:var(--text3);">Hover</span>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <button class="tab-trigger is-active" style="pointer-events:none;">Tab</button>
+          <span style="font-size:11px; color:var(--text3);">Active</span>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <button class="tab-trigger sim-focus" style="pointer-events:none; outline:2px solid var(--jio); outline-offset:2px; border-radius:4px;">Tab</button>
+          <span style="font-size:11px; color:var(--text3);">Focus</span>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <button class="tab-trigger" disabled style="opacity:0.38;">Tab</button>
+          <span style="font-size:11px; color:var(--text3);">Disabled</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT GUIDANCE -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <p class="ds-section-desc">Tabs are not breadcrumbs. Content under each tab should be substantively different.</p>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Tab labels</div>
+        <ul>
+          <li>1–3 words. Noun-first: "Reviews" not "Read Reviews".</li>
+          <li>Never use verbs unless the action is the point: "Download" is acceptable.</li>
+          <li>Don't duplicate the page title in the first tab — "Overview" is always sufficient.</li>
+          <li>Avoid abbreviations unless the abbreviation is the known term (e.g. "DLC").</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Structure rules</div>
+        <ul>
+          <li>Never use tabs for 2 items — use a toggle group instead.</li>
+          <li>Never use tabs for more than 7 items — collapse extras into a "More" overflow menu.</li>
+          <li>Don't nest tab groups — use a single level of tabs per page region.</li>
+          <li>Tab order should follow content priority, not alphabetical order.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Tab list scrolls horizontally with <code class="ds-code">overflow-x: auto</code> and hidden scrollbar.</li>
+          <li>Active tab is always scrolled into view on mount.</li>
+          <li>Swipe gesture between panels maps to tab switching.</li>
+          <li>Minimum touch target height: 44px (use M or L size).</li>
+          <li>Active indicator sits at bottom of tab strip.</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Same visual treatment as mobile — underline indicator at bottom.</li>
+          <li>Keyboard: Arrow Left / Right to move between tabs, Enter / Space to select.</li>
+          <li>Tab strip does not need to scroll on wide viewports — all tabs should be visible.</li>
+          <li>Add <code class="ds-code">title</code> on truncated tab labels for tooltip on hover.</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>Tabs become a D-pad–navigable horizontal row.</li>
+          <li>Active tab gets a visible focus ring (3px, <code class="ds-code">var(--jio)</code>).</li>
+          <li>Use L size minimum for legibility at 3m viewing distance.</li>
+          <li>Do not auto-advance tabs on TV — only change on D-pad confirm.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">Tabs must implement full ARIA tab pattern. Screen readers announce the active panel and total tab count.</p>
+    <table class="ds-spec-table">
+      <thead><tr><th>Element</th><th>Role / attribute</th><th>Guidance</th></tr></thead>
+      <tbody>
+        <tr><td>Tab list container</td><td><code class="ds-code">role="tablist"</code></td><td>Wraps all tab triggers. Optionally add <code class="ds-code">aria-label="Page sections"</code> if multiple tab groups exist.</td></tr>
+        <tr><td>Tab trigger</td><td><code class="ds-code">role="tab"</code> + <code class="ds-code">aria-selected</code></td><td><code class="ds-code">aria-selected="true"</code> on active tab, <code class="ds-code">"false"</code> on others. Link to panel via <code class="ds-code">aria-controls="panel-id"</code>.</td></tr>
+        <tr><td>Tab panel</td><td><code class="ds-code">role="tabpanel"</code></td><td>Matches trigger via <code class="ds-code">id</code>. Add <code class="ds-code">aria-labelledby="trigger-id"</code>. Hidden panels use <code class="ds-code">hidden</code> or <code class="ds-code">display:none</code>.</td></tr>
+        <tr><td>Keyboard</td><td>Arrow keys</td><td>Left / Right arrows move focus between tabs. Home / End jump to first / last. Enter or Space activates focused tab.</td></tr>
+        <tr><td>Badge count</td><td><code class="ds-code">aria-label</code></td><td>Label the whole trigger: <code class="ds-code">aria-label="Reviews, 12 items"</code>. Don't rely on visual badge alone.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- RELATED TOKENS -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <table class="ds-spec-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td><code class="ds-code">--jio</code></td><td><code class="ds-code">#00A859</code></td><td>Active tab indicator border-bottom color</td></tr>
+        <tr><td><code class="ds-code">--border-subtle</code></td><td><code class="ds-code">rgba(255,255,255,.08)</code></td><td>Tab strip bottom border</td></tr>
+        <tr><td><code class="ds-code">--text</code></td><td><code class="ds-code">#f4f2ee</code></td><td>Active tab label color</td></tr>
+        <tr><td><code class="ds-code">--text2</code></td><td><code class="ds-code">rgba(244,242,238,.55)</code></td><td>Hover tab label color</td></tr>
+        <tr><td><code class="ds-code">--text3</code></td><td><code class="ds-code">rgba(244,242,238,.32)</code></td><td>Default / inactive tab label color</td></tr>
+        <tr><td><code class="ds-code">--dur-fast</code></td><td><code class="ds-code">120ms</code></td><td>Color and indicator transition duration</td></tr>
+        <tr><td><code class="ds-code">--pill</code></td><td><code class="ds-code">100px</code></td><td>Tab badge border-radius</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CODE EXAMPLES -->
+  <section class="ds-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-section-desc">Copy as starting points. Always link <code class="ds-code">tokens.css</code>, <code class="ds-code">components.css</code>, and <code class="ds-code">states.css</code>.</p>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Basic tab structure</div>
+      <pre class="component-code-pre"><code>&lt;div class="tabs"&gt;
+  &lt;div class="tab-list" role="tablist" aria-label="Game sections"&gt;
+    &lt;button class="tab-trigger" role="tab" id="tab-1"
+            aria-selected="false" aria-controls="panel-1"&gt;Overview&lt;/button&gt;
+    &lt;button class="tab-trigger is-active" role="tab" id="tab-2"
+            aria-selected="true" aria-controls="panel-2"&gt;Screenshots&lt;/button&gt;
+    &lt;button class="tab-trigger" role="tab" id="tab-3"
+            aria-selected="false" aria-controls="panel-3"&gt;Reviews&lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;div class="tab-content" role="tabpanel" id="panel-1" aria-labelledby="tab-1" hidden&gt;
+    &lt;!-- Overview content --&gt;
+  &lt;/div&gt;
+  &lt;div class="tab-content is-active" role="tabpanel" id="panel-2" aria-labelledby="tab-2"&gt;
+    &lt;!-- Screenshots content --&gt;
+  &lt;/div&gt;
+  &lt;div class="tab-content" role="tabpanel" id="panel-3" aria-labelledby="tab-3" hidden&gt;
+    &lt;!-- Reviews content --&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Tab with badge count</div>
+      <pre class="component-code-pre"><code>&lt;button class="tab-trigger" role="tab"
+        aria-selected="false"
+        aria-label="Reviews, 12 items"&gt;
+  Reviews
+  &lt;span class="tab-badge" aria-hidden="true"&gt;12&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Tab with icon + label</div>
+      <pre class="component-code-pre"><code>&lt;button class="tab-trigger is-active" role="tab" aria-selected="true"
+        style="display:inline-flex; align-items:center; gap:6px;"&gt;
+  &lt;svg width="14" height="14" aria-hidden="true"&gt;
+    &lt;use href="/sprite.svg#ic_library"&gt;&lt;/use&gt;
+  &lt;/svg&gt;
+  Library
+&lt;/button&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- CHANGELOG -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Changelog</h2>
+    <div class="component-changelog">
+      <div class="component-changelog-entry">
+        <span class="component-changelog-version">v0.1</span>
+        <span class="component-changelog-date">Jun 2026</span>
+        <p class="component-changelog-desc">Initial draft. Underline, pill, and icon+label variants. S / M / L size tiers. Full ARIA tab pattern documentation. Badge count guidance.</p>
+      </div>
+    </div>
+  </section>
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

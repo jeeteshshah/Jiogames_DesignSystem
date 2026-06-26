@@ -1,0 +1,442 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radio — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    .radio-wrap { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; user-select: none; }
+    .radio { width: 20px; height: 20px; border-radius: var(--pill); border: 2px solid var(--border); background: transparent; display: flex; align-items: center; justify-content: center; transition: all var(--dur-fast) var(--ease-out); flex-shrink: 0; }
+    .radio.is-checked { border-color: var(--jio); }
+    .radio.is-checked::after { content: ''; width: 10px; height: 10px; border-radius: var(--pill); background: var(--jio); }
+    .radio.is-disabled { opacity: var(--state-disabled-opacity); pointer-events: none; }
+    .radio-label { font-family: var(--jio-font); font-size: 15px; font-weight: 500; color: var(--text); }
+    .radio-hint { font-size: 12px; color: var(--text3); margin-top: 2px; display: block; }
+    .radio-group { display: flex; flex-direction: column; gap: 12px; }
+    /* Large size */
+    .radio--l { width: 24px; height: 24px; }
+    .radio--l.is-checked::after { width: 12px; height: 12px; }
+  </style>
+</head><body><main class="ds-content">
+
+  <!-- PAGE HEADER -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Radio</span>
+    </nav>
+    <h1 class="component-page-title">Radio</h1>
+    <p class="component-page-def">Single selection from a mutually exclusive set. Used in plan selection, quality settings, and filter groups.</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:16px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+        <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+        <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+      </div>
+      <span class="component-maturity component-maturity--draft"><span class="component-maturity--dot"></span>Draft</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:300px;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner">
+      <div class="radio-group" style="position:relative; z-index:1;">
+        <label class="radio-wrap">
+          <span class="radio is-checked" role="radio" aria-checked="true"></span>
+          <span class="radio-label">720p</span>
+        </label>
+        <label class="radio-wrap">
+          <span class="radio" role="radio" aria-checked="false"></span>
+          <span class="radio-label">1080p</span>
+        </label>
+        <label class="radio-wrap" style="align-items:flex-start;">
+          <span class="radio" role="radio" aria-checked="false" style="margin-top:3px;"></span>
+          <span>
+            <span class="radio-label">4K Ultra</span>
+            <span class="radio-hint">Requires JioGames Ultimate</span>
+          </span>
+        </label>
+      </div>
+    </div>
+    <p class="component-hero-caption">Radio group · Video quality selection with description</p>
+  </section>
+
+  <!-- INTRO -->
+  <section class="component-intro" id="intro">
+    <p>Radio buttons enforce single selection within a group — choosing one option automatically deselects any previously selected item. Use them for mutually exclusive settings such as video quality, pass plan type, or language preference. Unlike checkboxes, radio buttons should never appear alone; a group of at least two is required for the mutual-exclusion semantics to make sense.</p>
+    <ul class="component-summary-list">
+      <li><strong>Plan selection</strong> — JioGames Mobile, Ultimate, or Family plan chooser</li>
+      <li><strong>Quality settings</strong> — 480p, 720p, 1080p, 4K video stream quality</li>
+      <li><strong>Language & region</strong> — preferred audio language, subtitle language</li>
+      <li><strong>Filter mode</strong> — sort order, content rating, release year range</li>
+    </ul>
+  </section>
+
+  <!-- BEST PRACTICES -->
+  <section class="ds-section" id="best-practices">
+    <h2 class="ds-section-title">Best practices</h2>
+    <div class="component-best-practices">
+      <div class="component-bp-card component-bp-card--do">
+        <span class="component-bp-label component-bp-label--do">Do</span>
+        <ul class="component-bp-list">
+          <li>Always pre-select a default option — never leave a radio group with nothing selected</li>
+          <li>Group all radios under a single <code class="ds-code">name</code> attribute so the browser enforces mutual exclusion natively</li>
+          <li>Use a fieldset + legend to label the group for screen readers</li>
+          <li>Order options logically — most popular first, or ascending size/quality</li>
+          <li>Use hint text to explain constraints like pass tier requirements</li>
+        </ul>
+      </div>
+      <div class="component-bp-card component-bp-card--dont">
+        <span class="component-bp-label component-bp-label--dont">Don't</span>
+        <ul class="component-bp-list">
+          <li>Use radio buttons for settings that can have multiple active values — use Checkboxes</li>
+          <li>Use a single standalone radio button — it implies a group that doesn't exist</li>
+          <li>Show more than 6 options as radios — use a Select/Dropdown instead</li>
+          <li>Change page content immediately on radio selection without user confirmation — prefer an explicit submit action</li>
+          <li>Use radio buttons on TV — use a card-style selector with D-pad focus instead</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <section class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <p class="ds-section-desc">A radio button consists of a circular control with an inner dot when selected, plus a required text label. Hint text is optional below the label.</p>
+    <div class="ds-anatomy">
+      <div class="ds-anatomy-preview">
+        <div class="ds-anatomy-component" style="position:relative; display:inline-flex; align-items:center; gap:10px; padding:12px 16px;">
+          <span class="radio is-checked" style="position:relative;">
+            <span class="ds-anatomy-callout-dot" style="position:absolute; top:-20px; left:50%; transform:translateX(-50%);"><span class="ds-anatomy-callout-num">1</span></span>
+            <span class="ds-anatomy-callout-dot" style="position:absolute; top:50%; left:-20px; transform:translateY(-50%);"><span class="ds-anatomy-callout-num">2</span></span>
+          </span>
+          <span style="font-family:var(--jio-font); font-size:15px; font-weight:500; color:var(--text); position:relative;">
+            1080p
+            <span class="ds-anatomy-callout-dot" style="position:absolute; top:-20px; left:50%; transform:translateX(-50%);"><span class="ds-anatomy-callout-num">3</span></span>
+          </span>
+        </div>
+      </div>
+      <ol class="ds-anatomy-list">
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">1</span>
+          <div>
+            <div class="ds-anatomy-label">Circle track <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">20×20px fully circular ring. Muted border when unchecked; green border when checked. Always border-radius: var(--pill).</div>
+            <code class="ds-anatomy-token ds-code">width:20px; height:20px; border-radius:var(--pill)</code>
+          </div>
+        </li>
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">2</span>
+          <div>
+            <div class="ds-anatomy-label">Inner dot <span class="ds-anatomy-optional">Conditional</span></div>
+            <div class="ds-anatomy-desc">10×10px filled green circle centred in the track. Appears only when selected. Created with a CSS ::after pseudo-element.</div>
+            <code class="ds-anatomy-token ds-code">width:10px; height:10px; background:var(--jio)</code>
+          </div>
+        </li>
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">3</span>
+          <div>
+            <div class="ds-anatomy-label">Label <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">15px/500 text in var(--text). Tapping the label must select the radio. Always associate via a wrapping label or for/id pair.</div>
+            <code class="ds-anatomy-token ds-code">font-size:15px; font-weight:500; color:var(--text)</code>
+          </div>
+        </li>
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">4</span>
+          <div>
+            <div class="ds-anatomy-label">Hint text <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc">12px muted text below the label for eligibility or usage notes. Example: "Requires JioGames Ultimate".</div>
+            <code class="ds-anatomy-token ds-code">font-size:12px; color:var(--text3); margin-top:2px</code>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- VARIANTS -->
+  <section class="ds-section" id="variants">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Radio buttons have four variants. All share the same circular control shape — only the selection state and optional description differ.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:40px; align-items:flex-start; padding:8px 0;">
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <label class="radio-wrap">
+            <span class="radio" role="radio" aria-checked="false"></span>
+            <span class="radio-label">Unchecked</span>
+          </label>
+          <span style="font-size:11px; color:var(--text3);">Unchecked</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <label class="radio-wrap">
+            <span class="radio is-checked" role="radio" aria-checked="true"></span>
+            <span class="radio-label">Checked</span>
+          </label>
+          <span style="font-size:11px; color:var(--text3);">Checked</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <label class="radio-wrap">
+            <span class="radio is-disabled" role="radio" aria-checked="false" aria-disabled="true"></span>
+            <span class="radio-label" style="opacity:0.4;">Disabled</span>
+          </label>
+          <span style="font-size:11px; color:var(--text3);">Disabled</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <label class="radio-wrap" style="align-items:flex-start;">
+            <span class="radio is-checked" role="radio" aria-checked="true" style="margin-top:3px;"></span>
+            <span>
+              <span class="radio-label">JioGames Ultimate</span>
+              <span class="radio-hint">Includes PC, Mobile &amp; TV access</span>
+            </span>
+          </label>
+          <span style="font-size:11px; color:var(--text3);">With description</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SIZES -->
+  <section class="ds-section" id="sizes">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Two sizes are available. M (20px) is the default for all surfaces. L (24px) is used on plan selection cards and settings pages where the control needs higher visual weight.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:40px; align-items:center; padding:8px 0;">
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <label class="radio-wrap">
+            <span class="radio is-checked" role="radio" aria-checked="true"></span>
+            <span class="radio-label">Medium</span>
+          </label>
+          <span style="font-size:11px; color:var(--text3);">M — 20px (default)</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <label class="radio-wrap">
+            <span class="radio radio--l is-checked" role="radio" aria-checked="true"></span>
+            <span class="radio-label" style="font-size:17px;">Large</span>
+          </label>
+          <span style="font-size:11px; color:var(--text3);">L — 24px</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- STATES -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Radio buttons have five states. Arrow keys navigate within a group — pressing an arrow key both moves focus and selects the item. Tab moves between groups.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:40px; align-items:flex-start; padding:8px 0;">
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <span class="radio"></span>
+          <span style="font-size:11px; color:var(--text3);">Default</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <span class="radio" style="border-color:var(--text2);"></span>
+          <span style="font-size:11px; color:var(--text3);">Hover</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <span class="radio is-checked"></span>
+          <span style="font-size:11px; color:var(--text3);">Checked</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <span class="radio sim-focus"></span>
+          <span style="font-size:11px; color:var(--text3);">Focus</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <span class="radio is-disabled"></span>
+          <span style="font-size:11px; color:var(--text3);">Disabled</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="ds-section" id="content">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <p class="ds-section-desc">Radio labels identify the option clearly and concisely. Descriptions should add meaningful context, not restate the label.</p>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Label copy</div>
+        <ul>
+          <li>Be specific — "720p HD" not just "Medium quality"</li>
+          <li>Use noun phrases — "JioGames Mobile", "English (India)", "Last 30 days"</li>
+          <li>Keep labels parallel in structure across all options in a group</li>
+          <li>For plan names, use the official product name — never invent shorthand</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Descriptions</div>
+        <ul>
+          <li>Use for eligibility notes: "Requires JioGames Ultimate"</li>
+          <li>Use for impact: "Saves up to 2GB per hour of data"</li>
+          <li>Do not describe what the option is — the label already does that</li>
+          <li>Keep descriptions to one line; two lines maximum on mobile</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Minimum 44×44px touch target via a wrapping <code class="ds-code">&lt;label&gt;</code></li>
+          <li>Stack options vertically — horizontal radio groups are illegible on small screens</li>
+          <li>Default to the most commonly chosen option pre-selected</li>
+          <li>Use M (20px) size — L is for settings pages only</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Arrow keys move selection within a radio group (Up/Left = previous, Down/Right = next)</li>
+          <li>Tab moves focus to the next focusable element outside the group</li>
+          <li>Show a 2px green focus ring on the currently focused radio</li>
+          <li>Wrap in <code class="ds-code">&lt;fieldset&gt;</code> + <code class="ds-code">&lt;legend&gt;</code> for screen reader group context</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>Do not use Radio on TV — use a highlighted card-style selector instead</li>
+          <li>Cards show a green border and a tick badge in the corner when selected</li>
+          <li>D-pad left/right navigates between options; OK/Select confirms</li>
+          <li>Selected card scales to 1.05 with a green glow to signal active state at 3m</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Requirement</th><th>Implementation</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Role</td>
+          <td><code class="ds-code">role="radio"</code></td>
+          <td>Automatic with <code class="ds-code">&lt;input type="radio"&gt;</code>. Required on custom elements.</td>
+        </tr>
+        <tr>
+          <td>Group role</td>
+          <td><code class="ds-code">role="radiogroup"</code></td>
+          <td>Wrap the group in an element with <code class="ds-code">role="radiogroup"</code> and <code class="ds-code">aria-labelledby</code> pointing to the group heading.</td>
+        </tr>
+        <tr>
+          <td>Checked state</td>
+          <td><code class="ds-code">aria-checked="true|false"</code></td>
+          <td>Update dynamically on selection. Native radio input handles this automatically.</td>
+        </tr>
+        <tr>
+          <td>Keyboard navigation</td>
+          <td>Arrow keys within group</td>
+          <td>Arrow keys must both move focus and select. Tab should exit the group, not navigate within it.</td>
+        </tr>
+        <tr>
+          <td>Disabled</td>
+          <td><code class="ds-code">aria-disabled="true"</code> + <code class="ds-code">disabled</code></td>
+          <td>Disabled radio is skipped by Tab and Arrow keys. Provide a tooltip or hint explaining why it's unavailable.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- RELATED TOKENS -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Token</th><th>Value</th><th>Usage</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code class="ds-code">--jio</code></td><td><code class="ds-code">#00A859</code></td><td>Checked border and inner dot fill</td></tr>
+        <tr><td><code class="ds-code">--border</code></td><td><code class="ds-code">rgba(255,255,255,.16)</code></td><td>Unchecked circle track border</td></tr>
+        <tr><td><code class="ds-code">--text</code></td><td><code class="ds-code">#f4f2ee</code></td><td>Label text color</td></tr>
+        <tr><td><code class="ds-code">--text3</code></td><td><code class="ds-code">rgba(244,242,238,.32)</code></td><td>Hint / description text color</td></tr>
+        <tr><td><code class="ds-code">--pill</code></td><td><code class="ds-code">100px</code></td><td>Border-radius for circle track and inner dot</td></tr>
+        <tr><td><code class="ds-code">--state-disabled-opacity</code></td><td><code class="ds-code">0.35</code></td><td>Disabled radio opacity</td></tr>
+        <tr><td><code class="ds-code">--dur-fast</code></td><td><code class="ds-code">120ms</code></td><td>Select/deselect transition duration</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CODE EXAMPLES -->
+  <section class="ds-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Single radio button</div>
+      <pre class="component-code-pre"><code>&lt;label class="radio-wrap"&gt;
+  &lt;input type="radio" name="quality" value="720p" class="sr-only"&gt;
+  &lt;span class="radio" aria-hidden="true"&gt;&lt;/span&gt;
+  &lt;span class="radio-label"&gt;720p&lt;/span&gt;
+&lt;/label&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Radio group with fieldset and legend</div>
+      <pre class="component-code-pre"><code>&lt;fieldset style="border:none; padding:0;"&gt;
+  &lt;legend style="font-size:13px; font-weight:700; color:var(--text2); margin-bottom:12px;"&gt;
+    Video quality
+  &lt;/legend&gt;
+  &lt;div class="radio-group" role="radiogroup" aria-labelledby="quality-legend"&gt;
+    &lt;label class="radio-wrap"&gt;
+      &lt;input type="radio" name="quality" value="480p"&gt;
+      &lt;span class="radio"&gt;&lt;/span&gt;
+      &lt;span class="radio-label"&gt;480p&lt;/span&gt;
+    &lt;/label&gt;
+    &lt;label class="radio-wrap"&gt;
+      &lt;input type="radio" name="quality" value="720p" checked&gt;
+      &lt;span class="radio is-checked"&gt;&lt;/span&gt;
+      &lt;span class="radio-label"&gt;720p&lt;/span&gt;
+    &lt;/label&gt;
+    &lt;label class="radio-wrap"&gt;
+      &lt;input type="radio" name="quality" value="1080p"&gt;
+      &lt;span class="radio"&gt;&lt;/span&gt;
+      &lt;span class="radio-label"&gt;1080p&lt;/span&gt;
+    &lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Radio with description (plan selection)</div>
+      <pre class="component-code-pre"><code>&lt;label class="radio-wrap" style="align-items:flex-start;"&gt;
+  &lt;input type="radio" name="plan" value="ultimate" class="sr-only"&gt;
+  &lt;span class="radio is-checked" aria-hidden="true" style="margin-top:3px;"&gt;&lt;/span&gt;
+  &lt;span&gt;
+    &lt;span class="radio-label"&gt;JioGames Ultimate&lt;/span&gt;
+    &lt;span class="radio-hint"&gt;Includes PC, Mobile &amp;amp; TV access&lt;/span&gt;
+  &lt;/span&gt;
+&lt;/label&gt;</code></pre>
+    </div>
+
+  </section>
+
+  <!-- CHANGELOG -->
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

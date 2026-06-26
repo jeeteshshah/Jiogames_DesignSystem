@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Icons — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    body { background: var(--bg); color: var(--text); font-family: var(--jio-font); margin: 0; }
+
+    .component-hero {
+      border-radius: 20px; overflow: hidden; margin-bottom: 48px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      position: relative; min-height: 280px; padding: 48px 32px 32px;
+    }
+    .component-hero--dark { background: #060810; }
+    .component-hero--grid {
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 32px 32px;
+      background-color: #060810;
+      border: 1px solid var(--border-subtle);
+    }
+    .component-hero-inner {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 28px; position: relative; z-index: 2;
+    }
+    .component-hero-caption {
+      display: block; font-size: 10px; font-weight: 700; letter-spacing: .6px;
+      text-transform: uppercase; color: var(--text4); margin-top: 24px; position: relative; z-index: 2;
+    }
+    .hero-glow {
+      position: absolute; width: 320px; height: 180px; border-radius: var(--pill);
+      background: radial-gradient(ellipse, rgba(0,168,89,.2) 0%, transparent 70%);
+      pointer-events: none; z-index: 1;
+    }
+
+    .component-intro { margin-bottom: 48px; }
+    .component-intro p {
+      font-size: 15px; font-weight: 500; color: var(--text2);
+      line-height: 1.65; margin-bottom: 20px; max-width: 640px;
+    }
+    .component-summary-list {
+      display: flex; flex-direction: column; gap: 0;
+      border: 1px solid var(--border-subtle); border-radius: 14px;
+      overflow: hidden; list-style: none; padding: 0; margin: 0;
+    }
+    .component-summary-list li {
+      padding: 14px 20px; border-bottom: 1px solid var(--border-subtle);
+      font-size: 13px; font-weight: 500; color: var(--text2); line-height: 1.55;
+    }
+    .component-summary-list li:last-child { border-bottom: none; }
+    .component-summary-list li strong { color: var(--text); font-weight: 700; }
+
+    .component-best-practices { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+    .component-bp-card { border-radius: 14px; overflow: hidden; border: 1.5px solid; }
+    .component-bp-card--do   { border-color: rgba(0,168,89,.3); }
+    .component-bp-card--dont { border-color: rgba(255,71,87,.3); }
+    .component-bp-label {
+      display: flex; align-items: center; gap: 6px; padding: 10px 16px;
+      font-size: 10px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase;
+    }
+    .component-bp-label--do   { background: rgba(0,168,89,.07);  color: var(--jio); }
+    .component-bp-label--dont { background: rgba(255,71,87,.07); color: var(--negative); }
+    .component-bp-label--do::before   { content: '\2713'; font-size: 11px; }
+    .component-bp-label--dont::before { content: '\2715'; font-size: 11px; }
+    .component-bp-list {
+      padding: 16px 20px 20px; background: var(--surface-1);
+      margin: 0; display: flex; flex-direction: column; gap: 8px; list-style: none;
+    }
+    .component-bp-list li {
+      font-size: 12px; font-weight: 500; color: var(--text2);
+      line-height: 1.5; padding-left: 14px; position: relative;
+    }
+    .component-bp-list li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+
+    .component-content-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px; }
+    .component-content-card {
+      background: var(--surface-1); border: 1px solid var(--border-subtle);
+      border-radius: var(--r4); padding: 20px;
+    }
+    .component-content-title {
+      font-size: 12px; font-weight: 700; color: var(--text);
+      text-transform: uppercase; letter-spacing: .5px; margin-bottom: 12px;
+    }
+    .component-content-card ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .component-content-card li {
+      font-size: 12px; font-weight: 500; color: var(--text2);
+      line-height: 1.5; padding-left: 14px; position: relative;
+    }
+    .component-content-card li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+
+    .component-platform-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+    .component-platform-card {
+      background: var(--surface-1); border: 1px solid var(--border-subtle);
+      border-radius: var(--r4); padding: 20px;
+    }
+    .component-platform-card--mobile { border-top: 2px solid rgba(110,231,183,.4); }
+    .component-platform-card--web    { border-top: 2px solid rgba(147,197,253,.4); }
+    .component-platform-card--tv     { border-top: 2px solid rgba(251,191,36,.4); }
+    .component-platform-card-title {
+      font-size: 11px; font-weight: 700; letter-spacing: .6px;
+      text-transform: uppercase; color: var(--text3); margin-bottom: 12px;
+    }
+    .component-platform-card--mobile .component-platform-card-title { color: #6ee7b7; }
+    .component-platform-card--web    .component-platform-card-title { color: #93c5fd; }
+    .component-platform-card--tv     .component-platform-card-title { color: #fbbf24; }
+    .component-platform-card ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .component-platform-card li {
+      font-size: 12px; font-weight: 500; color: var(--text2);
+      line-height: 1.5; padding-left: 14px; position: relative;
+    }
+    .component-platform-card li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+
+    .component-changelog {
+      display: flex; flex-direction: column; gap: 0;
+      border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden;
+    }
+    .component-changelog-entry {
+      display: grid; grid-template-columns: 56px 80px 1fr;
+      gap: 16px; align-items: start; padding: 14px 20px;
+      border-bottom: 1px solid var(--border-subtle); font-size: 12px;
+    }
+    .component-changelog-entry:last-child { border-bottom: none; }
+    .component-changelog-version { font-family: monospace; font-weight: 700; color: var(--jio); font-size: 11px; }
+    .component-changelog-date { color: var(--text3); font-weight: 500; }
+    .component-changelog-desc { color: var(--text2); line-height: 1.5; }
+
+    .ds-note {
+      background: rgba(0,168,89,.06); border: 1px solid rgba(0,168,89,.2);
+      border-radius: var(--r3); padding: 14px 18px;
+      font-size: 13px; font-weight: 500; color: var(--text2); line-height: 1.55;
+    }
+    .ds-note strong { color: var(--jio); }
+
+    /* Icon size matrix */
+    .icon-size-matrix {
+      border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden;
+    }
+    .icon-size-matrix-head {
+      display: grid; grid-template-columns: 120px 1fr 1fr 1fr;
+      background: var(--surface-2); border-bottom: 1px solid var(--border-subtle);
+    }
+    .icon-size-matrix-head > div {
+      padding: 10px 16px; font-size: 9px; font-weight: 700;
+      letter-spacing: .8px; text-transform: uppercase; color: var(--text3);
+    }
+    .icon-size-matrix-row {
+      display: grid; grid-template-columns: 120px 1fr 1fr 1fr;
+      border-bottom: 1px solid var(--border-subtle); background: var(--surface-1);
+    }
+    .icon-size-matrix-row:last-child { border-bottom: none; }
+    .icon-size-matrix-row:hover { background: var(--glass-1); }
+    .icon-size-matrix-label {
+      padding: 16px; display: flex; flex-direction: column; justify-content: center;
+      gap: 3px; border-right: 1px solid var(--border-subtle); background: var(--surface-2);
+    }
+    .icon-size-matrix-name { font-size: 12px; font-weight: 700; color: var(--text); }
+    .icon-size-matrix-class { font-family: monospace; font-size: 10px; color: #a8e6c5; }
+    .icon-size-matrix-cell {
+      padding: 16px; display: flex; flex-direction: column;
+      align-items: flex-start; gap: 8px; justify-content: center;
+    }
+    .icon-size-matrix-px { font-family: monospace; font-size: 10px; color: var(--text3); }
+
+    /* Common icon gallery */
+    .icon-gallery-box {
+      border: 1px solid var(--border-subtle); border-radius: var(--r4);
+      background: var(--surface-1); padding: 20px; margin-top: 4px;
+    }
+    .icon-gallery {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px;
+    }
+    .icon-gallery-item,
+    .icon-item {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      padding: 16px 8px 12px; background: var(--bg2);
+      border: 1px solid var(--border-subtle); border-radius: var(--r3);
+      cursor: pointer; transition: background 120ms, border-color 120ms;
+    }
+    .icon-gallery-item:hover,
+    .icon-item:hover { background: var(--glass-1); border-color: var(--border); }
+    .icon-gallery-label,
+    .icon-label { font-size: 9px; font-weight: 500; color: var(--text3); text-align: center; font-family: monospace; word-break: break-all; line-height: 1.4; }
+
+    /* Migration table */
+    .migration-table { border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; margin-top: 16px; }
+    .migration-row { display: grid; grid-template-columns: 1fr 1fr 1fr; border-bottom: 1px solid var(--border-subtle); }
+    .migration-row:last-child { border-bottom: none; }
+    .migration-row:first-child { background: var(--surface-2); }
+    .migration-cell {
+      padding: 12px 16px; font-size: 12px; font-weight: 500; color: var(--text2);
+      display: flex; align-items: center;
+    }
+    .migration-cell:first-child { border-right: 1px solid var(--border-subtle); }
+    .migration-cell:nth-child(2) { border-right: 1px solid var(--border-subtle); }
+    .migration-cell--head { font-size: 10px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--text3); }
+    .migration-cell--deprecated { color: var(--negative); font-family: monospace; font-size: 11px; }
+    .migration-cell--new { color: #a8e6c5; font-family: monospace; font-size: 11px; }
+
+    /* Accessibility */
+    .a11y-grid {
+      display: flex; flex-direction: column; gap: 0;
+      border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; margin-top: 24px;
+    }
+    .a11y-row { display: grid; grid-template-columns: 140px 1fr; gap: 0; border-bottom: 1px solid var(--border-subtle); }
+    .a11y-row:last-child { border-bottom: none; }
+    .a11y-label {
+      padding: 14px 16px; font-size: 11px; font-weight: 700; color: var(--text3);
+      letter-spacing: .3px; background: var(--surface-2); text-transform: uppercase;
+      display: flex; align-items: flex-start; padding-top: 16px;
+    }
+    .a11y-content {
+      padding: 14px 20px; font-size: 12px; font-weight: 500; color: var(--text2);
+      line-height: 1.6; background: var(--surface-1);
+    }
+    .a11y-content ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 5px; }
+    .a11y-content li { padding-left: 14px; position: relative; }
+    .a11y-content li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+
+    kbd {
+      display: inline-block; padding: 1px 6px;
+      background: var(--surface-3); border: 1px solid var(--border);
+      border-radius: 4px; font-family: monospace; font-size: 11px; color: var(--text2);
+    }
+
+    @media (max-width: 760px) {
+      .component-best-practices,
+      .component-content-grid,
+      .component-platform-grid { grid-template-columns: 1fr; }
+      .icon-size-matrix { overflow-x: auto; }
+      .icon-size-matrix-head,
+      .icon-size-matrix-row { min-width: 480px; }
+    }
+  </style>
+</head>
+<body>
+<main class="ds-content">
+
+  <!-- ===================================================
+       1. PAGE HEADER
+  =================================================== -->
+  <div class="component-page-header">
+    <div class="component-breadcrumb">
+      <a href="../index.html">JioGames DLS</a>
+      <span class="component-breadcrumb-sep">&#x203A;</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">&#x203A;</span>
+      <span>Icons</span>
+    </div>
+    <h1 class="component-page-title">Icons</h1>
+    <p class="component-page-def">Icons are visual symbols that communicate actions, objects, and states across the JioGames interface.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+      <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+      <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+      <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+    </div>
+  </div>
+
+  <!-- ===================================================
+       2. HERO VISUAL
+  =================================================== -->
+  <section class="component-hero component-hero--dark component-hero--grid" id="overview">
+    <div class="hero-glow" style="top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+    <div class="component-hero-inner">
+      <!-- Row 1: glyph sizes XS &#x2192; XL -->
+      <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;justify-content:center">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="var(--text2)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--text4);text-transform:uppercase">XS &#xB7; 12px</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="var(--text2)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--text4);text-transform:uppercase">S &#xB7; 16px</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="var(--text2)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--text4);text-transform:uppercase">M &#xB7; 20px</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="var(--text)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--jio);text-transform:uppercase">L &#xB7; 24px</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="var(--text2)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--text4);text-transform:uppercase">XL &#xB7; 32px</span>
+        </div>
+      </div>
+      <!-- Row 2: icon in wrapper, touch target, TV focus -->
+      <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:center">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:44px;height:44px;border-radius:50%;background:var(--surface-2);border:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:center">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="var(--text2)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          </div>
+          <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--text3);text-transform:uppercase">Icon wrap</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="position:relative;width:44px;height:44px;display:flex;align-items:center;justify-content:center">
+            <div style="position:absolute;inset:0;border:1px dashed rgba(0,168,89,.4);border-radius:4px"></div>
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="var(--jio)" aria-hidden="true"><use href="../sprite.svg#ic_search"></use></svg>
+          </div>
+          <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--jio);text-transform:uppercase">44px target</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <div style="width:72px;height:72px;border-radius:var(--r4);background:var(--surface-2);border:3px solid var(--jio);box-shadow:0 0 0 3px var(--jio),0 0 24px var(--jio-glow);display:flex;align-items:center;justify-content:center">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="var(--jio)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          </div>
+          <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--jio);text-transform:uppercase">TV focus</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="var(--text3)" aria-hidden="true"><use href="../sprite.svg#ic_chevron_right"></use></svg>
+          <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--text3);text-transform:uppercase">Muted</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="var(--jio)" aria-hidden="true"><use href="../sprite.svg#ic_chevron_right"></use></svg>
+          <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--jio);text-transform:uppercase">Active</span>
+        </div>
+      </div>
+    </div>
+    <span class="component-hero-caption">Sizes XS&#x2013;XL &#xB7; Touch target &#xB7; TV focus glow &#xB7; 1:1 scale Mobile L</span>
+  </section>
+
+  <!-- ===================================================
+       3. INTRO
+  =================================================== -->
+  <section class="component-intro" id="intro">
+    <p>Icons in JioGames are delivered as a single SVG sprite, referenced via <code class="ds-code">&lt;use href="../sprite.svg#ic_*"&gt;</code>. This keeps the DOM lightweight and allows a single token change to recolor every icon on a screen. The system defines five glyph sizes (XS&#x2013;XL), each resolving to different pixel values on Mobile, Web, and TV.</p>
+    <ul class="component-summary-list">
+      <li><strong>Sprite-based delivery.</strong> One <code class="ds-code">sprite.svg</code> file. All icons via <code class="ds-code">&lt;use&gt;</code>. No per-icon files, no inline blobs, no font icons.</li>
+      <li><strong>Platform-aware sizing.</strong> Five size names (XS/S/M/L/XL) resolve to different pixel values per platform. The same class works everywhere; the platform context sets the token alias.</li>
+      <li><strong>Semantic color via currentColor.</strong> Icons inherit fill from their container. Swap one CSS custom property to recolor entire icon families instantly.</li>
+      <li><strong>Touch targets are separate from glyph size.</strong> A 20px icon inside a 44px wrapper provides the WCAG-compliant touch area without inflating the visual glyph.</li>
+      <li><strong>TV focus ring.</strong> On TV, focused icon wrappers receive the <code class="ds-code">--tv-focus-shadow</code> glow and scale(1.05) transform, not a 2px outline.</li>
+    </ul>
+  </section>
+
+  <!-- ===================================================
+       4. BEST PRACTICES
+  =================================================== -->
+  <section class="ds-section" id="best-practices">
+    <h2 class="ds-section-title">Best practices</h2>
+    <p class="ds-section-desc">Icons reduce cognitive load when used consistently. These rules keep icon usage coherent across all surfaces.</p>
+    <div class="component-best-practices">
+      <div class="component-bp-card component-bp-card--do">
+        <span class="component-bp-label component-bp-label--do">Do</span>
+        <ul class="component-bp-list">
+          <li>Use <code class="ds-code">aria-hidden="true"</code> on all decorative icons</li>
+          <li>Pair icon-only controls with an <code class="ds-code">aria-label</code> on the interactive element</li>
+          <li>Use L (24px) as the default glyph size in navigation and primary UI</li>
+          <li>Wrap interactive icons in a touch target div at least 44px &#xD7; 44px on mobile</li>
+          <li>Use <code class="ds-code">fill:currentColor</code> so icons respond to theme changes</li>
+          <li>On TV, use icon-wrap-l (76px) minimum touch area</li>
+          <li>Use named sprite IDs &#x2014; never hardcode path data in product HTML</li>
+        </ul>
+      </div>
+      <div class="component-bp-card component-bp-card--dont">
+        <span class="component-bp-label component-bp-label--dont">Don&#x27;t</span>
+        <ul class="component-bp-list">
+          <li>Don&#x27;t resize icons by changing <code class="ds-code">viewBox</code> &#x2014; use <code class="ds-code">width</code>/<code class="ds-code">height</code> attributes</li>
+          <li>Don&#x27;t use <code class="ds-code">img</code> tags for icons &#x2014; they can&#x27;t be recolored via CSS</li>
+          <li>Don&#x27;t use XS (12px) icons as standalone interactive targets</li>
+          <li>Don&#x27;t rely on icons alone to communicate state &#x2014; always add text or ARIA label</li>
+          <li>Don&#x27;t use <code class="ds-code">.icon--tv</code> &#x2014; deprecated, use <code class="ds-code">.icon--xl</code> inside <code class="ds-code">.platform-tv</code></li>
+          <li>Don&#x27;t hardcode pixel sizes &#x2014; use the <code class="ds-code">--icon-*</code> token aliases</li>
+          <li>Don&#x27;t mix icon families or styles within the same UI region</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       5. ANATOMY
+  =================================================== -->
+  <section class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <p class="ds-section-desc">An icon has up to five layers. Only the SVG glyph and its viewbox are required. Wrapper, touch target, and focus ring are contextual additions for interactive use.</p>
+    <div class="ds-anatomy">
+      <div class="ds-anatomy-preview">
+        <div class="ds-anatomy-component" style="position:relative;display:inline-flex;padding:48px 56px;flex-direction:column;align-items:center;gap:0">
+          <!-- Touch target dashed -->
+          <div style="position:absolute;inset:20px 16px;border:1px dashed rgba(0,168,89,.3);border-radius:8px;pointer-events:none"></div>
+          <!-- Icon wrap -->
+          <div style="width:72px;height:72px;border-radius:var(--r4);background:var(--surface-2);border:1px solid var(--border-subtle);box-shadow:0 0 0 3px var(--jio),0 0 24px var(--jio-glow);display:flex;align-items:center;justify-content:center;position:relative">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="var(--jio)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          </div>
+          <!-- callout 1: glyph -->
+          <div style="position:absolute;bottom:8px;left:32%;display:flex;flex-direction:column;align-items:center;gap:0">
+            <div class="ds-anatomy-callout-dot"></div>
+            <div style="width:1px;height:12px;background:var(--jio);opacity:.5"></div>
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">1</div>
+          </div>
+          <!-- callout 2: viewbox -->
+          <div style="position:absolute;bottom:8px;right:32%;display:flex;flex-direction:column;align-items:center;gap:0">
+            <div class="ds-anatomy-callout-dot"></div>
+            <div style="width:1px;height:12px;background:var(--jio);opacity:.5"></div>
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">2</div>
+          </div>
+          <!-- callout 3: wrapper -->
+          <div style="position:absolute;top:8px;left:22%;display:flex;flex-direction:column;align-items:center;gap:0">
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">3</div>
+            <div style="width:1px;height:12px;background:var(--jio);opacity:.5"></div>
+            <div class="ds-anatomy-callout-dot"></div>
+          </div>
+          <!-- callout 4: touch target -->
+          <div style="position:absolute;top:8px;right:22%;display:flex;flex-direction:column;align-items:center;gap:0">
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">4</div>
+            <div style="width:1px;height:12px;background:var(--jio);opacity:.5"></div>
+            <div class="ds-anatomy-callout-dot"></div>
+          </div>
+          <!-- callout 5: focus ring side -->
+          <div style="position:absolute;top:50%;left:4px;transform:translateY(-50%);display:flex;align-items:center;gap:0">
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">5</div>
+            <div style="width:12px;height:1px;background:var(--jio);opacity:.5"></div>
+            <div class="ds-anatomy-callout-dot"></div>
+          </div>
+        </div>
+      </div>
+      <div class="ds-anatomy-list">
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">1</div>
+          <div>
+            <div class="ds-anatomy-label">SVG glyph <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">The <code class="ds-code">&lt;use href="../sprite.svg#ic_*"&gt;</code> element. Inherits <code class="ds-code">fill:currentColor</code> from the parent SVG. Never hardcode fill on the <code class="ds-code">&lt;use&gt;</code> tag.</div>
+            <div class="ds-anatomy-token">CSS: fill:currentColor &#xB7; Figma: Icon/Glyph</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">2</div>
+          <div>
+            <div class="ds-anatomy-label">Viewbox container (24&#xD7;24) <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">All icons are drawn on a 24&#xD7;24 viewbox. Scale by setting <code class="ds-code">width</code>/<code class="ds-code">height</code> on the <code class="ds-code">&lt;svg&gt;</code> element. Token: <code class="ds-code">--icon-l-mobile: 24px</code>.</div>
+            <div class="ds-anatomy-token">CSS: width/height attrs &#xB7; Figma: Icon/ViewBox</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">3</div>
+          <div>
+            <div class="ds-anatomy-label">Icon wrapper (<code class="ds-code">.icon-wrap</code>) <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc">Flex container that centers the glyph within a larger hit area. Required for standalone interactive icons. Size from <code class="ds-code">--icon-wrap-m-mobile: 44px</code>.</div>
+            <div class="ds-anatomy-token">CSS: .icon-wrap &#xB7; Figma: Icon/Wrapper</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">4</div>
+          <div>
+            <div class="ds-anatomy-label">Touch target zone (44px min) <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc">The interactive area that triggers the action. On mobile, minimum 44&#xD7;44px per WCAG 2.5.5. Wrapper size and touch target size should be identical &#x2014; don&#x27;t extend tap area invisibly.</div>
+            <div class="ds-anatomy-token">CSS: min 44px &#xB7; Token: --touch-min</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">5</div>
+          <div>
+            <div class="ds-anatomy-label">Focus ring / TV glow <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc">On web/mobile: 2px solid <code class="ds-code">var(--focus-ring-color)</code> at offset 3px on <code class="ds-code">:focus-visible</code>. On TV: <code class="ds-code">var(--tv-focus-shadow)</code> green glow + scale(1.05) when <code class="ds-code">.is-tv-focused</code> applied.</div>
+            <div class="ds-anatomy-token">CSS: :focus-visible / .is-tv-focused &#xB7; Figma: Icon/FocusRing</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       6. FULL ICON LIBRARY
+  =================================================== -->
+  <section class="ds-section" id="gallery">
+    <h2 class="ds-section-title">Icon library <span style="font-size:14px;font-weight:500;color:var(--text3);margin-left:10px">1,646 icons</span></h2>
+    <p class="ds-section-desc">All icons from the JioGames sprite. Click any icon to copy its ID to clipboard. Rendered at L (24px).</p>
+
+    <!-- Search + controls row -->
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+      <div style="position:relative;flex:1;min-width:200px;max-width:400px">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="var(--text3)" aria-hidden="true"
+          style="position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none">
+          <use href="../sprite.svg#ic_search"></use>
+        </svg>
+        <input id="icon-search" type="search" placeholder="Search 1,646 icons…"
+          style="width:100%;height:40px;background:var(--surface-2);border:1.5px solid var(--border-subtle);
+                 border-radius:10px;color:var(--text);font-family:var(--jio-font);font-size:13px;font-weight:500;
+                 padding:0 12px 0 36px;outline:none;box-sizing:border-box;
+                 transition:border-color 120ms;"
+          autocomplete="off" spellcheck="false">
+      </div>
+      <div id="icon-count" style="font-size:12px;font-weight:600;color:var(--text3);white-space:nowrap">1,646 icons</div>
+    </div>
+
+    <!-- Copy toast -->
+    <div id="copy-toast"
+      style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(16px);
+             background:var(--surface-3);border:1px solid var(--border);border-radius:10px;
+             padding:10px 18px;font-size:13px;font-weight:600;color:var(--text);
+             opacity:0;pointer-events:none;transition:opacity 200ms,transform 200ms;z-index:9999;
+             white-space:nowrap">
+      Copied!
+    </div>
+
+    <!-- Grid -->
+    <div class="icon-gallery-box">
+      <div id="icon-grid" class="icon-gallery"></div>
+      <div style="text-align:center;margin-top:20px">
+        <button id="icon-load-more" class="btn btn--ghost btn--m" style="display:none">Load 20 more</button>
+      </div>
+    </div>
+    <div id="icon-empty"
+      style="display:none;padding:48px 0;text-align:center;font-size:14px;font-weight:500;color:var(--text3)">
+      No icons match "<span id="icon-empty-query"></span>"
+    </div>
+
+    <script>
+    (function () {
+      var ALL_ICONS = ["ic_360_rotation","ic_404_error","ic_4_in_1_sensor","ic_4g","ic_4g_bar_four","ic_4g_bar_no_network","ic_4g_bar_none","ic_4g_bar_one","ic_4g_bar_three","ic_4g_bar_two","ic_4g_lte","ic_4g_lte_data","ic_4g_sim","ic_4k","ic_5g","ic_5g_double_plus","ic_5g_plus","ic_8k","ic_LTE","ic_VoNR","ic_a_to_z","ic_abdominal_pain","ic_ac_remote","ic_accessibility","ic_accessories","ic_account_close","ic_account_info","ic_ace_of_spades","ic_adblock_plus","ic_adblocker","ic_add","ic_add_circle","ic_adventure","ic_aerobics","ic_ai_sparkle","ic_air_conditioner","ic_air_dry","ic_air_filter_clean","ic_air_purification_mode","ic_airfiber","ic_airport","ic_alarm","ic_alarm_off","ic_alarm_sensor","ic_album","ic_alert","ic_align_bottom","ic_align_horizontal_centers","ic_align_left","ic_align_right","ic_align_top","ic_align_vertical_centers","ic_alignment_filling","ic_alignment_horizontal","ic_alignment_vertical","ic_analytics","ic_analytics_data","ic_analytics_pie_chart","ic_analytics_pie_chart_tree","ic_analytics_pie_chart_two","ic_android","ic_animation","ic_anime","ic_anti_corrosion","ic_antibacteria","ic_anxiety","ic_aparell","ic_apartment","ic_apartment_complex","ic_aperture","ic_app_switcher","ic_apple","ic_arcade","ic_arch","ic_archive","ic_archive_room","ic_area","ic_area_map","ic_area_type_bottom","ic_area_type_center","ic_area_type_justify","ic_area_type_top","ic_arena","ic_arist_mic","ic_armed","ic_armed_off","ic_armed_partially","ic_arrow_back","ic_arrow_down","ic_arrow_line","ic_arrow_line_diagonal","ic_arrow_line_dot","ic_arrow_next","ic_arrow_up","ic_artificial_insemination","ic_assistive_grid","ic_astrology","ic_at_home","ic_at_home_hazard","ic_attachment","ic_audio","ic_auto_mode","ic_auto_rikshaw","ic_aux","ic_aux_3_5","ic_av","ic_award","ic_award_badge","ic_baby_bottle","ic_baby_changing_room","ic_baby_monitor","ic_back","ic_back_pain","ic_background_effect","ic_backspace","ic_badminton","ic_bakery","ic_balcony","ic_bank_account","ic_bank_branch","ic_bank_main_branch","ic_barcode","ic_barn","ic_barn_stock","ic_basketball","ic_basketball_player","ic_bathroom","ic_bathtub","ic_battery_10","ic_battery_100","ic_battery_20","ic_battery_30","ic_battery_40","ic_battery_5","ic_battery_50","ic_battery_60","ic_battery_70","ic_battery_80","ic_battery_90","ic_battery_empty","ic_battery_empty_loading","ic_battery_full","ic_battery_full_loading","ic_battery_horizontal_1_bar","ic_battery_horizontal_2_bar","ic_battery_horizontal_3_bar","ic_battery_horizontal_empty","ic_battery_low","ic_battery_mid","ic_battery_off","ic_battery_saver_off","ic_battery_saver_on","ic_battery_warning","ic_beamer","ic_beauty","ic_beauty_products","ic_bed_double","ic_bed_medical","ic_bed_single","ic_bed_sleeping","ic_bike_man","ic_bill","ic_binary_code","ic_biography","ic_biology","ic_birthday","ic_bladder","ic_blizzard","ic_blocked","ic_blood","ic_blood_bag","ic_blood_bank","ic_blood_cells","ic_blood_glucose_meter","ic_blood_pressure_cuff","ic_blood_test","ic_blood_vessels","ic_blowing_drifting_snow","ic_blowing_sand_dust","ic_bluetooth","ic_bluetooth_connected","ic_boards","ic_body_care","ic_body_scale","ic_bold","ic_bookmark","ic_bookmark_add","ic_bookmark_off","ic_boxing","ic_brain","ic_brain_add","ic_brain_stroke","ic_brain_surgery","ic_breezy","ic_brick_breaker","ic_brightness","ic_brightness_display","ic_brightness_full","ic_brightness_half","ic_broadcast","ic_broken_image","ic_broom","ic_brush","ic_buffer","ic_bulb","ic_bull","ic_burger_menu","ic_bus_front","ic_bus_shuttle","ic_bus_side","ic_businessman","ic_butler","ic_cable_box","ic_cable_plug","ic_cable_wires","ic_calculate","ic_calculator","ic_calculator_percentage","ic_calendar","ic_calendar_event","ic_calendar_schedule","ic_calendar_week","ic_calendar_weekend","ic_calf","ic_call","ic_call_add","ic_call_cancel","ic_call_chat","ic_call_clear","ic_call_composer","ic_call_data","ic_call_dids","ic_call_emergency","ic_call_end","ic_call_forward","ic_call_group","ic_call_hd","ic_call_hold","ic_call_hunting","ic_call_incoming","ic_call_incoming_outgoing","ic_call_missed","ic_call_notification","ic_call_number","ic_call_off","ic_call_outgoing","ic_call_settings","ic_call_sound","ic_call_video","ic_call_wifi","ic_camera","ic_camera_auto","ic_camera_dome","ic_camera_filter","ic_camera_focus","ic_camera_high_end","ic_camera_manual","ic_camera_varifocal_bullet","ic_camera_varifocal_dome","ic_cancer","ic_caps_lock","ic_car_driver","ic_car_fleet","ic_car_front","ic_car_share_ride","ic_car_side","ic_car_top","ic_carbon_dioxide","ic_card","ic_cardiology","ic_cardiology_output","ic_cardiology_ventricle","ic_cards","ic_care","ic_carpenter","ic_carpool","ic_cart","ic_cart_preorder","ic_cast","ic_cast_media","ic_cast_screen","ic_categories","ic_categories_sub","ic_cattle_group","ic_cattle_list","ic_ccv","ic_ccv_off","ic_celebration","ic_challenge_reward","ic_chaos","ic_charity","ic_chat","ic_chats","ic_checkbox_indeterminate","ic_checkbox_off","ic_checkbox_on","ic_chemistry","ic_cherry","ic_chest_pain","ic_chevron_down","ic_chevron_down_circle","ic_chevron_left","ic_chevron_left_circle","ic_chevron_right","ic_chevron_right_circle","ic_chevron_up","ic_chevron_up_circle","ic_children_game","ic_chip","ic_cholesterol","ic_cinch","ic_cinch_cable","ic_city","ic_clauset","ic_cleaning","ic_cleaning_request","ic_clear","ic_clerk","ic_climbing","ic_clipping","ic_close","ic_close_remove","ic_cloud","ic_cloud_connect","ic_cloud_exclamation","ic_cloud_off","ic_cloud_paused","ic_cloud_progress","ic_cloud_sync","ic_cloud_synced","ic_cloud_upload","ic_cloudy","ic_cloudy_dreary","ic_code","ic_code_document","ic_cold_icy","ic_collapse","ic_collision_vehicle","ic_colon_complaints","ic_colour_palette","ic_colour_spot","ic_comedy","ic_communication_skills","ic_compact","ic_compare","ic_comparison","ic_compound_interest","ic_compress","ic_computer","ic_computer_graph","ic_computer_history","ic_confirm","ic_connected_home","ic_constipation","ic_consultant","ic_consumption_accounted","ic_consumption_average","ic_consumption_high","ic_consumption_low","ic_consumption_unaccounted","ic_contact_add","ic_contact_share","ic_contact_us","ic_contacts","ic_controler","ic_conversation","ic_cookies","ic_cooking","ic_cooling","ic_cooling_heating","ic_copy","ic_copy_document","ic_corporate_event","ic_cough","ic_coupon","ic_covid_19","ic_cow_adult","ic_cow_device","ic_cow_device_off","ic_cow_heat_activity","ic_cow_profile","ic_cow_retired","ic_create_playlist","ic_cricket","ic_crime","ic_crop","ic_crop_free","ic_crop_original","ic_crop_planning_style_1","ic_crop_planning_style_2","ic_crop_planning_style_3","ic_crowns","ic_csv_doc","ic_cup","ic_cut","ic_cut_out","ic_cut_scissor","ic_cv","ic_cycling","ic_dancing","ic_dark_light","ic_data_card","ic_data_circle","ic_data_in","ic_data_in_out","ic_data_in_out_none","ic_data_loan","ic_data_out","ic_data_pack","ic_data_saver","ic_database","ic_day","ic_day_night","ic_dc_9v","ic_default","ic_delete_backspace","ic_delivery_boy","ic_deployment","ic_design_tools","ic_development","ic_device_history","ic_devices_mixed","ic_devotion","ic_diamond","ic_diaolog","ic_dice_2","ic_digital_ecosystem","ic_digital_self_service","ic_dining","ic_direction_turn_right","ic_directions_off","ic_disabled","ic_disinfectant","ic_dislike","ic_display_led","ic_dispose_off","ic_distribute_horizontal_spacing","ic_distribute_vertical_spacing","ic_distribution","ic_dizzy","ic_dna","ic_dock","ic_doctor","ic_document","ic_document_doc","ic_document_jpg","ic_document_odt","ic_document_pdf","ic_document_png","ic_document_raw","ic_document_rtf","ic_document_settings","ic_document_tif","ic_document_txt","ic_document_unknown","ic_document_viewer","ic_document_xls","ic_document_xlsx","ic_documentary","ic_documents","ic_dolby_sound","ic_dongle_audio","ic_dongle_video","ic_doodle","ic_door","ic_door_bell","ic_door_camera","ic_door_locked","ic_door_open","ic_door_sensor","ic_door_unlocked","ic_doorlock","ic_download","ic_download_fast","ic_download_queue","ic_download_queue_bottom","ic_download_queue_top","ic_download_remove","ic_downloads","ic_downloads_fast","ic_drag_handle","ic_drama","ic_drawer","ic_drill","ic_drinks","ic_drive","ic_drizzle","ic_drone","ic_dry_air","ic_dth","ic_dth_signal","ic_dual_band","ic_dual_camera","ic_dual_camera_horizontal","ic_dual_sim","ic_dvd_player","ic_e_book_reader","ic_e_mail","ic_e_sim","ic_ear","ic_ear_pain","ic_edit","ic_edit_pen","ic_education","ic_elderly","ic_elephant","ic_elevator","ic_ellipse","ic_emergency_services","ic_emvco_tap_pay","ic_end_chat","ic_endocrinology","ic_energy_others","ic_energy_total","ic_engineering_request","ic_enter","ic_enterpreneurial","ic_entertainment","ic_entertainment_play","ic_episodes","ic_equalizer","ic_eraser","ic_error","ic_error_colored","ic_esports","ic_ethernet","ic_ethernet_off","ic_ev_charger","ic_exchange","ic_exchange_data","ic_exclamation","ic_expand","ic_explore_compass","ic_export","ic_exposure","ic_extract","ic_eyedropper","ic_face_filter","ic_facebook","ic_fallopian_tube","ic_family_history","ic_family_member","ic_fan","ic_fan_auto_speed","ic_fan_speed_high","ic_fan_speed_low","ic_fan_speed_medium","ic_fan_speed_turbo","ic_fantasy","ic_fantasy_games","ic_faq","ic_fashion","ic_fashion_child","ic_fashion_woman","ic_favorite","ic_favourite_mode","ic_feaver","ic_feedback","ic_feedback_add","ic_feedback_rating","ic_female","ic_female_hygiene_products","ic_female_male","ic_fertilized","ic_fertilizer","ic_fiber_off","ic_file_request","ic_file_send","ic_file_share","ic_filter","ic_filter_multiple","ic_find","ic_find_in_page","ic_fingerprint","ic_finish_line","ic_fire","ic_fire_alarm","ic_firefighter","ic_firefighter_manager","ic_firefighter_officer","ic_first_aid","ic_firstpage","ic_fitness","ic_fixed_deposit","ic_flag","ic_flag_gb","ic_flag_in","ic_flash","ic_flash_auto","ic_flash_off","ic_flight_game","ic_flight_mode","ic_flight_mode_off","ic_flip_camera","ic_flip_horizontal","ic_flip_phone","ic_flip_vertical","ic_flower","ic_fluorescent","ic_flurries","ic_flush_relay","ic_fog","ic_folder","ic_folder_bookmarks","ic_folder_favorites","ic_folder_locked","ic_folder_move_files","ic_folder_public","ic_folder_rated","ic_folder_remove","ic_folder_request","ic_food_drink","ic_football","ic_fork_spoon","ic_form","ic_form_add","ic_forms","ic_fort","ic_forward","ic_forward_1","ic_foyer","ic_fps_120","ic_fps_30","ic_fps_60","ic_frame","ic_freezing_drizzle","ic_freezing_rain","ic_front_door","ic_fuel","ic_fullscreen_mode","ic_fullscreen_mode_off","ic_game_publisher","ic_games","ic_gaming","ic_gaming_cloud","ic_gaming_controllers","ic_gaming_profile","ic_garage","ic_garden_plants","ic_garden_tools","ic_gas","ic_gas_piped","ic_gas_sensor","ic_gastrointestinal","ic_gateway_1","ic_gateway_2","ic_gayser","ic_geometry","ic_ghost","ic_gift","ic_gift_card","ic_gladiator","ic_glass_break_sensor","ic_globe","ic_glucometer","ic_go_back","ic_go_back_10","ic_go_back_30","ic_go_forward","ic_go_forward_10","ic_go_forward_30","ic_google","ic_google_lens","ic_gpon","ic_graph_increasing","ic_graph_low","ic_graph_table","ic_grocery","ic_group","ic_guard","ic_guestroom","ic_hail","ic_hair_dresser","ic_hair_problems","ic_hair_root","ic_hairfall","ic_halloween","ic_hammer","ic_hand","ic_hand_bag","ic_hand_luggage","ic_hand_off","ic_hand_soap","ic_handcuffs","ic_hands","ic_hard_disk","ic_harddrive","ic_harvest","ic_hashtag","ic_haze","ic_hcv_top","ic_hd","ic_hd_screen","ic_hdmi","ic_hdr","ic_hdr_auto","ic_hdr_off","ic_headlight","ic_headphones","ic_headset","ic_headset_bluetooth","ic_health_conditions","ic_health_protection","ic_health_report","ic_healthy","ic_heart_rate","ic_heat_sensor","ic_heavy_rain","ic_heavy_snow","ic_heavy_stoms_snow","ic_heavy_storms_rain","ic_heifer","ic_hellojio","ic_helmet_war","ic_help","ic_hiefer_abortion","ic_hiefer_breeding","ic_high_speed","ic_high_temperature_off","ic_hockey","ic_hockey_ice","ic_home","ic_home_care","ic_home_connection","ic_home_maintenance","ic_home_remedies","ic_homework","ic_horizontal_layout","ic_horror","ic_horzontal_swing","ic_hospital","ic_hospital_bed","ic_hot","ic_hot_day","ic_hotspot","ic_hotspot_locator","ic_hourglass","ic_html_5","ic_hubmode","ic_humidity","ic_hurricane","ic_hydrant","ic_ice","ic_ice_skating","ic_id","ic_id_check","ic_image","ic_image_mask","ic_import","ic_incognito","ic_incoming","ic_india","ic_indian_premier_league","ic_industry","ic_infant","ic_infinity","ic_info","ic_info_text","ic_information_sensor","ic_infrastructure","ic_input_source","ic_insemination","ic_insomnia","ic_instagram","ic_insurance","ic_intercom_call_mobile","ic_intercom_calls","ic_interest_low","ic_interest_payout","ic_internet","ic_internet_high_speed","ic_intersection","ic_ios","ic_ip67","ic_ip_camera","ic_iron","ic_irrigation","ic_italic","ic_itching","ic_janitor","ic_jewellery_diamond","ic_jewellery_ring","ic_jio_dot","ic_jio_dot_exclude","ic_jio_dot_jiofinance_2","ic_jio_dot_jiofinance_coloured","ic_jio_fi","ic_jio_fi_dongle","ic_jio_institute","ic_jio_link","ic_jio_payments","ic_jio_tunes","ic_jiopay","ic_joints","ic_kabaddi","ic_karate","ic_key","ic_key_off","ic_keyboard","ic_kidney","ic_kidney_bladder","ic_kidsroom","ic_kirana_store","ic_kitchen","ic_kitchen_extractor","ic_kitchen_pot","ic_kitchen_sink","ic_knight_chess","ic_known_conditions","ic_kyc","ic_kyc_manager","ic_kyc_supervisor","ic_lamp","ic_lan_output","ic_land_composition","ic_land_preparation","ic_landscape","ic_language","ic_laptop","ic_laptop_mobile","ic_laptop_screen","ic_lastpage","ic_layout","ic_lcv_top","ic_led_driver","ic_library","ic_lightbulb","ic_like","ic_limit_access","ic_limit_access_protection","ic_line","ic_line_crossing","ic_link","ic_linked_accounts","ic_linkedin","ic_lipid_profile","ic_list","ic_live","ic_live_camera","ic_live_off","ic_liver","ic_loans","ic_local_search","ic_location","ic_location_doctor","ic_location_hospital","ic_location_mobile_coolers","ic_location_off","ic_location_open","ic_location_point","ic_location_share","ic_location_vehicle","ic_lock","ic_lock_unlock","ic_lock_wireless","ic_login","ic_logout","ic_loitering_off","ic_lotus","ic_lte_device","ic_luggage","ic_lungs","ic_magic","ic_magnet_train","ic_mail","ic_male","ic_manager","ic_map","ic_map_layers","ic_mario_game","ic_mask","ic_mask_off","ic_mason","ic_mathematics","ic_media_share","ic_media_share_mobile","ic_medical_files","ic_medical_history","ic_medical_insurance","ic_medicine","ic_medicine_mortar","ic_medicines","ic_meeting_room","ic_megaphone","ic_men_health","ic_menu_card","ic_menu_card_roomservice","ic_merge","ic_merge_off","ic_mesh","ic_message_partially_delivered","ic_message_read","ic_message_send","ic_mic","ic_mic_mute_forced","ic_mic_off","ic_micro_sd","ic_microscope","ic_microwave","ic_milk","ic_milk_low","ic_minimise","ic_minus","ic_mirror_cast","ic_missed_call","ic_mixed_rain_hail","ic_mobile","ic_mobile_data","ic_mobile_data_off","ic_mobile_devices","ic_mobile_handset","ic_mobile_horizontal","ic_mobile_number_portability","ic_mobile_off","ic_mobile_receive","ic_mobile_send","ic_modem","ic_money_add","ic_money_loan","ic_money_request","ic_money_send","ic_money_to_self","ic_moneybag","ic_monster","ic_month","ic_moon_1_4","ic_moon_3_4","ic_moon_full","ic_moon_new","ic_moon_partly_cloudy","ic_moon_waning_1_6","ic_moon_waning_2_6_cresent","ic_moon_waning_4_6_gibbous","ic_moon_waning_5_6","ic_moon_waxing_1_6","ic_moon_waxing_2_6_cresent","ic_moon_waxing_4_6_gibbous","ic_moon_waxing_5_6","ic_moonrise","ic_moonset","ic_moped_delivery","ic_moped_side","ic_more_horizontal","ic_more_vertical","ic_motion_off","ic_motorbike_side","ic_mouse","ic_movers_packers","ic_movie","ic_multi_sensor","ic_multiple_user","ic_municipal_tax","ic_music","ic_music_album","ic_music_note","ic_music_note_single","ic_musical","ic_my_location","ic_mythology","ic_namaste","ic_nas","ic_nature","ic_nature_off","ic_network","ic_network_details","ic_network_dish","ic_network_future","ic_neutral_gender","ic_new_chat","ic_new_tab_group","ic_news","ic_next","ic_next_circle","ic_next_title","ic_nfc","ic_nic_card","ic_night_clear","ic_night_hazy","ic_night_intermittent_clouds","ic_night_mostly_clear","ic_night_mostly_cloudy_flurries","ic_night_mostly_cloudy_showers","ic_night_mostly_cloudy_snow","ic_night_mostly_cloudy_thunderstorms","ic_night_partly_cloudy_flurries","ic_night_partly_cloudy_showers","ic_night_partly_cloudy_snow","ic_night_partly_cloudy_thunderstorms","ic_no_internet","ic_no_repair","ic_no_sim_card","ic_non_veg","ic_nose","ic_not_at_home","ic_notes","ic_notification","ic_notification_off","ic_now_playing","ic_num_pad","ic_obesity","ic_ofdma","ic_off","ic_offer","ic_offer_coupon","ic_olympics","ic_one_tap","ic_open_in_new_tab","ic_open_with","ic_operating_table","ic_operator","ic_order","ic_orders","ic_os_nav_back","ic_os_nav_center","ic_os_nav_home","ic_os_nav_task","ic_otp","ic_out_of_stock","ic_outgoing","ic_outlet","ic_overlapping_layout","ic_overlay","ic_page_flip","ic_page_settings","ic_paint_roller","ic_paired","ic_pairing","ic_pairing_complete","ic_panic_button","ic_panorma","ic_parental_control_phone","ic_parental_control_shield","ic_parental_control_web","ic_parking","ic_parking_sensor","ic_partial_oxygen_pressure","ic_partner","ic_passbook","ic_passes","ic_paste","ic_paste_document","ic_patient","ic_pause","ic_pause_circle","ic_pay_bill","ic_pay_emi_install","ic_pay_friend","ic_pay_recurring","ic_pay_schedule","ic_payment","ic_payment_plan","ic_payments","ic_percentage_decrease","ic_percentage_increase","ic_percentage_value","ic_period_problems","ic_personal_history","ic_personal_trainer","ic_pest_problem","ic_pesticides","ic_pests","ic_pets","ic_pharmacy","ic_phone_key_access","ic_phone_number_landline","ic_phone_performance","ic_phone_secured","ic_photo","ic_photo_add","ic_photo_camera","ic_photo_crop","ic_photo_filter","ic_photo_media_files","ic_photo_remove","ic_photo_resize","ic_photo_size","ic_pin","ic_pin_off","ic_pipe","ic_plan","ic_plan_add","ic_plane_arrival","ic_plane_departure","ic_plank","ic_plans","ic_plant_growth","ic_planting","ic_play","ic_play_circle","ic_play_pause","ic_playbox","ic_playbox_add","ic_playlist","ic_playlist_add","ic_playlist_successful","ic_plc","ic_plc_poe","ic_plc_wifi","ic_plug","ic_pooja","ic_pool","ic_popcorn","ic_porch","ic_portrait","ic_power_over_ethernet","ic_powerplay","ic_pptx_doc","ic_preferred_number","ic_pregnancy_test","ic_premium_number","ic_prescription","ic_presentations","ic_previous_title","ic_prime_content","ic_print","ic_pro","ic_profile","ic_profile_female","ic_profile_male","ic_projection","ic_protection","ic_protection_locked","ic_protection_threats","ic_protection_unlock","ic_pulse_oximeter","ic_pushup","ic_puzzle","ic_qr_code","ic_quick_capture","ic_quick_payment","ic_racing_car","ic_racing_racetrack","ic_radio","ic_radio_off","ic_radio_on","ic_radio_signal","ic_radio_station","ic_rain","ic_rain_sleet","ic_rain_snow","ic_ram","ic_ram_horizonal","ic_raspberry","ic_ratio_1","ic_ratio_2","ic_ratio_3","ic_ratio_full","ic_ratop_4","ic_reader","ic_rearrange","ic_recent_history","ic_recharge_friend","ic_recharge_history","ic_recharge_now","ic_record","ic_recording","ic_rectangle","ic_recycling","ic_redo","ic_refresh","ic_refund","ic_regular_sensor","ic_relay_socket_cables","ic_remote","ic_remote_off","ic_remote_push","ic_remote_record","ic_remote_universal","ic_remote_universal_a","ic_remote_universal_b","ic_remote_universal_u","ic_rename","ic_repeat","ic_repeat_one","ic_replay","ic_reply","ic_reply_all","ic_reply_circle","ic_request","ic_research","ic_reset","ic_reset_password","ic_resolution_full_hd","ic_restaurant","ic_resume_reading","ic_resume_watching","ic_return","ic_return_off","ic_revolver","ic_rewind","ic_ribbon_grid","ic_ringer_vibrate","ic_ro_repair","ic_roaming","ic_roaming_network","ic_roaming_off","ic_robot","ic_rocket","ic_roller_blinds","ic_roller_blinds_closed","ic_romance","ic_room_purifyer","ic_rotate90","ic_rotate_phone","ic_roulette","ic_routes","ic_routes_traffic","ic_ruler","ic_running","ic_rupee","ic_rupee_coin","ic_rupee_coin_off","ic_safety_sensor","ic_sampling","ic_saturation","ic_save","ic_savings","ic_scale","ic_scalpel","ic_scan","ic_scan_body","ic_scan_face","ic_scan_picture","ic_scan_qr_code","ic_scan_text","ic_schedule","ic_scheduled_doctor_appointment","ic_scheduled_doctor_consultation","ic_sci_fiction","ic_screen","ic_screen_full","ic_screen_minimise","ic_screen_reduce","ic_scribble","ic_sd","ic_sd_card","ic_search","ic_seats","ic_secure_locked","ic_secured","ic_security_camera_ball","ic_security_camera_ceiling","ic_security_sensor","ic_security_vehicle","ic_securityguard","ic_securityguard_manager","ic_securityguard_officer","ic_seedling","ic_seekbar","ic_seismic_sensor","ic_select","ic_send_message","ic_server","ic_server_cloud","ic_server_home","ic_server_internet","ic_server_shared","ic_server_wifi","ic_service_center","ic_set_top_box","ic_settings","ic_sewing_machine","ic_shadow2","ic_share","ic_share_screen","ic_shared_album","ic_shopping","ic_shopping_bag","ic_shopping_bag_favorite","ic_shopping_bags","ic_shopping_basket","ic_showers","ic_shuffle","ic_shutter_10s","ic_shutter_3s","ic_shutter_5s","ic_sidebar","ic_sign","ic_sign_in","ic_sign_out","ic_sim","ic_sim_1","ic_sim_2","ic_sim_off","ic_sim_post_paid","ic_sirene","ic_skating","ic_skin_problem","ic_skipping","ic_skull","ic_sleep_apnea","ic_sleep_disorder","ic_sleep_mode","ic_sleeping","ic_sleet","ic_slide","ic_slow_motion","ic_smart_bulb","ic_smart_bulb_connect","ic_smart_bulb_dimmable","ic_smart_bulb_rgb","ic_smart_cleaner","ic_smart_doorlock","ic_smart_fridge","ic_smart_hoover","ic_smart_outlet","ic_smart_plug","ic_smart_switch_plug","ic_smart_watch","ic_smartphone_landline","ic_smiley_delighted","ic_smiley_happy","ic_smiley_neutral","ic_smiley_outraged","ic_smiley_satisfied","ic_smiley_unhappy","ic_smiley_unsatisfied","ic_smog","ic_smoke_sensor","ic_smoking","ic_smoking_off","ic_sms","ic_sms_group","ic_sms_receive","ic_sms_send","ic_smss","ic_snacks","ic_snake","ic_snapchat","ic_snow","ic_snow_showers","ic_sofa","ic_soil","ic_soil_layers","ic_sort","ic_sort_handle","ic_sort_list","ic_sort_up","ic_sos","ic_sos_circle","ic_sound","ic_sound_disabled","ic_sound_loud","ic_sound_medium","ic_sound_quiet","ic_sowing","ic_spade","ic_spanner","ic_spdif_optical","ic_spdif_optical_pos","ic_speaker","ic_speaker_megaphone","ic_spine","ic_split","ic_sport","ic_sports_pulse","ic_spotcolor","ic_spray_can","ic_spreadsheets","ic_squats","ic_stabilization","ic_stairway","ic_stamp","ic_star","ic_star_add","ic_status_fail","ic_status_loading","ic_status_successful","ic_steering_wheel","ic_steps","ic_sticker","ic_stomach_pain","ic_stop","ic_stopwatch","ic_store","ic_store_room","ic_story","ic_stream","ic_stream_off","ic_streamer","ic_stretching","ic_strikethrough","ic_stroller","ic_student","ic_subscription","ic_subscriptions","ic_subtitle","ic_success","ic_success_colored","ic_sun_heating","ic_sunny_clear","ic_sunny_hazy","ic_sunny_intermittent_clouds","ic_sunny_mostly_clear","ic_sunny_mostly_clear_showers","ic_sunny_mostly_cloudy","ic_sunny_mostly_cloudy_flurries","ic_sunny_mostly_cloudy_showers","ic_sunny_mostly_cloudy_snow","ic_sunny_mostly_cloudy_thunderstorms","ic_sunny_partly_cloudy","ic_sunny_partly_cloudy_flurries","ic_sunny_partly_cloudy_showers","ic_sunny_partly_cloudy_snow","ic_sunny_partly_cloudy_thunderstorms","ic_sunrise","ic_sunset","ic_supervisor","ic_support","ic_support_admin","ic_survey","ic_swap","ic_swimming","ic_switch","ic_sword","ic_tab_manager","ic_tab_trimming","ic_table_layout","ic_table_tennis","ic_tablet","ic_tag","ic_target","ic_target_aim","ic_tariff_alert","ic_tariff_checking","ic_tariff_expired","ic_task","ic_taxi_front","ic_teach","ic_team","ic_team_members","ic_technology","ic_teddy","ic_teddy_love","ic_temperature","ic_temperature_down","ic_temperature_off","ic_temperature_up","ic_tempered","ic_temple","ic_tennis","ic_terminal","ic_test","ic_tetris","ic_text","ic_text_align_center","ic_text_align_justify","ic_text_align_left","ic_text_align_right","ic_textbook","ic_theater_room","ic_theme","ic_thinking","ic_thinking_brain","ic_thinking_critical","ic_threads","ic_three_day","ic_throat","ic_thumbnail","ic_thunderstorm","ic_thunderstorm_light","ic_thyroid","ic_ticket","ic_ticket_details","ic_ticket_pnr_number","ic_ticket_raise","ic_ticket_status","ic_tickets","ic_tilt_sensor","ic_time","ic_timelapse","ic_timeline","ic_timelines","ic_timezone","ic_timezones","ic_tips","ic_tochpanel","ic_toddler","ic_toilet_man_women","ic_toilet_seat","ic_toll","ic_toll_station","ic_tooth","ic_torch","ic_torch_off","ic_tornado","ic_touchpanel_off","ic_tower","ic_track_ecg","ic_track_vitals","ic_traffic_cone","ic_train_delay","ic_train_front","ic_train_status","ic_tram_front","ic_transaction_history","ic_transcript","ic_trash","ic_trash_clear","ic_treadmill","ic_trending_flame","ic_triangle","ic_triangle_down","ic_trivia","ic_trolley_clearance","ic_tropical_storm","ic_truck_delivery","ic_truck_side","ic_tungsten","ic_tutorial","ic_tv","ic_tv_call","ic_tv_cam","ic_tv_channels","ic_tv_online","ic_tv_play","ic_tv_plus","ic_twitter","ic_udder","ic_udder_off","ic_underline","ic_undo","ic_unlink","ic_unpaired","ic_update","ic_upi_number","ic_upload","ic_upload_1","ic_uploads","ic_usb","ic_usb_cable","ic_usb_dongle","ic_usb_stick","ic_user","ic_vaccine","ic_vaccum_cleaner","ic_vampire","ic_veg","ic_vertical_layout","ic_vertical_swing","ic_vibration_sensor","ic_video","ic_video_call","ic_video_call_group","ic_video_calls","ic_video_end","ic_video_in_out","ic_video_incoming","ic_video_outgoing","ic_video_replay","ic_video_resize","ic_video_size","ic_video_surveillance","ic_view_tile","ic_vinyl_record","ic_virtualcurrency_beta","ic_virus","ic_visible","ic_visible_off","ic_vitamin_b","ic_vitamin_d","ic_vo_lte","ic_vo_wifi","ic_voice","ic_voice_recording","ic_voicebox","ic_volume","ic_voucher_4g","ic_voucher_cashback","ic_voucher_plan","ic_vpn","ic_vpn_data","ic_vr","ic_walking","ic_walking_aids","ic_wallet","ic_wallet_sleeve","ic_wallpaper","ic_war","ic_warehouse","ic_warning","ic_warning_colored","ic_warranty","ic_warranty_badge","ic_washing_machine","ic_water","ic_water_bottle","ic_water_bottle_reuseable","ic_water_checked","ic_water_pipe","ic_water_pump","ic_water_purifier","ic_water_sensor","ic_water_tap","ic_watering_can","ic_watermelon","ic_wealth","ic_web_browser","ic_web_browser_cursor","ic_web_browser_mobile","ic_web_browser_successful","ic_webcam","ic_webseries","ic_week","ic_weight_management","ic_weight_training","ic_whatsapp","ic_wide_angle_170","ic_widest_range","ic_widgets","ic_wifi","ic_wifi_connected","ic_wifi_enable","ic_wifi_locked","ic_wifi_locked_0","ic_wifi_locked_1","ic_wifi_locked_2","ic_wifi_locked_3","ic_wifi_network","ic_wifi_no_internet","ic_wifi_not_found","ic_wifi_off","ic_wifi_ok","ic_wifi_router","ic_wifi_sign_in_required","ic_wifi_strength_0","ic_wifi_strength_1","ic_wifi_strength_2","ic_wifi_strength_3","ic_windy","ic_wintry","ic_women_health","ic_word","ic_work","ic_workshop","ic_wps","ic_wrestling","ic_writing","ic_x_ray","ic_x_ray_body","ic_yoga","ic_yoga_meditation","ic_youtube","ic_zombie","ic_zoom_in","ic_zoom_out"];
+
+      var grid = document.getElementById('icon-grid');
+      var countEl = document.getElementById('icon-count');
+      var searchInput = document.getElementById('icon-search');
+      var loadMoreBtn = document.getElementById('icon-load-more');
+      var PAGE = 20;
+      var visibleCount = PAGE;
+      var currentList = ALL_ICONS;
+
+      function renderGrid() {
+        var slice = currentList.slice(0, visibleCount);
+        grid.innerHTML = '';
+        slice.forEach(function (id) {
+          var item = document.createElement('div');
+          item.className = 'icon-item';
+          item.title = id;
+          item.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#' + id + '"></use></svg><span class="icon-label">' + id.replace(/^ic_/, '') + '</span>';
+          item.addEventListener('click', function () { copyId(id); });
+          grid.appendChild(item);
+        });
+        var total = currentList.length;
+        var shown = Math.min(visibleCount, total);
+        countEl.textContent = shown + ' of ' + total + ' icon' + (total !== 1 ? 's' : '');
+        if (loadMoreBtn) {
+          var remaining = total - shown;
+          if (remaining > 0) {
+            loadMoreBtn.style.display = '';
+            loadMoreBtn.textContent = 'Load ' + Math.min(remaining, PAGE) + ' more';
+          } else {
+            loadMoreBtn.style.display = 'none';
+          }
+        }
+      }
+
+      function copyId(id) {
+        var text = id;
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(text).catch(function(){});
+        } else {
+          var ta = document.createElement('textarea');
+          ta.value = text; document.body.appendChild(ta); ta.select();
+          document.execCommand('copy'); document.body.removeChild(ta);
+        }
+        var toast = document.getElementById('icon-toast');
+        if (toast) {
+          toast.textContent = id + ' copied';
+          toast.classList.add('visible');
+          clearTimeout(toast._t);
+          toast._t = setTimeout(function () { toast.classList.remove('visible'); }, 1800);
+        }
+      }
+
+      if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function () {
+          visibleCount += PAGE;
+          renderGrid();
+        });
+      }
+
+      // URL param pre-fill
+      var urlQ = new URLSearchParams(window.location.search).get('q');
+      if (urlQ && searchInput) searchInput.value = urlQ;
+
+      searchInput.addEventListener('input', function () {
+        var q = searchInput.value.trim().toLowerCase().replace(/\s+/g, '_');
+        currentList = q ? ALL_ICONS.filter(function (id) { return id.indexOf(q) !== -1; }) : ALL_ICONS;
+        visibleCount = PAGE;
+        renderGrid();
+      });
+
+      // Keyboard shortcut: / to focus search
+      document.addEventListener('keydown', function (e) {
+        if (e.key === '/' && document.activeElement !== searchInput) {
+          e.preventDefault(); searchInput.focus();
+        }
+      });
+
+      currentList = urlQ ? ALL_ICONS.filter(function(id){ return id.indexOf(urlQ.toLowerCase().replace(/\s+/g,'_')) !== -1; }) : ALL_ICONS;
+      renderGrid();
+    })();
+    </script>
+  </section>
+
+  <!-- ===================================================
+       7. SIZES — Mobile / Web / TV
+  =================================================== -->
+  <section class="ds-section" id="sizes">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Five canonical size names cover all use cases. On TV, all sizes shift larger to maintain 10-foot legibility. The <code class="ds-code">--icon-*</code> runtime aliases resolve automatically via media query and <code class="ds-code">.platform-tv</code> context.</p>
+
+    <div class="ds-note" style="margin-bottom:20px">
+      <strong>Platform &#x2260; Size.</strong> <code class="ds-code">.icon--l</code> = 24px on mobile/web, 40px on TV. Same class, same selector &#x2014; platform context resolves the token alias. Use <code class="ds-code">.platform-tv</code> wrapper in TV prototypes.
+    </div>
+
+    <div class="icon-size-matrix">
+      <div class="icon-size-matrix-head">
+        <div>Size</div>
+        <div style="color:#6ee7b7">Mobile</div>
+        <div style="color:#93c5fd">Web</div>
+        <div style="color:#fbbf24">TV</div>
+      </div>
+      <div class="icon-size-matrix-row">
+        <div class="icon-size-matrix-label">
+          <span class="icon-size-matrix-name">XS</span>
+          <span class="icon-size-matrix-class">.icon--xs</span>
+        </div>
+        <div class="icon-size-matrix-cell">
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="var(--text2)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          <span class="icon-size-matrix-px">12px &#xB7; var(--icon-xs-mobile)</span>
+        </div>
+        <div class="icon-size-matrix-cell">
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="var(--text2)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          <span class="icon-size-matrix-px">12px &#xB7; var(--icon-xs-web)</span>
+        </div>
+        <div class="icon-size-matrix-cell">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="var(--text2)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          <span class="icon-size-matrix-px">20px &#xB7; var(--icon-xs-tv)</span>
+        </div>
+      </div>
+      <div class="icon-size-matrix-row">
+        <div class="icon-size-matrix-label">
+          <span class="icon-size-matrix-name">S</span>
+          <span class="icon-size-matrix-class">.icon--s</span>
+        </div>
+        <div class="icon-size-matrix-cell">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="var(--text2)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          <span class="icon-size-matrix-px">16px &#xB7; var(--icon-s-mobile)</span>
+        </div>
+        <div class="icon-size-matrix-cell">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="var(--text2)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          <span class="icon-size-matrix-px">16px &#xB7; var(--icon-s-web)</span>
+        </div>
+        <div class="icon-size-matrix-cell">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="var(--text2)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          <span class="icon-size-matrix-px">24px &#xB7; var(--icon-s-tv)</span>
+        </div>
+      </div>
+      <div class="icon-size-matrix-row">
+        <div class="icon-size-matrix-label">
+          <span class="icon-size-matrix-name">M</span>
+          <span class="icon-size-matrix-class">.icon--m</span>
+        </div>
+        <div class="icon-size-matrix-cell">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="var(--text2)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          <span class="icon-size-matrix-px">20px &#xB7; var(--icon-m-mobile)</span>
+        </div>
+        <div class="icon-size-matrix-cell">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="var(--text2)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          <span class="icon-size-matrix-px">20px &#xB7; var(--icon-m-web)</span>
+        </div>
+        <div class="icon-size-matrix-cell">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="var(--text2)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          <span class="icon-size-matrix-px">32px &#xB7; var(--icon-m-tv)</span>
+        </div>
+      </div>
+      <div class="icon-size-matrix-row">
+        <div class="icon-size-matrix-label">
+          <span class="icon-size-matrix-name">L</span>
+          <span class="icon-size-matrix-class">.icon--l</span>
+        </div>
+        <div class="icon-size-matrix-cell">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="var(--text)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          <span class="icon-size-matrix-px">24px &#xB7; var(--icon-l-mobile)</span>
+        </div>
+        <div class="icon-size-matrix-cell">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="var(--text)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          <span class="icon-size-matrix-px">24px &#xB7; var(--icon-l-web)</span>
+        </div>
+        <div class="icon-size-matrix-cell">
+          <svg viewBox="0 0 24 24" width="40" height="40" fill="var(--text)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          <span class="icon-size-matrix-px">40px &#xB7; var(--icon-l-tv)</span>
+        </div>
+      </div>
+      <div class="icon-size-matrix-row">
+        <div class="icon-size-matrix-label">
+          <span class="icon-size-matrix-name">XL</span>
+          <span class="icon-size-matrix-class">.icon--xl</span>
+        </div>
+        <div class="icon-size-matrix-cell">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="var(--text2)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          <span class="icon-size-matrix-px">32px &#xB7; var(--icon-xl-mobile)</span>
+        </div>
+        <div class="icon-size-matrix-cell">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="var(--text2)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          <span class="icon-size-matrix-px">32px &#xB7; var(--icon-xl-web)</span>
+        </div>
+        <div class="icon-size-matrix-cell">
+          <svg viewBox="0 0 24 24" width="48" height="48" fill="var(--text2)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          <span class="icon-size-matrix-px">48px &#xB7; var(--icon-xl-tv)</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:32px">
+      <div class="ds-sub-label" style="margin-bottom:12px">Icon wrapper sizes (touch / focus targets)</div>
+      <div class="icon-size-matrix">
+        <div class="icon-size-matrix-head">
+          <div>Wrapper</div>
+          <div style="color:#6ee7b7">Mobile</div>
+          <div style="color:#93c5fd">Web</div>
+          <div style="color:#fbbf24">TV</div>
+        </div>
+        <div class="icon-size-matrix-row">
+          <div class="icon-size-matrix-label"><span class="icon-size-matrix-name">XS</span><span class="icon-size-matrix-class">--icon-wrap-xs</span></div>
+          <div class="icon-size-matrix-cell"><span class="icon-size-matrix-px">32px</span></div>
+          <div class="icon-size-matrix-cell"><span class="icon-size-matrix-px">32px</span></div>
+          <div class="icon-size-matrix-cell"><span class="icon-size-matrix-px">52px</span></div>
+        </div>
+        <div class="icon-size-matrix-row">
+          <div class="icon-size-matrix-label"><span class="icon-size-matrix-name">S</span><span class="icon-size-matrix-class">--icon-wrap-s</span></div>
+          <div class="icon-size-matrix-cell"><span class="icon-size-matrix-px">36px</span></div>
+          <div class="icon-size-matrix-cell"><span class="icon-size-matrix-px">36px</span></div>
+          <div class="icon-size-matrix-cell"><span class="icon-size-matrix-px">60px</span></div>
+        </div>
+        <div class="icon-size-matrix-row">
+          <div class="icon-size-matrix-label"><span class="icon-size-matrix-name">M</span><span class="icon-size-matrix-class">--icon-wrap-m</span></div>
+          <div class="icon-size-matrix-cell"><span class="icon-size-matrix-px">44px &#x2713; WCAG</span></div>
+          <div class="icon-size-matrix-cell"><span class="icon-size-matrix-px">40px</span></div>
+          <div class="icon-size-matrix-cell"><span class="icon-size-matrix-px">68px</span></div>
+        </div>
+        <div class="icon-size-matrix-row">
+          <div class="icon-size-matrix-label"><span class="icon-size-matrix-name">L</span><span class="icon-size-matrix-class">--icon-wrap-l</span></div>
+          <div class="icon-size-matrix-cell"><span class="icon-size-matrix-px">48px</span></div>
+          <div class="icon-size-matrix-cell"><span class="icon-size-matrix-px">48px</span></div>
+          <div class="icon-size-matrix-cell"><span class="icon-size-matrix-px">76px</span></div>
+        </div>
+        <div class="icon-size-matrix-row">
+          <div class="icon-size-matrix-label"><span class="icon-size-matrix-name">XL</span><span class="icon-size-matrix-class">--icon-wrap-xl</span></div>
+          <div class="icon-size-matrix-cell"><span class="icon-size-matrix-px">56px</span></div>
+          <div class="icon-size-matrix-cell"><span class="icon-size-matrix-px">56px</span></div>
+          <div class="icon-size-matrix-cell"><span class="icon-size-matrix-px">84px</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       8. STATES
+  =================================================== -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Icons themselves are stateless. State is applied to the interactive wrapper. Use <code class="ds-code">.is-*</code> helper classes from <code class="ds-code">states.css</code> to demonstrate states in prototypes.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+          <div style="width:44px;height:44px;border-radius:var(--r3);background:transparent;display:flex;align-items:center;justify-content:center">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="var(--icon-color-default)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          </div>
+          <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--text3);text-transform:uppercase">Default</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+          <div style="width:44px;height:44px;border-radius:var(--r3);background:var(--state-hover-bg);display:flex;align-items:center;justify-content:center">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="var(--text)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          </div>
+          <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--text3);text-transform:uppercase">Hover</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+          <div style="width:44px;height:44px;border-radius:var(--r3);background:var(--state-selected-bg);display:flex;align-items:center;justify-content:center">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="var(--jio)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          </div>
+          <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--jio);text-transform:uppercase">Active / Selected</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+          <div style="width:44px;height:44px;border-radius:var(--r3);outline:2px solid var(--jio);outline-offset:2px;display:flex;align-items:center;justify-content:center">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="var(--text)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          </div>
+          <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--text3);text-transform:uppercase">Focus</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+          <div style="width:44px;height:44px;border-radius:var(--r3);display:flex;align-items:center;justify-content:center;opacity:.32">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="var(--text2)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          </div>
+          <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--text3);text-transform:uppercase">Disabled</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+          <div style="width:72px;height:72px;border-radius:var(--r4);background:var(--surface-2);box-shadow:0 0 0 3px var(--jio),0 0 24px var(--jio-glow);display:flex;align-items:center;justify-content:center;transform:scale(1.05)">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="var(--jio)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+          </div>
+          <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--jio);text-transform:uppercase">TV Focus</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       9. CONTENT GUIDANCE
+  =================================================== -->
+  <section class="ds-section" id="content">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <p class="ds-section-desc">Icon selection affects comprehension. Choose icons that match the mental model of the player, not the technical action of the system.</p>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Choosing icons</div>
+        <ul>
+          <li>Use universally understood symbols for navigation (house = home, magnifier = search)</li>
+          <li>Prefer outlined icons for inactive states, filled for active</li>
+          <li>Avoid icons that could be interpreted differently across cultures</li>
+          <li>When in doubt, use icon + label &#x2014; don&#x27;t rely on icon alone for novel actions</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Color semantics</div>
+        <ul>
+          <li>Default fill: <code class="ds-code">var(--icon-color-default)</code> &#x2014; rgba white at 45%</li>
+          <li>Active / selected: <code class="ds-code">var(--icon-color-active)</code> &#x2014; JioGames green</li>
+          <li>Muted / disabled: <code class="ds-code">var(--icon-color-muted)</code> &#x2014; #6B7280</li>
+          <li>Never use red icons in navigation &#x2014; red is reserved for destructive/error states</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Icon-only controls</div>
+        <ul>
+          <li>Always add <code class="ds-code">aria-label</code> to the interactive element</li>
+          <li>Surface a tooltip on hover (web) describing the action</li>
+          <li>Use icon + label if there is sufficient space &#x2014; icons alone reduce discoverability for new users</li>
+          <li>In bottom nav bars, always show labels below icons</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Adding new icons</div>
+        <ul>
+          <li>New icons must be drawn on 24&#xD7;24 viewbox with 2px consistent stroke</li>
+          <li>Submit as a single-path SVG optimized with SVGO</li>
+          <li>Icon must pass visual consistency review against existing set</li>
+          <li>Add to <code class="ds-code">sprite.svg</code> with an <code class="ds-code">ic_</code> prefix ID</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       10. PLATFORM CONSIDERATIONS
+  =================================================== -->
+  <section class="ds-section" id="platform-considerations">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <p class="ds-section-desc">Icon rendering and interaction differ fundamentally across Mobile, Web, and TV. Glyph size tokens auto-resolve per platform; wrapper and focus behavior require intentional decisions.</p>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>44&#xD7;44px minimum touch target for all interactive icons</li>
+          <li>L (24px) glyph in navigation; M (20px) in dense UI</li>
+          <li>Active color on selected tab bar icon</li>
+          <li>No hover state &#x2014; pressed state only on touch</li>
+          <li>Bottom navigation icons always include labels</li>
+          <li>Suppress tap highlight: <code class="ds-code">-webkit-tap-highlight-color: transparent</code></li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Hover state on wrapper on cursor entry</li>
+          <li>Keyboard focus via <code class="ds-code">:focus-visible</code> &#x2014; 2px green outline</li>
+          <li>Tooltips required for all icon-only interactive elements</li>
+          <li>Icon wrap-m (40px) &#x2014; slightly smaller than mobile target is acceptable for web</li>
+          <li>Cursor: pointer on all interactive wrappers</li>
+          <li>XS icons (12px) acceptable in dense data tables or badges</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>D-pad navigation &#x2014; no hover, no pointer</li>
+          <li>Icon-wrap-l (76px) minimum touch area for focus visibility</li>
+          <li>Green glow + scale(1.05) on focus via <code class="ds-code">--tv-focus-shadow</code></li>
+          <li>XL (48px) in hero areas; L (40px) in rails and navigation</li>
+          <li>Never use XS or S icons as standalone TV targets</li>
+          <li>Use <code class="ds-code">.is-tv-focused</code> to simulate TV focus in prototypes</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       11. MIGRATION — .icon--tv DEPRECATED
+  =================================================== -->
+  <section class="ds-section" id="migration">
+    <h2 class="ds-section-title">Migration</h2>
+    <p class="ds-section-desc">The <code class="ds-code">.icon--tv</code> class is deprecated as of v4.0. Migrate to the platform-aware size system using <code class="ds-code">.icon--xl</code> inside a <code class="ds-code">.platform-tv</code> wrapper.</p>
+    <div class="migration-table">
+      <div class="migration-row">
+        <div class="migration-cell migration-cell--head">Deprecated</div>
+        <div class="migration-cell migration-cell--head">Replacement</div>
+        <div class="migration-cell migration-cell--head">Notes</div>
+      </div>
+      <div class="migration-row">
+        <div class="migration-cell migration-cell--deprecated">.icon--tv</div>
+        <div class="migration-cell migration-cell--new">.icon--xl inside .platform-tv</div>
+        <div class="migration-cell" style="font-size:11px;color:var(--text2)">Resolves to 48px via --icon-xl-tv token alias</div>
+      </div>
+      <div class="migration-row">
+        <div class="migration-cell migration-cell--deprecated">width:40px on svg</div>
+        <div class="migration-cell migration-cell--new">var(--icon-l-tv) = 40px</div>
+        <div class="migration-cell" style="font-size:11px;color:var(--text2)">Use token alias so value can be updated centrally</div>
+      </div>
+      <div class="migration-row">
+        <div class="migration-cell migration-cell--deprecated">icon-wrap--tv</div>
+        <div class="migration-cell migration-cell--new">--icon-wrap-l-tv = 76px</div>
+        <div class="migration-cell" style="font-size:11px;color:var(--text2)">Apply via .platform-tv context class on ancestor</div>
+      </div>
+      <div class="migration-row">
+        <div class="migration-cell migration-cell--deprecated">fill:#00A859 inline</div>
+        <div class="migration-cell migration-cell--new">fill:currentColor + CSS var</div>
+        <div class="migration-cell" style="font-size:11px;color:var(--text2)">Inline fill overrides currentColor &#x2014; remove it</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       12. ACCESSIBILITY
+  =================================================== -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">Icons are visual shorthand. Ensure every icon is either descriptively labelled for assistive technology or explicitly marked as decorative.</p>
+    <div class="a11y-grid">
+      <div class="a11y-row">
+        <div class="a11y-label">Decorative icons</div>
+        <div class="a11y-content">Add <code class="ds-code">aria-hidden="true"</code> to every icon SVG that appears alongside a visible text label. Screen readers will skip it, avoiding redundant announcements like &#x22;image home Home&#x22;.</div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Meaningful icons</div>
+        <div class="a11y-content">When an icon is the sole content of an interactive element (e.g. a close button), add <code class="ds-code">aria-label="Close"</code> to the <code class="ds-code">&lt;button&gt;</code> element, not the SVG. The SVG itself still gets <code class="ds-code">aria-hidden="true"</code>.</div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Keyboard nav</div>
+        <div class="a11y-content">
+          <ul>
+            <li><kbd>Tab</kbd> &#x2014; moves focus to interactive icon wrapper</li>
+            <li><kbd>Enter</kbd> or <kbd>Space</kbd> &#x2014; activates the icon control</li>
+            <li>Focus ring visible on <code class="ds-code">:focus-visible</code>, hidden on mouse click</li>
+            <li>TV: d-pad directional focus handled by the shell focus manager</li>
+          </ul>
+        </div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Touch targets</div>
+        <div class="a11y-content">Minimum 44&#xD7;44px touch target per WCAG 2.5.5. The visual icon can be smaller (e.g. 20px glyph in 44px wrapper). Never reduce the wrapper below 44px on mobile for any interactive icon, regardless of visual glyph size.</div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Contrast</div>
+        <div class="a11y-content">
+          <ul>
+            <li>Default: <code class="ds-code">rgba(255,255,255,.45)</code> on <code class="ds-code">#06080F</code> &#x2014; passes 3.1:1 (UI component threshold)</li>
+            <li>Active: <code class="ds-code">#00A859</code> on <code class="ds-code">#06080F</code> &#x2014; 3.6:1 (meets non-text threshold)</li>
+            <li>For informational icons used alone (without labels), target 4.5:1</li>
+          </ul>
+        </div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Reduced motion</div>
+        <div class="a11y-content">Icon animations (spin, pulse, bounce) must be wrapped in a <code class="ds-code">@media (prefers-reduced-motion: no-preference)</code> block. The DLS token system collapses all <code class="ds-code">--dur-*</code> values to 0ms under reduced motion &#x2014; any CSS animation referencing these tokens will automatically pause.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       13. RELATED TOKENS
+  =================================================== -->
+  <section class="ds-section" id="tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-desc">All icon values are defined in <code class="ds-code">tokens/tokens.css</code>. Changing a token updates every icon instance using that alias.</p>
+
+    <div class="ds-sub-label" style="margin-bottom:12px;margin-top:8px">Color tokens</div>
+    <table class="ds-spec-table" style="margin-bottom:32px">
+      <thead>
+        <tr><th>Token</th><th>Value</th><th>Swatch</th><th>Usage</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="ds-code">--icon-color-default</code></td>
+          <td><code class="ds-code">rgba(255,255,255,.45)</code></td>
+          <td><span class="ds-token-swatch" style="background:rgba(255,255,255,.45)"></span></td>
+          <td>Inactive icon fill</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--icon-color-active</code></td>
+          <td><code class="ds-code">#00A859</code></td>
+          <td><span class="ds-token-swatch" style="background:#00A859"></span></td>
+          <td>Selected / active icon fill</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--icon-color-muted</code></td>
+          <td><code class="ds-code">#6B7280</code></td>
+          <td><span class="ds-token-swatch" style="background:#6B7280"></span></td>
+          <td>Disabled / muted icon fill</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--icon-fill-default</code></td>
+          <td><code class="ds-code">var(--icon-color-default)</code></td>
+          <td><span class="ds-token-swatch" style="background:rgba(255,255,255,.45)"></span></td>
+          <td>Semantic alias for default fill</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--icon-fill-active</code></td>
+          <td><code class="ds-code">var(--icon-color-active)</code></td>
+          <td><span class="ds-token-swatch" style="background:#00A859"></span></td>
+          <td>Semantic alias for active fill</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="ds-sub-label" style="margin-bottom:12px">Size tokens &#x2014; Mobile / Web / TV</div>
+    <div style="overflow-x:auto">
+    <table class="ds-spec-table" style="margin-bottom:32px;min-width:480px">
+      <thead>
+        <tr><th>Token</th><th>Mobile</th><th>Web</th><th>TV</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code class="ds-code">--icon-xs</code></td><td>12px</td><td>12px</td><td>20px</td></tr>
+        <tr><td><code class="ds-code">--icon-s</code></td><td>16px</td><td>16px</td><td>24px</td></tr>
+        <tr><td><code class="ds-code">--icon-m</code></td><td>20px</td><td>20px</td><td>32px</td></tr>
+        <tr><td><code class="ds-code">--icon-l</code></td><td>24px</td><td>24px</td><td>40px</td></tr>
+        <tr><td><code class="ds-code">--icon-xl</code></td><td>32px</td><td>32px</td><td>48px</td></tr>
+        <tr><td><code class="ds-code">--icon-wrap-xs</code></td><td>32px</td><td>32px</td><td>52px</td></tr>
+        <tr><td><code class="ds-code">--icon-wrap-s</code></td><td>36px</td><td>36px</td><td>60px</td></tr>
+        <tr><td><code class="ds-code">--icon-wrap-m</code></td><td>44px</td><td>40px</td><td>68px</td></tr>
+        <tr><td><code class="ds-code">--icon-wrap-l</code></td><td>48px</td><td>48px</td><td>76px</td></tr>
+        <tr><td><code class="ds-code">--icon-wrap-xl</code></td><td>56px</td><td>56px</td><td>84px</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       14. CODE EXAMPLES
+  =================================================== -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
+    <div class="component-code-block">
+      <div class="component-code-label">Icon — inline SVG via sprite</div>
+      <pre class="component-code-pre"><code>&lt;!-- Inline icon via sprite (recommended) --&gt;
+&lt;svg class="icon icon--m" aria-hidden="true"&gt;
+  &lt;use href="/sprite.svg#ic_home"&gt;&lt;/use&gt;
+&lt;/svg&gt;
+
+&lt;!-- Icon with accessible label --&gt;
+&lt;button class="btn btn--icon" aria-label="Search"&gt;
+  &lt;svg class="icon icon--m" aria-hidden="true"&gt;
+    &lt;use href="/sprite.svg#ic_search"&gt;&lt;/use&gt;
+  &lt;/svg&gt;
+&lt;/button&gt;</code></pre>
+    </div>
+    <div class="component-code-block">
+      <div class="component-code-label">Icon — sizes</div>
+      <pre class="component-code-pre"><code>&lt;!-- XS: 12px --&gt;
+&lt;svg class="icon icon--xs" aria-hidden="true"&gt;&lt;use href="/sprite.svg#ic_star"&gt;&lt;/use&gt;&lt;/svg&gt;
+
+&lt;!-- S: 16px --&gt;
+&lt;svg class="icon icon--s" aria-hidden="true"&gt;&lt;use href="/sprite.svg#ic_star"&gt;&lt;/use&gt;&lt;/svg&gt;
+
+&lt;!-- M: 20px (default) --&gt;
+&lt;svg class="icon icon--m" aria-hidden="true"&gt;&lt;use href="/sprite.svg#ic_star"&gt;&lt;/use&gt;&lt;/svg&gt;
+
+&lt;!-- L: 24px --&gt;
+&lt;svg class="icon icon--l" aria-hidden="true"&gt;&lt;use href="/sprite.svg#ic_star"&gt;&lt;/use&gt;&lt;/svg&gt;
+
+&lt;!-- XL: 32px --&gt;
+&lt;svg class="icon icon--xl" aria-hidden="true"&gt;&lt;use href="/sprite.svg#ic_star"&gt;&lt;/use&gt;&lt;/svg&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       15. CHANGELOG
+  =================================================== -->
+
+</main>
+<script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script>
+</body>
+</html>

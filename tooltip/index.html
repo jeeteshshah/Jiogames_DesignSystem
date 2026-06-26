@@ -1,0 +1,600 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tooltip — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    .tooltip-wrap { position: relative; display: inline-block; }
+    .tooltip {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--surface-4, #2A3142);
+      color: var(--text);
+      font-family: var(--jio-font);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: var(--r3);
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--dur-fast) var(--ease-out);
+      z-index: 200;
+      border: 1px solid var(--border-subtle);
+    }
+    .tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-top-color: var(--surface-4, #2A3142);
+    }
+    .tooltip-wrap:hover .tooltip,
+    .tooltip-wrap:focus-within .tooltip { opacity: 1; }
+    .tooltip--bottom { bottom: auto; top: calc(100% + 8px); }
+    .tooltip--bottom::after { top: auto; bottom: 100%; border-top-color: transparent; border-bottom-color: var(--surface-4, #2A3142); }
+    .tooltip--left { bottom: auto; left: auto; right: calc(100% + 8px); top: 50%; transform: translateY(-50%); }
+    .tooltip--left::after { top: 50%; left: 100%; transform: translateY(-50%); border-top-color: transparent; border-left-color: var(--surface-4, #2A3142); }
+    .tooltip--right { bottom: auto; left: calc(100% + 8px); top: 50%; transform: translateY(-50%); }
+    .tooltip--right::after { top: 50%; right: 100%; left: auto; transform: translateY(-50%); border-top-color: transparent; border-right-color: var(--surface-4, #2A3142); }
+    .tooltip--s { font-size: 10px; padding: 4px 8px; }
+    .tooltip--l { font-size: 14px; padding: 7px 13px; }
+    .demo-icon-btn {
+      width: 44px; height: 44px;
+      border-radius: var(--r3);
+      background: var(--surface-2);
+      border: 1px solid var(--border-subtle);
+      color: var(--text);
+      font-size: 20px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .demo-icon-btn:focus { outline: 2px solid var(--jio); outline-offset: 2px; }
+  </style>
+</head><body><main class="ds-content">
+
+  <!-- 1. PAGE HEADER -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Tooltip</span>
+    </nav>
+    <h1 class="component-page-title">Tooltip</h1>
+    <p class="component-page-def">Short label that appears on hover or focus near an icon or truncated text. Confirms what a control does without adding persistent UI.</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile">
+          <span class="component-platform-dot"></span>Mobile
+        </span>
+        <span class="component-platform component-platform--web">
+          <span class="component-platform-dot"></span>Web
+        </span>
+        <span class="component-platform component-platform--tv">
+          <span class="component-platform-dot"></span>TV
+        </span>
+      </div>
+      <span class="component-maturity component-maturity--draft">
+        <span class="component-maturity--dot"></span>Draft
+      </span>
+    </div>
+  </header>
+
+  <!-- 2. HERO -->
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:300px; position:relative; overflow:hidden;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="flex-direction:row; flex-wrap:wrap; gap:48px; padding:64px 32px;">
+
+      <!-- Play: tooltip top -->
+      <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+        <div class="tooltip-wrap">
+          <button class="demo-icon-btn" aria-describedby="tt-play">▶</button>
+          <span class="tooltip" id="tt-play" role="tooltip" style="opacity:1;">Play game</span>
+        </div>
+        <span style="font-size:11px; color:rgba(244,242,238,.4);">Top (default)</span>
+      </div>
+
+      <!-- Share: tooltip bottom -->
+      <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+        <div class="tooltip-wrap" style="margin-top:40px;">
+          <button class="demo-icon-btn" aria-describedby="tt-share">⇧</button>
+          <span class="tooltip tooltip--bottom" id="tt-share" role="tooltip" style="opacity:1;">Share</span>
+        </div>
+        <span style="font-size:11px; color:rgba(244,242,238,.4); margin-top:32px;">Bottom</span>
+      </div>
+
+      <!-- Wishlist: tooltip left -->
+      <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+        <div class="tooltip-wrap" style="margin-left:80px;">
+          <button class="demo-icon-btn" aria-describedby="tt-wish">♡</button>
+          <span class="tooltip tooltip--left" id="tt-wish" role="tooltip" style="opacity:1;">Add to wishlist</span>
+        </div>
+        <span style="font-size:11px; color:rgba(244,242,238,.4);">Left</span>
+      </div>
+
+      <!-- More: tooltip right -->
+      <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+        <div class="tooltip-wrap">
+          <button class="demo-icon-btn" aria-describedby="tt-more">⋯</button>
+          <span class="tooltip tooltip--right" id="tt-more" role="tooltip" style="opacity:1;">More options</span>
+        </div>
+        <span style="font-size:11px; color:rgba(244,242,238,.4);">Right</span>
+      </div>
+
+    </div>
+    <p class="component-hero-caption">Tooltip directions · Top, Bottom, Left, Right</p>
+  </section>
+
+  <!-- 3. INTRO -->
+  <section class="component-intro">
+    <p>Tooltips are transient, non-interactive labels that appear on hover or keyboard focus. They name icon-only controls, expand truncated labels, and clarify ambiguous actions — without permanently occupying layout space. Because tooltips disappear on interaction, they must never be the sole source of essential information.</p>
+    <ul class="component-summary-list">
+      <li><strong>Icon labels</strong> — names a control whose icon is not self-explanatory</li>
+      <li><strong>Truncation reveal</strong> — shows full text when a label is clipped</li>
+      <li><strong>Shortcut hint</strong> — surfaces keyboard shortcut alongside the action name</li>
+      <li><strong>Clarifying metadata</strong> — e.g. rating meaning, timestamp details</li>
+    </ul>
+  </section>
+
+  <!-- 4. BEST PRACTICES -->
+  <section class="component-best-practices">
+    <div class="component-bp-card component-bp-card--do">
+      <span class="component-bp-label component-bp-label--do">Do</span>
+      <ul class="component-bp-list">
+        <li>Keep copy under 40 characters — one short clause, no full stop</li>
+        <li>Describe the action: "Add to wishlist", not "Wishlist button"</li>
+        <li>Use <code class="ds-code">role="tooltip"</code> and <code class="ds-code">aria-describedby</code> on the trigger</li>
+        <li>Show on both hover and keyboard focus so keyboard users benefit equally</li>
+        <li>On TV, show tooltip on D-pad focus; dismiss when focus moves away</li>
+      </ul>
+    </div>
+    <div class="component-bp-card component-bp-card--dont">
+      <span class="component-bp-label component-bp-label--dont">Don't</span>
+      <ul class="component-bp-list">
+        <li>Put interactive content (links, buttons) inside a tooltip</li>
+        <li>Use a tooltip as the only label — visible labels are always preferred</li>
+        <li>Show tooltips on mobile — touch has no hover; use persistent labels instead</li>
+        <li>Exceed 40 characters — use a popover for richer explanations</li>
+        <li>Trigger tooltip on click — click should execute the action, not describe it</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. ANATOMY -->
+  <div class="ds-anatomy" style="margin-bottom:64px;">
+    <div class="ds-anatomy-preview">
+      <div class="ds-anatomy-component" style="position:relative; display:inline-flex; flex-direction:column; align-items:center; gap:8px; padding-top:48px;">
+        <div style="position:relative;">
+          <span style="display:inline-block; background:var(--surface-4,#2A3142); color:var(--text); font-size:12px; font-weight:600; padding:5px 10px; border-radius:var(--r3); border:1px solid var(--border-subtle); white-space:nowrap; position:relative;">
+            Play game
+            <span style="position:absolute; top:100%; left:50%; transform:translateX(-50%); border:5px solid transparent; border-top-color:var(--surface-4,#2A3142);"></span>
+          </span>
+          <span class="ds-anatomy-callout-dot" style="position:absolute; top:-18px; left:50%; transform:translateX(-50%);"><span class="ds-anatomy-callout-num">1</span></span>
+          <span class="ds-anatomy-callout-dot" style="position:absolute; top:50%; right:-24px; transform:translateY(-50%);"><span class="ds-anatomy-callout-num">2</span></span>
+          <span class="ds-anatomy-callout-dot" style="position:absolute; top:50%; left:-24px; transform:translateY(-50%);"><span class="ds-anatomy-callout-num">3</span></span>
+        </div>
+        <button class="demo-icon-btn" style="pointer-events:none;">▶</button>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; bottom:4px; right:-24px;"><span class="ds-anatomy-callout-num">4</span></span>
+      </div>
+    </div>
+    <ol class="ds-anatomy-list">
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">1</span>
+        <div>
+          <div class="ds-anatomy-label">Container <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Dark surface pill with border. Uses <code class="ds-code">--surface-4</code> so it contrasts on both dark and mid-tone backgrounds.</div>
+          <code class="ds-anatomy-token ds-code">background: var(--surface-4); border-radius: var(--r3)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">2</span>
+        <div>
+          <div class="ds-anatomy-label">Label text <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">12px semibold, sentence case, max 40 chars. No punctuation at end. Describes the control action.</div>
+          <code class="ds-anatomy-token ds-code">font-size: 12px; font-weight: 600</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">3</span>
+        <div>
+          <div class="ds-anatomy-label">Caret arrow <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">CSS border-triangle pointing at the trigger. Direction flips with <code class="ds-code">.tooltip--bottom</code>, <code class="ds-code">--left</code>, <code class="ds-code">--right</code>.</div>
+          <code class="ds-anatomy-token ds-code">::after { border: 5px solid transparent }</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">4</span>
+        <div>
+          <div class="ds-anatomy-label">Trigger element <span class="ds-anatomy-optional">Optional</span></div>
+          <div class="ds-anatomy-desc">The icon button, link, or truncated label that owns the tooltip. Must have <code class="ds-code">aria-describedby</code> pointing to the tooltip id.</div>
+          <code class="ds-anatomy-token ds-code">aria-describedby="tooltip-id"</code>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- 6. VARIANTS -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Direction variants control which side of the trigger the tooltip appears. Choose the direction that keeps the tooltip fully visible within its scroll container.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:48px; align-items:center; padding:24px 0; justify-content:center;">
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div class="tooltip-wrap">
+            <button class="demo-icon-btn">▶</button>
+            <span class="tooltip" role="tooltip" style="opacity:1;">Top (default)</span>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.4); margin-top:4px;">Top</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px; margin-top:32px;">
+          <div class="tooltip-wrap">
+            <button class="demo-icon-btn">⇧</button>
+            <span class="tooltip tooltip--bottom" role="tooltip" style="opacity:1;">Bottom</span>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.4); margin-top:36px;">Bottom</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div style="margin-left:80px;">
+            <div class="tooltip-wrap">
+              <button class="demo-icon-btn">♡</button>
+              <span class="tooltip tooltip--left" role="tooltip" style="opacity:1;">Left</span>
+            </div>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.4);">Left</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div class="tooltip-wrap">
+            <button class="demo-icon-btn">⋯</button>
+            <span class="tooltip tooltip--right" role="tooltip" style="opacity:1;">Right</span>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.4);">Right</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. SIZES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Three size tiers. Default covers most use cases. S fits dense icon toolbars. L improves legibility for accessibility-focused surfaces and TV.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:48px; align-items:flex-end; padding:32px 0 8px; justify-content:center;">
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+          <div class="tooltip-wrap">
+            <button class="demo-icon-btn">★</button>
+            <span class="tooltip tooltip--s" role="tooltip" style="opacity:1;">Rate game</span>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.4);">S — 10px<br><span style="font-size:10px; color:rgba(244,242,238,.28);">4px 8px padding</span></span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+          <div class="tooltip-wrap">
+            <button class="demo-icon-btn">▶</button>
+            <span class="tooltip" role="tooltip" style="opacity:1;">Play game</span>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.4);">M — 12px (default)<br><span style="font-size:10px; color:rgba(244,242,238,.28);">5px 10px padding</span></span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+          <div class="tooltip-wrap">
+            <button class="demo-icon-btn" style="width:52px;height:52px;font-size:24px;">⬇</button>
+            <span class="tooltip tooltip--l" role="tooltip" style="opacity:1;">Download game</span>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.4);">L — 14px (a11y/TV)<br><span style="font-size:10px; color:rgba(244,242,238,.28);">7px 13px padding</span></span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. STATES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Tooltips have two visual states: hidden (opacity 0) and visible (opacity 1). Transition is fast — 100–150ms — so it does not feel laggy on rapid hover.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:48px; align-items:center; padding:24px 0; justify-content:center;">
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div class="tooltip-wrap">
+            <button class="demo-icon-btn">▶</button>
+            <span class="tooltip" role="tooltip" style="opacity:0; pointer-events:none;">Play game</span>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.4);">Hidden (resting)</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div class="tooltip-wrap">
+            <button class="demo-icon-btn sim-hover">▶</button>
+            <span class="tooltip" role="tooltip" style="opacity:1;">Play game</span>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.4);">Visible (on hover)</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
+          <div class="tooltip-wrap">
+            <button class="demo-icon-btn sim-focus">▶</button>
+            <span class="tooltip" role="tooltip" style="opacity:1;">Play game</span>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.4);">Visible (on focus)</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. CONTENT GUIDANCE -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <p class="ds-section-desc">Tooltip copy must be the shortest possible label that completes the user's understanding of the control.</p>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Label writing rules</div>
+        <ul>
+          <li>Max 40 characters — no punctuation at end</li>
+          <li>Sentence case: "Add to wishlist" not "Add To Wishlist"</li>
+          <li>Describe the action: "Add to wishlist", not "Wishlist button"</li>
+          <li>For destructive actions add the word: "Remove from library"</li>
+          <li>Keyboard shortcut format: "Play game  ⌘P" (two spaces before shortcut)</li>
+          <li>Never put full sentences or explanations in a tooltip — use a popover</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">When to use vs. alternatives</div>
+        <ul>
+          <li>Icon-only button → tooltip (names the control)</li>
+          <li>Truncated text → tooltip (reveals full value)</li>
+          <li>Rich explanation needed → use Popover instead</li>
+          <li>Persistent info needed → use inline label or caption</li>
+          <li>Mobile surface → persistent label or bottom sheet, never tooltip</li>
+          <li>Error message → use form validation component, not tooltip</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. PLATFORM CONSIDERATIONS -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <p class="ds-section-desc">Tooltip interaction model varies significantly across platforms. Do not ship a single implementation across all three without platform-specific handling.</p>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Touch has no hover — <strong>do not use tooltips on mobile</strong></li>
+          <li>Use a persistent label beneath icon buttons instead</li>
+          <li>For overflow-truncated text, tap expands or opens detail sheet</li>
+          <li>Long-press tooltips are non-standard — avoid</li>
+          <li>If the only available pattern, use a bottom sheet with the full label</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Trigger on <code class="ds-code">mouseenter</code> and <code class="ds-code">focus</code></li>
+          <li>Dismiss on <code class="ds-code">mouseleave</code>, <code class="ds-code">blur</code>, and <code class="ds-code">Escape</code></li>
+          <li>No delay on show — instant appearance feels responsive</li>
+          <li>Position with <code class="ds-code">position:absolute</code> inside a relative wrapper</li>
+          <li>Ensure tooltip stays within viewport — flip direction if clipped</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>Show on D-pad focus, dismiss when focus moves to another element</li>
+          <li>Always use L size (14px) — default is unreadable at 3m</li>
+          <li>Position below focused element — top is obscured by focus ring glow</li>
+          <li>No hover trigger — remote control only navigates via focus</li>
+          <li>Tooltip must clear the focused element's glow shadow (20px clearance)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. ACCESSIBILITY -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">Tooltips must be reachable by keyboard and readable by screen readers. Never rely on tooltip alone to communicate critical information.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr>
+          <th>Requirement</th>
+          <th>Implementation</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ARIA role</td>
+          <td><code class="ds-code">role="tooltip"</code></td>
+          <td>Applied to the tooltip element, not the trigger.</td>
+        </tr>
+        <tr>
+          <td>Trigger linkage</td>
+          <td><code class="ds-code">aria-describedby="tooltip-id"</code></td>
+          <td>Trigger element points to tooltip id. Screen reader announces tooltip content after the control label.</td>
+        </tr>
+        <tr>
+          <td>Keyboard trigger</td>
+          <td>Focus (<code class="ds-code">:focus-within</code>)</td>
+          <td>Tooltip appears when trigger receives keyboard focus. Keyboard users must not miss tooltips.</td>
+        </tr>
+        <tr>
+          <td>Escape to dismiss</td>
+          <td>JS <code class="ds-code">keydown Escape</code></td>
+          <td>WCAG 1.4.13 — content triggered by hover must be dismissible without moving pointer/focus.</td>
+        </tr>
+        <tr>
+          <td>Pointer hoverable</td>
+          <td>Tooltip persists while pointer is over it</td>
+          <td>WCAG 1.4.13 — user must be able to move pointer onto tooltip without it dismissing.</td>
+        </tr>
+        <tr>
+          <td>Color contrast</td>
+          <td>Min 4.5:1 text on background</td>
+          <td><code class="ds-code">--text</code> on <code class="ds-code">--surface-4</code> passes at 7.2:1.</td>
+        </tr>
+        <tr>
+          <td>Not sole info source</td>
+          <td>Label or visible text required</td>
+          <td>If tooltip is the only label for a control, add a visually hidden <code class="ds-code">aria-label</code> to the trigger as fallback.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 12. RELATED TOKENS -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-desc">Use these tokens exclusively — never hardcode hex values for tooltip styles.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Token</th><th>Value</th><th>Usage</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="ds-code">--surface-4</code></td>
+          <td><code class="ds-code">#2A3142</code></td>
+          <td>Tooltip background fill</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--border-subtle</code></td>
+          <td><code class="ds-code">rgba(255,255,255,.08)</code></td>
+          <td>Tooltip border stroke</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--text</code></td>
+          <td><code class="ds-code">#f4f2ee</code></td>
+          <td>Tooltip label text color</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--r3</code></td>
+          <td><code class="ds-code">8px</code></td>
+          <td>Tooltip container border-radius</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--dur-fast</code></td>
+          <td><code class="ds-code">120ms</code></td>
+          <td>Tooltip fade-in/out transition duration</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--ease-out</code></td>
+          <td><code class="ds-code">cubic-bezier(.2,0,0,1)</code></td>
+          <td>Tooltip opacity transition easing</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CODE EXAMPLES -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-section-desc">Copy these snippets as starting points. Tooltip visibility is CSS-only via <code class="ds-code">:hover</code> and <code class="ds-code">:focus-within</code> on the wrapper.</p>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Tooltip — basic (top, default)</div>
+      <pre class="component-code-pre"><code>&lt;div class="tooltip-wrap"&gt;
+  &lt;button class="icon-btn" aria-describedby="tt-play"&gt;
+    &lt;svg ...&gt;&lt;/svg&gt;
+  &lt;/button&gt;
+  &lt;span class="tooltip" id="tt-play" role="tooltip"&gt;Play game&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+.tooltip-wrap { position: relative; display: inline-block; }
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--surface-4);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: var(--r3);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out);
+  border: 1px solid var(--border-subtle);
+}
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%; left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--surface-4);
+}
+.tooltip-wrap:hover .tooltip,
+.tooltip-wrap:focus-within .tooltip { opacity: 1; }
+&lt;/style&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Tooltip — directional variants</div>
+      <pre class="component-code-pre"><code>&lt;!-- Bottom --&gt;
+&lt;span class="tooltip tooltip--bottom" role="tooltip"&gt;Share&lt;/span&gt;
+
+&lt;!-- Left --&gt;
+&lt;span class="tooltip tooltip--left" role="tooltip"&gt;Add to wishlist&lt;/span&gt;
+
+&lt;!-- Right --&gt;
+&lt;span class="tooltip tooltip--right" role="tooltip"&gt;More options&lt;/span&gt;
+
+&lt;style&gt;
+.tooltip--bottom { bottom: auto; top: calc(100% + 8px); }
+.tooltip--bottom::after { top: auto; bottom: 100%; border-top-color: transparent; border-bottom-color: var(--surface-4); }
+
+.tooltip--left { bottom: auto; left: auto; right: calc(100% + 8px); top: 50%; transform: translateY(-50%); }
+.tooltip--left::after { top: 50%; left: 100%; transform: translateY(-50%); border-top-color: transparent; border-left-color: var(--surface-4); }
+
+.tooltip--right { bottom: auto; left: calc(100% + 8px); top: 50%; transform: translateY(-50%); }
+.tooltip--right::after { top: 50%; right: 100%; left: auto; transform: translateY(-50%); border-top-color: transparent; border-right-color: var(--surface-4); }
+&lt;/style&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Tooltip — keyboard (Escape to dismiss)</div>
+      <pre class="component-code-pre"><code>&lt;!-- JS: dismiss on Escape for WCAG 1.4.13 compliance --&gt;
+&lt;script&gt;
+document.querySelectorAll('.tooltip-wrap').forEach(wrap =&gt; {
+  wrap.addEventListener('keydown', e =&gt; {
+    if (e.key === 'Escape') {
+      wrap.querySelector('.tooltip').style.opacity = '0';
+      wrap.querySelector('[aria-describedby]').blur();
+    }
+  });
+});
+&lt;/script&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- 13. CHANGELOG -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Changelog</h2>
+    <div class="component-changelog">
+      <div class="component-changelog-entry">
+        <span class="component-changelog-version">v0.1</span>
+        <span class="component-changelog-date">Jun 2026</span>
+        <p class="component-changelog-desc">Initial draft. CSS-only tooltip with four direction variants (top, bottom, left, right), three size tiers (S/M/L), and full accessibility table. Mobile: no tooltip guidance documented.</p>
+      </div>
+    </div>
+  </section>
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

@@ -1,0 +1,511 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slider — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    .slider-wrap { width: 100%; display: flex; flex-direction: column; gap: 8px; }
+    .slider-header { display: flex; justify-content: space-between; align-items: center; }
+    .slider-label { font-family: var(--jio-font); font-size: 13px; font-weight: 700; color: var(--text2); }
+    .slider-value { font-family: var(--jio-font); font-size: 13px; font-weight: 700; color: var(--jio); }
+    .slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 4px;
+      border-radius: var(--pill);
+      background: var(--surface-3);
+      outline: none;
+      cursor: pointer;
+    }
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: var(--pill);
+      background: var(--jio);
+      cursor: pointer;
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 0 3px rgba(0,168,89,.2);
+    }
+    .slider:focus-visible { outline: 2px solid var(--jio); outline-offset: 6px; border-radius: var(--pill); }
+    .slider:disabled { opacity: var(--state-disabled-opacity); pointer-events: none; }
+
+    /* Track fill via inline background gradient */
+    .slider--thin { height: 2px; }
+    .slider--thick { height: 6px; }
+    .slider--thin::-webkit-slider-thumb { width: 16px; height: 16px; }
+    .slider--thick::-webkit-slider-thumb { width: 24px; height: 24px; }
+
+    /* Step marks wrapper */
+    .slider-steps { display: flex; justify-content: space-between; padding: 0 2px; margin-top: -2px; }
+    .slider-step-label { font-size: 10px; color: var(--text3); font-weight: 500; }
+
+    /* Simulated hover */
+    .slider-sim-hover::-webkit-slider-thumb { transform: scale(1.1); }
+
+    /* Demo touch size override */
+    .slider--touch::-webkit-slider-thumb { width: 28px; height: 28px; }
+  </style>
+</head><body><main class="ds-main">
+
+  <!-- PAGE HEADER -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Slider</span>
+    </nav>
+    <h1 class="component-page-title">Slider</h1>
+    <p class="component-page-def">Continuous value selector for volume, brightness, difficulty, and audio/video settings. Single-thumb and range variants.</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile">
+          <span class="component-platform-dot"></span>Mobile
+        </span>
+        <span class="component-platform component-platform--web">
+          <span class="component-platform-dot"></span>Web
+        </span>
+        <span class="component-platform component-platform--tv">
+          <span class="component-platform-dot"></span>TV
+        </span>
+      </div>
+      <span class="component-maturity component-maturity--draft">
+        <span class="component-maturity--dot"></span>Draft
+      </span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:300px;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner">
+      <div style="display:flex; flex-direction:column; gap:28px; width:100%; max-width:380px;">
+
+        <div class="slider-wrap">
+          <div class="slider-header">
+            <span class="slider-label">Volume</span>
+            <span class="slider-value">72%</span>
+          </div>
+          <input type="range" class="slider" min="0" max="100" value="72" style="background:linear-gradient(to right, var(--jio) 72%, var(--surface-3) 72%);" disabled>
+        </div>
+
+        <div class="slider-wrap">
+          <div class="slider-header">
+            <span class="slider-label">Brightness</span>
+            <span class="slider-value">55%</span>
+          </div>
+          <input type="range" class="slider" min="0" max="100" value="55" style="background:linear-gradient(to right, var(--jio) 55%, var(--surface-3) 55%);" disabled>
+        </div>
+
+        <div class="slider-wrap">
+          <div class="slider-header">
+            <span class="slider-label">Difficulty</span>
+            <span class="slider-value">40%</span>
+          </div>
+          <input type="range" class="slider" min="0" max="100" value="40" style="background:linear-gradient(to right, var(--jio) 40%, var(--surface-3) 40%);" disabled>
+        </div>
+
+      </div>
+    </div>
+    <p class="component-hero-caption">Slider in settings context · Volume, Brightness, Difficulty</p>
+  </section>
+
+  <!-- INTRO -->
+  <section class="component-intro">
+    <p>The Slider is a native <code class="ds-code">&lt;input type="range"&gt;</code> element styled to match the JioGames design language. It allows users to select a continuous value between a defined minimum and maximum. Sliders are used in settings panels — never as filters in a browse or discovery context (use Chips or Select for that).</p>
+    <ul class="component-summary-list">
+      <li><strong>Audio settings</strong> — volume, music/SFX balance, voice chat level</li>
+      <li><strong>Display settings</strong> — brightness, contrast, field of view</li>
+      <li><strong>Gameplay</strong> — difficulty level, aim sensitivity, camera speed</li>
+      <li><strong>Range selection</strong> — price or level range filter (two-thumb variant)</li>
+    </ul>
+  </section>
+
+  <!-- BEST PRACTICES -->
+  <section class="component-best-practices">
+    <div class="component-bp-card component-bp-card--do">
+      <span class="component-bp-label component-bp-label--do">Do</span>
+      <ul class="component-bp-list">
+        <li>Always show the current numeric value alongside the slider — never leave users guessing</li>
+        <li>Use round step values where possible: 5, 10, 25 increments rather than 1-unit steps for coarse settings</li>
+        <li>Label the slider with a visible text label — <code class="ds-code">aria-label</code> alone is not enough for sighted users</li>
+        <li>Update the displayed value in real time as the thumb moves, not just on release</li>
+        <li>Use the thick (6px) variant only for prominent standalone settings, not inline in dense lists</li>
+      </ul>
+    </div>
+    <div class="component-bp-card component-bp-card--dont">
+      <span class="component-bp-label component-bp-label--dont">Don't</span>
+      <ul class="component-bp-list">
+        <li>Use a Slider for binary settings — use a Toggle instead</li>
+        <li>Use a Slider for selecting from a short named list — use Radio or Select</li>
+        <li>Show a Slider without a label — value alone gives no context</li>
+        <li>Use Slider on TV — d-pad navigation makes continuous range selection frustrating; use a +/− button pair</li>
+        <li>Stack more than 4 sliders in a single panel without a visual separator between groups</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <div class="ds-anatomy" style="margin-bottom:64px;">
+    <div class="ds-anatomy-preview">
+      <div class="ds-anatomy-component" style="width:260px; position:relative;">
+        <div class="slider-header" style="margin-bottom:8px;">
+          <span class="slider-label">Volume</span>
+          <span class="slider-value">72%</span>
+        </div>
+        <input type="range" class="slider" min="0" max="100" value="72" style="background:linear-gradient(to right, var(--jio) 72%, var(--surface-3) 72%); pointer-events:none;" disabled>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:0; left:-24px;"><span class="ds-anatomy-callout-num">1</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:0; right:-24px;"><span class="ds-anatomy-callout-num">2</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; bottom:0; left:30%; transform:translateX(-50%);"><span class="ds-anatomy-callout-num">3</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; bottom:0; left:72%; transform:translateX(-50%);"><span class="ds-anatomy-callout-num">4</span></span>
+      </div>
+    </div>
+    <ol class="ds-anatomy-list">
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">1</span>
+        <div>
+          <div class="ds-anatomy-label">Label <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Left-aligned text label describing what the slider controls. 13px/700 weight, paired with the value on the right.</div>
+          <code class="ds-anatomy-token ds-code">font-size: 13px; font-weight: 700; color: var(--text2)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">2</span>
+        <div>
+          <div class="ds-anatomy-label">Live value <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Right-aligned numeric display that updates on every <code class="ds-code">input</code> event. Green accent color to signal interactivity.</div>
+          <code class="ds-anatomy-token ds-code">font-size: 13px; font-weight: 700; color: var(--jio)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">3</span>
+        <div>
+          <div class="ds-anatomy-label">Track <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">4px high, pill-shaped track. The filled portion (left of thumb) is <code class="ds-code">var(--jio)</code>; unfilled is <code class="ds-code">var(--surface-3)</code>. Achieved via <code class="ds-code">background</code> gradient.</div>
+          <code class="ds-anatomy-token ds-code">height: 4px; border-radius: var(--pill)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">4</span>
+        <div>
+          <div class="ds-anatomy-label">Thumb <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">20px circle, green fill, white border, soft green glow ring. On mobile increases to 28px for touch target compliance.</div>
+          <code class="ds-anatomy-token ds-code">width: 20px; height: 20px; border-radius: var(--pill)</code>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- VARIANTS -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Four variants. Default covers the majority of settings. Step marks help when discrete named values matter. Range suits price or level filters.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-direction:column; gap:32px; max-width:440px;">
+
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:12px;">Default</span>
+          <div class="slider-wrap">
+            <div class="slider-header"><span class="slider-label">Volume</span><span class="slider-value">72%</span></div>
+            <input type="range" class="slider" min="0" max="100" value="72" style="background:linear-gradient(to right, var(--jio) 72%, var(--surface-3) 72%);" oninput="this.previousElementSibling.querySelector('.slider-value').textContent=this.value+'%'; this.style.background='linear-gradient(to right, var(--jio) '+this.value+'%, var(--surface-3) '+this.value+'%)'">
+          </div>
+        </div>
+
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:12px;">With step marks — Difficulty</span>
+          <div class="slider-wrap">
+            <div class="slider-header"><span class="slider-label">Difficulty</span><span class="slider-value" id="diff-val">Normal</span></div>
+            <input type="range" class="slider" min="0" max="3" step="1" value="1" style="background:linear-gradient(to right, var(--jio) 33%, var(--surface-3) 33%);" oninput="const labels=['Easy','Normal','Hard','Extreme']; document.getElementById('diff-val').textContent=labels[this.value]; const pct=(this.value/3*100); this.style.background='linear-gradient(to right, var(--jio) '+pct+'%, var(--surface-3) '+pct+'%)'">
+            <div class="slider-steps">
+              <span class="slider-step-label">Easy</span>
+              <span class="slider-step-label">Normal</span>
+              <span class="slider-step-label">Hard</span>
+              <span class="slider-step-label">Extreme</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:12px;">Disabled</span>
+          <div class="slider-wrap">
+            <div class="slider-header"><span class="slider-label" style="opacity:.38;">Aim sensitivity</span><span class="slider-value" style="opacity:.38;">50%</span></div>
+            <input type="range" class="slider" min="0" max="100" value="50" style="background:linear-gradient(to right, var(--jio) 50%, var(--surface-3) 50%);" disabled>
+          </div>
+        </div>
+
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:12px;">Range — two thumbs (HTML-only illustration)</span>
+          <div style="background:var(--surface-1); border:1px solid var(--border-subtle); border-radius:var(--r4); padding:16px; font-size:12px; color:var(--text2); line-height:1.6;">
+            The two-thumb range variant requires a custom implementation — native <code class="ds-code">&lt;input type="range"&gt;</code> does not support two thumbs. Use two overlapping range inputs with JS to constrain min/max to each other. See code examples below.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SIZES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Track height is the only size dimension that varies. Thumb size adjusts proportionally. Thumb touch target on mobile is always 28px regardless of track size.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-direction:column; gap:28px; max-width:440px;">
+
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:12px;">Thin — 2px track · Inline / compact settings</span>
+          <input type="range" class="slider slider--thin" min="0" max="100" value="60" style="background:linear-gradient(to right, var(--jio) 60%, var(--surface-3) 60%);" disabled>
+        </div>
+
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:12px;">Default — 4px track · General settings</span>
+          <input type="range" class="slider" min="0" max="100" value="60" style="background:linear-gradient(to right, var(--jio) 60%, var(--surface-3) 60%);" disabled>
+        </div>
+
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:12px;">Thick — 6px track · Prominent standalone settings</span>
+          <input type="range" class="slider slider--thick" min="0" max="100" value="60" style="background:linear-gradient(to right, var(--jio) 60%, var(--surface-3) 60%);" disabled>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- STATES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Five interaction states. The dragging state is visually identical to hover — the distinction is behavioral (pointer is down and moving).</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>State</th><th>Visual change</th><th>When</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Default</td><td>Thumb at rest, no glow ring visible</td><td>Unfocused, not interacting</td></tr>
+        <tr><td>Hover</td><td>Thumb scales 1.1× via <code class="ds-code">transform: scale(1.1)</code></td><td>Pointer enters thumb hit area</td></tr>
+        <tr><td>Focused</td><td>Green outline ring <code class="ds-code">2px solid var(--jio)</code> with 6px offset</td><td>Keyboard focus, arrow keys move thumb</td></tr>
+        <tr><td>Dragging</td><td>Thumb scale 1.1×, track fill updates live</td><td>Pointer down and moving on track</td></tr>
+        <tr><td>Disabled</td><td>Opacity <code class="ds-code">var(--state-disabled-opacity)</code>, no pointer events</td><td>Setting locked (e.g., requires premium)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CONTENT GUIDANCE -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <p class="ds-section-desc">Labels and value displays are the only text surfaces on a slider.</p>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Label copy</div>
+        <ul>
+          <li>Use a single noun or noun phrase: "Volume", "Brightness", "Aim sensitivity"</li>
+          <li>Never use a verb: not "Set volume" — just "Volume"</li>
+          <li>Capitalise the first word only — not title case for every word</li>
+          <li>Keep label under 24 characters to avoid wrapping on mobile</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Value display</div>
+        <ul>
+          <li>For percentage sliders: append % — "72%"</li>
+          <li>For named steps: show the step name — "Normal", "Hard"</li>
+          <li>For sensitivity: show decimal if needed — "1.5×"</li>
+          <li>Always show current value; never leave it blank even at 0</li>
+          <li>Round to nearest integer unless the precision is meaningful</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <p class="ds-section-desc">Thumb size and interaction model differ substantially across platforms.</p>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Increase thumb to 28px via <code class="ds-code">@media (pointer: coarse)</code> — minimum touch target is 44px effective area</li>
+          <li>Full-width track — never constrain to less than the column width</li>
+          <li>Haptic feedback on step marks where platform APIs allow</li>
+          <li>Show value tooltip above the thumb while dragging on long settings panels</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>20px thumb is fine for pointer — no size increase needed on desktop</li>
+          <li>Keyboard navigation via arrow keys is native on <code class="ds-code">&lt;input type="range"&gt;</code> — do not suppress it</li>
+          <li>Show value tooltip on hover for accessibility on dense settings pages</li>
+          <li>Max-width 480px in single-column layout; full-width in form grids</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>No Slider on TV — d-pad cannot drag a continuous thumb accurately</li>
+          <li>Replace with a +/− button pair: two large icon buttons flanking the current value label</li>
+          <li>Step granularity on TV: 10-unit steps for volume, 25% for brightness</li>
+          <li>If slider must appear (e.g., playback scrubber), use left/right d-pad for 5-second seek steps with clear focus indicator</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">Native <code class="ds-code">&lt;input type="range"&gt;</code> carries most semantic attributes automatically. Supplement with ARIA for value labels and live updates.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Requirement</th><th>Implementation</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Label</td>
+          <td><code class="ds-code">aria-label</code> or <code class="ds-code">&lt;label for&gt;</code></td>
+          <td>Visible label preferred. <code class="ds-code">aria-label</code> only if label is visually suppressed.</td>
+        </tr>
+        <tr>
+          <td>Value range</td>
+          <td><code class="ds-code">aria-valuemin</code>, <code class="ds-code">aria-valuemax</code>, <code class="ds-code">aria-valuenow</code></td>
+          <td>Native <code class="ds-code">min</code>, <code class="ds-code">max</code>, <code class="ds-code">value</code> attributes map automatically — no extra ARIA needed for numeric sliders.</td>
+        </tr>
+        <tr>
+          <td>Named value</td>
+          <td><code class="ds-code">aria-valuetext</code></td>
+          <td>For step sliders with named values (Easy/Normal/Hard), add <code class="ds-code">aria-valuetext="Normal"</code> updated via JS so screen readers announce the name not the number.</td>
+        </tr>
+        <tr>
+          <td>Keyboard</td>
+          <td>Arrow keys native on <code class="ds-code">type="range"</code></td>
+          <td>Left/Down decreases, Right/Up increases. Home = min, End = max. Never suppress default key handling.</td>
+        </tr>
+        <tr>
+          <td>Focus visibility</td>
+          <td><code class="ds-code">:focus-visible</code> outline</td>
+          <td>Green 2px outline with 6px offset is visible against both dark and light surfaces. Do not suppress.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- RELATED TOKENS -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-desc">Use these tokens when implementing slider styles.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Token</th><th>Value</th><th>Usage</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code class="ds-code">--jio</code></td><td><code class="ds-code">#00A859</code></td><td>Thumb fill, filled track portion, live value color</td></tr>
+        <tr><td><code class="ds-code">--surface-3</code></td><td>Surface tier 3</td><td>Unfilled track background</td></tr>
+        <tr><td><code class="ds-code">--bg</code></td><td><code class="ds-code">#080a10</code></td><td>Thumb inner border to create separation from track</td></tr>
+        <tr><td><code class="ds-code">--pill</code></td><td><code class="ds-code">100px</code></td><td>Track and thumb border-radius</td></tr>
+        <tr><td><code class="ds-code">--text2</code></td><td><code class="ds-code">rgba(244,242,238,.55)</code></td><td>Slider label text color</td></tr>
+        <tr><td><code class="ds-code">--state-disabled-opacity</code></td><td><code class="ds-code">.38</code></td><td>Disabled state opacity applied to full slider-wrap</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CODE EXAMPLES -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-body">Link <code class="ds-code">tokens.css</code>, <code class="ds-code">components.css</code>, and <code class="ds-code">states.css</code> before using component classes.</p>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Basic slider</div>
+      <pre class="component-code-pre"><code>&lt;div class="slider-wrap"&gt;
+  &lt;div class="slider-header"&gt;
+    &lt;label class="slider-label" for="vol"&gt;Volume&lt;/label&gt;
+    &lt;span class="slider-value"&gt;72%&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;input
+    type="range"
+    id="vol"
+    class="slider"
+    min="0"
+    max="100"
+    value="72"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="72"
+    aria-label="Volume"
+  &gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Slider with live value display</div>
+      <pre class="component-code-pre"><code>&lt;div class="slider-wrap"&gt;
+  &lt;div class="slider-header"&gt;
+    &lt;label class="slider-label" for="bright"&gt;Brightness&lt;/label&gt;
+    &lt;span class="slider-value" id="bright-val"&gt;55%&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;input
+    type="range"
+    id="bright"
+    class="slider"
+    min="0" max="100" value="55"
+    style="background:linear-gradient(to right,var(--jio) 55%,var(--surface-3) 55%)"
+    oninput="
+      const v = this.value;
+      document.getElementById('bright-val').textContent = v + '%';
+      this.style.background =
+        'linear-gradient(to right,var(--jio) ' + v + '%,var(--surface-3) ' + v + '%)';
+      this.setAttribute('aria-valuenow', v);
+    "
+  &gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Range slider — two-thumb pattern (custom JS required)</div>
+      <pre class="component-code-pre"><code>&lt;!-- Two overlapping range inputs; JS constrains min/max to each other --&gt;
+&lt;div class="slider-wrap" style="position:relative;"&gt;
+  &lt;div class="slider-header"&gt;
+    &lt;span class="slider-label"&gt;Price range&lt;/span&gt;
+    &lt;span class="slider-value" id="range-display"&gt;₹0 – ₹500&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div style="position:relative; height:20px;"&gt;
+    &lt;input type="range" id="range-min" class="slider"
+      min="0" max="1000" value="0" step="50"
+      style="position:absolute; width:100%; pointer-events:none;"&gt;
+    &lt;input type="range" id="range-max" class="slider"
+      min="0" max="1000" value="500" step="50"
+      style="position:absolute; width:100%; pointer-events:none;"&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;
+  const rMin = document.getElementById('range-min');
+  const rMax = document.getElementById('range-max');
+  const display = document.getElementById('range-display');
+  function update() {
+    if (+rMin.value &gt; +rMax.value) rMin.value = rMax.value;
+    if (+rMax.value &lt; +rMin.value) rMax.value = rMin.value;
+    display.textContent = '₹' + rMin.value + ' – ₹' + rMax.value;
+  }
+  rMin.addEventListener('input', update);
+  rMax.addEventListener('input', update);
+&lt;/script&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- CHANGELOG -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Changelog</h2>
+    <div class="component-changelog">
+      <div class="component-changelog-entry">
+        <span class="component-changelog-version">v0.1</span>
+        <span class="component-changelog-date">Jun 2026</span>
+        <p class="component-changelog-desc">Initial draft. Includes Default, Step-marks, Disabled, and Range variant documentation. Thin / Default / Thick size tiers. Five states. Platform, accessibility, and token tables. Three code examples including two-thumb range pattern.</p>
+      </div>
+    </div>
+  </section>
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

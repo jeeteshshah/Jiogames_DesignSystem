@@ -1,0 +1,1222 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    /* ── Page-specific styles ── */
+    body { background: var(--bg); color: var(--text); font-family: var(--jio-font); margin: 0; }
+
+    /* Component page header */
+
+    /* Hero */
+    .component-hero {
+      border-radius: 20px;
+      overflow: hidden;
+      margin-bottom: 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      min-height: 280px;
+      padding: 48px 32px 32px;
+    }
+    .component-hero--dark { background: #060810; }
+    .component-hero--grid {
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 32px 32px;
+      background-color: #060810;
+      border: 1px solid var(--border-subtle);
+    }
+    .component-hero-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+      position: relative;
+      z-index: 2;
+      width: 100%;
+    }
+    .component-hero-caption {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: var(--text4);
+      margin-top: 24px;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 320px;
+      height: 180px;
+      border-radius: var(--pill);
+      background: radial-gradient(ellipse, rgba(0,168,89,.2) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Intro */
+    .component-intro {
+      margin-bottom: 48px;
+    }
+    .component-intro p {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.65;
+      margin-bottom: 20px;
+      max-width: 640px;
+    }
+    .component-summary-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      overflow: hidden;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .component-summary-list li {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.55;
+    }
+    .component-summary-list li:last-child { border-bottom: none; }
+    .component-summary-list li strong {
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    /* Best practices */
+    .component-best-practices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .component-bp-card {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1.5px solid;
+    }
+    .component-bp-card--do   { border-color: rgba(0,168,89,.3); }
+    .component-bp-card--dont { border-color: rgba(255,71,87,.3); }
+    .component-bp-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 16px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+    }
+    .component-bp-label--do   { background: rgba(0,168,89,.07);  color: var(--jio); }
+    .component-bp-label--dont { background: rgba(255,71,87,.07); color: var(--negative); }
+    .component-bp-label--do::before   { content: '\2713'; font-size: 11px; }
+    .component-bp-label--dont::before { content: '\2715'; font-size: 11px; }
+    .component-bp-list {
+      padding: 16px 20px 20px;
+      background: var(--surface-1);
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      list-style: none;
+    }
+    .component-bp-list li {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+    .component-bp-list li::before {
+      content: '\00B7';
+      position: absolute;
+      left: 3px;
+      color: var(--text4);
+    }
+
+    /* Content grid */
+    .component-content-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .component-content-card {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      padding: 20px;
+    }
+    .component-content-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-bottom: 12px;
+    }
+    .component-content-card ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .component-content-card li {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+    .component-content-card li::before {
+      content: '\00B7';
+      position: absolute;
+      left: 3px;
+      color: var(--text4);
+    }
+
+    /* Platform cards */
+    .component-platform-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .component-platform-card {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      padding: 20px;
+    }
+    .component-platform-card--mobile { border-top: 2px solid rgba(110,231,183,.4); }
+    .component-platform-card--web    { border-top: 2px solid rgba(147,197,253,.4); }
+    .component-platform-card--tv     { border-top: 2px solid rgba(251,191,36,.4); }
+    .component-platform-card-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 12px;
+    }
+    .component-platform-card--mobile .component-platform-card-title { color: #6ee7b7; }
+    .component-platform-card--web    .component-platform-card-title { color: #93c5fd; }
+    .component-platform-card--tv     .component-platform-card-title { color: #fbbf24; }
+    .component-platform-card ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .component-platform-card li {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.5;
+      padding-left: 14px;
+      position: relative;
+    }
+    .component-platform-card li::before {
+      content: '\00B7';
+      position: absolute;
+      left: 3px;
+      color: var(--text4);
+    }
+
+    /* Changelog */
+    .component-changelog {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      overflow: hidden;
+    }
+    .component-changelog-entry {
+      display: grid;
+      grid-template-columns: 56px 80px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 12px;
+    }
+    .component-changelog-entry:last-child { border-bottom: none; }
+    .component-changelog-version {
+      font-family: monospace;
+      font-weight: 700;
+      color: var(--jio);
+      font-size: 11px;
+    }
+    .component-changelog-date {
+      color: var(--text3);
+      font-weight: 500;
+    }
+    .component-changelog-desc {
+      color: var(--text2);
+      line-height: 1.5;
+    }
+
+    /* Note box */
+    .ds-note {
+      background: rgba(0,168,89,.06);
+      border: 1px solid rgba(0,168,89,.2);
+      border-radius: var(--r3);
+      padding: 14px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.55;
+    }
+    .ds-note strong { color: var(--jio); }
+
+    /* Platform size grid */
+    .platform-size-grid {
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 140px 1fr 1fr 1fr;
+      margin-top: 20px;
+    }
+    .platform-size-cell {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      border-right: 1px solid var(--border-subtle);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.5;
+    }
+    .platform-size-cell:last-child,
+    .platform-size-cell:nth-child(4n) { border-right: none; }
+    .platform-size-cell:nth-last-child(-n+4) { border-bottom: none; }
+    .platform-size-cell--header {
+      background: var(--surface-2);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--text3);
+      padding: 10px 16px;
+    }
+    .platform-size-cell--header.platform-size-cell--mobile { color: #6ee7b7; }
+    .platform-size-cell--header.platform-size-cell--web    { color: #93c5fd; }
+    .platform-size-cell--header.platform-size-cell--tv     { color: #fbbf24; }
+    .platform-size-cell--label {
+      background: var(--surface-2);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text);
+      border-right: 1px solid var(--border-subtle);
+    }
+    .platform-size-token {
+      font-family: monospace;
+      font-size: 10px;
+      color: #a8e6c5;
+      display: block;
+      margin-top: 3px;
+    }
+    .platform-size-value {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      display: block;
+    }
+    .platform-size-note {
+      font-size: 10px;
+      color: var(--text3);
+      display: block;
+      margin-top: 3px;
+    }
+
+    /* State demos */
+    .search-state-demo {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .search-state-item {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .search-state-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: var(--text3);
+    }
+    .search-state-label--active { color: var(--jio); }
+    .search-state-label--error  { color: var(--negative); }
+
+    /* Skeleton animation */
+    @keyframes shimmer {
+      0%   { background-position: -400px 0; }
+      100% { background-position: 400px 0; }
+    }
+    .skeleton {
+      border-radius: 6px;
+      background: linear-gradient(90deg,
+        var(--surface-2) 25%,
+        var(--glass-1) 50%,
+        var(--surface-2) 75%
+      );
+      background-size: 800px 100%;
+      animation: shimmer 1.4s infinite linear;
+    }
+    .skeleton--text {
+      height: 12px;
+    }
+    .skeleton--card {
+      height: 80px;
+      border-radius: var(--r3);
+    }
+
+    /* Accessibility grid */
+    .a11y-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      overflow: hidden;
+      margin-top: 24px;
+    }
+    .a11y-row {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .a11y-row:last-child { border-bottom: none; }
+    .a11y-label {
+      padding: 14px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text3);
+      letter-spacing: .3px;
+      background: var(--surface-2);
+      text-transform: uppercase;
+      display: flex;
+      align-items: flex-start;
+      padding-top: 16px;
+    }
+    .a11y-content {
+      padding: 14px 20px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.6;
+      background: var(--surface-1);
+    }
+    .a11y-content code {
+      font-family: monospace;
+      font-size: 11px;
+      color: #a8e6c5;
+      background: var(--surface-2);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+
+    /* Variant rows */
+    .search-variant-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      overflow: hidden;
+      margin-top: 24px;
+    }
+    .search-variant-row {
+      display: grid;
+      grid-template-columns: 180px 1fr 2fr;
+      gap: 20px;
+      align-items: center;
+      padding: 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--surface-1);
+    }
+    .search-variant-row:last-child { border-bottom: none; }
+    .search-variant-row:hover { background: var(--glass-1); }
+    .search-variant-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+    .search-variant-class {
+      font-family: monospace;
+      font-size: 10px;
+      color: #a8e6c5;
+    }
+    .search-variant-desc {
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 760px) {
+      .component-best-practices,
+      .component-content-grid,
+      .component-platform-grid { grid-template-columns: 1fr; }
+      .platform-size-grid { overflow-x: auto; }
+      .search-variant-row { grid-template-columns: 1fr; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+<main class="ds-content">
+
+  <!-- ===================================================
+       1. PAGE HEADER
+  =================================================== -->
+  <div class="component-page-header">
+    <div class="component-breadcrumb">
+      <a href="../index.html">JioGames DLS</a>
+      <span class="component-breadcrumb-sep">&#x203A;</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">&#x203A;</span>
+      <span>Search</span>
+    </div>
+    <h1 class="component-page-title">Search</h1>
+    <p class="component-page-def">Search gives players immediate access to any game, genre, or creator in the JioGames library.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+      <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+      <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+      <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+    </div>
+  </div>
+
+  <!-- ===================================================
+       2. HERO VISUAL
+  =================================================== -->
+  <section class="component-hero component-hero--dark component-hero--grid" id="overview">
+    <div class="hero-glow" style="top:30%;left:50%;transform:translate(-50%,-50%)"></div>
+    <div class="component-hero-inner">
+      <!-- Search bar in focus state -->
+      <div style="width:100%;max-width:480px">
+        <div style="display:flex;align-items:center;gap:10px;background:var(--surface-2);border:1.5px solid var(--jio);border-radius:var(--r4);padding:0 16px;height:48px;">
+          <svg viewBox="0 0 24 24" class="icon icon--m" style="color:var(--jio);flex-shrink:0"><use href="../sprite.svg#ic_search"></use></svg>
+          <span style="font-size:15px;color:var(--text3);flex:1">Search games, genres...</span>
+          <svg viewBox="0 0 24 24" class="icon icon--s" style="color:var(--text3)"><use href="../sprite.svg#ic_close"></use></svg>
+        </div>
+        <!-- Recent searches -->
+        <div style="margin-top:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <span style="font-size:10px;font-weight:700;letter-spacing:.4px;color:var(--text3);text-transform:uppercase">Recent</span>
+          <span class="chip chip--s is-active">Action</span>
+          <span class="chip chip--s">Racing</span>
+          <span class="chip chip--s">Free to play</span>
+        </div>
+        <!-- Skeleton results -->
+        <div style="margin-top:16px;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div class="skeleton" style="width:48px;height:48px;border-radius:var(--r3);flex-shrink:0"></div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:7px">
+              <div class="skeleton skeleton--text" style="width:55%"></div>
+              <div class="skeleton skeleton--text" style="width:35%"></div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px">
+            <div class="skeleton" style="width:48px;height:48px;border-radius:var(--r3);flex-shrink:0"></div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:7px">
+              <div class="skeleton skeleton--text" style="width:68%"></div>
+              <div class="skeleton skeleton--text" style="width:42%"></div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px">
+            <div class="skeleton" style="width:48px;height:48px;border-radius:var(--r3);flex-shrink:0"></div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:7px">
+              <div class="skeleton skeleton--text" style="width:47%"></div>
+              <div class="skeleton skeleton--text" style="width:28%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="component-hero-caption">Search bar &#xB7; Focus state &#xB7; Mobile M</span>
+  </section>
+
+  <!-- ===================================================
+       3. INTRO
+  =================================================== -->
+  <section class="component-intro" id="intro">
+    <p>Search is the fastest path to discovery in JioGames. It combines a text input, state-driven visual feedback, and a contextual results surface &#x2014; all responding to what the player is doing right now, whether browsing recents, typing a query, or landing on an empty state.</p>
+    <ul class="component-summary-list">
+      <li><strong>Immediate feedback.</strong> The search icon turns green on focus, recent chips appear, and results skeleton in after 300ms debounce.</li>
+      <li><strong>Three size tiers.</strong> S, M, and L map to compact filter bars, the default search surface, and full-screen hero moments. Platform context resolves pixel values automatically.</li>
+      <li><strong>Four variants.</strong> Standalone, AppBar-integrated, full-screen overlay, and filter-augmented &#x2014; each with the same core anatomy.</li>
+      <li><strong>Stateful by design.</strong> Every lifecycle moment &#x2014; from default to loading to no-results to offline &#x2014; has a defined visual treatment and next step for the player.</li>
+    </ul>
+  </section>
+
+  <!-- ===================================================
+       4. BEST PRACTICES
+  =================================================== -->
+  <section class="ds-section" id="best-practices">
+    <h2 class="ds-section-title">Best practices</h2>
+    <p class="ds-section-desc">Rules for keeping search usage consistent and useful across the JioGames product surface.</p>
+    <div class="component-best-practices">
+      <div class="component-bp-card component-bp-card--do">
+        <span class="component-bp-label component-bp-label--do">Do</span>
+        <ul class="component-bp-list">
+          <li>Use a descriptive, context-aware placeholder: "Search games, genres, creators..."</li>
+          <li>Show recent searches when the input is focused and empty</li>
+          <li>Debounce search requests at 300ms minimum before firing</li>
+          <li>Show skeleton results while loading &#x2014; not a full-screen spinner</li>
+          <li>Always offer genre chips in the no-results state</li>
+          <li>Announce result count via <code class="ds-code">aria-live</code> when results load</li>
+          <li>Keep the clear button accessible: <code class="ds-code">aria-label="Clear search"</code></li>
+          <li>On TV, make recent searches the primary visible content</li>
+        </ul>
+      </div>
+      <div class="component-bp-card component-bp-card--dont">
+        <span class="component-bp-label component-bp-label--dont">Don&#x27;t</span>
+        <ul class="component-bp-list">
+          <li>Don&#x27;t fire a request on every keystroke &#x2014; debounce first</li>
+          <li>Don&#x27;t say "No results found" without a next action or genre fallback</li>
+          <li>Don&#x27;t block the UI with a full-screen loader during search</li>
+          <li>Don&#x27;t use a vague single-word placeholder like "Search"</li>
+          <li>Don&#x27;t remove the focus ring &#x2014; use <code class="ds-code">var(--jio)</code> border, never outline: none</li>
+          <li>Don&#x27;t place search inside a card or modal without managed scroll context</li>
+          <li>Don&#x27;t skip the minimum 2-character threshold before triggering results</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       5. ANATOMY
+  =================================================== -->
+  <section class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <p class="ds-section-desc">Every search bar is built from five slots. The container and input field are required. All others respond to interaction state.</p>
+    <div class="ds-anatomy">
+      <div class="ds-anatomy-preview">
+        <div class="ds-anatomy-component" style="position:relative;display:inline-flex;padding:40px 48px">
+          <!-- Search bar -->
+          <div style="display:flex;align-items:center;gap:10px;background:var(--surface-2);border:1.5px solid var(--jio);border-radius:var(--r4);padding:0 16px;height:48px;min-width:320px;position:relative">
+            <svg viewBox="0 0 24 24" class="icon icon--m" style="color:var(--jio);flex-shrink:0"><use href="../sprite.svg#ic_search"></use></svg>
+            <span style="flex:1;font-size:14px;color:var(--text3)">Search games, genres...</span>
+            <span style="display:inline-block;width:1px;height:18px;background:var(--jio);opacity:.7;animation:blink 1s infinite step-end"></span>
+            <svg viewBox="0 0 24 24" class="icon icon--s" style="color:var(--text3)"><use href="../sprite.svg#ic_close"></use></svg>
+          </div>
+          <!-- Callout 1: search icon -->
+          <div style="position:absolute;top:6px;left:62px;display:flex;flex-direction:column;align-items:center">
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">1</div>
+            <div style="width:1px;height:18px;background:var(--jio);opacity:.5"></div>
+            <div class="ds-anatomy-callout-dot"></div>
+          </div>
+          <!-- Callout 2: input -->
+          <div style="position:absolute;bottom:6px;left:44%;display:flex;flex-direction:column;align-items:center">
+            <div class="ds-anatomy-callout-dot"></div>
+            <div style="width:1px;height:14px;background:var(--jio);opacity:.5"></div>
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">2</div>
+          </div>
+          <!-- Callout 3: placeholder -->
+          <div style="position:absolute;top:6px;left:44%;display:flex;flex-direction:column;align-items:center">
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">3</div>
+            <div style="width:1px;height:18px;background:var(--jio);opacity:.5"></div>
+            <div class="ds-anatomy-callout-dot"></div>
+          </div>
+          <!-- Callout 4: clear button -->
+          <div style="position:absolute;bottom:6px;right:52px;display:flex;flex-direction:column;align-items:center">
+            <div class="ds-anatomy-callout-dot"></div>
+            <div style="width:1px;height:14px;background:var(--jio);opacity:.5"></div>
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">4</div>
+          </div>
+          <!-- Callout 5: focus ring -->
+          <div style="position:absolute;top:6px;right:14px;display:flex;flex-direction:column;align-items:center">
+            <div class="ds-anatomy-callout-num" style="width:16px;height:16px;font-size:9px">5</div>
+            <div style="width:1px;height:18px;background:var(--jio);opacity:.5"></div>
+            <div class="ds-anatomy-callout-dot"></div>
+          </div>
+        </div>
+      </div>
+      <div class="ds-anatomy-list">
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">1</div>
+          <div>
+            <div class="ds-anatomy-label">Search icon <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Leading <code class="ds-code">ic_search</code> icon using <code class="ds-code">.icon.icon--m</code>. Color shifts from <code class="ds-code">var(--text3)</code> to <code class="ds-code">var(--jio)</code> on focus.</div>
+            <div class="ds-anatomy-token">Sprite: ic_search &#xB7; Figma: Search/LeadingIcon</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">2</div>
+          <div>
+            <div class="ds-anatomy-label">Input field <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">Text entry area. <code class="ds-code">flex:1</code>, transparent background, <code class="ds-code">type="search"</code>. No native styling; all states driven by wrapper border.</div>
+            <div class="ds-anatomy-token">CSS: .input-field &#xB7; Figma: Search/Input</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">3</div>
+          <div>
+            <div class="ds-anatomy-label">Placeholder / query text <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc">Placeholder color <code class="ds-code">var(--text3)</code> in default; disappears on input. Live query renders at <code class="ds-code">var(--text)</code> weight 500.</div>
+            <div class="ds-anatomy-token">CSS: ::placeholder &#xB7; Figma: Search/Placeholder</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">4</div>
+          <div>
+            <div class="ds-anatomy-label">Clear button <span class="ds-anatomy-optional">Conditional</span></div>
+            <div class="ds-anatomy-desc">Trailing <code class="ds-code">ic_close</code> icon. Appears only when the input has a value. Always requires <code class="ds-code">aria-label="Clear search"</code>.</div>
+            <div class="ds-anatomy-token">Sprite: ic_close &#xB7; Figma: Search/ClearButton</div>
+          </div>
+        </div>
+        <div class="ds-anatomy-item">
+          <div class="ds-anatomy-callout-num" style="flex-shrink:0">5</div>
+          <div>
+            <div class="ds-anatomy-label">Focus ring <span class="ds-anatomy-optional">Conditional</span></div>
+            <div class="ds-anatomy-desc">1.5px solid <code class="ds-code">var(--jio)</code> border on the wrapper when input is focused. On TV, replaced by <code class="ds-code">var(--tv-focus-shadow)</code> glow.</div>
+            <div class="ds-anatomy-token">CSS: :focus-within / .is-focused &#xB7; Figma: Search/FocusRing</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       6. VARIANTS
+  =================================================== -->
+  <section class="ds-section" id="variants">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Four search variants cover every surface where players need to find content. All share the same five-slot anatomy; only context and layout differ.</p>
+
+    <div class="search-variant-grid">
+
+      <div class="search-variant-row">
+        <div>
+          <div class="search-variant-name">Standard</div>
+          <div class="search-variant-class">.input-wrap + .input-field</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r4);padding:0 14px;height:48px;max-width:280px">
+          <svg viewBox="0 0 24 24" class="icon icon--m" style="color:var(--text3);flex-shrink:0"><use href="../sprite.svg#ic_search"></use></svg>
+          <span style="font-size:14px;color:var(--text3);flex:1">Search games...</span>
+        </div>
+        <div class="search-variant-desc">Standalone full-width bar used at the top of the search page. Default entry point on mobile. Max-width 480px on web.</div>
+      </div>
+
+      <div class="search-variant-row">
+        <div>
+          <div class="search-variant-name">AppBar integrated</div>
+          <div class="search-variant-class">.appbar .input-wrap</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r3);padding:0 12px;height:38px;max-width:280px">
+          <svg viewBox="0 0 24 24" class="icon icon--s" style="color:var(--text3);flex-shrink:0"><use href="../sprite.svg#ic_search"></use></svg>
+          <span style="font-size:13px;color:var(--text3);flex:1">Search...</span>
+        </div>
+        <div class="search-variant-desc">Replaces the AppBar title when search is activated. S-size (38px web / 36px mobile). Dismissing restores the title.</div>
+      </div>
+
+      <div class="search-variant-row">
+        <div>
+          <div class="search-variant-name">Full-screen</div>
+          <div class="search-variant-class">.search-overlay</div>
+        </div>
+        <div style="background:var(--bg);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:12px 16px;max-width:280px">
+          <div style="display:flex;align-items:center;gap:10px;background:var(--surface-2);border:1.5px solid var(--jio);border-radius:var(--r4);padding:0 14px;height:48px">
+            <svg viewBox="0 0 24 24" class="icon icon--m" style="color:var(--jio);flex-shrink:0"><use href="../sprite.svg#ic_search"></use></svg>
+            <span style="font-size:14px;color:var(--text3);flex:1">Search...</span>
+          </div>
+          <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">
+            <span class="chip chip--s">Action</span>
+            <span class="chip chip--s">RPG</span>
+            <span class="chip chip--s">Racing</span>
+          </div>
+        </div>
+        <div class="search-variant-desc">Modal overlay on mobile, fills screen from top. Used when search is the primary intent. Includes keyboard area management. Dismiss via back or tap outside.</div>
+      </div>
+
+      <div class="search-variant-row">
+        <div>
+          <div class="search-variant-name">Filter search</div>
+          <div class="search-variant-class">.input-wrap + .filter-chips</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;max-width:280px">
+          <div style="display:flex;align-items:center;gap:10px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r4);padding:0 14px;height:44px">
+            <svg viewBox="0 0 24 24" class="icon icon--m" style="color:var(--text3);flex-shrink:0"><use href="../sprite.svg#ic_search"></use></svg>
+            <span style="font-size:14px;color:var(--text3);flex:1">Filter games...</span>
+          </div>
+          <div style="display:flex;gap:6px">
+            <span class="chip chip--s is-active">Action</span>
+            <span class="chip chip--s">Mobile</span>
+            <span class="chip chip--s">Free</span>
+          </div>
+        </div>
+        <div class="search-variant-desc">Search bar with a horizontal filter chip row immediately below. Chips refine results by genre, platform, or price tier. Combine with multi-select chip logic.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       7. SIZES
+  =================================================== -->
+  <section class="ds-section" id="sizes">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Three size tiers &#x2014; S, M, L &#x2014; resolve to different pixel heights per platform. The size class stays constant; platform context provides the final value.</p>
+
+    <div class="ds-note" style="margin-bottom:20px">
+      <strong>Platform &#x2260; Size.</strong> <code class="ds-code">.input-m</code> on Mobile = 44px. Inside <code class="ds-code">.platform-tv</code> = 64px. Same class, same selector, different token alias resolved by context.
+    </div>
+
+    <div class="platform-size-grid" style="grid-template-columns:140px 1fr 1fr 1fr">
+      <div class="platform-size-cell platform-size-cell--header">Size</div>
+      <div class="platform-size-cell platform-size-cell--header platform-size-cell--mobile">Mobile</div>
+      <div class="platform-size-cell platform-size-cell--header platform-size-cell--web">Web</div>
+      <div class="platform-size-cell platform-size-cell--header platform-size-cell--tv">TV</div>
+
+      <div class="platform-size-cell platform-size-cell--label">S &#x2014; compact<span class="platform-size-token">--input-s-h</span></div>
+      <div class="platform-size-cell platform-size-cell--mobile">
+        <span class="platform-size-value">36px</span>
+        <span class="platform-size-note">Filter / typeahead bar</span>
+      </div>
+      <div class="platform-size-cell platform-size-cell--web">
+        <span class="platform-size-value">38px</span>
+        <span class="platform-size-note">Compact search</span>
+      </div>
+      <div class="platform-size-cell platform-size-cell--tv">
+        <span class="platform-size-value">56px</span>
+        <span class="platform-size-note">Secondary search fields</span>
+      </div>
+
+      <div class="platform-size-cell platform-size-cell--label">M &#x2014; standard<span class="platform-size-token">--input-m-h</span></div>
+      <div class="platform-size-cell platform-size-cell--mobile">
+        <span class="platform-size-value">44px</span>
+        <span class="platform-size-note">Default search bar</span>
+      </div>
+      <div class="platform-size-cell platform-size-cell--web">
+        <span class="platform-size-value">44px</span>
+        <span class="platform-size-note">Default search bar</span>
+      </div>
+      <div class="platform-size-cell platform-size-cell--tv">
+        <span class="platform-size-value">64px</span>
+        <span class="platform-size-note">Default search bar</span>
+      </div>
+
+      <div class="platform-size-cell platform-size-cell--label">L &#x2014; full<span class="platform-size-token">--input-l-h</span></div>
+      <div class="platform-size-cell platform-size-cell--mobile">
+        <span class="platform-size-value">54px</span>
+        <span class="platform-size-note">Hero / full-screen</span>
+      </div>
+      <div class="platform-size-cell platform-size-cell--web">
+        <span class="platform-size-value">52px</span>
+        <span class="platform-size-note">Prominent search bar</span>
+      </div>
+      <div class="platform-size-cell platform-size-cell--tv">
+        <span class="platform-size-value">72px</span>
+        <span class="platform-size-note">Hero search overlay</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       8. STATES
+  =================================================== -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Six interaction states cover the full search lifecycle. Each state has a distinct visual treatment and drives different panel content below the input.</p>
+
+    <div class="search-state-demo">
+
+      <!-- Default -->
+      <div class="search-state-item">
+        <div class="search-state-label">Default &#x2014; empty, unfocused</div>
+        <div style="max-width:480px;display:flex;align-items:center;gap:10px;height:48px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r4);padding:0 16px">
+          <svg viewBox="0 0 24 24" class="icon icon--m" style="color:var(--text3);flex-shrink:0"><use href="../sprite.svg#ic_search"></use></svg>
+          <span style="font-size:15px;color:var(--text3);flex:1">Search games, genres...</span>
+        </div>
+        <div style="font-size:11px;color:var(--text3)">Border: <code class="ds-code">var(--border)</code> &#xB7; Icon: <code class="ds-code">var(--text3)</code> &#xB7; No clear button</div>
+      </div>
+
+      <!-- Focused -->
+      <div class="search-state-item">
+        <div class="search-state-label search-state-label--active">Focused &#x2014; green border, cursor visible</div>
+        <div style="max-width:480px;display:flex;align-items:center;gap:10px;height:48px;background:var(--surface-2);border:1.5px solid var(--jio);border-radius:var(--r4);padding:0 16px">
+          <svg viewBox="0 0 24 24" class="icon icon--m" style="color:var(--jio);flex-shrink:0"><use href="../sprite.svg#ic_search"></use></svg>
+          <span style="font-size:15px;color:var(--text3);flex:1">Search games, genres...</span>
+          <span style="display:inline-block;width:1.5px;height:18px;background:var(--text);opacity:.8"></span>
+        </div>
+        <div style="font-size:11px;color:var(--text3)">Border: 1.5px <code class="ds-code">var(--jio)</code> &#xB7; Icon: <code class="ds-code">var(--jio)</code> &#xB7; Recent chips appear below</div>
+      </div>
+
+      <!-- Has value -->
+      <div class="search-state-item">
+        <div class="search-state-label">Has value &#x2014; clear button visible</div>
+        <div style="max-width:480px;display:flex;align-items:center;gap:10px;height:48px;background:var(--surface-2);border:1.5px solid var(--jio);border-radius:var(--r4);padding:0 16px">
+          <svg viewBox="0 0 24 24" class="icon icon--m" style="color:var(--jio);flex-shrink:0"><use href="../sprite.svg#ic_search"></use></svg>
+          <span style="font-size:15px;color:var(--text);flex:1">War Thunder</span>
+          <button aria-label="Clear search" class="btn btn--icon">
+            <svg viewBox="0 0 24 24" class="icon icon--s"><use href="../sprite.svg#ic_close"></use></svg>
+          </button>
+        </div>
+        <div style="font-size:11px;color:var(--text3)">Query: <code class="ds-code">var(--text)</code> &#xB7; Clear button appears &#xB7; Results surface opens</div>
+      </div>
+
+      <!-- Loading -->
+      <div class="search-state-item">
+        <div class="search-state-label">Loading &#x2014; spinner in trailing position</div>
+        <div style="max-width:480px">
+          <div style="display:flex;align-items:center;gap:10px;height:48px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r4);padding:0 16px">
+            <svg viewBox="0 0 24 24" class="icon icon--m" style="color:var(--text3);flex-shrink:0"><use href="../sprite.svg#ic_search"></use></svg>
+            <span style="font-size:15px;color:var(--text);flex:1">war</span>
+            <div class="jio-spinner jio-spinner--sm"></div>
+          </div>
+          <div style="margin-top:8px;display:flex;flex-direction:column;gap:10px;background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:14px 16px">
+            <div style="display:flex;gap:12px">
+              <div class="skeleton" style="width:40px;height:40px;border-radius:var(--r3);flex-shrink:0"></div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:7px">
+                <div class="skeleton skeleton--text" style="width:60%"></div>
+                <div class="skeleton skeleton--text" style="width:35%"></div>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px">
+              <div class="skeleton" style="width:40px;height:40px;border-radius:var(--r3);flex-shrink:0"></div>
+              <div style="flex:1;display:flex;flex-direction:column;gap:7px">
+                <div class="skeleton skeleton--text" style="width:72%"></div>
+                <div class="skeleton skeleton--text" style="width:44%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="font-size:11px;color:var(--text3)">Spinner replaces clear button &#xB7; Skeleton rows show below &#xB7; <code class="ds-code">aria-busy="true"</code></div>
+      </div>
+
+      <!-- No results -->
+      <div class="search-state-item">
+        <div class="search-state-label">No results &#x2014; empty state with fallback</div>
+        <div style="max-width:480px">
+          <div style="display:flex;align-items:center;gap:10px;height:48px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r4);padding:0 16px">
+            <svg viewBox="0 0 24 24" class="icon icon--m" style="color:var(--text3);flex-shrink:0"><use href="../sprite.svg#ic_search"></use></svg>
+            <span style="font-size:15px;color:var(--text);flex:1">xyzgame</span>
+            <button aria-label="Clear search" class="btn btn--icon">
+              <svg viewBox="0 0 24 24" class="icon icon--s"><use href="../sprite.svg#ic_close"></use></svg>
+            </button>
+          </div>
+          <div aria-live="polite" style="padding:32px 20px;text-align:center">
+            <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:6px">No results for &#x201C;xyzgame&#x201D;</div>
+            <div style="font-size:13px;color:var(--text3);margin-bottom:16px">Try a different keyword or browse by genre</div>
+            <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+              <span class="chip chip--s">Action</span>
+              <span class="chip chip--s">RPG</span>
+              <span class="chip chip--s">Racing</span>
+              <span class="chip chip--s">Free to play</span>
+            </div>
+          </div>
+        </div>
+        <div style="font-size:11px;color:var(--text3)">Genre chips offer a fallback browsing path &#xB7; Never say "No results" without a next step</div>
+      </div>
+
+      <!-- Error -->
+      <div class="search-state-item">
+        <div class="search-state-label search-state-label--error">Error &#x2014; can&#x27;t reach server</div>
+        <div style="max-width:480px">
+          <div style="display:flex;align-items:center;gap:10px;height:48px;background:var(--surface-2);border:1px solid var(--negative);border-radius:var(--r4);padding:0 16px">
+            <svg viewBox="0 0 24 24" class="icon icon--m" style="color:var(--negative);flex-shrink:0"><use href="../sprite.svg#ic_search"></use></svg>
+            <span style="font-size:15px;color:var(--text);flex:1">war</span>
+          </div>
+          <div style="margin-top:8px;padding:10px 14px;background:rgba(255,71,87,.08);border:1px solid rgba(255,71,87,.2);border-radius:var(--r3);font-size:13px;color:var(--negative)">
+            Search unavailable. Check your connection and try again.
+          </div>
+        </div>
+        <div style="font-size:11px;color:var(--text3)">Border: <code class="ds-code">var(--negative)</code> &#xB7; Error banner below &#xB7; Retry on reconnect</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       9. CONTENT
+  =================================================== -->
+  <section class="ds-section" id="content">
+    <h2 class="ds-section-title">Content</h2>
+    <p class="ds-section-desc">Every search surface text touch-point &#x2014; placeholder, empty state copy, error &#x2014; should reduce friction and show the player a clear next step.</p>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Placeholder copy</div>
+        <ul>
+          <li>Use "Search games, genres, creators..." on main search page</li>
+          <li>Use "Search..." only inside AppBar due to space constraints</li>
+          <li>Never use just "Search" alone &#x2014; name the objects players can find</li>
+          <li>Match language to the current surface context</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Query behavior</div>
+        <ul>
+          <li>Require minimum 2 characters before triggering any request</li>
+          <li>Debounce at 300ms after last keystroke</li>
+          <li>Show recent searches when focused and input is empty</li>
+          <li>Display skeleton cards while results load &#x2014; not a spinner overlay</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">No-results state</div>
+        <ul>
+          <li>Format: No results for &#x201C;[query]&#x201D;</li>
+          <li>Always follow with: Try a different keyword or browse by genre</li>
+          <li>Show 4&#x2013;6 genre chips as fallback browsing path</li>
+          <li>Never show a dead-end with no next action</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Error &amp; offline</div>
+        <ul>
+          <li>Error message: "Search unavailable. Check your connection and try again."</li>
+          <li>Show in a red-tinted banner below the bar, not inside it</li>
+          <li>Auto-retry when connection restores &#x2014; no manual user action needed</li>
+          <li>Disabled state: <code class="ds-code">opacity: var(--state-disabled-opacity)</code></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       10. PLATFORM CONSIDERATIONS
+  =================================================== -->
+  <section class="ds-section" id="platform-considerations">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <p class="ds-section-desc">The search component adapts its interaction model, size, and panel layout to the constraints of each platform.</p>
+    <div class="component-platform-grid">
+
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Full-width at top of search page</li>
+          <li>Tap activates focus; system keyboard slides up</li>
+          <li>Results and recent searches fill the page below</li>
+          <li>Bottom sheet for filter chips when results are displayed</li>
+          <li>Voice search icon in trailing position if microphone permission granted</li>
+          <li>Dismiss via back gesture or tapping outside</li>
+          <li>L size (54px) required for touch target compliance</li>
+        </ul>
+      </div>
+
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Inline within page or AppBar, max-width 480px</li>
+          <li>Inline results dropdown panel, z-index managed above rail content</li>
+          <li>Hover state on suggestion items (<code class="ds-code">var(--glass-1)</code> bg)</li>
+          <li>Arrow keys navigate suggestion list</li>
+          <li>ESC clears value and closes suggestions</li>
+          <li>Enter submits and routes to results page</li>
+          <li>M size (44px) for standard placement</li>
+        </ul>
+      </div>
+
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>D-pad OK/Enter to open virtual keyboard overlay</li>
+          <li>Full-width search bar always visible; cursor navigates to it</li>
+          <li>Recent searches shown prominently &#x2014; reduce typing burden</li>
+          <li>Voice search button accessible via D-pad</li>
+          <li>Suggestion items navigable up/down with D-pad</li>
+          <li>Focus ring uses <code class="ds-code">var(--tv-focus-shadow)</code> glow + scale(1.05)</li>
+          <li>L size (72px) for legibility at viewing distance</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================
+       11. ACCESSIBILITY
+  =================================================== -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">Search must be fully operable by keyboard, screen reader, and switch access. All live regions and ARIA roles are required &#x2014; not optional.</p>
+
+    <div class="a11y-grid">
+      <div class="a11y-row">
+        <div class="a11y-label">Form wrapper</div>
+        <div class="a11y-content"><code>role="search"</code> on the wrapping <code>&lt;form&gt;</code> element announces the search landmark to screen readers.</div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Input label</div>
+        <div class="a11y-content"><code>aria-label="Search JioGames"</code> on the <code>&lt;input&gt;</code>. Always use a visible label if space permits; <code>aria-label</code> as fallback.</div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Combobox role</div>
+        <div class="a11y-content">When suggestions are present: <code>role="combobox"</code>, <code>aria-expanded="true"</code>, <code>aria-haspopup="listbox"</code>, <code>aria-autocomplete="list"</code>, <code>aria-controls="search-suggestions"</code> on the input.</div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Result count</div>
+        <div class="a11y-content">Announce result count when loaded: <code>&lt;div aria-live="polite" aria-atomic="true"&gt;12 results for Action&lt;/div&gt;</code>. Region updates on every new result set.</div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Clear button</div>
+        <div class="a11y-content"><code>aria-label="Clear search"</code> required. Button must be focusable and operable by keyboard. Never use a bare icon without an accessible name.</div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Recent chip remove</div>
+        <div class="a11y-content">Each recent search chip with a remove action: <code>aria-label="Remove Action from recent searches"</code> on the close button within the chip.</div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Loading state</div>
+        <div class="a11y-content"><code>aria-busy="true"</code> on the input wrapper during loading. Spinner is decorative: <code>aria-hidden="true"</code>.</div>
+      </div>
+      <div class="a11y-row">
+        <div class="a11y-label">Focus ring</div>
+        <div class="a11y-content">Never remove the focus ring. On focus-within: 1.5px <code>var(--jio)</code> border. Do not use <code>outline: none</code> without a visible replacement.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       12. RELATED TOKENS
+  =================================================== -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-desc">Tokens that drive the search input&#x27;s visual states, sizing, and motion. Use these aliases &#x2014; never hardcode pixel values.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>Value</th>
+          <th>Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="ds-code">--input-s-h</code></td>
+          <td>36px / 38px / 56px</td>
+          <td>Compact search bar height &#x2014; mobile / web / TV</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--input-m-h</code></td>
+          <td>44px / 44px / 64px</td>
+          <td>Standard search bar height &#x2014; mobile / web / TV</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--input-l-h</code></td>
+          <td>54px / 52px / 72px</td>
+          <td>Full / hero search bar height &#x2014; mobile / web / TV</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--r4</code></td>
+          <td>14px</td>
+          <td>Default input container border-radius</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--border-subtle</code></td>
+          <td>rgba(255,255,255,.06)</td>
+          <td>Default unfocused border</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--jio</code></td>
+          <td>#00A859</td>
+          <td>Focus border color, leading icon on focus</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--surface-2</code></td>
+          <td>#161A24</td>
+          <td>Input container background</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--text3</code></td>
+          <td>rgba(244,242,238,.32)</td>
+          <td>Leading icon color (default), placeholder text</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--dur-default</code></td>
+          <td>200ms</td>
+          <td>Border color transition on focus/blur</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--ease-out</code></td>
+          <td>cubic-bezier(0,.6,.4,1)</td>
+          <td>Easing for focus ring appearance and panel slide-in</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ===================================================
+       13. CODE EXAMPLES
+  =================================================== -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
+    <div class="component-code-block">
+      <div class="component-code-label">Search — input bar</div>
+      <pre class="component-code-pre"><code>&lt;form class="search-bar" role="search" aria-label="Search games"&gt;
+  &lt;svg class="icon icon--m search-bar__icon" aria-hidden="true"&gt;
+    &lt;use href="/sprite.svg#ic_search"&gt;&lt;/use&gt;
+  &lt;/svg&gt;
+  &lt;input
+    class="input-field search-bar__input"
+    type="search"
+    placeholder="Search games, genres, publishers…"
+    aria-label="Search"
+    autocomplete="off"
+    spellcheck="false"
+  &gt;
+  &lt;button class="btn btn--icon search-bar__clear" aria-label="Clear search" hidden&gt;✕&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+    </div>
+    <div class="component-code-block">
+      <div class="component-code-label">Search — results list</div>
+      <pre class="component-code-pre"><code>&lt;ul class="ds-list" role="listbox" aria-label="Search results"&gt;
+  &lt;li class="ds-list-item" role="option"&gt;
+    &lt;div class="card__art" style="width:40px;height:40px;border-radius:var(--r3);flex-shrink:0"&gt;&lt;/div&gt;
+    &lt;div class="ds-list-item__body"&gt;
+      &lt;div class="ds-list-item__label"&gt;War Thunder&lt;/div&gt;
+      &lt;div class="ds-list-item__meta"&gt;Action · Free to play&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li class="ds-list-item" role="option"&gt;
+    &lt;div class="card__art" style="width:40px;height:40px;border-radius:var(--r3);flex-shrink:0"&gt;&lt;/div&gt;
+    &lt;div class="ds-list-item__body"&gt;
+      &lt;div class="ds-list-item__label"&gt;Tomb Raider&lt;/div&gt;
+      &lt;div class="ds-list-item__meta"&gt;Adventure · Pass included&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       14. CHANGELOG
+  =================================================== -->
+
+</main>
+<script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script>
+</body>
+</html>

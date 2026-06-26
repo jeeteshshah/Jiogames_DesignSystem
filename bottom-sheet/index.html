@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bottom Sheet — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    body { background: var(--bg); color: var(--text); font-family: var(--jio-font); margin: 0; }
+
+    /* ── Hero ── */
+    .component-hero {
+      border-radius: 20px; overflow: hidden; margin-bottom: 48px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      position: relative; padding: 48px 32px 40px;
+    }
+    .component-hero--dark { background: #060810; }
+    .component-hero--grid {
+      background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 32px 32px; background-color: #060810;
+      border: 1px solid var(--border-subtle);
+    }
+    .component-hero-inner { display:flex;flex-direction:column;align-items:center;gap:28px;position:relative;z-index:2;width:100%;max-width:700px; }
+    .component-hero-caption { display:block;font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text4);margin-top:24px;position:relative;z-index:2; }
+    .hero-glow { position:absolute;width:320px;height:180px;border-radius:var(--pill);background:radial-gradient(ellipse,rgba(0,168,89,.18) 0%,transparent 70%);pointer-events:none;z-index:1; }
+
+    /* ── Variant demo sections ── */
+    .variant-demo-section {
+      border: 1px solid var(--border-subtle); border-radius: var(--r4);
+      overflow: hidden; margin-top: 20px;
+    }
+    .variant-demo-preview {
+      background: #060810; padding: 48px 32px 36px;
+      display: flex; flex-direction: column; align-items: center; gap: 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      background-image:
+        linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .variant-demo-body { background: var(--surface-1); padding: 24px; }
+    .variant-demo-desc { font-size:14px;font-weight:500;color:var(--text2);line-height:1.6;max-width:560px;margin:0; }
+
+    /* ── Phone frame ── */
+    .phone { position:relative;background:#0a0c12;border-radius:24px;border:1px solid var(--border-subtle);overflow:hidden;transition:transform 400ms cubic-bezier(.32,.72,0,1),border-radius 400ms cubic-bezier(.32,.72,0,1); }
+    .phone.is-open { transform:scale(0.93) translateY(-6px);border-radius:32px; }
+
+    /* ── Sheet inside phone ── */
+    .phone-sheet {
+      position:absolute;bottom:0;left:0;right:0;
+      background:var(--surface-2);border-radius:16px 16px 0 0;
+      border-top:1px solid var(--border);
+      transform:translateY(100%);
+      transition:transform 420ms cubic-bezier(.32,.72,0,1);
+      display:flex;flex-direction:column;
+    }
+    .phone-sheet.is-open { transform:translateY(0); }
+    .phone-sheet-handle { display:flex;justify-content:center;padding:10px 0 0;flex-shrink:0;cursor:grab; }
+    .phone-sheet-handle-pill { width:36px;height:4px;border-radius:2px;background:rgba(255,255,255,.2); }
+    .phone-scrim {
+      position:absolute;inset:0;background:rgba(0,0,0,.5);
+      opacity:0;transition:opacity 350ms ease;pointer-events:none;
+    }
+    .phone-scrim.is-open { opacity:1;pointer-events:auto; }
+
+    /* ── Demo trigger buttons ── */
+    .demo-trigger {
+      height:36px;border-radius:10px;background:var(--surface-2);
+      border:1px solid var(--border);color:var(--text);
+      font-size:12px;font-weight:600;padding:0 20px;cursor:pointer;
+      font-family:var(--jio-font);transition:background 150ms,border-color 150ms;
+    }
+    .demo-trigger:hover { background:var(--surface-3);border-color:var(--border); }
+    .demo-trigger-group { display:flex;flex-direction:column;align-items:center;gap:10px; }
+    .demo-trigger-label { font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text4); }
+
+    /* ── Anatomy ── */
+    .anatomy-tree {
+      border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;
+      font-family:monospace;font-size:12px;
+    }
+    .anatomy-tree-row {
+      display:grid;grid-template-columns:280px 1fr;border-bottom:1px solid var(--border-subtle);
+    }
+    .anatomy-tree-row:last-child { border-bottom:none; }
+    .anatomy-tree-name { padding:12px 16px;background:var(--surface-2);color:var(--text);font-weight:600;display:flex;align-items:center;gap:6px;font-size:11px; }
+    .anatomy-tree-name .indent { color:var(--border); }
+    .anatomy-tree-desc { padding:12px 16px;background:var(--surface-1);font-size:11px;font-weight:500;color:var(--text2);line-height:1.55;font-family:var(--jio-font); }
+    .anatomy-required { display:inline-block;font-size:9px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--jio);background:rgba(0,168,89,.1);border-radius:4px;padding:1px 5px;margin-left:4px;font-family:var(--jio-font); }
+    .anatomy-optional { display:inline-block;font-size:9px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--text3);background:var(--surface-3);border-radius:4px;padding:1px 5px;margin-left:4px;font-family:var(--jio-font); }
+
+    /* ── Code block ── */
+    .ds-code-block { border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;margin-top:12px; }
+    .ds-code-label { padding:10px 16px;background:var(--surface-2);font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border-subtle); }
+    .ds-code-pre { margin:0;background:var(--surface-1);padding:20px;overflow-x:auto; }
+    .ds-code-pre code { font-size:12px;line-height:1.7;color:var(--text2);font-family:monospace; }
+
+    /* ── Token table ── */
+    .ds-token-table { width:100%;border-collapse:collapse;border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;font-size:12px; }
+    .ds-token-table th { background:var(--surface-2);padding:10px 16px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border-subtle); }
+    .ds-token-table td { padding:12px 16px;border-bottom:1px solid var(--border-subtle);color:var(--text2);vertical-align:top;background:var(--surface-1); }
+    .ds-token-table tr:last-child td { border-bottom:none; }
+    .ds-token-table code { font-family:monospace;font-size:11px;color:#a8e6c5;background:rgba(0,168,89,.08);padding:1px 5px;border-radius:3px; }
+
+    /* ── Do / Don't ── */
+    .bp-grid { display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px; }
+    .bp-card { border-radius:14px;overflow:hidden;border:1.5px solid; }
+    .bp-card--do   { border-color:rgba(0,168,89,.3); }
+    .bp-card--dont { border-color:rgba(255,71,87,.3); }
+    .bp-label { display:flex;align-items:center;gap:6px;padding:10px 16px;font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase; }
+    .bp-label--do   { background:rgba(0,168,89,.07);color:var(--jio); }
+    .bp-label--dont { background:rgba(255,71,87,.07);color:var(--negative); }
+    .bp-label--do::before   { content:'\2713';font-size:11px; }
+    .bp-label--dont::before { content:'\2715';font-size:11px; }
+    .bp-list { padding:16px 20px 20px;background:var(--surface-1);margin:0;display:flex;flex-direction:column;gap:8px;list-style:none; }
+    .bp-list li { font-size:12px;font-weight:500;color:var(--text2);line-height:1.5;padding-left:14px;position:relative; }
+    .bp-list li::before { content:'\00B7';position:absolute;left:3px;color:var(--text4); }
+
+    /* ── A11y ── */
+    .a11y-grid { display:flex;flex-direction:column;gap:0;border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;margin-top:20px; }
+    .a11y-row { display:grid;grid-template-columns:160px 1fr;gap:0;border-bottom:1px solid var(--border-subtle); }
+    .a11y-row:last-child { border-bottom:none; }
+    .a11y-label { padding:14px 16px;font-size:11px;font-weight:700;color:var(--text3);letter-spacing:.3px;background:var(--surface-2);text-transform:uppercase;display:flex;align-items:flex-start;padding-top:16px; }
+    .a11y-content { padding:14px 20px;font-size:12px;font-weight:500;color:var(--text2);line-height:1.6;background:var(--surface-1); }
+    .a11y-content code { font-family:monospace;font-size:11px;color:#a8e6c5;background:rgba(0,168,89,.08);padding:1px 5px;border-radius:3px; }
+
+    /* ── Platform grid ── */
+    .platform-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px; }
+    .platform-card { background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:20px; }
+    .platform-card--mobile { border-top:2px solid rgba(110,231,183,.4); }
+    .platform-card--web    { border-top:2px solid rgba(147,197,253,.4); }
+    .platform-card--tv     { border-top:2px solid rgba(251,191,36,.4); }
+    .platform-card-title { font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin-bottom:12px; }
+    .platform-card--mobile .platform-card-title { color:#6ee7b7; }
+    .platform-card--web    .platform-card-title { color:#93c5fd; }
+    .platform-card--tv     .platform-card-title { color:#fbbf24; }
+    .platform-card ul { margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px; }
+    .platform-card li { font-size:12px;font-weight:500;color:var(--text2);line-height:1.5;padding-left:14px;position:relative; }
+    .platform-card li::before { content:'\00B7';position:absolute;left:3px;color:var(--text4); }
+
+    /* ── Snap point indicator ── */
+    .snap-indicator {
+      display:flex;gap:4px;margin-top:6px;
+    }
+    .snap-dot {
+      width:6px;height:6px;border-radius:50%;background:var(--border);transition:background 300ms;
+    }
+    .snap-dot.active { background:var(--jio); }
+
+    @media (max-width:760px) {
+      .bp-grid,.platform-grid { grid-template-columns:1fr; }
+      .anatomy-tree-row { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+<main class="ds-content">
+
+  <!-- ══════════════════════════════════════════
+       PAGE HEADER
+  ══════════════════════════════════════════ -->
+  <div class="component-page-header">
+    <div class="component-breadcrumb">
+      <a href="../index.html">JioGames DLS</a>
+      <span class="component-breadcrumb-sep">&#x203A;</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">&#x203A;</span>
+      <span>Bottom Sheet</span>
+    </div>
+    <h1 class="component-page-title">Bottom Sheet</h1>
+    <p class="component-page-def">An extended overlay panel that slides up from the bottom of the screen. Supports drag-to-dismiss, snap points, scrollable content, and a sticky footer.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+      <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       HERO — Interactive dual demo
+  ══════════════════════════════════════════ -->
+  <section class="component-hero component-hero--dark component-hero--grid" id="overview" style="min-height:460px">
+    <div class="hero-glow" style="top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+    <div class="component-hero-inner">
+      <div style="display:flex;gap:32px;align-items:flex-end;justify-content:center;flex-wrap:wrap">
+
+        <!-- Demo A: Standard -->
+        <div class="demo-trigger-group">
+          <div id="ph-a" class="phone" style="width:210px;height:320px">
+            <div style="padding:16px 14px 0">
+              <div style="height:90px;background:linear-gradient(135deg,rgba(0,168,89,.18),rgba(90,60,200,.1));border-radius:12px;display:flex;align-items:flex-end;padding:10px">
+                <span style="font-size:10px;font-weight:700;color:var(--text)">Tomb Raider: Shadow</span>
+              </div>
+              <div style="display:flex;gap:6px;margin-top:8px">
+                <button class="btn btn--primary btn--sm" style="flex:1;min-width:0">▶ Play</button>
+                <button class="btn btn--ghost btn--sm" style="flex:1;min-width:0">More</button>
+              </div>
+              <div style="margin-top:10px;display:flex;flex-direction:column;gap:4px">
+                <div style="height:5px;background:var(--surface-3);border-radius:3px;width:90%"></div>
+                <div style="height:5px;background:var(--surface-3);border-radius:3px;width:70%"></div>
+              </div>
+            </div>
+            <div id="sc-a" class="phone-scrim" onclick="dsClose('a')"></div>
+            <div id="sh-a" class="phone-sheet" style="height:195px">
+              <div class="phone-sheet-handle"><div class="phone-sheet-handle-pill"></div></div>
+              <div style="padding:10px 16px 0">
+                <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:10px">Share game</div>
+                <div style="display:flex;flex-direction:column">
+                  <div style="display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--border-subtle)">
+                    <div style="width:26px;height:26px;border-radius:50%;background:var(--surface-3);flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="12" height="12" fill="var(--text2)"><use href="../sprite.svg#ic_share"></use></svg></div>
+                    <span style="font-size:10px;font-weight:600;color:var(--text)">Share with friends</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--border-subtle)">
+                    <div style="width:26px;height:26px;border-radius:50%;background:var(--surface-3);flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="12" height="12" fill="var(--text2)"><use href="../sprite.svg#ic_multiple_user"></use></svg></div>
+                    <span style="font-size:10px;font-weight:600;color:var(--text)">Invite to play</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:9px;padding:7px 0">
+                    <div style="width:26px;height:26px;border-radius:50%;background:var(--surface-3);flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="12" height="12" fill="var(--text2)"><use href="../sprite.svg#ic_copy"></use></svg></div>
+                    <span style="font-size:10px;font-weight:600;color:var(--text)">Copy link</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button id="btn-a" class="demo-trigger" onclick="dsOpen('a')">Open Drawer</button>
+          <span class="demo-trigger-label">Standard</span>
+        </div>
+
+        <!-- Demo B: Scrollable + sticky footer -->
+        <div class="demo-trigger-group">
+          <div id="ph-b" class="phone" style="width:210px;height:320px">
+            <div style="padding:16px 14px 0">
+              <div style="font-size:10px;font-weight:700;color:var(--text);margin-bottom:8px">My Library</div>
+              <div style="display:flex;flex-direction:column;gap:5px">
+                <div style="height:40px;background:var(--surface-2);border-radius:9px;border:1px solid var(--border-subtle);display:flex;align-items:center;gap:8px;padding:0 8px">
+                  <div style="width:24px;height:24px;background:linear-gradient(135deg,rgba(0,168,89,.3),rgba(90,60,200,.2));border-radius:5px;flex-shrink:0"></div>
+                  <div><div style="font-size:8px;font-weight:700;color:var(--text)">Tomb Raider</div><div style="font-size:7px;color:var(--text3)">72% completed</div></div>
+                </div>
+                <div style="height:40px;background:var(--surface-2);border-radius:9px;border:1px solid var(--border-subtle);display:flex;align-items:center;gap:8px;padding:0 8px">
+                  <div style="width:24px;height:24px;background:linear-gradient(135deg,rgba(142,91,255,.3),rgba(0,168,89,.1));border-radius:5px;flex-shrink:0"></div>
+                  <div><div style="font-size:8px;font-weight:700;color:var(--text)">War Thunder</div><div style="font-size:7px;color:var(--text3)">34% completed</div></div>
+                </div>
+              </div>
+            </div>
+            <div id="sc-b" class="phone-scrim" onclick="dsClose('b')"></div>
+            <div id="sh-b" class="phone-sheet" style="height:250px">
+              <div class="phone-sheet-handle"><div class="phone-sheet-handle-pill"></div></div>
+              <div style="padding:8px 16px 6px;flex-shrink:0">
+                <div style="font-size:12px;font-weight:700;color:var(--text)">Game settings</div>
+                <div style="font-size:8px;color:var(--text3);margin-top:1px">Tomb Raider: Shadow</div>
+              </div>
+              <div style="flex:1;overflow-y:auto;padding:0 16px;min-height:0">
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border-subtle)"><span style="font-size:9px;font-weight:600;color:var(--text)">Graphics quality</span><span style="font-size:8px;color:var(--jio);font-weight:700">High</span></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border-subtle)"><span style="font-size:9px;font-weight:600;color:var(--text)">Notifications</span><div style="width:22px;height:13px;background:var(--jio);border-radius:7px;position:relative"><div style="position:absolute;right:2px;top:1.5px;width:10px;height:10px;background:#fff;border-radius:50%"></div></div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border-subtle)"><span style="font-size:9px;font-weight:600;color:var(--text)">Auto-save</span><div style="width:22px;height:13px;background:var(--surface-3);border-radius:7px;position:relative"><div style="position:absolute;left:2px;top:1.5px;width:10px;height:10px;background:var(--text3);border-radius:50%"></div></div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border-subtle)"><span style="font-size:9px;font-weight:600;color:var(--text)">Sound effects</span><div style="width:22px;height:13px;background:var(--jio);border-radius:7px;position:relative"><div style="position:absolute;right:2px;top:1.5px;width:10px;height:10px;background:#fff;border-radius:50%"></div></div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0"><span style="font-size:9px;font-weight:600;color:var(--negative)">Reset progress</span><span style="font-size:8px;color:var(--text4)">›</span></div>
+              </div>
+              <div style="flex-shrink:0;padding:8px 16px 12px;border-top:1px solid var(--border-subtle);display:flex;gap:7px">
+                <button onclick="dsClose('b')" class="btn btn--ghost btn--sm" style="flex:1">Cancel</button>
+                <button onclick="dsClose('b')" class="btn btn--primary btn--sm" style="flex:2">Save settings</button>
+              </div>
+            </div>
+          </div>
+          <button id="btn-b" class="demo-trigger" onclick="dsOpen('b')">Open Drawer</button>
+          <span class="demo-trigger-label">Scrollable + Sticky footer</span>
+        </div>
+
+      </div>
+    </div>
+    <span class="component-hero-caption">Bottom sheet &#xB7; Interactive demo &#xB7; Mobile</span>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       VARIANTS
+  ══════════════════════════════════════════ -->
+  <section class="ds-section" id="variants">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Four patterns cover the full range of contextual use cases. Each is interactive below.</p>
+
+    <!-- ── Variant 1: Basic ── -->
+    <h3 class="ds-subsection-title" style="margin-top:32px">Basic</h3>
+    <p class="ds-body" style="max-width:560px">Fixed-height sheet with a list of actions. Single snap point. The most common variant — used for sharing, more options, and quick selections.</p>
+    <div class="variant-demo-section">
+      <div class="variant-demo-preview">
+        <div class="demo-trigger-group">
+          <div id="ph-v1" class="phone" style="width:220px;height:340px">
+            <div style="padding:18px 16px 0">
+              <div style="height:100px;background:linear-gradient(135deg,rgba(0,168,89,.15),rgba(142,91,255,.08));border-radius:12px;display:flex;align-items:flex-end;padding:10px">
+                <span style="font-size:10px;font-weight:700;color:var(--text)">Tomb Raider: Shadow</span>
+              </div>
+              <div style="display:flex;gap:7px;margin-top:9px">
+                <button class="btn btn--primary btn--sm" style="flex:1;min-width:0">▶ Play</button>
+                <button class="btn btn--ghost btn--sm" style="flex:1;min-width:0">More</button>
+              </div>
+              <div style="margin-top:10px;display:flex;flex-direction:column;gap:5px">
+                <div style="height:5px;background:var(--surface-3);border-radius:3px;width:90%"></div>
+                <div style="height:5px;background:var(--surface-3);border-radius:3px;width:70%"></div>
+                <div style="height:5px;background:var(--surface-3);border-radius:3px;width:80%"></div>
+              </div>
+            </div>
+            <div id="sc-v1" class="phone-scrim" onclick="dsClose('v1')"></div>
+            <div id="sh-v1" class="phone-sheet" style="height:215px">
+              <div class="phone-sheet-handle"><div class="phone-sheet-handle-pill"></div></div>
+              <div style="padding:10px 18px 0">
+                <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:11px">Share game</div>
+                <div style="display:flex;flex-direction:column">
+                  <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border-subtle)">
+                    <div style="width:28px;height:28px;border-radius:50%;background:var(--surface-3);flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="13" height="13" fill="var(--text2)"><use href="../sprite.svg#ic_share"></use></svg></div>
+                    <span style="font-size:11px;font-weight:600;color:var(--text)">Share with friends</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border-subtle)">
+                    <div style="width:28px;height:28px;border-radius:50%;background:var(--surface-3);flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="13" height="13" fill="var(--text2)"><use href="../sprite.svg#ic_multiple_user"></use></svg></div>
+                    <span style="font-size:11px;font-weight:600;color:var(--text)">Invite to play</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:10px;padding:8px 0">
+                    <div style="width:28px;height:28px;border-radius:50%;background:var(--surface-3);flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="13" height="13" fill="var(--text2)"><use href="../sprite.svg#ic_copy"></use></svg></div>
+                    <span style="font-size:11px;font-weight:600;color:var(--text)">Copy link</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button id="btn-v1" class="demo-trigger" onclick="dsOpen('v1')">Open Drawer</button>
+        </div>
+      </div>
+      <div class="variant-demo-body">
+        <p class="variant-demo-desc">Fixed height. Action list of 2&#x2013;6 items. Each row has an icon, label, and optional chevron. Tapping the scrim or swiping down dismisses.</p>
+        <div class="ds-code-block" style="margin-top:16px">
+          <div class="ds-code-label">HTML structure</div>
+          <pre class="ds-code-pre"><code>&lt;div class="bottom-sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title"&gt;
+  &lt;div class="sheet-handle" aria-hidden="true"&gt;&lt;/div&gt;
+  &lt;div class="sheet-header"&gt;
+    &lt;h2 id="sheet-title" class="sheet-title"&gt;Share game&lt;/h2&gt;
+  &lt;/div&gt;
+  &lt;div class="sheet-body"&gt;
+    &lt;button class="sheet-action-row"&gt;
+      &lt;div class="sheet-action-icon"&gt;&lt;!-- icon --&gt;&lt;/div&gt;
+      &lt;span class="sheet-action-label"&gt;Share with friends&lt;/span&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Variant 2: Scrollable content ── -->
+    <h3 class="ds-subsection-title" style="margin-top:40px">Scrollable content</h3>
+    <p class="ds-body" style="max-width:560px">Body scrolls independently while the header and footer stay fixed. Use for settings, filters, or any list that can exceed the sheet height.</p>
+    <div class="variant-demo-section">
+      <div class="variant-demo-preview">
+        <div class="demo-trigger-group">
+          <div id="ph-v2" class="phone" style="width:220px;height:340px">
+            <div style="padding:18px 16px 0">
+              <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:9px">Filter games</div>
+              <div style="display:flex;gap:5px;flex-wrap:wrap">
+                <div style="height:22px;border-radius:var(--pill);background:rgba(0,168,89,.15);border:1px solid rgba(0,168,89,.3);padding:0 9px;display:flex;align-items:center"><span style="font-size:8px;font-weight:700;color:var(--jio)">Action</span></div>
+                <div style="height:22px;border-radius:var(--pill);background:var(--surface-3);border:1px solid var(--border-subtle);padding:0 9px;display:flex;align-items:center"><span style="font-size:8px;font-weight:600;color:var(--text2)">Racing</span></div>
+                <div style="height:22px;border-radius:var(--pill);background:var(--surface-3);border:1px solid var(--border-subtle);padding:0 9px;display:flex;align-items:center"><span style="font-size:8px;font-weight:600;color:var(--text2)">RPG</span></div>
+                <div style="height:22px;border-radius:var(--pill);background:var(--surface-3);border:1px solid var(--border-subtle);padding:0 9px;display:flex;align-items:center"><span style="font-size:8px;font-weight:600;color:var(--text2)">Sports</span></div>
+              </div>
+              <div style="margin-top:10px;display:flex;flex-direction:column;gap:5px">
+                <div style="height:5px;background:var(--surface-3);border-radius:3px;width:80%"></div>
+                <div style="height:5px;background:var(--surface-3);border-radius:3px;width:65%"></div>
+              </div>
+            </div>
+            <div id="sc-v2" class="phone-scrim" onclick="dsClose('v2')"></div>
+            <div id="sh-v2" class="phone-sheet" style="height:265px">
+              <div class="phone-sheet-handle"><div class="phone-sheet-handle-pill"></div></div>
+              <div style="padding:8px 16px 6px;flex-shrink:0;border-bottom:1px solid var(--border-subtle)">
+                <div style="font-size:12px;font-weight:700;color:var(--text)">Filter by genre</div>
+              </div>
+              <!-- Scrollable body -->
+              <div style="flex:1;overflow-y:auto;min-height:0">
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-bottom:1px solid var(--border-subtle)"><span style="font-size:10px;font-weight:600;color:var(--text)">Action</span><div style="width:14px;height:14px;border-radius:4px;background:var(--jio);display:flex;align-items:center;justify-content:center"><span style="font-size:9px;color:#fff">✓</span></div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-bottom:1px solid var(--border-subtle)"><span style="font-size:10px;font-weight:600;color:var(--text)">Adventure</span><div style="width:14px;height:14px;border-radius:4px;background:var(--surface-3);border:1px solid var(--border)"></div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-bottom:1px solid var(--border-subtle)"><span style="font-size:10px;font-weight:600;color:var(--text)">Racing</span><div style="width:14px;height:14px;border-radius:4px;background:var(--surface-3);border:1px solid var(--border)"></div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-bottom:1px solid var(--border-subtle)"><span style="font-size:10px;font-weight:600;color:var(--text)">RPG</span><div style="width:14px;height:14px;border-radius:4px;background:var(--surface-3);border:1px solid var(--border)"></div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-bottom:1px solid var(--border-subtle)"><span style="font-size:10px;font-weight:600;color:var(--text)">Sports</span><div style="width:14px;height:14px;border-radius:4px;background:var(--surface-3);border:1px solid var(--border)"></div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px"><span style="font-size:10px;font-weight:600;color:var(--text)">Casual</span><div style="width:14px;height:14px;border-radius:4px;background:var(--surface-3);border:1px solid var(--border)"></div></div>
+              </div>
+              <!-- Sticky footer -->
+              <div style="flex-shrink:0;padding:8px 16px 14px;border-top:1px solid var(--border-subtle);display:flex;gap:7px">
+                <button onclick="dsClose('v2')" class="btn btn--ghost btn--sm" style="flex:1">Reset</button>
+                <button onclick="dsClose('v2')" class="btn btn--primary btn--sm" style="flex:2">Apply filters</button>
+              </div>
+            </div>
+          </div>
+          <button id="btn-v2" class="demo-trigger" onclick="dsOpen('v2')">Open Drawer</button>
+        </div>
+      </div>
+      <div class="variant-demo-body">
+        <p class="variant-demo-desc">The header and footer use <code style="font-family:monospace;font-size:12px;color:#a8e6c5">flex-shrink:0</code>. The body takes <code style="font-family:monospace;font-size:12px;color:#a8e6c5">flex:1;overflow-y:auto;min-height:0</code> to enable independent scroll while footer actions stay pinned and always reachable.</p>
+        <div class="ds-code-block" style="margin-top:16px">
+          <div class="ds-code-label">CSS — flex layout for sticky footer</div>
+          <pre class="ds-code-pre"><code>.bottom-sheet {
+  display: flex;
+  flex-direction: column;
+  height: var(--sheet-height, 55vh); /* or fixed px */
+}
+.sheet-header { flex-shrink: 0; }
+.sheet-body   { flex: 1; overflow-y: auto; min-height: 0; }
+.sheet-footer { flex-shrink: 0; }</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Variant 3: Snap points ── -->
+    <h3 class="ds-subsection-title" style="margin-top:40px">Snap points</h3>
+    <p class="ds-body" style="max-width:560px">Multi-height sheet that snaps between defined heights on drag. Supports peek (25%), half (55%), and full (92%). Click the buttons below to snap between heights.</p>
+    <div class="variant-demo-section">
+      <div class="variant-demo-preview">
+        <div class="demo-trigger-group">
+          <div id="ph-v3" class="phone" style="width:220px;height:340px">
+            <div style="padding:18px 16px 0">
+              <div style="height:100px;background:linear-gradient(135deg,rgba(0,168,89,.15),rgba(142,91,255,.1));border-radius:12px;display:flex;align-items:flex-end;padding:10px">
+                <span style="font-size:10px;font-weight:700;color:var(--text)">Yooka-Laylee</span>
+              </div>
+              <div style="margin-top:10px;display:flex;flex-direction:column;gap:5px">
+                <div style="height:5px;background:var(--surface-3);border-radius:3px;width:85%"></div>
+                <div style="height:5px;background:var(--surface-3);border-radius:3px;width:70%"></div>
+              </div>
+            </div>
+            <div id="sc-v3" class="phone-scrim" onclick="snapClose()"></div>
+            <div id="sh-v3" style="position:absolute;bottom:0;left:0;right:0;background:var(--surface-2);border-radius:16px 16px 0 0;border-top:1px solid var(--border);transform:translateY(100%);transition:height 380ms cubic-bezier(.32,.72,0,1),transform 420ms cubic-bezier(.32,.72,0,1);overflow:hidden">
+              <div class="phone-sheet-handle" style="cursor:grab"><div class="phone-sheet-handle-pill"></div></div>
+              <div style="padding:6px 16px 0">
+                <div style="font-size:12px;font-weight:700;color:var(--text)">Game details</div>
+                <div style="font-size:8px;color:var(--text3);margin-top:1px">Yooka-Laylee &amp; The Impossible Lair</div>
+              </div>
+              <div style="padding:10px 16px;display:flex;flex-direction:column;gap:6px">
+                <div style="font-size:9px;color:var(--text2);line-height:1.55">A beautiful platformer with hand-crafted 2.5D worlds. Collect Quills, rescue Tonic powers, and challenge the Impossible Lair.</div>
+                <div style="display:flex;gap:5px;margin-top:4px">
+                  <div style="height:20px;border-radius:var(--pill);background:rgba(0,168,89,.15);border:1px solid rgba(0,168,89,.2);padding:0 8px;display:flex;align-items:center"><span style="font-size:7px;font-weight:700;color:var(--jio)">Platformer</span></div>
+                  <div style="height:20px;border-radius:var(--pill);background:var(--surface-3);border:1px solid var(--border-subtle);padding:0 8px;display:flex;align-items:center"><span style="font-size:7px;font-weight:600;color:var(--text3)">Adventure</span></div>
+                </div>
+                <div style="margin-top:4px;display:flex;flex-direction:column;gap:4px">
+                  <div style="height:4px;background:var(--surface-3);border-radius:2px;width:100%"></div>
+                  <div style="height:4px;background:var(--surface-3);border-radius:2px;width:85%"></div>
+                  <div style="height:4px;background:var(--surface-3);border-radius:2px;width:90%"></div>
+                  <div style="height:4px;background:var(--surface-3);border-radius:2px;width:75%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Snap controls -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+            <div style="display:flex;gap:6px">
+              <button class="demo-trigger" style="font-size:11px;padding:0 12px;height:30px" onclick="snapTo(0)">Peek</button>
+              <button class="demo-trigger" style="font-size:11px;padding:0 12px;height:30px" onclick="snapTo(1)">Half</button>
+              <button class="demo-trigger" style="font-size:11px;padding:0 12px;height:30px" onclick="snapTo(2)">Full</button>
+              <button class="demo-trigger" style="font-size:11px;padding:0 12px;height:30px;background:var(--surface-3)" onclick="snapClose()">✕</button>
+            </div>
+            <div class="snap-indicator">
+              <div class="snap-dot" id="sd0"></div>
+              <div class="snap-dot" id="sd1"></div>
+              <div class="snap-dot" id="sd2"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="variant-demo-body">
+        <p class="variant-demo-desc">Define snap heights as percentages of the frame. On release after drag, snap to nearest point based on position and velocity. Higher velocity snaps in direction of travel regardless of midpoint.</p>
+        <div class="ds-code-block" style="margin-top:16px">
+          <div class="ds-code-label">JS — snap point logic</div>
+          <pre class="ds-code-pre"><code>const snaps = ['25%', '55%', '92%']; // of viewport height
+let current = 0;
+
+function snapTo(index) {
+  current = index;
+  sheet.style.height = snaps[index];
+  updateIndicators();
+}
+
+// On drag end — snap by velocity
+function onDragEnd(velocity, position) {
+  if (velocity > 0.5) snapTo(Math.max(0, current - 1));  // fast down = lower snap
+  else if (velocity < -0.5) snapTo(Math.min(2, current + 1)); // fast up = higher snap
+  else snapTo(nearestSnap(position));
+}</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Variant 4: Responsive dialog ── -->
+    <h3 class="ds-subsection-title" style="margin-top:40px">Responsive dialog</h3>
+    <p class="ds-body" style="max-width:560px">Renders as a centered dialog on wide viewports (&#x2265;768px) and as a bottom sheet on mobile. One component, two presentations. Useful for flows like plan selection or confirmation.</p>
+    <div class="variant-demo-section">
+      <div class="variant-demo-preview" style="flex-direction:row;justify-content:center;flex-wrap:wrap;gap:40px">
+
+        <!-- Mobile view -->
+        <div class="demo-trigger-group">
+          <div id="ph-v4m" class="phone" style="width:180px;height:290px">
+            <div style="padding:14px 12px 0">
+              <div style="font-size:9px;color:var(--text3);margin-bottom:6px;font-weight:700">CURRENT PLAN</div>
+              <div style="height:50px;background:var(--surface-2);border-radius:10px;border:1px solid var(--border-subtle);display:flex;align-items:center;padding:0 10px;gap:8px">
+                <div style="width:26px;height:26px;border-radius:50%;background:rgba(0,168,89,.15);border:1.5px solid rgba(0,168,89,.3);display:flex;align-items:center;justify-content:center"><span style="font-size:8px;font-weight:900;color:var(--jio)">M</span></div>
+                <div><div style="font-size:9px;font-weight:700;color:var(--text)">Mobile Pass</div><div style="font-size:7px;color:var(--text3)">₹99 / month</div></div>
+              </div>
+            </div>
+            <div id="sc-v4m" class="phone-scrim" onclick="dsClose('v4m')"></div>
+            <div id="sh-v4m" class="phone-sheet" style="height:200px">
+              <div class="phone-sheet-handle"><div class="phone-sheet-handle-pill"></div></div>
+              <div style="padding:8px 14px 0;flex-shrink:0">
+                <div style="font-size:11px;font-weight:700;color:var(--text)">Upgrade to Ultimate</div>
+                <div style="font-size:8px;color:var(--text3);margin-top:1px">Unlock 200+ games, TV + mobile</div>
+              </div>
+              <div style="padding:8px 14px;flex:1;display:flex;flex-direction:column;gap:5px">
+                <div style="display:flex;align-items:center;gap:7px"><span style="font-size:9px;color:var(--jio);font-weight:700">✓</span><span style="font-size:9px;color:var(--text2)">All Mobile Pass games</span></div>
+                <div style="display:flex;align-items:center;gap:7px"><span style="font-size:9px;color:var(--jio);font-weight:700">✓</span><span style="font-size:9px;color:var(--text2)">JioGames on TV</span></div>
+                <div style="display:flex;align-items:center;gap:7px"><span style="font-size:9px;color:var(--jio);font-weight:700">✓</span><span style="font-size:9px;color:var(--text2)">Cloud gaming (beta)</span></div>
+              </div>
+              <div style="flex-shrink:0;padding:0 14px 12px">
+                <button onclick="dsClose('v4m')" class="btn btn--primary btn--sm btn--full">Upgrade — ₹199/mo</button>
+              </div>
+            </div>
+          </div>
+          <button id="btn-v4m" class="demo-trigger" onclick="dsOpen('v4m')">Mobile (sheet)</button>
+        </div>
+
+        <!-- Web / desktop view -->
+        <div class="demo-trigger-group">
+          <div style="position:relative;width:360px;height:240px;background:#0a0c12;border-radius:16px;border:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:center;overflow:hidden">
+            <!-- Fake desktop bg -->
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,#0e1118 0%,#06080f 100%);opacity:.7"></div>
+            <!-- Dialog -->
+            <div id="dialog-v4w" style="position:relative;z-index:2;width:280px;background:var(--surface-2);border-radius:14px;border:1px solid var(--border);padding:0;overflow:hidden;transform:scale(0.9) translateY(8px);opacity:0;transition:transform 320ms cubic-bezier(.32,.72,0,1),opacity 280ms ease;pointer-events:none">
+              <div style="padding:20px 20px 0">
+                <div style="font-size:14px;font-weight:700;color:var(--text)">Upgrade to Ultimate</div>
+                <div style="font-size:11px;color:var(--text3);margin-top:2px">Unlock 200+ games, TV + mobile</div>
+              </div>
+              <div style="padding:14px 20px;display:flex;flex-direction:column;gap:7px">
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:10px;color:var(--jio);font-weight:700">✓</span><span style="font-size:11px;color:var(--text2)">All Mobile Pass games</span></div>
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:10px;color:var(--jio);font-weight:700">✓</span><span style="font-size:11px;color:var(--text2)">JioGames on TV</span></div>
+                <div style="display:flex;align-items:center;gap:8px"><span style="font-size:10px;color:var(--jio);font-weight:700">✓</span><span style="font-size:11px;color:var(--text2)">Cloud gaming (beta)</span></div>
+              </div>
+              <div style="padding:0 20px 20px;display:flex;gap:8px">
+                <button onclick="dialogClose()" class="btn btn--ghost btn--sm" style="flex:1">Cancel</button>
+                <button onclick="dialogClose()" class="btn btn--primary btn--sm" style="flex:2">Upgrade — ₹199/mo</button>
+              </div>
+            </div>
+          </div>
+          <button id="btn-v4w" class="demo-trigger" onclick="dialogOpen()">Desktop (dialog)</button>
+        </div>
+      </div>
+      <div class="variant-demo-body">
+        <p class="variant-demo-desc">Same content, two presentations. On mobile, the sheet slides up from the bottom with a drag handle. On desktop, the same content renders as a centered dialog with a backdrop. Implement with a single component, switching class at the 768px breakpoint.</p>
+        <div class="ds-code-block" style="margin-top:16px">
+          <div class="ds-code-label">CSS — responsive switch</div>
+          <pre class="ds-code-pre"><code>.bottom-sheet {
+  /* Mobile: bottom sheet */
+  position: fixed; bottom: 0; left: 0; right: 0;
+  border-radius: 20px 20px 0 0;
+  transform: translateY(100%);
+}
+
+@media (min-width: 768px) {
+  .bottom-sheet {
+    /* Desktop: centered dialog */
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 480px; border-radius: 16px;
+    bottom: auto; right: auto;
+  }
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       ANATOMY
+  ══════════════════════════════════════════ -->
+  <section class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <p class="ds-section-desc">The component hierarchy. Required parts must always be present. Optional parts enhance specific use cases.</p>
+    <div class="anatomy-tree" style="margin-top:20px">
+      <div class="anatomy-tree-row">
+        <div class="anatomy-tree-name">Drawer <span class="anatomy-required">Required</span></div>
+        <div class="anatomy-tree-desc">Root context provider. Controls open/close state, snap point position, and animation. Sets <code style="font-family:monospace;font-size:11px;color:#a8e6c5">role="dialog"</code> and <code style="font-family:monospace;font-size:11px;color:#a8e6c5">aria-modal="true"</code>.</div>
+      </div>
+      <div class="anatomy-tree-row">
+        <div class="anatomy-tree-name"><span class="indent">└─ </span>DrawerTrigger <span class="anatomy-required">Required</span></div>
+        <div class="anatomy-tree-desc">The element that opens the drawer. Wraps any interactive element. Sets <code style="font-family:monospace;font-size:11px;color:#a8e6c5">aria-haspopup="dialog"</code> and <code style="font-family:monospace;font-size:11px;color:#a8e6c5">aria-controls</code>. Focus returns here on close.</div>
+      </div>
+      <div class="anatomy-tree-row">
+        <div class="anatomy-tree-name"><span class="indent">└─ </span>DrawerPortal <span class="anatomy-optional">Optional</span></div>
+        <div class="anatomy-tree-desc">Teleports drawer content to <code style="font-family:monospace;font-size:11px;color:#a8e6c5">&lt;body&gt;</code> to escape stacking context. Use when the triggering element is inside a transformed or <code style="font-family:monospace;font-size:11px;color:#a8e6c5">overflow:hidden</code> ancestor.</div>
+      </div>
+      <div class="anatomy-tree-row">
+        <div class="anatomy-tree-name"><span class="indent">&nbsp;&nbsp;&nbsp;└─ </span>DrawerOverlay <span class="anatomy-required">Required</span></div>
+        <div class="anatomy-tree-desc">Scrim layer behind the sheet. <code style="font-family:monospace;font-size:11px;color:#a8e6c5">rgba(0,0,0,.45)</code>. Click dismisses the drawer. Opacity tracks drag position during swipe-dismiss. Blocks background interaction.</div>
+      </div>
+      <div class="anatomy-tree-row">
+        <div class="anatomy-tree-name"><span class="indent">&nbsp;&nbsp;&nbsp;└─ </span>DrawerContent <span class="anatomy-required">Required</span></div>
+        <div class="anatomy-tree-desc">The sheet container. <code style="font-family:monospace;font-size:11px;color:#a8e6c5">background: var(--surface-2)</code>, <code style="font-family:monospace;font-size:11px;color:#a8e6c5">border-radius: 20px 20px 0 0</code>. Handles touch events for drag and snap. Receives focus on open.</div>
+      </div>
+      <div class="anatomy-tree-row">
+        <div class="anatomy-tree-name"><span class="indent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─ </span>DrawerHandle <span class="anatomy-required">Required</span></div>
+        <div class="anatomy-tree-desc">40×4px pill, <code style="font-family:monospace;font-size:11px;color:#a8e6c5">rgba(255,255,255,.2)</code>, centered at top. Communicates draggability. Keyboard-focusable — Space/Enter snaps to next height, Escape dismisses. Never omit.</div>
+      </div>
+      <div class="anatomy-tree-row">
+        <div class="anatomy-tree-name"><span class="indent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─ </span>DrawerHeader <span class="anatomy-optional">Optional</span></div>
+        <div class="anatomy-tree-desc">Contains title and optional description. <code style="font-family:monospace;font-size:11px;color:#a8e6c5">flex-shrink:0</code> — does not scroll with body. Use a bottom border when the body is scrollable to signal more content below.</div>
+      </div>
+      <div class="anatomy-tree-row">
+        <div class="anatomy-tree-name"><span class="indent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ </span>DrawerTitle <span class="anatomy-optional">Optional</span></div>
+        <div class="anatomy-tree-desc">Labelled with <code style="font-family:monospace;font-size:11px;color:#a8e6c5">id</code> matched by <code style="font-family:monospace;font-size:11px;color:#a8e6c5">aria-labelledby</code> on DrawerContent. Font: 15–17px / 700. Max 4 words. Describes the action, not the component.</div>
+      </div>
+      <div class="anatomy-tree-row">
+        <div class="anatomy-tree-name"><span class="indent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─ </span>DrawerDescription <span class="anatomy-optional">Optional</span></div>
+        <div class="anatomy-tree-desc">Short supporting text. Linked via <code style="font-family:monospace;font-size:11px;color:#a8e6c5">aria-describedby</code>. Font: 13px / 400 / <code style="font-family:monospace;font-size:11px;color:#a8e6c5">var(--text2)</code>. Max 2 lines. Not a substitute for button labels.</div>
+      </div>
+      <div class="anatomy-tree-row">
+        <div class="anatomy-tree-name"><span class="indent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─ </span>DrawerBody <span class="anatomy-required">Required</span></div>
+        <div class="anatomy-tree-desc">Scrollable content area. <code style="font-family:monospace;font-size:11px;color:#a8e6c5">flex:1; overflow-y:auto; min-height:0</code>. Contains action rows, form fields, lists, or rich content. Scrolls independently of header and footer.</div>
+      </div>
+      <div class="anatomy-tree-row">
+        <div class="anatomy-tree-name"><span class="indent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─ </span>DrawerFooter <span class="anatomy-optional">Optional</span></div>
+        <div class="anatomy-tree-desc">Sticky footer for primary actions. <code style="font-family:monospace;font-size:11px;color:#a8e6c5">flex-shrink:0</code>. Always visible above the keyboard. Primary action on the right. Max 2 actions. Includes <code style="font-family:monospace;font-size:11px;color:#a8e6c5">env(safe-area-inset-bottom)</code> bottom padding.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       CODE — Full example
+  ══════════════════════════════════════════ -->
+  <section class="ds-section" id="code">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-section-desc">Copy these snippets as starting points. Always link <code style="font-family:monospace;font-size:12px;color:#a8e6c5">tokens/tokens.css</code>, <code style="font-family:monospace;font-size:12px;color:#a8e6c5">components.css</code>, and <code style="font-family:monospace;font-size:12px;color:#a8e6c5">states.css</code> first.</p>
+    <div class="ds-code-block" style="margin-top:20px">
+      <div class="ds-code-label">Full bottom sheet — HTML</div>
+      <pre class="ds-code-pre"><code>&lt;!-- Overlay --&gt;
+&lt;div class="sheet-overlay" aria-hidden="true"&gt;&lt;/div&gt;
+
+&lt;!-- Sheet --&gt;
+&lt;div
+  class="bottom-sheet"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="sheet-title"
+  aria-describedby="sheet-desc"
+&gt;
+  &lt;div class="sheet-handle" tabindex="0" aria-label="Drag to resize" aria-hidden="false"&gt;&lt;/div&gt;
+
+  &lt;div class="sheet-header"&gt;
+    &lt;h2 id="sheet-title" class="sheet-title"&gt;Filter by genre&lt;/h2&gt;
+    &lt;p id="sheet-desc" class="sheet-description"&gt;Select one or more genres&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class="sheet-body"&gt;
+    &lt;!-- Scrollable content --&gt;
+  &lt;/div&gt;
+
+  &lt;div class="sheet-footer"&gt;
+    &lt;button class="btn btn--ghost btn--m" onclick="closeSheet()"&gt;Reset&lt;/button&gt;
+    &lt;button class="btn btn--primary btn--m" onclick="applyFilters()"&gt;Apply&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+    <div class="ds-code-block" style="margin-top:12px">
+      <div class="ds-code-label">Open / close — JS</div>
+      <pre class="ds-code-pre"><code>const sheet  = document.querySelector('.bottom-sheet');
+const overlay = document.querySelector('.sheet-overlay');
+
+function openSheet() {
+  sheet.classList.add('is-open');
+  overlay.classList.add('is-visible');
+  document.body.style.overflow = 'hidden';
+  sheet.focus();
+}
+
+function closeSheet() {
+  sheet.classList.remove('is-open');
+  overlay.classList.remove('is-visible');
+  document.body.style.overflow = '';
+  document.querySelector('[data-sheet-trigger]')?.focus(); // restore focus
+}
+
+overlay.addEventListener('click', closeSheet);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSheet(); });
+sheet.querySelector('.sheet-handle').addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeSheet();
+});</code></pre>
+    </div>
+    <div class="ds-code-block" style="margin-top:12px">
+      <div class="ds-code-label">CSS — core sheet styles</div>
+      <pre class="ds-code-pre"><code>.sheet-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.45);
+  opacity: 0; pointer-events: none;
+  transition: opacity 300ms ease;
+  z-index: 100;
+}
+.sheet-overlay.is-visible { opacity: 1; pointer-events: auto; }
+
+.bottom-sheet {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--surface-2);
+  border-radius: 20px 20px 0 0;
+  border-top: 1px solid var(--border);
+  transform: translateY(100%);
+  transition: transform 420ms cubic-bezier(0.32, 0.72, 0, 1);
+  display: flex; flex-direction: column;
+  max-height: 90vh;
+  z-index: 101;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.bottom-sheet.is-open { transform: translateY(0); }
+
+.sheet-handle {
+  width: 40px; height: 4px;
+  border-radius: 2px;
+  background: rgba(255,255,255,.2);
+  margin: 12px auto 4px;
+  flex-shrink: 0;
+}
+.sheet-header { flex-shrink: 0; padding: 12px 20px 8px; }
+.sheet-title  { font-size: 17px; font-weight: 700; color: var(--text); margin: 0; }
+.sheet-description { font-size: 13px; color: var(--text2); margin: 4px 0 0; }
+.sheet-body   { flex: 1; overflow-y: auto; min-height: 0; padding: 0 20px; }
+.sheet-footer {
+  flex-shrink: 0; display: flex; gap: 12px;
+  padding: 12px 20px 16px;
+  border-top: 1px solid var(--border-subtle);
+}</code></pre>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       TOKENS
+  ══════════════════════════════════════════ -->
+  <section class="ds-section" id="tokens">
+    <h2 class="ds-section-title">Tokens</h2>
+    <p class="ds-section-desc">Design tokens that control bottom sheet appearance. Override at the platform-specific layer.</p>
+    <table class="ds-token-table" style="margin-top:20px">
+      <thead>
+        <tr><th>Token</th><th>Default</th><th>Usage</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>--surface-2</code></td><td>#16181f</td><td>Sheet container background</td></tr>
+        <tr><td><code>--border</code></td><td>rgba(255,255,255,.1)</td><td>Top border of sheet container</td></tr>
+        <tr><td><code>--r7</code></td><td>20px</td><td>Top corner radius (border-radius: 20px 20px 0 0)</td></tr>
+        <tr><td><code>--overlay-scrim</code></td><td>rgba(0,0,0,.45)</td><td>Backdrop scrim color</td></tr>
+        <tr><td><code>--ease-out</code></td><td>cubic-bezier(0.32,0.72,0,1)</td><td>Entry and snap easing (vaul-style)</td></tr>
+        <tr><td><code>--spring</code></td><td>cubic-bezier(0.34,1.56,0.64,1)</td><td>Bounce easing for snap to higher height</td></tr>
+        <tr><td><code>--dur-300</code></td><td>300ms</td><td>Overlay fade duration</td></tr>
+        <tr><td><code>--dur-400</code></td><td>420ms</td><td>Sheet slide-up / snap duration</td></tr>
+        <tr><td><code>--dur-200</code></td><td>200ms</td><td>Dismiss (swipe-driven, ease-in)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       DO / DON'T
+  ══════════════════════════════════════════ -->
+  <section class="ds-section" id="best-practices">
+    <h2 class="ds-section-title">Do / Don&#x27;t</h2>
+    <div class="bp-grid">
+      <div class="bp-card bp-card--do">
+        <span class="bp-label bp-label--do">Do</span>
+        <ul class="bp-list">
+          <li>Use for actions related to the current context</li>
+          <li>Include a drag handle on every sheet — always</li>
+          <li>Use scrollable variant when content may overflow</li>
+          <li>Pin footer actions so they're always reachable</li>
+          <li>Dismiss on scrim tap, swipe down, or Escape</li>
+          <li>Return focus to trigger element on close</li>
+          <li>Add <code style="font-family:monospace;font-size:10px;color:#a8e6c5">env(safe-area-inset-bottom)</code> at bottom</li>
+          <li>Use snap points for variable-length content</li>
+        </ul>
+      </div>
+      <div class="bp-card bp-card--dont">
+        <span class="bp-label bp-label--dont">Don&#x27;t</span>
+        <ul class="bp-list">
+          <li>Nest a sheet inside another sheet</li>
+          <li>Use on TV — bottom is outside safe zone</li>
+          <li>Use on desktop web — use side panel or dialog</li>
+          <li>Auto-open without a user trigger</li>
+          <li>Omit the drag handle — it signals draggability</li>
+          <li>Use for primary navigation or wayfinding</li>
+          <li>Put more than 6 items without scroll or snap</li>
+          <li>Use generic titles like "Options" or "Menu"</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       PLATFORM
+  ══════════════════════════════════════════ -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform guidance</h2>
+    <div class="platform-grid">
+      <div class="platform-card platform-card--mobile">
+        <div class="platform-card-title">&#x1F4F1; Mobile</div>
+        <ul>
+          <li>Primary pattern — use freely</li>
+          <li>Touch drag with velocity-aware snap</li>
+          <li>Snap heights: peek / half / full</li>
+          <li>Corner radius 20px, handle 40×4px</li>
+          <li>Safe area bottom padding required</li>
+          <li>Background scales to 93% when sheet is open</li>
+        </ul>
+      </div>
+      <div class="platform-card platform-card--web">
+        <div class="platform-card-title">&#x1F4BB; Web</div>
+        <ul>
+          <li>Avoid on desktop viewports ≥768px</li>
+          <li>Switch to centered dialog at 768px+</li>
+          <li>Drag-to-dismiss not available on pointer</li>
+          <li>Escape key must always dismiss</li>
+          <li>Tab cycles focus within sheet (trap)</li>
+          <li>Click outside backdrop dismisses</li>
+        </ul>
+      </div>
+      <div class="platform-card platform-card--tv">
+        <div class="platform-card-title">&#x1F4FA; TV</div>
+        <ul>
+          <li>Do not use — pattern not supported</li>
+          <li>Bottom of screen is outside TV safe zone</li>
+          <li>Use full-screen overlay instead</li>
+          <li>No touch gestures on TV</li>
+          <li>D-pad cannot interact with bottom-anchored drawers</li>
+          <li>Use focused panel or dialog for confirmations</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       ACCESSIBILITY
+  ══════════════════════════════════════════ -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <div class="a11y-grid">
+      <div class="a11y-row">
+        <span class="a11y-label">ARIA role</span>
+        <div class="a11y-content">Modal sheets: <code>role="dialog"</code> + <code>aria-modal="true"</code>. Non-modal supplemental sheets: <code>role="complementary"</code>. Both require <code>aria-labelledby</code> pointing to <code>DrawerTitle</code>.</div>
+      </div>
+      <div class="a11y-row">
+        <span class="a11y-label">Focus trap</span>
+        <div class="a11y-content">Modal sheets trap focus inside <code>DrawerContent</code>. Tab cycles through interactive elements; Shift+Tab reverses. Focus must not escape to background content while the sheet is open.</div>
+      </div>
+      <div class="a11y-row">
+        <span class="a11y-label">Handle keyboard</span>
+        <div class="a11y-content"><code>DrawerHandle</code> has <code>tabindex="0"</code>. <kbd>Space</kbd> / <kbd>Enter</kbd> snaps to next height. <kbd>Escape</kbd> dismisses. Minimum touch target: 44×44px (extend handle invisibly).</div>
+      </div>
+      <div class="a11y-row">
+        <span class="a11y-label">Snap announce</span>
+        <div class="a11y-content">Announce height changes via <code>aria-live="polite"</code>. Example: "Panel expanded to half height". Keep announcements under 5 words and fire after transition ends.</div>
+      </div>
+      <div class="a11y-row">
+        <span class="a11y-label">Keyboard dismiss</span>
+        <div class="a11y-content"><kbd>Escape</kbd> dismisses at any snap height. Restore focus to <code>DrawerTrigger</code>. On mobile, the system Back gesture must also dismiss.</div>
+      </div>
+      <div class="a11y-row">
+        <span class="a11y-label">Reduced motion</span>
+        <div class="a11y-content">Wrap all <code>transition</code> and <code>transform</code> in <code>@media (prefers-reduced-motion: no-preference)</code>. Under reduced motion, sheet appears instantly at target position with no animation.</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══ Shared demo JS ══ -->
+<script>
+(function () {
+  /* Generic open/close for demos keyed by id suffix */
+  var frames = {};
+  ['a','b','v1','v2','v4m'].forEach(function(k) {
+    frames[k] = {
+      ph: document.getElementById('ph-'  + k),
+      sh: document.getElementById('sh-'  + k),
+      sc: document.getElementById('sc-'  + k),
+      btn: document.getElementById('btn-' + k)
+    };
+  });
+
+  window.dsOpen = function(k) {
+    var f = frames[k];
+    if (!f) return;
+    f.ph.classList.add('is-open');
+    f.sh.classList.add('is-open');
+    f.sc.classList.add('is-open');
+    if (f.btn) { f.btn.textContent = 'Close Drawer'; f.btn.onclick = function(){ dsClose(k); }; }
+  };
+  window.dsClose = function(k) {
+    var f = frames[k];
+    if (!f) return;
+    f.ph.classList.remove('is-open');
+    f.sh.classList.remove('is-open');
+    f.sc.classList.remove('is-open');
+    if (f.btn) { f.btn.textContent = 'Open Drawer'; f.btn.onclick = function(){ dsOpen(k); }; }
+  };
+
+  /* Snap point demo */
+  var snapHeights = [86, 187, 313]; /* px inside 340px phone */
+  var snapCurrent = -1;
+
+  window.snapTo = function(idx) {
+    var ph = document.getElementById('ph-v3');
+    var sh = document.getElementById('sh-v3');
+    var sc = document.getElementById('sc-v3');
+    if (snapCurrent === -1) {
+      ph.classList.add('is-open');
+      sc.classList.add('is-open');
+    }
+    snapCurrent = idx;
+    sh.style.height = snapHeights[idx] + 'px';
+    sh.style.transform = 'translateY(0)';
+    [0,1,2].forEach(function(i) {
+      document.getElementById('sd' + i).classList.toggle('active', i === idx);
+    });
+  };
+
+  window.snapClose = function() {
+    var ph = document.getElementById('ph-v3');
+    var sh = document.getElementById('sh-v3');
+    var sc = document.getElementById('sc-v3');
+    ph.classList.remove('is-open');
+    sc.classList.remove('is-open');
+    sh.style.transform = 'translateY(100%)';
+    snapCurrent = -1;
+    [0,1,2].forEach(function(i) {
+      document.getElementById('sd' + i).classList.remove('active');
+    });
+  };
+
+  /* Responsive dialog demo */
+  window.dialogOpen = function() {
+    var d = document.getElementById('dialog-v4w');
+    var btn = document.getElementById('btn-v4w');
+    d.style.transform = 'scale(1) translateY(0)';
+    d.style.opacity = '1';
+    d.style.pointerEvents = 'auto';
+    btn.textContent = 'Close';
+    btn.onclick = dialogClose;
+  };
+  window.dialogClose = function() {
+    var d = document.getElementById('dialog-v4w');
+    var btn = document.getElementById('btn-v4w');
+    d.style.transform = 'scale(0.9) translateY(8px)';
+    d.style.opacity = '0';
+    d.style.pointerEvents = 'none';
+    btn.textContent = 'Desktop (dialog)';
+    btn.onclick = dialogOpen;
+  };
+})();
+</script>
+<script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script>
+</body>
+</html>

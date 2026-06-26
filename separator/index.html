@@ -1,0 +1,349 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Separator — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    .separator { border: none; border-top: 1px solid var(--border-subtle); margin: 0; }
+    .separator--strong { border-top-color: var(--border); }
+    .separator--vertical { border: none; border-left: 1px solid var(--border-subtle); align-self: stretch; width: 1px; flex-shrink: 0; }
+    .separator-label { display: flex; align-items: center; gap: 12px; color: var(--text3); font-size: 11px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; }
+    .separator-label::before, .separator-label::after { content: ''; flex: 1; height: 1px; background: var(--border-subtle); }
+  </style>
+</head><body><main class="ds-content">
+
+  <!-- PAGE HEADER -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Separator</span>
+    </nav>
+    <h1 class="component-page-title">Separator</h1>
+    <p class="component-page-def">Thin visual divider that organises content into sections. Horizontal or vertical, with optional label.</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:16px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+        <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+        <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+      </div>
+      <span class="component-maturity component-maturity--draft"><span class="component-maturity--dot"></span>Draft</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:320px;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="gap:32px; max-width:440px; width:100%; position:relative; z-index:1;">
+
+      <!-- Plain horizontal -->
+      <div style="width:100%;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:12px;">
+          <span style="font-size:12px; color:var(--text2);">Recent matches</span>
+          <span style="font-size:12px; color:var(--text3);">See all</span>
+        </div>
+        <hr class="separator" aria-orientation="horizontal">
+        <div style="display:flex; justify-content:space-between; margin-top:12px;">
+          <span style="font-size:12px; color:var(--text2);">Saved games</span>
+          <span style="font-size:12px; color:var(--text3);">See all</span>
+        </div>
+        <span style="font-size:10px; color:var(--text4); margin-top:12px; display:block; letter-spacing:.3px;">HORIZONTAL</span>
+      </div>
+
+      <!-- With label -->
+      <div style="width:100%;">
+        <div class="separator-label">OR</div>
+        <span style="font-size:10px; color:var(--text4); margin-top:12px; display:block; letter-spacing:.3px;">WITH LABEL</span>
+      </div>
+
+      <!-- Vertical -->
+      <div style="display:flex; align-items:center; gap:24px; height:44px;">
+        <button class="btn btn--ghost btn--m">Sign in</button>
+        <div class="separator--vertical" role="separator" aria-orientation="vertical"></div>
+        <button class="btn btn--primary btn--m">Get Pass</button>
+        <span style="font-size:10px; color:var(--text4); letter-spacing:.3px; white-space:nowrap;">VERTICAL</span>
+      </div>
+
+    </div>
+    <p class="component-hero-caption">Separator variants · Horizontal, With label, Vertical</p>
+  </section>
+
+  <!-- INTRO -->
+  <section class="component-intro" id="intro">
+    <p>Separators create visual breathing room between unrelated content blocks. They are purely structural — they communicate "these sections are distinct" without adding meaning or hierarchy. Use them sparingly: white space alone often achieves the same separation without introducing a visible line. A separator is appropriate when two adjacent sections are semantically unrelated and the spatial gap alone is insufficient to signal the boundary.</p>
+    <ul class="component-summary-list">
+      <li><strong>Horizontal</strong> — default usage between vertical content sections, list items, or form groups</li>
+      <li><strong>With label</strong> — adds a centred uppercase text (e.g. "OR") between the two rule lines for login alternatives</li>
+      <li><strong>Vertical</strong> — separates items in a horizontal row such as a toolbar, button pair, or nav strip</li>
+      <li><strong>Strong</strong> — slightly brighter border for more visible separation on dense surfaces</li>
+    </ul>
+  </section>
+
+  <!-- BEST PRACTICES -->
+  <section class="ds-section" id="best-practices">
+    <h2 class="ds-section-title">Best practices</h2>
+    <div class="component-best-practices">
+      <div class="component-bp-card component-bp-card--do">
+        <span class="component-bp-label component-bp-label--do">Do</span>
+        <ul class="component-bp-list">
+          <li>Use separators to divide semantically unrelated content — not just for decoration or rhythm</li>
+          <li>Add <code class="ds-code">role="separator"</code> and <code class="ds-code">aria-orientation</code> when using a custom element; use <code class="ds-code">&lt;hr&gt;</code> when possible</li>
+          <li>Use the labelled separator ("OR") sparingly — only when two genuinely alternative paths meet</li>
+          <li>Use the strong variant when the surface is dense (e.g. a list of 10+ rows) and the subtle variant disappears</li>
+          <li>On TV, increase separator opacity and thickness for 10-foot legibility</li>
+        </ul>
+      </div>
+      <div class="component-bp-card component-bp-card--dont">
+        <span class="component-bp-label component-bp-label--dont">Don't</span>
+        <ul class="component-bp-list">
+          <li>Use separators between every item in a list — use <code class="ds-code">gap</code> or background alternation instead</li>
+          <li>Use a separator to introduce hierarchy — that's the job of headings and typographic scale</li>
+          <li>Add top and bottom margins to <code class="ds-code">&lt;hr&gt;</code> inside a layout that already uses <code class="ds-code">gap</code> — it doubles the spacing</li>
+          <li>Use the labelled separator with text longer than 4 characters — it stretches the rule lines unevenly</li>
+          <li>Use a vertical separator as the primary structural division of a layout — use columns or cards instead</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <section class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <p class="ds-section-desc">The horizontal separator is a single 1px rule. The labelled variant adds a centred text node flanked by two equal-width rule lines via flex + pseudo-elements.</p>
+    <div class="ds-anatomy">
+      <div class="ds-anatomy-preview" style="flex-direction:column; gap:32px; align-items:stretch;">
+        <div style="position:relative;">
+          <hr class="separator" style="position:relative;">
+          <span class="ds-anatomy-callout-dot" style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);"><span class="ds-anatomy-callout-num">1</span></span>
+        </div>
+        <div style="position:relative;">
+          <div class="separator-label" style="position:relative;">OR<span class="ds-anatomy-callout-dot" style="position:absolute; top:-16px; left:20%;"><span class="ds-anatomy-callout-num">2</span></span><span class="ds-anatomy-callout-dot" style="position:absolute; top:-16px; right:20%;"><span class="ds-anatomy-callout-num">3</span></span></div>
+        </div>
+      </div>
+      <ol class="ds-anatomy-list">
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">1</span>
+          <div>
+            <div class="ds-anatomy-label">Rule line <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">1px solid line in var(--border-subtle). No height, no padding — spacing around the separator is set by the parent layout (gap or margin on siblings). Use --strong for var(--border).</div>
+            <code class="ds-anatomy-token ds-code">border-top: 1px solid var(--border-subtle)</code>
+          </div>
+        </li>
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">2</span>
+          <div>
+            <div class="ds-anatomy-label">Flanking rule lines <span class="ds-anatomy-optional">Conditional</span></div>
+            <div class="ds-anatomy-desc">Two equal flex:1 pseudo-element lines that expand to fill available space on either side of the label. Created via ::before and ::after on .separator-label.</div>
+            <code class="ds-anatomy-token ds-code">::before, ::after { flex:1; height:1px; background:var(--border-subtle) }</code>
+          </div>
+        </li>
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">3</span>
+          <div>
+            <div class="ds-anatomy-label">Label text <span class="ds-anatomy-optional">Conditional</span></div>
+            <div class="ds-anatomy-desc">11px/700 uppercase, var(--text3), letter-spacing 0.4px. Typically "OR". Maximum 4 characters. Rendered as a text node inside .separator-label.</div>
+            <code class="ds-anatomy-token ds-code">font-size:11px; font-weight:700; text-transform:uppercase; color:var(--text3)</code>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- VARIANTS -->
+  <section class="ds-section" id="variants">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Four variants cover all separation contexts. Thickness is always 1px — use the strong variant for higher contrast, not a thicker line.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-direction:column; gap:32px; padding:8px 0;">
+
+        <div>
+          <hr class="separator">
+          <span style="font-size:11px; color:var(--text3); margin-top:10px; display:block;">Horizontal (default) — <code class="ds-code">var(--border-subtle)</code></span>
+        </div>
+
+        <div>
+          <hr class="separator separator--strong">
+          <span style="font-size:11px; color:var(--text3); margin-top:10px; display:block;">Strong — <code class="ds-code">var(--border)</code></span>
+        </div>
+
+        <div>
+          <div class="separator-label">OR</div>
+          <span style="font-size:11px; color:var(--text3); margin-top:10px; display:block;">With label</span>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:20px; height:36px;">
+          <span style="font-size:13px; color:var(--text2);">Sign in with Google</span>
+          <div class="separator--vertical" role="separator" aria-orientation="vertical"></div>
+          <span style="font-size:13px; color:var(--text2);">Sign in with Apple</span>
+          <span style="font-size:11px; color:var(--text3); margin-left:8px;">Vertical</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- STATES (note: separator is stateless — use a note section instead of states) -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Separators are stateless. They have no hover, focus, pressed, or disabled states — they are purely visual dividers and carry no interactivity. If you need a collapsible section divider with toggle behaviour, use an Accordion component instead.</p>
+    <div class="ds-demo ds-demo--dark" style="padding:24px;">
+      <p style="font-size:13px; color:var(--text3); margin:0; font-style:italic;">No interactive states — separators do not respond to pointer or keyboard events.</p>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="ds-section" id="content">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Labelled separator text</div>
+        <ul>
+          <li>Use all-caps, max 4 characters: "OR", "AND", "VS", "NEW"</li>
+          <li>"OR" is the standard for login alternative paths (OTP vs password, JioID vs guest)</li>
+          <li>Do not use sentence-case or lowercase — the uppercase tracks the visual weight of the rule lines</li>
+          <li>Never use descriptive phrases like "Continue with" — that belongs in the button label, not the separator</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">When to use vs. avoid</div>
+        <ul>
+          <li>Use to divide a settings sheet into "Account" and "Preferences" groups</li>
+          <li>Use between the main game rail and the "Because you played" rail on the home screen</li>
+          <li>Avoid between every card in a vertical list — rely on card borders or gap spacing instead</li>
+          <li>Avoid on surfaces that already use strong card backgrounds — the line becomes redundant noise</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Use 1px default — thicker lines feel heavy on high-DPI mobile screens</li>
+          <li>Let the parent layout (gap or padding) control the space around the separator — don't add margin directly to <code class="ds-code">&lt;hr&gt;</code></li>
+          <li>Full-bleed separators (extending to screen edges) are appropriate in sheet overlays and settings lists</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Use <code class="ds-code">&lt;hr&gt;</code> for horizontal separators — it carries the correct semantic role automatically</li>
+          <li>For the labelled variant, use a <code class="ds-code">&lt;div class="separator-label"&gt;</code> with <code class="ds-code">role="separator"</code></li>
+          <li>Vertical separators: set <code class="ds-code">aria-orientation="vertical"</code> and <code class="ds-code">role="separator"</code></li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>Use 2px thickness and increase opacity to at least 30% — 1px at var(--border-subtle) is invisible at 3m</li>
+          <li>Use the strong variant as the baseline on TV; default subtle is insufficient</li>
+          <li>Avoid labelled separators on TV — the 11px uppercase label is unreadable at 10-foot distance</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Requirement</th><th>Implementation</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Semantic element</td>
+          <td><code class="ds-code">&lt;hr&gt;</code></td>
+          <td>Use a native <code class="ds-code">&lt;hr&gt;</code> for horizontal separators. It carries <code class="ds-code">role="separator"</code> and <code class="ds-code">aria-orientation="horizontal"</code> automatically.</td>
+        </tr>
+        <tr>
+          <td>Custom separator</td>
+          <td><code class="ds-code">role="separator"</code></td>
+          <td>When using a <code class="ds-code">&lt;div&gt;</code> or <code class="ds-code">&lt;span&gt;</code>, always add <code class="ds-code">role="separator"</code> explicitly.</td>
+        </tr>
+        <tr>
+          <td>Orientation</td>
+          <td><code class="ds-code">aria-orientation="horizontal|vertical"</code></td>
+          <td>Default is horizontal for <code class="ds-code">&lt;hr&gt;</code>. Always declare <code class="ds-code">aria-orientation="vertical"</code> on vertical separators.</td>
+        </tr>
+        <tr>
+          <td>Decorative separators</td>
+          <td><code class="ds-code">aria-hidden="true"</code></td>
+          <td>If the separator is purely decorative and adds no structural meaning, add <code class="ds-code">aria-hidden="true"</code> to hide it from the accessibility tree.</td>
+        </tr>
+        <tr>
+          <td>Color contrast</td>
+          <td>Not applicable</td>
+          <td>Separators are non-text elements; WCAG 1.4.11 Non-text Contrast requires 3:1 against adjacent surfaces. var(--border-subtle) passes on var(--bg) and var(--surface-1).</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- RELATED TOKENS -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Token</th><th>Value</th><th>Usage</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code class="ds-code">--border-subtle</code></td><td><code class="ds-code">rgba(255,255,255,.08)</code></td><td>Default separator rule line color</td></tr>
+        <tr><td><code class="ds-code">--border</code></td><td><code class="ds-code">rgba(255,255,255,.16)</code></td><td>Strong separator rule line color</td></tr>
+        <tr><td><code class="ds-code">--text3</code></td><td><code class="ds-code">rgba(244,242,238,.32)</code></td><td>Labelled separator text color</td></tr>
+        <tr><td><code class="ds-code">--jio-font</code></td><td><code class="ds-code">'Outfit', sans-serif</code></td><td>Labelled separator font family</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CODE EXAMPLES -->
+  <section class="ds-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Plain horizontal separator</div>
+      <pre class="component-code-pre"><code>&lt;!-- Preferred: use the native hr element --&gt;
+&lt;hr class="separator"&gt;
+
+&lt;!-- Strong variant --&gt;
+&lt;hr class="separator separator--strong"&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Separator with label ("OR")</div>
+      <pre class="component-code-pre"><code>&lt;div class="separator-label" role="separator" aria-label="or"&gt;OR&lt;/div&gt;
+
+&lt;!-- Usage in login flow --&gt;
+&lt;button class="btn btn--primary btn--m"&gt;Continue with OTP&lt;/button&gt;
+&lt;div class="separator-label" role="separator" aria-label="or"&gt;OR&lt;/div&gt;
+&lt;button class="btn btn--ghost btn--m"&gt;Sign in with JioID&lt;/button&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Vertical separator in a flex row</div>
+      <pre class="component-code-pre"><code>&lt;div style="display:flex; align-items:center; gap:16px; height:36px;"&gt;
+  &lt;button class="btn btn--ghost btn--s"&gt;Sign in&lt;/button&gt;
+  &lt;div
+    class="separator--vertical"
+    role="separator"
+    aria-orientation="vertical"
+    aria-hidden="true"
+  &gt;&lt;/div&gt;
+  &lt;button class="btn btn--primary btn--s"&gt;Get Pass&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+  </section>
+
+  <!-- CHANGELOG -->
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

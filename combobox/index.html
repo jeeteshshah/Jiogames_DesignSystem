@@ -1,0 +1,737 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Combobox — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    .combobox-wrap { position: relative; width: 100%; }
+    .combobox-input-wrap { position: relative; }
+    .combobox-list {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      right: 0;
+      background: var(--surface-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r5);
+      overflow: hidden;
+      z-index: 100;
+      box-shadow: 0 8px 24px rgba(0,0,0,.4);
+    }
+    .combobox-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-family: var(--jio-font);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      transition: background var(--dur-fast) var(--ease-out);
+    }
+    .combobox-item:hover, .combobox-item.is-active { background: var(--glass-1); }
+    .combobox-item.is-selected { color: var(--jio); }
+    .combobox-empty { padding: 14px; text-align: center; font-size: 13px; color: var(--text3); }
+
+    /* Input override for combobox */
+    .combobox-input {
+      width: 100%;
+      height: 48px;
+      background: var(--input-bg, var(--glass-1));
+      border: 1.5px solid var(--input-border, var(--border-subtle));
+      border-radius: var(--r5);
+      color: var(--text);
+      font-family: var(--jio-font);
+      font-size: 15px;
+      font-weight: 500;
+      padding: 0 40px 0 14px;
+      outline: none;
+      transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+      -webkit-appearance: none;
+    }
+    .combobox-input:focus { border-color: var(--jio); box-shadow: 0 0 0 3px rgba(0,168,89,.12); }
+    .combobox-input--l { height: 56px; font-size: 16px; }
+    .combobox-input--open { border-color: var(--jio); box-shadow: 0 0 0 3px rgba(0,168,89,.12); border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+    .combobox-list--attached { border-top-left-radius: 0; border-top-right-radius: 0; top: 0; border-top: none; }
+
+    /* Search icon */
+    .combobox-search-icon {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: var(--text3);
+    }
+
+    /* Highlight match */
+    .combobox-match { color: var(--jio); font-weight: 700; }
+
+    /* Game thumb in list */
+    .combobox-thumb {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--r3);
+      flex-shrink: 0;
+      background: var(--surface-3);
+    }
+
+    /* Skeleton item */
+    .combobox-skeleton {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+    }
+    .combobox-skeleton-thumb {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--r3);
+      background: var(--surface-3);
+      animation: skel-pulse 1.4s ease-in-out infinite;
+    }
+    .combobox-skeleton-line {
+      height: 12px;
+      border-radius: 6px;
+      background: var(--surface-3);
+      animation: skel-pulse 1.4s ease-in-out infinite;
+    }
+    @keyframes skel-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .4; }
+    }
+
+    /* Multi-select chip */
+    .combobox-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 8px 14px;
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--r5);
+      background: var(--glass-1);
+      cursor: text;
+      min-height: 48px;
+      align-items: center;
+    }
+    .combobox-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      border-radius: var(--pill);
+      background: var(--jio-soft);
+      border: 1px solid rgba(0,168,89,.3);
+      color: var(--jio);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .combobox-chip-remove {
+      font-size: 14px;
+      line-height: 1;
+      cursor: pointer;
+      opacity: .7;
+    }
+    .combobox-chip-remove:hover { opacity: 1; }
+    .combobox-chip-input {
+      border: none;
+      background: none;
+      outline: none;
+      font-family: var(--jio-font);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      min-width: 80px;
+      flex: 1;
+    }
+
+    /* Field label util */
+    .field-label { font-size: 12px; font-weight: 500; color: var(--text2); display: block; margin-bottom: 6px; }
+  </style>
+</head><body><main class="ds-main">
+
+  <!-- PAGE HEADER -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Combobox</span>
+    </nav>
+    <h1 class="component-page-title">Combobox</h1>
+    <p class="component-page-def">Searchable select for finding games, genres, or friends from large lists. Combines text input with a dropdown of filtered options.</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile">
+          <span class="component-platform-dot"></span>Mobile
+        </span>
+        <span class="component-platform component-platform--web">
+          <span class="component-platform-dot"></span>Web
+        </span>
+        <span class="component-platform component-platform--tv">
+          <span class="component-platform-dot"></span>TV
+        </span>
+      </div>
+      <span class="component-maturity component-maturity--draft">
+        <span class="component-maturity--dot"></span>Draft
+      </span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:320px;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner">
+      <div style="width:100%; max-width:360px;">
+        <label class="field-label">Search games</label>
+        <div class="combobox-wrap">
+          <div class="combobox-input-wrap">
+            <input
+              type="text"
+              class="combobox-input combobox-input--open"
+              value="tomb r"
+              readonly
+              aria-role="combobox"
+              aria-expanded="true"
+              aria-autocomplete="list"
+            >
+            <span class="combobox-search-icon" style="color:var(--jio);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_search"></use></svg>
+            </span>
+          </div>
+          <div class="combobox-list combobox-list--attached">
+            <!-- Result 1: highlighted (is-active) -->
+            <div class="combobox-item is-active" role="option" aria-selected="false">
+              <div class="combobox-thumb" style="background:linear-gradient(135deg,#2a1010,#4a1818);"></div>
+              <span><span class="combobox-match">Tomb R</span>aider</span>
+            </div>
+            <!-- Result 2: selected -->
+            <div class="combobox-item" role="option" aria-selected="false">
+              <div class="combobox-thumb" style="background:linear-gradient(135deg,#101a2a,#182040);"></div>
+              <span><span class="combobox-match">Tomb R</span>aider II</span>
+            </div>
+            <!-- Result 3 -->
+            <div class="combobox-item" role="option" aria-selected="false">
+              <div class="combobox-thumb" style="background:linear-gradient(135deg,#1a1a10,#2a2a18);"></div>
+              <span><span class="combobox-match">Tomb R</span>aider: Anniversary</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="component-hero-caption">Combobox open · query "tomb r" · first result highlighted</p>
+  </section>
+
+  <!-- INTRO -->
+  <section class="component-intro">
+    <p>The Combobox is a searchable selection control that combines a text input with a filtered dropdown list. It is the right choice when a list has more than 15 items, when users are unlikely to know the exact option name up front, or when typing is faster than scrolling. It is not a replacement for a simple Select — use Select for short, well-known lists.</p>
+    <ul class="component-summary-list">
+      <li><strong>Game search</strong> — find a game by name from the full catalogue across add-to-wishlist, review, and share flows</li>
+      <li><strong>Genre and tag filter</strong> — multi-select combobox for applying genre tags in preference setup</li>
+      <li><strong>Friend search</strong> — find players by username to invite to a party or share a game</li>
+      <li><strong>Large reference lists</strong> — country, language, or platform selection when the list exceeds 15 items</li>
+    </ul>
+  </section>
+
+  <!-- BEST PRACTICES -->
+  <section class="component-best-practices">
+    <div class="component-bp-card component-bp-card--do">
+      <span class="component-bp-label component-bp-label--do">Do</span>
+      <ul class="component-bp-list">
+        <li>Highlight the matched query substring in each result — bold green on the matched characters</li>
+        <li>Show a maximum of 8 results before scrolling — more overwhelms without adding value</li>
+        <li>Write a specific empty state: <em>No games found for "xyz"</em> — never a blank white box</li>
+        <li>Show skeleton items during network fetch — never a spinner that blocks the input</li>
+        <li>Close the dropdown on Escape, and return focus to the input</li>
+      </ul>
+    </div>
+    <div class="component-bp-card component-bp-card--dont">
+      <span class="component-bp-label component-bp-label--dont">Don't</span>
+      <ul class="component-bp-list">
+        <li>Open the dropdown before the user has typed at least 1 character — an unfiltered full list is not a Combobox, it is a Select</li>
+        <li>Use Combobox for lists under 15 items — use Select instead</li>
+        <li>Show a completely blank dropdown panel on empty results — always show the empty state message</li>
+        <li>Trigger a network request on every keystroke without debouncing — debounce by at least 200ms</li>
+        <li>Auto-select the first result on Enter without the user explicitly confirming — they may still be typing</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <div class="ds-anatomy" style="margin-bottom:64px;">
+    <div class="ds-anatomy-preview">
+      <div class="ds-anatomy-component" style="width:260px; position:relative;">
+        <div class="combobox-wrap">
+          <div class="combobox-input-wrap">
+            <input type="text" class="combobox-input combobox-input--open" value="tomb r" readonly style="pointer-events:none;">
+            <span class="combobox-search-icon" style="color:var(--jio);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_search"></use></svg>
+            </span>
+          </div>
+          <div class="combobox-list combobox-list--attached" style="position:relative; top:0;">
+            <div class="combobox-item is-active"><div class="combobox-thumb" style="background:linear-gradient(135deg,#2a1010,#4a1818);"></div><span><span class="combobox-match">Tomb R</span>aider</span></div>
+            <div class="combobox-item"><div class="combobox-thumb" style="background:linear-gradient(135deg,#101a2a,#182040);"></div><span><span class="combobox-match">Tomb R</span>aider II</span></div>
+          </div>
+        </div>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:12px; left:-24px;"><span class="ds-anatomy-callout-num">1</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:12px; right:-24px;"><span class="ds-anatomy-callout-num">2</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:56px; left:-24px;"><span class="ds-anatomy-callout-num">3</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:76px; right:-24px;"><span class="ds-anatomy-callout-num">4</span></span>
+      </div>
+    </div>
+    <ol class="ds-anatomy-list">
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">1</span>
+        <div>
+          <div class="ds-anatomy-label">Text input <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Standard input field with <code class="ds-code">role="combobox"</code>, <code class="ds-code">aria-autocomplete="list"</code>, and <code class="ds-code">aria-expanded</code>. Green border and glow when open.</div>
+          <code class="ds-anatomy-token ds-code">height: 48px; border-color: var(--jio) when open</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">2</span>
+        <div>
+          <div class="ds-anatomy-label">Search icon <span class="ds-anatomy-optional">Optional</span></div>
+          <div class="ds-anatomy-desc">16px magnifier icon, right-aligned in the input. Turns green when the dropdown is open. <code class="ds-code">pointer-events: none</code>.</div>
+          <code class="ds-anatomy-token ds-code">color: var(--text3) → var(--jio) on open</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">3</span>
+        <div>
+          <div class="ds-anatomy-label">Dropdown list <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Absolutely positioned below the input, <code class="ds-code">role="listbox"</code>. Max 8 items visible before scroll. Dark surface background, subtle border, strong drop shadow.</div>
+          <code class="ds-anatomy-token ds-code">background: var(--surface-2); box-shadow: 0 8px 24px rgba(0,0,0,.4)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">4</span>
+        <div>
+          <div class="ds-anatomy-label">Result item <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Each item is <code class="ds-code">role="option"</code>. Optional leading thumbnail, matched text highlighted in green/bold, 10px 14px padding. Hover and keyboard-active state both use <code class="ds-code">is-active</code>.</div>
+          <code class="ds-anatomy-token ds-code">padding: 10px 14px; font-size: 14px</code>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- VARIANTS -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Five variants. Default covers single-value game and genre search. Multi-select is used for preference setup where several tags need to be applied at once.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-direction:column; gap:40px; max-width:420px;">
+
+        <!-- Default closed -->
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:10px;">Default — closed</span>
+          <div class="combobox-wrap">
+            <div class="combobox-input-wrap">
+              <input type="text" class="combobox-input" placeholder="Search games…" style="pointer-events:none;" readonly>
+              <span class="combobox-search-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_search"></use></svg></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Open with results -->
+        <div style="position:relative; z-index:10;">
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:10px;">Open — with results</span>
+          <div class="combobox-wrap">
+            <div class="combobox-input-wrap">
+              <input type="text" class="combobox-input combobox-input--open" value="tomb r" readonly style="pointer-events:none;">
+              <span class="combobox-search-icon" style="color:var(--jio);"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_search"></use></svg></span>
+            </div>
+            <div class="combobox-list combobox-list--attached">
+              <div class="combobox-item is-active"><div class="combobox-thumb" style="background:linear-gradient(135deg,#2a1010,#4a1818);"></div><span><span class="combobox-match">Tomb R</span>aider</span></div>
+              <div class="combobox-item"><div class="combobox-thumb" style="background:linear-gradient(135deg,#101a2a,#182040);"></div><span><span class="combobox-match">Tomb R</span>aider II</span></div>
+              <div class="combobox-item"><div class="combobox-thumb" style="background:linear-gradient(135deg,#1a1a10,#2a2a18);"></div><span><span class="combobox-match">Tomb R</span>aider: Anniversary</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty state -->
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:10px;">Empty state — no results</span>
+          <div class="combobox-wrap">
+            <div class="combobox-input-wrap">
+              <input type="text" class="combobox-input combobox-input--open" value="xyzqwerty" readonly style="pointer-events:none;">
+              <span class="combobox-search-icon" style="color:var(--jio);"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_search"></use></svg></span>
+            </div>
+            <div class="combobox-list combobox-list--attached">
+              <div class="combobox-empty">No games found for "xyzqwerty"</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Loading skeleton -->
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:10px;">Loading — skeleton items</span>
+          <div class="combobox-wrap">
+            <div class="combobox-input-wrap">
+              <input type="text" class="combobox-input combobox-input--open" value="war" readonly style="pointer-events:none;">
+              <span class="combobox-search-icon" style="color:var(--jio);"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_search"></use></svg></span>
+            </div>
+            <div class="combobox-list combobox-list--attached">
+              <div class="combobox-skeleton"><div class="combobox-skeleton-thumb"></div><div class="combobox-skeleton-line" style="width:140px;"></div></div>
+              <div class="combobox-skeleton"><div class="combobox-skeleton-thumb"></div><div class="combobox-skeleton-line" style="width:110px;"></div></div>
+              <div class="combobox-skeleton"><div class="combobox-skeleton-thumb"></div><div class="combobox-skeleton-line" style="width:160px;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Multi-select -->
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:10px;">Multi-select — with chips</span>
+          <div class="combobox-chips">
+            <span class="combobox-chip">Action <span class="combobox-chip-remove">×</span></span>
+            <span class="combobox-chip">RPG <span class="combobox-chip-remove">×</span></span>
+            <input type="text" class="combobox-chip-input" placeholder="Add genre…" style="pointer-events:none;" readonly>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SIZES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Two input height tiers. The dropdown list item size does not change — only the trigger height varies.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-direction:column; gap:20px; max-width:360px;">
+
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:8px;">M — 48px · Default</span>
+          <div class="combobox-input-wrap">
+            <input type="text" class="combobox-input" placeholder="Search games…" style="pointer-events:none;" readonly>
+            <span class="combobox-search-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_search"></use></svg></span>
+          </div>
+        </div>
+
+        <div>
+          <span style="font-size:10px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; display:block; margin-bottom:8px;">L — 56px · Prominent search bars</span>
+          <div class="combobox-input-wrap">
+            <input type="text" class="combobox-input combobox-input--l" placeholder="Search games…" style="pointer-events:none;" readonly>
+            <span class="combobox-search-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_search"></use></svg></span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- STATES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Six states across the input and list together. The loading state shows skeleton items in the list while results are fetching — the input remains fully interactive.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>State</th><th>Input</th><th>List</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Default</td><td>Border <code class="ds-code">var(--border-subtle)</code>, grey search icon</td><td>Hidden</td></tr>
+        <tr><td>Focused / Open</td><td>Border <code class="ds-code">var(--jio)</code>, green glow, green search icon</td><td>Visible, results rendered</td></tr>
+        <tr><td>Item hover</td><td>No change</td><td>Hovered item background <code class="ds-code">var(--glass-1)</code></td></tr>
+        <tr><td>Item selected</td><td>Input shows selected value; list closes</td><td>Hidden after selection</td></tr>
+        <tr><td>Loading</td><td>Open / focused state</td><td>Skeleton items pulse at 1.4s</td></tr>
+        <tr><td>Empty</td><td>Open / focused state</td><td>Single empty state message: "No [noun] found for "[query]""</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CONTENT GUIDANCE -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <p class="ds-section-desc">Three text surfaces: input placeholder, result items, and the empty state message.</p>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Placeholder and result text</div>
+        <ul>
+          <li>Placeholder: "Search games…", "Find a friend…" — use an ellipsis, not "Enter a name"</li>
+          <li>Match highlight: bold the matched substring in <code class="ds-code">var(--jio)</code> green — never underline or italicise</li>
+          <li>Show max 8 items before the list scrolls internally</li>
+          <li>Result item copy: game title as-is, no truncation under 32 chars</li>
+          <li>For friend search: show username + display name in a two-line item layout</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Empty state message</div>
+        <ul>
+          <li>Always include the query in the message: <em>No games found for "xyzqwerty"</em></li>
+          <li>Never leave the dropdown panel blank — a blank panel creates confusion about whether results are still loading</li>
+          <li>If the list is network-backed, distinguish "no results" from "error": <em>No games found…</em> vs <em>Couldn't load results. Try again.</em></li>
+          <li>Offer a fallback action in the empty state where possible: "Browse all games →"</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <p class="ds-section-desc">The list presentation changes substantially across platforms — the input is consistent, the list adapts to the interaction model.</p>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Do not render an inline dropdown on mobile — open a bottom sheet instead to avoid soft-keyboard overlap</li>
+          <li>Bottom sheet contains the input at the top and scrollable list below, full-width</li>
+          <li>Result items on mobile: 56px height minimum for touch target compliance</li>
+          <li>Debounce network queries by 300ms on mobile — slower connections need more tolerance</li>
+          <li>Show a "Done" button in the bottom sheet header to confirm multi-select and dismiss</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Inline dropdown panel below the input — standard combobox pattern</li>
+          <li>Max dropdown height: <code class="ds-code">320px</code> with internal scroll; never taller than the viewport minus 80px</li>
+          <li>Flip to open upward if there is insufficient space below the input</li>
+          <li>Debounce network queries by 200ms</li>
+          <li>Click outside (pointerdown on document) closes the dropdown</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>No inline combobox on TV — open a full-screen search overlay on d-pad confirm</li>
+          <li>Full-screen overlay: input at the top with virtual keyboard or voice search; results in a grid below</li>
+          <li>D-pad navigates the result grid; OK confirms; Back closes the overlay</li>
+          <li>Result cards on TV: 120px+ height with large artwork for legibility at 3m</li>
+          <li>Always offer voice search as primary input method on TV — physical text entry is slow</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">Combobox is one of the most complex ARIA patterns. Follow the ARIA 1.2 combobox pattern precisely — do not approximate.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Requirement</th><th>Implementation</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Input role</td>
+          <td><code class="ds-code">role="combobox"</code></td>
+          <td>Applied to the <code class="ds-code">&lt;input&gt;</code> element itself, not a wrapper div.</td>
+        </tr>
+        <tr>
+          <td>Expanded state</td>
+          <td><code class="ds-code">aria-expanded="true|false"</code></td>
+          <td>Toggle on input with every open/close. Screen readers announce "expanded" or "collapsed" on focus.</td>
+        </tr>
+        <tr>
+          <td>Autocomplete hint</td>
+          <td><code class="ds-code">aria-autocomplete="list"</code></td>
+          <td>Tells screen readers that a list of suggestions is available filtered by typed input.</td>
+        </tr>
+        <tr>
+          <td>List ownership</td>
+          <td><code class="ds-code">aria-controls="listbox-id"</code></td>
+          <td>Points the input to the <code class="ds-code">role="listbox"</code> element. Required for JAWS and NVDA to associate the two.</td>
+        </tr>
+        <tr>
+          <td>Active option</td>
+          <td><code class="ds-code">aria-activedescendant="option-id"</code></td>
+          <td>Updated on every keyboard arrow navigation to point to the currently highlighted <code class="ds-code">role="option"</code>. Do not move DOM focus to the option — keep focus on the input.</td>
+        </tr>
+        <tr>
+          <td>Option roles</td>
+          <td><code class="ds-code">role="option"</code> + <code class="ds-code">aria-selected</code></td>
+          <td>Each result item. <code class="ds-code">aria-selected="true"</code> on the currently highlighted item. For multi-select, <code class="ds-code">aria-selected="true"</code> on chosen items.</td>
+        </tr>
+        <tr>
+          <td>Keyboard</td>
+          <td>Down/Up: navigate list · Enter: select · Escape: close</td>
+          <td>Home moves to first item, End to last. Tab closes and moves to next focusable element without selecting.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- RELATED TOKENS -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-desc">Tokens used across the input and dropdown list.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Token</th><th>Value</th><th>Usage</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code class="ds-code">--input-bg</code></td><td><code class="ds-code">var(--glass-1)</code></td><td>Input background fill</td></tr>
+        <tr><td><code class="ds-code">--input-border</code></td><td><code class="ds-code">var(--border-subtle)</code></td><td>Default input border</td></tr>
+        <tr><td><code class="ds-code">--jio</code></td><td><code class="ds-code">#00A859</code></td><td>Open border, glow ring, match highlight, selected item color, chip background</td></tr>
+        <tr><td><code class="ds-code">--surface-2</code></td><td>Surface tier 2</td><td>Dropdown list background</td></tr>
+        <tr><td><code class="ds-code">--border-subtle</code></td><td><code class="ds-code">rgba(255,255,255,.08)</code></td><td>Dropdown list border</td></tr>
+        <tr><td><code class="ds-code">--glass-1</code></td><td>Glass tier 1</td><td>Item hover and keyboard-active background</td></tr>
+        <tr><td><code class="ds-code">--surface-3</code></td><td>Surface tier 3</td><td>Skeleton item pulse background</td></tr>
+        <tr><td><code class="ds-code">--text3</code></td><td><code class="ds-code">rgba(244,242,238,.32)</code></td><td>Empty state text, search icon default color</td></tr>
+        <tr><td><code class="ds-code">--r5</code></td><td>Border radius tier 5</td><td>Input and list border-radius</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CODE EXAMPLES -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-body">Link <code class="ds-code">tokens.css</code>, <code class="ds-code">components.css</code>, and <code class="ds-code">states.css</code> before using component classes.</p>
+
+    <div class="component-code-block">
+      <div class="component-code-label">HTML structure — single-select combobox</div>
+      <pre class="component-code-pre"><code>&lt;div class="combobox-wrap"&gt;
+  &lt;label class="field-label" id="game-label"&gt;Search games&lt;/label&gt;
+  &lt;div class="combobox-input-wrap"&gt;
+    &lt;input
+      type="text"
+      id="game-input"
+      class="combobox-input"
+      role="combobox"
+      aria-expanded="false"
+      aria-autocomplete="list"
+      aria-controls="game-listbox"
+      aria-labelledby="game-label"
+      aria-activedescendant=""
+      placeholder="Search games…"
+      autocomplete="off"
+    &gt;
+    &lt;span class="combobox-search-icon" aria-hidden="true"&gt;
+      &lt;svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"&gt;
+        &lt;circle cx="7" cy="7" r="4.5" stroke="currentColor" stroke-width="1.5"/&gt;
+        &lt;path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/&gt;
+      &lt;/svg&gt;
+    &lt;/span&gt;
+  &lt;/div&gt;
+  &lt;ul
+    id="game-listbox"
+    class="combobox-list"
+    role="listbox"
+    aria-labelledby="game-label"
+    hidden
+  &gt;
+    &lt;li id="opt-1" class="combobox-item" role="option" aria-selected="false"&gt;
+      &lt;div class="combobox-thumb"&gt;&lt;/div&gt;
+      Tomb Raider
+    &lt;/li&gt;
+    &lt;li id="opt-2" class="combobox-item" role="option" aria-selected="false"&gt;
+      &lt;div class="combobox-thumb"&gt;&lt;/div&gt;
+      Tomb Raider II
+    &lt;/li&gt;
+    &lt;!-- empty state (shown when no results) --&gt;
+    &lt;li class="combobox-empty" role="status" hidden&gt;
+      No games found for ""
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Keyboard navigation pattern</div>
+      <pre class="component-code-pre"><code>const input    = document.getElementById('game-input');
+const listbox  = document.getElementById('game-listbox');
+const options  = () =&gt; [...listbox.querySelectorAll('[role="option"]:not([hidden])')];
+let activeIdx  = -1;
+
+function open()  { listbox.hidden = false; input.setAttribute('aria-expanded', 'true'); }
+function close() { listbox.hidden = true;  input.setAttribute('aria-expanded', 'false'); activeIdx = -1; clearActive(); }
+
+function setActive(idx) {
+  const opts = options();
+  clearActive();
+  if (idx &lt; 0 || idx &gt;= opts.length) { activeIdx = -1; input.setAttribute('aria-activedescendant', ''); return; }
+  activeIdx = idx;
+  opts[idx].classList.add('is-active');
+  input.setAttribute('aria-activedescendant', opts[idx].id);
+  opts[idx].scrollIntoView({ block: 'nearest' });
+}
+function clearActive() { options().forEach(o =&gt; o.classList.remove('is-active')); }
+
+input.addEventListener('input', () =&gt; {
+  // filter options, then:
+  activeIdx = -1;
+  open();
+});
+
+input.addEventListener('keydown', e =&gt; {
+  const opts = options();
+  if (e.key === 'ArrowDown') { e.preventDefault(); setActive(Math.min(activeIdx + 1, opts.length - 1)); }
+  if (e.key === 'ArrowUp')   { e.preventDefault(); setActive(Math.max(activeIdx - 1, 0)); }
+  if (e.key === 'Home')      { e.preventDefault(); setActive(0); }
+  if (e.key === 'End')       { e.preventDefault(); setActive(opts.length - 1); }
+  if (e.key === 'Enter' &amp;&amp; activeIdx &gt;= 0) {
+    input.value = opts[activeIdx].textContent.trim();
+    close();
+  }
+  if (e.key === 'Escape') { close(); }
+  if (e.key === 'Tab')    { close(); }
+});
+
+document.addEventListener('pointerdown', e =&gt; {
+  if (!input.contains(e.target) &amp;&amp; !listbox.contains(e.target)) close();
+});</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Multi-select pattern — chip input</div>
+      <pre class="component-code-pre"><code>&lt;!-- Multi-select: selected values render as chips inside the input wrapper --&gt;
+&lt;div
+  class="combobox-chips"
+  role="group"
+  aria-label="Selected genres"
+  onclick="this.querySelector('.combobox-chip-input').focus()"
+&gt;
+  &lt;!-- Chip per selected value --&gt;
+  &lt;span class="combobox-chip"&gt;
+    Action
+    &lt;button
+      class="combobox-chip-remove"
+      aria-label="Remove Action"
+      onclick="this.closest('.combobox-chip').remove()"
+    &gt;×&lt;/button&gt;
+  &lt;/span&gt;
+  &lt;span class="combobox-chip"&gt;
+    RPG
+    &lt;button class="combobox-chip-remove" aria-label="Remove RPG"
+      onclick="this.closest('.combobox-chip').remove()"&gt;×&lt;/button&gt;
+  &lt;/span&gt;
+  &lt;!-- Inline search input --&gt;
+  &lt;input
+    type="text"
+    class="combobox-chip-input"
+    role="combobox"
+    aria-expanded="false"
+    aria-autocomplete="list"
+    aria-controls="genre-listbox"
+    placeholder="Add genre…"
+    autocomplete="off"
+  &gt;
+&lt;/div&gt;
+&lt;!-- Dropdown list renders below .combobox-chips wrapper --&gt;
+&lt;ul id="genre-listbox" class="combobox-list" role="listbox" hidden&gt;
+  &lt;li class="combobox-item" role="option" aria-selected="false"&gt;Sports&lt;/li&gt;
+  &lt;li class="combobox-item" role="option" aria-selected="false"&gt;Racing&lt;/li&gt;
+  &lt;li class="combobox-item" role="option" aria-selected="false"&gt;Adventure&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- CHANGELOG -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Changelog</h2>
+    <div class="component-changelog">
+      <div class="component-changelog-entry">
+        <span class="component-changelog-version">v0.1</span>
+        <span class="component-changelog-date">Jun 2026</span>
+        <p class="component-changelog-desc">Initial draft. Includes Default, Open, Empty, Loading, and Multi-select variants. M and L input sizes. Six states. Platform guidance for mobile bottom sheet, web inline dropdown, and TV full-screen overlay. Full ARIA 1.2 combobox accessibility table. Three code examples: HTML structure, keyboard navigation pattern, and multi-select chip input.</p>
+      </div>
+    </div>
+  </section>
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

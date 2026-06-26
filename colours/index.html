@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colours — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'JioType', sans-serif;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── Brand swatch cards ── */
+    .brand-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .brand-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r5);
+      overflow: hidden;
+    }
+    .brand-card-block {
+      height: 80px;
+    }
+    .brand-card-body {
+      padding: 14px 16px;
+    }
+    .brand-card-token {
+      font-family: monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+    .brand-card-hex {
+      font-family: monospace;
+      font-size: 11px;
+      color: var(--text3);
+      margin-bottom: 8px;
+    }
+    .brand-card-desc {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.55;
+    }
+
+    /* ── Neutral ladder ── */
+    .neutral-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 12px;
+    }
+    .neutral-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      overflow: hidden;
+    }
+    .neutral-block {
+      height: 64px;
+      position: relative;
+    }
+    .neutral-block-inner {
+      position: absolute;
+      inset: 0;
+    }
+    .neutral-body {
+      padding: 12px 14px;
+    }
+    .neutral-token {
+      font-family: monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+    .neutral-hex {
+      font-family: monospace;
+      font-size: 10px;
+      color: var(--text3);
+      margin-bottom: 6px;
+    }
+    .neutral-desc {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.5;
+    }
+
+    /* ── Functional pills ── */
+    .functional-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+    .func-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+    }
+    .func-swatch {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--r3);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .func-info {}
+    .func-token {
+      font-family: monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+    .func-hex {
+      font-family: monospace;
+      font-size: 10px;
+      color: var(--text3);
+      margin-bottom: 5px;
+    }
+    .func-desc {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.5;
+    }
+
+    /* ── Contrast matrix ── */
+    .contrast-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .contrast-table th {
+      text-align: left;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--text3);
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .contrast-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--divider);
+      font-weight: 500;
+      vertical-align: middle;
+    }
+    .contrast-table tr:last-child td { border-bottom: none; }
+    .contrast-table tr:hover td { background: var(--glass-2); }
+    .contrast-fg {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .contrast-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: var(--pill);
+      flex-shrink: 0;
+      border: 1px solid var(--border-subtle);
+    }
+    .contrast-token {
+      font-family: monospace;
+      font-size: 12px;
+      color: var(--text);
+    }
+    .contrast-hex-small {
+      font-family: monospace;
+      font-size: 11px;
+      color: var(--text3);
+    }
+    .contrast-ratio {
+      font-family: monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .wcag-aaa  { color: var(--jio);      font-weight: 700; font-size: 12px; }
+    .wcag-aa   { color: var(--jio-2);    font-weight: 700; font-size: 12px; }
+    .wcag-large { color: var(--amber);   font-weight: 700; font-size: 12px; }
+    .wcag-fail { color: var(--negative); font-weight: 700; font-size: 12px; }
+
+    /* ── Preview bar ── */
+    .preview-bar {
+      height: 8px;
+      border-radius: var(--pill);
+      margin-top: 12px;
+    }
+
+    /* ── Border tokens visual ── */
+    .border-demo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .border-demo-card {
+      padding: 20px;
+      border-radius: var(--r4);
+      background: var(--surface-2);
+    }
+    .border-demo-label {
+      font-family: monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text2);
+      margin-bottom: 4px;
+    }
+    .border-demo-desc {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text3);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Sidebar injected by shell.js -->
+
+<main class="ds-main">
+
+  <!-- Page header -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <a href="../" class="component-breadcrumb-link">JioGames DLS</a>
+      <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="component-breadcrumb-current">Colours</span>
+    </nav>
+    <h1 class="component-page-title">Colours</h1>
+    <p class="component-page-def">JioGames colour system — brand green, surface ladder, text hierarchy, functional accents, and full token table.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+      <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+      <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+      <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="component-hero component-hero--dark" style="padding:32px 40px;align-items:flex-start;gap:16px">
+    <div class="hero-glow"></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;position:relative;z-index:1">
+      <!-- Brand greens -->
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <div style="width:80px;height:80px;border-radius:var(--r4);background:var(--jio)"></div>
+        <div style="font-size:9px;font-weight:700;color:var(--text3);text-align:center">--jio</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <div style="width:80px;height:80px;border-radius:var(--r4);background:var(--jio-bright)"></div>
+        <div style="font-size:9px;font-weight:700;color:var(--text3);text-align:center">--jio-bright</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <div style="width:80px;height:80px;border-radius:var(--r4);background:var(--ultimate)"></div>
+        <div style="font-size:9px;font-weight:700;color:var(--text3);text-align:center">--ultimate</div>
+      </div>
+      <!-- Surfaces -->
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <div style="width:80px;height:80px;border-radius:var(--r4);background:var(--surface-1);border:1px solid var(--border-subtle)"></div>
+        <div style="font-size:9px;font-weight:700;color:var(--text3);text-align:center">--surface-1</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <div style="width:80px;height:80px;border-radius:var(--r4);background:var(--surface-2);border:1px solid var(--border-subtle)"></div>
+        <div style="font-size:9px;font-weight:700;color:var(--text3);text-align:center">--surface-2</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <div style="width:80px;height:80px;border-radius:var(--r4);background:var(--surface-3);border:1px solid var(--border-subtle)"></div>
+        <div style="font-size:9px;font-weight:700;color:var(--text3);text-align:center">--surface-3</div>
+      </div>
+      <!-- Accents -->
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <div style="width:80px;height:80px;border-radius:var(--r4);background:var(--negative)"></div>
+        <div style="font-size:9px;font-weight:700;color:var(--text3);text-align:center">--negative</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px">
+        <div style="width:80px;height:80px;border-radius:var(--r4);background:var(--popular-gold)"></div>
+        <div style="font-size:9px;font-weight:700;color:var(--text3);text-align:center">--popular-gold</div>
+      </div>
+    </div>
+    <p class="component-hero-caption">BRAND · SURFACES · ACCENTS · ALL TOKEN-BASED</p>
+  </div>
+
+  <!-- ── Section 1: Brand palette ── -->
+  <div class="ds-section">
+    <div class="ds-section-title">Brand palette</div>
+    <p class="ds-section-desc">JioGames green in all its forms. The brand accent is exclusively green — no blue, indigo, or purple anywhere in the system.</p>
+    <div class="brand-grid">
+
+      <div class="brand-card">
+        <div class="brand-card-block" style="background:#00A859;"></div>
+        <div class="brand-card-body">
+          <div class="brand-card-token">--jio</div>
+          <div class="brand-card-hex">#00A859</div>
+          <div class="brand-card-desc">Primary brand green. CTA backgrounds, active states, progress fills.</div>
+          <div class="preview-bar" style="background:#00A859;"></div>
+        </div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-block" style="background:#22C16C;"></div>
+        <div class="brand-card-body">
+          <div class="brand-card-token">--jio-2</div>
+          <div class="brand-card-hex">#22C16C</div>
+          <div class="brand-card-desc">Lighter green. Hover states, secondary highlights.</div>
+          <div class="preview-bar" style="background:#22C16C;"></div>
+        </div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-block" style="background:#88E5AB;"></div>
+        <div class="brand-card-body">
+          <div class="brand-card-token">--jio-3</div>
+          <div class="brand-card-hex">#88E5AB</div>
+          <div class="brand-card-desc">Pale green. Decorative accents, icon tints.</div>
+          <div class="preview-bar" style="background:#88E5AB;"></div>
+        </div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-block" style="background:#00E870;"></div>
+        <div class="brand-card-body">
+          <div class="brand-card-token">--jio-bright</div>
+          <div class="brand-card-hex">#00E870</div>
+          <div class="brand-card-desc">Electric green. Glow effects, live indicators.</div>
+          <div class="preview-bar" style="background:#00E870;"></div>
+        </div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-block" style="background:rgba(0,168,89,.12);border-bottom:1px solid var(--border-subtle);"></div>
+        <div class="brand-card-body">
+          <div class="brand-card-token">--jio-soft</div>
+          <div class="brand-card-hex">rgba(0,168,89,.12)</div>
+          <div class="brand-card-desc">Green tint. Tag backgrounds, subtle highlights.</div>
+          <div class="preview-bar" style="background:rgba(0,168,89,.12);border:1px solid rgba(0,168,89,.2);"></div>
+        </div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-block" style="background:rgba(0,200,100,.35);border-bottom:1px solid var(--border-subtle);"></div>
+        <div class="brand-card-body">
+          <div class="brand-card-token">--jio-glow</div>
+          <div class="brand-card-hex">rgba(0,200,100,.35)</div>
+          <div class="brand-card-desc">Glow halo. Focus rings, active card shadows.</div>
+          <div class="preview-bar" style="background:rgba(0,200,100,.35);"></div>
+        </div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-block" style="background:#00cc65;"></div>
+        <div class="brand-card-body">
+          <div class="brand-card-token">--ultimate</div>
+          <div class="brand-card-hex">#00cc65</div>
+          <div class="brand-card-desc">All Screen Pass tier. Brighter than --jio, never blue.</div>
+          <div class="preview-bar" style="background:#00cc65;"></div>
+        </div>
+      </div>
+
+      <div class="brand-card">
+        <div class="brand-card-block" style="background:#00A859;"></div>
+        <div class="brand-card-body">
+          <div class="brand-card-token">--positive</div>
+          <div class="brand-card-hex">#00A859</div>
+          <div class="brand-card-desc">Success / positive states. Maps to --jio.</div>
+          <div class="preview-bar" style="background:#00A859;"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Section 2: Neutral palette ── -->
+  <div class="ds-section">
+    <div class="ds-section-title">Neutral palette</div>
+    <p class="ds-section-desc">The surface ladder — from the deepest page background to the highest opaque card. All surfaces are dark. Never use white or light-grey surfaces.</p>
+    <div class="neutral-grid">
+
+      <div class="neutral-card">
+        <div class="neutral-block">
+          <div class="neutral-block-inner" style="background:#06080F;border-bottom:1px solid rgba(255,255,255,.08);"></div>
+        </div>
+        <div class="neutral-body">
+          <div class="neutral-token">--bg</div>
+          <div class="neutral-hex">#06080F</div>
+          <div class="neutral-desc">Page background. The darkest surface.</div>
+        </div>
+      </div>
+
+      <div class="neutral-card">
+        <div class="neutral-block">
+          <div class="neutral-block-inner" style="background:#111115;border-bottom:1px solid rgba(255,255,255,.08);"></div>
+        </div>
+        <div class="neutral-body">
+          <div class="neutral-token">--card-bg</div>
+          <div class="neutral-hex">#111115</div>
+          <div class="neutral-desc">Card background. Primary content surface.</div>
+        </div>
+      </div>
+
+      <div class="neutral-card">
+        <div class="neutral-block">
+          <div class="neutral-block-inner" style="background:#0E1119;border-bottom:1px solid rgba(255,255,255,.08);"></div>
+        </div>
+        <div class="neutral-body">
+          <div class="neutral-token">--surface-1</div>
+          <div class="neutral-hex">#0E1119</div>
+          <div class="neutral-desc">Elevated surface 1.</div>
+        </div>
+      </div>
+
+      <div class="neutral-card">
+        <div class="neutral-block">
+          <div class="neutral-block-inner" style="background:#161A24;border-bottom:1px solid rgba(255,255,255,.08);"></div>
+        </div>
+        <div class="neutral-body">
+          <div class="neutral-token">--surface-2</div>
+          <div class="neutral-hex">#161A24</div>
+          <div class="neutral-desc">Elevated surface 2.</div>
+        </div>
+      </div>
+
+      <div class="neutral-card">
+        <div class="neutral-block">
+          <div class="neutral-block-inner" style="background:#1F2432;border-bottom:1px solid rgba(255,255,255,.08);"></div>
+        </div>
+        <div class="neutral-body">
+          <div class="neutral-token">--surface-3</div>
+          <div class="neutral-hex">#1F2432</div>
+          <div class="neutral-desc">Elevated surface 3.</div>
+        </div>
+      </div>
+
+      <div class="neutral-card">
+        <div class="neutral-block">
+          <div class="neutral-block-inner" style="background:#2A3142;border-bottom:1px solid rgba(255,255,255,.08);"></div>
+        </div>
+        <div class="neutral-body">
+          <div class="neutral-token">--surface-4</div>
+          <div class="neutral-hex">#2A3142</div>
+          <div class="neutral-desc">Highest opaque surface.</div>
+        </div>
+      </div>
+
+      <div class="neutral-card">
+        <div class="neutral-block">
+          <div class="neutral-block-inner" style="background:#0c0f14;border-bottom:1px solid rgba(255,255,255,.08);"></div>
+        </div>
+        <div class="neutral-body">
+          <div class="neutral-token">--chip-bg</div>
+          <div class="neutral-hex">#0c0f14</div>
+          <div class="neutral-desc">Chip and tag background.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Section 3: Text colours ── -->
+  <div class="ds-section">
+    <div class="ds-section-title">Text colours</div>
+    <p class="ds-section-desc">Five text tokens covering full range from primary readable content to disabled-only states. Note: --text3 and --text4 are below WCAG AA for small text.</p>
+    <div class="ds-demo ds-demo--dark" >
+      <table class="ds-token-table">
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Swatch</th>
+            <th>Hex</th>
+            <th>Usage</th>
+            <th>Contrast vs --bg</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="ds-token-name">--text</span></td>
+            <td><span class="ds-token-swatch" style="background:#F4F2EE;"></span></td>
+            <td><span class="ds-token-value">#F4F2EE</span></td>
+            <td style="color:var(--text2);">Primary text</td>
+            <td style="color:var(--jio);font-weight:700;font-size:12px;">14.5:1 AAA</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--text2</span></td>
+            <td><span class="ds-token-swatch" style="background:#A8ADBA;"></span></td>
+            <td><span class="ds-token-value">#A8ADBA</span></td>
+            <td style="color:var(--text2);">Secondary, labels</td>
+            <td style="color:var(--jio-2);font-weight:700;font-size:12px;">6.8:1 AA</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--text3</span></td>
+            <td><span class="ds-token-swatch" style="background:#6B7280;"></span></td>
+            <td><span class="ds-token-value">#6B7280</span></td>
+            <td style="color:var(--text2);">Muted, captions</td>
+            <td style="color:var(--amber);font-weight:700;font-size:12px;">3.8:1 AA Large</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--text4</span></td>
+            <td><span class="ds-token-swatch" style="background:#454A57;"></span></td>
+            <td><span class="ds-token-value">#454A57</span></td>
+            <td style="color:var(--text2);">Disabled only</td>
+            <td style="color:var(--negative);font-weight:700;font-size:12px;">2.1:1 Fail</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--text-inv</span></td>
+            <td><span class="ds-token-swatch" style="background:#000000;border-color:var(--border);"></span></td>
+            <td><span class="ds-token-value">#000000</span></td>
+            <td style="color:var(--text2);">On bright/green surfaces</td>
+            <td style="color:var(--text3);font-size:12px;">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Text preview -->
+    <div style="margin-top:16px;padding:24px;background:var(--card-bg);border:1px solid var(--border-subtle);border-radius:var(--r5);display:flex;flex-direction:column;gap:8px;">
+      <div style="font-size:16px;font-weight:700;color:var(--text);letter-spacing:-.2px;">Primary text — --text · #F4F2EE · 14.5:1</div>
+      <div style="font-size:14px;font-weight:500;color:var(--text2);">Secondary text — --text2 · #A8ADBA · 6.8:1</div>
+      <div style="font-size:13px;font-weight:500;color:var(--text3);">Muted text — --text3 · #6B7280 · 3.8:1 (large only)</div>
+      <div style="font-size:12px;font-weight:500;color:var(--text4);">Disabled text — --text4 · #454A57 · 2.1:1 (disabled only)</div>
+    </div>
+  </div>
+
+  <!-- ── Section 4: Functional colours ── -->
+  <div class="ds-section">
+    <div class="ds-section-title">Functional colours</div>
+    <p class="ds-section-desc">Semantic tokens for specific UI states. Each has a single, governed meaning — do not repurpose them for decoration.</p>
+    <div class="functional-grid">
+
+      <div class="func-card">
+        <div class="func-swatch" style="background:#FF4757;"></div>
+        <div class="func-info">
+          <div class="func-token">--negative</div>
+          <div class="func-hex">#FF4757</div>
+          <div class="func-desc">Error states, destructive actions</div>
+        </div>
+      </div>
+
+      <div class="func-card">
+        <div class="func-swatch" style="background:#F59E0B;"></div>
+        <div class="func-info">
+          <div class="func-token">--amber</div>
+          <div class="func-hex">#F59E0B</div>
+          <div class="func-desc">Warnings, expiry notices</div>
+        </div>
+      </div>
+
+      <div class="func-card">
+        <div class="func-swatch" style="background:#FFC23D;"></div>
+        <div class="func-info">
+          <div class="func-token">--gold</div>
+          <div class="func-hex">#FFC23D</div>
+          <div class="func-desc">Ratings, premium highlights</div>
+        </div>
+      </div>
+
+      <div class="func-card">
+        <div class="func-swatch" style="background:#8E5BFF;"></div>
+        <div class="func-info">
+          <div class="func-token">--violet</div>
+          <div class="func-hex">#8E5BFF</div>
+          <div class="func-desc">Special events, exclusive content</div>
+        </div>
+      </div>
+
+      <div class="func-card">
+        <div class="func-swatch" style="background:#26D6C9;"></div>
+        <div class="func-info">
+          <div class="func-token">--cyan</div>
+          <div class="func-hex">#26D6C9</div>
+          <div class="func-desc">Info states, live stream accents</div>
+        </div>
+      </div>
+
+      <div class="func-card">
+        <div class="func-swatch" style="background:#F7AB20;"></div>
+        <div class="func-info">
+          <div class="func-token">--popular-gold</div>
+          <div class="func-hex">#F7AB20</div>
+          <div class="func-desc">Popular badges</div>
+        </div>
+      </div>
+
+      <div class="func-card">
+        <div class="func-swatch" style="background:#FF3D7F;"></div>
+        <div class="func-info">
+          <div class="func-token">--pink</div>
+          <div class="func-hex">#FF3D7F</div>
+          <div class="func-desc">Trending, spotlight content</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Section 5: Borders & dividers ── -->
+  <div class="ds-section">
+    <div class="ds-section-title">Borders &amp; dividers</div>
+    <p class="ds-section-desc">Transparent white overlays — all borders are tinted white at varying opacities, never solid grey. One special border for the Ultimate Pass tier.</p>
+
+    <div class="border-demo-grid" style="margin-bottom:24px;">
+      <div class="border-demo-card" style="border:1px solid rgba(255,255,255,.1);">
+        <div class="border-demo-label">--border</div>
+        <div class="border-demo-desc">rgba(255,255,255,.1) — Standard card border</div>
+      </div>
+      <div class="border-demo-card" style="border:1px solid rgba(255,255,255,.14);">
+        <div class="border-demo-label">--border-strong</div>
+        <div class="border-demo-desc">rgba(255,255,255,.14) — Emphasized border</div>
+      </div>
+      <div class="border-demo-card" style="border:1px solid rgba(255,255,255,.08);">
+        <div class="border-demo-label">--border-subtle</div>
+        <div class="border-demo-desc">rgba(255,255,255,.08) — Subtle separator</div>
+      </div>
+      <div class="border-demo-card" style="border:1px solid rgba(0,204,101,.3);">
+        <div class="border-demo-label">--border-ultimate</div>
+        <div class="border-demo-desc">rgba(0,204,101,.3) — Ultimate Pass card border</div>
+      </div>
+      <div class="border-demo-card" style="border-bottom:1px solid rgba(255,255,255,.07);border:1px solid transparent;border-bottom-color:rgba(255,255,255,.07);">
+        <div class="border-demo-label">--divider</div>
+        <div class="border-demo-desc">rgba(255,255,255,.07) — Section dividers</div>
+      </div>
+      <div class="border-demo-card" style="border-bottom:1px solid rgba(255,255,255,.08);border:1px solid transparent;border-bottom-color:rgba(255,255,255,.08);">
+        <div class="border-demo-label">--hairline</div>
+        <div class="border-demo-desc">rgba(255,255,255,.08) — Hairline rules</div>
+      </div>
+    </div>
+
+    <div class="ds-demo ds-demo--dark" >
+      <table class="ds-token-table">
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Value</th>
+            <th>Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="ds-token-name">--border</span></td>
+            <td><span class="ds-token-value">rgba(255,255,255,.1)</span></td>
+            <td style="color:var(--text2);">Standard card border</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--border-strong</span></td>
+            <td><span class="ds-token-value">rgba(255,255,255,.14)</span></td>
+            <td style="color:var(--text2);">Emphasized border</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--border-subtle</span></td>
+            <td><span class="ds-token-value">rgba(255,255,255,.08)</span></td>
+            <td style="color:var(--text2);">Subtle separator</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--border-ultimate</span></td>
+            <td><span class="ds-token-value">rgba(0,204,101,.3)</span></td>
+            <td style="color:var(--text2);">Ultimate Pass card border</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--divider</span></td>
+            <td><span class="ds-token-value">rgba(255,255,255,.07)</span></td>
+            <td style="color:var(--text2);">Section dividers</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--hairline</span></td>
+            <td><span class="ds-token-value">rgba(255,255,255,.08)</span></td>
+            <td style="color:var(--text2);">Hairline rules</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── Section 6: Full token table ── -->
+  <div class="ds-section">
+    <div class="ds-section-title">Full colour token table</div>
+    <p class="ds-section-desc">Every colour token in the system, in one place. Reference this when building components — never hardcode a hex value.</p>
+    <div class="ds-demo ds-demo--dark" >
+      <table class="ds-token-table">
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Swatch</th>
+            <th>Value</th>
+            <th>Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ds-token-name">--jio</span></td><td><span class="ds-token-swatch" style="background:#00A859;"></span></td><td><span class="ds-token-value">#00A859</span></td><td style="color:var(--text2);">Primary brand green, CTA</td></tr>
+          <tr><td><span class="ds-token-name">--jio-2</span></td><td><span class="ds-token-swatch" style="background:#22C16C;"></span></td><td><span class="ds-token-value">#22C16C</span></td><td style="color:var(--text2);">Hover, secondary highlight</td></tr>
+          <tr><td><span class="ds-token-name">--jio-3</span></td><td><span class="ds-token-swatch" style="background:#88E5AB;"></span></td><td><span class="ds-token-value">#88E5AB</span></td><td style="color:var(--text2);">Pale accent, icon tints</td></tr>
+          <tr><td><span class="ds-token-name">--jio-bright</span></td><td><span class="ds-token-swatch" style="background:#00E870;"></span></td><td><span class="ds-token-value">#00E870</span></td><td style="color:var(--text2);">Glow effects, live indicators</td></tr>
+          <tr><td><span class="ds-token-name">--jio-soft</span></td><td><span class="ds-token-swatch" style="background:rgba(0,168,89,.12);"></span></td><td><span class="ds-token-value">rgba(0,168,89,.12)</span></td><td style="color:var(--text2);">Tag backgrounds, tinted fills</td></tr>
+          <tr><td><span class="ds-token-name">--jio-glow</span></td><td><span class="ds-token-swatch" style="background:rgba(0,200,100,.35);"></span></td><td><span class="ds-token-value">rgba(0,200,100,.35)</span></td><td style="color:var(--text2);">Focus rings, active shadows</td></tr>
+          <tr><td><span class="ds-token-name">--ultimate</span></td><td><span class="ds-token-swatch" style="background:#00cc65;"></span></td><td><span class="ds-token-value">#00cc65</span></td><td style="color:var(--text2);">All Screen Pass tier</td></tr>
+          <tr><td><span class="ds-token-name">--positive</span></td><td><span class="ds-token-swatch" style="background:#00A859;"></span></td><td><span class="ds-token-value">#00A859</span></td><td style="color:var(--text2);">Success states (= --jio)</td></tr>
+          <tr><td><span class="ds-token-name">--negative</span></td><td><span class="ds-token-swatch" style="background:#FF4757;"></span></td><td><span class="ds-token-value">#FF4757</span></td><td style="color:var(--text2);">Error, destructive</td></tr>
+          <tr><td><span class="ds-token-name">--amber</span></td><td><span class="ds-token-swatch" style="background:#F59E0B;"></span></td><td><span class="ds-token-value">#F59E0B</span></td><td style="color:var(--text2);">Warnings, expiry</td></tr>
+          <tr><td><span class="ds-token-name">--gold</span></td><td><span class="ds-token-swatch" style="background:#FFC23D;"></span></td><td><span class="ds-token-value">#FFC23D</span></td><td style="color:var(--text2);">Ratings, premium</td></tr>
+          <tr><td><span class="ds-token-name">--popular-gold</span></td><td><span class="ds-token-swatch" style="background:#F7AB20;"></span></td><td><span class="ds-token-value">#F7AB20</span></td><td style="color:var(--text2);">Popular badge</td></tr>
+          <tr><td><span class="ds-token-name">--violet</span></td><td><span class="ds-token-swatch" style="background:#8E5BFF;"></span></td><td><span class="ds-token-value">#8E5BFF</span></td><td style="color:var(--text2);">Events, exclusive content</td></tr>
+          <tr><td><span class="ds-token-name">--cyan</span></td><td><span class="ds-token-swatch" style="background:#26D6C9;"></span></td><td><span class="ds-token-value">#26D6C9</span></td><td style="color:var(--text2);">Info, live stream</td></tr>
+          <tr><td><span class="ds-token-name">--pink</span></td><td><span class="ds-token-swatch" style="background:#FF3D7F;"></span></td><td><span class="ds-token-value">#FF3D7F</span></td><td style="color:var(--text2);">Trending, spotlight</td></tr>
+          <tr><td><span class="ds-token-name">--bg</span></td><td><span class="ds-token-swatch" style="background:#06080F;border-color:rgba(255,255,255,.15);"></span></td><td><span class="ds-token-value">#06080F</span></td><td style="color:var(--text2);">Page background</td></tr>
+          <tr><td><span class="ds-token-name">--card-bg</span></td><td><span class="ds-token-swatch" style="background:#111115;"></span></td><td><span class="ds-token-value">#111115</span></td><td style="color:var(--text2);">Card background</td></tr>
+          <tr><td><span class="ds-token-name">--surface-1</span></td><td><span class="ds-token-swatch" style="background:#0E1119;"></span></td><td><span class="ds-token-value">#0E1119</span></td><td style="color:var(--text2);">Elevated surface 1</td></tr>
+          <tr><td><span class="ds-token-name">--surface-2</span></td><td><span class="ds-token-swatch" style="background:#161A24;"></span></td><td><span class="ds-token-value">#161A24</span></td><td style="color:var(--text2);">Elevated surface 2</td></tr>
+          <tr><td><span class="ds-token-name">--surface-3</span></td><td><span class="ds-token-swatch" style="background:#1F2432;"></span></td><td><span class="ds-token-value">#1F2432</span></td><td style="color:var(--text2);">Elevated surface 3</td></tr>
+          <tr><td><span class="ds-token-name">--surface-4</span></td><td><span class="ds-token-swatch" style="background:#2A3142;"></span></td><td><span class="ds-token-value">#2A3142</span></td><td style="color:var(--text2);">Highest opaque surface</td></tr>
+          <tr><td><span class="ds-token-name">--chip-bg</span></td><td><span class="ds-token-swatch" style="background:#0c0f14;"></span></td><td><span class="ds-token-value">#0c0f14</span></td><td style="color:var(--text2);">Chip / tag background</td></tr>
+          <tr><td><span class="ds-token-name">--glass-1</span></td><td><span class="ds-token-swatch" style="background:rgba(255,255,255,.055);"></span></td><td><span class="ds-token-value">rgba(255,255,255,.055)</span></td><td style="color:var(--text2);">Subtle glass overlay</td></tr>
+          <tr><td><span class="ds-token-name">--glass-2</span></td><td><span class="ds-token-swatch" style="background:rgba(255,255,255,.03);"></span></td><td><span class="ds-token-value">rgba(255,255,255,.03)</span></td><td style="color:var(--text2);">Softest glass overlay</td></tr>
+          <tr><td><span class="ds-token-name">--text</span></td><td><span class="ds-token-swatch" style="background:#F4F2EE;"></span></td><td><span class="ds-token-value">#F4F2EE</span></td><td style="color:var(--text2);">Primary text</td></tr>
+          <tr><td><span class="ds-token-name">--text2</span></td><td><span class="ds-token-swatch" style="background:#A8ADBA;"></span></td><td><span class="ds-token-value">#A8ADBA</span></td><td style="color:var(--text2);">Secondary text</td></tr>
+          <tr><td><span class="ds-token-name">--text3</span></td><td><span class="ds-token-swatch" style="background:#6B7280;"></span></td><td><span class="ds-token-value">#6B7280</span></td><td style="color:var(--text2);">Muted, captions</td></tr>
+          <tr><td><span class="ds-token-name">--text4</span></td><td><span class="ds-token-swatch" style="background:#454A57;"></span></td><td><span class="ds-token-value">#454A57</span></td><td style="color:var(--text2);">Disabled only</td></tr>
+          <tr><td><span class="ds-token-name">--text-inv</span></td><td><span class="ds-token-swatch" style="background:#000000;border-color:rgba(255,255,255,.15);"></span></td><td><span class="ds-token-value">#000000</span></td><td style="color:var(--text2);">On bright green surfaces</td></tr>
+          <tr><td><span class="ds-token-name">--border</span></td><td><span class="ds-token-swatch" style="background:rgba(255,255,255,.1);"></span></td><td><span class="ds-token-value">rgba(255,255,255,.1)</span></td><td style="color:var(--text2);">Standard border</td></tr>
+          <tr><td><span class="ds-token-name">--border-strong</span></td><td><span class="ds-token-swatch" style="background:rgba(255,255,255,.14);"></span></td><td><span class="ds-token-value">rgba(255,255,255,.14)</span></td><td style="color:var(--text2);">Emphasized border</td></tr>
+          <tr><td><span class="ds-token-name">--border-subtle</span></td><td><span class="ds-token-swatch" style="background:rgba(255,255,255,.08);"></span></td><td><span class="ds-token-value">rgba(255,255,255,.08)</span></td><td style="color:var(--text2);">Subtle separator</td></tr>
+          <tr><td><span class="ds-token-name">--border-ultimate</span></td><td><span class="ds-token-swatch" style="background:rgba(0,204,101,.3);"></span></td><td><span class="ds-token-value">rgba(0,204,101,.3)</span></td><td style="color:var(--text2);">Ultimate Pass border</td></tr>
+          <tr><td><span class="ds-token-name">--divider</span></td><td><span class="ds-token-swatch" style="background:rgba(255,255,255,.07);"></span></td><td><span class="ds-token-value">rgba(255,255,255,.07)</span></td><td style="color:var(--text2);">Section dividers</td></tr>
+          <tr><td><span class="ds-token-name">--hairline</span></td><td><span class="ds-token-swatch" style="background:rgba(255,255,255,.08);"></span></td><td><span class="ds-token-value">rgba(255,255,255,.08)</span></td><td style="color:var(--text2);">Hairline rules</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── Section 7: Usage rules ── -->
+  <div class="ds-section">
+    <div class="ds-section-title">Usage rules</div>
+    <p class="ds-section-desc">Hard rules enforced by the DLS validator. Green rows are required practices. Red rows are prohibited — these will cause a validation ERR.</p>
+    <div class="ds-rules">
+      <div class="ds-rule ds-rule--pass">Use <code style="font-family:monospace;font-size:11px;color:var(--jio);">--jio</code> for all primary interactive elements — buttons, links, active states, progress bars.</div>
+      <div class="ds-rule ds-rule--pass">Use <code style="font-family:monospace;font-size:11px;color:var(--jio);">--negative</code> for all error states — field errors, destructive confirmations, failure toasts.</div>
+      <div class="ds-rule ds-rule--pass">Use <code style="font-family:monospace;font-size:11px;color:var(--jio);">--text3</code> only for decorative or non-essential text (captions, metadata) — never for body copy or labels.</div>
+      <div class="ds-rule ds-rule--pass">Use <code style="font-family:monospace;font-size:11px;color:var(--jio);">--ultimate</code> exclusively for All Screen Pass tier UI — do not use for general green accents.</div>
+      <div class="ds-rule ds-rule--pass">Reference all colour values through their token — <code style="font-family:monospace;font-size:11px;color:var(--jio);">var(--jio)</code>, never <code style="font-family:monospace;font-size:11px;color:var(--text3);">#00A859</code>.</div>
+      <div class="ds-rule ds-rule--fail">Use any blue, indigo, or purple for brand actions — --violet is allowed only for events/exclusives, not interactive UI.</div>
+      <div class="ds-rule ds-rule--fail">Use raw hex values in component CSS — every value must reference a token variable.</div>
+      <div class="ds-rule ds-rule--fail">Use light-mode surfaces (white, off-white, light grey) at any breakpoint on any platform.</div>
+      <div class="ds-rule ds-rule--fail">Use <code style="font-family:monospace;font-size:11px;">--text4</code> for any meaningful, readable content — it is contrast-fail and reserved for disabled states only.</div>
+      <div class="ds-rule ds-rule--fail">Create new colour values not in the token set — open an RFC instead.</div>
+    </div>
+  </div>
+
+  <!-- ── Section 8: Contrast matrix ── -->
+  <div class="ds-section">
+    <div class="ds-section-title">Contrast matrix</div>
+    <p class="ds-section-desc">Verified WCAG 2.1 contrast ratios for the most common foreground/background pairings. AAA = 7:1+, AA = 4.5:1+, AA Large = 3:1+ (18px+ or 14px bold).</p>
+    <div class="ds-demo ds-demo--dark" >
+      <table class="contrast-table">
+        <thead>
+          <tr>
+            <th>Foreground</th>
+            <th>Background</th>
+            <th>Ratio</th>
+            <th>WCAG</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="contrast-fg">
+                <span class="contrast-dot" style="background:#F4F2EE;"></span>
+                <div><div class="contrast-token">--text</div><div class="contrast-hex-small">#F4F2EE</div></div>
+              </div>
+            </td>
+            <td>
+              <div class="contrast-fg">
+                <span class="contrast-dot" style="background:#06080F;border-color:rgba(255,255,255,.2);"></span>
+                <div><div class="contrast-token">--bg</div><div class="contrast-hex-small">#06080F</div></div>
+              </div>
+            </td>
+            <td><span class="contrast-ratio">14.5:1</span></td>
+            <td><span class="wcag-aaa">AAA ✓</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="contrast-fg">
+                <span class="contrast-dot" style="background:#A8ADBA;"></span>
+                <div><div class="contrast-token">--text2</div><div class="contrast-hex-small">#A8ADBA</div></div>
+              </div>
+            </td>
+            <td>
+              <div class="contrast-fg">
+                <span class="contrast-dot" style="background:#06080F;border-color:rgba(255,255,255,.2);"></span>
+                <div><div class="contrast-token">--bg</div><div class="contrast-hex-small">#06080F</div></div>
+              </div>
+            </td>
+            <td><span class="contrast-ratio">6.8:1</span></td>
+            <td><span class="wcag-aa">AA ✓</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="contrast-fg">
+                <span class="contrast-dot" style="background:#6B7280;"></span>
+                <div><div class="contrast-token">--text3</div><div class="contrast-hex-small">#6B7280</div></div>
+              </div>
+            </td>
+            <td>
+              <div class="contrast-fg">
+                <span class="contrast-dot" style="background:#06080F;border-color:rgba(255,255,255,.2);"></span>
+                <div><div class="contrast-token">--bg</div><div class="contrast-hex-small">#06080F</div></div>
+              </div>
+            </td>
+            <td><span class="contrast-ratio">3.8:1</span></td>
+            <td><span class="wcag-large">AA Large only ⚠</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="contrast-fg">
+                <span class="contrast-dot" style="background:#454A57;"></span>
+                <div><div class="contrast-token">--text4</div><div class="contrast-hex-small">#454A57</div></div>
+              </div>
+            </td>
+            <td>
+              <div class="contrast-fg">
+                <span class="contrast-dot" style="background:#06080F;border-color:rgba(255,255,255,.2);"></span>
+                <div><div class="contrast-token">--bg</div><div class="contrast-hex-small">#06080F</div></div>
+              </div>
+            </td>
+            <td><span class="contrast-ratio">2.1:1</span></td>
+            <td><span class="wcag-fail">Fail ✗</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="contrast-fg">
+                <span class="contrast-dot" style="background:#00A859;"></span>
+                <div><div class="contrast-token">--jio</div><div class="contrast-hex-small">#00A859</div></div>
+              </div>
+            </td>
+            <td>
+              <div class="contrast-fg">
+                <span class="contrast-dot" style="background:#06080F;border-color:rgba(255,255,255,.2);"></span>
+                <div><div class="contrast-token">--bg</div><div class="contrast-hex-small">#06080F</div></div>
+              </div>
+            </td>
+            <td><span class="contrast-ratio">4.6:1</span></td>
+            <td><span class="wcag-aa">AA ✓</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="contrast-fg">
+                <span class="contrast-dot" style="background:#F4F2EE;"></span>
+                <div><div class="contrast-token">--text</div><div class="contrast-hex-small">#F4F2EE</div></div>
+              </div>
+            </td>
+            <td>
+              <div class="contrast-fg">
+                <span class="contrast-dot" style="background:#111115;border-color:rgba(255,255,255,.15);"></span>
+                <div><div class="contrast-token">--card-bg</div><div class="contrast-hex-small">#111115</div></div>
+              </div>
+            </td>
+            <td><span class="contrast-ratio">13.9:1</span></td>
+            <td><span class="wcag-aaa">AAA ✓</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="contrast-fg">
+                <span class="contrast-dot" style="background:#A8ADBA;"></span>
+                <div><div class="contrast-token">--text2</div><div class="contrast-hex-small">#A8ADBA</div></div>
+              </div>
+            </td>
+            <td>
+              <div class="contrast-fg">
+                <span class="contrast-dot" style="background:#111115;border-color:rgba(255,255,255,.15);"></span>
+                <div><div class="contrast-token">--card-bg</div><div class="contrast-hex-small">#111115</div></div>
+              </div>
+            </td>
+            <td><span class="contrast-ratio">6.5:1</span></td>
+            <td><span class="wcag-aa">AA ✓</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="contrast-fg">
+                <span class="contrast-dot" style="background:#F4F2EE;"></span>
+                <div><div class="contrast-token">--text</div><div class="contrast-hex-small">#F4F2EE</div></div>
+              </div>
+            </td>
+            <td>
+              <div class="contrast-fg">
+                <span class="contrast-dot" style="background:#161A24;border-color:rgba(255,255,255,.15);"></span>
+                <div><div class="contrast-token">--surface-2</div><div class="contrast-hex-small">#161A24</div></div>
+              </div>
+            </td>
+            <td><span class="contrast-ratio">12.1:1</span></td>
+            <td><span class="wcag-aaa">AAA ✓</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <!-- CHANGELOG -->
+
+</main>
+
+<script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script>
+</body>
+</html>

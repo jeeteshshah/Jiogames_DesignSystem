@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessibility — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+</head>
+<body>
+  <main class="ds-main">
+
+    <header class="component-page-header">
+      <nav class="component-breadcrumb" aria-label="Breadcrumb">
+        <a href="../">JioGames DLS</a>
+        <span class="component-breadcrumb-sep" aria-hidden="true">›</span>
+        <span>Accessibility</span>
+      </nav>
+      <h1 class="component-page-title">Accessibility</h1>
+      <p class="component-page-def">JioGames targets WCAG 2.1 AA minimum across all platforms. TV also follows WCAG 2.1 AA plus remote-control navigation requirements.</p>
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+        <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+        <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+        <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <div class="component-hero component-hero--dark" style="padding:32px 40px;align-items:flex-start;gap:20px">
+      <div class="hero-glow"></div>
+      <div style="display:flex;gap:32px;flex-wrap:wrap;position:relative;z-index:1">
+        <!-- Contrast ratio block -->
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Contrast</div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:32px;height:20px;border-radius:var(--r2);background:var(--jio);display:flex;align-items:center;justify-content:center">
+                <span style="font-size:9px;font-weight:900;color:#000">Aa</span>
+              </div>
+              <div style="font-size:11px;color:var(--text2)">Green on dark · 4.8:1 ✓ AA</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:32px;height:20px;border-radius:var(--r2);background:var(--surface-2);display:flex;align-items:center;justify-content:center">
+                <span style="font-size:9px;font-weight:700;color:var(--text)">Aa</span>
+              </div>
+              <div style="font-size:11px;color:var(--text2)">Text on surface · 8.2:1 ✓ AA</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:32px;height:20px;border-radius:var(--r2);background:var(--surface-2);display:flex;align-items:center;justify-content:center">
+                <span style="font-size:9px;font-weight:700;color:var(--text2)">Aa</span>
+              </div>
+              <div style="font-size:11px;color:var(--text2)">text2 on surface · 4.6:1 ✓ AA</div>
+            </div>
+          </div>
+        </div>
+        <!-- WCAG level tags -->
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Targets</div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <div style="display:inline-flex;align-items:center;gap:8px;background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:6px 12px">
+              <span style="width:8px;height:8px;border-radius:50%;background:var(--jio);display:inline-block"></span>
+              <span style="font-size:12px;font-weight:700;color:var(--text)">WCAG 2.1 AA</span>
+              <span style="font-size:11px;color:var(--text3)">Mobile · Web · TV</span>
+            </div>
+            <div style="display:inline-flex;align-items:center;gap:8px;background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:6px 12px">
+              <span style="width:8px;height:8px;border-radius:50%;background:var(--popular-gold, #FFCF5C);display:inline-block"></span>
+              <span style="font-size:12px;font-weight:700;color:var(--text)">WCAG 2.1 AAA</span>
+              <span style="font-size:11px;color:var(--text3)">Target (not required)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="component-hero-caption">WCAG 2.1 AA · CONTRAST · FOCUS · REDUCED MOTION</p>
+    </div>
+
+    <!-- WCAG COMPLIANCE MATRIX -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">WCAG 2.1 Compliance Matrix</h2>
+      <p class="ds-section-desc">Current audit status. All AA criteria must pass before shipping a new platform surface.</p>
+      <table style="width:100%;border-collapse:collapse;margin-top:16px">
+        <thead>
+          <tr style="background:var(--surface-2)">
+            <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border-subtle)">Criterion</th>
+            <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border-subtle)">Level</th>
+            <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border-subtle)">Status</th>
+            <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border-subtle)">JioGames implementation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border-subtle)">
+            <td style="padding:10px 14px;font-size:13px;color:var(--text)">1.4.3 Contrast (Text)</td>
+            <td style="padding:10px 14px"><span style="background:var(--surface-2);color:var(--text3);font-size:11px;padding:2px 8px;border-radius:var(--pill);border:1px solid var(--border-subtle)">AA</span></td>
+            <td style="padding:10px 14px"><span style="color:var(--success-text);font-size:12px;font-weight:700">✓ Pass</span></td>
+            <td style="padding:10px 14px;font-size:13px;color:var(--text2)">--text on --bg = 13.5:1</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border-subtle)">
+            <td style="padding:10px 14px;font-size:13px;color:var(--text)">1.4.11 Non-text Contrast</td>
+            <td style="padding:10px 14px"><span style="background:var(--surface-2);color:var(--text3);font-size:11px;padding:2px 8px;border-radius:var(--pill);border:1px solid var(--border-subtle)">AA</span></td>
+            <td style="padding:10px 14px"><span style="color:var(--success-text);font-size:12px;font-weight:700">✓ Pass</span></td>
+            <td style="padding:10px 14px;font-size:13px;color:var(--text2)">--border on --bg = 3.1:1</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border-subtle)">
+            <td style="padding:10px 14px;font-size:13px;color:var(--text)">2.1.1 Keyboard</td>
+            <td style="padding:10px 14px"><span style="background:var(--surface-2);color:var(--text3);font-size:11px;padding:2px 8px;border-radius:var(--pill);border:1px solid var(--border-subtle)">AA</span></td>
+            <td style="padding:10px 14px"><span style="color:var(--success-text);font-size:12px;font-weight:700">✓ Pass</span></td>
+            <td style="padding:10px 14px;font-size:13px;color:var(--text2)">All interactive elements keyboard navigable</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border-subtle)">
+            <td style="padding:10px 14px;font-size:13px;color:var(--text)">2.1.2 No Keyboard Trap</td>
+            <td style="padding:10px 14px"><span style="background:var(--surface-2);color:var(--text3);font-size:11px;padding:2px 8px;border-radius:var(--pill);border:1px solid var(--border-subtle)">AA</span></td>
+            <td style="padding:10px 14px"><span style="color:var(--success-text);font-size:12px;font-weight:700">✓ Pass</span></td>
+            <td style="padding:10px 14px;font-size:13px;color:var(--text2)">Modals use focus trap with Escape key</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border-subtle)">
+            <td style="padding:10px 14px;font-size:13px;color:var(--text)">2.4.3 Focus Order</td>
+            <td style="padding:10px 14px"><span style="background:var(--surface-2);color:var(--text3);font-size:11px;padding:2px 8px;border-radius:var(--pill);border:1px solid var(--border-subtle)">AA</span></td>
+            <td style="padding:10px 14px"><span style="color:var(--success-text);font-size:12px;font-weight:700">✓ Pass</span></td>
+            <td style="padding:10px 14px;font-size:13px;color:var(--text2)">DOM order = visual order</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border-subtle)">
+            <td style="padding:10px 14px;font-size:13px;color:var(--text)">2.4.7 Focus Visible</td>
+            <td style="padding:10px 14px"><span style="background:var(--surface-2);color:var(--text3);font-size:11px;padding:2px 8px;border-radius:var(--pill);border:1px solid var(--border-subtle)">AA</span></td>
+            <td style="padding:10px 14px"><span style="color:var(--success-text);font-size:12px;font-weight:700">✓ Pass</span></td>
+            <td style="padding:10px 14px;font-size:13px;color:var(--text2)">All elements have visible focus ring</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 14px;font-size:13px;color:var(--text)">4.1.2 Name/Role/Value</td>
+            <td style="padding:10px 14px"><span style="background:var(--surface-2);color:var(--text3);font-size:11px;padding:2px 8px;border-radius:var(--pill);border:1px solid var(--border-subtle)">AA</span></td>
+            <td style="padding:10px 14px"><span style="color:var(--success-text);font-size:12px;font-weight:700">✓ Pass</span></td>
+            <td style="padding:10px 14px;font-size:13px;color:var(--text2)">ARIA labels on all icon-only controls</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- CONTRAST DEMOS -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Contrast Demos</h2>
+      <p class="ds-section-desc">Three key text pairings. Only use <code>--text3</code> for decorative or non-critical labels (metadata, timestamps). Never use <code>--text4</code> for visible text.</p>
+      <div class="ds-demo">
+        <div style="display:flex;flex-direction:column;gap:12px">
+
+          <div style="display:flex;align-items:center;gap:16px;padding:14px 16px;background:var(--bg);border-radius:var(--r4);border:1px solid var(--border-subtle)">
+            <div style="width:40px;height:40px;border-radius:var(--r3);background:var(--text);flex-shrink:0"></div>
+            <div style="flex:1">
+              <div style="font-size:15px;font-weight:600;color:var(--text)">Primary text on background</div>
+              <div style="font-size:12px;color:var(--text3);margin-top:2px">--text on --bg</div>
+            </div>
+            <div style="text-align:right;flex-shrink:0">
+              <div style="font-size:18px;font-weight:700;color:var(--success-text)">13.5:1</div>
+              <div style="font-size:11px;color:var(--success-text);font-weight:600">AAA</div>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:16px;padding:14px 16px;background:var(--surface-1);border-radius:var(--r4);border:1px solid var(--border-subtle)">
+            <div style="width:40px;height:40px;border-radius:var(--r3);background:var(--text2);flex-shrink:0"></div>
+            <div style="flex:1">
+              <div style="font-size:15px;font-weight:600;color:var(--text2)">Secondary text on surface</div>
+              <div style="font-size:12px;color:var(--text3);margin-top:2px">--text2 on --surface-1</div>
+            </div>
+            <div style="text-align:right;flex-shrink:0">
+              <div style="font-size:18px;font-weight:700;color:var(--success-text)">5.2:1</div>
+              <div style="font-size:11px;color:var(--success-text);font-weight:600">AA</div>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:16px;padding:14px 16px;background:var(--bg);border-radius:var(--r4);border:1px solid var(--border-subtle)">
+            <div style="width:40px;height:40px;border-radius:var(--r3);background:var(--jio);flex-shrink:0"></div>
+            <div style="flex:1">
+              <div style="font-size:15px;font-weight:600;color:var(--jio)">Brand green on background</div>
+              <div style="font-size:12px;color:var(--text3);margin-top:2px">--jio on --bg · large text or UI element only</div>
+            </div>
+            <div style="text-align:right;flex-shrink:0">
+              <div style="font-size:18px;font-weight:700;color:var(--warning-text)">4.6:1</div>
+              <div style="font-size:11px;color:var(--warning-text);font-weight:600">AA (large)</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FOCUS VISIBLE -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Focus Visible</h2>
+      <p class="ds-section-desc">Three focus tiers: default (no focus), web focused (2px ring), TV focused (glow + scale). Never use <code>outline:none</code> without a custom replacement.</p>
+      <div class="ds-demo">
+        <div style="display:flex;gap:32px;align-items:flex-end;flex-wrap:wrap">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+            <button class="btn btn--primary btn--hug">Play Now</button>
+            <span style="font-size:11px;color:var(--text3);font-weight:600">Default</span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+            <button class="btn btn--primary btn--hug is-focused">Play Now</button>
+            <span style="font-size:11px;color:var(--text3);font-weight:600">Web Focused</span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+            <button class="btn btn--primary btn--xl btn--hug is-tv-focused">Play Now</button>
+            <span style="font-size:11px;color:var(--text3);font-weight:600">TV Focused</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARIA PATTERNS -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">ARIA Patterns</h2>
+      <p class="ds-section-desc">Required ARIA for each interactive pattern in the system. Copy these exactly — screen reader announcements depend on the right combination of role + attribute.</p>
+      <div class="ds-demo">
+        <div style="display:flex;flex-direction:column;gap:10px">
+
+          <div style="background:var(--surface-1);border-radius:var(--r3);padding:14px 16px;border:1px solid var(--border-subtle)">
+            <div style="font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--text3);margin-bottom:6px">Icon-only button</div>
+            <code style="font-size:13px;color:var(--text2);line-height:1.8">&lt;button <span style="color:var(--jio)">aria-label="Favourite game"</span> class="btn btn--icon btn--icon-circle"&gt;…&lt;/button&gt;</code>
+          </div>
+
+          <div style="background:var(--surface-1);border-radius:var(--r3);padding:14px 16px;border:1px solid var(--border-subtle)">
+            <div style="font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--text3);margin-bottom:6px">Loading state</div>
+            <code style="font-size:13px;color:var(--text2);line-height:1.8">&lt;button <span style="color:var(--jio)">aria-busy="true" aria-label="Loading…"</span>&gt;…&lt;/button&gt;</code>
+          </div>
+
+          <div style="background:var(--surface-1);border-radius:var(--r3);padding:14px 16px;border:1px solid var(--border-subtle)">
+            <div style="font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--text3);margin-bottom:6px">Disabled (accessible)</div>
+            <code style="font-size:13px;color:var(--text2);line-height:1.8">&lt;button <span style="color:var(--jio)">aria-disabled="true" tabindex="0"</span>&gt;…&lt;/button&gt;</code>
+            <div style="font-size:12px;color:var(--text3);margin-top:6px">Prefer <code>aria-disabled</code> over <code>disabled</code> — keeps element in focus order so screen reader can announce the reason.</div>
+          </div>
+
+          <div style="background:var(--surface-1);border-radius:var(--r3);padding:14px 16px;border:1px solid var(--border-subtle)">
+            <div style="font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--text3);margin-bottom:6px">Game card</div>
+            <code style="font-size:13px;color:var(--text2);line-height:1.8">&lt;div <span style="color:var(--jio)">role="article" aria-label="War Thunder, Action, Free to Play" tabindex="0"</span>&gt;…&lt;/div&gt;</code>
+          </div>
+
+          <div style="background:var(--surface-1);border-radius:var(--r3);padding:14px 16px;border:1px solid var(--border-subtle)">
+            <div style="font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--text3);margin-bottom:6px">Toggle switch</div>
+            <code style="font-size:13px;color:var(--text2);line-height:1.8">&lt;button <span style="color:var(--jio)">role="switch" aria-checked="true" aria-label="Enable notifications"</span>&gt;…&lt;/button&gt;</code>
+          </div>
+
+          <div style="background:var(--surface-1);border-radius:var(--r3);padding:14px 16px;border:1px solid var(--border-subtle)">
+            <div style="font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--text3);margin-bottom:6px">Live region (toast / alert)</div>
+            <code style="font-size:13px;color:var(--text2);line-height:1.8">&lt;div <span style="color:var(--jio)">role="status" aria-live="polite" aria-atomic="true"</span>&gt;…&lt;/div&gt;</code>
+            <div style="font-size:12px;color:var(--text3);margin-top:6px">Use <code>role="alert"</code> + <code>aria-live="assertive"</code> for errors. Polite for all other live regions.</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- TOUCH TARGET SIZES -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Touch Target Sizes</h2>
+      <p class="ds-section-desc">Visual size and interactive target size are different. Expand touch targets with padding or invisible wrapper — never shrink them to match visual size.</p>
+      <div class="ds-demo">
+        <div style="display:flex;gap:32px;align-items:flex-end;flex-wrap:wrap">
+
+          <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+            <div style="width:32px;height:32px;border-radius:var(--r3);background:var(--surface-2);border:2px solid var(--error-text);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--error-text)">32px</div>
+            <div style="text-align:center">
+              <div style="font-size:12px;font-weight:700;color:var(--error-text)">✗ Fail</div>
+              <div style="font-size:11px;color:var(--text3)">Below 44px min</div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+            <div style="width:44px;height:44px;border-radius:var(--r3);background:var(--jio-soft);border:2px solid var(--jio);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--jio)">44px</div>
+            <div style="text-align:center">
+              <div style="font-size:12px;font-weight:700;color:var(--success-text)">✓ Mobile</div>
+              <div style="font-size:11px;color:var(--text3)">WCAG 2.5.5 min</div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+            <div style="width:60px;height:60px;border-radius:var(--r3);background:var(--jio-soft);border:2px solid var(--jio);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--jio)">60px</div>
+            <div style="text-align:center">
+              <div style="font-size:12px;font-weight:700;color:var(--success-text)">✓ TV</div>
+              <div style="font-size:11px;color:var(--text3)">10-foot rule</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- MOTION / VESTIBULAR -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Motion & Vestibular</h2>
+      <p class="ds-section-desc">Under <code>prefers-reduced-motion: reduce</code>, all decorative transitions are zeroed. Only purposeful transitions (sheet open, focus ring) may persist — and only if they help spatial orientation.</p>
+      <div class="ds-code">
+<pre>@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Exception: sheet transition kept for spatial cue */
+  .bottom-sheet {
+    transition-duration: 100ms !important;
+  }
+}</pre>
+      </div>
+    </section>
+
+    <!-- SCREEN READER CHECKLIST -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Screen Reader Checklist</h2>
+      <p class="ds-section-desc">Run through this before every release. Test with VoiceOver (iOS / macOS) and TalkBack (Android).</p>
+      <ul class="ds-rules">
+        <li class="ds-rule ds-rule--pass">All images have alt text, or <code>alt=""</code> + <code>aria-hidden="true"</code> if purely decorative.</li>
+        <li class="ds-rule ds-rule--pass">Form inputs have associated <code>&lt;label&gt;</code> — not just <code>placeholder</code>.</li>
+        <li class="ds-rule ds-rule--pass">Error messages are programmatically linked to their input via <code>aria-describedby</code>.</li>
+        <li class="ds-rule ds-rule--pass">Modals announce their title on open via <code>aria-labelledby</code>.</li>
+        <li class="ds-rule ds-rule--pass">Dynamic content (toasts, pass states) uses <code>aria-live</code> regions.</li>
+        <li class="ds-rule ds-rule--pass">Page title updates on route change — screen reader announces the new screen.</li>
+        <li class="ds-rule ds-rule--pass">Focus is restored to the trigger element when a modal or sheet closes.</li>
+      </ul>
+    </section>
+
+    <!-- TV-SPECIFIC -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">TV-Specific Accessibility</h2>
+      <p class="ds-section-desc">TV has no pointer, no hover, and a mandatory 3m viewing distance. These requirements are in addition to WCAG 2.1 AA.</p>
+      <div class="ds-demo">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--surface-1);border-radius:var(--r3);border:1px solid var(--border-subtle)">
+            <span style="color:var(--success-text);font-size:14px;font-weight:700;flex-shrink:0">✓</span>
+            <span style="font-size:13px;color:var(--text2)">All navigable elements reachable by D-pad — no mouse-only paths.</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--surface-1);border-radius:var(--r3);border:1px solid var(--border-subtle)">
+            <span style="color:var(--success-text);font-size:14px;font-weight:700;flex-shrink:0">✓</span>
+            <span style="font-size:13px;color:var(--text2)">No hover-only interactions — every action must be available via focus + OK.</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--surface-1);border-radius:var(--r3);border:1px solid var(--border-subtle)">
+            <span style="color:var(--success-text);font-size:14px;font-weight:700;flex-shrink:0">✓</span>
+            <span style="font-size:13px;color:var(--text2)">Focus never lost when content changes (rail load, skeleton → content).</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--surface-1);border-radius:var(--r3);border:1px solid var(--border-subtle)">
+            <span style="color:var(--success-text);font-size:14px;font-weight:700;flex-shrink:0">✓</span>
+            <span style="font-size:13px;color:var(--text2)">Back button always exits modal/sheet — never trapped.</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--surface-1);border-radius:var(--r3);border:1px solid var(--border-subtle)">
+            <span style="color:var(--success-text);font-size:14px;font-weight:700;flex-shrink:0">✓</span>
+            <span style="font-size:13px;color:var(--text2)">Focus ring contrast: <code>--jio</code> on <code>--bg</code> = 4.6:1 — meets 3:1 minimum for non-text contrast (WCAG 2.4.11).</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--surface-1);border-radius:var(--r3);border:1px solid var(--border-subtle)">
+            <span style="color:var(--success-text);font-size:14px;font-weight:700;flex-shrink:0">✓</span>
+            <span style="font-size:13px;color:var(--text2)">Minimum interactive size 60×60px on TV (exceeds 44px WCAG minimum).</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOKEN TABLE -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Tokens</h2>
+      <table class="ds-token-table">
+        <thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="ds-token-name">--focus-ring-color</span></td>
+            <td><span class="ds-token-value">var(--jio)</span></td>
+            <td style="color:var(--text2)">Web/mobile focus ring</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--focus-ring-width</span></td>
+            <td><span class="ds-token-value">2px</span></td>
+            <td style="color:var(--text2)">Web focus ring thickness</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--focus-ring-offset</span></td>
+            <td><span class="ds-token-value">3px</span></td>
+            <td style="color:var(--text2)">Gap between element and ring</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--focus-shadow</span></td>
+            <td><span class="ds-token-value">0 0 0 var(--focus-ring-width) var(--focus-ring-color)</span></td>
+            <td style="color:var(--text2)">Web focus shadow shorthand</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--tv-focus-shadow</span></td>
+            <td><span class="ds-token-value">0 0 0 3px var(--jio), 0 0 24px var(--jio-glow), 0 0 48px …</span></td>
+            <td style="color:var(--text2)">TV composite focus ring</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--state-disabled-opacity</span></td>
+            <td><span class="ds-token-value">0.32</span></td>
+            <td style="color:var(--text2)">Disabled element opacity</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--text (contrast)</span></td>
+            <td><span class="ds-token-value">13.5:1 on --bg</span></td>
+            <td style="color:var(--text2)">Primary text — AAA</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--text2 (contrast)</span></td>
+            <td><span class="ds-token-value">5.2:1 on --surface-1</span></td>
+            <td style="color:var(--text2)">Secondary text — AA</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--jio (contrast)</span></td>
+            <td><span class="ds-token-value">4.6:1 on --bg</span></td>
+            <td style="color:var(--text2)">Brand green — AA large text</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- FOCUS MANAGEMENT -->
+    <section class="ds-section">
+      <h2 class="ds-section-title" id="focus-management">Focus Management</h2>
+      <p class="ds-section-desc">Focus rings are defined by three tokens. Never remove the outline without supplying a token-based replacement.</p>
+
+      <h3 class="ds-subsection-title">Focus ring tokens</h3>
+      <table class="ds-token-table">
+        <thead><tr><th>Token</th><th>Value</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="ds-token-name">--focus-ring-color</span></td>
+            <td><span class="ds-token-value">var(--jio)</span></td>
+            <td style="color:var(--text2)">Ring colour — matches brand green</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--focus-ring-width</span></td>
+            <td><span class="ds-token-value">2px</span></td>
+            <td style="color:var(--text2)">Ring stroke thickness</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--focus-ring-offset</span></td>
+            <td><span class="ds-token-value">3px</span></td>
+            <td style="color:var(--text2)">Gap between element edge and ring</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="ds-subsection-title" style="margin-top:24px">.is-focused demo</h3>
+      <div class="ds-demo">
+        <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+            <button class="btn btn--primary btn--hug is-focused">Primary button</button>
+            <span style="font-size:11px;color:var(--text3)">btn.is-focused</span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+            <input class="ds-input is-focused" value="text input" style="outline:var(--focus-ring-width) solid var(--focus-ring-color);outline-offset:var(--focus-ring-offset);background:var(--surface-2);color:var(--text);border:1px solid var(--border);border-radius:var(--r3);padding:8px 12px;font-size:14px;width:160px" readonly>
+            <span style="font-size:11px;color:var(--text3)">input.is-focused</span>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="ds-subsection-title" style="margin-top:24px">Rules</h3>
+      <ul class="ds-rules">
+        <li class="ds-rule ds-rule--pass">Never write <code>outline:none</code> or <code>outline:0</code> without providing a token-based replacement using <code>--focus-ring-color</code>.</li>
+        <li class="ds-rule ds-rule--pass">Provide a skip-nav link as the first focusable element on every web page: <code>&lt;a href="#main" class="sr-only sr-only--focusable"&gt;Skip to content&lt;/a&gt;</code>.</li>
+        <li class="ds-rule ds-rule--pass">Trap focus inside modals and bottom sheets while they are open — Tab and Shift+Tab must cycle within the modal only. Restore focus to the trigger element on close.</li>
+        <li class="ds-rule ds-rule--fail">Relying on browser default outlines — they vary across OS/browser combinations and may not meet contrast requirements.</li>
+      </ul>
+    </section>
+
+    <!-- COLOUR & CONTRAST -->
+    <section class="ds-section">
+      <h2 class="ds-section-title" id="colour-contrast">Colour &amp; Contrast</h2>
+      <p class="ds-section-desc">WCAG AA requires 4.5:1 for normal text, 3:1 for large text (18pt+ or 14pt bold) and UI components. Key token pairs below.</p>
+
+      <h3 class="ds-subsection-title">Token contrast table</h3>
+      <table style="width:100%;border-collapse:collapse;margin-top:16px">
+        <thead>
+          <tr style="background:var(--surface-2)">
+            <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border-subtle)">Foreground token</th>
+            <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border-subtle)">Background token</th>
+            <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border-subtle)">Ratio</th>
+            <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border-subtle)">Result</th>
+            <th style="padding:10px 14px;text-align:left;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border-subtle)">Note</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--border-subtle)">
+            <td style="padding:10px 14px;font-size:13px;font-family:monospace;color:var(--text)">--text</td>
+            <td style="padding:10px 14px;font-size:13px;font-family:monospace;color:var(--text)">--bg</td>
+            <td style="padding:10px 14px;font-size:14px;font-weight:700;color:var(--text)">13.5:1</td>
+            <td style="padding:10px 14px"><span style="color:var(--success-text);font-weight:700">✓ AAA</span></td>
+            <td style="padding:10px 14px;font-size:12px;color:var(--text2)">Primary body copy — passes all levels</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border-subtle)">
+            <td style="padding:10px 14px;font-size:13px;font-family:monospace;color:var(--text)">--text2</td>
+            <td style="padding:10px 14px;font-size:13px;font-family:monospace;color:var(--text)">--bg</td>
+            <td style="padding:10px 14px;font-size:14px;font-weight:700;color:var(--text)">5.4:1</td>
+            <td style="padding:10px 14px"><span style="color:var(--success-text);font-weight:700">✓ AA</span></td>
+            <td style="padding:10px 14px;font-size:12px;color:var(--text2)">Secondary text on dark bg — passes AA</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border-subtle)">
+            <td style="padding:10px 14px;font-size:13px;font-family:monospace;color:var(--text)">--text2</td>
+            <td style="padding:10px 14px;font-size:13px;font-family:monospace;color:var(--text)">--surface-1</td>
+            <td style="padding:10px 14px;font-size:14px;font-weight:700;color:var(--warning-text)">~4.6:1</td>
+            <td style="padding:10px 14px"><span style="color:var(--warning-text);font-weight:700">⚠ Marginal</span></td>
+            <td style="padding:10px 14px;font-size:12px;color:var(--text2)">Passes AA but verify per surface — avoid for small text below 14px</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border-subtle)">
+            <td style="padding:10px 14px;font-size:13px;font-family:monospace;color:var(--text)">--text3</td>
+            <td style="padding:10px 14px;font-size:13px;font-family:monospace;color:var(--text)">--bg</td>
+            <td style="padding:10px 14px;font-size:14px;font-weight:700;color:var(--error-text)">3.8:1</td>
+            <td style="padding:10px 14px"><span style="color:var(--error-text);font-weight:700">✗ Fail (small)</span></td>
+            <td style="padding:10px 14px;font-size:12px;color:var(--text2)">Use only for metadata / decorative labels at 14px+ bold or 18px+</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 14px;font-size:13px;font-family:monospace;color:var(--text)">--jio</td>
+            <td style="padding:10px 14px;font-size:13px;font-family:monospace;color:var(--text)">--bg</td>
+            <td style="padding:10px 14px;font-size:14px;font-weight:700;color:var(--warning-text)">4.6:1</td>
+            <td style="padding:10px 14px"><span style="color:var(--warning-text);font-weight:700">✓ AA (large)</span></td>
+            <td style="padding:10px 14px;font-size:12px;color:var(--text2)">Brand green — use for large text / UI indicators only</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="ds-subsection-title" style="margin-top:24px">Colour alone is not enough</h3>
+      <ul class="ds-rules">
+        <li class="ds-rule ds-rule--pass">Always pair a colour-coded status with an icon or label: success = green + ✓, error = red + ✗, warning = amber + ⚠.</li>
+        <li class="ds-rule ds-rule--pass">Disabled states must use both reduced opacity (<code>--state-disabled-opacity</code>) and a non-colour cue (e.g. <code>aria-disabled</code> or greyed icon).</li>
+        <li class="ds-rule ds-rule--fail">Using colour as the sole indicator for required fields, validation errors, or subscription tiers.</li>
+      </ul>
+    </section>
+
+    <!-- TOUCH TARGETS -->
+    <section class="ds-section">
+      <h2 class="ds-section-title" id="touch-targets">Touch Targets</h2>
+      <p class="ds-section-desc">Touch target minimum is <code>var(--touch-min)</code> (44px). On TV, minimum is <code>var(--icon-wrap-xs-tv)</code> (52px) due to 10-foot viewing and remote precision. Visual size and interactive target size may differ — expand with padding.</p>
+
+      <h3 class="ds-subsection-title">Target size demo</h3>
+      <div class="ds-demo">
+        <div style="display:flex;gap:40px;align-items:flex-end;flex-wrap:wrap">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+            <div style="width:20px;height:20px;border-radius:var(--r2);background:var(--surface-2);border:2px solid var(--error-text);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--error-text)">20</div>
+            <div style="text-align:center">
+              <div style="font-size:12px;font-weight:700;color:var(--error-text)">✗ Fail</div>
+              <div style="font-size:11px;color:var(--text3)">Bare icon · 20px</div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+            <div style="width:44px;height:44px;border-radius:var(--r3);background:var(--jio-soft);border:2px solid var(--jio);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--jio)">.icon-wrap--m</div>
+            <div style="text-align:center">
+              <div style="font-size:12px;font-weight:700;color:var(--success-text)">✓ Mobile</div>
+              <div style="font-size:11px;color:var(--text3)">44×44px — var(--touch-min)</div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:12px">
+            <div style="width:52px;height:52px;border-radius:var(--r3);background:var(--jio-soft);border:2px solid var(--jio);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--jio)">52px TV</div>
+            <div style="text-align:center">
+              <div style="font-size:12px;font-weight:700;color:var(--success-text)">✓ TV</div>
+              <div style="font-size:11px;color:var(--text3)">var(--icon-wrap-xs-tv)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ds-code" style="margin-top:16px">
+<pre>/* Correct: wrap bare icon in .icon-wrap--m */
+&lt;button class="btn btn--icon btn--icon-circle" aria-label="Add to wishlist"&gt;
+  &lt;svg aria-hidden="true" width="20" height="20"&gt;…&lt;/svg&gt;
+&lt;/button&gt;
+
+/* Wrong: interactive icon without wrapper */
+&lt;svg onclick="…" width="20" height="20"&gt;…&lt;/svg&gt;</pre>
+      </div>
+    </section>
+
+    <!-- SCREEN READER PATTERNS -->
+    <section class="ds-section">
+      <h2 class="ds-section-title" id="screen-reader">Screen Reader Patterns</h2>
+      <p class="ds-section-desc">Copy these exact patterns. Screen reader announcements depend on the right combination of role, aria attributes, and DOM structure.</p>
+
+      <h3 class="ds-subsection-title">Icon-only button</h3>
+      <div class="ds-code">
+<pre>&lt;button class="btn btn--icon btn--icon-circle"
+        aria-label="Add War Thunder to wishlist"&gt;
+  &lt;svg aria-hidden="true" focusable="false" width="20" height="20"&gt;…&lt;/svg&gt;
+&lt;/button&gt;</pre>
+      </div>
+
+      <h3 class="ds-subsection-title" style="margin-top:20px">Decorative icon (hidden from SR)</h3>
+      <div class="ds-code">
+<pre>&lt;!-- role="img" on meaningful standalone graphics; aria-hidden on decorative --&gt;
+&lt;svg role="img" aria-label="JioGames logo" width="40" height="40"&gt;…&lt;/svg&gt;
+
+&lt;svg aria-hidden="true" focusable="false" width="16" height="16"&gt;…&lt;/svg&gt;</pre>
+      </div>
+
+      <h3 class="ds-subsection-title" style="margin-top:20px">Live regions — toast &amp; banner</h3>
+      <div class="ds-demo" style="margin-bottom:12px">
+        <div style="background:var(--surface-1);border-radius:var(--r3);padding:14px 16px;border-left:3px solid var(--jio);font-size:13px;color:var(--text2)">
+          <strong style="color:var(--text)">aria-live="polite"</strong> — waits for the user to finish their current task before announcing. Use for toasts, pass-found banners, rail load completions.
+        </div>
+      </div>
+      <div class="ds-demo" style="margin-bottom:12px">
+        <div style="background:var(--surface-1);border-radius:var(--r3);padding:14px 16px;border-left:3px solid var(--error-text);font-size:13px;color:var(--text2)">
+          <strong style="color:var(--text)">aria-live="assertive"</strong> — interrupts immediately. Use only for errors (OTP fail, payment declined) where the user must act now.
+        </div>
+      </div>
+      <div class="ds-code">
+<pre>&lt;!-- Toast: polite --&gt;
+&lt;div role="status" aria-live="polite" aria-atomic="true" class="toast"&gt;
+  Pass activated successfully
+&lt;/div&gt;
+
+&lt;!-- Error: assertive --&gt;
+&lt;div role="alert" aria-live="assertive" aria-atomic="true"&gt;
+  Incorrect OTP. 2 attempts remaining.
+&lt;/div&gt;</pre>
+      </div>
+    </section>
+
+    <!-- TV / D-PAD ACCESSIBILITY -->
+    <section class="ds-section">
+      <h2 class="ds-section-title" id="tv-accessibility">TV / D-pad Accessibility</h2>
+      <p class="ds-section-desc">TV has no pointer and no hover. Every interaction must be reachable via D-pad (Up/Down/Left/Right/OK/Back). Requirements are additive to WCAG 2.1 AA.</p>
+
+      <h3 class="ds-subsection-title">Requirements</h3>
+      <ul class="ds-rules">
+        <li class="ds-rule ds-rule--pass">All interactive elements must be focusable — set <code>tabindex="0"</code> on non-native focusable elements.</li>
+        <li class="ds-rule ds-rule--pass"><code>.is-tv-focused</code> must be visibly applied using <code>var(--tv-focus-shadow)</code> — the glow must be visible at 3m distance.</li>
+        <li class="ds-rule ds-rule--pass">Focus order must follow visual order — match DOM order to visual layout exactly.</li>
+        <li class="ds-rule ds-rule--pass">No pointer-only interactions — no hover-only tooltips, no hover-only reveal buttons.</li>
+        <li class="ds-rule ds-rule--pass"><code>var(--tv-focus-shadow)</code> must always be fully visible — never clip it with <code>overflow:hidden</code> on a parent.</li>
+        <li class="ds-rule ds-rule--pass">Back button (Backspace / Escape) must always dismiss modals and sheets — never trap focus without an exit.</li>
+        <li class="ds-rule ds-rule--fail">Using CSS <code>:hover</code> as the only trigger for revealing actions (e.g. card overlay buttons).</li>
+        <li class="ds-rule ds-rule--fail">Clipping <code>overflow:hidden</code> on a rail container that cuts off the TV focus glow.</li>
+      </ul>
+
+      <h3 class="ds-subsection-title" style="margin-top:20px">TV focus token</h3>
+      <table class="ds-token-table">
+        <thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="ds-token-name">--tv-focus-shadow</span></td>
+            <td><span class="ds-token-value">0 0 0 3px var(--jio), 0 0 24px var(--jio-glow), 0 0 48px var(--jio-glow)</span></td>
+            <td style="color:var(--text2)">Composite ring + glow for TV</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- REDUCED MOTION -->
+    <section class="ds-section">
+      <h2 class="ds-section-title" id="reduced-motion">Reduced Motion</h2>
+      <p class="ds-section-desc">Users with vestibular disorders may enable <code>prefers-reduced-motion: reduce</code>. Under this preference all decorative keyframe animations must be suppressed. <code>var(--dur-fast)</code> resolves to near-zero (0.01ms) so transitions do not play.</p>
+
+      <h3 class="ds-subsection-title">Pattern</h3>
+      <div class="ds-code">
+<pre>/* Global suppression in tokens.css */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Exception: sheet slide-in kept as spatial orientation cue */
+  .bottom-sheet { transition-duration: 100ms !important; }
+}
+
+/* Per-component guard (preferred for explicit control) */
+@media (prefers-reduced-motion: no-preference) {
+  .skeleton-shimmer {
+    animation: shimmer var(--dur-skeleton) linear infinite;
+  }
+}</pre>
+      </div>
+
+      <h3 class="ds-subsection-title" style="margin-top:20px">Token behaviour</h3>
+      <table class="ds-token-table">
+        <thead><tr><th>Token</th><th>Default value</th><th>Reduced motion value</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="ds-token-name">--dur-fast</span></td>
+            <td><span class="ds-token-value">120ms</span></td>
+            <td style="color:var(--text2)">0.01ms (via media query override)</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--dur-normal</span></td>
+            <td><span class="ds-token-value">220ms</span></td>
+            <td style="color:var(--text2)">0.01ms</td>
+          </tr>
+          <tr>
+            <td><span class="ds-token-name">--dur-slow</span></td>
+            <td><span class="ds-token-value">400ms</span></td>
+            <td style="color:var(--text2)">0.01ms</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- RULES -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Rules</h2>
+      <ul class="ds-rules">
+        <li class="ds-rule ds-rule--pass">Test with VoiceOver (iOS/macOS) and TalkBack (Android) before shipping.</li>
+        <li class="ds-rule ds-rule--pass">Minimum 4.5:1 contrast for normal body text; 3:1 for large text and UI components.</li>
+        <li class="ds-rule ds-rule--pass">Never rely on colour alone to convey state — pair with icon, text, or shape.</li>
+        <li class="ds-rule ds-rule--pass">All keyboard-interactive elements must show a visible focus ring on <code>:focus-visible</code>.</li>
+        <li class="ds-rule ds-rule--pass">Respect <code>prefers-reduced-motion</code> — all non-purposeful animations must be gated.</li>
+        <li class="ds-rule ds-rule--fail">Using <code>--text3</code> (#6B7280) for body copy — only passes at large sizes (3.8:1).</li>
+        <li class="ds-rule ds-rule--fail">Using <code>--text4</code> (#454A57) for any visible text — fails all WCAG levels (2.1:1).</li>
+        <li class="ds-rule ds-rule--fail">Using <code>outline:none</code> without a replacement focus indicator.</li>
+        <li class="ds-rule ds-rule--fail">Hover-only tooltips or actions on TV — no hover means no access.</li>
+      </ul>
+    </section>
+
+
+    <!-- CHANGELOG -->
+
+  </main>
+  <script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script>
+</body>
+</html>

@@ -1,0 +1,480 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toggle Group — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    .toggle-group { display: inline-flex; border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; gap: 0; }
+    .toggle-group-item {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: transparent;
+      border: none;
+      border-right: 1px solid var(--border-subtle);
+      font-family: var(--jio-font);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text3);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all var(--dur-fast) var(--ease-out);
+    }
+    .toggle-group-item:last-child { border-right: none; }
+    .toggle-group-item:hover { color: var(--text2); background: var(--glass-1); }
+    .toggle-group-item.is-active { background: var(--jio); color: #000; font-weight: 700; }
+    .toggle-group-item:focus-visible { outline: 2px solid var(--jio); outline-offset: -2px; }
+    .toggle-group-item:disabled { opacity: var(--state-disabled-opacity, 0.38); pointer-events: none; }
+    .toggle-group--pill { border-radius: var(--pill); }
+    .toggle-group--pill .toggle-group-item:first-child { border-radius: var(--pill) 0 0 var(--pill); }
+    .toggle-group--pill .toggle-group-item:last-child { border-radius: 0 var(--pill) var(--pill) 0; }
+  </style>
+</head><body><main class="ds-main">
+
+  <!-- PAGE HEADER -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Toggle Group</span>
+    </nav>
+    <h1 class="component-page-title">Toggle Group</h1>
+    <p class="component-page-def">A set of toggle buttons where one (or multiple) can be active. Used for view mode switchers, filter chips, and platform selectors.</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+        <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+        <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+      </div>
+      <span class="component-maturity component-maturity--draft"><span class="component-maturity--dot"></span>Draft</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:280px;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="gap:32px;">
+      <!-- View switcher -->
+      <div style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+        <div class="toggle-group" role="group" aria-label="View mode">
+          <button class="toggle-group-item is-active" aria-pressed="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" aria-hidden="true">
+              <rect x="1" y="1" width="6" height="6" rx="1" fill="currentColor"/>
+              <rect x="9" y="1" width="6" height="6" rx="1" fill="currentColor"/>
+              <rect x="1" y="9" width="6" height="6" rx="1" fill="currentColor"/>
+              <rect x="9" y="9" width="6" height="6" rx="1" fill="currentColor"/>
+            </svg>
+            Grid
+          </button>
+          <button class="toggle-group-item" aria-pressed="false">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_text_align_left"></use></svg>
+            List
+          </button>
+        </div>
+        <span style="font-size:11px; color:var(--text3);">View switcher · single-select</span>
+      </div>
+
+      <!-- Platform filter -->
+      <div style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+        <div class="toggle-group" role="group" aria-label="Platform filter">
+          <button class="toggle-group-item" aria-pressed="false">All</button>
+          <button class="toggle-group-item is-active" aria-pressed="true">Mobile</button>
+          <button class="toggle-group-item" aria-pressed="false">Web</button>
+          <button class="toggle-group-item" aria-pressed="false">TV</button>
+        </div>
+        <span style="font-size:11px; color:var(--text3);">Platform filter · single-select</span>
+      </div>
+    </div>
+    <p class="component-hero-caption">Toggle Group · view switcher and platform filter, active state green</p>
+  </section>
+
+  <!-- INTRO -->
+  <section class="component-intro">
+    <p>Toggle Group presents a set of mutually exclusive or independently selectable options as a connected button bar. It is the correct component when a user needs to switch between modes (Grid / List), select a filter category (All / Mobile / Web / TV), or mark platform availability. It differs from Tabs in that it does not control a content panel below it — it communicates a selection value, not navigation.</p>
+    <ul class="component-summary-list">
+      <li><strong>Single-select (radio)</strong> — one item active at a time. Use for view modes, sort orders, time ranges.</li>
+      <li><strong>Multi-select (checkbox)</strong> — any combination active. Use for tag or genre filters.</li>
+      <li><strong>Pill shape</strong> — fully rounded ends; softer appearance for filter chips and tags.</li>
+      <li><strong>Square shape</strong> — default rounded corners; use in toolbars and density-sensitive layouts.</li>
+    </ul>
+  </section>
+
+  <!-- BEST PRACTICES -->
+  <section class="component-best-practices">
+    <div class="component-bp-card component-bp-card--do">
+      <span class="component-bp-label component-bp-label--do">Do</span>
+      <ul class="component-bp-list">
+        <li>Use 2–6 items. Below 2, use a checkbox or switch. Above 6, use a dropdown or chip scroll.</li>
+        <li>Keep labels to 1–2 words or a single icon. "Mobile" not "Mobile Devices".</li>
+        <li>Always have a default selection in single-select mode — never leave all items inactive.</li>
+        <li>Use <code class="ds-code">role="radiogroup"</code> for single-select, <code class="ds-code">role="group"</code> for multi-select.</li>
+        <li>Ensure minimum 44px touch height on mobile by adding vertical padding.</li>
+      </ul>
+    </div>
+    <div class="component-bp-card component-bp-card--dont">
+      <span class="component-bp-label component-bp-label--dont">Don't</span>
+      <ul class="component-bp-list">
+        <li>Use Toggle Group as tab navigation — it does not control a content panel.</li>
+        <li>Mix icon-only and text items in the same group — keep them consistent.</li>
+        <li>Use more than 6 items — overflow is not handled gracefully in the base component.</li>
+        <li>Use Toggle Group for yes/no binary choices — use a Switch or Checkbox instead.</li>
+        <li>Wrap to multiple lines — if items overflow, switch to a horizontal scroll or chip list.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <div class="ds-anatomy" style="margin-bottom:64px;">
+    <div class="ds-anatomy-preview">
+      <div class="ds-anatomy-component" style="position:relative; display:inline-flex;">
+        <div class="toggle-group" style="pointer-events:none; position:relative;">
+          <button class="toggle-group-item" style="position:relative;">
+            Grid
+            <span class="ds-anatomy-callout-dot" style="position:absolute; top:-12px; left:50%; transform:translateX(-50%);"><span class="ds-anatomy-callout-num">1</span></span>
+          </button>
+          <button class="toggle-group-item is-active" style="position:relative;">
+            List
+            <span class="ds-anatomy-callout-dot" style="position:absolute; top:-12px; left:50%; transform:translateX(-50%);"><span class="ds-anatomy-callout-num">2</span></span>
+          </button>
+          <button class="toggle-group-item" style="position:relative;">
+            Map
+            <span class="ds-anatomy-callout-dot" style="position:absolute; bottom:-12px; left:50%; transform:translateX(-50%);"><span class="ds-anatomy-callout-num">3</span></span>
+          </button>
+          <span class="ds-anatomy-callout-dot" style="position:absolute; top:-12px; right:-10px;"><span class="ds-anatomy-callout-num">4</span></span>
+        </div>
+      </div>
+    </div>
+    <ol class="ds-anatomy-list">
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">1</span>
+        <div>
+          <div class="ds-anatomy-label">Inactive item <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">13px / weight 600 / <code class="ds-code">var(--text3)</code>. Transparent background. Border-right separates from adjacent item.</div>
+          <code class="ds-anatomy-token ds-code">color: var(--text3); background: transparent</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">2</span>
+        <div>
+          <div class="ds-anatomy-label">Active item <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Same size, weight 700, text black on green fill. <code class="ds-code">background: var(--jio)</code>. Only one active in single-select; any in multi-select.</div>
+          <code class="ds-anatomy-token ds-code">background: var(--jio); color: #000; font-weight: 700</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">3</span>
+        <div>
+          <div class="ds-anatomy-label">Item divider <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">1px <code class="ds-code">var(--border-subtle)</code> right border on all items except last. Provides visual separation within the group.</div>
+          <code class="ds-anatomy-token ds-code">border-right: 1px solid var(--border-subtle)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">4</span>
+        <div>
+          <div class="ds-anatomy-label">Group container <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">1px outer border + <code class="ds-code">var(--r4)</code> radius. <code class="ds-code">overflow: hidden</code> clips item corners. No gap between items.</div>
+          <code class="ds-anatomy-token ds-code">border: 1px solid var(--border-subtle); border-radius: var(--r4)</code>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- VARIANTS -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Four variants covering the main use cases. Shape and selection mode are independent — combine as needed.</p>
+
+    <div class="ds-section-stack" style="gap:32px;">
+
+      <!-- Single select -->
+      <div>
+        <div class="ds-sub-label">Single-select (radio) — view switcher</div>
+        <div class="ds-demo ds-demo--dark">
+          <div class="toggle-group" role="radiogroup" aria-label="View mode">
+            <button class="toggle-group-item is-active" role="radio" aria-checked="true">Grid</button>
+            <button class="toggle-group-item" role="radio" aria-checked="false">List</button>
+            <button class="toggle-group-item" role="radio" aria-checked="false">Map</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Multi select -->
+      <div>
+        <div class="ds-sub-label">Multi-select (checkbox) — genre filter</div>
+        <div class="ds-demo ds-demo--dark">
+          <div class="toggle-group" role="group" aria-label="Genre filter">
+            <button class="toggle-group-item is-active" aria-pressed="true">Action</button>
+            <button class="toggle-group-item" aria-pressed="false">RPG</button>
+            <button class="toggle-group-item is-active" aria-pressed="true">Racing</button>
+            <button class="toggle-group-item" aria-pressed="false">Sports</button>
+            <button class="toggle-group-item" aria-pressed="false">Strategy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pill shape -->
+      <div>
+        <div class="ds-sub-label">Pill shape — softer filter chips</div>
+        <div class="ds-demo ds-demo--dark">
+          <div class="toggle-group toggle-group--pill" role="group" aria-label="Time range">
+            <button class="toggle-group-item" aria-pressed="false">Today</button>
+            <button class="toggle-group-item is-active" aria-pressed="true">This week</button>
+            <button class="toggle-group-item" aria-pressed="false">All time</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Icon only -->
+      <div>
+        <div class="ds-sub-label">Icon-only — toolbar alignment</div>
+        <div class="ds-demo ds-demo--dark">
+          <div class="toggle-group" role="group" aria-label="Text alignment">
+            <button class="toggle-group-item is-active" aria-pressed="true" aria-label="Align left">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" aria-hidden="true"><path d="M2 4h12M2 8h8M2 12h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </button>
+            <button class="toggle-group-item" aria-pressed="false" aria-label="Align center">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_text_align_center"></use></svg>
+            </button>
+            <button class="toggle-group-item" aria-pressed="false" aria-label="Align right">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_text_align_right"></use></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SIZES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Three sizes. M is the default for all surfaces. S for compact toolbars. L for prominent filter bars or TV contexts.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div class="ds-section-stack" style="gap:24px; align-items:flex-start;">
+        <div style="display:flex; align-items:center; gap:20px;">
+          <span style="font-size:11px; color:var(--text3); width:48px;">S</span>
+          <div class="toggle-group" role="group">
+            <button class="toggle-group-item is-active" style="font-size:10px; padding:6px 10px;">Grid</button>
+            <button class="toggle-group-item" style="font-size:10px; padding:6px 10px;">List</button>
+            <button class="toggle-group-item" style="font-size:10px; padding:6px 10px;">Map</button>
+          </div>
+          <span style="font-size:11px; color:var(--text3);">10px · 6px 10px</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:20px;">
+          <span style="font-size:11px; color:var(--text3); width:48px;">M</span>
+          <div class="toggle-group" role="group">
+            <button class="toggle-group-item is-active">Grid</button>
+            <button class="toggle-group-item">List</button>
+            <button class="toggle-group-item">Map</button>
+          </div>
+          <span style="font-size:11px; color:var(--text3);">13px · 8px 14px (default)</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:20px;">
+          <span style="font-size:11px; color:var(--text3); width:48px;">L</span>
+          <div class="toggle-group" role="group">
+            <button class="toggle-group-item is-active" style="font-size:15px; padding:10px 18px;">Grid</button>
+            <button class="toggle-group-item" style="font-size:15px; padding:10px 18px;">List</button>
+            <button class="toggle-group-item" style="font-size:15px; padding:10px 18px;">Map</button>
+          </div>
+          <span style="font-size:11px; color:var(--text3);">15px · 10px 18px</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Individual items have 5 states. The entire group can also be set to all-disabled.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:32px; align-items:flex-end;">
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <button class="toggle-group-item" style="border:1px solid var(--border-subtle); border-radius:var(--r3); pointer-events:none;">Item</button>
+          <span style="font-size:11px; color:var(--text3);">Default</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <button class="toggle-group-item" style="border:1px solid var(--border-subtle); border-radius:var(--r3); pointer-events:none; color:var(--text2); background:var(--glass-1);">Item</button>
+          <span style="font-size:11px; color:var(--text3);">Hover</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <button class="toggle-group-item is-active" style="border-radius:var(--r3); pointer-events:none;">Item</button>
+          <span style="font-size:11px; color:var(--text3);">Active</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <button class="toggle-group-item" style="border:1px solid var(--border-subtle); border-radius:var(--r3); pointer-events:none; outline:2px solid var(--jio); outline-offset:-2px;">Item</button>
+          <span style="font-size:11px; color:var(--text3);">Focus</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <button class="toggle-group-item" style="border:1px solid var(--border-subtle); border-radius:var(--r3);" disabled>Item</button>
+          <span style="font-size:11px; color:var(--text3);">Disabled</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <div class="toggle-group" style="opacity:0.38; pointer-events:none;">
+            <button class="toggle-group-item is-active">All</button>
+            <button class="toggle-group-item">Mobile</button>
+          </div>
+          <span style="font-size:11px; color:var(--text3);">Group disabled</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT GUIDANCE -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <p class="ds-section-desc">Labels should be 1–2 words. Icons are allowed with text or alone. Minimum 2 items, maximum 6.</p>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Item labels</div>
+        <ul>
+          <li>1–2 words. Nouns or adjectives. "Grid" not "Grid View".</li>
+          <li>Keep all labels in a group roughly equal length — avoid one long label skewing the layout.</li>
+          <li>Icons-only: always add <code class="ds-code">aria-label</code> to each button.</li>
+          <li>Icon + text: icon is <code class="ds-code">aria-hidden</code> — label carries the accessible name.</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Group rules</div>
+        <ul>
+          <li>Minimum 2 items. Maximum 6 — above 6, use a dropdown or scrollable chip list.</li>
+          <li>For single-select: always have one item active on mount. No empty selection.</li>
+          <li>For multi-select: zero active items is a valid state (means "no filter applied").</li>
+          <li>Don't mix icon-only and text items — keep items consistent within a group.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Minimum 44px touch height — use M or L size, or add <code class="ds-code">min-height: 44px</code>.</li>
+          <li>If items overflow the screen width, add <code class="ds-code">overflow-x: auto</code> with hidden scrollbar on a wrapper — don't wrap to a second line.</li>
+          <li>Use pill variant for filter chips to align with mobile UI conventions.</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Group stays contained — no overflow scroll needed on wider viewports.</li>
+          <li>Keyboard: Tab to enter group, Arrow Left / Right to move between items, Space / Enter selects.</li>
+          <li>Focus ring inset (<code class="ds-code">outline-offset: -2px</code>) keeps ring inside the group border.</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>D-pad Left / Right navigates between items. OK selects.</li>
+          <li>Active item gets the standard TV focus ring: 3px <code class="ds-code">var(--jio)</code> glow.</li>
+          <li>Use L size minimum for legibility at 3m. Add <code class="ds-code">min-height: 56px</code>.</li>
+          <li>Avoid more than 4 items on TV — they crowd the remote's D-pad navigation.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <table class="ds-spec-table">
+      <thead><tr><th>Element</th><th>Role / attribute</th><th>Guidance</th></tr></thead>
+      <tbody>
+        <tr><td>Group container</td><td><code class="ds-code">role="radiogroup"</code> or <code class="ds-code">role="group"</code></td><td>Use <code class="ds-code">radiogroup</code> for single-select, <code class="ds-code">group</code> for multi-select. Always add <code class="ds-code">aria-label</code> describing the group's purpose.</td></tr>
+        <tr><td>Single-select item</td><td><code class="ds-code">role="radio"</code> + <code class="ds-code">aria-checked</code></td><td><code class="ds-code">aria-checked="true"</code> on active, <code class="ds-code">"false"</code> on others. Arrow keys move focus; Space activates.</td></tr>
+        <tr><td>Multi-select item</td><td><code class="ds-code">&lt;button&gt;</code> + <code class="ds-code">aria-pressed</code></td><td><code class="ds-code">aria-pressed="true"</code> when active. Each button independently toggleable. Tab moves between items.</td></tr>
+        <tr><td>Icon-only item</td><td><code class="ds-code">aria-label</code></td><td>Each icon-only button must have a descriptive <code class="ds-code">aria-label</code>. The SVG is <code class="ds-code">aria-hidden="true"</code>.</td></tr>
+        <tr><td>Disabled item</td><td><code class="ds-code">disabled</code></td><td>Disabled items are removed from tab order. If they need to stay focusable, use <code class="ds-code">aria-disabled="true"</code> instead and handle pointer-events in CSS.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- RELATED TOKENS -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <table class="ds-spec-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td><code class="ds-code">--jio</code></td><td><code class="ds-code">#00A859</code></td><td>Active item background fill</td></tr>
+        <tr><td><code class="ds-code">--border-subtle</code></td><td><code class="ds-code">rgba(255,255,255,.08)</code></td><td>Group outer border and item dividers</td></tr>
+        <tr><td><code class="ds-code">--glass-1</code></td><td><code class="ds-code">rgba(255,255,255,.04)</code></td><td>Item hover background</td></tr>
+        <tr><td><code class="ds-code">--text3</code></td><td><code class="ds-code">rgba(244,242,238,.32)</code></td><td>Inactive item label color</td></tr>
+        <tr><td><code class="ds-code">--text2</code></td><td><code class="ds-code">rgba(244,242,238,.55)</code></td><td>Item hover label color</td></tr>
+        <tr><td><code class="ds-code">--r4</code></td><td><code class="ds-code">12px</code></td><td>Group container border-radius (square variant)</td></tr>
+        <tr><td><code class="ds-code">--pill</code></td><td><code class="ds-code">100px</code></td><td>Group container border-radius (pill variant)</td></tr>
+        <tr><td><code class="ds-code">--dur-fast</code></td><td><code class="ds-code">120ms</code></td><td>All item transitions</td></tr>
+        <tr><td><code class="ds-code">--state-disabled-opacity</code></td><td><code class="ds-code">0.38</code></td><td>Disabled item / group opacity</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CODE EXAMPLES -->
+  <section class="ds-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+
+    <div class="component-code-block">
+      <div class="component-code-label">View switcher — single-select</div>
+      <pre class="component-code-pre"><code>&lt;div class="toggle-group" role="radiogroup" aria-label="View mode"&gt;
+  &lt;button class="toggle-group-item is-active"
+          role="radio" aria-checked="true"&gt;Grid&lt;/button&gt;
+  &lt;button class="toggle-group-item"
+          role="radio" aria-checked="false"&gt;List&lt;/button&gt;
+  &lt;button class="toggle-group-item"
+          role="radio" aria-checked="false"&gt;Map&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Multi-select filter chips</div>
+      <pre class="component-code-pre"><code>&lt;div class="toggle-group toggle-group--pill"
+     role="group" aria-label="Genre filter"&gt;
+  &lt;button class="toggle-group-item is-active" aria-pressed="true"&gt;Action&lt;/button&gt;
+  &lt;button class="toggle-group-item" aria-pressed="false"&gt;RPG&lt;/button&gt;
+  &lt;button class="toggle-group-item is-active" aria-pressed="true"&gt;Racing&lt;/button&gt;
+  &lt;button class="toggle-group-item" aria-pressed="false"&gt;Sports&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Icon-only with accessible labels</div>
+      <pre class="component-code-pre"><code>&lt;div class="toggle-group" role="group" aria-label="View layout"&gt;
+  &lt;button class="toggle-group-item is-active"
+          aria-pressed="true" aria-label="Grid view"&gt;
+    &lt;svg width="14" height="14" aria-hidden="true"&gt;
+      &lt;!-- grid icon --&gt;
+    &lt;/svg&gt;
+  &lt;/button&gt;
+  &lt;button class="toggle-group-item"
+          aria-pressed="false" aria-label="List view"&gt;
+    &lt;svg width="14" height="14" aria-hidden="true"&gt;
+      &lt;!-- list icon --&gt;
+    &lt;/svg&gt;
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- CHANGELOG -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Changelog</h2>
+    <div class="component-changelog">
+      <div class="component-changelog-entry">
+        <span class="component-changelog-version">v0.1</span>
+        <span class="component-changelog-date">Jun 2026</span>
+        <p class="component-changelog-desc">Initial draft. Single-select and multi-select modes. Square and pill shapes. S / M / L sizes. Icon-only variant. Full ARIA radiogroup and group pattern documentation.</p>
+      </div>
+    </div>
+  </section>
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

@@ -1,0 +1,543 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popover — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    .popover-wrap { position: relative; display: inline-block; }
+    .popover {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      min-width: 240px;
+      background: var(--surface-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r5);
+      padding: var(--space-2, 16px);
+      box-shadow: 0 8px 32px rgba(0,0,0,.5);
+      z-index: 150;
+    }
+    .popover-title {
+      font-family: var(--jio-font);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .popover-close {
+      position: absolute;
+      top: 10px; right: 10px;
+      background: none; border: none;
+      color: var(--text3); cursor: pointer;
+      font-size: 18px; line-height: 1;
+      padding: 4px; border-radius: var(--r2);
+    }
+    .popover-close:hover { color: var(--text); background: var(--glass-1); }
+    .popover--s { min-width: 180px; }
+    .popover--l { min-width: 320px; }
+    .popover-check-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 13px; color: var(--text2);
+      font-family: var(--jio-font);
+    }
+    .popover-check-row:last-of-type { border-bottom: none; }
+    .popover-check-row input[type=checkbox] { accent-color: var(--jio); width: 16px; height: 16px; }
+    .popover-apply-btn {
+      width: 100%; margin-top: 12px;
+      padding: 9px;
+      background: var(--jio);
+      color: #000;
+      font-family: var(--jio-font);
+      font-size: 13px; font-weight: 700;
+      border: none; border-radius: var(--r3);
+      cursor: pointer;
+    }
+    .popover-apply-btn:hover { background: var(--jio-light, #00E870); }
+    .skeleton-line {
+      height: 12px; border-radius: 4px;
+      background: linear-gradient(90deg, var(--surface-3) 25%, var(--surface-4,#2A3142) 50%, var(--surface-3) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s ease-in-out infinite;
+      margin-bottom: 8px;
+    }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    .demo-filter-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 14px;
+      background: var(--surface-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r3);
+      font-family: var(--jio-font);
+      font-size: 13px; font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+    }
+  </style>
+</head><body><main class="ds-content">
+
+  <!-- 1. PAGE HEADER -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Popover</span>
+    </nav>
+    <h1 class="component-page-title">Popover</h1>
+    <p class="component-page-def">Small floating panel triggered by a button. Contains rich content — filters, options, extra info. Dismisses on outside click or Escape.</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile">
+          <span class="component-platform-dot"></span>Mobile
+        </span>
+        <span class="component-platform component-platform--web">
+          <span class="component-platform-dot"></span>Web
+        </span>
+        <span class="component-platform component-platform--tv">
+          <span class="component-platform-dot"></span>TV
+        </span>
+      </div>
+      <span class="component-maturity component-maturity--draft">
+        <span class="component-maturity--dot"></span>Draft
+      </span>
+    </div>
+  </header>
+
+  <!-- 2. HERO -->
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:320px; position:relative; overflow:visible;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="flex-direction:column; align-items:flex-start; padding:48px 64px; gap:0;">
+      <button class="demo-filter-btn">⚙ Filter ▾</button>
+      <div class="popover" style="position:relative; top:auto; left:auto; margin-top:8px; max-width:240px;">
+        <div class="popover-title">Platform</div>
+        <button class="popover-close" aria-label="Close filter">✕</button>
+        <div class="popover-check-row"><input type="checkbox" id="p-mob" checked><label for="p-mob">Mobile</label></div>
+        <div class="popover-check-row"><input type="checkbox" id="p-web"><label for="p-web">Web</label></div>
+        <div class="popover-check-row"><input type="checkbox" id="p-tv" checked><label for="p-tv">TV</label></div>
+        <button class="popover-apply-btn">Apply filters</button>
+      </div>
+    </div>
+    <p class="component-hero-caption">Popover with form controls · Platform filter</p>
+  </section>
+
+  <!-- 3. INTRO -->
+  <section class="component-intro">
+    <p>Popovers are floating panels that anchor to a trigger element and contain interactive content — filter checkboxes, short forms, option lists, or contextual information. Unlike tooltips (label only), popovers can hold multiple form controls, buttons, and structured text. They are non-modal: the rest of the page remains interactive while a popover is open.</p>
+    <ul class="component-summary-list">
+      <li><strong>Filters</strong> — compact checkbox or toggle groups anchored to a filter button</li>
+      <li><strong>Quick actions</strong> — 2–4 action items without navigating away</li>
+      <li><strong>Contextual info</strong> — extended description or help text for a nearby control</li>
+      <li><strong>Mini forms</strong> — single-field input + submit, e.g. rename or add note</li>
+    </ul>
+  </section>
+
+  <!-- 4. BEST PRACTICES -->
+  <section class="component-best-practices">
+    <div class="component-bp-card component-bp-card--do">
+      <span class="component-bp-label component-bp-label--do">Do</span>
+      <ul class="component-bp-list">
+        <li>Add a close button when the popover contains interactive controls</li>
+        <li>Dismiss on outside click and Escape key — both must work</li>
+        <li>Keep content to 3–4 items max — use a bottom sheet for longer lists</li>
+        <li>Give trigger <code class="ds-code">aria-expanded</code> and <code class="ds-code">aria-haspopup="dialog"</code></li>
+        <li>Return focus to trigger when popover closes</li>
+      </ul>
+    </div>
+    <div class="component-bp-card component-bp-card--dont">
+      <span class="component-bp-label component-bp-label--dont">Don't</span>
+      <ul class="component-bp-list">
+        <li>Use popover for a single line of text — a tooltip is sufficient</li>
+        <li>Open more than one popover at a time — new trigger closes the previous</li>
+        <li>Use modal-level blocking behavior — popover is non-modal</li>
+        <li>Place destructive-only actions in a popover without confirmation step</li>
+        <li>Use on mobile — replace with bottom sheet (full-width, touch-friendly)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. ANATOMY -->
+  <div class="ds-anatomy" style="margin-bottom:64px;">
+    <div class="ds-anatomy-preview">
+      <div style="position:relative; width:220px;">
+        <div class="popover" style="position:relative; top:auto; left:auto;">
+          <div class="popover-title">Platform</div>
+          <button class="popover-close" aria-label="Close" style="pointer-events:none;">✕</button>
+          <div class="popover-check-row"><input type="checkbox" checked disabled><span style="font-size:13px;color:var(--text2);">Mobile</span></div>
+          <div class="popover-check-row"><input type="checkbox" disabled><span style="font-size:13px;color:var(--text2);">Web</span></div>
+          <button class="popover-apply-btn" style="pointer-events:none;">Apply</button>
+        </div>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:-10px; left:50%; transform:translateX(-50%);"><span class="ds-anatomy-callout-num">1</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:14px; right:-20px;"><span class="ds-anatomy-callout-num">2</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:44px; right:-20px;"><span class="ds-anatomy-callout-num">3</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; bottom:8px; right:-20px;"><span class="ds-anatomy-callout-num">4</span></span>
+      </div>
+    </div>
+    <ol class="ds-anatomy-list">
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">1</span>
+        <div>
+          <div class="ds-anatomy-label">Container <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Elevated surface with border and shadow. <code class="ds-code">--surface-2</code> background, <code class="ds-code">--r5</code> radius, <code class="ds-code">0 8px 32px rgba(0,0,0,.5)</code> shadow.</div>
+          <code class="ds-anatomy-token ds-code">background: var(--surface-2); border-radius: var(--r5)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">2</span>
+        <div>
+          <div class="ds-anatomy-label">Title <span class="ds-anatomy-optional">Optional</span></div>
+          <div class="ds-anatomy-desc">14px bold label naming the popover's purpose. Required if content alone is ambiguous. Omit for simple option lists.</div>
+          <code class="ds-anatomy-token ds-code">font-size: 14px; font-weight: 700</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">3</span>
+        <div>
+          <div class="ds-anatomy-label">Content slot <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Free slot for checkboxes, radios, text, or a mini form. Max 4 items before needing a bottom sheet.</div>
+          <code class="ds-anatomy-token ds-code">padding: var(--space-2)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">4</span>
+        <div>
+          <div class="ds-anatomy-label">Action / close <span class="ds-anatomy-optional">Optional</span></div>
+          <div class="ds-anatomy-desc">Primary CTA (Apply, Save) or a close ✕ button in the top-right. Required when content has a form or multi-step interaction.</div>
+          <code class="ds-anatomy-token ds-code">position: absolute; top: 10px; right: 10px</code>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- 6. VARIANTS -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Four popover variants cover the full range of use cases from simple text to interactive forms.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:32px; align-items:flex-start; padding:8px 0;">
+
+        <!-- Simple text -->
+        <div style="display:flex; flex-direction:column; gap:8px; align-items:flex-start;">
+          <div class="popover" style="position:relative; top:auto; left:auto; min-width:200px; pointer-events:none;">
+            <p style="font-size:13px; color:var(--text2); line-height:1.5; margin:0;">This game requires JioGames Pass to access all levels.</p>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.4);">Simple text</span>
+        </div>
+
+        <!-- With header + close -->
+        <div style="display:flex; flex-direction:column; gap:8px; align-items:flex-start;">
+          <div class="popover" style="position:relative; top:auto; left:auto; min-width:200px; pointer-events:none;">
+            <div class="popover-title">About this rating</div>
+            <button class="popover-close" style="pointer-events:none;">✕</button>
+            <p style="font-size:13px; color:var(--text2); line-height:1.5; margin:0;">Rated by 4,218 players. Score is the average of all ratings in the last 30 days.</p>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.4);">With header + close</span>
+        </div>
+
+        <!-- With form -->
+        <div style="display:flex; flex-direction:column; gap:8px; align-items:flex-start;">
+          <div class="popover" style="position:relative; top:auto; left:auto; min-width:220px; pointer-events:none;">
+            <div class="popover-title">Platform</div>
+            <button class="popover-close" style="pointer-events:none;">✕</button>
+            <div class="popover-check-row"><input type="checkbox" checked disabled><span style="font-size:13px;color:var(--text2);">Mobile</span></div>
+            <div class="popover-check-row"><input type="checkbox" disabled><span style="font-size:13px;color:var(--text2);">Web</span></div>
+            <button class="popover-apply-btn" style="pointer-events:none;">Apply</button>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.4);">With form controls</span>
+        </div>
+
+        <!-- Loading skeleton -->
+        <div style="display:flex; flex-direction:column; gap:8px; align-items:flex-start;">
+          <div class="popover" style="position:relative; top:auto; left:auto; min-width:200px; pointer-events:none;">
+            <div class="skeleton-line" style="width:60%;"></div>
+            <div class="skeleton-line" style="width:100%;"></div>
+            <div class="skeleton-line" style="width:80%;"></div>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.4);">Loading (skeleton)</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. SIZES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Popover width is governed by content but constrained to three tiers. Height is always content-driven — never fixed.</p>
+    <table class="ds-spec-table">
+      <thead><tr><th>Size</th><th>min-width</th><th>Use case</th></tr></thead>
+      <tbody>
+        <tr><td>S</td><td><code class="ds-code">180px</code></td><td>2–3 short option items, minimal text</td></tr>
+        <tr><td>M (default)</td><td><code class="ds-code">240px</code></td><td>Filter panels, help text, short forms</td></tr>
+        <tr><td>L</td><td><code class="ds-code">320px</code></td><td>Multi-field forms, richer content blocks</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 8. STATES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Popovers toggle between closed and open. The open state has two sub-states: with content and loading (skeleton).</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:40px; align-items:flex-start; padding:8px 0;">
+
+        <!-- Closed -->
+        <div style="display:flex; flex-direction:column; gap:8px; align-items:flex-start;">
+          <button class="demo-filter-btn" aria-expanded="false" aria-haspopup="dialog">⚙ Filter ▾</button>
+          <span style="font-size:11px; color:rgba(244,242,238,.4);">Closed</span>
+        </div>
+
+        <!-- Open with content -->
+        <div style="display:flex; flex-direction:column; gap:8px; align-items:flex-start;">
+          <button class="demo-filter-btn" aria-expanded="true" aria-haspopup="dialog" style="border-color:rgba(0,168,89,.4); color:var(--jio);">⚙ Filter ▾</button>
+          <div class="popover" style="position:relative; top:auto; left:auto; max-width:220px;">
+            <div class="popover-title">Platform</div>
+            <button class="popover-close" style="pointer-events:none;">✕</button>
+            <div class="popover-check-row"><input type="checkbox" checked disabled><span style="font-size:13px;color:var(--text2);">Mobile</span></div>
+            <div class="popover-check-row"><input type="checkbox" disabled><span style="font-size:13px;color:var(--text2);">Web</span></div>
+            <button class="popover-apply-btn" style="pointer-events:none;">Apply</button>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.4);">Open — with content</span>
+        </div>
+
+        <!-- Loading -->
+        <div style="display:flex; flex-direction:column; gap:8px; align-items:flex-start;">
+          <button class="demo-filter-btn" aria-expanded="true">⚙ Filter ▾</button>
+          <div class="popover" style="position:relative; top:auto; left:auto; max-width:220px;">
+            <div class="skeleton-line" style="width:50%; margin-bottom:12px;"></div>
+            <div class="skeleton-line" style="width:100%;"></div>
+            <div class="skeleton-line" style="width:80%;"></div>
+            <div class="skeleton-line" style="width:60%;"></div>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.4);">Open — loading</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. CONTENT GUIDANCE -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <p class="ds-section-desc">Popovers sit between tooltips (label only) and bottom sheets (full content) in the overlay hierarchy.</p>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Popover vs Tooltip</div>
+        <ul>
+          <li>Tooltip = label only, no interaction, hover-triggered</li>
+          <li>Popover = interactive content, click-triggered</li>
+          <li>If content is a single sentence with no buttons → tooltip</li>
+          <li>If content has a checkbox, button, or form → popover</li>
+          <li>If content exceeds 4 items → bottom sheet (mobile) or drawer (web)</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Writing content inside</div>
+        <ul>
+          <li>Title: 2–4 words, sentence case, no verb ("Platform", not "Select platform")</li>
+          <li>Body text: max 2 lines, 13px, muted color</li>
+          <li>CTA labels: verb-first ("Apply filters", "Save", "Done")</li>
+          <li>Close button: always ✕ icon only with <code class="ds-code">aria-label="Close"</code></li>
+          <li>Never put navigation links inside a popover</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. PLATFORM CONSIDERATIONS -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Replace with bottom sheet — popovers are too small for touch targets</li>
+          <li>Bottom sheet slides up from bottom edge, full viewport width</li>
+          <li>Drag handle at top, close button in header</li>
+          <li>Never use an absolute-positioned popover on a touch surface</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Anchor below trigger by default; flip upward if near bottom viewport edge</li>
+          <li>Dismiss on <code class="ds-code">click outside</code> and <code class="ds-code">Escape</code></li>
+          <li>Focus first interactive element on open</li>
+          <li>Max-width 320px — wider content needs a modal or drawer</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>Replace with full-screen panel — popovers are too small at TV scale</li>
+          <li>D-pad navigates items in the panel, Back button closes</li>
+          <li>Focus ring must be clearly visible on each option (3px glow)</li>
+          <li>Always show a visible "Close" action as the last item</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. ACCESSIBILITY -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <table class="ds-spec-table">
+      <thead><tr><th>Requirement</th><th>Implementation</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>ARIA role</td>
+          <td><code class="ds-code">role="dialog"</code></td>
+          <td>Applied to the popover container element.</td>
+        </tr>
+        <tr>
+          <td>Non-modal</td>
+          <td><code class="ds-code">aria-modal="false"</code></td>
+          <td>Popover is not modal — page content remains accessible to AT.</td>
+        </tr>
+        <tr>
+          <td>Trigger state</td>
+          <td><code class="ds-code">aria-expanded</code> + <code class="ds-code">aria-haspopup="dialog"</code></td>
+          <td>Toggle <code class="ds-code">aria-expanded</code> true/false with open/close. Screen readers announce the state change.</td>
+        </tr>
+        <tr>
+          <td>Focus management</td>
+          <td>Focus first interactive element on open</td>
+          <td>Return focus to trigger on close. Do not trap focus (non-modal).</td>
+        </tr>
+        <tr>
+          <td>Keyboard dismiss</td>
+          <td><code class="ds-code">Escape</code> closes</td>
+          <td>Required. Also dismiss on click outside.</td>
+        </tr>
+        <tr>
+          <td>Accessible name</td>
+          <td><code class="ds-code">aria-labelledby</code> pointing to title</td>
+          <td>If no visible title, use <code class="ds-code">aria-label</code> on the dialog element.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 12. RELATED TOKENS -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <table class="ds-spec-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td><code class="ds-code">--surface-2</code></td><td><code class="ds-code">#161B26</code></td><td>Popover background</td></tr>
+        <tr><td><code class="ds-code">--border-subtle</code></td><td><code class="ds-code">rgba(255,255,255,.08)</code></td><td>Popover border</td></tr>
+        <tr><td><code class="ds-code">--r5</code></td><td><code class="ds-code">16px</code></td><td>Popover border-radius</td></tr>
+        <tr><td><code class="ds-code">--r2</code></td><td><code class="ds-code">4px</code></td><td>Close button border-radius</td></tr>
+        <tr><td><code class="ds-code">--glass-1</code></td><td><code class="ds-code">rgba(255,255,255,.04)</code></td><td>Close button hover background</td></tr>
+        <tr><td><code class="ds-code">--space-2</code></td><td><code class="ds-code">16px</code></td><td>Popover internal padding</td></tr>
+        <tr><td><code class="ds-code">--jio</code></td><td><code class="ds-code">#00A859</code></td><td>Apply button background, checkbox accent</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CODE EXAMPLES -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Popover — basic</div>
+      <pre class="component-code-pre"><code>&lt;div class="popover-wrap"&gt;
+  &lt;button
+    class="filter-btn"
+    aria-haspopup="dialog"
+    aria-expanded="false"
+    aria-controls="pop-platform"
+    onclick="this.setAttribute('aria-expanded','true'); document.getElementById('pop-platform').hidden=false;"
+  &gt;Filter ▾&lt;/button&gt;
+
+  &lt;div
+    class="popover"
+    id="pop-platform"
+    role="dialog"
+    aria-modal="false"
+    aria-labelledby="pop-platform-title"
+    hidden
+  &gt;
+    &lt;p id="pop-platform-title" class="popover-title"&gt;Platform&lt;/p&gt;
+    &lt;!-- content --&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Popover — with form controls</div>
+      <pre class="component-code-pre"><code>&lt;div class="popover" role="dialog" aria-modal="false" aria-labelledby="pop-filter-title"&gt;
+  &lt;p id="pop-filter-title" class="popover-title"&gt;Platform&lt;/p&gt;
+  &lt;button class="popover-close" aria-label="Close filter"&gt;✕&lt;/button&gt;
+
+  &lt;label class="popover-check-row"&gt;
+    &lt;input type="checkbox" name="platform" value="mobile" checked&gt; Mobile
+  &lt;/label&gt;
+  &lt;label class="popover-check-row"&gt;
+    &lt;input type="checkbox" name="platform" value="web"&gt; Web
+  &lt;/label&gt;
+  &lt;label class="popover-check-row"&gt;
+    &lt;input type="checkbox" name="platform" value="tv" checked&gt; TV
+  &lt;/label&gt;
+
+  &lt;button class="popover-apply-btn"&gt;Apply filters&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Popover — dismiss on outside click + Escape</div>
+      <pre class="component-code-pre"><code>&lt;script&gt;
+function openPopover(triggerId, popoverId) {
+  const trigger = document.getElementById(triggerId);
+  const pop = document.getElementById(popoverId);
+  trigger.setAttribute('aria-expanded', 'true');
+  pop.hidden = false;
+  // Focus first interactive element
+  pop.querySelector('button,input,[tabindex]')?.focus();
+}
+
+function closePopover(triggerId, popoverId) {
+  const trigger = document.getElementById(triggerId);
+  const pop = document.getElementById(popoverId);
+  trigger.setAttribute('aria-expanded', 'false');
+  pop.hidden = true;
+  trigger.focus(); // return focus to trigger
+}
+
+document.addEventListener('click', e =&gt; {
+  document.querySelectorAll('.popover:not([hidden])').forEach(pop =&gt; {
+    if (!pop.contains(e.target) &amp;&amp; !e.target.matches('[aria-haspopup]')) {
+      pop.hidden = true;
+    }
+  });
+});
+
+document.addEventListener('keydown', e =&gt; {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.popover:not([hidden])').forEach(pop =&gt; {
+      pop.hidden = true;
+    });
+  }
+});
+&lt;/script&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- 13. CHANGELOG -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Changelog</h2>
+    <div class="component-changelog">
+      <div class="component-changelog-entry">
+        <span class="component-changelog-version">v0.1</span>
+        <span class="component-changelog-date">Jun 2026</span>
+        <p class="component-changelog-desc">Initial draft. Three size tiers (S/M/L), four variants (simple, header+close, form controls, loading skeleton), full accessibility table. Mobile bottom-sheet guidance documented.</p>
+      </div>
+    </div>
+  </section>
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

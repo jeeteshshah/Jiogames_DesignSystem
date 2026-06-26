@@ -1,0 +1,477 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menubar — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    .menubar { display: flex; align-items: center; height: 36px; background: var(--surface-1); border-bottom: 1px solid var(--border-subtle); padding: 0 8px; gap: 2px; }
+    .menubar-item { position: relative; }
+    .menubar-trigger { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: var(--r3); background: transparent; border: none; font-family: var(--jio-font); font-size: 13px; font-weight: 500; color: var(--text2); cursor: pointer; height: 28px; transition: all var(--dur-fast) var(--ease-out); }
+    .menubar-trigger:hover, .menubar-trigger.is-open { color: var(--text); background: var(--glass-1); }
+    .menubar-menu { position: absolute; top: calc(100% + 4px); left: 0; min-width: 180px; background: var(--surface-2); border: 1px solid var(--border-subtle); border-radius: var(--r4); padding: 4px; box-shadow: 0 8px 24px rgba(0,0,0,.4); z-index: 300; }
+    .menubar-menu-item { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 7px 10px; border-radius: var(--r3); font-size: 13px; font-weight: 500; color: var(--text); cursor: pointer; border: none; background: transparent; width: 100%; text-align: left; transition: background var(--dur-fast) var(--ease-out); font-family: var(--jio-font); }
+    .menubar-menu-item:hover { background: var(--glass-1); }
+    .menubar-menu-item.is-checked { color: var(--jio); }
+    .menubar-menu-item.is-disabled { opacity: .35; pointer-events: none; }
+    .menubar-menu-item .shortcut { font-size: 11px; color: var(--text3); white-space: nowrap; font-family: monospace; }
+    .menubar-separator { height: 1px; background: var(--border-subtle); margin: 4px 0; }
+    .menubar-check-icon { width: 14px; flex-shrink: 0; color: var(--jio); font-size: 11px; }
+    .menubar-submenu-arrow { font-size: 10px; color: var(--text3); }
+    /* demo shell simulation */
+    .demo-shell { background: var(--bg); border: 1px solid var(--border-subtle); border-radius: var(--r5); overflow: hidden; }
+    .demo-shell-content { padding: 32px; min-height: 120px; display: flex; align-items: center; justify-content: center; color: var(--text3); font-size: 13px; }
+  </style>
+</head><body><main class="ds-content">
+
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Menubar</span>
+    </nav>
+    <h1 class="component-page-title">Menubar</h1>
+    <p class="component-page-def">Horizontal bar of menus typically seen in desktop/web app shells. In JioGames web, used in the admin/CMS tools and game developer dashboard. Not for the player-facing UI.</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--web">
+          <span class="component-platform-dot"></span>Web
+        </span>
+      </div>
+      <span class="component-maturity component-maturity--draft">
+        <span class="component-maturity--dot"></span>Draft
+      </span>
+    </div>
+  </header>
+
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:340px; position:relative; overflow:hidden;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="padding:40px 32px; align-items:stretch;">
+      <div style="width:100%; max-width:580px;">
+        <div class="demo-shell">
+          <div class="menubar">
+            <div class="menubar-item">
+              <button class="menubar-trigger">File</button>
+            </div>
+            <div class="menubar-item" style="position:relative;">
+              <button class="menubar-trigger is-open">Edit</button>
+              <div class="menubar-menu" style="position:relative; top:auto; left:auto; box-shadow:none; border-radius:var(--r4); margin-top:2px;">
+                <button class="menubar-menu-item">
+                  <span>New Game</span><span class="shortcut">⌘N</span>
+                </button>
+                <button class="menubar-menu-item">
+                  <span>Duplicate</span><span class="shortcut">⌘D</span>
+                </button>
+                <div class="menubar-separator"></div>
+                <button class="menubar-menu-item">
+                  <span>Export</span><span class="shortcut">⌘E</span>
+                </button>
+                <button class="menubar-menu-item is-disabled">
+                  <span>Delete</span><span class="shortcut">⌫</span>
+                </button>
+              </div>
+            </div>
+            <div class="menubar-item">
+              <button class="menubar-trigger">View</button>
+            </div>
+            <div class="menubar-item">
+              <button class="menubar-trigger">Help</button>
+            </div>
+          </div>
+          <div class="demo-shell-content">App content area</div>
+        </div>
+      </div>
+    </div>
+    <p class="component-hero-caption">Menubar · Edit menu open · New Game / Duplicate / separator / Export / Delete (disabled)</p>
+  </section>
+
+  <section class="component-intro">
+    <p>The Menubar component renders a horizontal strip of top-level menu triggers. Clicking a trigger opens a dropdown menu with items, separators, keyboard shortcuts, and optional checkmarks. It is a desktop/web pattern used exclusively in JioGames internal tooling — the CMS, game developer dashboard, and admin panels. It must never appear in the player-facing app on any platform.</p>
+    <ul class="component-summary-list">
+      <li><strong>File, Edit, View, Help</strong> — the four standard top-level menus for JioGames tooling</li>
+      <li><strong>Keyboard shortcuts</strong> — shown right-aligned within each menu item</li>
+      <li><strong>Checked items</strong> — checkmark for toggle state (e.g., View → Show Sidebar)</li>
+      <li><strong>Submenus</strong> — indicated by › arrow; max one level of nesting</li>
+    </ul>
+  </section>
+
+  <section class="component-best-practices">
+    <div class="component-bp-card component-bp-card--do">
+      <span class="component-bp-label component-bp-label--do">Do</span>
+      <ul class="component-bp-list">
+        <li>Limit to 4 top-level menus maximum — File, Edit, View, Help covers all CMS needs</li>
+        <li>Show keyboard shortcuts right-aligned on every item that has one</li>
+        <li>Use separators to group related items — max 3 items per group before a separator</li>
+        <li>Close the open menu when any other trigger is hovered, matching native OS menubar behavior</li>
+        <li>Keep menu item labels to 2–3 words — "New Game", "Export CSV", "Show Sidebar"</li>
+      </ul>
+    </div>
+    <div class="component-bp-card component-bp-card--dont">
+      <span class="component-bp-label component-bp-label--dont">Don't</span>
+      <ul class="component-bp-list">
+        <li>Use the menubar in the player-facing JioGames app — it is CMS and developer tooling only</li>
+        <li>Nest submenus more than one level deep — two arrows to reach an action is too many</li>
+        <li>Put destructive actions (Delete, Unpublish) at the top of a group — place them last, after a separator</li>
+        <li>Use the menubar on mobile — it has no touch equivalent; use a drawer or bottom sheet instead</li>
+        <li>Add more than 8 items to a single menu without grouping them with separators</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="ds-anatomy" style="margin:40px 0;">
+    <div class="ds-anatomy-preview">
+      <div class="ds-anatomy-component" style="position:relative; width:100%;">
+        <div style="background:var(--surface-1); border:1px solid var(--border-subtle); border-radius:var(--r4); overflow:visible;">
+          <div class="menubar" style="border-radius:var(--r4) var(--r4) 0 0; border-bottom:1px solid var(--border-subtle);">
+            <button class="menubar-trigger">File</button>
+            <button class="menubar-trigger is-open">Edit</button>
+            <button class="menubar-trigger">View</button>
+          </div>
+          <div style="position:relative; height:8px;"></div>
+          <div style="position:absolute; left:46px; top:36px; z-index:10; background:var(--surface-2); border:1px solid var(--border-subtle); border-radius:var(--r4); padding:4px; min-width:160px; box-shadow:0 8px 24px rgba(0,0,0,.4);">
+            <button class="menubar-menu-item" style="width:100%;">
+              <span>New Game</span><span class="shortcut">⌘N</span>
+            </button>
+            <button class="menubar-menu-item" style="width:100%; background:var(--glass-1);">
+              <span>Duplicate</span><span class="shortcut">⌘D</span>
+            </button>
+            <div class="menubar-separator"></div>
+            <button class="menubar-menu-item is-disabled" style="width:100%;">
+              <span>Delete</span>
+            </button>
+          </div>
+        </div>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:-14px; left:20px;"><span class="ds-anatomy-callout-num">1</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:-14px; left:80px;"><span class="ds-anatomy-callout-num">2</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:60px; right:-20px;"><span class="ds-anatomy-callout-num">3</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:100px; right:-20px;"><span class="ds-anatomy-callout-num">4</span></span>
+      </div>
+    </div>
+    <ol class="ds-anatomy-list">
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">1</span>
+        <div>
+          <div class="ds-anatomy-label">Menubar strip <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">36px tall horizontal bar. Surface-1 background with bottom border. Contains all top-level triggers flush left. Fixed to top of tool shell.</div>
+          <code class="ds-anatomy-token ds-code">height: 36px; background: var(--surface-1); role="menubar"</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">2</span>
+        <div>
+          <div class="ds-anatomy-label">Menu trigger <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">28px tall button, 13px weight-500. Transparent default, glass-1 on hover/open. No chevron — click behavior is self-evident in a menubar context.</div>
+          <code class="ds-anatomy-token ds-code">height: 28px; font-size: 13px; role="menuitem" aria-haspopup="menu"</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">3</span>
+        <div>
+          <div class="ds-anatomy-label">Menu panel <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Floating surface-2 panel, 4px padding, border-radius r4, elevation shadow. Minimum 180px wide. Appears 4px below the trigger.</div>
+          <code class="ds-anatomy-token ds-code">background: var(--surface-2); role="menu"</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">4</span>
+        <div>
+          <div class="ds-anatomy-label">Menu item <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Full-width button, 13px weight-500. Label left, shortcut right in monospace. Hover fills glass-1. Checked items show green text. Disabled at 35% opacity.</div>
+          <code class="ds-anatomy-token ds-code">role="menuitem" | role="menuitemcheckbox"</code>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Four menu item configurations covering all common CMS tool needs.</p>
+    <div class="ds-demo ds-demo--dark" style="display:flex; flex-wrap:wrap; gap:24px;">
+
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <div style="font-size:11px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; margin-bottom:4px;">Default — with shortcuts</div>
+        <div style="background:var(--surface-2); border:1px solid var(--border-subtle); border-radius:var(--r4); padding:4px; min-width:200px;">
+          <button class="menubar-menu-item" style="width:100%;"><span>New Game</span><span class="shortcut">⌘N</span></button>
+          <button class="menubar-menu-item" style="width:100%; background:var(--glass-1);"><span>Duplicate</span><span class="shortcut">⌘D</span></button>
+          <button class="menubar-menu-item" style="width:100%;"><span>Export CSV</span><span class="shortcut">⌘E</span></button>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <div style="font-size:11px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; margin-bottom:4px;">With checked items</div>
+        <div style="background:var(--surface-2); border:1px solid var(--border-subtle); border-radius:var(--r4); padding:4px; min-width:200px;">
+          <button class="menubar-menu-item is-checked" style="width:100%;">
+            <span style="display:flex; align-items:center; gap:6px;"><span style="width:14px; color:var(--jio); font-size:11px;">✓</span>Show Sidebar</span>
+            <span class="shortcut">⌘B</span>
+          </button>
+          <button class="menubar-menu-item" style="width:100%;">
+            <span style="display:flex; align-items:center; gap:6px;"><span style="width:14px;"></span>Show Preview</span>
+            <span class="shortcut">⌘P</span>
+          </button>
+          <button class="menubar-menu-item is-checked" style="width:100%;">
+            <span style="display:flex; align-items:center; gap:6px;"><span style="width:14px; color:var(--jio); font-size:11px;">✓</span>Dark Mode</span>
+          </button>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <div style="font-size:11px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase; margin-bottom:4px;">With submenu indicator</div>
+        <div style="background:var(--surface-2); border:1px solid var(--border-subtle); border-radius:var(--r4); padding:4px; min-width:200px;">
+          <button class="menubar-menu-item" style="width:100%;"><span>Export</span><span class="menubar-submenu-arrow">›</span></button>
+          <button class="menubar-menu-item" style="width:100%;"><span>Import</span><span class="menubar-submenu-arrow">›</span></button>
+          <div class="menubar-separator"></div>
+          <button class="menubar-menu-item is-disabled" style="width:100%;"><span>Delete</span><span class="shortcut">⌫</span></button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">The menubar has a single fixed height — 36px bar, 28px triggers, 13px font. No size variants exist.</p>
+    <div class="ds-demo ds-demo--dark">
+      <table class="ds-spec-table">
+        <thead><tr><th>Element</th><th>Spec</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Menubar height</td><td><code class="ds-code">36px</code></td><td>Fixed — aligns with OS-native menubar proportions</td></tr>
+          <tr><td>Trigger height</td><td><code class="ds-code">28px</code></td><td>4px margin above and below within 36px bar</td></tr>
+          <tr><td>Trigger font</td><td><code class="ds-code">13px / 500</code></td><td>Not adjustable — smaller than 13px is unreadable on web</td></tr>
+          <tr><td>Menu item font</td><td><code class="ds-code">13px / 500</code></td><td>Same as trigger — visual consistency</td></tr>
+          <tr><td>Menu min-width</td><td><code class="ds-code">180px</code></td><td>Wider menus grow to fit longest item label + shortcut</td></tr>
+          <tr><td>Menu item padding</td><td><code class="ds-code">7px 10px</code></td><td>7px vertical gives ~34px total item height</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">States apply to individual triggers and menu items. The menubar strip itself has no state — it is always visible and always at full opacity.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:32px; align-items:flex-start;">
+
+        <div style="display:flex; flex-direction:column; gap:8px; align-items:center;">
+          <button class="menubar-trigger">File</button>
+          <span style="font-size:11px; color:var(--text3);">Default trigger</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:8px; align-items:center;">
+          <button class="menubar-trigger is-open">Edit</button>
+          <span style="font-size:11px; color:var(--text3);">Open trigger</span>
+        </div>
+
+        <div style="height:48px; width:1px; background:var(--border-subtle);"></div>
+
+        <div style="display:flex; flex-direction:column; gap:4px; min-width:180px;">
+          <button class="menubar-menu-item" style="width:100%;">Default item</button>
+          <button class="menubar-menu-item" style="width:100%; background:var(--glass-1);">Hovered item</button>
+          <button class="menubar-menu-item is-checked" style="width:100%;">
+            <span style="display:flex; align-items:center; gap:6px;"><span style="width:14px; color:var(--jio); font-size:11px;">✓</span>Checked item</span>
+          </button>
+          <button class="menubar-menu-item is-disabled" style="width:100%;">Disabled item</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">JioGames CMS context</div>
+        <ul>
+          <li>Use the menubar only in CMS, developer dashboard, and admin tools</li>
+          <li>Standard four menus: <strong>File</strong>, <strong>Edit</strong>, <strong>View</strong>, <strong>Help</strong></li>
+          <li>Never exceed 4 top-level menus — consolidate into submenus if needed</li>
+          <li>File menu: New, Open, Save, Export, Close</li>
+          <li>Edit menu: New Game, Duplicate, Publish, Unpublish, Delete</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Labels and shortcuts</div>
+        <ul>
+          <li>Labels: 2–3 words, title case — "New Game", "Export CSV", "Show Sidebar"</li>
+          <li>Shortcuts: use OS notation — ⌘N for Mac, Ctrl+N for Windows shown separately</li>
+          <li>Destructive items (Delete, Unpublish) go last in their group, after a separator</li>
+          <li>Checked items: use checkmark glyph ✓ in green — not a checkbox component</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Not applicable — menubar is web/desktop only</li>
+          <li>Mobile CMS access uses a drawer navigation pattern instead</li>
+          <li>Actions available in menubar are surfaced via bottom sheet on mobile</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Arrow keys move between top-level triggers (←→) and within open menus (↑↓)</li>
+          <li>Enter or Space opens a trigger's menu; Enter activates a menu item</li>
+          <li>Escape closes the open menu and returns focus to the trigger</li>
+          <li>Hovering a second trigger while one is open switches the open menu immediately</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>Not applicable — menubar is CMS/developer tooling, not TV player UI</li>
+          <li>TV apps use a focusable rail navigation pattern instead</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <table class="ds-spec-table">
+      <thead><tr><th>Element</th><th>Role / attribute</th><th>Guidance</th></tr></thead>
+      <tbody>
+        <tr><td>Menubar strip</td><td><code class="ds-code">role="menubar"</code></td><td><code class="ds-code">aria-label="Application menu"</code>. Contains only menuitem children.</td></tr>
+        <tr><td>Menu trigger</td><td><code class="ds-code">role="menuitem"</code></td><td><code class="ds-code">aria-haspopup="menu"</code>, <code class="ds-code">aria-expanded="true/false"</code> when menu opens/closes.</td></tr>
+        <tr><td>Menu panel</td><td><code class="ds-code">role="menu"</code></td><td><code class="ds-code">aria-label</code> matching trigger label — "Edit menu". Contains only menuitem/menuitemcheckbox/separator children.</td></tr>
+        <tr><td>Standard item</td><td><code class="ds-code">role="menuitem"</code></td><td>Keyboard shortcut in a visually-hidden or <code class="ds-code">aria-keyshortcuts</code> attribute so screen readers announce it.</td></tr>
+        <tr><td>Checked item</td><td><code class="ds-code">role="menuitemcheckbox"</code></td><td><code class="ds-code">aria-checked="true/false"</code>. The checkmark glyph is <code class="ds-code">aria-hidden="true"</code> — role carries the meaning.</td></tr>
+        <tr><td>Separator</td><td><code class="ds-code">role="separator"</code></td><td>No text content, no aria-label needed. Purely structural.</td></tr>
+        <tr><td>Disabled item</td><td><code class="ds-code">aria-disabled="true"</code></td><td>Do not use the HTML <code class="ds-code">disabled</code> attribute — that removes the item from tab order entirely. Use <code class="ds-code">aria-disabled</code> so it remains discoverable.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <table class="ds-spec-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td><code class="ds-code">--surface-1</code></td><td>—</td><td>Menubar strip background</td></tr>
+        <tr><td><code class="ds-code">--surface-2</code></td><td>—</td><td>Menu panel background</td></tr>
+        <tr><td><code class="ds-code">--border-subtle</code></td><td><code class="ds-code">rgba(255,255,255,.08)</code></td><td>Menubar bottom border, menu panel border, separator</td></tr>
+        <tr><td><code class="ds-code">--glass-1</code></td><td><code class="ds-code">rgba(255,255,255,.05)</code></td><td>Trigger hover/open fill, menu item hover fill</td></tr>
+        <tr><td><code class="ds-code">--text2</code></td><td><code class="ds-code">rgba(244,242,238,.55)</code></td><td>Default trigger label color</td></tr>
+        <tr><td><code class="ds-code">--text3</code></td><td><code class="ds-code">rgba(244,242,238,.32)</code></td><td>Keyboard shortcut text color</td></tr>
+        <tr><td><code class="ds-code">--jio</code></td><td><code class="ds-code">#00A859</code></td><td>Checked menu item text color and checkmark glyph color</td></tr>
+        <tr><td><code class="ds-code">--r3</code></td><td>—</td><td>Trigger border-radius, menu item border-radius</td></tr>
+        <tr><td><code class="ds-code">--r4</code></td><td>—</td><td>Menu panel border-radius</td></tr>
+        <tr><td><code class="ds-code">--dur-fast</code></td><td><code class="ds-code">120ms</code></td><td>Trigger and item hover background transition</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Basic menubar structure</div>
+      <pre class="component-code-pre"><code>&lt;div class="menubar" role="menubar" aria-label="Application menu"&gt;
+
+  &lt;div class="menubar-item"&gt;
+    &lt;button class="menubar-trigger" role="menuitem"
+      aria-haspopup="menu" aria-expanded="false"
+      aria-controls="menu-file"&gt;
+      File
+    &lt;/button&gt;
+    &lt;div id="menu-file" class="menubar-menu" role="menu" aria-label="File menu" hidden&gt;
+      &lt;button class="menubar-menu-item" role="menuitem" aria-keyshortcuts="Meta+N"&gt;
+        &lt;span&gt;New Game&lt;/span&gt;
+        &lt;span class="shortcut" aria-hidden="true"&gt;⌘N&lt;/span&gt;
+      &lt;/button&gt;
+      &lt;button class="menubar-menu-item" role="menuitem" aria-keyshortcuts="Meta+S"&gt;
+        &lt;span&gt;Save&lt;/span&gt;
+        &lt;span class="shortcut" aria-hidden="true"&gt;⌘S&lt;/span&gt;
+      &lt;/button&gt;
+      &lt;div class="menubar-separator" role="separator"&gt;&lt;/div&gt;
+      &lt;button class="menubar-menu-item is-disabled" role="menuitem" aria-disabled="true"&gt;
+        &lt;span&gt;Delete&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="menubar-item"&gt;
+    &lt;button class="menubar-trigger" role="menuitem"
+      aria-haspopup="menu" aria-expanded="false"
+      aria-controls="menu-edit"&gt;
+      Edit
+    &lt;/button&gt;
+    &lt;div id="menu-edit" class="menubar-menu" role="menu" aria-label="Edit menu" hidden&gt;
+      &lt;!-- items --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Menu with keyboard shortcuts</div>
+      <pre class="component-code-pre"><code>&lt;div id="menu-edit" class="menubar-menu" role="menu" aria-label="Edit menu"&gt;
+  &lt;button class="menubar-menu-item" role="menuitem" aria-keyshortcuts="Meta+N"&gt;
+    &lt;span&gt;New Game&lt;/span&gt;
+    &lt;span class="shortcut" aria-hidden="true"&gt;⌘N&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;button class="menubar-menu-item" role="menuitem" aria-keyshortcuts="Meta+D"&gt;
+    &lt;span&gt;Duplicate&lt;/span&gt;
+    &lt;span class="shortcut" aria-hidden="true"&gt;⌘D&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;div class="menubar-separator" role="separator"&gt;&lt;/div&gt;
+  &lt;button class="menubar-menu-item" role="menuitem" aria-keyshortcuts="Meta+E"&gt;
+    &lt;span&gt;Export&lt;/span&gt;
+    &lt;span class="shortcut" aria-hidden="true"&gt;⌘E&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;button class="menubar-menu-item is-disabled" role="menuitem" aria-disabled="true"&gt;
+    &lt;span&gt;Delete&lt;/span&gt;
+    &lt;span class="shortcut" aria-hidden="true"&gt;⌫&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Menu with checked state (View toggles)</div>
+      <pre class="component-code-pre"><code>&lt;div id="menu-view" class="menubar-menu" role="menu" aria-label="View menu"&gt;
+
+  &lt;!-- Checked: sidebar is visible --&gt;
+  &lt;button class="menubar-menu-item is-checked" role="menuitemcheckbox"
+    aria-checked="true" aria-keyshortcuts="Meta+B"&gt;
+    &lt;span style="display:flex; align-items:center; gap:6px;"&gt;
+      &lt;span aria-hidden="true" style="width:14px; color:var(--jio);"&gt;✓&lt;/span&gt;
+      Show Sidebar
+    &lt;/span&gt;
+    &lt;span class="shortcut" aria-hidden="true"&gt;⌘B&lt;/span&gt;
+  &lt;/button&gt;
+
+  &lt;!-- Unchecked: preview is hidden --&gt;
+  &lt;button class="menubar-menu-item" role="menuitemcheckbox"
+    aria-checked="false" aria-keyshortcuts="Meta+P"&gt;
+    &lt;span style="display:flex; align-items:center; gap:6px;"&gt;
+      &lt;span aria-hidden="true" style="width:14px;"&gt;&lt;/span&gt;
+      Show Preview
+    &lt;/span&gt;
+    &lt;span class="shortcut" aria-hidden="true"&gt;⌘P&lt;/span&gt;
+  &lt;/button&gt;
+
+&lt;/div&gt;</code></pre>
+    </div>
+  </section>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">Changelog</h2>
+    <div class="component-changelog">
+      <div class="component-changelog-entry">
+        <span class="component-changelog-version">v0.1</span>
+        <span class="component-changelog-date">Jun 2026</span>
+        <p class="component-changelog-desc">Initial draft. Basic menubar, shortcuts variant, checked items variant. Full ARIA menubar pattern documented. Web-only scope — CMS and developer dashboard exclusively.</p>
+      </div>
+    </div>
+  </section>
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

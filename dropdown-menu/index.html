@@ -1,0 +1,623 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dropdown Menu — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    .dropdown-wrap { position: relative; display: inline-block; }
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      min-width: 180px;
+      background: var(--surface-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r5);
+      padding: 6px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.4);
+      z-index: 200;
+    }
+    .dropdown-menu--left { right: auto; left: 0; }
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: var(--r3);
+      font-family: var(--jio-font);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background var(--dur-fast) var(--ease-out);
+      border: none;
+      background: transparent;
+      width: 100%;
+      text-align: left;
+    }
+    .dropdown-item:hover,
+    .dropdown-item.sim-hover { background: var(--glass-1); }
+    .dropdown-item:focus { outline: none; background: var(--glass-1); }
+    .dropdown-item--active { color: var(--jio); }
+    .dropdown-item--active::before {
+      content: '✓';
+      font-size: 11px;
+      color: var(--jio);
+      margin-right: -2px;
+    }
+    .dropdown-item--destructive { color: var(--negative); }
+    .dropdown-item--destructive:hover,
+    .dropdown-item--destructive.sim-hover { background: rgba(255,71,87,.08); }
+    .dropdown-item--disabled { opacity: .35; cursor: not-allowed; pointer-events: none; }
+    .dropdown-separator { height: 1px; background: var(--border-subtle); margin: 4px 6px; }
+    .dropdown-header {
+      padding: 6px 12px 2px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text3);
+      letter-spacing: .4px;
+      text-transform: uppercase;
+    }
+    .dropdown-item-icon { width: 16px; height: 16px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+    .dropdown-item-meta { margin-left: auto; font-size: 11px; color: var(--text3); }
+    .dropdown-menu--compact .dropdown-item { font-size: 12px; padding: 7px 10px; }
+    .dropdown-trigger {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 14px;
+      background: var(--surface-2);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r3);
+      font-family: var(--jio-font);
+      font-size: 13px; font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+    }
+    .dropdown-trigger--kebab {
+      width: 36px; height: 36px; padding: 0;
+      justify-content: center;
+      border-radius: var(--r3);
+      font-size: 18px;
+    }
+    .dropdown-trigger[aria-expanded="true"] {
+      border-color: rgba(0,168,89,.4);
+      color: var(--jio);
+    }
+    .account-avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--jio-soft), var(--surface-3));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; flex-shrink: 0;
+      border: 1px solid var(--border-subtle);
+    }
+  </style>
+</head><body><main class="ds-content">
+
+  <!-- 1. PAGE HEADER -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Dropdown Menu</span>
+    </nav>
+    <h1 class="component-page-title">Dropdown Menu</h1>
+    <p class="component-page-def">Click-triggered menu anchored below a button. Used for "More options", account menus, and kebab menus on cards and list items.</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile">
+          <span class="component-platform-dot"></span>Mobile
+        </span>
+        <span class="component-platform component-platform--web">
+          <span class="component-platform-dot"></span>Web
+        </span>
+        <span class="component-platform component-platform--tv">
+          <span class="component-platform-dot"></span>TV
+        </span>
+      </div>
+      <span class="component-maturity component-maturity--draft">
+        <span class="component-maturity--dot"></span>Draft
+      </span>
+    </div>
+  </header>
+
+  <!-- 2. HERO -->
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:320px; position:relative; overflow:hidden;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="flex-direction:row; gap:48px; flex-wrap:wrap; justify-content:center; align-items:flex-start; padding:48px 32px;">
+
+      <!-- Kebab trigger + open menu -->
+      <div style="display:flex; flex-direction:column; align-items:flex-end; gap:0;">
+        <button class="dropdown-trigger dropdown-trigger--kebab" aria-haspopup="menu" aria-expanded="true" aria-label="More options">⋯</button>
+        <div class="dropdown-menu" style="position:relative; top:auto; right:auto; margin-top:6px;">
+          <button class="dropdown-item"><span class="dropdown-item-icon">✏</span>Edit profile</button>
+          <button class="dropdown-item"><span class="dropdown-item-icon">⬇</span>Download game</button>
+          <button class="dropdown-item"><span class="dropdown-item-icon">⇧</span>Share</button>
+          <div class="dropdown-separator" role="separator"></div>
+          <button class="dropdown-item dropdown-item--destructive"><span class="dropdown-item-icon">→</span>Sign out</button>
+        </div>
+        <span style="font-size:11px; color:rgba(244,242,238,.4); margin-top:8px; align-self:center;">Kebab menu (⋯)</span>
+      </div>
+
+    </div>
+    <p class="component-hero-caption">Dropdown Menu · Kebab trigger, right-anchored</p>
+  </section>
+
+  <!-- 3. INTRO -->
+  <section class="component-intro">
+    <p>Dropdown menus open on click (not hover) and anchor below the button that triggered them. They are the standard pattern for "More options" kebab buttons (⋯), account avatar menus, and primary buttons with option variants. Unlike context menus — which are right-click triggered and position-anchored — dropdown menus are always tied to a specific button in the UI.</p>
+    <ul class="component-summary-list">
+      <li><strong>Kebab menu</strong> — ⋯ button on game cards, list rows, and player tiles</li>
+      <li><strong>Account menu</strong> — avatar button in the app header, opens profile + settings actions</li>
+      <li><strong>Sort / filter</strong> — "Sort by ▾" button with a list of sorting options</li>
+      <li><strong>Button with options</strong> — primary "Download ▾" split into format variants</li>
+    </ul>
+  </section>
+
+  <!-- 4. BEST PRACTICES -->
+  <section class="component-best-practices">
+    <div class="component-bp-card component-bp-card--do">
+      <span class="component-bp-label component-bp-label--do">Do</span>
+      <ul class="component-bp-list">
+        <li>Use chevron (▾) for buttons whose label changes with selection; kebab (⋯) for fixed item-level actions</li>
+        <li>Focus the first item automatically when opened via keyboard</li>
+        <li>Close on Escape and return focus to the trigger</li>
+        <li>Show active state with a leading ✓ checkmark for selection menus</li>
+        <li>Flip anchor to left-aligned if trigger is near the right viewport edge</li>
+      </ul>
+    </div>
+    <div class="component-bp-card component-bp-card--dont">
+      <span class="component-bp-label component-bp-label--dont">Don't</span>
+      <ul class="component-bp-list">
+        <li>Open dropdown on hover — hover is for tooltips, click is for menus</li>
+        <li>Use dropdown for navigation links that change the page URL — use a nav component</li>
+        <li>Mix section headers with ungrouped items in the same menu</li>
+        <li>Show dropdown on mobile — replace with bottom sheet</li>
+        <li>Stack two dropdowns open simultaneously — new trigger closes the previous</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5. ANATOMY -->
+  <div class="ds-anatomy" style="margin-bottom:64px;">
+    <div class="ds-anatomy-preview">
+      <div style="position:relative; display:flex; flex-direction:column; align-items:flex-end; gap:0;">
+        <button class="dropdown-trigger dropdown-trigger--kebab" style="pointer-events:none;" aria-expanded="true">⋯</button>
+        <div class="dropdown-menu" style="position:relative; top:auto; right:auto; margin-top:6px; min-width:200px; pointer-events:none;">
+          <div class="dropdown-header">Account</div>
+          <button class="dropdown-item dropdown-item--active">✓ Edit profile</button>
+          <button class="dropdown-item sim-hover">⬇ Download game</button>
+          <div class="dropdown-separator" role="separator"></div>
+          <button class="dropdown-item dropdown-item--destructive">→ Sign out</button>
+        </div>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:0; left:-22px;"><span class="ds-anatomy-callout-num">1</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:56px; left:-22px;"><span class="ds-anatomy-callout-num">2</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:80px; left:-22px;"><span class="ds-anatomy-callout-num">3</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:110px; left:-22px;"><span class="ds-anatomy-callout-num">4</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; bottom:8px; left:-22px;"><span class="ds-anatomy-callout-num">5</span></span>
+      </div>
+    </div>
+    <ol class="ds-anatomy-list">
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">1</span>
+        <div>
+          <div class="ds-anatomy-label">Trigger button <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">The button that opens the menu. Must have <code class="ds-code">aria-haspopup="menu"</code> and toggle <code class="ds-code">aria-expanded</code> true/false.</div>
+          <code class="ds-anatomy-token ds-code">aria-haspopup="menu" aria-expanded="false"</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">2</span>
+        <div>
+          <div class="ds-anatomy-label">Section header <span class="ds-anatomy-optional">Optional</span></div>
+          <div class="ds-anatomy-desc">11px uppercase label grouping items beneath it. Used when the menu has 2+ distinct categories. Not interactive — no role="menuitem".</div>
+          <code class="ds-anatomy-token ds-code">font-size: 11px; text-transform: uppercase; color: var(--text3)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">3</span>
+        <div>
+          <div class="ds-anatomy-label">Active item <span class="ds-anatomy-optional">Optional</span></div>
+          <div class="ds-anatomy-desc">Currently selected option in a selection menu. Leading ✓ checkmark in <code class="ds-code">--jio</code> color. Used for sort/filter menus only.</div>
+          <code class="ds-anatomy-token ds-code">color: var(--jio); content: '✓'</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">4</span>
+        <div>
+          <div class="ds-anatomy-label">Standard item <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">14px medium weight button. 9px 12px padding. Optional leading icon (16px). Optional trailing meta (11px muted). Full-width.</div>
+          <code class="ds-anatomy-token ds-code">padding: 9px 12px; border-radius: var(--r3)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">5</span>
+        <div>
+          <div class="ds-anatomy-label">Destructive item <span class="ds-anatomy-optional">Optional</span></div>
+          <div class="ds-anatomy-desc">Same structure as standard item but text uses <code class="ds-code">--negative</code>. Red-tinted hover. Always last after a separator.</div>
+          <code class="ds-anatomy-token ds-code">color: var(--negative); hover: rgba(255,71,87,.08)</code>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- 6. VARIANTS -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Five variants cover the full range of dropdown use cases from item-level actions to account navigation.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:32px; align-items:flex-start; padding:8px 0;">
+
+        <!-- Right-aligned (default) -->
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-end;">
+          <div class="dropdown-menu" style="position:relative; top:auto; right:auto; min-width:180px; pointer-events:none;">
+            <button class="dropdown-item">Edit profile</button>
+            <button class="dropdown-item">Download game</button>
+            <div class="dropdown-separator"></div>
+            <button class="dropdown-item dropdown-item--destructive">Sign out</button>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.4);">Right-aligned (default)</span>
+        </div>
+
+        <!-- Left-aligned -->
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <div class="dropdown-menu dropdown-menu--left" style="position:relative; top:auto; left:auto; right:auto; min-width:180px; pointer-events:none;">
+            <button class="dropdown-item">Most recent</button>
+            <button class="dropdown-item dropdown-item--active">Top rated</button>
+            <button class="dropdown-item">Alphabetical</button>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.4);">Left-aligned + active</span>
+        </div>
+
+        <!-- With section headers -->
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-end;">
+          <div class="dropdown-menu" style="position:relative; top:auto; right:auto; min-width:200px; pointer-events:none;">
+            <div class="dropdown-header">Account</div>
+            <button class="dropdown-item">View profile</button>
+            <button class="dropdown-item">Settings</button>
+            <div class="dropdown-separator"></div>
+            <div class="dropdown-header">Support</div>
+            <button class="dropdown-item">Help center</button>
+            <div class="dropdown-separator"></div>
+            <button class="dropdown-item dropdown-item--destructive">Sign out</button>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.4);">With section headers</span>
+        </div>
+
+        <!-- With icons -->
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-end;">
+          <div class="dropdown-menu" style="position:relative; top:auto; right:auto; min-width:190px; pointer-events:none;">
+            <button class="dropdown-item"><span class="dropdown-item-icon">✏</span>Edit profile</button>
+            <button class="dropdown-item"><span class="dropdown-item-icon">⬇</span>Download game</button>
+            <button class="dropdown-item"><span class="dropdown-item-icon">⇧</span>Share</button>
+            <div class="dropdown-separator"></div>
+            <button class="dropdown-item dropdown-item--destructive"><span class="dropdown-item-icon">→</span>Sign out</button>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.4);">With icons</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. SIZES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Two size tiers. Default for standard surfaces. Compact for dense toolbars and list rows where item height must stay minimal.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:32px; align-items:flex-start; padding:8px 0;">
+
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div class="dropdown-menu dropdown-menu--compact" style="position:relative; top:auto; right:auto; min-width:180px; pointer-events:none;">
+            <button class="dropdown-item">Edit profile</button>
+            <button class="dropdown-item">Download game</button>
+            <div class="dropdown-separator"></div>
+            <button class="dropdown-item dropdown-item--destructive">Sign out</button>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.4);">Compact — 12px font, 7px 10px padding</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div class="dropdown-menu" style="position:relative; top:auto; right:auto; min-width:180px; pointer-events:none;">
+            <button class="dropdown-item">Edit profile</button>
+            <button class="dropdown-item">Download game</button>
+            <div class="dropdown-separator"></div>
+            <button class="dropdown-item dropdown-item--destructive">Sign out</button>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.4);">Default — 14px font, 9px 12px padding</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. STATES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">The trigger button carries open/closed state. Individual items carry hover, active, disabled, and destructive states.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:40px; align-items:flex-start; padding:8px 0;">
+
+        <!-- Trigger states -->
+        <div style="display:flex; flex-direction:column; gap:16px; align-items:flex-start;">
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <button class="dropdown-trigger dropdown-trigger--kebab" aria-expanded="false" style="pointer-events:none;">⋯</button>
+            <span style="font-size:11px; color:rgba(244,242,238,.4);">Trigger closed</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <button class="dropdown-trigger dropdown-trigger--kebab" aria-expanded="true" style="pointer-events:none; border-color:rgba(0,168,89,.4); color:var(--jio);">⋯</button>
+            <span style="font-size:11px; color:rgba(244,242,238,.4);">Trigger open</span>
+          </div>
+        </div>
+
+        <!-- Item states -->
+        <div style="display:flex; flex-direction:column; gap:10px; align-items:flex-start;">
+          <div class="dropdown-menu" style="position:relative; top:auto; right:auto; min-width:200px; pointer-events:none;">
+            <button class="dropdown-item">Default item</button>
+            <button class="dropdown-item sim-hover">Hovered item</button>
+            <button class="dropdown-item dropdown-item--active">Active (selected)</button>
+            <button class="dropdown-item dropdown-item--disabled">Disabled item</button>
+            <div class="dropdown-separator"></div>
+            <button class="dropdown-item dropdown-item--destructive">Destructive</button>
+            <button class="dropdown-item dropdown-item--destructive sim-hover">Destructive hover</button>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.4);">All item states</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. CONTENT GUIDANCE -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Dropdown vs Context Menu</div>
+        <ul>
+          <li>Dropdown = click-triggered, anchored to a fixed button in the UI</li>
+          <li>Context menu = right-click triggered, anchored to pointer coordinates</li>
+          <li>Use kebab (⋯) for item-level actions — stays visible, no right-click needed</li>
+          <li>Use chevron (▾) on a labeled button when the button label reflects the selection</li>
+          <li>Never use dropdown for global navigation — use nav bar or drawer</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Item label rules</div>
+        <ul>
+          <li>Verb-first: "Edit profile", "Download game", "Sign out"</li>
+          <li>Sentence case, no trailing punctuation</li>
+          <li>Section headers: noun-only, uppercase, max 2 words ("Account", "Support")</li>
+          <li>Active checkmark only in selection menus (sort, filter) — not action menus</li>
+          <li>Destructive label names the consequence: "Sign out" not just "Exit"</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. PLATFORM CONSIDERATIONS -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Replace with bottom sheet — inline dropdowns have insufficient touch target height</li>
+          <li>Bottom sheet slides up, full-width, items min 48px height</li>
+          <li>Drag handle at top; optional section headers preserved from dropdown</li>
+          <li>Kebab tap opens bottom sheet; chevron button expands inline options list</li>
+          <li>Destructive item always last, red, with extra padding from the group above</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Open on click; dismiss on outside click or Escape</li>
+          <li>Anchor right edge of menu to right edge of trigger (right-aligned default)</li>
+          <li>Flip to left-anchored if menu would clip right viewport edge</li>
+          <li>Flip to open upward if menu would clip bottom viewport edge</li>
+          <li>Keyboard: Space/Enter opens; arrow keys navigate; Escape closes</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>Select button on remote opens the dropdown inline beside the trigger</li>
+          <li>D-pad ↑↓ navigates items; Select activates; Back closes</li>
+          <li>Use default size minimum — compact is unreadable at 3m distance</li>
+          <li>Highlight focused item with 3px <code class="ds-code">--jio</code> glow outline, not just background tint</li>
+          <li>No section header uppercase labels on TV — use a plain separator instead</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. ACCESSIBILITY -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <table class="ds-spec-table">
+      <thead><tr><th>Requirement</th><th>Implementation</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Trigger button</td>
+          <td><code class="ds-code">&lt;button&gt;</code> with <code class="ds-code">aria-haspopup="menu"</code></td>
+          <td>Must be a native button, not a div. Screen readers announce "menu button".</td>
+        </tr>
+        <tr>
+          <td>Open/close state</td>
+          <td><code class="ds-code">aria-expanded="true/false"</code></td>
+          <td>Toggle on trigger with every open/close. Screen reader announces state change.</td>
+        </tr>
+        <tr>
+          <td>Menu container</td>
+          <td><code class="ds-code">role="menu"</code></td>
+          <td>Applied to <code class="ds-code">.dropdown-menu</code>. Paired with <code class="ds-code">aria-labelledby</code> pointing to trigger id.</td>
+        </tr>
+        <tr>
+          <td>Items</td>
+          <td><code class="ds-code">role="menuitem"</code></td>
+          <td>Each clickable item. Active/selected items use <code class="ds-code">aria-checked="true"</code> with <code class="ds-code">role="menuitemcheckbox"</code> for selection menus.</td>
+        </tr>
+        <tr>
+          <td>Disabled items</td>
+          <td><code class="ds-code">aria-disabled="true"</code></td>
+          <td>Keep focusable — use <code class="ds-code">aria-disabled</code> not HTML <code class="ds-code">disabled</code> so screen readers can read the item name.</td>
+        </tr>
+        <tr>
+          <td>Keyboard open</td>
+          <td>Space / Enter on trigger</td>
+          <td>Focus moves to first item. Down arrow also opens and focuses first item.</td>
+        </tr>
+        <tr>
+          <td>Keyboard nav</td>
+          <td>Arrow Up/Down, Home, End</td>
+          <td>Arrow keys move focus between items. Home/End jump to first/last.</td>
+        </tr>
+        <tr>
+          <td>Escape</td>
+          <td>Close menu, return focus to trigger</td>
+          <td>Required. Tab key also closes and moves focus forward in page order.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 12. RELATED TOKENS -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <table class="ds-spec-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td><code class="ds-code">--surface-2</code></td><td><code class="ds-code">#161B26</code></td><td>Menu background</td></tr>
+        <tr><td><code class="ds-code">--border-subtle</code></td><td><code class="ds-code">rgba(255,255,255,.08)</code></td><td>Menu border and separators</td></tr>
+        <tr><td><code class="ds-code">--r5</code></td><td><code class="ds-code">16px</code></td><td>Menu container border-radius</td></tr>
+        <tr><td><code class="ds-code">--r3</code></td><td><code class="ds-code">8px</code></td><td>Item border-radius on hover</td></tr>
+        <tr><td><code class="ds-code">--glass-1</code></td><td><code class="ds-code">rgba(255,255,255,.04)</code></td><td>Item hover background</td></tr>
+        <tr><td><code class="ds-code">--jio</code></td><td><code class="ds-code">#00A859</code></td><td>Active item text and checkmark color</td></tr>
+        <tr><td><code class="ds-code">--negative</code></td><td><code class="ds-code">#FF4757</code></td><td>Destructive item text color</td></tr>
+        <tr><td><code class="ds-code">--text3</code></td><td><code class="ds-code">rgba(244,242,238,.32)</code></td><td>Section header and meta text color</td></tr>
+        <tr><td><code class="ds-code">--dur-fast</code></td><td><code class="ds-code">120ms</code></td><td>Item hover transition duration</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CODE EXAMPLES -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Dropdown — kebab menu (item-level actions)</div>
+      <pre class="component-code-pre"><code>&lt;div class="dropdown-wrap"&gt;
+  &lt;button
+    id="kebab-trigger"
+    class="dropdown-trigger dropdown-trigger--kebab"
+    aria-haspopup="menu"
+    aria-expanded="false"
+    aria-controls="kebab-menu"
+    aria-label="More options"
+  &gt;⋯&lt;/button&gt;
+
+  &lt;div
+    class="dropdown-menu"
+    id="kebab-menu"
+    role="menu"
+    aria-labelledby="kebab-trigger"
+    hidden
+  &gt;
+    &lt;button class="dropdown-item" role="menuitem"&gt;Edit profile&lt;/button&gt;
+    &lt;button class="dropdown-item" role="menuitem"&gt;Download game&lt;/button&gt;
+    &lt;button class="dropdown-item" role="menuitem"&gt;Share&lt;/button&gt;
+    &lt;div class="dropdown-separator" role="separator"&gt;&lt;/div&gt;
+    &lt;button class="dropdown-item dropdown-item--destructive" role="menuitem"&gt;Sign out&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Dropdown — account menu with section headers</div>
+      <pre class="component-code-pre"><code>&lt;div class="dropdown-wrap"&gt;
+  &lt;button class="dropdown-trigger" aria-haspopup="menu" aria-expanded="false"&gt;
+    &lt;img class="account-avatar" src="/avatar.jpg" alt="My account"&gt;
+    My account ▾
+  &lt;/button&gt;
+
+  &lt;div class="dropdown-menu" role="menu" hidden&gt;
+    &lt;div class="dropdown-header" aria-hidden="true"&gt;Account&lt;/div&gt;
+    &lt;a class="dropdown-item" role="menuitem" href="/profile"&gt;View profile&lt;/a&gt;
+    &lt;a class="dropdown-item" role="menuitem" href="/settings"&gt;Settings&lt;/a&gt;
+
+    &lt;div class="dropdown-separator" role="separator"&gt;&lt;/div&gt;
+    &lt;div class="dropdown-header" aria-hidden="true"&gt;Support&lt;/div&gt;
+    &lt;a class="dropdown-item" role="menuitem" href="/help"&gt;Help center&lt;/a&gt;
+
+    &lt;div class="dropdown-separator" role="separator"&gt;&lt;/div&gt;
+    &lt;button class="dropdown-item dropdown-item--destructive" role="menuitem"&gt;Sign out&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Dropdown — open/close + keyboard navigation (JS)</div>
+      <pre class="component-code-pre"><code>&lt;script&gt;
+document.querySelectorAll('.dropdown-wrap').forEach(wrap =&gt; {
+  const trigger = wrap.querySelector('[aria-haspopup="menu"]');
+  const menu    = wrap.querySelector('[role="menu"]');
+  const items   = () =&gt; [...menu.querySelectorAll('.dropdown-item:not([aria-disabled="true"])')];
+  let focusIdx  = 0;
+
+  function open() {
+    trigger.setAttribute('aria-expanded', 'true');
+    menu.hidden = false;
+    focusIdx = 0;
+    items()[0]?.focus();
+  }
+  function close() {
+    trigger.setAttribute('aria-expanded', 'false');
+    menu.hidden = true;
+    trigger.focus();
+  }
+
+  trigger.addEventListener('click', () =&gt; menu.hidden ? open() : close());
+
+  trigger.addEventListener('keydown', e =&gt; {
+    if (e.key === 'ArrowDown' || e.key === ' ' || e.key === 'Enter') {
+      e.preventDefault(); open();
+    }
+  });
+
+  menu.addEventListener('keydown', e =&gt; {
+    const its = items();
+    if (e.key === 'ArrowDown') { e.preventDefault(); focusIdx = (focusIdx + 1) % its.length; its[focusIdx].focus(); }
+    if (e.key === 'ArrowUp')   { e.preventDefault(); focusIdx = (focusIdx - 1 + its.length) % its.length; its[focusIdx].focus(); }
+    if (e.key === 'Home')      { e.preventDefault(); focusIdx = 0; its[0].focus(); }
+    if (e.key === 'End')       { e.preventDefault(); focusIdx = its.length - 1; its[focusIdx].focus(); }
+    if (e.key === 'Escape' || e.key === 'Tab') close();
+  });
+
+  // Close on outside click
+  document.addEventListener('click', e =&gt; {
+    if (!wrap.contains(e.target)) close();
+  });
+});
+&lt;/script&gt;</code></pre>
+    </div>
+
+  </section>
+
+  <!-- 13. CHANGELOG -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Changelog</h2>
+    <div class="component-changelog">
+      <div class="component-changelog-entry">
+        <span class="component-changelog-version">v0.1</span>
+        <span class="component-changelog-date">Jun 2026</span>
+        <p class="component-changelog-desc">Initial draft. Two size tiers (compact/default), five variants (right-aligned, left-aligned, section headers, icons, active checkmark), full keyboard nav spec and ARIA table. Mobile bottom-sheet replacement documented. TV D-pad guidance included.</p>
+      </div>
+    </div>
+  </section>
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

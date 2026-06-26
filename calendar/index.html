@@ -1,0 +1,512 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendar — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    .calendar { width: 280px; background: var(--surface-2); border: 1px solid var(--border-subtle); border-radius: var(--r5); overflow: hidden; font-family: var(--jio-font); }
+    .calendar-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid var(--border-subtle); }
+    .calendar-month { font-size: 15px; font-weight: 700; color: var(--text); }
+    .calendar-nav { background: none; border: none; color: var(--text3); cursor: pointer; padding: 4px 8px; border-radius: var(--r3); font-size: 16px; transition: all var(--dur-fast) var(--ease-out); }
+    .calendar-nav:hover { color: var(--text); background: var(--glass-1); }
+    .calendar-grid { padding: 12px; }
+    .calendar-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); margin-bottom: 6px; }
+    .calendar-weekday { text-align: center; font-size: 11px; font-weight: 700; color: var(--text3); padding: 4px 0; }
+    .calendar-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+    .calendar-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-radius: var(--pill); font-size: 13px; font-weight: 500; color: var(--text); cursor: pointer; border: none; background: transparent; transition: all var(--dur-fast) var(--ease-out); position: relative; font-family: var(--jio-font); }
+    .calendar-day:hover { background: var(--glass-1); }
+    .calendar-day.is-today { font-weight: 900; color: var(--jio); }
+    .calendar-day.is-selected { background: var(--jio); color: #000; font-weight: 700; }
+    .calendar-day.is-outside { color: var(--text4); }
+    .calendar-day.is-disabled { opacity: 0.3; pointer-events: none; }
+    .calendar-day.has-event::after { content: ''; display: block; width: 4px; height: 4px; border-radius: var(--pill); background: var(--jio); position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); }
+    .calendar-day.is-selected.has-event::after { background: #000; }
+    .calendar-day.is-range-start { background: var(--jio); color: #000; font-weight: 700; border-radius: var(--pill) 0 0 var(--pill); }
+    .calendar-day.is-range-end { background: var(--jio); color: #000; font-weight: 700; border-radius: 0 var(--pill) var(--pill) 0; }
+    .calendar-day.is-in-range { background: var(--jio-soft); color: var(--text); border-radius: 0; }
+  </style>
+</head><body><main class="ds-content">
+
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Calendar</span>
+    </nav>
+    <h1 class="component-page-title">Calendar</h1>
+    <p class="component-page-def">Month-view date grid for selecting dates. Used for game release schedules, event dates, and subscription renewal dates in JioGames. Not a full date-picker — pairs with the Date Picker component.</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile">
+          <span class="component-platform-dot"></span>Mobile
+        </span>
+        <span class="component-platform component-platform--web">
+          <span class="component-platform-dot"></span>Web
+        </span>
+      </div>
+      <span class="component-maturity component-maturity--draft">
+        <span class="component-maturity--dot"></span>Draft
+      </span>
+    </div>
+  </header>
+
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:360px; position:relative; overflow:hidden;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="padding:48px 32px;">
+      <div class="calendar">
+        <div class="calendar-header">
+          <button class="calendar-nav">‹</button>
+          <span class="calendar-month">June 2026</span>
+          <button class="calendar-nav">›</button>
+        </div>
+        <div class="calendar-grid">
+          <div class="calendar-weekdays">
+            <div class="calendar-weekday">S</div><div class="calendar-weekday">M</div><div class="calendar-weekday">T</div><div class="calendar-weekday">W</div><div class="calendar-weekday">T</div><div class="calendar-weekday">F</div><div class="calendar-weekday">S</div>
+          </div>
+          <div class="calendar-days">
+            <!-- Row 1: padding + 1–6 -->
+            <div class="calendar-day is-outside"></div>
+            <div class="calendar-day">1</div>
+            <div class="calendar-day has-event">2</div>
+            <div class="calendar-day">3</div>
+            <div class="calendar-day">4</div>
+            <div class="calendar-day">5</div>
+            <div class="calendar-day has-event">6</div>
+            <!-- Row 2: 7–13 -->
+            <div class="calendar-day">7</div>
+            <div class="calendar-day">8</div>
+            <div class="calendar-day">9</div>
+            <div class="calendar-day">10</div>
+            <div class="calendar-day">11</div>
+            <div class="calendar-day has-event">12</div>
+            <div class="calendar-day">13</div>
+            <!-- Row 3: 14–20 -->
+            <div class="calendar-day">14</div>
+            <div class="calendar-day is-selected">15</div>
+            <div class="calendar-day">16</div>
+            <div class="calendar-day">17</div>
+            <div class="calendar-day">18</div>
+            <div class="calendar-day">19</div>
+            <div class="calendar-day has-event">20</div>
+            <!-- Row 4: 21–27 -->
+            <div class="calendar-day">21</div>
+            <div class="calendar-day">22</div>
+            <div class="calendar-day">23</div>
+            <div class="calendar-day">24</div>
+            <div class="calendar-day">25</div>
+            <div class="calendar-day is-today">26</div>
+            <div class="calendar-day">27</div>
+            <!-- Row 5: 28–30 + padding -->
+            <div class="calendar-day">28</div>
+            <div class="calendar-day">29</div>
+            <div class="calendar-day">30</div>
+            <div class="calendar-day is-outside"></div>
+            <div class="calendar-day is-outside"></div>
+            <div class="calendar-day is-outside"></div>
+            <div class="calendar-day is-outside"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="component-hero-caption">Calendar · June 2026 · today=26 (green) · selected=15 · event dots on release dates</p>
+  </section>
+
+  <section class="component-intro">
+    <p>The Calendar component renders a month-view grid of days for date selection. It is a low-level primitive — it is almost always used inside the Date Picker component, but can also be rendered standalone as a read-only event calendar for game release schedules and tournament dates. The Calendar does not manage its own state; the parent component or page controls the selected date(s).</p>
+    <ul class="component-summary-list">
+      <li><strong>Single select</strong> — tap or click a day to select it; previous selection clears</li>
+      <li><strong>Range select</strong> — tap start date, then end date; days in between fill with tinted background</li>
+      <li><strong>Read-only</strong> — no day interaction, used for event calendars showing release schedules</li>
+      <li><strong>Event dots</strong> — small green dot below the day number marks dates with game releases or events</li>
+    </ul>
+  </section>
+
+  <section class="component-best-practices">
+    <div class="component-bp-card component-bp-card--do">
+      <span class="component-bp-label component-bp-label--do">Do</span>
+      <ul class="component-bp-list">
+        <li>Use event dots (not counts or numbers) for marking game release dates on the grid</li>
+        <li>Keep today's date visually distinct with bold weight and green color even when not selected</li>
+        <li>Navigate months only with prev/next arrows — do not offer a year/month dropdown in compact contexts</li>
+        <li>Dim outside-month days to 40% opacity so the current month grid is the visual focus</li>
+        <li>On mobile, make each day cell at least 40×40px for comfortable thumb tapping</li>
+      </ul>
+    </div>
+    <div class="component-bp-card component-bp-card--dont">
+      <span class="component-bp-label component-bp-label--dont">Don't</span>
+      <ul class="component-bp-list">
+        <li>Show more than 3 event dots per day — link to a list view for days with many events</li>
+        <li>Allow selecting disabled dates — pointer-events: none is not enough; block keyboard selection too</li>
+        <li>Use the calendar as a navigation widget — it selects dates, it does not navigate to pages</li>
+        <li>Render the calendar on TV — no pointer, D-pad date picking is unusable; use date text input instead</li>
+        <li>Start weeks on a day other than Sunday in the JioGames context — India locale expectation</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="ds-anatomy" style="margin:40px 0;">
+    <div class="ds-anatomy-preview">
+      <div class="ds-anatomy-component" style="position:relative;">
+        <div class="calendar" style="width:240px;">
+          <div class="calendar-header" style="padding:10px 12px;">
+            <button class="calendar-nav">‹</button>
+            <span class="calendar-month" style="font-size:13px;">June 2026</span>
+            <button class="calendar-nav">›</button>
+          </div>
+          <div class="calendar-grid" style="padding:8px;">
+            <div class="calendar-weekdays">
+              <div class="calendar-weekday">S</div><div class="calendar-weekday">M</div><div class="calendar-weekday">T</div><div class="calendar-weekday">W</div><div class="calendar-weekday">T</div><div class="calendar-weekday">F</div><div class="calendar-weekday">S</div>
+            </div>
+            <div class="calendar-days" style="gap:1px;">
+              <div class="calendar-day is-outside"></div>
+              <div class="calendar-day" style="font-size:11px;">1</div><div class="calendar-day has-event" style="font-size:11px;">2</div><div class="calendar-day" style="font-size:11px;">3</div><div class="calendar-day" style="font-size:11px;">4</div><div class="calendar-day" style="font-size:11px;">5</div><div class="calendar-day" style="font-size:11px;">6</div>
+              <div class="calendar-day" style="font-size:11px;">7</div><div class="calendar-day" style="font-size:11px;">8</div><div class="calendar-day" style="font-size:11px;">9</div><div class="calendar-day" style="font-size:11px;">10</div><div class="calendar-day" style="font-size:11px;">11</div><div class="calendar-day" style="font-size:11px;">12</div><div class="calendar-day" style="font-size:11px;">13</div>
+              <div class="calendar-day" style="font-size:11px;">14</div><div class="calendar-day is-selected" style="font-size:11px;">15</div><div class="calendar-day" style="font-size:11px;">16</div><div class="calendar-day" style="font-size:11px;">17</div><div class="calendar-day" style="font-size:11px;">18</div><div class="calendar-day" style="font-size:11px;">19</div><div class="calendar-day" style="font-size:11px;">20</div>
+              <div class="calendar-day" style="font-size:11px;">21</div><div class="calendar-day" style="font-size:11px;">22</div><div class="calendar-day" style="font-size:11px;">23</div><div class="calendar-day" style="font-size:11px;">24</div><div class="calendar-day" style="font-size:11px;">25</div><div class="calendar-day is-today" style="font-size:11px;">26</div><div class="calendar-day" style="font-size:11px;">27</div>
+              <div class="calendar-day" style="font-size:11px;">28</div><div class="calendar-day" style="font-size:11px;">29</div><div class="calendar-day" style="font-size:11px;">30</div>
+              <div class="calendar-day is-outside"></div><div class="calendar-day is-outside"></div><div class="calendar-day is-outside"></div><div class="calendar-day is-outside"></div>
+            </div>
+          </div>
+        </div>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:-14px; left:50%; transform:translateX(-50%);"><span class="ds-anatomy-callout-num">1</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:24px; right:-20px;"><span class="ds-anatomy-callout-num">2</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; top:64px; left:-20px;"><span class="ds-anatomy-callout-num">3</span></span>
+        <span class="ds-anatomy-callout-dot" style="position:absolute; bottom:28px; right:-20px;"><span class="ds-anatomy-callout-num">4</span></span>
+      </div>
+    </div>
+    <ol class="ds-anatomy-list">
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">1</span>
+        <div>
+          <div class="ds-anatomy-label">Header <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Month + year label centred. Prev/next arrow buttons on either side. Header is always visible — never hidden.</div>
+          <code class="ds-anatomy-token ds-code">border-bottom: 1px solid var(--border-subtle)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">2</span>
+        <div>
+          <div class="ds-anatomy-label">Weekday labels <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Single-letter abbreviated weekday headers (S M T W T F S). 11px bold, muted color. Not interactive.</div>
+          <code class="ds-anatomy-token ds-code">font-size: 11px; font-weight: 700; color: var(--text3)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">3</span>
+        <div>
+          <div class="ds-anatomy-label">Day grid <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">7-column grid. Each day is a button with aspect-ratio 1. Outside-month days rendered but dimmed. Hover, today, selected, disabled, and range states applied as modifier classes.</div>
+          <code class="ds-anatomy-token ds-code">display: grid; grid-template-columns: repeat(7, 1fr)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">4</span>
+        <div>
+          <div class="ds-anatomy-label">Event dot <span class="ds-anatomy-optional">Optional</span></div>
+          <div class="ds-anatomy-desc">4×4px green dot via ::after pseudo-element. Only used in event calendar variant. Max one dot per day — not a count indicator.</div>
+          <code class="ds-anatomy-token ds-code">width: 4px; height: 4px; background: var(--jio); border-radius: var(--pill)</code>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Three usage modes — single select, range select, and read-only event view.</p>
+    <div class="ds-demo ds-demo--dark" style="display:flex; flex-wrap:wrap; gap:32px; align-items:flex-start;">
+
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div style="font-size:11px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase;">Single date select</div>
+        <div class="calendar">
+          <div class="calendar-header">
+            <button class="calendar-nav">‹</button>
+            <span class="calendar-month">June 2026</span>
+            <button class="calendar-nav">›</button>
+          </div>
+          <div class="calendar-grid">
+            <div class="calendar-weekdays"><div class="calendar-weekday">S</div><div class="calendar-weekday">M</div><div class="calendar-weekday">T</div><div class="calendar-weekday">W</div><div class="calendar-weekday">T</div><div class="calendar-weekday">F</div><div class="calendar-weekday">S</div></div>
+            <div class="calendar-days">
+              <div class="calendar-day is-outside"></div><div class="calendar-day">1</div><div class="calendar-day">2</div><div class="calendar-day">3</div><div class="calendar-day">4</div><div class="calendar-day">5</div><div class="calendar-day">6</div>
+              <div class="calendar-day">7</div><div class="calendar-day">8</div><div class="calendar-day">9</div><div class="calendar-day">10</div><div class="calendar-day">11</div><div class="calendar-day">12</div><div class="calendar-day">13</div>
+              <div class="calendar-day">14</div><div class="calendar-day is-selected">15</div><div class="calendar-day">16</div><div class="calendar-day">17</div><div class="calendar-day">18</div><div class="calendar-day">19</div><div class="calendar-day">20</div>
+              <div class="calendar-day">21</div><div class="calendar-day">22</div><div class="calendar-day">23</div><div class="calendar-day">24</div><div class="calendar-day">25</div><div class="calendar-day is-today">26</div><div class="calendar-day">27</div>
+              <div class="calendar-day">28</div><div class="calendar-day">29</div><div class="calendar-day">30</div><div class="calendar-day is-outside"></div><div class="calendar-day is-outside"></div><div class="calendar-day is-outside"></div><div class="calendar-day is-outside"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div style="font-size:11px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase;">Range select</div>
+        <div class="calendar">
+          <div class="calendar-header">
+            <button class="calendar-nav">‹</button>
+            <span class="calendar-month">June 2026</span>
+            <button class="calendar-nav">›</button>
+          </div>
+          <div class="calendar-grid">
+            <div class="calendar-weekdays"><div class="calendar-weekday">S</div><div class="calendar-weekday">M</div><div class="calendar-weekday">T</div><div class="calendar-weekday">W</div><div class="calendar-weekday">T</div><div class="calendar-weekday">F</div><div class="calendar-weekday">S</div></div>
+            <div class="calendar-days">
+              <div class="calendar-day is-outside"></div><div class="calendar-day">1</div><div class="calendar-day">2</div><div class="calendar-day">3</div><div class="calendar-day">4</div><div class="calendar-day">5</div><div class="calendar-day">6</div>
+              <div class="calendar-day">7</div><div class="calendar-day">8</div><div class="calendar-day">9</div><div class="calendar-day is-range-start">10</div><div class="calendar-day is-in-range">11</div><div class="calendar-day is-in-range">12</div><div class="calendar-day is-in-range">13</div>
+              <div class="calendar-day is-in-range">14</div><div class="calendar-day is-range-end">15</div><div class="calendar-day">16</div><div class="calendar-day">17</div><div class="calendar-day">18</div><div class="calendar-day">19</div><div class="calendar-day">20</div>
+              <div class="calendar-day">21</div><div class="calendar-day">22</div><div class="calendar-day">23</div><div class="calendar-day">24</div><div class="calendar-day">25</div><div class="calendar-day is-today">26</div><div class="calendar-day">27</div>
+              <div class="calendar-day">28</div><div class="calendar-day">29</div><div class="calendar-day">30</div><div class="calendar-day is-outside"></div><div class="calendar-day is-outside"></div><div class="calendar-day is-outside"></div><div class="calendar-day is-outside"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div style="font-size:11px; font-weight:700; color:var(--text3); letter-spacing:.5px; text-transform:uppercase;">Read-only with event dots</div>
+        <div class="calendar" style="pointer-events:none; opacity:.9;">
+          <div class="calendar-header">
+            <button class="calendar-nav">‹</button>
+            <span class="calendar-month">June 2026</span>
+            <button class="calendar-nav">›</button>
+          </div>
+          <div class="calendar-grid">
+            <div class="calendar-weekdays"><div class="calendar-weekday">S</div><div class="calendar-weekday">M</div><div class="calendar-weekday">T</div><div class="calendar-weekday">W</div><div class="calendar-weekday">T</div><div class="calendar-weekday">F</div><div class="calendar-weekday">S</div></div>
+            <div class="calendar-days">
+              <div class="calendar-day is-outside"></div><div class="calendar-day">1</div><div class="calendar-day has-event">2</div><div class="calendar-day">3</div><div class="calendar-day">4</div><div class="calendar-day">5</div><div class="calendar-day has-event">6</div>
+              <div class="calendar-day">7</div><div class="calendar-day">8</div><div class="calendar-day">9</div><div class="calendar-day">10</div><div class="calendar-day">11</div><div class="calendar-day has-event">12</div><div class="calendar-day">13</div>
+              <div class="calendar-day">14</div><div class="calendar-day">15</div><div class="calendar-day">16</div><div class="calendar-day">17</div><div class="calendar-day has-event">18</div><div class="calendar-day">19</div><div class="calendar-day has-event">20</div>
+              <div class="calendar-day">21</div><div class="calendar-day">22</div><div class="calendar-day">23</div><div class="calendar-day">24</div><div class="calendar-day">25</div><div class="calendar-day is-today">26</div><div class="calendar-day">27</div>
+              <div class="calendar-day">28</div><div class="calendar-day">29</div><div class="calendar-day">30</div><div class="calendar-day is-outside"></div><div class="calendar-day is-outside"></div><div class="calendar-day is-outside"></div><div class="calendar-day is-outside"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Three fixed widths — the grid scales proportionally within each. Always use the default (280px) inside Date Picker.</p>
+    <div class="ds-demo ds-demo--dark">
+      <table class="ds-spec-table">
+        <thead><tr><th>Size</th><th>Width</th><th>Day font</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td>Compact</td><td><code class="ds-code">240px</code></td><td><code class="ds-code">11px</code></td><td>Tight sidebars, popover contexts with limited space</td></tr>
+          <tr><td>Default</td><td><code class="ds-code">280px</code></td><td><code class="ds-code">13px</code></td><td>Date Picker popover, standalone inline calendar</td></tr>
+          <tr><td>Large</td><td><code class="ds-code">320px</code></td><td><code class="ds-code">14px</code></td><td>Full-page event calendar, release schedule view</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Each day button carries one or more state modifier classes. States are mutually exclusive except has-event, which can combine with any day state.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:24px; align-items:flex-end;">
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div class="calendar-day" style="width:36px; height:36px;">14</div>
+          <span style="font-size:11px; color:var(--text3);">Default</span>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div class="calendar-day" style="width:36px; height:36px; background:var(--glass-1);">22</div>
+          <span style="font-size:11px; color:var(--text3);">Hover</span>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div class="calendar-day is-today" style="width:36px; height:36px;">26</div>
+          <span style="font-size:11px; color:var(--text3);">Today</span>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div class="calendar-day is-selected" style="width:36px; height:36px;">15</div>
+          <span style="font-size:11px; color:var(--text3);">Selected</span>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div class="calendar-day is-in-range" style="width:36px; height:36px; border-radius:0;">11</div>
+          <span style="font-size:11px; color:var(--text3);">In range</span>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div class="calendar-day is-outside" style="width:36px; height:36px;">31</div>
+          <span style="font-size:11px; color:var(--text3);">Outside month</span>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div class="calendar-day is-disabled" style="width:36px; height:36px;">5</div>
+          <span style="font-size:11px; color:var(--text3);">Disabled</span>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <div class="calendar-day has-event" style="width:36px; height:36px;">18</div>
+          <span style="font-size:11px; color:var(--text3);">Has event</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Event dots</div>
+        <ul>
+          <li>Use event dots for marking game release dates — not for counts</li>
+          <li>Never show more than one dot per day on the grid — link days with 3+ events to a list view</li>
+          <li>Dot color is always <code class="ds-code">var(--jio)</code> — no semantic color variation</li>
+          <li>On selected days, dot changes to <code class="ds-code">#000</code> for contrast against green fill</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Month navigation</div>
+        <ul>
+          <li>Header format: "Month YYYY" — "June 2026", never "Jun '26" or "06/2026"</li>
+          <li>Prev/next arrows only in compact contexts — no month/year dropdown</li>
+          <li>Large standalone calendar may offer a year picker via header click</li>
+          <li>Disable past months when calendar is used for future event booking</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Full-width calendar — no fixed 280px; spans container width</li>
+          <li>Day cells minimum 44px height for comfortable thumb tapping</li>
+          <li>Swipe left/right on the grid to change months</li>
+          <li>Haptic feedback on day selection where OS supports it</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>280px fixed width, positioned below date input as a popover</li>
+          <li>Arrow key navigation between days within the grid</li>
+          <li>Page Up / Page Down changes months</li>
+          <li>Home / End jumps to first/last day of current month</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>Not applicable — D-pad date picking on a 7-column grid is unusable</li>
+          <li>Use a date text input or pre-filled date chips instead</li>
+          <li>Read-only event calendar can render on TV if not interactive</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <table class="ds-spec-table">
+      <thead><tr><th>Element</th><th>Role / attribute</th><th>Guidance</th></tr></thead>
+      <tbody>
+        <tr><td>Day grid container</td><td><code class="ds-code">role="grid"</code></td><td><code class="ds-code">aria-label="June 2026"</code> — updates dynamically as month changes.</td></tr>
+        <tr><td>Day button</td><td><code class="ds-code">role="gridcell"</code></td><td><code class="ds-code">aria-selected="true/false"</code>, <code class="ds-code">aria-disabled="true"</code> for disabled days.</td></tr>
+        <tr><td>Today</td><td><code class="ds-code">aria-current="date"</code></td><td>Applied to today's cell only. Screen readers announce "today" in addition to the date number.</td></tr>
+        <tr><td>Event dot</td><td>Visually hidden text</td><td>Add <code class="ds-code">&lt;span class="sr-only"&gt;, game release&lt;/span&gt;</code> inside the day button so the event is announced.</td></tr>
+        <tr><td>Keyboard nav</td><td>Arrow keys</td><td>↑↓ moves week rows, ←→ moves days, Page Up/Down changes months. Focus must be managed manually — not native tab order.</td></tr>
+        <tr><td>Nav buttons</td><td><code class="ds-code">aria-label</code></td><td>"Previous month" and "Next month" — not just ‹ and ›.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <table class="ds-spec-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td><code class="ds-code">--surface-2</code></td><td>—</td><td>Calendar panel background</td></tr>
+        <tr><td><code class="ds-code">--border-subtle</code></td><td><code class="ds-code">rgba(255,255,255,.08)</code></td><td>Panel border, header bottom border</td></tr>
+        <tr><td><code class="ds-code">--jio</code></td><td><code class="ds-code">#00A859</code></td><td>Selected day fill, today text color, event dot color</td></tr>
+        <tr><td><code class="ds-code">--jio-soft</code></td><td><code class="ds-code">rgba(0,168,89,.12)</code></td><td>In-range day background fill</td></tr>
+        <tr><td><code class="ds-code">--glass-1</code></td><td><code class="ds-code">rgba(255,255,255,.05)</code></td><td>Hovered day background</td></tr>
+        <tr><td><code class="ds-code">--text3</code></td><td><code class="ds-code">rgba(244,242,238,.32)</code></td><td>Weekday labels, nav arrow color</td></tr>
+        <tr><td><code class="ds-code">--text4</code></td><td>—</td><td>Outside-month day numbers</td></tr>
+        <tr><td><code class="ds-code">--pill</code></td><td><code class="ds-code">100px</code></td><td>Day cell border-radius (circle shape)</td></tr>
+        <tr><td><code class="ds-code">--r5</code></td><td>—</td><td>Calendar panel border-radius</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <div class="component-code-block">
+      <div class="component-code-label">Basic calendar HTML</div>
+      <pre class="component-code-pre"><code>&lt;div class="calendar" role="group" aria-label="Date picker"&gt;
+  &lt;div class="calendar-header"&gt;
+    &lt;button class="calendar-nav" aria-label="Previous month"&gt;‹&lt;/button&gt;
+    &lt;span class="calendar-month" aria-live="polite"&gt;June 2026&lt;/span&gt;
+    &lt;button class="calendar-nav" aria-label="Next month"&gt;›&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="calendar-grid"&gt;
+    &lt;div class="calendar-weekdays" role="row"&gt;
+      &lt;div class="calendar-weekday" role="columnheader" aria-label="Sunday"&gt;S&lt;/div&gt;
+      &lt;div class="calendar-weekday" role="columnheader" aria-label="Monday"&gt;M&lt;/div&gt;
+      &lt;!-- ...T W T F S --&gt;
+    &lt;/div&gt;
+    &lt;div class="calendar-days" role="grid" aria-label="June 2026"&gt;
+      &lt;button class="calendar-day is-outside" role="gridcell" aria-disabled="true" tabindex="-1"&gt;&lt;/button&gt;
+      &lt;button class="calendar-day" role="gridcell" aria-selected="false" tabindex="-1"&gt;1&lt;/button&gt;
+      &lt;button class="calendar-day is-today" role="gridcell" aria-current="date" aria-selected="false" tabindex="0"&gt;26&lt;/button&gt;
+      &lt;button class="calendar-day is-selected" role="gridcell" aria-selected="true" tabindex="-1"&gt;15&lt;/button&gt;
+      &lt;!-- ...remaining days --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Range selection — start, in-range, end classes</div>
+      <pre class="component-code-pre"><code>&lt;!-- Range: 10 Jun → 15 Jun --&gt;
+&lt;button class="calendar-day is-range-start" role="gridcell" aria-selected="true"
+  aria-label="10 June 2026, range start"&gt;10&lt;/button&gt;
+
+&lt;button class="calendar-day is-in-range" role="gridcell" aria-selected="false"
+  aria-label="11 June 2026, within selected range"&gt;11&lt;/button&gt;
+&lt;button class="calendar-day is-in-range" role="gridcell" aria-selected="false"
+  aria-label="12 June 2026, within selected range"&gt;12&lt;/button&gt;
+&lt;!-- ...13, 14 --&gt;
+
+&lt;button class="calendar-day is-range-end" role="gridcell" aria-selected="true"
+  aria-label="15 June 2026, range end"&gt;15&lt;/button&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Day with event dot — accessible markup</div>
+      <pre class="component-code-pre"><code>&lt;!-- Event dot is purely decorative — hidden text carries meaning --&gt;
+&lt;button class="calendar-day has-event" role="gridcell" aria-selected="false"
+  aria-label="2 June 2026, game release"&gt;
+  2
+  &lt;span class="sr-only"&gt;, game release&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;!-- sr-only utility class (add to your base CSS if not present) --&gt;
+&lt;style&gt;
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border-width: 0;
+}
+&lt;/style&gt;</code></pre>
+    </div>
+  </section>
+
+  <section class="ds-section">
+    <h2 class="ds-section-title">Changelog</h2>
+    <div class="component-changelog">
+      <div class="component-changelog-entry">
+        <span class="component-changelog-version">v0.1</span>
+        <span class="component-changelog-date">Jun 2026</span>
+        <p class="component-changelog-desc">Initial draft. Single select, range select, and read-only event variants. Three size tiers. Full day-state documentation, ARIA grid pattern, event dot accessible markup guidance.</p>
+      </div>
+    </div>
+  </section>
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

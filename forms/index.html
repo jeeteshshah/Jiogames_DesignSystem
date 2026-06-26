@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forms — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+</head>
+<body>
+  <main class="ds-main">
+
+    <!-- PAGE HEADER -->
+    <header class="component-page-header">
+      <nav class="component-breadcrumb" aria-label="Breadcrumb">
+        <a href="../">JioGames DLS</a>
+        <span class="component-breadcrumb-sep" aria-hidden="true">›</span>
+        <a href="../">Components</a>
+        <span class="component-breadcrumb-sep" aria-hidden="true">›</span>
+        <span>Forms</span>
+      </nav>
+      <h1 class="component-page-title">Forms</h1>
+      <p class="component-page-def">Form patterns for collecting user input across login, payment, preferences, and settings flows.</p>
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+        <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+        <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <div class="component-hero component-hero--dark component-hero--grid">
+      <div class="hero-glow"></div>
+      <div style="display:flex;flex-direction:column;gap:20px;align-items:flex-start">
+
+        <!-- Single field example -->
+        <div style="display:flex;flex-direction:column;gap:6px;width:280px">
+          <label style="font-size:13px;font-weight:700;color:var(--text)">Mobile number <span style="color:var(--negative)">*</span></label>
+          <div class="input-wrap"><input class="input-field" type="tel" placeholder="+91 98765 43210"></div>
+          <div style="font-size:11px;color:var(--text3)">Linked to your Jio account</div>
+        </div>
+
+        <!-- OTP row -->
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <label style="font-size:13px;font-weight:700;color:var(--text)">Enter OTP <span style="color:var(--negative)">*</span></label>
+          <div style="display:flex;gap:8px">
+            <input class="input-field" type="text" maxlength="1" style="width:48px;height:56px;border-radius:14px;font-size:22px;text-align:center;padding:0;flex-shrink:0" placeholder="—">
+            <input class="input-field is-focused" type="text" maxlength="1" style="width:48px;height:56px;border-radius:14px;font-size:22px;text-align:center;padding:0;flex-shrink:0" value="4">
+            <input class="input-field" type="text" maxlength="1" style="width:48px;height:56px;border-radius:14px;font-size:22px;text-align:center;padding:0;flex-shrink:0" placeholder="—">
+            <input class="input-field" type="text" maxlength="1" style="width:48px;height:56px;border-radius:14px;font-size:22px;text-align:center;padding:0;flex-shrink:0" placeholder="—">
+          </div>
+        </div>
+
+        <!-- Error + success states side by side -->
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <div style="display:flex;flex-direction:column;gap:6px;width:160px">
+            <label style="font-size:12px;font-weight:700;color:var(--text)">Email</label>
+            <div class="input-wrap"><input class="input-field is-error" type="email" value="bad@" placeholder=""></div>
+            <div style="font-size:11px;color:var(--error-text)">Enter a valid email</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;width:160px">
+            <label style="font-size:12px;font-weight:700;color:var(--text)">Username</label>
+            <div class="input-wrap"><input class="input-field is-success" type="text" value="JeetGamer99"></div>
+            <div style="font-size:11px;color:var(--success-text)">Username available</div>
+          </div>
+        </div>
+
+      </div>
+      <p class="component-hero-caption">FORMS · LOGIN, OTP, VALIDATION STATES</p>
+    </div>
+
+    <!-- OVERVIEW -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Overview</h2>
+      <p class="ds-section-desc">JioGames forms are dark-first, minimal-chrome input collections. Every field follows the label → input → helper/error stack. Use <code>.input-field</code> inside <code>.input-wrap</code> for consistent focus rings and surface treatment. Never raw <code>&lt;input&gt;</code> without a wrapper.</p>
+    </section>
+
+    <!-- ANATOMY -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Anatomy</h2>
+      <p class="ds-section-desc">A single field is composed of up to 7 layers. Only Label and Input are required.</p>
+      <div class="ds-anatomy">
+        <div class="ds-anatomy-preview">
+          <div style="max-width:400px;display:flex;flex-direction:column;gap:4px">
+            <div style="display:flex;align-items:center;gap:4px">
+              <label style="font-size:13px;font-weight:700;color:var(--text)">Email address</label>
+              <span style="font-size:10px;font-weight:700;color:var(--negative)">*</span>
+            </div>
+            <div class="input-wrap"><input class="input-field is-error" type="email" value="bad@email" placeholder="you@example.com"></div>
+            <div style="font-size:11px;color:var(--error-text)">Enter a valid email address (e.g. you@example.com)</div>
+          </div>
+        </div>
+        <ol class="ds-anatomy-list">
+          <li class="ds-anatomy-item">
+            <span class="ds-anatomy-label">Field label</span>
+            <span class="ds-anatomy-desc"><code>font-size:13px font-weight:700</code> — primary text colour</span>
+            <span class="ds-anatomy-required">Required</span>
+          </li>
+          <li class="ds-anatomy-item">
+            <span class="ds-anatomy-label">Required marker</span>
+            <span class="ds-anatomy-desc"><code>*</code> in <code>var(--negative)</code>, placed after label text</span>
+            <span class="ds-anatomy-optional">Optional</span>
+          </li>
+          <li class="ds-anatomy-item">
+            <span class="ds-anatomy-label">Input</span>
+            <span class="ds-anatomy-desc"><code>.input-field</code> inside <code>.input-wrap</code></span>
+            <span class="ds-anatomy-required">Required</span>
+          </li>
+          <li class="ds-anatomy-item">
+            <span class="ds-anatomy-label">Placeholder</span>
+            <span class="ds-anatomy-desc">Descriptive example text — never a label substitute</span>
+            <span class="ds-anatomy-optional">Optional</span>
+          </li>
+          <li class="ds-anatomy-item">
+            <span class="ds-anatomy-label">Helper text</span>
+            <span class="ds-anatomy-desc">11px guidance text, <code>var(--text3)</code></span>
+            <span class="ds-anatomy-optional">Optional</span>
+          </li>
+          <li class="ds-anatomy-item">
+            <span class="ds-anatomy-label">Error message</span>
+            <span class="ds-anatomy-desc">11px, <code>var(--error-text)</code> — shown when <code>.is-error</code></span>
+            <span class="ds-anatomy-optional">Conditional</span>
+          </li>
+          <li class="ds-anatomy-item">
+            <span class="ds-anatomy-label">Success message</span>
+            <span class="ds-anatomy-desc">11px, <code>var(--success-text)</code> — shown when <code>.is-success</code></span>
+            <span class="ds-anatomy-optional">Conditional</span>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- FIELD TYPES -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Field types</h2>
+      <p class="ds-section-desc">All supported input variants. Use native elements with <code>.input-field</code> styling — never custom replacements.</p>
+      <div class="ds-demo ds-demo--dark">
+        <div class="ds-demo-column" style="max-width:480px;width:100%">
+
+          <!-- Text -->
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <label style="font-size:13px;font-weight:700;color:var(--text)">Display Name</label>
+            <div class="input-wrap"><input class="input-field" type="text" placeholder="Enter your name"></div>
+          </div>
+
+          <!-- Email -->
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <label style="font-size:13px;font-weight:700;color:var(--text)">Email <span style="color:var(--negative)">*</span></label>
+            <div class="input-wrap"><input class="input-field" type="email" placeholder="you@example.com"></div>
+            <div style="font-size:11px;color:var(--text3)">We'll use this for account recovery</div>
+          </div>
+
+          <!-- Password -->
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <label style="font-size:13px;font-weight:700;color:var(--text)">Password <span style="color:var(--negative)">*</span></label>
+            <div class="input-wrap" style="position:relative">
+              <input class="input-field" type="password" value="mypassword123" placeholder="Min 8 characters">
+              <button class="btn btn--icon" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);width:32px;height:32px" aria-label="Show password">
+                <svg viewBox="0 0 24 24" class="icon icon--m" aria-hidden="true"><use href="../sprite.svg#ic_settings"></use></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Select -->
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <label style="font-size:13px;font-weight:700;color:var(--text)">Country</label>
+            <div class="input-wrap" style="position:relative">
+              <select class="input-field" style="appearance:none;cursor:pointer">
+                <option value="">Select country</option>
+                <option value="in" selected>India</option>
+                <option value="us">United States</option>
+                <option value="uk">United Kingdom</option>
+              </select>
+              <svg viewBox="0 0 24 24" class="icon icon--m" aria-hidden="true" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--text3)"><use href="../sprite.svg#ic_chevron_down"></use></svg>
+            </div>
+          </div>
+
+          <!-- Checkbox -->
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px">Checkboxes</div>
+            <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:13px;color:var(--text2);line-height:1.5">
+              <input type="checkbox" checked style="width:18px;height:18px;accent-color:var(--jio);flex-shrink:0;margin-top:1px">
+              I agree to the Terms of Service and Privacy Policy
+            </label>
+            <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:13px;color:var(--text2);line-height:1.5">
+              <input type="checkbox" style="width:18px;height:18px;accent-color:var(--jio);flex-shrink:0;margin-top:1px">
+              Send me promotional emails and game recommendations
+            </label>
+          </div>
+
+          <!-- Radio -->
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px">Radio group</div>
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13px;color:var(--text2)">
+              <input type="radio" name="plan" value="mobile" checked style="width:18px;height:18px;accent-color:var(--jio)">
+              Mobile Pass — ₹99/month
+            </label>
+            <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13px;color:var(--text2)">
+              <input type="radio" name="plan" value="all" style="width:18px;height:18px;accent-color:var(--jio)">
+              All Screen Pass — ₹199/month
+            </label>
+          </div>
+
+          <!-- Toggle in form context -->
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle)">
+            <div>
+              <div style="font-size:13px;font-weight:700;color:var(--text)">Notifications</div>
+              <div style="font-size:11px;color:var(--text3);margin-top:2px">Get alerts for new games and events</div>
+            </div>
+            <div class="switch">
+              <input type="checkbox" checked id="notif-toggle" class="switch__input">
+              <label for="notif-toggle" class="switch__track"><span class="switch__thumb"></span></label>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- VALIDATION STATES -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Validation states</h2>
+      <p class="ds-section-desc">Validate on blur. Surface errors inline below the input. Use colour + message — never icon-only.</p>
+      <div class="ds-demo ds-demo--dark">
+        <div class="ds-demo-grid--3">
+
+          <!-- Error -->
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <label style="font-size:13px;font-weight:700;color:var(--text)">Email <span style="color:var(--negative)">*</span></label>
+            <div class="input-wrap"><input class="input-field is-error" type="email" value="notanemail" placeholder="you@example.com"></div>
+            <div style="font-size:11px;color:var(--error-text)">Enter a valid email address</div>
+          </div>
+
+          <!-- Success -->
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <label style="font-size:13px;font-weight:700;color:var(--text)">Username</label>
+            <div class="input-wrap"><input class="input-field is-success" type="text" value="JeeteshGamer99" placeholder="username"></div>
+            <div style="font-size:11px;color:var(--success-text)">Username is available</div>
+          </div>
+
+          <!-- Warning -->
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <label style="font-size:13px;font-weight:700;color:var(--text)">Password</label>
+            <div class="input-wrap"><input class="input-field is-warning" type="password" value="pass123" placeholder="Min 8 characters"></div>
+            <div style="font-size:11px;color:var(--warning-text)">Weak — add numbers and symbols</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FIELD GROUPS -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Field groups</h2>
+      <p class="ds-section-desc">Group related fields under a section label separated by a subtle divider. Use a 2-column grid only when fields are short (first/last name, day/month).</p>
+      <div class="ds-demo ds-demo--dark">
+        <div style="max-width:480px;width:100%">
+          <div style="font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--text3);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border-subtle)">Personal details</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label style="font-size:13px;font-weight:700;color:var(--text)">First name</label>
+              <div class="input-wrap"><input class="input-field" type="text" placeholder="Jeet"></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label style="font-size:13px;font-weight:700;color:var(--text)">Last name</label>
+              <div class="input-wrap"><input class="input-field" type="text" placeholder="Shah"></div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <label style="font-size:13px;font-weight:700;color:var(--text)">Email <span style="color:var(--negative)">*</span></label>
+            <div class="input-wrap"><input class="input-field" type="email" placeholder="you@example.com"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMPLETE FORM — LOGIN -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Complete form — Login</h2>
+      <p class="ds-section-desc">The OTP login form used across mobile and web. OTP boxes are large, square, centred inputs — each accepts one digit.</p>
+      <div class="ds-demo ds-demo--dark">
+        <div style="max-width:380px;width:100%;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r7);padding:32px;display:flex;flex-direction:column;gap:20px">
+          <div>
+            <div style="font-size:22px;font-weight:900;color:var(--text);margin-bottom:4px">Sign in</div>
+            <div style="font-size:13px;color:var(--text3)">Enter your details to continue</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <label style="font-size:13px;font-weight:700;color:var(--text)">Mobile number</label>
+            <div class="input-wrap"><input class="input-field" type="tel" placeholder="+91 9876543210"></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <label style="font-size:13px;font-weight:700;color:var(--text)">OTP <span style="color:var(--negative)">*</span></label>
+            <div style="display:flex;gap:10px">
+              <input class="input-field" type="text" maxlength="1" style="width:50px;height:56px;border-radius:14px;font-size:24px;text-align:center;padding:0;flex-shrink:0" placeholder="—">
+              <input class="input-field" type="text" maxlength="1" style="width:50px;height:56px;border-radius:14px;font-size:24px;text-align:center;padding:0;flex-shrink:0" placeholder="—">
+              <input class="input-field" type="text" maxlength="1" style="width:50px;height:56px;border-radius:14px;font-size:24px;text-align:center;padding:0;flex-shrink:0" placeholder="—">
+              <input class="input-field" type="text" maxlength="1" style="width:50px;height:56px;border-radius:14px;font-size:24px;text-align:center;padding:0;flex-shrink:0" placeholder="—">
+            </div>
+            <div style="font-size:11px;color:var(--text3)">Sent to +91 9876543210 · <button style="background:none;border:none;color:var(--jio);font-size:11px;cursor:pointer;padding:0;font-weight:700">Resend</button></div>
+          </div>
+          <button class="btn btn--primary btn--lg btn--full">Continue</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ERROR SUMMARY -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Error summary</h2>
+      <p class="ds-section-desc">When a form has multiple errors on submit, list them all at the top of the form in a summary block. Use <code>role="alert"</code> so screen readers announce immediately.</p>
+      <div class="ds-demo ds-demo--dark">
+        <div style="background:rgba(255,71,87,.08);border:1.5px solid rgba(255,71,87,.3);border-radius:var(--r4);padding:14px 16px;max-width:480px;width:100%" role="alert">
+          <div style="font-size:13px;font-weight:700;color:var(--error-text);margin-bottom:8px">Fix 2 errors to continue</div>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:4px">
+            <li style="font-size:12px;color:var(--text2);display:flex;align-items:center;gap:6px"><span style="color:var(--error-text)">•</span> Email address is required</li>
+            <li style="font-size:12px;color:var(--text2);display:flex;align-items:center;gap:6px"><span style="color:var(--error-text)">•</span> Password must be at least 8 characters</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATE MATRIX -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">State matrix</h2>
+      <p class="ds-section-desc">All field types across all interactive states. Apply states via class on <code>.input-field</code>.</p>
+      <div class="ds-matrix-scroll">
+        <div class="ds-matrix-grid" style="grid-template-columns:120px repeat(7,180px)">
+          <div class="ds-matrix-header"></div>
+          <div class="ds-matrix-header">Default</div>
+          <div class="ds-matrix-header">Hover</div>
+          <div class="ds-matrix-header">Focus</div>
+          <div class="ds-matrix-header">Filled</div>
+          <div class="ds-matrix-header">Error</div>
+          <div class="ds-matrix-header">Disabled</div>
+          <div class="ds-matrix-header">Loading</div>
+
+          <!-- Text input row -->
+          <div class="ds-matrix-row-label">Text input</div>
+          <div class="ds-matrix-cell ds-matrix-cell--dark"><div class="input-wrap"><input class="input-field" type="text" placeholder="Placeholder"></div></div>
+          <div class="ds-matrix-cell ds-matrix-cell--dark"><div class="input-wrap"><input class="input-field is-hover" type="text" placeholder="Hover"></div></div>
+          <div class="ds-matrix-cell ds-matrix-cell--dark"><div class="input-wrap"><input class="input-field is-focused" type="text" placeholder="Focused"></div></div>
+          <div class="ds-matrix-cell ds-matrix-cell--dark"><div class="input-wrap"><input class="input-field" type="text" value="Filled text"></div></div>
+          <div class="ds-matrix-cell ds-matrix-cell--dark"><div class="input-wrap"><input class="input-field is-error" type="text" value="Bad value"></div></div>
+          <div class="ds-matrix-cell ds-matrix-cell--dark"><div class="input-wrap"><input class="input-field is-disabled" type="text" disabled placeholder="Disabled"></div></div>
+          <div class="ds-matrix-cell ds-matrix-cell--dark"><div class="input-wrap"><input class="input-field is-loading" type="text" placeholder="Loading…"></div></div>
+
+          <!-- Checkbox row -->
+          <div class="ds-matrix-row-label">Checkbox</div>
+          <div class="ds-matrix-cell ds-matrix-cell--center ds-matrix-cell--dark"><input type="checkbox" style="width:18px;height:18px;accent-color:var(--jio)"></div>
+          <div class="ds-matrix-cell ds-matrix-cell--center ds-matrix-cell--dark"><input type="checkbox" style="width:18px;height:18px;accent-color:var(--jio)"></div>
+          <div class="ds-matrix-cell ds-matrix-cell--center ds-matrix-cell--dark"><input type="checkbox" style="width:18px;height:18px;accent-color:var(--jio);outline:2px solid var(--jio);outline-offset:2px"></div>
+          <div class="ds-matrix-cell ds-matrix-cell--center ds-matrix-cell--dark"><input type="checkbox" checked style="width:18px;height:18px;accent-color:var(--jio)"></div>
+          <div class="ds-matrix-cell ds-matrix-cell--center ds-matrix-cell--dark"><input type="checkbox" style="width:18px;height:18px;accent-color:var(--negative)"></div>
+          <div class="ds-matrix-cell ds-matrix-cell--center ds-matrix-cell--dark"><input type="checkbox" disabled style="width:18px;height:18px;opacity:var(--state-disabled-opacity)"></div>
+          <div class="ds-matrix-cell ds-matrix-cell--center ds-matrix-cell--dark"><span style="font-size:11px;color:var(--text3)">—</span></div>
+
+          <!-- Radio row -->
+          <div class="ds-matrix-row-label">Radio</div>
+          <div class="ds-matrix-cell ds-matrix-cell--center ds-matrix-cell--dark"><input type="radio" style="width:18px;height:18px;accent-color:var(--jio)"></div>
+          <div class="ds-matrix-cell ds-matrix-cell--center ds-matrix-cell--dark"><input type="radio" style="width:18px;height:18px;accent-color:var(--jio)"></div>
+          <div class="ds-matrix-cell ds-matrix-cell--center ds-matrix-cell--dark"><input type="radio" style="width:18px;height:18px;accent-color:var(--jio);outline:2px solid var(--jio);outline-offset:2px"></div>
+          <div class="ds-matrix-cell ds-matrix-cell--center ds-matrix-cell--dark"><input type="radio" checked style="width:18px;height:18px;accent-color:var(--jio)"></div>
+          <div class="ds-matrix-cell ds-matrix-cell--center ds-matrix-cell--dark"><input type="radio" style="width:18px;height:18px;accent-color:var(--negative)"></div>
+          <div class="ds-matrix-cell ds-matrix-cell--center ds-matrix-cell--dark"><input type="radio" disabled style="width:18px;height:18px;opacity:var(--state-disabled-opacity)"></div>
+          <div class="ds-matrix-cell ds-matrix-cell--center ds-matrix-cell--dark"><span style="font-size:11px;color:var(--text3)">—</span></div>
+
+          <!-- Select row -->
+          <div class="ds-matrix-row-label">Select</div>
+          <div class="ds-matrix-cell ds-matrix-cell--dark"><div class="input-wrap" style="position:relative"><select class="input-field" style="appearance:none"><option>Country</option></select><svg viewBox="0 0 24 24" class="icon icon--s" aria-hidden="true" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--text3)"><use href="../sprite.svg#ic_chevron_down"></use></svg></div></div>
+          <div class="ds-matrix-cell ds-matrix-cell--dark"><div class="input-wrap" style="position:relative"><select class="input-field is-hover" style="appearance:none"><option>Country</option></select><svg viewBox="0 0 24 24" class="icon icon--s" aria-hidden="true" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--text3)"><use href="../sprite.svg#ic_chevron_down"></use></svg></div></div>
+          <div class="ds-matrix-cell ds-matrix-cell--dark"><div class="input-wrap" style="position:relative"><select class="input-field is-focused" style="appearance:none"><option>Country</option></select><svg viewBox="0 0 24 24" class="icon icon--s" aria-hidden="true" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--text3)"><use href="../sprite.svg#ic_chevron_down"></use></svg></div></div>
+          <div class="ds-matrix-cell ds-matrix-cell--dark"><div class="input-wrap" style="position:relative"><select class="input-field" style="appearance:none"><option selected>India</option></select><svg viewBox="0 0 24 24" class="icon icon--s" aria-hidden="true" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--text3)"><use href="../sprite.svg#ic_chevron_down"></use></svg></div></div>
+          <div class="ds-matrix-cell ds-matrix-cell--dark"><div class="input-wrap" style="position:relative"><select class="input-field is-error" style="appearance:none"><option>Country</option></select><svg viewBox="0 0 24 24" class="icon icon--s" aria-hidden="true" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--text3)"><use href="../sprite.svg#ic_chevron_down"></use></svg></div></div>
+          <div class="ds-matrix-cell ds-matrix-cell--dark"><div class="input-wrap" style="position:relative"><select class="input-field is-disabled" disabled style="appearance:none"><option>Disabled</option></select><svg viewBox="0 0 24 24" class="icon icon--s" aria-hidden="true" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--text3)"><use href="../sprite.svg#ic_chevron_down"></use></svg></div></div>
+          <div class="ds-matrix-cell ds-matrix-cell--center ds-matrix-cell--dark"><span style="font-size:11px;color:var(--text3)">—</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLATFORM BEHAVIOR -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Platform behavior</h2>
+      <div class="ds-platform-grid">
+        <div class="ds-platform-card">
+          <div class="ds-platform-card-title">Mobile</div>
+          <ul class="ds-platform-list">
+            <li>Full-width inputs — no max-width constraint within the form</li>
+            <li>Keyboard pushes content up — use <code>viewport-fit=cover</code> and <code>padding-bottom: env(safe-area-inset-bottom)</code></li>
+            <li>OTP inputs auto-advance focus on each keystroke</li>
+            <li>Submit CTA pinned to bottom above safe area</li>
+            <li>Use <code>inputmode="numeric"</code> on OTP fields to show numeric keyboard</li>
+          </ul>
+        </div>
+        <div class="ds-platform-card">
+          <div class="ds-platform-card-title">Web</div>
+          <ul class="ds-platform-list">
+            <li>Max-width 480px on form containers</li>
+            <li>Tab key navigates through fields in DOM order</li>
+            <li>Enter key submits if focus is inside the form</li>
+            <li>Validate on blur — never on every keystroke</li>
+            <li>Show error immediately after blur, not only on submit</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACCESSIBILITY -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Accessibility</h2>
+      <p class="ds-section-desc">Forms are high-risk for accessibility failures. Follow every rule below — no exceptions.</p>
+      <div class="ds-rules">
+        <div class="ds-rule ds-rule--pass">Every <code>&lt;input&gt;</code> has a visible <code>&lt;label&gt;</code> — never use <code>placeholder</code> as a label substitute</div>
+        <div class="ds-rule ds-rule--pass">Required fields are marked with <code>aria-required="true"</code> AND a visual <code>*</code> indicator with legend</div>
+        <div class="ds-rule ds-rule--pass">Error messages reference the field with <code>aria-describedby</code> and the message element has <code>role="alert"</code></div>
+        <div class="ds-rule ds-rule--pass">Focus order matches visual reading order (top-to-bottom, left-to-right)</div>
+        <div class="ds-rule ds-rule--pass">Touch targets ≥ 44×44px — use <code>var(--touch-min)</code></div>
+        <div class="ds-rule ds-rule--pass">Colour alone never conveys validation state — always pair with text message</div>
+        <div class="ds-rule ds-rule--fail">Never: <code>outline: none</code> without a custom focus ring replacement</div>
+        <div class="ds-rule ds-rule--fail">Never: <code>autocomplete="off"</code> on non-sensitive fields</div>
+      </div>
+    </section>
+
+    <!-- CONTENT GUIDANCE -->
+    <section class="component-section" id="content">
+      <h2 class="ds-section-title">Content guidance</h2>
+      <div class="component-content-grid">
+        <div>
+          <h3 class="ds-subsection-title">Labels</h3>
+          <p class="ds-body">Use sentence case. Be specific: "Mobile number" not "Phone". Never use technical keys: "user_id" or "emailAddress". Labels sit above the field — never inside it.</p>
+        </div>
+        <div>
+          <h3 class="ds-subsection-title">Placeholder text</h3>
+          <p class="ds-body">Placeholder is an example — not a label, not instructions. Use realistic examples: "+91 98765 43210", "you@example.com". Disappears on type, so never put required info here.</p>
+        </div>
+        <div>
+          <h3 class="ds-subsection-title">Helper text</h3>
+          <p class="ds-body">Short factual guidance below the field: "We'll use this for account recovery". Write in present tense. Disappears when an error or success message appears.</p>
+        </div>
+        <div>
+          <h3 class="ds-subsection-title">Error messages</h3>
+          <p class="ds-body">Be specific and actionable: "Password must be at least 8 characters" not "Invalid". State what went wrong and what to do. Never use "Error" alone.</p>
+        </div>
+        <div>
+          <h3 class="ds-subsection-title">Required markers</h3>
+          <p class="ds-body">Mark required fields with * (asterisk) in var(--negative). Add a legend above the form: "* Required fields". Do not mark optional fields — mark required ones only.</p>
+        </div>
+        <div>
+          <h3 class="ds-subsection-title">CTA copy</h3>
+          <p class="ds-body">Use specific action verbs that describe what happens next: "Continue", "Send OTP", "Verify", "Save changes". Avoid "Submit" or "OK".</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DO / DON'T -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Do / Don't</h2>
+      <div class="ds-do-dont-grid">
+        <div class="ds-do-card">
+          <div class="ds-do-body">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label style="font-size:13px;font-weight:700;color:var(--text)">Mobile number <span style="color:var(--negative)">*</span></label>
+              <div class="input-wrap"><input class="input-field" type="tel" placeholder="+91 98765 43210"></div>
+              <div style="font-size:11px;color:var(--text3)">Enter the number linked to your Jio account</div>
+            </div>
+          </div>
+          <div class="ds-do-footer">Visible label + required marker + helper text</div>
+        </div>
+        <div class="ds-dont-card">
+          <div class="ds-dont-body">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div class="input-wrap"><input class="input-field" type="tel" placeholder="Mobile number *"></div>
+            </div>
+          </div>
+          <div class="ds-dont-footer">Placeholder-as-label — disappears on type, no helper context</div>
+        </div>
+        <div class="ds-do-card">
+          <div class="ds-do-body">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label style="font-size:13px;font-weight:700;color:var(--text)">Password</label>
+              <div class="input-wrap"><input class="input-field is-error" type="password" value="abc"></div>
+              <div style="font-size:11px;color:var(--error-text)">Password must be at least 8 characters</div>
+            </div>
+          </div>
+          <div class="ds-do-footer">Error state with specific, actionable message</div>
+        </div>
+        <div class="ds-dont-card">
+          <div class="ds-dont-body">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label style="font-size:13px;font-weight:700;color:var(--text)">Password</label>
+              <div class="input-wrap"><input class="input-field is-error" type="password" value="abc"></div>
+              <div style="font-size:11px;color:var(--error-text)">Invalid</div>
+            </div>
+          </div>
+          <div class="ds-dont-footer">Vague error — user cannot know what to fix</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORM LAYOUT VARIANTS -->
+    <section class="ds-section">
+      <h2 class="ds-section-title" id="form-layout-variants">Form layout variants</h2>
+      <p class="ds-section-desc">Choose a layout based on platform and field density. Never use two-column on mobile — inputs become too narrow for comfortable touch.</p>
+      <div class="ds-platform-grid">
+        <div class="ds-platform-card">
+          <div class="ds-platform-card-title">Single column <span style="font-size:10px;font-weight:400;color:var(--text3);margin-left:6px">Mobile default</span></div>
+          <div style="display:flex;flex-direction:column;gap:12px;margin-top:12px">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label style="font-size:13px;font-weight:700;color:var(--text)">Mobile number <span style="color:var(--negative)">*</span></label>
+              <div class="input-wrap"><input class="input-field" type="tel" placeholder="+91 98765 43210"></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label style="font-size:13px;font-weight:700;color:var(--text)">Email address</label>
+              <div class="input-wrap"><input class="input-field" type="email" placeholder="you@example.com"></div>
+            </div>
+            <button class="btn btn--primary btn--lg btn--full">Continue</button>
+          </div>
+          <div style="font-size:11px;color:var(--text3);margin-top:10px">Full-width inputs stacked vertically. Used on all mobile forms. Max content width follows phone frame gutter.</div>
+        </div>
+        <div class="ds-platform-card">
+          <div class="ds-platform-card-title">Two column <span style="font-size:10px;font-weight:400;color:var(--text3);margin-left:6px">Web only</span></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label style="font-size:13px;font-weight:700;color:var(--text)">First name</label>
+              <div class="input-wrap"><input class="input-field" type="text" placeholder="Jeet"></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <label style="font-size:13px;font-weight:700;color:var(--text)">Last name</label>
+              <div class="input-wrap"><input class="input-field" type="text" placeholder="Shah"></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px;grid-column:1/-1">
+              <label style="font-size:13px;font-weight:700;color:var(--text)">Email <span style="color:var(--negative)">*</span></label>
+              <div class="input-wrap"><input class="input-field" type="email" placeholder="you@example.com"></div>
+            </div>
+          </div>
+          <div style="font-size:11px;color:var(--text3);margin-top:10px">Only for short paired fields (first/last name, day/month). Never split semantically unrelated fields into a row.</div>
+        </div>
+        <div class="ds-platform-card">
+          <div class="ds-platform-card-title">Inline <span style="font-size:10px;font-weight:400;color:var(--text3);margin-left:6px">Compact horizontal</span></div>
+          <div style="display:flex;gap:8px;align-items:flex-end;margin-top:12px">
+            <div style="display:flex;flex-direction:column;gap:6px;flex:1">
+              <label style="font-size:13px;font-weight:700;color:var(--text)">Promo code</label>
+              <div class="input-wrap"><input class="input-field" type="text" placeholder="JIOPASS99"></div>
+            </div>
+            <button class="btn btn--primary btn--hug" style="height:var(--ctrl-h,54px);white-space:nowrap;padding:0 18px;flex-shrink:0">Apply</button>
+          </div>
+          <div style="font-size:11px;color:var(--text3);margin-top:10px">Single input + adjacent action button. Use only when the action is tightly coupled (search, promo code). Never use for multi-field forms.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VALIDATION LIFECYCLE -->
+    <section class="ds-section">
+      <h2 class="ds-section-title" id="validation-lifecycle">Validation lifecycle</h2>
+      <p class="ds-section-desc">Fields progress through discrete states. Trigger validation on blur — never on every keystroke. Apply state classes to <code>.input-field</code>.</p>
+      <table class="ds-spec-table">
+        <thead><tr><th>State</th><th>Class</th><th>Border</th><th>Message</th><th>Trigger</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Idle</strong></td>
+            <td><code>—</code></td>
+            <td><code>var(--border)</code></td>
+            <td>Helper text if any</td>
+            <td>Page load / untouched</td>
+          </tr>
+          <tr>
+            <td><strong>Touched</strong></td>
+            <td><code>—</code></td>
+            <td><code>var(--border)</code></td>
+            <td>Helper text persists</td>
+            <td>User focuses the field</td>
+          </tr>
+          <tr>
+            <td><strong>Valid</strong></td>
+            <td><code>.is-success</code></td>
+            <td><code>var(--success-text)</code></td>
+            <td>Confirmation message</td>
+            <td>On blur, passes validation</td>
+          </tr>
+          <tr>
+            <td><strong>Error</strong></td>
+            <td><code>.is-error</code></td>
+            <td><code>var(--negative)</code></td>
+            <td>Specific error message</td>
+            <td>On blur, fails validation</td>
+          </tr>
+          <tr>
+            <td><strong>Submitting</strong></td>
+            <td><code>.is-loading</code></td>
+            <td><code>var(--border)</code></td>
+            <td>None — inputs disabled</td>
+            <td>Form submit in flight</td>
+          </tr>
+          <tr>
+            <td><strong>Success</strong></td>
+            <td><code>.is-success</code> on form</td>
+            <td>—</td>
+            <td>Success toast / redirect</td>
+            <td>Server confirms submission</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- RELATED TOKENS — FORMS -->
+    <section class="ds-section">
+      <h2 class="ds-section-title" id="form-related-tokens">Related tokens</h2>
+      <p class="ds-section-desc">Core tokens that control input field appearance. Never hard-code values — reference these variables everywhere.</p>
+      <table class="ds-spec-table">
+        <thead><tr><th>Token</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td><code>--surface-2</code></td><td>Input background (<code>--input-bg</code> alias)</td></tr>
+          <tr><td><code>--border</code></td><td>Default input border (<code>--input-border</code> alias)</td></tr>
+          <tr><td><code>--negative</code></td><td>Error border ring (<code>--error-border</code> alias)</td></tr>
+          <tr><td><code>--success-text</code></td><td>Success border ring (<code>--success-border</code> alias)</td></tr>
+          <tr><td><code>--r3</code></td><td>Standard input corner radius (<code>--input-radius</code> alias, 12px)</td></tr>
+          <tr><td><code>--r4</code></td><td>OTP box corner radius (14px)</td></tr>
+          <tr><td><code>--ctrl-h</code></td><td>Standard input height (54px)</td></tr>
+          <tr><td><code>--focus-shadow</code></td><td>Focus ring: <code>0 0 0 2px var(--jio)</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- TOKENS -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Tokens</h2>
+      <table class="ds-spec-table">
+        <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td><code>--surface-2</code></td><td>#161A24</td><td>Input background</td></tr>
+          <tr><td><code>--border</code></td><td>rgba(255,255,255,.1)</td><td>Default input border</td></tr>
+          <tr><td><code>--border-subtle</code></td><td>rgba(255,255,255,.08)</td><td>Divider lines in field groups</td></tr>
+          <tr><td><code>--jio</code></td><td>#00A859</td><td>Focus ring, accent, checkbox/radio</td></tr>
+          <tr><td><code>--focus-shadow</code></td><td>0 0 0 2px var(--jio)</td><td>Focused input ring</td></tr>
+          <tr><td><code>--negative</code></td><td>#FF4757</td><td>Required marker, error border</td></tr>
+          <tr><td><code>--error-text</code></td><td>#FF4757</td><td>Error message text</td></tr>
+          <tr><td><code>--success-text</code></td><td>#00A859</td><td>Success message text</td></tr>
+          <tr><td><code>--warning-text</code></td><td>#F59E0B</td><td>Warning message text</td></tr>
+          <tr><td><code>--text3</code></td><td>#6B7280</td><td>Helper/placeholder text</td></tr>
+          <tr><td><code>--r3</code></td><td>12px</td><td>Standard input border-radius</td></tr>
+          <tr><td><code>--r4</code></td><td>14px</td><td>OTP input border-radius</td></tr>
+          <tr><td><code>--ctrl-h</code></td><td>54px</td><td>Standard input height</td></tr>
+          <tr><td><code>--touch-min</code></td><td>44px</td><td>Minimum touch target</td></tr>
+          <tr><td><code>--state-disabled-opacity</code></td><td>0.32</td><td>Disabled field opacity</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- FIGMA NAMES -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Figma component names</h2>
+      <div class="ds-figma-names">
+        <div class="ds-figma-name-row"><span class="ds-figma-name-label">Input (default)</span><span class="ds-figma-name-value">Forms/Input/Default</span></div>
+        <div class="ds-figma-name-row"><span class="ds-figma-name-label">Input (error)</span><span class="ds-figma-name-value">Forms/Input/Error</span></div>
+        <div class="ds-figma-name-row"><span class="ds-figma-name-label">Input (success)</span><span class="ds-figma-name-value">Forms/Input/Success</span></div>
+        <div class="ds-figma-name-row"><span class="ds-figma-name-label">Input (disabled)</span><span class="ds-figma-name-value">Forms/Input/Disabled</span></div>
+        <div class="ds-figma-name-row"><span class="ds-figma-name-label">OTP box</span><span class="ds-figma-name-value">Forms/OTP/Box</span></div>
+        <div class="ds-figma-name-row"><span class="ds-figma-name-label">Field group</span><span class="ds-figma-name-value">Forms/FieldGroup</span></div>
+        <div class="ds-figma-name-row"><span class="ds-figma-name-label">Error summary</span><span class="ds-figma-name-value">Forms/ErrorSummary</span></div>
+        <div class="ds-figma-name-row"><span class="ds-figma-name-label">Select / dropdown</span><span class="ds-figma-name-value">Forms/Select</span></div>
+      </div>
+    </section>
+
+    <!-- CSS CLASSES -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">CSS classes</h2>
+      <div class="ds-code-block"><pre>.input-field         — base input styles (text, email, password, tel, select)
+.input-wrap          — wrapper that applies border + focus ring treatment
+.input-field.is-hover     — hover state (web only)
+.input-field.is-focused   — focused state — shows --focus-shadow ring
+.input-field.is-error     — error border + red ring
+.input-field.is-success   — success border + green ring
+.input-field.is-warning   — warning border + amber ring
+.input-field.is-disabled  — 0.32 opacity, pointer-events:none
+.input-field.is-loading   — loading state, typically a spinner in wrapper</pre></div>
+    </section>
+
+    <!-- RULES -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Rules</h2>
+      <div class="ds-rules">
+        <div class="ds-rule ds-rule--pass">Always wrap <code>.input-field</code> in <code>.input-wrap</code></div>
+        <div class="ds-rule ds-rule--pass">Label weight must be <code>700</code> — never lighter</div>
+        <div class="ds-rule ds-rule--pass">Required fields must have <code>aria-required="true"</code> on the <code>&lt;input&gt;</code></div>
+        <div class="ds-rule ds-rule--pass">Error/success messages use <code>font-size:11px</code> and a semantic role</div>
+        <div class="ds-rule ds-rule--pass">OTP inputs: <code>inputmode="numeric"</code>, <code>maxlength="1"</code>, <code>autocomplete="one-time-code"</code></div>
+        <div class="ds-rule ds-rule--fail">Never use <code>placeholder</code> as the only field label</div>
+        <div class="ds-rule ds-rule--fail">Never style <code>&lt;input&gt;</code> directly with raw hex colours — use tokens</div>
+        <div class="ds-rule ds-rule--fail">Never show error state before the user has interacted with the field</div>
+        <div class="ds-rule ds-rule--fail">Never use Inter, Outfit, or system fonts — JioType only</div>
+      </div>
+    </section>
+
+
+    <!-- CHANGELOG -->
+
+  </main>
+  <script src="../sprite-loader.js"></script>
+  <script src="../shell.js"></script>
+</body>
+</html>

@@ -1,0 +1,916 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lists — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    /* ── Hero list ────────────────────────────────────────────── */
+    .hero-list { background: var(--surface-1); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-subtle); width: 100%; max-width: 400px; }
+    .hero-list-row { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-bottom: 1px solid var(--border-subtle); }
+    .hero-list-row:last-child { border-bottom: none; }
+    .hero-list-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--surface-3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 16px; }
+    .hero-list-icon--red { background: rgba(255,71,87,.12); }
+    .hero-list-thumb { width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg,#1a0a2e,#3d1560); flex-shrink: 0; }
+    .hero-list-body { flex: 1; min-width: 0; }
+    .hero-list-title { font-size: 14px; font-weight: 500; color: var(--text); }
+    .hero-list-title--red { color: var(--negative); }
+    .hero-list-meta { font-size: 12px; color: var(--text3); margin-top: 2px; }
+    .hero-list-badge { font-size: 10px; font-weight: 700; color: var(--jio); letter-spacing: .4px; flex-shrink: 0; }
+    .hero-list-chevron { color: var(--text4, rgba(244,242,238,.22)); font-size: 18px; line-height: 1; flex-shrink: 0; }
+    .hero-mini-toggle { width: 40px; height: 24px; border-radius: 100px; background: var(--jio); position: relative; flex-shrink: 0; }
+    .hero-mini-toggle::after { content: ''; position: absolute; width: 18px; height: 18px; background: #fff; border-radius: 50%; top: 3px; left: 19px; }
+
+    /* ── Variant demos ────────────────────────────────────────── */
+    .var-list { background: var(--surface-1); border-radius: 14px; overflow: hidden; border: 1px solid var(--border-subtle); width: 100%; max-width: 420px; }
+    .var-row { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-bottom: 1px solid var(--border-subtle); }
+    .var-row:last-child { border-bottom: none; }
+    .var-icon { width: 36px; height: 36px; border-radius: 10px; background: var(--surface-3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 15px; }
+    .var-thumb { width: 48px; height: 48px; border-radius: 10px; flex-shrink: 0; }
+    .var-thumb-wide { width: 56px; height: 40px; border-radius: 8px; flex-shrink: 0; }
+    .var-body { flex: 1; min-width: 0; }
+    .var-label { font-size: 14px; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .var-label--red { color: var(--negative); }
+    .var-meta { font-size: 12px; color: var(--text3); margin-top: 2px; }
+    .var-chevron { color: var(--text4, rgba(244,242,238,.22)); font-size: 18px; flex-shrink: 0; }
+    .var-badge-jio { font-size: 10px; font-weight: 800; color: var(--jio); flex-shrink: 0; letter-spacing: .3px; }
+    .var-count { font-size: 11px; font-weight: 600; color: var(--text3); flex-shrink: 0; }
+    .var-toggle-on { width: 40px; height: 24px; border-radius: 100px; background: var(--jio); position: relative; flex-shrink: 0; }
+    .var-toggle-on::after { content: ''; position: absolute; width: 18px; height: 18px; background: #fff; border-radius: 50%; top: 3px; left: 19px; }
+    .var-toggle-off { width: 40px; height: 24px; border-radius: 100px; background: var(--surface-3); position: relative; flex-shrink: 0; }
+    .var-toggle-off::after { content: ''; position: absolute; width: 18px; height: 18px; background: rgba(244,242,238,.4); border-radius: 50%; top: 3px; left: 3px; }
+    .var-checkbox { width: 20px; height: 20px; border-radius: 6px; border: 1.5px solid var(--border); background: transparent; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .var-checkbox--checked { background: var(--jio); border-color: var(--jio); }
+    .var-action-btn { font-size: 12px; font-weight: 600; color: var(--negative); padding: 6px 14px; border-radius: 8px; background: rgba(255,71,87,.1); border: 1px solid rgba(255,71,87,.25); white-space: nowrap; flex-shrink: 0; cursor: pointer; }
+    .var-action-btn--neutral { color: var(--text2); background: var(--surface-3); border-color: var(--border-subtle); }
+
+    /* ── Variant group label ──────────────────────────────────── */
+    .variant-group { margin-bottom: 28px; }
+    .variant-group:last-child { margin-bottom: 0; }
+    .variant-group-label { font-size: 11px; font-weight: 700; color: var(--text3); letter-spacing: .8px; text-transform: uppercase; margin-bottom: 10px; }
+
+    /* ── Size table ───────────────────────────────────────────── */
+    .size-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .size-table th { text-align: left; padding: 10px 14px; font-size: 10px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: var(--text3); border-bottom: 1px solid var(--border-subtle); }
+    .size-table td { padding: 12px 14px; border-bottom: 1px solid var(--border-subtle); color: var(--text2); vertical-align: middle; }
+    .size-table tr:last-child td { border-bottom: none; }
+    .size-table td:first-child { color: var(--text); font-weight: 500; }
+    .size-pill { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 100px; font-size: 11px; font-weight: 600; }
+    .size-pill--mobile { background: rgba(0,168,89,.1); color: var(--jio); }
+    .size-pill--web    { background: rgba(99,179,237,.1); color: #63b3ed; }
+    .size-pill--tv     { background: rgba(246,173,85,.1); color: #f6ad55; }
+    .size-pill-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+
+    /* ── State demos ──────────────────────────────────────────── */
+    .state-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(188px, 1fr)); gap: 10px; }
+    .state-card { background: var(--surface-2); border-radius: 12px; overflow: hidden; border: 1px solid var(--border-subtle); }
+    .state-label-bar { font-size: 10px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: var(--text3); padding: 7px 12px 8px; border-top: 1px solid var(--border-subtle); }
+    .state-row { display: flex; align-items: center; gap: 12px; padding: 13px 14px; }
+    .state-row--hover { background: rgba(244,242,238,.04); }
+    .state-row--pressed { transform: scale(0.98); background: rgba(244,242,238,.06); }
+    .state-row--selected { background: rgba(0,168,89,.08); border-left: 2.5px solid var(--jio); }
+    .state-row--disabled { opacity: .4; }
+    .state-icon-s { width: 32px; height: 32px; border-radius: 8px; background: var(--surface-3); display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+    .state-icon-s--red { background: rgba(255,71,87,.1); }
+    .state-body { flex: 1; min-width: 0; }
+    .state-title { font-size: 13px; font-weight: 500; color: var(--text); }
+    .state-title--jio { color: var(--jio); }
+    .state-title--red { color: var(--negative); }
+    .state-meta-s { font-size: 11px; color: var(--text3); margin-top: 1px; }
+    .state-chevron { color: var(--text4, rgba(244,242,238,.2)); font-size: 15px; flex-shrink: 0; }
+
+    /* ── Skeleton shimmer ─────────────────────────────────────── */
+    .shimmer-row { display: flex; align-items: center; gap: 12px; padding: 13px 14px; }
+    .shimmer-box { border-radius: 8px; background: linear-gradient(90deg, var(--surface-3) 25%, rgba(244,242,238,.08) 50%, var(--surface-3) 75%); background-size: 200% 100%; animation: lists-shimmer 1.4s infinite; }
+    @keyframes lists-shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+    /* ── Token table ──────────────────────────────────────────── */
+    .token-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .token-table th { text-align: left; padding: 10px 14px; font-size: 10px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: var(--text3); border-bottom: 1px solid var(--border-subtle); }
+    .token-table td { padding: 11px 14px; border-bottom: 1px solid var(--border-subtle); color: var(--text2); vertical-align: middle; }
+    .token-table tr:last-child td { border-bottom: none; }
+    .token-swatch { width: 18px; height: 18px; border-radius: 4px; border: 1px solid var(--border-subtle); display: inline-block; vertical-align: middle; margin-right: 7px; }
+
+    /* ── Accessibility cards ──────────────────────────────────── */
+    .a11y-card { background: var(--surface-2); border-radius: 12px; padding: 18px 20px; border: 1px solid var(--border-subtle); margin-bottom: 10px; }
+    .a11y-card:last-child { margin-bottom: 0; }
+    .a11y-card-title { font-size: 11px; font-weight: 700; color: var(--text2); margin-bottom: 6px; letter-spacing: .5px; text-transform: uppercase; }
+    .a11y-card p { font-size: 13px; color: var(--text2); line-height: 1.6; margin: 0; }
+  </style>
+</head><body><main class="ds-content">
+
+<!-- ── 1. PAGE HEADER ─────────────────────────────────────────── -->
+<header class="component-page-header">
+  <nav class="component-breadcrumb">
+    <a href="../index.html">JioGames DLS</a>
+    <span class="component-breadcrumb-sep">›</span>
+    <a href="../index.html#components">Components</a>
+    <span class="component-breadcrumb-sep">›</span>
+    <span>Lists</span>
+  </nav>
+  <h1 class="component-page-title">Lists</h1>
+  <p class="component-page-def">Lists present sequential items — settings, menus, game libraries — with consistent row structure.</p>
+  <div style="display:flex;align-items:center;gap:12px;margin-top:16px;flex-wrap:wrap;">
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile">
+        <span class="component-platform-dot"></span>Mobile
+      </span>
+      <span class="component-platform component-platform--web">
+        <span class="component-platform-dot"></span>Web
+      </span>
+      <span class="component-platform component-platform--tv">
+        <span class="component-platform-dot"></span>TV
+      </span>
+    </div>
+    <span class="component-maturity component-maturity--stable">
+      <span class="component-maturity--dot"></span>Stable
+    </span>
+  </div>
+</header>
+
+<!-- ── 2. HERO ────────────────────────────────────────────────── -->
+<section class="component-hero component-hero--dark component-hero--grid" style="min-height:300px;position:relative;overflow:hidden;">
+  <div class="hero-glow" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);width:560px;height:260px;background:radial-gradient(ellipse,rgba(0,168,89,.16) 0%,transparent 70%);pointer-events:none;"></div>
+  <div class="component-hero-inner" style="display:flex;align-items:center;justify-content:center;padding:48px 24px;position:relative;z-index:1;">
+    <div class="hero-list">
+
+      <!-- Row 1: Navigation -->
+      <div class="hero-list-row">
+        <div class="hero-list-icon">🎮</div>
+        <div class="hero-list-body">
+          <div class="hero-list-title">Action Games</div>
+        </div>
+        <span class="hero-list-chevron">›</span>
+      </div>
+
+      <!-- Row 2: Detail with thumbnail + badge -->
+      <div class="hero-list-row">
+        <div class="hero-list-thumb"></div>
+        <div class="hero-list-body">
+          <div class="hero-list-title">Tomb Raider</div>
+          <div class="hero-list-meta">Action · 4.9★</div>
+        </div>
+        <span class="hero-list-badge">FREE</span>
+      </div>
+
+      <!-- Row 3: Toggle -->
+      <div class="hero-list-row">
+        <div class="hero-list-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_notification"></use></svg>
+        </div>
+        <div class="hero-list-body">
+          <div class="hero-list-title">Push Notifications</div>
+        </div>
+        <div class="hero-mini-toggle" role="switch" aria-checked="true" aria-label="Push Notifications"></div>
+      </div>
+
+      <!-- Row 4: Destructive -->
+      <div class="hero-list-row">
+        <div class="hero-list-icon hero-list-icon--red">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="color:#FF4757" aria-hidden="true"><use href="../sprite.svg#ic_trash"></use></svg>
+        </div>
+        <div class="hero-list-body">
+          <div class="hero-list-title hero-list-title--red">Clear Cache</div>
+          <div class="hero-list-meta">2.3 GB</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <p class="component-hero-caption">Lists · Navigation, Detail, Toggle, Destructive row types</p>
+</section>
+
+<!-- ── 3. INTRO ───────────────────────────────────────────────── -->
+<section class="component-intro ds-section">
+  <p style="font-family:var(--jio-font,'Outfit',sans-serif);font-size:15px;color:var(--text2);line-height:1.7;max-width:680px;margin:0 0 24px;">
+    Lists are the backbone of settings screens, game libraries, and contextual menus across JioGames. A consistent row structure — leading content, primary label, secondary text, trailing action — lets players scan and act without friction.
+  </p>
+  <ul class="component-summary-list">
+    <li><strong>Row anatomy is fixed.</strong> Leading content (icon/thumbnail), primary label, optional secondary, and a single trailing action.</li>
+    <li><strong>One trailing action per row.</strong> Don't mix chevron + toggle in the same row.</li>
+    <li><strong>Separator is optional.</strong> Use only when visual grouping is unclear without it.</li>
+    <li><strong>Platform-aware sizing.</strong> Row heights differ across Mobile, Web, and TV contexts.</li>
+  </ul>
+</section>
+
+<!-- ── 4. BEST PRACTICES ──────────────────────────────────────── -->
+<section class="ds-section">
+  <h2 class="ds-section-title">Best practices</h2>
+  <div class="component-best-practices">
+
+    <div class="component-bp-card component-bp-card--do">
+      <span class="component-bp-label component-bp-label--do">Do</span>
+      <ul class="component-bp-list">
+        <li>Keep primary labels to 1 line; truncate with ellipsis if needed.</li>
+        <li>Use secondary/meta text for context, not repetition of the label.</li>
+        <li>Group related rows with section headers, not visual dividers alone.</li>
+        <li>Use destructive red label for irreversible actions (Delete, Remove, Clear).</li>
+        <li>Maintain consistent leading content type within a list section.</li>
+        <li>Add skeleton rows during loading, not empty states.</li>
+      </ul>
+    </div>
+
+    <div class="component-bp-card component-bp-card--dont">
+      <span class="component-bp-label component-bp-label--dont">Don't</span>
+      <ul class="component-bp-list">
+        <li>Don't mix icon and thumbnail rows in the same list without visual reason.</li>
+        <li>Don't add more than one trailing action per row.</li>
+        <li>Don't use chevron if the row triggers an action, not navigation.</li>
+        <li>Don't truncate primary labels when secondary text is more important.</li>
+        <li>Don't use more than 2 lines for secondary text.</li>
+        <li>Don't add borders between every row in dense TV lists.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── 5. ANATOMY ─────────────────────────────────────────────── -->
+<section class="ds-section">
+  <h2 class="ds-section-title">Anatomy</h2>
+  <p class="ds-section-desc">Every list row is built from a fixed set of slots. Slots 1 and 3 are required; all others are optional and compose freely.</p>
+
+  <div class="ds-anatomy">
+    <div class="ds-anatomy-preview" style="padding:32px 24px;display:flex;align-items:center;justify-content:center;">
+      <div style="width:100%;max-width:420px;background:var(--surface-1);border-radius:14px;overflow:visible;border:1px solid var(--border-subtle);position:relative;">
+        <!-- Callout 1: Row container -->
+        <span class="ds-anatomy-callout-num" style="position:absolute;top:6px;right:-10px;">1</span>
+        <div style="display:flex;align-items:center;gap:14px;padding:18px 16px;position:relative;">
+          <!-- Callout 2: Leading -->
+          <div style="width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,#1a0a2e,#3d1560);flex-shrink:0;position:relative;">
+            <span class="ds-anatomy-callout-num" style="position:absolute;top:-10px;left:-10px;">2</span>
+          </div>
+          <div style="flex:1;min-width:0;">
+            <!-- Callout 3: Primary label -->
+            <div style="font-size:14px;font-weight:500;color:var(--text);position:relative;">
+              <span class="ds-anatomy-callout-num" style="position:absolute;top:-10px;left:-6px;">3</span>
+              Recommended for You
+            </div>
+            <!-- Callout 4: Secondary -->
+            <div style="font-size:12px;color:var(--text3);margin-top:3px;position:relative;">
+              <span class="ds-anatomy-callout-num" style="position:absolute;top:-8px;left:-6px;">4</span>
+              Adventure · ★4.6
+            </div>
+          </div>
+          <!-- Callout 5: Trailing -->
+          <span style="font-size:10px;font-weight:800;color:var(--jio);position:relative;">
+            <span class="ds-anatomy-callout-num" style="position:absolute;top:-10px;left:-20px;">5</span>
+            FREE
+          </span>
+        </div>
+        <!-- Callout 6: Separator -->
+        <div style="height:1px;background:var(--border-subtle);position:relative;">
+          <span class="ds-anatomy-callout-num" style="position:absolute;top:-9px;right:12px;">6</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;padding:18px 16px;">
+          <div style="width:44px;height:44px;border-radius:10px;background:var(--surface-3);flex-shrink:0;"></div>
+          <div style="flex:1;"><div style="font-size:14px;font-weight:500;color:var(--text);">Hidden Gems</div></div>
+          <span style="color:var(--text4,rgba(244,242,238,.22));font-size:18px;">›</span>
+        </div>
+      </div>
+    </div>
+    <ul class="ds-anatomy-list">
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-label">Row container <span class="ds-anatomy-required">Required</span></span>
+        <span class="ds-anatomy-desc">Full-width flex row. Min-height 56px mobile, 60px web, 80px TV. Receives all interaction states.</span>
+        <code class="ds-anatomy-token">min-height: 56px (mobile default)</code>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-label">Leading icon / thumbnail <span class="ds-anatomy-optional">Optional</span></span>
+        <span class="ds-anatomy-desc">36px icon container or 40–48px thumbnail. Always <code>flex-shrink: 0</code> to prevent squishing.</span>
+        <code class="ds-anatomy-token">width: 36–48px; border-radius: --r3</code>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-label">Primary label <span class="ds-anatomy-required">Required</span></span>
+        <span class="ds-anatomy-desc">Main text. One line with ellipsis overflow. font-size 14px mobile/web, 18px TV. font-weight 500.</span>
+        <code class="ds-anatomy-token">font-size: 14px; font-weight: 500; color: --text</code>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-label">Secondary / metadata text <span class="ds-anatomy-optional">Optional</span></span>
+        <span class="ds-anatomy-desc">Context text beneath the primary label. font-size 12px. color --text3. Maximum 2 lines.</span>
+        <code class="ds-anatomy-token">font-size: 12px; color: --text3</code>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-label">Trailing action <span class="ds-anatomy-optional">Optional</span></span>
+        <span class="ds-anatomy-desc">One of: chevron ›, toggle, badge, count, or a small button. Never two trailing elements in the same row.</span>
+        <code class="ds-anatomy-token">flex-shrink: 0; max one per row</code>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-label">Separator <span class="ds-anatomy-optional">Optional</span></span>
+        <span class="ds-anatomy-desc">1px hairline divider between rows. Use --border-subtle. Omit in dense TV lists or when section headers provide grouping.</span>
+        <code class="ds-anatomy-token">border-bottom: 1px solid --border-subtle</code>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── 6. VARIANTS ────────────────────────────────────────────── -->
+<section class="ds-section">
+  <h2 class="ds-section-title">Variants</h2>
+  <p class="ds-section-desc">Five row types cover every major use case across JioGames settings, libraries, and menus.</p>
+
+  <!-- Navigation list -->
+  <div class="variant-group">
+    <div class="variant-group-label">Navigation list</div>
+    <p class="ds-section-desc" style="margin-bottom:10px;font-size:13px;">Icon + label + chevron. For settings screens, menu items, and any row that navigates to a child screen.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div class="var-list">
+        <div class="var-row">
+          <div class="var-icon">🎮</div>
+          <div class="var-body"><div class="var-label">My Games</div></div>
+          <span class="var-chevron">›</span>
+        </div>
+        <div class="var-row">
+          <div class="var-icon">🏆</div>
+          <div class="var-body"><div class="var-label">Achievements</div></div>
+          <span class="var-chevron">›</span>
+        </div>
+        <div class="var-row">
+          <div class="var-icon">⚙️</div>
+          <div class="var-body"><div class="var-label">Account Settings</div></div>
+          <span class="var-chevron">›</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail list -->
+  <div class="variant-group">
+    <div class="variant-group-label">Detail list</div>
+    <p class="ds-section-desc" style="margin-bottom:10px;font-size:13px;">Label + metadata below + optional badge trailing. For game libraries, search results, and content feeds.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div class="var-list">
+        <div class="var-row">
+          <div class="var-thumb" style="background:linear-gradient(135deg,#1a0a2e,#3d1560);"></div>
+          <div class="var-body">
+            <div class="var-label">Tomb Raider</div>
+            <div class="var-meta">Action · ★4.9</div>
+          </div>
+          <span class="var-badge-jio">FREE</span>
+        </div>
+        <div class="var-row">
+          <div class="var-thumb" style="background:linear-gradient(135deg,#0a1a30,#1a4060);"></div>
+          <div class="var-body">
+            <div class="var-label">War Thunder</div>
+            <div class="var-meta">Strategy · ★4.7</div>
+          </div>
+          <span class="var-badge-jio">PASS</span>
+        </div>
+        <div class="var-row">
+          <div class="var-thumb" style="background:linear-gradient(135deg,#0f1a10,#1a4020);"></div>
+          <div class="var-body">
+            <div class="var-label">Yooka-Laylee</div>
+            <div class="var-meta">Platformer · ★4.5</div>
+          </div>
+          <span class="var-count" style="font-size:10px;font-weight:700;letter-spacing:.4px;color:var(--text3);">NEW</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkbox list -->
+  <div class="variant-group">
+    <div class="variant-group-label">Checkbox list</div>
+    <p class="ds-section-desc" style="margin-bottom:10px;font-size:13px;">Leading checkbox + label. For multi-select flows like genre preferences, filter sheets, and batch operations.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div class="var-list">
+        <div class="var-row">
+          <div class="var-checkbox var-checkbox--checked">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><polyline points="2,6 5,9 10,3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="var-body"><div class="var-label">Action</div></div>
+        </div>
+        <div class="var-row">
+          <div class="var-checkbox var-checkbox--checked">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true"><polyline points="2,6 5,9 10,3" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="var-body"><div class="var-label">Adventure</div></div>
+        </div>
+        <div class="var-row">
+          <div class="var-checkbox"></div>
+          <div class="var-body"><div class="var-label" style="color:var(--text2);">Racing</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action list -->
+  <div class="variant-group">
+    <div class="variant-group-label">Action list</div>
+    <p class="ds-section-desc" style="margin-bottom:10px;font-size:13px;">Label with trailing action button. For destructive operations, confirmable actions, and secondary in-place controls.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div class="var-list">
+        <div class="var-row">
+          <div class="var-body">
+            <div class="var-label">Clear Download Cache</div>
+            <div class="var-meta">Frees up storage space</div>
+          </div>
+          <button class="var-action-btn">Clear</button>
+        </div>
+        <div class="var-row">
+          <div class="var-body">
+            <div class="var-label">Sign Out</div>
+            <div class="var-meta">You'll need to sign in again</div>
+          </div>
+          <button class="var-action-btn">Sign out</button>
+        </div>
+        <div class="var-row">
+          <div class="var-body">
+            <div class="var-label">Restore Purchases</div>
+          </div>
+          <button class="var-action-btn var-action-btn--neutral">Restore</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Thumbnail list -->
+  <div class="variant-group">
+    <div class="variant-group-label">Thumbnail list</div>
+    <p class="ds-section-desc" style="margin-bottom:10px;font-size:13px;">Game art thumbnail + title + meta + trailing action. Richer than detail list; used in libraries and curated collections.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div class="var-list">
+        <div class="var-row">
+          <div class="var-thumb-wide" style="background:linear-gradient(135deg,#2a0a1e,#5d1570);"></div>
+          <div class="var-body">
+            <div class="var-label">Shadow of the Tomb Raider</div>
+            <div class="var-meta">3.2 GB · Action Adventure</div>
+          </div>
+          <span class="var-chevron">›</span>
+        </div>
+        <div class="var-row">
+          <div class="var-thumb-wide" style="background:linear-gradient(135deg,#0a1a30,#1a4060);"></div>
+          <div class="var-body">
+            <div class="var-label">War Thunder</div>
+            <div class="var-meta">1.8 GB · Strategy</div>
+          </div>
+          <span class="var-chevron">›</span>
+        </div>
+        <div class="var-row">
+          <div class="var-thumb-wide" style="background:linear-gradient(135deg,#0f2a10,#1a5020);"></div>
+          <div class="var-body">
+            <div class="var-label">Yooka-Laylee</div>
+            <div class="var-meta">892 MB · Platformer</div>
+          </div>
+          <span class="var-chevron">›</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ── 7. SIZES ────────────────────────────────────────────────── -->
+<section class="ds-section">
+  <h2 class="ds-section-title">Sizes</h2>
+  <p class="ds-section-desc">Row height adapts to context and platform. Standard is the default. Compact suits dense settings sheets. Large suits featured navigation or rows containing thumbnails.</p>
+  <div class="ds-demo ds-demo--dark" >
+    <table class="size-table">
+      <thead>
+        <tr>
+          <th>Size</th>
+          <th>
+            <span class="size-pill size-pill--mobile">
+              <span class="size-pill-dot"></span>Mobile
+            </span>
+          </th>
+          <th>
+            <span class="size-pill size-pill--web">
+              <span class="size-pill-dot"></span>Web
+            </span>
+          </th>
+          <th>
+            <span class="size-pill size-pill--tv">
+              <span class="size-pill-dot"></span>TV
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Compact</td>
+          <td>48px</td>
+          <td>52px</td>
+          <td>68px</td>
+        </tr>
+        <tr>
+          <td>Standard</td>
+          <td>56px</td>
+          <td>60px</td>
+          <td>80px</td>
+        </tr>
+        <tr>
+          <td>Large</td>
+          <td>72px</td>
+          <td>76px</td>
+          <td>96px</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ── 8. STATES ──────────────────────────────────────────────── -->
+<section class="ds-section">
+  <h2 class="ds-section-title">States</h2>
+  <p class="ds-section-desc">Eight states cover the full interaction model across touch, pointer, keyboard, and TV remote. All states apply at row level, not element level.</p>
+  <div class="ds-demo ds-demo--dark">
+    <div class="state-grid">
+
+      <!-- Default -->
+      <div class="state-card">
+        <div class="state-row">
+          <div class="state-icon-s">🎮</div>
+          <div class="state-body">
+            <div class="state-title">My Library</div>
+            <div class="state-meta-s">48 games</div>
+          </div>
+          <span class="state-chevron">›</span>
+        </div>
+        <div class="state-label-bar">Default</div>
+      </div>
+
+      <!-- Hover -->
+      <div class="state-card">
+        <div class="state-row state-row--hover">
+          <div class="state-icon-s">🎮</div>
+          <div class="state-body">
+            <div class="state-title">My Library</div>
+            <div class="state-meta-s">48 games</div>
+          </div>
+          <span class="state-chevron">›</span>
+        </div>
+        <div class="state-label-bar">Hover</div>
+      </div>
+
+      <!-- Pressed -->
+      <div class="state-card" style="overflow:visible;">
+        <div style="padding:4px 4px 0;">
+          <div class="state-row state-row--pressed" style="border-radius:8px;">
+            <div class="state-icon-s">🎮</div>
+            <div class="state-body">
+              <div class="state-title">My Library</div>
+              <div class="state-meta-s">48 games</div>
+            </div>
+            <span class="state-chevron">›</span>
+          </div>
+        </div>
+        <div class="state-label-bar" style="margin-top:4px;">Pressed</div>
+      </div>
+
+      <!-- Selected -->
+      <div class="state-card">
+        <div class="state-row state-row--selected">
+          <div class="state-icon-s">🎮</div>
+          <div class="state-body">
+            <div class="state-title state-title--jio">My Library</div>
+            <div class="state-meta-s">48 games</div>
+          </div>
+          <svg width="14" height="14" viewBox="0 0 12 12" fill="none" aria-hidden="true" style="flex-shrink:0;"><polyline points="1,6 4.5,9.5 11,2.5" stroke="#00A859" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="state-label-bar">Selected</div>
+      </div>
+
+      <!-- Disabled -->
+      <div class="state-card">
+        <div class="state-row state-row--disabled">
+          <div class="state-icon-s">🔒</div>
+          <div class="state-body">
+            <div class="state-title">Downloads</div>
+            <div class="state-meta-s">Sign in to enable</div>
+          </div>
+          <span class="state-chevron">›</span>
+        </div>
+        <div class="state-label-bar">Disabled</div>
+      </div>
+
+      <!-- Destructive -->
+      <div class="state-card">
+        <div class="state-row">
+          <div class="state-icon-s state-icon-s--red">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="color:#FF4757" aria-hidden="true"><use href="../sprite.svg#ic_trash"></use></svg>
+          </div>
+          <div class="state-body">
+            <div class="state-title state-title--red">Delete Account</div>
+            <div class="state-meta-s">Permanent, cannot undo</div>
+          </div>
+        </div>
+        <div class="state-label-bar">Destructive</div>
+      </div>
+
+      <!-- Skeleton — spans 2 columns -->
+      <div class="state-card" style="grid-column:span 2;">
+        <div class="shimmer-row">
+          <div class="shimmer-box" style="width:32px;height:32px;border-radius:8px;flex-shrink:0;"></div>
+          <div style="flex:1;min-width:0;">
+            <div class="shimmer-box" style="height:12px;border-radius:5px;width:52%;margin-bottom:7px;"></div>
+            <div class="shimmer-box" style="height:10px;border-radius:5px;width:36%;"></div>
+          </div>
+          <div class="shimmer-box" style="width:16px;height:16px;border-radius:4px;flex-shrink:0;"></div>
+        </div>
+        <div class="shimmer-row" style="padding-top:4px;padding-bottom:14px;">
+          <div class="shimmer-box" style="width:32px;height:32px;border-radius:8px;flex-shrink:0;"></div>
+          <div style="flex:1;min-width:0;">
+            <div class="shimmer-box" style="height:12px;border-radius:5px;width:68%;margin-bottom:7px;"></div>
+            <div class="shimmer-box" style="height:10px;border-radius:5px;width:44%;"></div>
+          </div>
+          <div class="shimmer-box" style="width:16px;height:16px;border-radius:4px;flex-shrink:0;"></div>
+        </div>
+        <div class="state-label-bar">Skeleton / Loading</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── 9. CONTENT GUIDANCE ─────────────────────────────────────── -->
+<section class="ds-section">
+  <h2 class="ds-section-title">Content guidance</h2>
+  <p class="ds-section-desc">Copy in list rows follows the same economy principle as the rest of JioGames — the row must communicate at a glance.</p>
+  <div class="component-content-grid">
+
+    <div class="component-content-card">
+      <div class="component-content-title">Primary labels</div>
+      <ul class="component-bp-list" style="margin-top:12px;">
+        <li>Maximum 1 line; overflow with ellipsis.</li>
+        <li>Sentence case. Noun or verb phrase.</li>
+        <li>Avoid articles — write "Account Settings" not "The Account Settings".</li>
+        <li>For destructive rows: use imperative verb ("Clear Cache", "Delete Account").</li>
+      </ul>
+    </div>
+
+    <div class="component-content-card">
+      <div class="component-content-title">Secondary / metadata text</div>
+      <ul class="component-bp-list" style="margin-top:12px;">
+        <li>Context, not repetition of the label.</li>
+        <li>Dates in relative format ("3 days ago", "Just now").</li>
+        <li>Ratings always include the star symbol: ★4.9 not "4.9 stars".</li>
+        <li>File sizes in human-readable form: "2.3 GB" not "2300 MB".</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── 10. PLATFORM ───────────────────────────────────────────── -->
+<section class="ds-section">
+  <h2 class="ds-section-title">Platform specifications</h2>
+  <div class="component-platform-grid">
+
+    <div class="component-platform-card component-platform-card--mobile">
+      <div class="component-platform-card-title">
+        <span class="component-platform component-platform--mobile" style="display:inline-flex;"><span class="component-platform-dot"></span>Mobile</span>
+      </div>
+      <ul class="component-bp-list" style="margin-top:12px;">
+        <li>Standard row height: <strong>56px</strong>.</li>
+        <li>Minimum touch target: 44px (WCAG 2.5.5).</li>
+        <li>Leading icon size: 36px.</li>
+        <li>Swipe-to-reveal for destructive row actions (delete, archive).</li>
+        <li>Haptic feedback on destructive confirm.</li>
+      </ul>
+    </div>
+
+    <div class="component-platform-card component-platform-card--web">
+      <div class="component-platform-card-title">
+        <span class="component-platform component-platform--web" style="display:inline-flex;"><span class="component-platform-dot"></span>Web</span>
+      </div>
+      <ul class="component-bp-list" style="margin-top:12px;">
+        <li>Standard row height: <strong>60px</strong>.</li>
+        <li><code class="ds-code">cursor: pointer</code> on interactive rows.</li>
+        <li>Hover state: subtle background shift (<code class="ds-code">rgba(244,242,238,.04)</code>).</li>
+        <li>Keyboard navigation with arrow keys across rows.</li>
+        <li>Focus ring on entire row, not just trailing element.</li>
+      </ul>
+    </div>
+
+    <div class="component-platform-card component-platform-card--tv">
+      <div class="component-platform-card-title">
+        <span class="component-platform component-platform--tv" style="display:inline-flex;"><span class="component-platform-dot"></span>TV</span>
+      </div>
+      <ul class="component-bp-list" style="margin-top:12px;">
+        <li>Standard row height: <strong>80px</strong>.</li>
+        <li>Focus ring on entire row via <code class="ds-code">--tv-focus-shadow</code>.</li>
+        <li>No hover state — TV has no pointer device.</li>
+        <li>D-pad navigation; enter/select to trigger row action.</li>
+        <li>Increase primary label to <strong>18px</strong> for 10-foot legibility.</li>
+        <li>Omit row separators in dense lists to reduce visual noise.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── 11. ACCESSIBILITY ───────────────────────────────────────── -->
+<section class="ds-section">
+  <h2 class="ds-section-title">Accessibility</h2>
+  <p class="ds-section-desc">Lists must be fully navigable by screen readers, keyboard, and switch access. Semantic markup is not optional.</p>
+  <div style="max-width:680px;">
+
+    <div class="a11y-card">
+      <div class="a11y-card-title">Roles &amp; Semantics</div>
+      <p>Use <code class="ds-code">role="list"</code> on the container and <code class="ds-code">role="listitem"</code> on each row. Alternatively, use semantic <code class="ds-code">&lt;ul&gt;/&lt;li&gt;</code> elements. Either approach is valid; don't use both together.</p>
+    </div>
+
+    <div class="a11y-card">
+      <div class="a11y-card-title">Interactive rows</div>
+      <p>Wrap the entire row in a <code class="ds-code">&lt;button&gt;</code> or <code class="ds-code">&lt;a&gt;</code>. Do not attach the tap handler only to the trailing chevron — this breaks keyboard and screen reader access.</p>
+    </div>
+
+    <div class="a11y-card">
+      <div class="a11y-card-title">Chevron rows</div>
+      <p>Add an <code class="ds-code">aria-label</code> on the row that describes the destination: <code class="ds-code">aria-label="Go to Account Settings"</code>. The chevron itself is <code class="ds-code">aria-hidden="true"</code>.</p>
+    </div>
+
+    <div class="a11y-card">
+      <div class="a11y-card-title">Toggle rows</div>
+      <p>The toggle element uses <code class="ds-code">role="switch"</code> and <code class="ds-code">aria-checked="true|false"</code>. The row label should be linked via <code class="ds-code">aria-labelledby</code> pointing at the primary label element.</p>
+    </div>
+
+    <div class="a11y-card">
+      <div class="a11y-card-title">Destructive rows</div>
+      <p>Include the destructive nature in the accessible label: <code class="ds-code">aria-label="Delete account — destructive, cannot be undone"</code>. This ensures screen reader users are warned before confirming.</p>
+    </div>
+
+    <div class="a11y-card">
+      <div class="a11y-card-title">Focus visibility</div>
+      <p>Visible focus ring must encircle the entire row, not just inner elements. Use <code class="ds-code">outline: 2px solid var(--jio); outline-offset: 2px</code> on the row. Never suppress <code class="ds-code">:focus-visible</code> without an alternative.</p>
+    </div>
+
+  </div>
+</section>
+
+<section id="platform-considerations" class="component-section">
+  <h2 class="ds-section-title">Platform considerations</h2>
+  <div class="component-platform-grid">
+    <div class="component-platform component-platform--mobile">
+      <div class="component-platform-label">Mobile</div>
+      <ul class="component-platform-list">
+        <li>Minimum touch target 48px height per row</li>
+        <li>Leading icon or avatar aligned to 20px from left edge</li>
+        <li>Swipe-to-reveal actions supported (delete, archive)</li>
+        <li>Dividers optional; use negative space to separate groups</li>
+      </ul>
+    </div>
+    <div class="component-platform component-platform--web">
+      <div class="component-platform-label">Web</div>
+      <ul class="component-platform-list">
+        <li>Row height can reduce to 40px minimum on pointer devices</li>
+        <li>Hover state required: subtle background lift on row</li>
+        <li>Keyboard: arrow keys navigate rows; Enter activates; Space toggles</li>
+        <li>Supports right-click context menu where applicable</li>
+      </ul>
+    </div>
+    <div class="component-platform component-platform--tv">
+      <div class="component-platform-label">TV</div>
+      <ul class="component-platform-list">
+        <li>Row height minimum 64px; all text minimum 16px</li>
+        <li>D-pad up/down navigates rows; right/left enters or exits list</li>
+        <li>Focused row shows full TV focus ring</li>
+        <li>Avoid lists longer than 8–10 items without sectioning or pagination</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="content" class="component-section">
+  <h2 class="ds-section-title">Content guidance</h2>
+  <div class="component-content-grid">
+    <div>
+      <h3 class="ds-subsection-title">Labels</h3>
+      <p class="ds-body">Keep primary labels to 1–3 words. Use sentence case. Avoid truncation — reduce label length before truncating.</p>
+    </div>
+    <div>
+      <h3 class="ds-subsection-title">Supporting text</h3>
+      <p class="ds-body">Supporting text max 1 line on mobile. Use it for status, metadata, or secondary context — not for repeating the label.</p>
+    </div>
+    <div>
+      <h3 class="ds-subsection-title">Section headers</h3>
+      <p class="ds-body">Group 5 or more items under section headers. Caps-lock short labels: "RECENTLY PLAYED", "SETTINGS". Keep under 3 words.</p>
+    </div>
+    <div>
+      <h3 class="ds-subsection-title">Empty state</h3>
+      <p class="ds-body">Always provide an empty state message when a list can be empty. Explain why it's empty and what action fills it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── 12. RELATED TOKENS ──────────────────────────────────────── -->
+<section class="ds-section">
+  <h2 class="ds-section-title">Related tokens</h2>
+  <p class="ds-section-desc">Design tokens used directly by the List component. Reference these in code instead of raw values.</p>
+  <div class="ds-demo ds-demo--dark" >
+    <table class="token-table">
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>Usage</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="ds-code">--surface-1</code></td>
+          <td>List container background</td>
+          <td><span class="token-swatch" style="background:var(--surface-1);"></span>Surface level 1</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--border-subtle</code></td>
+          <td>Row separator, container border</td>
+          <td><span class="token-swatch" style="background:var(--border-subtle);"></span>Hairline divider</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--text</code></td>
+          <td>Primary label color</td>
+          <td><span class="token-swatch" style="background:var(--text);"></span>#F4F2EE</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--text3</code></td>
+          <td>Secondary / metadata color</td>
+          <td><span class="token-swatch" style="background:rgba(244,242,238,.32);"></span>32% opacity text</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--r5</code></td>
+          <td>List container border-radius</td>
+          <td>16px</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--touch-min</code></td>
+          <td>Minimum touch target height</td>
+          <td>44px</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--jio</code></td>
+          <td>Selected state accent, badge color, toggle on</td>
+          <td><span class="token-swatch" style="background:#00A859;"></span>#00A859</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--negative</code></td>
+          <td>Destructive row label and icon tint</td>
+          <td><span class="token-swatch" style="background:#FF4757;"></span>#FF4757</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ── CODE EXAMPLES ──────────────────────────────────────────── -->
+<section class="component-section" id="code-examples">
+  <h2 class="ds-section-title">Code examples</h2>
+  <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
+  <div class="component-code-block">
+    <div class="component-code-label">List — basic rows</div>
+    <pre class="component-code-pre"><code>&lt;ul class="ds-list" role="list"&gt;
+  &lt;li class="ds-list-item"&gt;
+    &lt;svg class="icon icon--m ds-list-item__icon" aria-hidden="true"&gt;
+      &lt;use href="/sprite.svg#ic_gamepad"&gt;&lt;/use&gt;
+    &lt;/svg&gt;
+    &lt;div class="ds-list-item__body"&gt;
+      &lt;div class="ds-list-item__label"&gt;War Thunder&lt;/div&gt;
+      &lt;div class="ds-list-item__meta"&gt;Action · 2.1 GB&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;svg class="icon icon--m ds-list-item__trailing" aria-hidden="true"&gt;
+      &lt;use href="/sprite.svg#ic_chevron_right"&gt;&lt;/use&gt;
+    &lt;/svg&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  </div>
+  <div class="component-code-block">
+    <div class="component-code-label">List — with section header</div>
+    <pre class="component-code-pre"><code>&lt;div class="ds-list-group"&gt;
+  &lt;div class="ds-list-group-header"&gt;RECENTLY PLAYED&lt;/div&gt;
+  &lt;ul class="ds-list" role="list"&gt;
+    &lt;li class="ds-list-item"&gt;...&lt;/li&gt;
+    &lt;li class="ds-list-item"&gt;...&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+</section>
+
+<!-- ── 13. CHANGELOG ──────────────────────────────────────────── -->
+<section class="ds-section">
+  <h2 class="ds-section-title">Changelog</h2>
+  <div class="component-changelog">
+
+    <div class="component-changelog-entry">
+      <span class="component-changelog-version">v2.2</span>
+      <span class="component-changelog-date">May 2025</span>
+      <span class="component-changelog-desc">Skeleton loading rows added; swipe-to-reveal spec for destructive mobile rows.</span>
+    </div>
+
+    <div class="component-changelog-entry">
+      <span class="component-changelog-version">v2.0</span>
+      <span class="component-changelog-date">Jan 2025</span>
+      <span class="component-changelog-desc">Thumbnail list variant; TV row heights formalised; accessibility section expanded.</span>
+    </div>
+
+    <div class="component-changelog-entry">
+      <span class="component-changelog-version">v1.0</span>
+      <span class="component-changelog-date">Sep 2024</span>
+      <span class="component-changelog-desc">Initial release — navigation, detail, checkbox, and action list variants.</span>
+    </div>
+
+  </div>
+</section>
+
+</main><script src="../sprite-loader.js"></script><script src="../shell.js"></script></body></html>

@@ -1,0 +1,505 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collapsible — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    .collapsible {}
+    .collapsible-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      color: var(--jio);
+      font-family: var(--jio-font);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 4px 0;
+    }
+    .collapsible-trigger:focus-visible { outline: 2px solid var(--jio); outline-offset: 3px; border-radius: var(--r2); }
+    .collapsible-icon { transition: transform var(--dur-fast) var(--ease-out); color: var(--jio); }
+    .collapsible-trigger[aria-expanded="true"] .collapsible-icon { transform: rotate(180deg); }
+    .collapsible-content { overflow: hidden; }
+    .collapsible-content[hidden] { display: none; }
+
+    /* Outlined button trigger variant */
+    .collapsible-trigger--btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text2);
+      font-family: var(--jio-font);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 8px 14px;
+      border-radius: var(--r3);
+      transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
+    }
+    .collapsible-trigger--btn:hover { background: var(--glass-1); color: var(--text); border-color: var(--border); }
+    .collapsible-trigger--btn:focus-visible { outline: 2px solid var(--jio); outline-offset: 2px; }
+
+    /* CSS-only animation variant */
+    .collapsible-content--animated {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows var(--dur-base, 200ms) var(--ease-out);
+    }
+    .collapsible-content--animated > * { overflow: hidden; }
+    .collapsible-trigger[aria-expanded="true"] + .collapsible-content--animated { grid-template-rows: 1fr; }
+
+    /* Game thumbnail grid demo */
+    .demo-game-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 12px; }
+    .demo-game-thumb { aspect-ratio: 3/4; border-radius: var(--r3); background: var(--surface-2); border: 1px solid var(--border-subtle); }
+  </style>
+</head><body><main class="ds-main">
+
+  <!-- PAGE HEADER -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Collapsible</span>
+    </nav>
+    <h1 class="component-page-title">Collapsible</h1>
+    <p class="component-page-def">A single show/hide container triggered by a button. Lighter than Accordion — use for one-off expandable content like "Show advanced settings" or "Show more games".</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+        <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+        <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+      </div>
+      <span class="component-maturity component-maturity--draft"><span class="component-maturity--dot"></span>Draft</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:300px;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="flex-direction:row; align-items:flex-start; gap:64px; flex-wrap:wrap; justify-content:center;">
+
+      <!-- Collapsed state -->
+      <div style="display:flex; flex-direction:column; gap:6px; align-items:flex-start;">
+        <button class="collapsible-trigger" aria-expanded="false" style="pointer-events:none;">
+          Show 12 more games
+          <svg class="collapsible-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" aria-hidden="true">
+            <use href="../sprite.svg#ic_chevron_down"></use>
+          </svg>
+        </button>
+        <span style="font-size:11px; color:var(--text3); margin-top:4px;">Collapsed</span>
+      </div>
+
+      <!-- Expanded state -->
+      <div style="display:flex; flex-direction:column; gap:6px; align-items:flex-start; max-width:280px;">
+        <button class="collapsible-trigger" aria-expanded="true" style="pointer-events:none;">
+          Hide games
+          <svg class="collapsible-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" aria-hidden="true" style="transform:rotate(180deg);">
+            <use href="../sprite.svg#ic_chevron_down"></use>
+          </svg>
+        </button>
+        <div class="demo-game-grid">
+          <div class="demo-game-thumb" style="background:linear-gradient(135deg,#1a2a1a,#0d2010);"></div>
+          <div class="demo-game-thumb" style="background:linear-gradient(135deg,#1a1a2a,#0d1020);"></div>
+          <div class="demo-game-thumb" style="background:linear-gradient(135deg,#2a1a1a,#201010);"></div>
+          <div class="demo-game-thumb" style="background:linear-gradient(135deg,#1a2a2a,#0d2020);"></div>
+          <div class="demo-game-thumb" style="background:linear-gradient(135deg,#2a2a1a,#202010);"></div>
+        </div>
+        <span style="font-size:11px; color:var(--text3); margin-top:4px;">Expanded</span>
+      </div>
+
+    </div>
+    <p class="component-hero-caption">Collapsible · text trigger, collapsed and expanded states</p>
+  </section>
+
+  <!-- INTRO -->
+  <section class="component-intro">
+    <p>Collapsible is a single-instance show/hide primitive — the simplest form of progressive disclosure. Unlike Accordion, it manages only one content region and has no shared group logic. Use it for secondary or overflow content where the label alone communicates enough context: "Show 12 more games", "Show advanced filters", "Read the full description".</p>
+    <ul class="component-summary-list">
+      <li><strong>Text trigger</strong> — a plain green inline button, inherits from its context. Most common use.</li>
+      <li><strong>Button trigger</strong> — outlined button style, for use in card surfaces or when the trigger needs more visual weight.</li>
+      <li><strong>Inline</strong> — no wrapper element; trigger sits directly in flow of text or a list row.</li>
+    </ul>
+  </section>
+
+  <!-- BEST PRACTICES -->
+  <section class="component-best-practices">
+    <div class="component-bp-card component-bp-card--do">
+      <span class="component-bp-label component-bp-label--do">Do</span>
+      <ul class="component-bp-list">
+        <li>Label the trigger for BOTH states — "Show 12 more games" collapses to "Hide games", not back to "Show more".</li>
+        <li>Include the count in the collapsed label when possible: "Show 12 more" not "Show more".</li>
+        <li>Use Collapsible for a single isolated expandable region. Use Accordion for a group.</li>
+        <li>Position the trigger immediately before or after its content — never separated by other elements.</li>
+        <li>Keep expanded content within the user's scrollable viewport where possible.</li>
+      </ul>
+    </div>
+    <div class="component-bp-card component-bp-card--dont">
+      <span class="component-bp-label component-bp-label--dont">Don't</span>
+      <ul class="component-bp-list">
+        <li>Label the trigger "Toggle" — this word is meaningless to most users.</li>
+        <li>Use "Show more / Show less" — "less" is vague. Write "Hide [noun]" instead.</li>
+        <li>Use Collapsible for navigation or interactive controls — only for content reveal.</li>
+        <li>Stack multiple Collapsibles — use an Accordion group instead for better structure.</li>
+        <li>Hide critical content behind a Collapsible — it must be optional / secondary.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <div class="ds-anatomy" style="margin-bottom:64px;">
+    <div class="ds-anatomy-preview">
+      <div class="ds-anatomy-component" style="position:relative; display:flex; flex-direction:column; gap:12px; align-items:flex-start;">
+        <div style="position:relative; display:inline-flex; align-items:center;">
+          <button class="collapsible-trigger" style="pointer-events:none;" aria-expanded="false">
+            Show 12 more games
+            <svg class="collapsible-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" aria-hidden="true">
+              <use href="../sprite.svg#ic_chevron_down"></use>
+            </svg>
+          </button>
+          <span class="ds-anatomy-callout-dot" style="position:absolute; top:-12px; left:20px;"><span class="ds-anatomy-callout-num">1</span></span>
+          <span class="ds-anatomy-callout-dot" style="position:absolute; top:-12px; right:0;"><span class="ds-anatomy-callout-num">2</span></span>
+        </div>
+        <div style="height:32px; background:var(--surface-2); border:1px dashed var(--border-subtle); border-radius:var(--r3); width:200px; display:flex; align-items:center; justify-content:center; position:relative;">
+          <span style="font-size:11px; color:var(--text3);">Content panel</span>
+          <span class="ds-anatomy-callout-dot" style="position:absolute; bottom:-12px; left:50%; transform:translateX(-50%);"><span class="ds-anatomy-callout-num">3</span></span>
+        </div>
+      </div>
+    </div>
+    <ol class="ds-anatomy-list">
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">1</span>
+        <div>
+          <div class="ds-anatomy-label">Trigger label <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">14px / weight 700 / <code class="ds-code">var(--jio)</code>. Must describe both the collapsed and expanded state. Count-in-label preferred.</div>
+          <code class="ds-anatomy-token ds-code">font-size:14px; font-weight:700; color:var(--jio)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">2</span>
+        <div>
+          <div class="ds-anatomy-label">Chevron icon <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">14px inline chevron. Rotates 180° when expanded. <code class="ds-code">aria-hidden="true"</code> — state communicated via <code class="ds-code">aria-expanded</code>.</div>
+          <code class="ds-anatomy-token ds-code">transition: transform var(--dur-fast)</code>
+        </div>
+      </li>
+      <li class="ds-anatomy-item">
+        <span class="ds-anatomy-callout-num">3</span>
+        <div>
+          <div class="ds-anatomy-label">Content panel <span class="ds-anatomy-required">Required</span></div>
+          <div class="ds-anatomy-desc">Hidden via <code class="ds-code">hidden</code> attr or CSS grid trick. Linked to trigger via <code class="ds-code">aria-controls</code> and matching <code class="ds-code">id</code>.</div>
+          <code class="ds-anatomy-token ds-code">id="panel-id" — matches aria-controls</code>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <!-- VARIANTS -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Three trigger styles for different surface contexts. Content panel structure is identical across all variants.</p>
+
+    <div class="ds-section-stack" style="gap:32px;">
+      <!-- Text trigger -->
+      <div>
+        <div class="ds-sub-label">Text trigger — default</div>
+        <div class="ds-demo ds-demo--dark">
+          <div class="collapsible">
+            <button class="collapsible-trigger" aria-expanded="false" aria-controls="demo-text">
+              Show 12 more games
+              <svg class="collapsible-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" aria-hidden="true">
+                <use href="../sprite.svg#ic_chevron_down"></use>
+              </svg>
+            </button>
+            <div class="collapsible-content" id="demo-text" hidden>
+              <div class="demo-game-grid" style="margin-top:12px;">
+                <div class="demo-game-thumb" style="background:linear-gradient(135deg,#1a2a1a,#0d2010);"></div>
+                <div class="demo-game-thumb" style="background:linear-gradient(135deg,#1a1a2a,#0d1020);"></div>
+                <div class="demo-game-thumb" style="background:linear-gradient(135deg,#2a1a1a,#201010);"></div>
+                <div class="demo-game-thumb" style="background:linear-gradient(135deg,#1a2a2a,#0d2020);"></div>
+                <div class="demo-game-thumb" style="background:linear-gradient(135deg,#2a2a1a,#202010);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Button trigger -->
+      <div>
+        <div class="ds-sub-label">Button trigger — outlined</div>
+        <div class="ds-demo ds-demo--dark">
+          <div class="collapsible">
+            <button class="collapsible-trigger--btn" aria-expanded="false" aria-controls="demo-btn">
+              Show advanced settings
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" aria-hidden="true">
+                <use href="../sprite.svg#ic_chevron_down"></use>
+              </svg>
+            </button>
+            <div class="collapsible-content" id="demo-btn" hidden>
+              <div style="margin-top:12px; padding:16px; background:var(--surface-1); border-radius:var(--r4); border:1px solid var(--border-subtle);">
+                <p style="font-size:13px; color:var(--text2); margin:0;">Advanced settings content appears here — resolution overrides, developer flags, cache controls.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inline -->
+      <div>
+        <div class="ds-sub-label">Inline — in flow of a list row</div>
+        <div class="ds-demo ds-demo--dark">
+          <div style="max-width:400px;">
+            <div style="padding:14px 0; border-bottom:1px solid var(--border-subtle);">
+              <p style="font-size:14px; color:var(--text); margin:0 0 4px;">Tomb Raider: Reloaded</p>
+              <p style="font-size:13px; color:var(--text2); margin:0;">Action adventure · 2.3 GB · <button class="collapsible-trigger" style="font-size:13px; display:inline-flex; vertical-align:middle; padding:0;" aria-expanded="false" aria-controls="demo-inline">More info <svg class="collapsible-icon" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" aria-hidden="true"><use href="../sprite.svg#ic_chevron_down"></use></svg></button></p>
+              <div class="collapsible-content" id="demo-inline" hidden style="margin-top:8px;">
+                <p style="font-size:13px; color:var(--text3); margin:0;">Last updated Jan 2026 · Rated 12+ · 4.8 ★ (12.4k ratings)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIZES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Collapsible has no independent size scale — the trigger inherits size from its surrounding context. Pair with the appropriate Button or text size for the surface.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-direction:column; gap:20px; align-items:flex-start;">
+        <div style="display:flex; align-items:center; gap:24px;">
+          <span style="font-size:11px; color:var(--text3); width:60px;">S context</span>
+          <button class="collapsible-trigger" style="font-size:12px; font-weight:600; pointer-events:none;">Show more <svg class="collapsible-icon" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" aria-hidden="true"><use href="../sprite.svg#ic_chevron_down"></use></svg></button>
+        </div>
+        <div style="display:flex; align-items:center; gap:24px;">
+          <span style="font-size:11px; color:var(--text3); width:60px;">M default</span>
+          <button class="collapsible-trigger" style="pointer-events:none;">Show more <svg class="collapsible-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" aria-hidden="true"><use href="../sprite.svg#ic_chevron_down"></use></svg></button>
+        </div>
+        <div style="display:flex; align-items:center; gap:24px;">
+          <span style="font-size:11px; color:var(--text3); width:60px;">L context</span>
+          <button class="collapsible-trigger" style="font-size:16px; pointer-events:none;">Show more <svg class="collapsible-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" aria-hidden="true"><use href="../sprite.svg#ic_chevron_down"></use></svg></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATES -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Only two functional states: collapsed and expanded. Focus ring appears on keyboard navigation.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:40px; align-items:flex-end;">
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:10px;">
+          <button class="collapsible-trigger" style="pointer-events:none;" aria-expanded="false">
+            Show 12 more games
+            <svg class="collapsible-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" aria-hidden="true">
+              <use href="../sprite.svg#ic_chevron_down"></use>
+            </svg>
+          </button>
+          <span style="font-size:11px; color:var(--text3);">Collapsed</span>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:10px;">
+          <button class="collapsible-trigger" style="pointer-events:none;" aria-expanded="true">
+            Hide games
+            <svg class="collapsible-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" aria-hidden="true" style="transform:rotate(180deg);">
+              <use href="../sprite.svg#ic_chevron_down"></use>
+            </svg>
+          </button>
+          <span style="font-size:11px; color:var(--text3);">Expanded</span>
+        </div>
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:10px;">
+          <button class="collapsible-trigger" style="pointer-events:none; outline:2px solid var(--jio); outline-offset:3px; border-radius:var(--r2);" aria-expanded="false">
+            Show 12 more games
+            <svg class="collapsible-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" aria-hidden="true">
+              <use href="../sprite.svg#ic_chevron_down"></use>
+            </svg>
+          </button>
+          <span style="font-size:11px; color:var(--text3);">Focus</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT GUIDANCE -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <p class="ds-section-desc">Label the trigger for both states. Never use "Toggle". Count-in-label is strongly preferred.</p>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Trigger labels</div>
+        <ul>
+          <li>Collapsed: "Show 12 more games" — includes count and noun.</li>
+          <li>Expanded: "Hide games" — verb + noun, not "Show less" or "Collapse".</li>
+          <li>Never use "Toggle" — meaningless without directional context.</li>
+          <li>If count is unavailable at render time, use "Show more [noun]" with the noun always present.</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Platform notes</div>
+        <ul>
+          <li>Mobile + Web: trigger and content in normal document flow — no special treatment.</li>
+          <li>TV: if the revealed content is large, prefer a bottom sheet or new screen. Expanding in-place on TV can scroll content off-screen with no clear recovery path.</li>
+          <li>Trigger minimum touch target on mobile: 44px height. Use <code class="ds-code">padding: 12px 0</code> if the text alone is too small.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Trigger sits inline or block depending on context — both are valid.</li>
+          <li>Min touch height 44px — add vertical padding to text triggers if needed.</li>
+          <li>Revealed content scrolls with the page — no inner scroll needed for most cases.</li>
+          <li>Animate expand via CSS grid trick — hardware-accelerated, no JS height calc.</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Keyboard: Tab to trigger, Enter / Space toggles, Tab into revealed content.</li>
+          <li>Focus-visible ring: 2px solid <code class="ds-code">var(--jio)</code>, offset 3px.</li>
+          <li>CSS grid animation works without JS height calculation — use <code class="ds-code">grid-template-rows: 0fr → 1fr</code>.</li>
+          <li>Announced to screen readers via <code class="ds-code">aria-expanded</code> on the trigger.</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>If expanded content exceeds viewport height, prefer a bottom sheet instead.</li>
+          <li>D-pad OK button triggers expand/collapse.</li>
+          <li>Ensure revealed content items are themselves D-pad navigable when focused.</li>
+          <li>Text trigger size should be at least 14px — increase to 16px in dense TV layouts.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <table class="ds-spec-table">
+      <thead><tr><th>Element</th><th>Role / attribute</th><th>Guidance</th></tr></thead>
+      <tbody>
+        <tr><td>Trigger</td><td><code class="ds-code">&lt;button&gt;</code> + <code class="ds-code">aria-expanded</code></td><td><code class="ds-code">aria-expanded="true/false"</code> reflects current state. Links panel via <code class="ds-code">aria-controls="panel-id"</code>.</td></tr>
+        <tr><td>Content panel</td><td><code class="ds-code">id</code> + <code class="ds-code">hidden</code></td><td>Matches <code class="ds-code">aria-controls</code> value. Use native <code class="ds-code">hidden</code> attr — screen readers skip it automatically.</td></tr>
+        <tr><td>Chevron icon</td><td><code class="ds-code">aria-hidden="true"</code></td><td>Decorative. State is communicated by <code class="ds-code">aria-expanded</code> — not icon direction.</td></tr>
+        <tr><td>Focus ring</td><td><code class="ds-code">:focus-visible</code></td><td>2px solid <code class="ds-code">var(--jio)</code> with 3px offset. Only shown on keyboard focus, not mouse click.</td></tr>
+        <tr><td>Label change</td><td>Dynamic text</td><td>When trigger label changes ("Show" → "Hide"), screen readers re-announce. Ensure label always describes the next action.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- RELATED TOKENS -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <table class="ds-spec-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td><code class="ds-code">--jio</code></td><td><code class="ds-code">#00A859</code></td><td>Trigger text color and focus ring color</td></tr>
+        <tr><td><code class="ds-code">--border-subtle</code></td><td><code class="ds-code">rgba(255,255,255,.08)</code></td><td>Button variant border color</td></tr>
+        <tr><td><code class="ds-code">--glass-1</code></td><td><code class="ds-code">rgba(255,255,255,.04)</code></td><td>Button variant hover background</td></tr>
+        <tr><td><code class="ds-code">--dur-fast</code></td><td><code class="ds-code">120ms</code></td><td>Chevron rotation transition</td></tr>
+        <tr><td><code class="ds-code">--dur-base</code></td><td><code class="ds-code">200ms</code></td><td>Content reveal animation duration</td></tr>
+        <tr><td><code class="ds-code">--r2</code></td><td><code class="ds-code">6px</code></td><td>Focus ring border-radius on text trigger</td></tr>
+        <tr><td><code class="ds-code">--r3</code></td><td><code class="ds-code">8px</code></td><td>Button trigger border-radius</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CODE EXAMPLES -->
+  <section class="ds-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Basic collapsible</div>
+      <pre class="component-code-pre"><code>&lt;div class="collapsible"&gt;
+  &lt;button class="collapsible-trigger"
+          aria-expanded="false"
+          aria-controls="more-games"&gt;
+    Show 12 more games
+    &lt;svg class="collapsible-icon" width="14" height="14" aria-hidden="true"&gt;
+      &lt;!-- chevron-down path --&gt;
+    &lt;/svg&gt;
+  &lt;/button&gt;
+  &lt;div class="collapsible-content" id="more-games" hidden&gt;
+    &lt;!-- revealed content --&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  document.querySelector('.collapsible-trigger').addEventListener('click', function() {
+    const expanded = this.getAttribute('aria-expanded') === 'true';
+    this.setAttribute('aria-expanded', !expanded);
+    document.getElementById('more-games').hidden = expanded;
+    this.childNodes[0].textContent = expanded ? 'Show 12 more games' : 'Hide games ';
+  });
+&lt;/script&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">CSS-only animation (no JS height calc)</div>
+      <pre class="component-code-pre"><code>&lt;!-- CSS grid trick: animates from 0 to natural height --&gt;
+&lt;style&gt;
+  .collapsible-content--animated {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 200ms var(--ease-out);
+  }
+  .collapsible-content--animated &gt; * { overflow: hidden; }
+
+  /* When trigger is expanded, sibling content opens */
+  .collapsible-trigger[aria-expanded="true"] + .collapsible-content--animated {
+    grid-template-rows: 1fr;
+  }
+&lt;/style&gt;
+
+&lt;div class="collapsible"&gt;
+  &lt;button class="collapsible-trigger" aria-expanded="false"&gt;Show more&lt;/button&gt;
+  &lt;div class="collapsible-content--animated"&gt;
+    &lt;div&gt;&lt;!-- inner wrapper required for grid trick --&gt;
+      Content here...
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">With count in label</div>
+      <pre class="component-code-pre"><code>&lt;!-- Fetch count from data, render into label before mount --&gt;
+&lt;button class="collapsible-trigger"
+        aria-expanded="false"
+        aria-controls="more-games"
+        data-count="12"&gt;
+  Show &lt;span class="collapsible-count"&gt;12&lt;/span&gt; more games
+  &lt;svg class="collapsible-icon" width="14" height="14" aria-hidden="true"&gt;...&lt;/svg&gt;
+&lt;/button&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- CHANGELOG -->
+  <section class="ds-section">
+    <h2 class="ds-section-title">Changelog</h2>
+    <div class="component-changelog">
+      <div class="component-changelog-entry">
+        <span class="component-changelog-version">v0.1</span>
+        <span class="component-changelog-date">Jun 2026</span>
+        <p class="component-changelog-desc">Initial draft. Text trigger, button trigger, and inline variants. CSS grid animation technique documented. Full accessibility and content guidance included.</p>
+      </div>
+    </div>
+  </section>
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

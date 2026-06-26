@@ -1,0 +1,420 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Label — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    .label { font-family: var(--jio-font); font-size: 13px; font-weight: 700; color: var(--text2); letter-spacing: .1px; display: block; margin-bottom: 6px; }
+    .label--required::after { content: ' *'; color: var(--negative); }
+    .label--optional::after { content: ' (optional)'; font-weight: 500; color: var(--text3); font-size: 11px; }
+    .label-hint { font-size: 12px; font-weight: 500; color: var(--text3); line-height: 1.5; display: block; margin-top: 4px; }
+    /* Size variants */
+    .label--s { font-size: 11px; }
+    .label--l { font-size: 15px; }
+    /* Error state */
+    .label--error { color: var(--negative); }
+    /* Disabled state */
+    .label--disabled { opacity: var(--state-disabled-opacity); }
+    /* Demo input styles — not part of Label component */
+    .demo-input { display: block; width: 100%; background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--r3); padding: 10px 14px; font-family: var(--jio-font); font-size: 14px; color: var(--text); outline: none; }
+    .demo-input--error { border-color: var(--negative); }
+    .demo-input::placeholder { color: var(--text3); }
+    .demo-field { max-width: 280px; }
+  </style>
+</head><body><main class="ds-content">
+
+  <!-- PAGE HEADER -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb">
+      <span>JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span>Label</span>
+    </nav>
+    <h1 class="component-page-title">Label</h1>
+    <p class="component-page-def">Semantic text element that associates a visible name with a form control. Required above every input field.</p>
+    <div style="display:flex; align-items:center; gap:8px; margin-top:16px; flex-wrap:wrap;">
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+        <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+        <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+      </div>
+      <span class="component-maturity component-maturity--draft"><span class="component-maturity--dot"></span>Draft</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:300px;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="flex-direction:row; flex-wrap:wrap; gap:32px; justify-content:center;">
+
+      <div class="demo-field" style="position:relative; z-index:1;">
+        <label class="label label--required" for="hero-email">Email address</label>
+        <input class="demo-input" id="hero-email" type="email" placeholder="you@example.com">
+      </div>
+
+      <div class="demo-field" style="position:relative; z-index:1;">
+        <label class="label label--optional" for="hero-username">Username</label>
+        <input class="demo-input" id="hero-username" type="text" placeholder="GamerTag_007">
+      </div>
+
+      <div class="demo-field" style="position:relative; z-index:1;">
+        <label class="label" for="hero-phone">Phone number</label>
+        <input class="demo-input" id="hero-phone" type="tel" placeholder="+91 98765 43210">
+        <span class="label-hint">Used for OTP verification only. Not shared publicly.</span>
+      </div>
+
+    </div>
+    <p class="component-hero-caption">Label variants · Required, Optional, With hint text</p>
+  </section>
+
+  <!-- INTRO -->
+  <section class="component-intro" id="intro">
+    <p>Labels are the visible text identifiers that sit above form fields. They tell the user what information belongs in each input. Every form field in JioGames — text inputs, selects, textareas, radio groups, checkbox groups — must have an associated label. Labels are never decorative; they are a functional accessibility requirement that connects the visual UI to assistive technology.</p>
+    <ul class="component-summary-list">
+      <li><strong>Required marker</strong> — red asterisk suffix signals that the field must be completed before submission</li>
+      <li><strong>Optional marker</strong> — grey "(optional)" suffix reduces friction by clarifying which fields can be skipped</li>
+      <li><strong>Hint text</strong> — a secondary line below the label for format guidance, privacy notes, or constraints</li>
+      <li><strong>Error state</strong> — label turns negative red when its associated field has a validation error</li>
+    </ul>
+  </section>
+
+  <!-- BEST PRACTICES -->
+  <section class="ds-section" id="best-practices">
+    <h2 class="ds-section-title">Best practices</h2>
+    <div class="component-best-practices">
+      <div class="component-bp-card component-bp-card--do">
+        <span class="component-bp-label component-bp-label--do">Do</span>
+        <ul class="component-bp-list">
+          <li>Always place the label above the input — never to the side or inside (placeholder-only)</li>
+          <li>Associate labels programmatically using <code class="ds-code">for</code>/<code class="ds-code">id</code> or a wrapping <code class="ds-code">&lt;label&gt;</code> element</li>
+          <li>Mark only truly required fields with an asterisk — if most fields are required, mark the optional ones instead</li>
+          <li>Use hint text for format guidance: "10-digit mobile number, no spaces"</li>
+          <li>Persist the label even when the field is focused — never hide it on focus</li>
+        </ul>
+      </div>
+      <div class="component-bp-card component-bp-card--dont">
+        <span class="component-bp-label component-bp-label--dont">Don't</span>
+        <ul class="component-bp-list">
+          <li>Use placeholder text as the sole label — placeholders disappear on input and are not reliably read by screen readers</li>
+          <li>Use floating/animated labels — they shift context during entry and confuse error recovery</li>
+          <li>Mark every single field as required — it creates noise and reduces trust in which fields are truly critical</li>
+          <li>Put error messages inside the label — use a separate error text element below the input</li>
+          <li>Truncate long labels with ellipsis — wrap to a second line instead</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <section class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <p class="ds-section-desc">A label consists of the label text, an optional required or optional marker, and an optional hint line below. All three are vertically stacked above the input.</p>
+    <div class="ds-anatomy">
+      <div class="ds-anatomy-preview">
+        <div class="ds-anatomy-component" style="position:relative; display:inline-flex; flex-direction:column; gap:4px; padding:12px 16px; min-width:200px;">
+          <span style="font-family:var(--jio-font); font-size:13px; font-weight:700; color:var(--text2); position:relative; display:inline-block;">
+            Mobile number<span style="color:var(--negative);"> *</span>
+            <span class="ds-anatomy-callout-dot" style="position:absolute; top:-20px; left:10px;"><span class="ds-anatomy-callout-num">1</span></span>
+            <span class="ds-anatomy-callout-dot" style="position:absolute; top:-20px; right:0;"><span class="ds-anatomy-callout-num">2</span></span>
+          </span>
+          <span style="font-size:12px; font-weight:500; color:var(--text3); position:relative;">
+            10-digit number, no spaces
+            <span class="ds-anatomy-callout-dot" style="position:absolute; top:-20px; left:30px;"><span class="ds-anatomy-callout-num">3</span></span>
+          </span>
+        </div>
+      </div>
+      <ol class="ds-anatomy-list">
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">1</span>
+          <div>
+            <div class="ds-anatomy-label">Label text <span class="ds-anatomy-required">Required</span></div>
+            <div class="ds-anatomy-desc">13px bold, color var(--text2). Sentence case. Describes what the field collects — not what to do with it ("Mobile number", not "Enter your mobile number").</div>
+            <code class="ds-anatomy-token ds-code">font-size:13px; font-weight:700; color:var(--text2)</code>
+          </div>
+        </li>
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">2</span>
+          <div>
+            <div class="ds-anatomy-label">Required / Optional marker <span class="ds-anatomy-optional">Conditional</span></div>
+            <div class="ds-anatomy-desc">Required: red " *" appended via CSS ::after. Optional: grey " (optional)" in 11px. Use one or the other — never both on the same label.</div>
+            <code class="ds-anatomy-token ds-code">.label--required::after { content: ' *'; color: var(--negative); }</code>
+          </div>
+        </li>
+        <li class="ds-anatomy-item">
+          <span class="ds-anatomy-callout-num">3</span>
+          <div>
+            <div class="ds-anatomy-label">Hint text <span class="ds-anatomy-optional">Optional</span></div>
+            <div class="ds-anatomy-desc">12px, var(--text3), 1.5 line-height. Sits between the label and the input. Used for format guidance or privacy notes. Not the same as error text.</div>
+            <code class="ds-anatomy-token ds-code">font-size:12px; color:var(--text3); margin-top:4px</code>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- VARIANTS -->
+  <section class="ds-section" id="variants">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Four label variants cover every form field context. Default is used when the field is implicitly required. Required and Optional are mutually exclusive markers.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:32px; align-items:flex-start; padding:8px 0;">
+
+        <div class="demo-field">
+          <label class="label" for="v-default">Display name</label>
+          <input class="demo-input" id="v-default" type="text" placeholder="Your name">
+          <span style="font-size:11px; color:var(--text3); margin-top:8px; display:block;">Default</span>
+        </div>
+
+        <div class="demo-field">
+          <label class="label label--required" for="v-required">Email address</label>
+          <input class="demo-input" id="v-required" type="email" placeholder="you@example.com">
+          <span style="font-size:11px; color:var(--text3); margin-top:8px; display:block;">Required</span>
+        </div>
+
+        <div class="demo-field">
+          <label class="label label--optional" for="v-optional">Referral code</label>
+          <input class="demo-input" id="v-optional" type="text" placeholder="JGREF12345">
+          <span style="font-size:11px; color:var(--text3); margin-top:8px; display:block;">Optional</span>
+        </div>
+
+        <div class="demo-field">
+          <label class="label" for="v-hint">Phone number</label>
+          <input class="demo-input" id="v-hint" type="tel" placeholder="+91 98765 43210">
+          <span class="label-hint">Used for OTP only. Not shared publicly.</span>
+          <span style="font-size:11px; color:var(--text3); margin-top:8px; display:block;">With hint</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SIZES -->
+  <section class="ds-section" id="sizes">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Three sizes scale the label to match the density of the surrounding form. M (13px) is the default for all standard forms. S (11px) is for compact inline forms. L (15px) is for prominent single-field surfaces like search or OTP entry.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:32px; align-items:flex-end; padding:8px 0;">
+
+        <div class="demo-field">
+          <label class="label label--s" for="sz-s">Game title</label>
+          <input class="demo-input" id="sz-s" type="text" placeholder="Search games…" style="font-size:13px; padding:8px 12px;">
+          <span style="font-size:11px; color:var(--text3); margin-top:8px; display:block;">S — 11px · Compact forms</span>
+        </div>
+
+        <div class="demo-field">
+          <label class="label" for="sz-m">Game title</label>
+          <input class="demo-input" id="sz-m" type="text" placeholder="Search games…">
+          <span style="font-size:11px; color:var(--text3); margin-top:8px; display:block;">M — 13px · Default</span>
+        </div>
+
+        <div class="demo-field">
+          <label class="label label--l" for="sz-l">Game title</label>
+          <input class="demo-input" id="sz-l" type="text" placeholder="Search games…" style="font-size:16px; padding:12px 16px;">
+          <span style="font-size:11px; color:var(--text3); margin-top:8px; display:block;">L — 15px · Prominent fields</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- STATES -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Labels have three states that respond to the state of their associated input. The label itself does not have a hover or focus state — those belong to the input.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:32px; align-items:flex-start; padding:8px 0;">
+
+        <div class="demo-field">
+          <label class="label" for="st-default">Username</label>
+          <input class="demo-input" id="st-default" type="text" placeholder="GamerTag_007">
+          <span style="font-size:11px; color:var(--text3); margin-top:8px; display:block;">Default</span>
+        </div>
+
+        <div class="demo-field">
+          <label class="label label--error" for="st-error">Email address</label>
+          <input class="demo-input demo-input--error" id="st-error" type="email" value="notanemail">
+          <span style="font-size:12px; color:var(--negative); margin-top:4px; display:block;">Enter a valid email address</span>
+          <span style="font-size:11px; color:var(--text3); margin-top:8px; display:block;">Error</span>
+        </div>
+
+        <div class="demo-field">
+          <label class="label label--disabled" for="st-disabled">Linked account</label>
+          <input class="demo-input" id="st-disabled" type="text" placeholder="No account linked" disabled style="opacity:0.35; cursor:not-allowed;">
+          <span style="font-size:11px; color:var(--text3); margin-top:8px; display:block;">Disabled</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="ds-section" id="content">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <div class="component-content-grid">
+      <div class="component-content-card">
+        <div class="component-content-title">Label text</div>
+        <ul>
+          <li>Use sentence case — "Date of birth" not "Date Of Birth"</li>
+          <li>Describe what the field collects — "Mobile number" not "Enter your mobile number"</li>
+          <li>Be specific — "Jio mobile number" not just "Number" when context matters</li>
+          <li>Keep labels under 4 words; use hint text for additional context</li>
+          <li>Never end a label with a colon — the visual stacking already implies the relationship</li>
+        </ul>
+      </div>
+      <div class="component-content-card">
+        <div class="component-content-title">Hint text</div>
+        <ul>
+          <li>Use for format guidance: "DD/MM/YYYY", "10-digit number, no spaces"</li>
+          <li>Use for privacy assurance: "Your number is never shared with third parties"</li>
+          <li>Use for constraints: "Minimum 8 characters, at least one number"</li>
+          <li>Do not duplicate what the placeholder says — they should add different information</li>
+          <li>Hint text is not error text — keep them in separate elements with distinct styles</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <div class="component-platform-grid">
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>Always above the input — never floating or inside</li>
+          <li>Use M (13px) size for all standard form fields</li>
+          <li>Ensure the label tap area is at least 44px tall including hint text</li>
+          <li>When the keyboard appears, label must remain visible above the scrolled input</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Always above the input — inline labels (to the left) are permitted only in dense data-entry tables</li>
+          <li>Clicking the label must focus its associated input — always use <code class="ds-code">for</code>/<code class="ds-code">id</code></li>
+          <li>Use M or L sizes; S only in toolbar or compact filter panels</li>
+          <li>Error state label color must maintain 4.5:1 contrast against the background</li>
+        </ul>
+      </div>
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>Labels are used on TV in settings and account screens</li>
+          <li>Use L (15px) minimum — 13px is too small at 3-metre viewing distance</li>
+          <li>Increase label-to-input gap to 10px at TV scale</li>
+          <li>Required markers (*) must be accompanied by a legend visible on the same screen</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Requirement</th><th>Implementation</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Label association</td>
+          <td><code class="ds-code">&lt;label for="inputId"&gt;</code></td>
+          <td>The <code class="ds-code">for</code> attribute must match the input's <code class="ds-code">id</code> exactly. Alternatively, wrap the input inside the <code class="ds-code">&lt;label&gt;</code> element.</td>
+        </tr>
+        <tr>
+          <td>Required fields</td>
+          <td><code class="ds-code">aria-required="true"</code> on the input</td>
+          <td>The visual asterisk is CSS-only and invisible to screen readers. Always add <code class="ds-code">aria-required="true"</code> to the input itself.</td>
+        </tr>
+        <tr>
+          <td>Hint text</td>
+          <td><code class="ds-code">aria-describedby</code> on the input</td>
+          <td>Set <code class="ds-code">aria-describedby="hintId"</code> on the input pointing to the hint element's <code class="ds-code">id</code>. Screen readers announce hint text after the label.</td>
+        </tr>
+        <tr>
+          <td>Error text</td>
+          <td><code class="ds-code">aria-describedby</code> + <code class="ds-code">aria-invalid="true"</code></td>
+          <td>Set <code class="ds-code">aria-invalid="true"</code> on the input and point <code class="ds-code">aria-describedby</code> to the error message element.</td>
+        </tr>
+        <tr>
+          <td>Placeholder as label</td>
+          <td>Never</td>
+          <td>Placeholders are not labels. They disappear on input, are not reliably announced by screen readers, and fail WCAG 1.3.1 at contrast ratios below 4.5:1.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- RELATED TOKENS -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <table class="ds-spec-table">
+      <thead>
+        <tr><th>Token</th><th>Value</th><th>Usage</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code class="ds-code">--text2</code></td><td><code class="ds-code">rgba(244,242,238,.55)</code></td><td>Default label text color</td></tr>
+        <tr><td><code class="ds-code">--text3</code></td><td><code class="ds-code">rgba(244,242,238,.32)</code></td><td>Hint text color and "(optional)" marker</td></tr>
+        <tr><td><code class="ds-code">--negative</code></td><td><code class="ds-code">#FF4757</code></td><td>Required asterisk color and error state label color</td></tr>
+        <tr><td><code class="ds-code">--jio-font</code></td><td><code class="ds-code">'Outfit', sans-serif</code></td><td>Label font family</td></tr>
+        <tr><td><code class="ds-code">--state-disabled-opacity</code></td><td><code class="ds-code">0.35</code></td><td>Disabled label opacity</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CODE EXAMPLES -->
+  <section class="ds-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Basic label + input</div>
+      <pre class="component-code-pre"><code>&lt;div class="form-field"&gt;
+  &lt;label class="label" for="displayName"&gt;Display name&lt;/label&gt;
+  &lt;input type="text" id="displayName" placeholder="Your in-game name"&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Required field with aria-required</div>
+      <pre class="component-code-pre"><code>&lt;div class="form-field"&gt;
+  &lt;label class="label label--required" for="email"&gt;Email address&lt;/label&gt;
+  &lt;input
+    type="email"
+    id="email"
+    aria-required="true"
+    placeholder="you@example.com"
+  &gt;
+&lt;/div&gt;
+
+&lt;!-- Note: the asterisk is CSS-only (.label--required::after).
+     aria-required="true" on the input communicates the requirement
+     to screen readers independently of visual styling. --&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Label with hint text and aria-describedby</div>
+      <pre class="component-code-pre"><code>&lt;div class="form-field"&gt;
+  &lt;label class="label label--required" for="phone"&gt;Phone number&lt;/label&gt;
+  &lt;span class="label-hint" id="phone-hint"&gt;
+    10-digit Jio number — used for OTP only
+  &lt;/span&gt;
+  &lt;input
+    type="tel"
+    id="phone"
+    aria-required="true"
+    aria-describedby="phone-hint"
+    placeholder="+91 98765 43210"
+  &gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+  </section>
+
+  <!-- CHANGELOG -->
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

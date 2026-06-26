@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motion — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    /* ── Easing cards ── */
+    .easing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-2);
+    }
+    .easing-card {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r5);
+      padding: var(--space-3);
+    }
+    .easing-token-name {
+      font-family: monospace;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--jio);
+      margin-bottom: var(--space-0-5);
+    }
+    .easing-value {
+      font-family: monospace;
+      font-size: 10px;
+      color: var(--text3);
+      margin-bottom: var(--space-1-5);
+      line-height: 1.5;
+    }
+    .easing-desc {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.6;
+      margin-bottom: var(--space-2);
+    }
+    .easing-demo-track {
+      height: 48px;
+      background: var(--surface-2);
+      border-radius: var(--r2);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .easing-demo-box {
+      position: absolute;
+      left: var(--space-1);
+      top: 50%;
+      transform: translateY(-50%);
+      width: 32px;
+      height: 32px;
+      background: var(--jio);
+      border-radius: var(--r2);
+      transition: transform 200ms;
+    }
+    /* Each box uses its own timing function inline via style attribute */
+    .easing-demo-track:hover .easing-demo-box {
+      transform: translateY(-50%) translateX(8px);
+    }
+    .easing-hint {
+      font-size: 10px;
+      color: var(--text4);
+      margin-top: var(--space-0-5);
+      font-weight: 500;
+    }
+
+    /* ── Duration table ── */
+    .dur-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .dur-table th {
+      text-align: left;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--text3);
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--surface-1);
+    }
+    .dur-table td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--divider);
+      color: var(--text2);
+      font-weight: 500;
+      vertical-align: middle;
+    }
+    .dur-table tr:last-child td { border-bottom: none; }
+    .dur-table .t { font-family: monospace; font-size: 12px; color: #a8e6c5; }
+    .dur-table .v { font-family: monospace; font-size: 12px; color: var(--text3); }
+    .dur-table tbody tr:hover { background: var(--glass-1); }
+
+    /* ── Duration bar chart ── */
+    .dur-bars {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      padding: var(--space-3);
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r5);
+    }
+    .dur-bar-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1-5);
+    }
+    .dur-bar-label {
+      font-family: monospace;
+      font-size: 11px;
+      color: var(--text3);
+      width: 140px;
+      flex-shrink: 0;
+    }
+    .dur-bar-track {
+      flex: 1;
+      height: 8px;
+      background: var(--surface-2);
+      border-radius: var(--pill);
+      overflow: hidden;
+    }
+    .dur-bar-fill {
+      height: 100%;
+      background: var(--jio);
+      border-radius: var(--pill);
+      opacity: .7;
+    }
+    .dur-bar-ms {
+      font-family: monospace;
+      font-size: 11px;
+      color: var(--text3);
+      width: 48px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* ── Reduced motion code block ── */
+    .rm-note {
+      background: var(--surface-2);
+      border-left: 3px solid var(--amber);
+      border-radius: 0 var(--r3) var(--r3) 0;
+      padding: var(--space-2) var(--space-3);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.6;
+      margin-top: var(--space-2);
+    }
+
+    /* ── TV section ── */
+    .tv-rules-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2);
+    }
+    .tv-rule-card {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      padding: var(--space-2) var(--space-3);
+    }
+    .tv-rule-heading {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: var(--space-1);
+    }
+    .tv-rule-body {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.55;
+    }
+    .tv-rule-body code {
+      font-family: monospace;
+      font-size: 11px;
+      color: #a8e6c5;
+      background: var(--surface-3);
+      padding: 1px 5px;
+      border-radius: var(--r1);
+    }
+    .tv-rule-card--forbidden {
+      border-color: rgba(255,71,87,.2);
+      background: rgba(255,71,87,.04);
+    }
+    .tv-rule-card--forbidden .tv-rule-heading {
+      color: var(--negative);
+    }
+  </style>
+</head>
+<body>
+  <main class="ds-main">
+
+    <header class="component-page-header">
+      <nav class="component-breadcrumb" aria-label="Breadcrumb">
+        <a href="../" class="component-breadcrumb-link">JioGames DLS</a>
+        <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+        <span class="component-breadcrumb-current">Motion</span>
+      </nav>
+      <h1 class="component-page-title">Motion</h1>
+      <p class="component-page-def">Easing curves, duration tokens, and animation principles for JioGames across Mobile, Web, and TV.</p>
+      <div class="component-platforms">
+        <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+        <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+        <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+        <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <div class="component-hero component-hero--dark" style="padding:32px 40px;align-items:flex-start;gap:20px">
+      <div class="hero-glow"></div>
+      <div style="display:flex;gap:32px;flex-wrap:wrap;position:relative;z-index:1">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Easing</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:80px;height:3px;background:linear-gradient(90deg,var(--jio) 0%,var(--jio-bright) 100%);border-radius:2px"></div>
+              <div style="font-size:11px;color:var(--text2)">--ease-out</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:80px;height:3px;background:linear-gradient(90deg,var(--jio-bright) 0%,var(--jio) 100%);border-radius:2px"></div>
+              <div style="font-size:11px;color:var(--text2)">--ease-in</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:80px;height:3px;background:linear-gradient(90deg,var(--surface-3) 0%,var(--jio-bright) 50%,var(--surface-3) 100%);border-radius:2px"></div>
+              <div style="font-size:11px;color:var(--text2)">--ease-in-out</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:80px;height:3px;background:linear-gradient(90deg,var(--ultimate) 0%,var(--jio-bright) 60%,var(--surface-3) 100%);border-radius:2px"></div>
+              <div style="font-size:11px;color:var(--text2)">--spring</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Duration</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:20px;height:20px;border-radius:var(--r2);background:var(--jio);opacity:.9"></div>
+              <div style="font-size:11px;color:var(--text2)">--dur-instant · 80ms</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:30px;height:20px;border-radius:var(--r2);background:var(--jio);opacity:.75"></div>
+              <div style="font-size:11px;color:var(--text2)">--dur-fast · 120ms</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:50px;height:20px;border-radius:var(--r2);background:var(--jio);opacity:.6"></div>
+              <div style="font-size:11px;color:var(--text2)">--dur-base · 200ms</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:70px;height:20px;border-radius:var(--r2);background:var(--jio);opacity:.45"></div>
+              <div style="font-size:11px;color:var(--text2)">--dur-slow · 320ms</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="component-hero-caption">EASING CURVES · DURATION SCALE · REDUCED MOTION READY</p>
+    </div>
+
+    <!-- Section 1: Easing tokens -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Easing tokens</h2>
+      <p class="ds-section-desc">Five named easing curves cover every motion category. Hover each card to see the easing in action.</p>
+
+      <div class="easing-grid">
+
+        <!-- spring -->
+        <div class="easing-card">
+          <div class="easing-token-name">--spring</div>
+          <div class="easing-value">cubic-bezier(.22,1,.36,1)</div>
+          <div class="easing-desc">Natural settling. Elements entering from off-screen, panels appearing. The default enter easing for most UI.</div>
+          <div class="easing-demo-track">
+            <div class="easing-demo-box" style="transition-timing-function:cubic-bezier(.22,1,.36,1);"></div>
+          </div>
+          <div class="easing-hint">Hover to preview</div>
+        </div>
+
+        <!-- spring-bounce -->
+        <div class="easing-card">
+          <div class="easing-token-name">--spring-bounce</div>
+          <div class="easing-value">cubic-bezier(.34,1.56,.64,1)</div>
+          <div class="easing-desc">Playful bounce. Pop-in cards, achievement unlocked, reward reveals. Use sparingly — one per flow maximum.</div>
+          <div class="easing-demo-track">
+            <div class="easing-demo-box" style="transition-timing-function:cubic-bezier(.34,1.56,.64,1);"></div>
+          </div>
+          <div class="easing-hint">Hover to preview</div>
+        </div>
+
+        <!-- ease-screen -->
+        <div class="easing-card">
+          <div class="easing-token-name">--ease-screen</div>
+          <div class="easing-value">cubic-bezier(.42,0,.18,1)</div>
+          <div class="easing-desc">Full-screen transitions. Screen-to-screen navigation, hero transitions. Feels deliberate and spatial.</div>
+          <div class="easing-demo-track">
+            <div class="easing-demo-box" style="transition-timing-function:cubic-bezier(.42,0,.18,1);"></div>
+          </div>
+          <div class="easing-hint">Hover to preview</div>
+        </div>
+
+        <!-- ease-out -->
+        <div class="easing-card">
+          <div class="easing-token-name">--ease-out</div>
+          <div class="easing-value">cubic-bezier(0,0,.2,1)</div>
+          <div class="easing-desc">Standard decelerating motion. Button feedback, list reveals, fade-ins. Safe default when unsure.</div>
+          <div class="easing-demo-track">
+            <div class="easing-demo-box" style="transition-timing-function:cubic-bezier(0,0,.2,1);"></div>
+          </div>
+          <div class="easing-hint">Hover to preview</div>
+        </div>
+
+        <!-- ease-error -->
+        <div class="easing-card">
+          <div class="easing-token-name">--ease-error</div>
+          <div class="easing-value">cubic-bezier(.36,.07,.19,.97)</div>
+          <div class="easing-desc">Error shake animation. Form validation failures, invalid OTP entry. Tight and authoritative — no bounce.</div>
+          <div class="easing-demo-track">
+            <div class="easing-demo-box" style="transition-timing-function:cubic-bezier(.36,.07,.19,.97);"></div>
+          </div>
+          <div class="easing-hint">Hover to preview</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 2: Duration tokens -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Duration tokens</h2>
+      <p class="ds-section-desc">Duration tokens are defined in tokens.css and must be referenced via <code style="font-family:monospace;font-size:12px;color:#a8e6c5;">var(--dur-*)</code> — never raw milliseconds in component CSS.</p>
+
+      <div class="ds-demo" >
+        <table class="dur-table">
+          <thead>
+            <tr>
+              <th>Token</th>
+              <th>Value</th>
+              <th>Purpose</th>
+              <th>Typical use</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="t">--dur-instant</td>
+              <td class="v">90ms</td>
+              <td>Micro-feedback</td>
+              <td>Icon state changes, toggle switches</td>
+            </tr>
+            <tr>
+              <td class="t">--dur-fast</td>
+              <td class="v">120ms</td>
+              <td>Quick response</td>
+              <td>Button press feedback, chip selection</td>
+            </tr>
+            <tr>
+              <td class="t">--dur-default</td>
+              <td class="v">200ms</td>
+              <td>Standard UI</td>
+              <td>Most transitions, fades, state changes</td>
+            </tr>
+            <tr>
+              <td class="t">--dur-pop</td>
+              <td class="v">280ms</td>
+              <td>Pop-in content</td>
+              <td>Cards appearing, dropdowns opening</td>
+            </tr>
+            <tr>
+              <td class="t">--dur-error</td>
+              <td class="v">380ms</td>
+              <td>Error feedback</td>
+              <td>Shake animations, validation errors</td>
+            </tr>
+            <tr>
+              <td class="t">--dur-sheet</td>
+              <td class="v">400ms</td>
+              <td>Sheet slides</td>
+              <td>Bottom sheet open / close</td>
+            </tr>
+            <tr>
+              <td class="t">--dur-enter</td>
+              <td class="v">420ms</td>
+              <td>Screen enters</td>
+              <td>New page appearing, overlay entering</td>
+            </tr>
+            <tr>
+              <td class="t">--dur-screen</td>
+              <td class="v">420ms</td>
+              <td>Screen transitions</td>
+              <td>Full navigation transitions</td>
+            </tr>
+            <tr>
+              <td class="t">--dur-tv-enter</td>
+              <td class="v">560ms</td>
+              <td>TV focus / enter</td>
+              <td>D-pad navigation, focus transitions</td>
+            </tr>
+            <tr>
+              <td class="t">--dur-shimmer</td>
+              <td class="v">1600ms</td>
+              <td>Loading state</td>
+              <td>Skeleton shimmer loop</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Duration bar chart -->
+      <h3 class="ds-section-title" style="font-size:14px;margin-bottom:16px;">Duration scale — relative lengths</h3>
+      <div class="dur-bars">
+        <div class="dur-bar-row">
+          <span class="dur-bar-label">--dur-instant</span>
+          <div class="dur-bar-track"><div class="dur-bar-fill" style="width:5.6%;"></div></div>
+          <span class="dur-bar-ms">90ms</span>
+        </div>
+        <div class="dur-bar-row">
+          <span class="dur-bar-label">--dur-fast</span>
+          <div class="dur-bar-track"><div class="dur-bar-fill" style="width:7.5%;"></div></div>
+          <span class="dur-bar-ms">120ms</span>
+        </div>
+        <div class="dur-bar-row">
+          <span class="dur-bar-label">--dur-default</span>
+          <div class="dur-bar-track"><div class="dur-bar-fill" style="width:12.5%;"></div></div>
+          <span class="dur-bar-ms">200ms</span>
+        </div>
+        <div class="dur-bar-row">
+          <span class="dur-bar-label">--dur-pop</span>
+          <div class="dur-bar-track"><div class="dur-bar-fill" style="width:17.5%;"></div></div>
+          <span class="dur-bar-ms">280ms</span>
+        </div>
+        <div class="dur-bar-row">
+          <span class="dur-bar-label">--dur-error</span>
+          <div class="dur-bar-track"><div class="dur-bar-fill" style="width:23.75%;"></div></div>
+          <span class="dur-bar-ms">380ms</span>
+        </div>
+        <div class="dur-bar-row">
+          <span class="dur-bar-label">--dur-sheet</span>
+          <div class="dur-bar-track"><div class="dur-bar-fill" style="width:25%;"></div></div>
+          <span class="dur-bar-ms">400ms</span>
+        </div>
+        <div class="dur-bar-row">
+          <span class="dur-bar-label">--dur-enter</span>
+          <div class="dur-bar-track"><div class="dur-bar-fill" style="width:26.25%;"></div></div>
+          <span class="dur-bar-ms">420ms</span>
+        </div>
+        <div class="dur-bar-row">
+          <span class="dur-bar-label">--dur-screen</span>
+          <div class="dur-bar-track"><div class="dur-bar-fill" style="width:26.25%;"></div></div>
+          <span class="dur-bar-ms">420ms</span>
+        </div>
+        <div class="dur-bar-row">
+          <span class="dur-bar-label">--dur-tv-enter</span>
+          <div class="dur-bar-track"><div class="dur-bar-fill" style="width:35%;"></div></div>
+          <span class="dur-bar-ms">560ms</span>
+        </div>
+        <div class="dur-bar-row">
+          <span class="dur-bar-label">--dur-shimmer</span>
+          <div class="dur-bar-track"><div class="dur-bar-fill" style="width:100%;opacity:.4;"></div></div>
+          <span class="dur-bar-ms">1600ms</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Reduced motion -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Reduced motion</h2>
+      <p class="ds-section-desc">When <code style="font-family:monospace;font-size:12px;color:#a8e6c5;">prefers-reduced-motion: reduce</code> is set, duration tokens are overridden in tokens.css. Animation properties themselves are not removed — only their durations, so no layout shifts occur.</p>
+
+      <pre class="ds-code"><span class="k">@media</span> (prefers-reduced-motion: reduce) {
+  <span class="k">:root</span> {
+    <span class="t">--dur-instant</span>: <span class="v">0ms</span>;
+    <span class="t">--dur-fast</span>:    <span class="v">0ms</span>;
+    <span class="t">--dur-default</span>: <span class="v">0ms</span>;
+    <span class="t">--dur-pop</span>:     <span class="v">0ms</span>;
+    <span class="t">--dur-enter</span>:   <span class="v">0ms</span>;
+    <span class="t">--dur-screen</span>:  <span class="v">0ms</span>;
+    <span class="t">--dur-tv-enter</span>:<span class="v">0ms</span>;
+    <span class="c">/* --dur-reduced-fade (100ms) and --dur-reduced-instant (1ms) */</span>
+    <span class="c">/* are intentionally NOT collapsed — they are reduced-motion values */</span>
+  }
+}
+
+<span class="c">/* Ambient loops must be explicitly stopped */</span>
+<span class="k">@media</span> (prefers-reduced-motion: reduce) {
+  <span class="k">.marquee-row, .hero-bg, .aurora</span> {
+    <span class="p">animation</span>: <span class="v">none</span>;
+  }
+  <span class="c">/* Shimmer: a zero-duration loop still flashes — remove it */</span>
+  <span class="k">.shimmer-wrap::after</span> {
+    <span class="p">animation</span>: <span class="v">none</span>;
+    <span class="p">display</span>:    <span class="v">none</span>;
+  }
+}</pre>
+
+      <div class="rm-note">
+        <strong style="color:var(--amber);">Note:</strong> Shimmer animations must be explicitly removed (<code style="font-family:monospace;color:#a8e6c5;">display:none</code> or <code style="font-family:monospace;color:#a8e6c5;">animation:none</code>) for users with reduced motion. A zero-duration loop still flashes on every frame.
+      </div>
+    </section>
+
+    <!-- Section 4: TV motion -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">TV motion</h2>
+      <p class="ds-section-desc">TV is a 10-foot UI driven by D-pad. Motion must be larger, slightly slower, and completely restrained. No ambient loops, no press feedback, no sheets.</p>
+
+      <div class="tv-rules-grid" style="margin-bottom:var(--space-3);">
+        <div class="tv-rule-card">
+          <div class="tv-rule-heading">Focus transitions</div>
+          <div class="tv-rule-body">All focus moves use <code>--dur-tv-enter</code> (560ms) + <code>--spring</code>. No instant cuts between focus states.</div>
+        </div>
+        <div class="tv-rule-card">
+          <div class="tv-rule-heading">Card focus state</div>
+          <div class="tv-rule-body">Focused card scales to <code>scale(1.05)</code> with <code>--spring</code> easing and mandatory <code>--jio-glow</code> box-shadow.</div>
+        </div>
+        <div class="tv-rule-card">
+          <div class="tv-rule-heading">Focus ring timing</div>
+          <div class="tv-rule-body">Focus ring appears in 150ms with <code>--ease-out</code> — intentionally faster than content transitions so navigation feels instant.</div>
+        </div>
+        <div class="tv-rule-card">
+          <div class="tv-rule-heading">Screen transitions</div>
+          <div class="tv-rule-body">Opacity crossfade only. No horizontal slide. TV spatial model does not follow the mobile forward/back convention.</div>
+        </div>
+        <div class="tv-rule-card tv-rule-card--forbidden">
+          <div class="tv-rule-heading">Never on TV</div>
+          <div class="tv-rule-body">No <code>--spring-bounce</code> — too playful for 10-foot UI. No ambient loops. No press/tap scale. No shimmer sweep. No backdrop-filter. No stagger sequences.</div>
+        </div>
+        <div class="tv-rule-card">
+          <div class="tv-rule-heading">Content entrance</div>
+          <div class="tv-rule-body">Use <code>--dur-tv-enter</code> with <code>fade-up</code> keyframe (32px translate). Stagger collapses — all items enter simultaneously on TV.</div>
+        </div>
+      </div>
+
+      <pre class="ds-code"><span class="c">/* TV focus state */</span>
+<span class="k">.focusable:focus-visible</span> {
+  <span class="p">transform</span>:  <span class="v">scale(1.05)</span>;
+  <span class="p">box-shadow</span>: <span class="t">var(--jio-glow)</span>;
+  <span class="p">transition</span>: transform <span class="t">var(--dur-fast)</span> <span class="t">var(--spring)</span>,
+              box-shadow <span class="t">var(--dur-fast)</span> <span class="t">var(--spring)</span>;
+  <span class="p">outline</span>:    <span class="v">none</span>;
+}
+
+<span class="c">/* TV content entrance — no stagger */</span>
+<span class="k">.tv-card</span> {
+  <span class="p">animation</span>: fade-up <span class="t">var(--dur-tv-enter)</span> <span class="t">var(--spring)</span> both;
+}</pre>
+    </section>
+
+    <!-- Section 5: Usage rules -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Usage rules</h2>
+      <div class="ds-rules">
+        <div class="ds-rule ds-rule--pass">Use token pairs — always a duration token + an easing token together.</div>
+        <div class="ds-rule ds-rule--pass">Use <code>--spring</code> for elements entering the screen.</div>
+        <div class="ds-rule ds-rule--pass">Use <code>--ease-out</code> as the safe default when unsure about easing.</div>
+        <div class="ds-rule ds-rule--pass">Use <code>--dur-tv-enter</code> + <code>--spring</code> for all TV focus moves and content entrance.</div>
+        <div class="ds-rule ds-rule--fail">Use ad-hoc <code>cubic-bezier</code> values not in the token set — use <code>var(--spring)</code> etc.</div>
+        <div class="ds-rule ds-rule--fail">Use <code>transition:&#x20;all</code> — always list explicit properties.</div>
+        <div class="ds-rule ds-rule--fail">Use <code>--spring-bounce</code> on TV — too playful for 10-foot UI.</div>
+        <div class="ds-rule ds-rule--fail">Omit <code>prefers-reduced-motion</code> support for looping animations.</div>
+        <div class="ds-rule ds-rule--fail">Animate pricing, payment totals, or subscription terms — critical information is always static.</div>
+      </div>
+    </section>
+
+
+    <!-- CHANGELOG -->
+
+  </main>
+  <script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script>
+</body>
+</html>

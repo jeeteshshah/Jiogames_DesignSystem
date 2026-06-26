@@ -1,0 +1,536 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skeleton Loader — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=3">
+  <style>
+    @keyframes skeleton-shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .skeleton {
+      background: linear-gradient(90deg, var(--surface-2) 25%, var(--surface-3) 50%, var(--surface-2) 75%);
+      background-size: 200% 100%;
+      animation: skeleton-shimmer 1.6s infinite linear;
+    }
+    .skeleton--text {
+      height: 10px;
+      border-radius: var(--pill);
+      width: 100%;
+      margin-bottom: 6px;
+    }
+    .skeleton--card {
+      width: 120px;
+      height: 80px;
+      border-radius: var(--r4);
+      flex-shrink: 0;
+    }
+    .skeleton--avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--pill);
+      flex-shrink: 0;
+    }
+    .skeleton--hero {
+      width: 100%;
+      height: 120px;
+      border-radius: var(--r5);
+    }
+    .skeleton-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .skeleton { animation: none; }
+    }
+  </style>
+</head><body><main class="ds-main">
+
+  <!-- PAGE HEADER -->
+  <header class="component-page-header">
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <a href="../" class="component-breadcrumb-link">JioGames DLS</a>
+      <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="component-breadcrumb-current">Skeleton</span>
+    </nav>
+    <h1 class="component-page-title">Skeleton Loader</h1>
+    <p class="component-page-def">Animated placeholder shapes that represent loading content before data arrives. Reduces perceived wait time for rails, cards, and game detail.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile">
+        <span class="component-platform-dot"></span>Mobile
+      </span>
+      <span class="component-platform component-platform--web">
+        <span class="component-platform-dot"></span>Web
+      </span>
+      <span class="component-platform component-platform--tv">
+        <span class="component-platform-dot"></span>TV
+      </span>
+      <span class="component-maturity component-maturity--draft">
+        <span class="component-maturity--dot"></span>Draft
+      </span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="component-hero component-hero--dark component-hero--grid" style="min-height:300px; position:relative; overflow:hidden;">
+    <div class="hero-glow"></div>
+    <div class="component-hero-inner" style="display:flex; flex-direction:column; align-items:flex-start; gap:16px; padding:48px 40px; max-width:520px; width:100%; position:relative; z-index:1;">
+      <!-- Skeleton card strip -->
+      <div style="display:flex; gap:12px; width:100%;">
+        <div class="skeleton" style="width:100px; height:64px; border-radius:var(--r4); flex-shrink:0;"></div>
+        <div class="skeleton" style="width:100px; height:64px; border-radius:var(--r4); flex-shrink:0;"></div>
+        <div class="skeleton" style="width:100px; height:64px; border-radius:var(--r4); flex-shrink:0;"></div>
+        <div class="skeleton" style="width:100px; height:64px; border-radius:var(--r4); flex-shrink:0;"></div>
+      </div>
+      <!-- Skeleton text lines -->
+      <div style="width:100%; display:flex; flex-direction:column; gap:8px;">
+        <div class="skeleton skeleton--text" style="width:60%;"></div>
+        <div class="skeleton skeleton--text" style="width:40%;"></div>
+      </div>
+    </div>
+    <p class="component-hero-caption">SHIMMER ANIMATION · SHAPE-MATCHED · SCREEN-READER HIDDEN</p>
+  </section>
+
+  <!-- 1. INTRODUCTION -->
+  <section class="ds-section" id="intro">
+    <h2 class="ds-section-title">Introduction</h2>
+    <p class="ds-section-desc">When to use skeleton loaders in JioGames.</p>
+    <div class="component-intro">
+      <p>Use skeleton loaders for content that loads asynchronously: game rails, hero images, profile data, and search results. Skeletons set user expectations by communicating the shape and position of incoming content before the data arrives.</p>
+      <ul class="component-summary-list">
+        <li><strong>Game rails</strong> — show a row of card skeletons while the game list fetches from the API</li>
+        <li><strong>Hero images</strong> — fill the hero banner area with a shape-matched skeleton until the asset loads</li>
+        <li><strong>Profile data</strong> — replace avatar and username areas with appropriate shapes during session load</li>
+        <li><strong>Search results</strong> — render a full skeleton grid before results populate to prevent layout shift</li>
+      </ul>
+      <p style="margin-top:16px; font-size:14px; color:var(--text2); line-height:1.6;">Do <strong style="color:var(--negative);">NOT</strong> use skeleton loaders for instant operations under 300ms, navigation transitions (use page transitions instead), or error states. If data fails to load, replace the skeleton with an error state — never leave a skeleton on screen indefinitely.</p>
+    </div>
+  </section>
+
+  <!-- 2. BEST PRACTICES -->
+  <section class="ds-section" id="best-practices">
+    <h2 class="ds-section-title">Best Practices</h2>
+    <p class="ds-section-desc">Follow these rules to keep skeleton loaders consistent and accessible across all JioGames surfaces.</p>
+    <div class="component-best-practices">
+      <div class="component-bp-card component-bp-card--do">
+        <span class="component-bp-label component-bp-label--do">Do</span>
+        <ul class="component-bp-list">
+          <li>Match skeleton shape exactly to real content — wrong shape causes layout shift on reveal</li>
+          <li>Animate all skeletons on the same phase — staggering creates visual noise</li>
+          <li>Remove from DOM (not just hide) when content loads — screen readers must not encounter skeleton text</li>
+          <li>Use on entire sections, not individual elements — partial skeleton within loaded content is disorienting</li>
+          <li>Respect <code style="font-size:11px; font-family:monospace; color:#a8e6c5; background:var(--surface-2); border:1px solid var(--border-subtle); border-radius:4px; padding:1px 5px;">prefers-reduced-motion</code> — disable shimmer on TV and reduced-motion environments</li>
+        </ul>
+      </div>
+      <div class="component-bp-card component-bp-card--dont">
+        <span class="component-bp-label component-bp-label--dont">Don't</span>
+        <ul class="component-bp-list">
+          <li>Use skeleton loaders for operations that complete in under 300ms — they cause more anxiety than they resolve</li>
+          <li>Leave skeleton elements in the DOM after content has loaded — assistive technology will read them</li>
+          <li>Mix skeleton and loaded content in the same rail — show all or nothing</li>
+          <li>Use a generic rectangle when the real content is circular or pill-shaped</li>
+          <li>Stack multiple skeletons of different animation phases — they must all pulse together</li>
+        </ul>
+      </div>
+    </div>
+    <!-- Do / Don't visual -->
+    <div class="ds-do-dont-grid" style="margin-top:20px;">
+      <div class="ds-do-card">
+        <div class="ds-do-body" style="display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; gap:10px;">
+            <div class="skeleton" style="width:80px; height:52px; border-radius:var(--r4); flex-shrink:0;"></div>
+            <div class="skeleton" style="width:80px; height:52px; border-radius:var(--r4); flex-shrink:0;"></div>
+            <div class="skeleton" style="width:80px; height:52px; border-radius:var(--r4); flex-shrink:0;"></div>
+          </div>
+          <div class="skeleton skeleton--text" style="width:55%;"></div>
+        </div>
+        <div class="ds-do-footer">Full rail skeleton while games load</div>
+      </div>
+      <div class="ds-dont-card">
+        <div class="ds-dont-body" style="display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; gap:10px; align-items:center;">
+            <!-- Loaded card -->
+            <div style="width:80px; height:52px; border-radius:var(--r4); background:linear-gradient(135deg,#1a2010,#0d2010); flex-shrink:0; border:1px solid rgba(0,168,89,.15);"></div>
+            <!-- Skeleton mixed in -->
+            <div class="skeleton" style="width:80px; height:52px; border-radius:var(--r4); flex-shrink:0;"></div>
+            <div style="width:80px; height:52px; border-radius:var(--r4); background:linear-gradient(135deg,#1a1020,#100a20); flex-shrink:0; border:1px solid rgba(100,80,200,.15);"></div>
+          </div>
+          <div class="skeleton skeleton--text" style="width:45%;"></div>
+        </div>
+        <div class="ds-dont-footer">Mixed skeleton + loaded content in same rail</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. ANATOMY -->
+  <section class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <p class="ds-section-desc">Skeleton loaders are composed of a shape container and an optional shimmer gradient overlay. No text, icons, or interactive elements are ever placed inside a skeleton.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr>
+          <th>Part</th>
+          <th>Element</th>
+          <th>Token</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Shape</td>
+          <td><code class="ds-code">div.skeleton</code></td>
+          <td><code class="ds-code">background: var(--surface-2)</code></td>
+        </tr>
+        <tr>
+          <td>Shimmer</td>
+          <td>CSS gradient animation</td>
+          <td><code class="ds-code">var(--surface-2)</code> → <code class="ds-code">var(--surface-3)</code> → <code class="ds-code">var(--surface-2)</code></td>
+        </tr>
+        <tr>
+          <td>Container</td>
+          <td><code class="ds-code">div.skeleton-group</code></td>
+          <td>No visual style</td>
+        </tr>
+        <tr>
+          <td>Text line</td>
+          <td><code class="ds-code">div.skeleton.skeleton--text</code></td>
+          <td><code class="ds-code">border-radius: var(--pill)</code></td>
+        </tr>
+        <tr>
+          <td>Card</td>
+          <td><code class="ds-code">div.skeleton.skeleton--card</code></td>
+          <td><code class="ds-code">border-radius: var(--r4)</code></td>
+        </tr>
+        <tr>
+          <td>Avatar</td>
+          <td><code class="ds-code">div.skeleton.skeleton--avatar</code></td>
+          <td><code class="ds-code">border-radius: var(--pill)</code></td>
+        </tr>
+        <tr>
+          <td>Hero</td>
+          <td><code class="ds-code">div.skeleton.skeleton--hero</code></td>
+          <td><code class="ds-code">border-radius: var(--r5)</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 4. VARIANTS -->
+  <section class="ds-section" id="variants">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">Four variants cover the primary content shapes in JioGames. Each maps to a specific real-content type and uses the matching border-radius token.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:40px; align-items:flex-end; padding:8px 0;">
+
+        <!-- Text -->
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:12px; min-width:160px;">
+          <div class="skeleton-group" aria-hidden="true" style="width:160px;">
+            <div class="skeleton skeleton--text" style="width:80%;"></div>
+            <div class="skeleton skeleton--text" style="width:60%;"></div>
+            <div class="skeleton skeleton--text" style="width:40%;"></div>
+          </div>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Text — skeleton--text</span>
+        </div>
+
+        <!-- Card -->
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:12px;">
+          <div class="skeleton skeleton--card" aria-hidden="true"></div>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Card — skeleton--card</span>
+        </div>
+
+        <!-- Avatar -->
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:12px;">
+          <div class="skeleton skeleton--avatar" aria-hidden="true"></div>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Avatar — skeleton--avatar</span>
+        </div>
+
+        <!-- Hero -->
+        <div style="display:flex; flex-direction:column; align-items:flex-start; gap:12px; flex:1; min-width:200px;">
+          <div class="skeleton skeleton--hero" aria-hidden="true" style="min-width:200px;"></div>
+          <span style="font-size:11px; color:rgba(244,242,238,.45);">Hero — skeleton--hero</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. SIZES -->
+  <section class="ds-section" id="sizes">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">Skeleton sizes derive from the real component they replace. No independent size scale — match the exact dimensions of the target component.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr>
+          <th>Context</th>
+          <th>Width</th>
+          <th>Height</th>
+          <th>Radius token</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Game cover card</td>
+          <td>120px</td>
+          <td>160px</td>
+          <td><code class="ds-code">--r4</code></td>
+        </tr>
+        <tr>
+          <td>Game hero banner</td>
+          <td>100%</td>
+          <td>200px</td>
+          <td><code class="ds-code">--r5</code></td>
+        </tr>
+        <tr>
+          <td>Rail thumbnail</td>
+          <td>210px</td>
+          <td>128px</td>
+          <td><code class="ds-code">--r4</code></td>
+        </tr>
+        <tr>
+          <td>Text — heading</td>
+          <td>50–70%</td>
+          <td>18px</td>
+          <td><code class="ds-code">--pill</code></td>
+        </tr>
+        <tr>
+          <td>Text — body</td>
+          <td>80–100%</td>
+          <td>13px</td>
+          <td><code class="ds-code">--pill</code></td>
+        </tr>
+        <tr>
+          <td>Avatar</td>
+          <td>40px</td>
+          <td>40px</td>
+          <td><code class="ds-code">--pill</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 6. STATES -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">Skeleton loaders have two states: loading and loaded. The transition between them must be handled in JavaScript — never CSS visibility alone.</p>
+    <div class="ds-demo ds-demo--dark">
+      <div style="display:flex; flex-wrap:wrap; gap:40px; align-items:flex-start; padding:8px 0;">
+
+        <!-- Loading -->
+        <div style="display:flex; flex-direction:column; gap:12px; min-width:220px;">
+          <div style="font-size:10px; font-weight:700; letter-spacing:.6px; text-transform:uppercase; color:var(--jio);">Loading</div>
+          <div style="background:var(--surface-1); border:1px solid var(--border-subtle); border-radius:var(--r4); padding:16px; display:flex; flex-direction:column; gap:12px;" aria-busy="true" aria-live="polite" aria-label="Loading games">
+            <div class="skeleton skeleton--hero" aria-hidden="true" style="height:80px;"></div>
+            <div class="skeleton-group" aria-hidden="true">
+              <div class="skeleton skeleton--text" style="width:65%;"></div>
+              <div class="skeleton skeleton--text" style="width:45%;"></div>
+            </div>
+          </div>
+          <div style="font-size:11px; color:var(--text3); line-height:1.5;">Shimmer active · <code style="font-size:11px; font-family:monospace; color:#a8e6c5;">aria-hidden="true"</code> on skeletons · <code style="font-size:11px; font-family:monospace; color:#a8e6c5;">aria-busy="true"</code> on parent</div>
+        </div>
+
+        <!-- Loaded -->
+        <div style="display:flex; flex-direction:column; gap:12px; min-width:220px;">
+          <div style="font-size:10px; font-weight:700; letter-spacing:.6px; text-transform:uppercase; color:var(--text3);">Loaded</div>
+          <div style="background:var(--surface-1); border:1px solid var(--border-subtle); border-radius:var(--r4); padding:16px; display:flex; flex-direction:column; gap:12px;">
+            <div style="height:80px; border-radius:var(--r5); background:linear-gradient(135deg,#0a1a10 0%,#0d2010 60%,#1a2a1a 100%); display:flex; align-items:center; justify-content:center;">
+              <span style="font-size:11px; color:rgba(244,242,238,.35); letter-spacing:.3px;">Game hero image</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:4px;">
+              <div style="font-size:14px; font-weight:700; color:var(--text);">Tomb Raider</div>
+              <div style="font-size:12px; color:var(--text3);">Action Adventure · ★4.9</div>
+            </div>
+          </div>
+          <div style="font-size:11px; color:var(--text3); line-height:1.5;">Skeleton removed from DOM · Real content rendered · Screen reader announces update</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. CONTENT -->
+  <section class="ds-section" id="content">
+    <h2 class="ds-section-title">Content</h2>
+    <p class="ds-section-desc">Skeleton loaders contain no readable text. The shape communicates structure only.</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:20px;">
+      <div style="background:var(--card-bg); border:1px solid var(--border-subtle); border-top:2px solid rgba(0,168,89,.5); border-radius:14px; padding:20px;">
+        <div style="font-size:9px; font-weight:800; letter-spacing:.8px; text-transform:uppercase; color:var(--jio); margin-bottom:12px;">Do</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
+          <li style="font-size:12px; color:var(--text2); line-height:1.5;">Keep skeleton shapes empty — no text, no icons, no placeholder labels</li>
+          <li style="font-size:12px; color:var(--text2); line-height:1.5;">Let shape and position carry all structural meaning</li>
+          <li style="font-size:12px; color:var(--text2); line-height:1.5;">Use <code class="ds-code">aria-hidden="true"</code> so screen readers skip over skeletons entirely</li>
+        </ul>
+      </div>
+      <div style="background:var(--card-bg); border:1px solid var(--border-subtle); border-top:2px solid rgba(255,59,48,.4); border-radius:14px; padding:20px;">
+        <div style="font-size:9px; font-weight:800; letter-spacing:.8px; text-transform:uppercase; color:var(--negative); margin-bottom:12px;">Don't</div>
+        <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
+          <li style="font-size:12px; color:var(--text2); line-height:1.5;">Never place "Loading…" or any placeholder text inside a skeleton shape</li>
+          <li style="font-size:12px; color:var(--text2); line-height:1.5;">Do not use <code class="ds-code">role="img"</code> or <code class="ds-code">alt</code> attributes on skeleton elements</li>
+          <li style="font-size:12px; color:var(--text2); line-height:1.5;">Do not use animated GIFs or spinner icons as skeleton content</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. PLATFORM -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform considerations</h2>
+    <p class="ds-section-desc">Skeleton behavior adapts by platform. Shimmer speed and linger duration vary to suit each surface's performance and viewing context.</p>
+    <div class="component-platform-grid">
+
+      <div class="component-platform-card component-platform-card--mobile">
+        <div class="component-platform-card-title">Mobile</div>
+        <ul>
+          <li>1.6s shimmer speed — matches natural reading rhythm on small screens</li>
+          <li>Full-width rails — skeleton cards should span the same width as real cards including gutters</li>
+          <li>Match card aspect ratio exactly — cover cards are portrait, rail thumbnails are landscape</li>
+          <li>Remove skeleton from DOM immediately when data resolves — no linger</li>
+        </ul>
+      </div>
+
+      <div class="component-platform-card component-platform-card--web">
+        <div class="component-platform-card-title">Web</div>
+        <ul>
+          <li>Same 1.6s shimmer speed as mobile for consistency</li>
+          <li>Wider layout allows multi-column skeleton grids — match the real grid column count</li>
+          <li>Skeleton max-width should mirror content max-width constraints</li>
+          <li>Use CSS <code style="font-size:11px; font-family:monospace; color:#a8e6c5;">will-change: background-position</code> to promote shimmer to GPU</li>
+        </ul>
+      </div>
+
+      <div class="component-platform-card component-platform-card--tv">
+        <div class="component-platform-card-title">TV</div>
+        <ul>
+          <li>Disable shimmer animation — use static <code style="font-size:11px; font-family:monospace; color:#a8e6c5;">background: var(--surface-2)</code> fill instead</li>
+          <li>Shimmer flicker at TV refresh rates can trigger photosensitivity concerns</li>
+          <li>Linger skeleton 500ms after data arrives to prevent flicker from near-instant content flash</li>
+          <li>TV focus ring must not appear on skeleton elements — they are never focusable</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 9. ACCESSIBILITY -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">Skeleton loaders must be invisible to assistive technology while loading, and must announce completion when real content arrives.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr>
+          <th>Attribute</th>
+          <th>Applied to</th>
+          <th>Guidance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="ds-code">aria-hidden="true"</code></td>
+          <td>Every skeleton element</td>
+          <td>Prevents screen readers from reading the skeleton shape as content. Applied to each <code class="ds-code">div.skeleton</code> and <code class="ds-code">div.skeleton-group</code>.</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">aria-busy="true"</code></td>
+          <td>Loading region parent</td>
+          <td>Signal to assistive technology that the region is updating. Set to <code class="ds-code">false</code> (or remove) once content has loaded. Place on the wrapping section, not on individual skeletons.</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">aria-live="polite"</code></td>
+          <td>Loading region parent</td>
+          <td>When <code class="ds-code">aria-busy</code> resolves and real content is inserted, <code class="ds-code">aria-live="polite"</code> causes screen readers to announce the update at the next pause in speech.</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">aria-label</code></td>
+          <td>Loading region parent</td>
+          <td>Describe what is loading. Example: <code class="ds-code">aria-label="Loading games"</code>. Do not use a generic "Loading" — be specific about the content type.</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">role="img"</code> / <code class="ds-code">alt</code></td>
+          <td>Never</td>
+          <td>Skeleton shapes must never carry image semantics. They are decorative loading indicators, not meaningful content representations.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 10. RELATED TOKENS -->
+  <section class="ds-section" id="related-tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-desc">Use these tokens to implement skeleton styles. Never hardcode hex values — token references stay in sync with theme updates.</p>
+    <table class="ds-spec-table">
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>Value</th>
+          <th>Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code class="ds-code">--surface-2</code></td>
+          <td><code class="ds-code">#161A24</code></td>
+          <td>Skeleton base fill — the dark resting color of the shimmer gradient</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--surface-3</code></td>
+          <td><code class="ds-code">#1F2432</code></td>
+          <td>Shimmer highlight — the lighter midpoint of the gradient that creates the sweep effect</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--r4</code></td>
+          <td><code class="ds-code">8px</code></td>
+          <td>Card and rail thumbnail skeleton border-radius</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--r5</code></td>
+          <td><code class="ds-code">12px</code></td>
+          <td>Hero banner skeleton border-radius</td>
+        </tr>
+        <tr>
+          <td><code class="ds-code">--pill</code></td>
+          <td><code class="ds-code">100px</code></td>
+          <td>Text line and avatar skeleton border-radius — creates the pill shape for inline content</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 11. CODE EXAMPLES -->
+  <section class="component-section" id="code-examples">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-section-desc">Copy these snippets as starting points. Link <code class="ds-code">tokens/tokens.css</code> and <code class="ds-code">components.css</code> before using component classes.</p>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Text skeleton — HTML</div>
+      <pre class="component-code-pre"><code>&lt;!-- Text skeleton --&gt;
+&lt;div class="skeleton-group" aria-hidden="true"&gt;
+  &lt;div class="skeleton skeleton--text" style="width:70%"&gt;&lt;/div&gt;
+  &lt;div class="skeleton skeleton--text" style="width:55%"&gt;&lt;/div&gt;
+  &lt;div class="skeleton skeleton--text" style="width:40%"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Card skeleton — HTML</div>
+      <pre class="component-code-pre"><code>&lt;!-- Card skeleton --&gt;
+&lt;div class="skeleton skeleton--card" aria-hidden="true"&gt;&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="component-code-block">
+      <div class="component-code-label">Loading region with ARIA — HTML</div>
+      <pre class="component-code-pre"><code>&lt;!-- Loading region with ARIA --&gt;
+&lt;section aria-busy="true" aria-live="polite" aria-label="Loading games"&gt;
+  &lt;div class="skeleton skeleton--hero" aria-hidden="true"&gt;&lt;/div&gt;
+  &lt;div class="skeleton-group" aria-hidden="true"&gt;
+    &lt;div class="skeleton skeleton--text" style="width:60%"&gt;&lt;/div&gt;
+    &lt;div class="skeleton skeleton--text" style="width:40%"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+    </div>
+  </section>
+
+  <!-- 12. CHANGELOG -->
+
+</main><script src="../sprite-loader.js"></script>
+<script src="../shell.js"></script></body></html>

@@ -153,7 +153,8 @@
   function isActive(itemPath) {
     if (itemPath === '/') {
       if (isFile) return !inSub && (curPath.endsWith('/index.html/') || curPath.endsWith('jiogames-design-system//'));
-      return curPath === '/';
+      // On HTTP, home = not inside any known section
+      return !inSub;
     }
     var seg = itemPath.replace(/^\//, '').replace(/\/$/, '');
     return lastName === seg;

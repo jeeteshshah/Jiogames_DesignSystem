@@ -45,7 +45,7 @@
     .component-content-title { font-size: 13px; font-weight: 700; color: var(--text); margin: 0 0 12px; }
 
     /* ── Platform grid ── */
-    .component-platform-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 48px; }
+    .component-platform-grid { display: grid; grid-template-columns: repeat(1, 1fr); gap: 16px; margin-bottom: 48px; }
     .component-platform-card { border-radius: 12px; border: 1px solid var(--border-subtle); padding: 20px; }
     .component-platform-card--mobile { border-top: 2px solid #3B82F6; }
     .component-platform-card--web { border-top: 2px solid #8B5CF6; }
@@ -188,12 +188,6 @@
       <span class="component-platform component-platform--mobile">
         <span class="component-platform-dot"></span>Mobile
       </span>
-      <span class="component-platform component-platform--web">
-        <span class="component-platform-dot"></span>Web
-      </span>
-      <span class="component-platform component-platform--tv">
-        <span class="component-platform-dot"></span>TV
-      </span>
       <span class="component-maturity component-maturity--stable">
         <span class="component-maturity--dot"></span>Stable
       </span>
@@ -294,7 +288,6 @@
           <li>Don't exceed 3 trailing icons</li>
           <li>Don't use hamburger + back simultaneously</li>
           <li>Don't truncate title with ellipsis unless absolutely necessary</li>
-          <li>Don't show the app bar on TV (use side rail instead)</li>
         </ul>
       </div>
     </div>
@@ -501,46 +494,32 @@
           <tr>
             <th>Property</th>
             <th>Mobile</th>
-            <th>Web</th>
-            <th>TV</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>App bar height</td>
             <td><code class="t">64px</code></td>
-            <td><code class="t">64px</code></td>
-            <td class="na">N/A</td>
           </tr>
           <tr>
             <td>Back button</td>
             <td>Chevron-left, 44px touch target</td>
-            <td>Chevron or breadcrumb</td>
-            <td class="na">None — use remote Back</td>
           </tr>
           <tr>
             <td>Title size</td>
             <td>17px, weight 700</td>
-            <td>18px, weight 700</td>
-            <td>22px, weight 700</td>
           </tr>
           <tr>
             <td>Trailing icons</td>
             <td>Max 3, 44px target</td>
-            <td>Max 3, 40px target</td>
-            <td>Max 2, 60px target (d-pad)</td>
           </tr>
           <tr>
             <td>Transparent mode</td>
             <td>Yes — hero screens</td>
-            <td>No</td>
-            <td class="na">No</td>
           </tr>
           <tr>
             <td>Safe area top</td>
             <td><code class="t">env(safe-area-inset-top)</code></td>
-            <td>None</td>
-            <td class="na">None</td>
           </tr>
         </tbody>
       </table>
@@ -616,7 +595,7 @@
   <!-- 10. PLATFORM CONSIDERATIONS -->
   <section class="ds-section" id="platform">
     <h2 class="ds-section-title">Platform Considerations</h2>
-    <p class="ds-section-desc">Each platform has distinct input models and viewing contexts that shape how the app bar behaves.</p>
+    <p class="ds-section-desc">The app bar is a mobile-only component. The rules below apply to the JioGames mobile app.</p>
     <div class="component-platform-grid">
       <div class="component-platform-card component-platform-card--mobile">
         <div class="component-platform-card-title">Mobile</div>
@@ -626,26 +605,6 @@
           <li>Back chevron with 44px touch target</li>
           <li>Height <code class="t">var(--app-bar-h)</code> — 64px</li>
           <li>Cinematic mode for game detail screens</li>
-        </ul>
-      </div>
-      <div class="component-platform-card component-platform-card--web">
-        <div class="component-platform-card-title">Web</div>
-        <ul class="ds-platform-list">
-          <li>Sticky positioning — always visible</li>
-          <li>Can include breadcrumb instead of back button</li>
-          <li>Hover states on all icon buttons</li>
-          <li>Always opaque — no transparency mode</li>
-          <li>Skip-nav link before bar for keyboard users</li>
-        </ul>
-      </div>
-      <div class="component-platform-card component-platform-card--tv">
-        <div class="component-platform-card-title">TV</div>
-        <ul class="ds-platform-list">
-          <li>No app bar — replaced by side rail navigation</li>
-          <li>Titles appear in hero regions of screens</li>
-          <li>Use remote <code class="t">Back</code> button for navigation</li>
-          <li>No trailing action buttons in top area</li>
-          <li>All focusable elements 60px+ target size</li>
         </ul>
       </div>
     </div>

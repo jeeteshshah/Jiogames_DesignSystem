@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
 </head>
 <body>
 
@@ -18,18 +18,18 @@
       <!-- Page header -->
       <header class="component-page-header">
         <nav class="component-breadcrumb" aria-label="Breadcrumb">
-          <a href="../">JioGames DLS</a>
-          <span class="component-breadcrumb-sep" aria-hidden="true">›</span>
-          <span>Foundations</span>
+          <span class="component-breadcrumb-link">JioGames DLS</span>
+          <span class="component-breadcrumb-sep">›</span>
+          <span class="component-breadcrumb-current">Foundations</span>
         </nav>
-        <h1 class="component-page-title">Foundations</h1>
-        <p class="component-page-def">The design language behind JioGames — why we make the choices we make, how tokens flow from raw value to component, and the principles that govern every decision across Mobile, Web, and TV.</p>
+        <h1 class="component-page-title">Foundations</h1><p class="component-page-def">The design language behind JioGames — why we make the choices we make, how tokens flow from raw value to component, and the principles that govern every decision across Mobile, Web, and TV.</p>
         <div class="component-platforms">
           <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
           <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
           <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
           <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
-        </div>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBGb3VuZGF0aW9ucyDigJQgSmlvR2FtZXMgRExTIHNwZWMKCj4gU291cmNlOiBgZm91bmRhdGlvbnMvaW5kZXguaHRtbGAgaW4gdGhlIEppb0dhbWVzIERlc2lnbiBTeXN0ZW0uCj4gVGhpcyBzcGVjIGlzIGdlbmVyYXRlZCB2ZXJiYXRpbSBmcm9tIHRoZSBwYWdlIOKAlCBkbyBub3QgaW52ZW50IHZhbHVlcyBub3QgbGlzdGVkIGhlcmUuCgoqKlBhdGg6KiogSmlvR2FtZXMgRExTIOKAuiBGb3VuZGF0aW9ucwoKLS0tCgpUaGUgZGVzaWduIGxhbmd1YWdlIGJlaGluZCBKaW9HYW1lcyDigJQgd2h5IHdlIG1ha2UgdGhlIGNob2ljZXMgd2UgbWFrZSwgaG93IHRva2VucyBmbG93IGZyb20gcmF3IHZhbHVlIHRvIGNvbXBvbmVudCwgYW5kIHRoZSBwcmluY2lwbGVzIHRoYXQgZ292ZXJuIGV2ZXJ5IGRlY2lzaW9uIGFjcm9zcyBNb2JpbGUsIFdlYiwgYW5kIFRWLgoKIyMgQnJhbmQgUHJpbmNpcGxlcwoKRml2ZSBub24tbmVnb3RpYWJsZXMgdGhhdCBkZWZpbmUgd2hhdCBKaW9HYW1lcyBsb29rcyBhbmQgZmVlbHMgbGlrZS4gVmlvbGF0aW5nIGFueSBvbmUgb2YgdGhlc2UgYnJlYWtzIHRoZSBpZGVudGl0eS4KCiMjIFByb2R1Y3QgUHJpbmNpcGxlcwoKU2l4IHByaW5jaXBsZXMgdGhhdCBnb3Zlcm4gcHJvZHVjdCBkZWNpc2lvbnMg4oCUIHdoYXQgdG8gYnVpbGQsIHdoYXQgdG8gc2hvdywgYW5kIGluIHdoYXQgb3JkZXIuCgojIyBQbGF0Zm9ybSBQcmluY2lwbGVzCgpFYWNoIHBsYXRmb3JtIGhhcyBhIGRpZmZlcmVudCBpbnB1dCBtb2RlbCwgdmlld2luZyBkaXN0YW5jZSwgYW5kIGludGVyYWN0aW9uIGNvbnRyYWN0LiBEZXNpZ24gZm9yIGFsbCB0aHJlZSDigJQgbm90IGEgc2luZ2xlIGxvd2VzdCBjb21tb24gZGVub21pbmF0b3IuCgotIFRvdWNoIHRhcmdldHMg4omlIDQ0cHggYXQgYWxsIHRpbWVzCi0gQm90dG9tIG5hdmlnYXRpb24g4oCUIG5ldmVyIGEgc2lkZWJhcgotIFN3aXBlIGdlc3R1cmVzIHN1cHBsZW1lbnQgdGFwLCBuZXZlciByZXBsYWNlCi0gU2FmZSBhcmVhcyByZXNwZWN0ZWQgKG5vdGNoLCBob21lIGluZGljYXRvcikKLSBUaHVtYiByZWFjaCB6b25lIGlzIHRoZSBoZXJvIGludGVyYWN0aW9uIHpvbmUKLSBBcHBCYXIgY29sbGFwc2VzIG9uIHNjcm9sbCDigJQgc2NyZWVuIHNwYWNlIGlzIHByZWNpb3VzCgotIEhvdmVyIHN0YXRlcyBvbiBhbGwgaW50ZXJhY3RpdmUgZWxlbWVudHMKLSBGdWxsIGtleWJvYXJkIG5hdmlnYXRpb24g4oCUIFRhYiwgYXJyb3dzLCBFbnRlciwgRXNjYXBlCi0gUmlnaHQtY2xpY2sgLyBjb250ZXh0IG1lbnVzIHN1cHBvcnRlZCB3aGVyZSBhcHByb3ByaWF0ZQotIERlc2t0b3AgY29udGVudCBkZW5zaXR5IGlzIGFjY2VwdGFibGUg4oCUIG1vcmUgcGVyIHNjcmVlbgotIE1vdXNlIHByZWNpc2lvbiBhbGxvd3Mgc21hbGxlciBzZWNvbmRhcnkgdGFyZ2V0cyAobWluIDMycHgpCi0gQXBwQmFyIGlzIGFsd2F5cyB2aXNpYmxlIOKAlCBzdGlja3kgYXQgdG9wCgotIEQtcGFkIG9ubHkg4oCUIG5vIG1vdXNlLCBubyB0b3VjaCBpbnB1dAotIEZvY3VzIHJpbmcgaXMgdGhlIHNvbGUgYWZmb3JkYW5jZSDigJQgbmV2ZXIgcmVseSBvbiBob3ZlcgotIE1pbmltdW0gZm9jdXNhYmxlIHRhcmdldDogNjBweAotIFJlbW90ZSBsYXRlbmN5OiBuZXZlciBhc3N1bWUgaW5zdGFudCByZXNwb25zZQotIDEwLWZvb3QgcnVsZTogYWxsIHRleHQg4omlIDI0cHgsIGFsbCBpY29ucyDiiaUgMzJweAotIE5vIGhvdmVyIGludGVyYWN0aW9ucyDigJQgYWxsIHN0YXRlcyBtdXN0IGJlIGZvY3VzLWRyaXZlbgoKIyMgVG9rZW4gUGhpbG9zb3BoeQoKVG9rZW5zIGFyZSB0aGUgYnJpZGdlIGJldHdlZW4gZGVzaWduIGRlY2lzaW9ucyBhbmQgY29kZS4gVGhlIHN5c3RlbSB1c2VzIHRocmVlIGxheWVycyDigJQgcHJpbWl0aXZlLCBzZW1hbnRpYywgYW5kIGNvbXBvbmVudCDigJQgc28gdGhhdCBhIHNpbmdsZSBjb2xvdXIgY2hhbmdlIHByb3BhZ2F0ZXMgZXZlcnl3aGVyZSBpdCBpcyB1c2VkLgoKIyMgQWNjZXNzaWJpbGl0eSBQcmluY2lwbGVzCgpBY2Nlc3NpYmlsaXR5IGlzIGJ1aWx0IGluIGF0IHRoZSB0b2tlbiBhbmQgY29tcG9uZW50IGxldmVsIOKAlCBub3QgYWRkZWQgYWZ0ZXIgdGhlIGZhY3QuIFRoZXNlIGZvdXIgY29tbWl0bWVudHMgYXBwbHkgdG8gZXZlcnkgY29tcG9uZW50IGluIHRoZSBzeXN0ZW0uCgojIyBNb3Rpb24gUHJpbmNpcGxlcwoKQW5pbWF0aW9uIGNvbW11bmljYXRlcyBzdGF0ZSBhbmQgY3JlYXRlcyBjaW5lbWF0aWMgd2VpZ2h0LiBJdCBpcyBuZXZlciBkZWNvcmF0aXZlLiBFdmVyeSBkdXJhdGlvbiBhbmQgZWFzaW5nIGlzIGEgdG9rZW4uCgojIyBDb21wb25lbnQgTWF0dXJpdHkgTW9kZWwKCkV2ZXJ5IGNvbXBvbmVudCBjYXJyaWVzIGEgbWF0dXJpdHkgbGV2ZWwuIFVzZSBvbmx5IExldmVsIDMgKFJlYWR5KSBjb21wb25lbnRzIGluIHByb2R1Y3Rpb24uIExldmVscyAx4oCTMiBleGlzdCBmb3IgZGVzaWduIGFuZCBlbmdpbmVlcmluZyBhbGlnbm1lbnQg4oCUIG5vdCB1c2VyLWZhY2luZyBjb2RlLgoKfCBMZXZlbCB8IE5hbWUgfCBNZWFuaW5nIHwgQmFkZ2UgfAp8LS0tfC0tLXwtLS18LS0tfAp8IDAgfCBJZGVhIHwgVW5kZXIgZGlzY3Vzc2lvbi4gTm90IHlldCBkZXNpZ25lZCBvciBzcGVjaWZpZWQuIHwg4oCUIHwKfCAxIHwgRHJhZnQgfCBEZXNpZ24gaW4gcHJvZ3Jlc3MuIE5vIGltcGxlbWVudGF0aW9uLiBEbyBub3QgdXNlIGluIHByb2R1Y3Rpb24uIHwgRHJhZnQgfAp8IDIgfCBCZXRhIHwgSW1wbGVtZW50ZWQgYW5kIHRlc3RhYmxlLiBOZWVkcyByZWFsIHVzYWdlIHRvIHZhbGlkYXRlLiBBUEkgbWF5IGNoYW5nZS4gfCBCZXRhIHwKfCAzIHwgUmVhZHkgfCBTdGFibGUuIFZhbGlkYXRlZCBpbiBwcm9kdWN0aW9uLiBTYWZlIHRvIHVzZSBhY3Jvc3MgYWxsIHN1cmZhY2VzLiB8IFJlYWR5IHwKfCA0IHwgRGVwcmVjYXRlZCB8IFdpbGwgYmUgcmVtb3ZlZCBpbiB0aGUgbmV4dCBtYWpvciB2ZXJzaW9uLiBNaWdyYXRlIG5vdy4gfCBEZXByZWNhdGVkIHwKCiMjIE5vbi1OZWdvdGlhYmxlIFJ1bGVzCgpUaGVzZSBhcmUgaGFyZCBjb25zdHJhaW50cyDigJQgbm90IGd1aWRlbGluZXMuIEV2ZXJ5IHZpb2xhdGlvbiBkZWdyYWRlcyB0aGUgc3lzdGVtJ3MgaW50ZWdyaXR5LgoKLS0tCgojIyBUb2tlbnMgcmVmZXJlbmNlZCBvbiB0aGlzIHBhZ2UKClVzZSB0aGVzZSBleGFjdCB0b2tlbnMg4oCUIGRlZmluZWQgaW4gYHRva2Vucy90b2tlbnMuY3NzYC4gRG8gbm90IHN1YnN0aXR1dGUgcmF3IHZhbHVlcy4KCi0gYC0tcGlsbGAKLSBgLS1yM2AKLSBgLS1zdXJmYWNlLTJgCi0gYC0tdGV4dDNgCi0gYC0tdGV4dDRgCgotLS0KCiMjIEJ1aWxkIHJ1bGVzIChiaW5kaW5nKQoKMS4gVXNlICoqb25seSoqIHRoZSB0b2tlbnMgbGlzdGVkIGFib3ZlLiBJZiBhIHZhbHVlIHlvdSBuZWVkIGlzIG5vdCBsaXN0ZWQsIHN0b3AgYW5kIGFzayDigJQgZG8gbm90IGludHJvZHVjZSBhIHJhdyB2YWx1ZS4KMi4gRm9udCBpcyAqKkppb1R5cGUqKiBvbmx5LiBXZWlnaHRzOiAzMDAsIDUwMCwgNzAwLCA5MDAuCjMuIFJldXNlIHRoZSBjb21wb25lbnQgQ1NTIHBhdHRlcm5zIHNob3duIG9uIHRoZSBzb3VyY2UgcGFnZTsgZG8gbm90IHJlZGVzaWduLgo0LiBNYXRjaCBldmVyeSBzdGF0ZSAoZGVmYXVsdCwgaG92ZXIsIGZvY3VzLCBhY3RpdmUsIGRpc2FibGVkLCBsb2FkaW5nKSBzaG93biBvbiB0aGUgcGFnZS4KNS4gQWNjZXNzaWJpbGl0eSByZXF1aXJlbWVudHMgb24gdGhlIHBhZ2UgYXJlIG1hbmRhdG9yeSwgbm90IG9wdGlvbmFsLgo=" download="foundations-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
+    </div>
       </header>
 
       <!-- §1 Brand principles -->
@@ -328,6 +328,6 @@
   </aside>
 
   <script src="../sprite-loader.js"></script>
-<script src="../shell.js"></script>
+<script src="../shell.js?v=2"></script>
 </body>
 </html>

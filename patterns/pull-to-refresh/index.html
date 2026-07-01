@@ -1,0 +1,245 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pull to Refresh — JioGames DLS Patterns</title>
+  <link rel="stylesheet" href="../../tokens/tokens.css">
+  <link rel="stylesheet" href="../../components.css">
+  <link rel="stylesheet" href="../../states.css">
+  <link rel="stylesheet" href="../../shell.css?v=3">
+</head>
+<body>
+<main class="ds-main">
+
+  <header class="component-page-header">
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <a href="../../" class="component-breadcrumb-link">JioGames DLS</a>
+      <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+      <a href="../" class="component-breadcrumb-link">Patterns</a>
+      <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="component-breadcrumb-current">Pull to Refresh</span>
+    </nav>
+    <h1 class="component-page-title">Pull to Refresh</h1>
+    <p class="component-page-def">A touch gesture that lets mobile users reload content by pulling a scrollable surface downward past a threshold, triggering a refresh cycle.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+    </div>
+  </header>
+
+  <!-- PURPOSE -->
+  <section class="ds-section" id="purpose">
+    <h2 class="ds-section-title">Purpose</h2>
+    <p style="font-size:13px;color:var(--text2);line-height:1.6;margin-top:12px">Pull to Refresh gives users an immediately recognisable, low-friction way to fetch the latest content on mobile surfaces where the feed or list may change over time — such as the game home feed, notification list, or activity log. Because the gesture is native to mobile OS conventions (iOS and Android both implement it as a system pattern), users encounter no learning curve. The indicator provides continuous feedback during the pull distance, the commit threshold, and the async refresh cycle, so users always know the system is responding.</p>
+  </section>
+
+  <!-- WHEN TO USE / WHEN NOT TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use / When not to use</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px">
+      <div style="padding:20px;background:var(--status-positive-soft);border:1px solid var(--status-positive-border);border-radius:var(--r4)">
+        <p style="font-size:12px;font-weight:700;color:var(--status-positive);margin:0 0 12px">Use when</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:16px;position:relative"><span style="position:absolute;left:2px;color:var(--status-positive)">·</span>The list or feed may have new content since last load (home feed, notifications)</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:16px;position:relative"><span style="position:absolute;left:2px;color:var(--status-positive)">·</span>The surface already scrolls vertically from the top</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:16px;position:relative"><span style="position:absolute;left:2px;color:var(--status-positive)">·</span>Refreshes are quick (&lt; 5 seconds expected) — long waits erode trust in the gesture</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:16px;position:relative"><span style="position:absolute;left:2px;color:var(--status-positive)">·</span>Mobile only — users expect this gesture on touch devices</li>
+        </ul>
+      </div>
+      <div style="padding:20px;background:var(--status-negative-soft);border:1px solid var(--status-negative-border);border-radius:var(--r4)">
+        <p style="font-size:12px;font-weight:700;color:var(--status-negative);margin:0 0 12px">Do not use when</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:16px;position:relative"><span style="position:absolute;left:2px;color:var(--status-negative)">·</span>The list uses <strong>infinite scroll</strong> — loading older items at the bottom conflicts with pull gesture semantics</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:16px;position:relative"><span style="position:absolute;left:2px;color:var(--status-negative)">·</span>The list uses <strong>pagination</strong> — refresh would discard position and confuse users</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:16px;position:relative"><span style="position:absolute;left:2px;color:var(--status-negative)">·</span><strong>Search results</strong> — user-defined queries don't benefit from background refresh; use an explicit refresh button</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:16px;position:relative"><span style="position:absolute;left:2px;color:var(--status-negative)">·</span><strong>TV or Web</strong> — no touch input; use a visible refresh button or auto-polling instead</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:16px;position:relative"><span style="position:absolute;left:2px;color:var(--status-negative)">·</span>The screen has static content that does not change (settings, legal pages)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <section class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;margin-top:20px">
+      <div style="display:grid;grid-template-columns:28px 160px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:22px;height:22px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--jio)">A</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Scrollable container</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">The full-screen scroll region that the user pulls down. Overflow behavior temporarily overridden to allow above-fold reveal.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:28px 160px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:22px;height:22px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--jio)">B</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Indicator track</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Reserved 64px zone above the first list item. Hidden at rest, revealed as user overscrolls. Centers the spinner horizontally.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:28px 160px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:22px;height:22px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--jio)">C</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Progress arc</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">24px SVG arc that fills proportionally as pull distance approaches the 80px commit threshold. Color: <code class="ds-code">var(--jio)</code>. Stroke width: <code class="ds-code">var(--spinner-stroke)</code> (2px).</span>
+      </div>
+      <div style="display:grid;grid-template-columns:28px 160px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:22px;height:22px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--jio)">D</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Spinner</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">24px circular spinner shown during the <em>refreshing</em> state. Continuous 360° rotation at <code class="ds-code">var(--dur-icon-spin)</code> (1000ms) linear. Replaces the progress arc.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:28px 160px 1fr;gap:16px;padding:14px 20px;align-items:start">
+        <div style="width:22px;height:22px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--jio)">E</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Success checkmark</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Brief checkmark icon in <code class="ds-code">var(--status-positive)</code>. Shown for exactly 400ms then fades with <code class="ds-code">var(--dur-fast)</code>. Provides confirmation feedback before indicator disappears.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOW -->
+  <section class="ds-section" id="flow">
+    <h2 class="ds-section-title">Flow</h2>
+    <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;margin-top:20px">
+      <div style="display:grid;grid-template-columns:32px 160px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">1</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Idle</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">List is scrolled to top. Indicator track is hidden. No visual change until overscroll begins.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 160px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">2</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Pulling (0–64px)</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Content follows finger with spring resistance factor 0.4 — the surface moves at 40% of finger velocity, providing tactile push-back. Indicator track reveals proportionally. Progress arc fills from 0%.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 160px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">3</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Pulling (64–80px)</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Indicator becomes fully visible at 64px. Arc continues filling toward 100%. A subtle haptic tick fires at 80px to confirm threshold hit (where available).</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 160px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">4</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Releasing</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">User lifts finger past 80px. Content snaps up with <code class="ds-code">var(--dur-sheet)</code> (400ms) spring easing to rest position showing indicator. Arc swaps to continuous spinner. Refresh request fires.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 160px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">5</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Refreshing</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Spinner rotates continuously. Existing content remains visible — no skeleton flash. New content is fetched in the background. List is not blanked during this state.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 160px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--success-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--status-positive)">6a</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Success</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Spinner swaps to checkmark (400ms dwell). List updates in place. <code class="ds-code">aria-live="polite"</code> region announces "Content refreshed". Indicator fades out with <code class="ds-code">var(--dur-fast)</code>.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 160px 1fr;gap:16px;padding:14px 20px;align-items:start">
+        <div style="width:24px;height:24px;background:var(--error-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--status-negative)">6b</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Error</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Indicator shakes horizontally (ease-error easing, <code class="ds-code">var(--dur-error)</code>). Spinner color changes to <code class="ds-code">var(--status-negative)</code>. <code class="ds-code">aria-live</code> announces "Refresh failed". Existing content remains. Indicator fades after 1.5s.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATES -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <table class="ds-api-table" style="margin-top:16px">
+      <thead><tr><th>State</th><th>Visual</th><th>Interaction</th><th>aria-live</th></tr></thead>
+      <tbody>
+        <tr><td>Idle</td><td>No indicator visible</td><td>Normal scroll</td><td>—</td></tr>
+        <tr><td>Pulling</td><td>Progress arc fills proportionally; resistance applied</td><td>Finger held; release cancels</td><td>—</td></tr>
+        <tr><td>Releasing</td><td>Arc at 100%; content springs back</td><td>Gesture committed; cannot cancel</td><td>—</td></tr>
+        <tr><td>Refreshing</td><td>Continuous spinner, <code class="ds-code">var(--jio)</code> color</td><td>List non-interactive during fetch</td><td>—</td></tr>
+        <tr><td>Success</td><td>Green checkmark, 400ms dwell, fade out</td><td>List updates in place</td><td>"Content refreshed"</td></tr>
+        <tr><td>Error</td><td>Shake + red spinner, fade after 1.5s</td><td>Existing content intact; retry available</td><td>"Refresh failed"</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PLATFORM BEHAVIOR -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform behavior</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:16px">
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--jio);border-radius:var(--r4);padding:20px;background:var(--surface-1)">
+        <p style="font-size:12px;font-weight:700;color:var(--jio);margin:0 0 12px">Mobile</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Full native gesture support. Use WebKit/Chromium overscroll-behavior or native SDK component.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Resistance factor 0.4 applied via JS touch handler if custom implementation needed.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Haptic confirmation at 80px threshold where device supports it.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Safe area aware — indicator stays below status bar.</li>
+        </ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--gold);border-radius:var(--r4);padding:20px;background:var(--surface-1)">
+        <p style="font-size:12px;font-weight:700;color:var(--gold);margin:0 0 12px">Web</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--status-negative)">Not supported.</strong> Web users do not expect pull-to-refresh on desktop browsers.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Use a visible "Refresh" icon button in the page header or toolbar instead.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Auto-polling (e.g. every 30s) is acceptable for notification badges on web.</li>
+        </ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--amber);border-radius:var(--r4);padding:20px;background:var(--surface-1)">
+        <p style="font-size:12px;font-weight:700;color:var(--amber);margin:0 0 12px">TV</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--status-negative)">Not supported.</strong> No touch input on TV remotes.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Add a focusable "Refresh" action in the page header, reachable by D-pad.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Consider background auto-refresh on a timer for content feeds.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOTION -->
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-api-table" style="margin-top:16px">
+      <thead><tr><th>Moment</th><th>Token</th><th>Easing</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Pull resistance</td><td><em>continuous (finger-driven)</em></td><td><code class="ds-code">var(--spring)</code></td><td>Factor 0.4 — content moves at 40% of finger delta</td></tr>
+        <tr><td>Release snap-back</td><td><code class="ds-code">var(--dur-sheet)</code> 400ms</td><td><code class="ds-code">var(--spring)</code></td><td>Content animates to resting position showing indicator</td></tr>
+        <tr><td>Spinner rotation</td><td><code class="ds-code">var(--dur-icon-spin)</code> 1000ms</td><td>linear</td><td>Infinite loop while refreshing</td></tr>
+        <tr><td>Success checkmark appear</td><td><code class="ds-code">var(--dur-fast)</code> 120ms</td><td><code class="ds-code">var(--ease-out)</code></td><td>Scale 0.7 → 1.0, opacity 0 → 1</td></tr>
+        <tr><td>Success fade out</td><td><code class="ds-code">var(--dur-fast)</code> 120ms</td><td><code class="ds-code">var(--ease-out)</code></td><td>After 400ms dwell; indicator collapses away</td></tr>
+        <tr><td>Error shake</td><td><code class="ds-code">var(--dur-error)</code> 380ms</td><td><code class="ds-code">var(--ease-error)</code></td><td>±6px horizontal oscillation, 3 cycles</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:16px;padding:16px;background:var(--status-warning-soft);border:1px solid var(--status-warning-border);border-radius:var(--r3)">
+      <p style="font-size:12px;font-weight:700;color:var(--status-warning);margin:0 0 6px">Reduced motion</p>
+      <p style="font-size:12px;color:var(--text2);line-height:1.5;margin:0">When <code class="ds-code">prefers-reduced-motion: reduce</code> is active: disable spring resistance animation (content tracks finger 1:1), replace spinning animation with a static arc, use instant show/hide for indicator (<code class="ds-code">var(--dur-reduced-instant)</code>). Error shake is replaced by a static red indicator with text label "Refresh failed".</p>
+    </div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;margin-top:16px">
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Include a visually-hidden <code class="ds-code">&lt;div aria-live="polite" aria-atomic="true"&gt;</code> region in the DOM. On success, inject "Content refreshed". On error, inject "Refresh failed, please try again".</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Always provide a visible refresh button (icon button in the app bar or page header) as a pointer/keyboard/switch-access alternative. The gesture alone is not sufficient.</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>During the refreshing state, set <code class="ds-code">aria-busy="true"</code> on the list container. Remove it when refresh completes or errors.</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>The spinner element should have <code class="ds-code">role="progressbar"</code> and <code class="ds-code">aria-label="Refreshing"</code>. Hide it from the accessibility tree when not refreshing using <code class="ds-code">aria-hidden="true"</code>.</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Do not use color alone to distinguish success from error states — pair the color change with distinct iconography (checkmark vs. X) and the aria-live announcement.</li>
+    </ul>
+  </section>
+
+  <!-- CONTENT GUIDANCE -->
+  <section class="ds-section" id="content">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <table class="ds-api-table" style="margin-top:16px">
+      <thead><tr><th>Scenario</th><th>aria-live announcement</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Refresh succeeded, new items found</td><td>"Content refreshed"</td><td>Do not announce the number of new items — overly verbose for a routine action</td></tr>
+        <tr><td>Refresh succeeded, no new items</td><td>"Content refreshed"</td><td>Same message — distinguishing "nothing new" adds noise without benefit</td></tr>
+        <tr><td>Refresh failed (network error)</td><td>"Refresh failed, please try again"</td><td>Keep message neutral — avoid technical jargon like "network timeout"</td></tr>
+        <tr><td>Refresh failed (server error)</td><td>"Refresh failed, please try again"</td><td>Consistent phrasing regardless of server-side cause</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:16px;padding:16px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3)">
+      <p style="font-size:12px;font-weight:700;color:var(--text);margin:0 0 6px">Skeleton relationship</p>
+      <p style="font-size:12px;color:var(--text2);line-height:1.5;margin:0">Pull to Refresh does <em>not</em> blank the list and replace with skeletons. The existing content stays visible throughout the refresh cycle. Skeletons are only appropriate on initial page load when no content exists yet. Replacing visible content with skeletons during a refresh creates unnecessary visual disruption and degrades perceived performance.</p>
+    </div>
+  </section>
+
+  <!-- RELATED COMPONENTS -->
+  <section class="ds-section" id="components">
+    <h2 class="ds-section-title">Related components</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px">
+      <a href="../../spinner/" class="ds-chip ds-chip--default">Spinner</a>
+      <a href="../../skeleton/" class="ds-chip ds-chip--default">Skeleton</a>
+      <a href="../../toast/" class="ds-chip ds-chip--default">Toast</a>
+      <a href="../../buttons/" class="ds-chip ds-chip--default">Buttons</a>
+      <a href="../load-more/" class="ds-chip ds-chip--default">Infinite Scroll &amp; Load More</a>
+    </div>
+  </section>
+
+</main>
+<script src="../../shell.js?v=2"></script>
+</body></html>

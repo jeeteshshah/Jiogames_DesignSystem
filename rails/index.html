@@ -7,95 +7,93 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     body { background: var(--bg); color: var(--text); font-family: var(--jio-font); margin: 0; }
 
-    .component-hero { border-radius: 20px; overflow: hidden; margin-bottom: 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; min-height: 280px; padding: 48px 32px 32px; }
-    .component-hero--dark { background: #060810; }
-    .component-hero--grid { background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: 32px 32px; background-color: #060810; border: 1px solid var(--border-subtle); }
-    .component-hero-inner { display: flex; flex-direction: column; align-items: center; gap: 28px; position: relative; z-index: 2; }
-    .component-hero-caption { display: block; font-size: 10px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--text4); margin-top: 24px; position: relative; z-index: 2; }
-    .hero-glow { position: absolute; width: 320px; height: 180px; border-radius: var(--pill); background: radial-gradient(ellipse, rgba(0,168,89,.2) 0%, transparent 70%); pointer-events: none; z-index: 1; }
+    
+    
+    
+    
+    
+    
 
-    .component-intro { margin-bottom: 48px; }
-    .component-intro p { font-size: 15px; font-weight: 500; color: var(--text2); line-height: 1.65; margin-bottom: 20px; max-width: 640px; }
-    .component-summary-list { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border-subtle); border-radius: 14px; overflow: hidden; list-style: none; padding: 0; margin: 0; }
-    .component-summary-list li { padding: 14px 20px; border-bottom: 1px solid var(--border-subtle); font-size: 13px; font-weight: 500; color: var(--text2); line-height: 1.55; }
-    .component-summary-list li:last-child { border-bottom: none; }
-    .component-summary-list li strong { color: var(--text); font-weight: 700; }
+    
+    
+    
+    
+    
+    
 
-    .component-best-practices { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
-    .component-bp-card { border-radius: 14px; overflow: hidden; border: 1.5px solid; }
-    .component-bp-card--do { border-color: rgba(0,168,89,.3); }
-    .component-bp-card--dont { border-color: rgba(255,71,87,.3); }
-    .component-bp-label { display: flex; align-items: center; gap: 6px; padding: 10px 16px; font-size: 10px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; }
-    .component-bp-label--do { background: rgba(0,168,89,.07); color: var(--jio); }
-    .component-bp-label--dont { background: rgba(255,71,87,.07); color: var(--negative); }
-    .component-bp-label--do::before { content: '\2713'; font-size: 11px; }
-    .component-bp-label--dont::before { content: '\2715'; font-size: 11px; }
-    .component-bp-list { padding: 16px 20px 20px; background: var(--surface-1); margin: 0; display: flex; flex-direction: column; gap: 8px; list-style: none; }
-    .component-bp-list li { font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.5; padding-left: 14px; position: relative; }
-    .component-bp-list li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
-    .component-platform-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
-    .component-platform-card { background: var(--surface-1); border: 1px solid var(--border-subtle); border-radius: var(--r4); padding: 20px; }
-    .component-platform-card--mobile { border-top: 2px solid rgba(110,231,183,.4); }
-    .component-platform-card--web { border-top: 2px solid rgba(147,197,253,.4); }
-    .component-platform-card--tv { border-top: 2px solid rgba(251,191,36,.4); }
-    .component-platform-card-title { font-size: 11px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--text3); margin-bottom: 12px; }
-    .component-platform-card--mobile .component-platform-card-title { color: #6ee7b7; }
-    .component-platform-card--web .component-platform-card-title { color: #93c5fd; }
-    .component-platform-card--tv .component-platform-card-title { color: #fbbf24; }
-    .component-platform-card ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
-    .component-platform-card li { font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.5; padding-left: 14px; position: relative; }
-    .component-platform-card li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
-    .component-changelog { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; }
-    .component-changelog-entry { display: grid; grid-template-columns: 56px 80px 1fr; gap: 16px; align-items: start; padding: 14px 20px; border-bottom: 1px solid var(--border-subtle); font-size: 12px; }
-    .component-changelog-entry:last-child { border-bottom: none; }
-    .component-changelog-version { font-family: monospace; font-weight: 700; color: var(--jio); font-size: 11px; }
-    .component-changelog-date { color: var(--text3); font-weight: 500; }
-    .component-changelog-desc { color: var(--text2); line-height: 1.5; }
+    
+    
+    
+    
+    
+    
 
-    .a11y-grid { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; margin-top: 24px; }
-    .a11y-row { display: grid; grid-template-columns: 140px 1fr; gap: 0; border-bottom: 1px solid var(--border-subtle); }
-    .a11y-row:last-child { border-bottom: none; }
-    .a11y-label { padding: 16px 16px 14px; font-size: 11px; font-weight: 700; color: var(--text3); letter-spacing: .3px; background: var(--surface-2); text-transform: uppercase; display: flex; align-items: flex-start; }
-    .a11y-content { padding: 14px 20px; font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.6; background: var(--surface-1); }
-    .a11y-content ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 5px; }
-    .a11y-content li { padding-left: 14px; position: relative; }
-    .a11y-content li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+    
+    
+    
+    
+    
+    
+    
+    
 
     kbd { display: inline-block; padding: 1px 6px; background: var(--surface-3); border: 1px solid var(--border); border-radius: 4px; font-family: monospace; font-size: 11px; color: var(--text2); }
 
-    .ds-token-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; font-size: 12px; }
-    .ds-token-table thead th { background: var(--surface-2); padding: 10px 16px; text-align: left; font-size: 9px; font-weight: 700; letter-spacing: .7px; text-transform: uppercase; color: var(--text3); border-bottom: 1px solid var(--border-subtle); }
-    .ds-token-table tbody td { padding: 12px 16px; border-bottom: 1px solid var(--border-subtle); color: var(--text2); vertical-align: middle; }
-    .ds-token-table tbody tr:last-child td { border-bottom: none; }
-    .ds-token-table tbody tr:hover td { background: var(--surface-2); }
-    .ds-token-name { font-family: monospace; color: #a8e6c5; font-size: 11px; }
-    .ds-token-value { font-family: monospace; color: var(--text3); font-size: 11px; }
-    .ds-token-swatch { display: inline-block; width: 16px; height: 16px; border-radius: 4px; border: 1px solid var(--border-subtle); vertical-align: middle; }
+    
+    
+    
+    
+    
+    
+    
+    
 
-    .ds-anatomy { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 24px; }
-    .ds-anatomy-preview { background: var(--surface-1); border: 1px solid var(--border-subtle); border-radius: var(--r4); padding: 24px; display: flex; align-items: center; justify-content: center; }
-    .ds-anatomy-list { display: flex; flex-direction: column; gap: 16px; }
-    .ds-anatomy-item { display: grid; grid-template-columns: 20px 1fr; gap: 12px; align-items: flex-start; }
-    .ds-anatomy-callout-num { width: 20px; height: 20px; border-radius: 50%; background: var(--jio); color: #000; font-size: 10px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .ds-anatomy-callout-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--jio); flex-shrink: 0; }
-    .ds-anatomy-label { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-    .ds-anatomy-desc { font-size: 12px; color: var(--text2); line-height: 1.55; }
-    .ds-anatomy-token { font-size: 10px; font-family: monospace; color: var(--text4); margin-top: 4px; }
-    .ds-anatomy-required { display: inline-block; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: var(--pill); background: rgba(0,168,89,.1); color: var(--jio); letter-spacing: .3px; margin-left: 6px; text-transform: uppercase; }
-    .ds-anatomy-optional { display: inline-block; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: var(--pill); background: rgba(255,255,255,.06); color: var(--text3); letter-spacing: .3px; margin-left: 6px; text-transform: uppercase; }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     @keyframes shimmer { 0% { background-position: -400px 0; } 100% { background-position: 400px 0; } }
-    .skeleton { background: linear-gradient(90deg, var(--surface-2) 25%, var(--surface-3) 50%, var(--surface-2) 75%); background-size: 800px 100%; animation: shimmer 1.4s infinite linear; border-radius: 6px; }
+    
 
-    @media (max-width: 760px) {
-      .component-best-practices, .component-platform-grid, .ds-anatomy { grid-template-columns: 1fr; }
-    }
+    
   </style>
 </head>
 <body>
@@ -103,20 +101,20 @@
 
   <!-- 1. PAGE HEADER -->
   <div class="component-page-header">
-    <div class="component-breadcrumb">
-      <a href="../index.html">JioGames DLS</a>
-      <span class="component-breadcrumb-sep">&#x203A;</span>
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <span class="component-breadcrumb-link">JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
       <span>Components</span>
-      <span class="component-breadcrumb-sep">&#x203A;</span>
-      <span>Rails</span>
-    </div>
-    <h1 class="component-page-title">Rails</h1>
-    <p class="component-page-def">Rails are horizontal-scrolling rows of cards that organize game collections into discoverable, swipeable sections.</p>
+      <span class="component-breadcrumb-sep">›</span>
+      <span class="component-breadcrumb-current">Rails</span>
+    </nav>
+    <h1 class="component-page-title">Rails</h1><p class="component-page-def">Rails are horizontal-scrolling rows of cards that organize game collections into discoverable, swipeable sections.</p>
     <div class="component-platforms">
       <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
       <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
       <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
       <span class="component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBSYWlscyDigJQgSmlvR2FtZXMgRExTIHNwZWMKCj4gU291cmNlOiBgcmFpbHMvaW5kZXguaHRtbGAgaW4gdGhlIEppb0dhbWVzIERlc2lnbiBTeXN0ZW0uCj4gVGhpcyBzcGVjIGlzIGdlbmVyYXRlZCB2ZXJiYXRpbSBmcm9tIHRoZSBwYWdlIOKAlCBkbyBub3QgaW52ZW50IHZhbHVlcyBub3QgbGlzdGVkIGhlcmUuCgoqKlBhdGg6KiogSmlvR2FtZXMgRExTIOKAuiBDb21wb25lbnRzIOKAuiBSYWlscwoKLS0tCgpSYWlscyBhcmUgaG9yaXpvbnRhbC1zY3JvbGxpbmcgcm93cyBvZiBjYXJkcyB0aGF0IG9yZ2FuaXplIGdhbWUgY29sbGVjdGlvbnMgaW50byBkaXNjb3ZlcmFibGUsIHN3aXBlYWJsZSBzZWN0aW9ucy4KClJhaWxzIGxldCBwbGF5ZXJzIHNjYW4gbGFyZ2UgZ2FtZSBjYXRhbG9ncyB3aXRob3V0IGxlYXZpbmcgdGhlIGN1cnJlbnQgc2NyZWVuLiBUaGUgaG9yaXpvbnRhbCBvcmllbnRhdGlvbiBjcmVhdGVzIGEgbmF0dXJhbCBzd2lwZSBnZXN0dXJlIG9uIHRvdWNoIGFuZCBhIGRpcmVjdGlvbmFsIGJyb3dzZSBvbiBUViByZW1vdGVzLgoKLSAqKlNlY3Rpb24gaGVhZGVyKiogaWRlbnRpZmllcyB0aGUgcmFpbCdzIHRoZW1lIGFuZCBjdXJhdGlvbiBsb2dpYyBpbiAy4oCTNCB3b3Jkcy4KLSAqKkNhcmRzIGFyZSBzaXplZCBjb25zaXN0ZW50bHkqKiB3aXRoaW4gYSByYWlsIOKAlCBuZXZlciBtaXggY2FyZCB3aWR0aHMgaW4gb25lIHJvdy4KLSAqKlBhcnRpYWwgY2FyZCBhdCBlZGdlKiogc2lnbmFscyBtb3JlIGNvbnRlbnQgaXMgYXZhaWxhYmxlIHRvIHRoZSByaWdodC4KLSAqKkdyYWRpZW50IGVkZ2UgZmFkZSoqIHJlaW5mb3JjZXMgc2Nyb2xsYWJpbGl0eSBhbmQgbWFpbnRhaW5zIHRoZSBkYXJrIGFlc3RoZXRpYy4KLSAqKkVtcHR5IC8gbG9hZGluZyBzdGF0ZXMqKiBtYWludGFpbiByYWlsIGhlaWdodCBzbyBsYXlvdXQgZG9lcyBub3Qgc2hpZnQuCgojIyBXaGVuIHRvIHVzZQoKVXNlIHdoZW4KCi0gSG9yaXpvbnRhbCBzY3JvbGxpbmcgZ2FtZSBjb2xsZWN0aW9ucyBvbiB0aGUgaG9tZSBzY3JlZW4KLSBSZWNvbW1lbmRlZCwgdHJlbmRpbmcsIGFuZCBwZXJzb25hbGlzZWQgY29udGVudCByb3dzCi0gR2VucmUgb3IgcGxhdGZvcm0gZ3JvdXBpbmdzIHdpdGhpbiBkaXNjb3ZlcnkKLSAiSnVtcCBiYWNrIGluIiBjb250aW51ZS1wbGF5aW5nIHJvd3MKCkRvbid0IHVzZSB3aGVuCgotIFZlcnRpY2FsIHN0YWNrZWQgY2FyZCBsaXN0cyDigJQgdXNlIGEgTGlzdCBvciBncmlkCi0gTW9yZSB0aGFuIDMwIGl0ZW1zIGluIGEgc2luZ2xlIHJhaWwg4oCUIHBhZ2luYXRlIG9yIHVzZSBhIGRlZGljYXRlZCBzY3JlZW4KLSBSYWlscyB3aXRob3V0IGEgdGl0bGUg4oCUIHVzZXJzIG5lZWQgY29udGV4dCBmb3Igd2h5IHRoaXMgY29udGVudCBpcyBncm91cGVkCi0gTWl4aW5nIGNhcmQgc2l6ZXMgd2l0aGluIGEgc2luZ2xlIHJhaWwKCiMjIEJlc3QgcHJhY3RpY2VzCgpGb2xsb3cgdGhlc2UgcnVsZXMgdG8ga2VlcCByYWlscyBjb25zaXN0ZW50IGFuZCBzY2FubmFibGUgYWNyb3NzIHRoZSBKaW9HYW1lcyBwcm9kdWN0IHN1cmZhY2UuCgotIFVzZSBzZWN0aW9uIHRpdGxlcyB0aGF0IGRlc2NyaWJlIHRoZSBjdXJhdGlvbiBsb2dpYyAoIkJlY2F1c2UgeW91IHBsYXllZCBYIikKLSBBbHdheXMgc2hvdyAiU2VlIGFsbCIgd2hlbiB0aGUgcmFpbCBoYXMgbW9yZSB0aGFuIDggaXRlbXMKLSBVc2UgY29uc2lzdGVudCBjYXJkIHNpemVzIHdpdGhpbiBhIHNpbmdsZSByYWlsCi0gU2hvdyBsb2FkaW5nIHNrZWxldG9ucyBhdCB0aGUgY29ycmVjdCBjYXJkIHNpemUKLSBVc2UgYSBDb250aW51ZSBwbGF5aW5nIHJhaWwgZm9yIGluLXByb2dyZXNzIGdhbWVzCgotIE1peCBjYXJkIHNpemVzIHdpdGhpbiBvbmUgcmFpbAotIFVzZSBtb3JlIHRoYW4gMyB3b3JkcyBmb3IgIlNlZSBhbGwiIOKAlCBuZXZlciAiVmlldyBtb3JlIGl0ZW1zIgotIFNob3cgZW1wdHkgcmFpbHMg4oCUIGhpZGUgdGhlIHJhaWwgb3Igc2hvdyBhIHBsYWNlaG9sZGVyCi0gQXV0b3BsYXkgdmlkZW8gaW4gcmFpbCBjYXJkcwotIFVzZSByYWlscyBvbiBUViB3aXRob3V0IEQtcGFkIGZvY3VzIGhhbmRsaW5nCgojIyBBbmF0b215CgpFdmVyeSByYWlsIGlzIGNvbXBvc2VkIG9mIHRoZSBzYW1lIGNvcmUgc2xvdHMuIFRoZSBzZWN0aW9uIGhlYWRlciwgY2FyZCByb3csIGFuZCBncmFkaWVudCBlZGdlIGZhZGUgYXJlIHJlcXVpcmVkOyBzY3JvbGwgaW5kaWNhdG9ycyBhbmQgcHJvZ3Jlc3MgYmFycyBhcmUgb3B0aW9uYWwgZW5oYW5jZW1lbnRzLgoKIyMgVmFyaWFudHMKCkZpdmUgcmFpbCB0eXBlcyBjb3ZlciB0aGUgZnVsbCByYW5nZSBvZiBjdXJhdGlvbiBuZWVkcy4gQ2FyZCBzaGFwZSBhbmQgbWV0YWRhdGEgYWRhcHQgcGVyIHZhcmlhbnQgd2hpbGUgdGhlIGhlYWRlciBhbmQgc2Nyb2xsIHBhdHRlcm4gc3RheSBjb25zdGFudC4KCiMjIFNpemVzCgpDYXJkIHNpemVzIGZvbGxvdyBhIG5hbWVkIHNjYWxlIGFjcm9zcyBwbGF0Zm9ybXMuIFRoZSBzYW1lIHNpemUgbmFtZSByZXNvbHZlcyB0byBkaWZmZXJlbnQgcGl4ZWwgdmFsdWVzIG9uIE1vYmlsZSwgV2ViLCBhbmQgVFYgdmlhIENTUyB0b2tlbiBhbGlhc2VzLgoKIyMgU3RhdGVzCgpSYWlscyByZXNwb25kIHRvIGZpdmUgc3RhdGVzLiBMb2FkaW5nIGFuZCBlbXB0eSBzdGF0ZXMgbXVzdCBtYWludGFpbiByYWlsIGhlaWdodCB0byBwcmV2ZW50IGxheW91dCBzaGlmdC4KCiMjIENvbnRlbnQKClJhaWwgdGl0bGVzIGFuZCBjYXJkIGNvcHkgZm9sbG93IGEgc2hvcnQsIGRpcmVjdCBzdHlsZSB0byBhaWQgc2Nhbm5hYmlsaXR5IGluIGZhc3Qtc2Nyb2xsaW5nIGNvbnRleHRzLgoKLSDCtzLigJM0IHdvcmRzLCBzZW50ZW5jZSBjYXNlCi0gwrciU2VlIGFsbCIg4oCUIG5ldmVyICJWaWV3IG1vcmUiIG9yICJWaWV3IGFsbCBpdGVtcyIKLSDCt0Rlc2NyaWJlIGN1cmF0aW9uIGxvZ2ljOiAiQmVjYXVzZSB5b3UgbG92ZSBUb21iIFJhaWRlciIKLSDCt0dlbnJlIHRpbGVzOiAx4oCTMiB3b3JkcywgdGl0bGUgY2FzZSAoIk9wZW4gV29ybGQiKQoKLSDCt1RpdGxlOiBtYXggMiBsaW5lcywgMTRweCBib2xkCi0gwrdNZXRhOiAxIGxpbmUsIDEycHggbXV0ZWQgKGdlbnJlIMK3IHJhdGluZykKLSDCt0NvbnRpbnVlOiBzaG93ICJYJSBjb21wbGV0ZSIgaW4gZ3JlZW4KLSDCt0VtcHR5OiBubyBwbGFjZWhvbGRlciB0ZXh0IGluc2lkZSBjYXJkIGFydAoKIyMgUGxhdGZvcm0gY29uc2lkZXJhdGlvbnMKCkVhY2ggcGxhdGZvcm0gaGFzIGEgZGlmZmVyZW50IGludGVyYWN0aW9uIG1vZGVsLiBTY3JvbGwgYWZmb3JkYW5jZXMgYW5kIGNhcmQgc2l6ZXMgYWRhcHQgd2hpbGUgdGhlIHJhaWwgc3RydWN0dXJlIHN0YXlzIGNvbnN0YW50LgoKLSBUb3VjaC1zd2lwZSwgbW9tZW50dW0gc2Nyb2xsaW5nCi0gSGlkZSBzY3JvbGxiYXIgdmlhIENTUwotIEdyYWRpZW50IGVkZ2UgZmFkZSByaWdodCAoNDBweCkKLSAxNnB4IGhvcml6b250YWwgZ3V0dGVyIHBhZGRpbmcKLSBQYXJ0aWFsIDR0aCBjYXJkIHZpc2libGUgYXMgYWZmb3JkYW5jZQotIFNjcm9sbCBpbmRpY2F0b3IgZG90cyBvcHRpb25hbAoKLSBNb3VzZSBkcmFnIG9yIGFycm93IGNoZXZyb24gYnV0dG9ucyBhdCBlZGdlcwotIFdpZGVyIGNhcmRzIOKAlCBTdGFuZGFyZCA9IDIyMMOXMTM4Ci0gNDBweCBob3Jpem9udGFsIGd1dHRlcgotIEhvdmVyOiBzY2FsZSAxLjAyLCBjYXJkIHNoYWRvdwotIENoZXZyb24gbmF2IGJ1dHRvbnMgYXBwZWFyIG9uIGhvdmVyCi0gS2V5Ym9hcmQgVGFiICsgYXJyb3cgdG8gbmF2aWdhdGUKCi0gRC1wYWQgZm9jdXMgbW92ZXMgYmV0d2VlbiBjYXJkcwotIEZvY3VzZWQgY2FyZCBzY2FsZXMgMS4wNSB3aXRoIGdsb3cKLSBObyBob3Jpem9udGFsIHNjcm9sbCBvbiBZLWF4aXMgbmF2Ci0gU3RhbmRhcmQgPSAzMjDDlzE5MgotIEZvY3VzIHJpbmc6IDNweCBgdmFyKC0tamlvKWAKLSBMZWZ0L3JpZ2h0IEQtcGFkIHdyYXBzIHRvIGFkamFjZW50IHJhaWwKCiMjIE1vdGlvbgoKfCBJbnRlcmFjdGlvbiB8IEVhc2luZyB8IER1cmF0aW9uIHwgUHJvcGVydHkgfAp8LS0tfC0tLXwtLS18LS0tfAp8IFNjcm9sbCAobW9tZW50dW0pIHwgYG5hdGl2ZWAgfCBgcmVhbHRpbWVgIHwgc2Nyb2xsLXNuYXAgfAp8IENhcmQgaG92ZXIgbGlmdCB8IGAtLWVhc2Utb3V0YCB8IGAtLWR1ci1mYXN0YCB8IHRyYW5zZm9ybSBzY2FsZSgxLjAzKSB8CnwgVFYgZm9jdXMgc2NhbGUgfCBgLS1lYXNlLW91dGAgfCBgLS1kdXItZmFzdGAgfCB0cmFuc2Zvcm0gc2NhbGUoMS4wOCkgfAp8IFJhaWwgYXBwZWFyIChzdGFnZ2VyKSB8IGAtLWVhc2Utb3V0YCB8IGAtLWR1ci1mYXN0YCB8IG9wYWNpdHksIHRyYW5zZm9ybSB0cmFuc2xhdGVYKC0xNnB4IOKGkiAwKSB8CnwgQXJyb3cgYnV0dG9uIHByZXNzIHwgYC0tZWFzZS1vdXRgIHwgYDgwbXNgIHwgdHJhbnNmb3JtIHNjYWxlKDAuOTIpIHwKCiMjIFBsYXRmb3JtIHJ1bGVzCgpNb2JpbGUKCi0gSG9yaXpvbnRhbCBzY3JvbGwgd2l0aCBzY3JvbGwtc25hcC10eXBlOiB4IG1hbmRhdG9yeQotIENhcmQgc2l6ZXM6IHdpZGUgMjEww5cxMjhweDsgcG9ydHJhaXQgMTIww5cxODBweAotIFBlZWsgb2YgbmV4dCBjYXJkICgyNHB4KSB2aXNpYmxlIGF0IHJpZ2h0IGVkZ2UKLSBTY3JvbGxiYXIgaGlkZGVuIOKAlCBtb21lbnR1bSBzY3JvbGxpbmcgbmF0aXZlCi0gUmFpbCB0aXRsZSAxNnB4IDcwMDsgU2VlIEFsbCBsaW5rIHJpZ2h0LWFsaWduZWQKCldlYgoKLSBBcnJvdyBidXR0b25zIGFwcGVhciBvbiByYWlsIGhvdmVyIChsZWZ0L3JpZ2h0IGVkZ2VzKSBmb3IgbW91c2UgbmF2Ci0gS2V5Ym9hcmQ6IFRhYiBmb2N1c2VzIHJhaWw7IGFycm93IGtleXMgc2Nyb2xsIGNhcmRzCi0gQ2FyZHMgbWF5IGJlIGxhcmdlciAoMjQww5cxNTBweCkgd2l0aCB3aWRlciBndXR0ZXJzIG9uIGRlc2t0b3AKLSBMb2FkaW5nOiBzaG93IDUgc2tlbGV0b24gY2FyZHMgYXQgc3RhbmRhcmQgZGltZW5zaW9ucwoKVFYKCi0gSG9yaXpvbnRhbCBELXBhZCBuYXZpZ2F0aW9uIOKAlCBMZWZ0L1JpZ2h0IG1vdmVzIGNhcmQgZm9jdXMKLSBGb2N1c2VkIGNhcmQ6IHNjYWxlKDEuMDgpICsgamlvLWdsb3cgcmluZwotIFJhaWwgdGl0bGUgMjBweCBtaW5pbXVtIOKAlCByZWFkYWJsZSBkdXJpbmcgRC1wYWQgZm9jdXMgc3RhdGUKLSBBdCBsZWFzdCA1IGNhcmRzIHZpc2libGUgc2ltdWx0YW5lb3VzbHkgb24gVFYgdmlld3BvcnQKLSBBdXRvLXNjcm9sbCByYWlsIHRvIGtlZXAgZm9jdXNlZCBjYXJkIGZ1bGx5IHZpc2libGUKCiMjIEFjY2Vzc2liaWxpdHkKClJhaWxzIG11c3QgYmUgZnVsbHkgbmF2aWdhYmxlIGJ5IGtleWJvYXJkLCBzY3JlZW4gcmVhZGVyLCBhbmQgcmVtb3RlIGNvbnRyb2wuIFNlbWFudGljIHJvbGVzIGVuc3VyZSBzY3JvbGwgcmVnaW9ucyBhbmQgY2FyZHMgYXJlIGNvcnJlY3RseSBhbm5vdW5jZWQuCgotIGByb2xlPSJsaXN0ImAgb24gdGhlIGNhcmQgcm93IGNvbnRhaW5lcgotIGByb2xlPSJsaXN0aXRlbSJgIG9uIGVhY2ggY2FyZCBlbGVtZW50Ci0gUmFpbCBzZWN0aW9uOiBgYAoKLSBUYWIg4oCUIG1vdmVzIHRvIHRoZSBmaXJzdCBjYXJkIGluIHRoZSByYWlsCi0gQXJyb3cgTGVmdCAvIFJpZ2h0IOKAlCBuYXZpZ2F0ZSBiZXR3ZWVuIGNhcmRzIHdpdGhpbiB0aGUgcmFpbAotIEFycm93IFVwIC8gRG93biDigJQgbW92ZSBmb2N1cyB0byB0aGUgbmV4dC9wcmV2aW91cyByYWlsIHNlY3Rpb24KLSBFbnRlciDigJQgYWN0aXZhdGVzIHRoZSBmb2N1c2VkIGNhcmQKCiMjIFJlbGF0ZWQgdG9rZW5zCgpBbGwgcmFpbCBsYXlvdXQgdmFsdWVzIGFyZSBkZWZpbmVkIGluIGB0b2tlbnMvdG9rZW5zLmNzc2AuIENoYW5nZSBhIHRva2VuIG9uY2UgYW5kIGFsbCByYWlsIGluc3RhbmNlcyB1cGRhdGUgYXV0b21hdGljYWxseS4KCnwgVG9rZW4gfCBWYWx1ZSB8IFN3YXRjaCB8IFVzYWdlIHwKfC0tLXwtLS18LS0tfC0tLXwKfCAtLWNhcmQtd2lkZS13IHwgMjcycHggfCDigJQgfCBIZXJvIC8gc3RhbmRhcmQgbGFuZHNjYXBlIGNhcmQgd2lkdGggfAp8IC0tY2FyZC1zcSB8IDk2cHggfCDigJQgfCBTcXVhcmUgY2FyZCBzaWRlIChxdWljayBwbGF5LCBnZW5yZSB0aWxlKSB8CnwgLS1jYXJkLXJhZGl1cy1sYW5kc2NhcGUgfCAxNnB4IHwg4oCUIHwgQm9yZGVyLXJhZGl1cyBvbiBsYW5kc2NhcGUgY2FyZHMgfAp8IC0tY2FyZC1nYXAgfCAxMnB4IHwg4oCUIHwgR2FwIGJldHdlZW4gY2FyZHMgaW4gYSByYWlsIHwKfCAtLXJhaWwtZ2FwIHwgMjhweCB8IOKAlCB8IFZlcnRpY2FsIGdhcCBiZXR3ZWVuIHJhaWwgc2VjdGlvbnMgfAp8IC0tZ3V0dGVyIHwgMjBweCB8IOKAlCB8IExlZnQvcmlnaHQgcGFnZSBwYWRkaW5nIChNb2JpbGUpIHwKfCAtLWNhcmQtb3ZlcmxheSB8IGxpbmVhci1ncmFkaWVudCgwZGVnLCByZ2JhKDAsMCwwLC43KSwgdHJhbnNwYXJlbnQpIHwgICB8IFRleHQgc2NyaW0gb24gY2FyZCBhcnQgfAp8IC0tamlvIHwgIzAwQTg1OSB8ICAgfCBQcm9ncmVzcyBiYXIsIHNjcm9sbCBpbmRpY2F0b3IgYWN0aXZlIGRvdCB8CgojIyBBUEkKCiMjIyBDU1MgY2xhc3NlcwoKfCBDbGFzcyB8IERlc2NyaXB0aW9uIHwKfC0tLXwtLS18CnwgYC5kcy1yYWlsYCB8IFJvb3Qg4oCUIGZsZXggY29sdW1uLCBnYXAgMTJweCB8CnwgYC5kcy1yYWlsX19oZWFkZXJgIHwgVGl0bGUgcm93IOKAlCBmbGV4LCBzcGFjZS1iZXR3ZWVuLCBhbGlnbi1pdGVtcyBjZW50ZXIgfAp8IGAuZHMtcmFpbF9fdGl0bGVgIHwgMTZweCA3MDAgdGV4dCB8CnwgYC5kcy1yYWlsX19zZWUtYWxsYCB8IDEzcHggamlvLWdyZWVuIGxpbmsgfAp8IGAuZHMtcmFpbF9fdHJhY2tgIHwgSG9yaXpvbnRhbCBzY3JvbGwgY29udGFpbmVyIOKAlCBmbGV4IHJvdywgZ2FwIDEycHgsIG92ZXJmbG93LXggYXV0bywgc2Nyb2xsLXNuYXAgfAp8IGAuZHMtcmFpbF9fdHJhY2s6Oi13ZWJraXQtc2Nyb2xsYmFyYCB8IEhpZGRlbiBzY3JvbGxiYXIgfAoKIyMjIFJlYWN0IHByb3BzCgp8IFByb3AgfCBUeXBlIHwgRGVmYXVsdCB8IERlc2NyaXB0aW9uIHwKfC0tLXwtLS18LS0tfC0tLXwKfCBgdGl0bGVgIHwgc3RyaW5nIHwgcmVxdWlyZWQgfCBSYWlsIHNlY3Rpb24gaGVhZGluZyB8CnwgYHNlZUFsbEhyZWZgIHwgc3RyaW5nIHwgdW5kZWZpbmVkIHwgTGluayBmb3IgIlNlZSBhbGwiIGJ1dHRvbiB8CnwgYGNhcmRXaWR0aGAgfCBudW1iZXIgfCAxNjAgfCBDYXJkIHdpZHRoIGluIHB4IGZvciBzY3JvbGwtc25hcCBzaXppbmcgfAp8IGBjaGlsZHJlbmAgfCBSZWFjdE5vZGUgfCByZXF1aXJlZCB8IENhcmQgZWxlbWVudHMgaW4gdGhlIHNjcm9sbCB0cmFjayB8CnwgYGxvYWRpbmdgIHwgYm9vbGVhbiB8IGZhbHNlIHwgU2hvdyBza2VsZXRvbiBwbGFjZWhvbGRlciBjYXJkcyB8CgojIyBDb2RlIGV4YW1wbGVzCgpDb3B5IHRoZXNlIHNuaXBwZXRzIGFzIHN0YXJ0aW5nIHBvaW50cy4gQWx3YXlzIGxpbmsgYHRva2Vucy90b2tlbnMuY3NzYCwgYGNvbXBvbmVudHMuY3NzYCwgYW5kIGBzdGF0ZXMuY3NzYCBiZWZvcmUgdXNpbmcgY29tcG9uZW50IGNsYXNzZXMuCgpgYGBgaHRtbAo8c2VjdGlvbiBhcmlhLWxhYmVsPSJQb3B1bGFyIGluIE11bWJhaSI+CiAgPGRpdiBjbGFzcz0icmFpbC1oZWFkZXIiPgogICAgPGgyIGNsYXNzPSJyYWlsLXRpdGxlIj5Qb3B1bGFyIGluIE11bWJhaTwvaDI+CiAgICA8YnV0dG9uIGNsYXNzPSJidG4gYnRuLS10ZXh0IGJ0bi0teHMgYnRuLS1odWciIHN0eWxlPSJjb2xvcjp2YXIoLS1qaW8pIj5TZWUgYWxsPC9idXR0b24+CiAgPC9kaXY+CiAgPGRpdiBjbGFzcz0icmFpbC1zY3JvbGwiPgogICAgPGRpdiBjbGFzcz0iY2FyZCIgc3R5bGU9IndpZHRoOjE2MHB4O2ZsZXgtc2hyaW5rOjAiPi4uLjwvZGl2PgogICAgPGRpdiBjbGFzcz0iY2FyZCIgc3R5bGU9IndpZHRoOjE2MHB4O2ZsZXgtc2hyaW5rOjAiPi4uLjwvZGl2PgogICAgPGRpdiBjbGFzcz0iY2FyZCIgc3R5bGU9IndpZHRoOjE2MHB4O2ZsZXgtc2hyaW5rOjAiPi4uLjwvZGl2PgogIDwvZGl2Pgo8L3NlY3Rpb24+CmBgYGAKCmBgYGBodG1sCjxzZWN0aW9uIGFyaWEtbGFiZWw9IkxvYWRpbmcgZ2FtZXMiIGFyaWEtYnVzeT0idHJ1ZSI+CiAgPGRpdiBjbGFzcz0icmFpbC1oZWFkZXIiPgogICAgPGRpdiBjbGFzcz0ic2tlbGV0b24gc2tlbGV0b24tLXRleHQiIHN0eWxlPSJ3aWR0aDoxNjBweDtoZWlnaHQ6MThweCI+PC9kaXY+CiAgPC9kaXY+CiAgPGRpdiBjbGFzcz0icmFpbC1zY3JvbGwiPgogICAgPGRpdiBjbGFzcz0ic2tlbGV0b24gc2tlbGV0b24tLWNhcmQiIHN0eWxlPSJ3aWR0aDoxNjBweDtoZWlnaHQ6OTBweDtmbGV4LXNocmluazowO2JvcmRlci1yYWRpdXM6dmFyKC0tcjQpIj48L2Rpdj4KICAgIDxkaXYgY2xhc3M9InNrZWxldG9uIHNrZWxldG9uLS1jYXJkIiBzdHlsZT0id2lkdGg6MTYwcHg7aGVpZ2h0OjkwcHg7ZmxleC1zaHJpbms6MDtib3JkZXItcmFkaXVzOnZhcigtLXI0KSI+PC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJza2VsZXRvbiBza2VsZXRvbi0tY2FyZCIgc3R5bGU9IndpZHRoOjE2MHB4O2hlaWdodDo5MHB4O2ZsZXgtc2hyaW5rOjA7Ym9yZGVyLXJhZGl1czp2YXIoLS1yNCkiPjwvZGl2PgogIDwvZGl2Pgo8L3NlY3Rpb24+CmBgYGAKCi0tLQoKIyMgVG9rZW5zIHJlZmVyZW5jZWQgb24gdGhpcyBwYWdlCgpVc2UgdGhlc2UgZXhhY3QgdG9rZW5zIOKAlCBkZWZpbmVkIGluIGB0b2tlbnMvdG9rZW5zLmNzc2AuIERvIG5vdCBzdWJzdGl0dXRlIHJhdyB2YWx1ZXMuCgotIGAtLWFtYmVyYAotIGAtLWJnYAotIGAtLWJvcmRlcmAKLSBgLS1ib3JkZXItc3VidGxlYAotIGAtLWdvbGRgCi0gYC0tamlvYAotIGAtLWppby1mb250YAotIGAtLW5lZ2F0aXZlYAotIGAtLXBpbGxgCi0gYC0tcjRgCi0gYC0tcjVgCi0gYC0tc3VyZmFjZS0xYAotIGAtLXN1cmZhY2UtMmAKLSBgLS1zdXJmYWNlLTNgCi0gYC0tdGV4dGAKLSBgLS10ZXh0MmAKLSBgLS10ZXh0M2AKLSBgLS10ZXh0NGAKCi0tLQoKIyMgQnVpbGQgcnVsZXMgKGJpbmRpbmcpCgoxLiBVc2UgKipvbmx5KiogdGhlIHRva2VucyBsaXN0ZWQgYWJvdmUuIElmIGEgdmFsdWUgeW91IG5lZWQgaXMgbm90IGxpc3RlZCwgc3RvcCBhbmQgYXNrIOKAlCBkbyBub3QgaW50cm9kdWNlIGEgcmF3IHZhbHVlLgoyLiBGb250IGlzICoqSmlvVHlwZSoqIG9ubHkuIFdlaWdodHM6IDMwMCwgNTAwLCA3MDAsIDkwMC4KMy4gUmV1c2UgdGhlIGNvbXBvbmVudCBDU1MgcGF0dGVybnMgc2hvd24gb24gdGhlIHNvdXJjZSBwYWdlOyBkbyBub3QgcmVkZXNpZ24uCjQuIE1hdGNoIGV2ZXJ5IHN0YXRlIChkZWZhdWx0LCBob3ZlciwgZm9jdXMsIGFjdGl2ZSwgZGlzYWJsZWQsIGxvYWRpbmcpIHNob3duIG9uIHRoZSBwYWdlLgo1LiBBY2Nlc3NpYmlsaXR5IHJlcXVpcmVtZW50cyBvbiB0aGUgcGFnZSBhcmUgbWFuZGF0b3J5LCBub3Qgb3B0aW9uYWwuCg==" download="rails-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
     </div>
   </div>
 
@@ -128,7 +126,7 @@
         <!-- Rail header -->
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;width:100%">
           <span style="font-size:16px;font-weight:900;color:var(--text)">Because you love Tomb Raider</span>
-          <span style="font-size:13px;color:var(--jio);cursor:pointer;font-weight:600">See all</span>
+          <span style="font-size:13px;color:var(--jio);cursor:pointer;font-weight:700">See all</span>
         </div>
         <!-- Card row -->
         <div style="display:flex;gap:12px;overflow:hidden">
@@ -181,6 +179,31 @@
   </section>
 
   <!-- 4. BEST PRACTICES -->
+  <!-- WHEN TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use</h2>
+    <div class="ds-usage-grid">
+      <div class="ds-usage-card ds-usage-card--do">
+        <p class="ds-usage-label ds-usage-label--do">Use when</p>
+        <ul class="ds-usage-list">
+              <li>Horizontal scrolling game collections on the home screen</li>
+              <li>Recommended, trending, and personalised content rows</li>
+              <li>Genre or platform groupings within discovery</li>
+              <li>"Jump back in" continue-playing rows</li>
+        </ul>
+      </div>
+      <div class="ds-usage-card ds-usage-card--dont">
+        <p class="ds-usage-label ds-usage-label--dont">Don't use when</p>
+        <ul class="ds-usage-list">
+              <li>Vertical stacked card lists — use a List or grid</li>
+              <li>More than 30 items in a single rail — paginate or use a dedicated screen</li>
+              <li>Rails without a title — users need context for why this content is grouped</li>
+              <li>Mixing card sizes within a single rail</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <section class="ds-section" id="best-practices">
     <h2 class="ds-section-title">Best practices</h2>
     <p class="ds-section-desc">Follow these rules to keep rails consistent and scannable across the JioGames product surface.</p>
@@ -604,6 +627,40 @@
   </section>
 
   <!-- 11. ACCESSIBILITY -->
+  <!-- MOTION -->
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-motion-table">
+      <thead><tr><th>Interaction</th><th>Easing</th><th>Duration</th><th>Property</th></tr></thead>
+      <tbody>
+        <tr><td>Scroll (momentum)</td><td><code>native</code></td><td><code>realtime</code></td><td>scroll-snap</td></tr>
+        <tr><td>Card hover lift</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>transform scale(1.03)</td></tr>
+        <tr><td>TV focus scale</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>transform scale(1.08)</td></tr>
+        <tr><td>Rail appear (stagger)</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>opacity, transform translateX(-16px → 0)</td></tr>
+        <tr><td>Arrow button press</td><td><code>--ease-out</code></td><td><code>80ms</code></td><td>transform scale(0.92)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PLATFORM -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform rules</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:16px;">
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--gold);border-radius:var(--r4);padding:20px;background:var(--surface-1);">
+        <p style="font-size:12px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px;">Mobile</p>
+        <ul style="list-style:none;padding:0;margin:0;"><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Horizontal scroll with scroll-snap-type: x mandatory</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Card sizes: wide 210×128px; portrait 120×180px</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Peek of next card (24px) visible at right edge</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Scrollbar hidden — momentum scrolling native</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Rail title 16px 700; See All link right-aligned</li></ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--amber);border-radius:var(--r4);padding:20px;background:var(--surface-1);">
+        <p style="font-size:12px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px;">Web</p>
+        <ul style="list-style:none;padding:0;margin:0;"><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Arrow buttons appear on rail hover (left/right edges) for mouse nav</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Keyboard: Tab focuses rail; arrow keys scroll cards</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Cards may be larger (240×150px) with wider gutters on desktop</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Loading: show 5 skeleton cards at standard dimensions</li></ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid #F59E0B;border-radius:var(--r4);padding:20px;background:var(--surface-1);">
+        <p style="font-size:12px;font-weight:700;color:#F59E0B;text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px;">TV</p>
+        <ul style="list-style:none;padding:0;margin:0;"><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Horizontal D-pad navigation — Left/Right moves card focus</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Focused card: scale(1.08) + jio-glow ring</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Rail title 20px minimum — readable during D-pad focus state</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">At least 5 cards visible simultaneously on TV viewport</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Auto-scroll rail to keep focused card fully visible</li></ul>
+      </div>
+    </div>
+  </section>
+
   <section class="ds-section" id="accessibility">
     <h2 class="ds-section-title">Accessibility</h2>
     <p class="ds-section-desc">Rails must be fully navigable by keyboard, screen reader, and remote control. Semantic roles ensure scroll regions and cards are correctly announced.</p>
@@ -712,6 +769,34 @@
   </section>
 
   <!-- 13. CODE EXAMPLES -->
+  <!-- API -->
+  <section class="ds-section" id="api">
+    <h2 class="ds-section-title">API</h2>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:0 0 12px;">CSS classes</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>.ds-rail</code></td><td>Root — flex column, gap 12px</td></tr>
+        <tr><td><code>.ds-rail__header</code></td><td>Title row — flex, space-between, align-items center</td></tr>
+        <tr><td><code>.ds-rail__title</code></td><td>16px 700 text</td></tr>
+        <tr><td><code>.ds-rail__see-all</code></td><td>13px jio-green link</td></tr>
+        <tr><td><code>.ds-rail__track</code></td><td>Horizontal scroll container — flex row, gap 12px, overflow-x auto, scroll-snap</td></tr>
+        <tr><td><code>.ds-rail__track::-webkit-scrollbar</code></td><td>Hidden scrollbar</td></tr>
+      </tbody>
+    </table>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 12px;">React props</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>title</code></td><td><span class="api-type">string</span></td><td><span class="api-default">required</span></td><td>Rail section heading</td></tr>
+        <tr><td><code>seeAllHref</code></td><td><span class="api-type">string</span></td><td><span class="api-default">undefined</span></td><td>Link for "See all" button</td></tr>
+        <tr><td><code>cardWidth</code></td><td><span class="api-type">number</span></td><td><span class="api-default">160</span></td><td>Card width in px for scroll-snap sizing</td></tr>
+        <tr><td><code>children</code></td><td><span class="api-type">ReactNode</span></td><td><span class="api-default">required</span></td><td>Card elements in the scroll track</td></tr>
+        <tr><td><code>loading</code></td><td><span class="api-type">boolean</span></td><td><span class="api-default">false</span></td><td>Show skeleton placeholder cards</td></tr>
+      </tbody>
+    </table>
+  </section>
+
   <section class="component-section" id="code-examples">
     <h2 class="ds-section-title">Code examples</h2>
     <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
@@ -748,6 +833,6 @@
 
 </main>
 <script src="../sprite-loader.js"></script>
-<script src="../shell.js"></script>
+<script src="../shell.js?v=2"></script>
 </body>
 </html>

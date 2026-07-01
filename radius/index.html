@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     /* ── Demo swatch sizes (illustration only — not UI controls) ── */
     :root {
@@ -141,18 +141,18 @@
 
     <header class="component-page-header">
       <nav class="component-breadcrumb" aria-label="Breadcrumb">
-        <a href="../" class="component-breadcrumb-link">JioGames DLS</a>
-        <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+        <span class="component-breadcrumb-link">JioGames DLS</span>
+        <span class="component-breadcrumb-sep">›</span>
         <span class="component-breadcrumb-current">Radius</span>
       </nav>
-      <h1 class="component-page-title">Radius</h1>
-      <p class="component-page-def">Nine graduated radius tokens plus a pill token. Components never use bare pixel values for border-radius.</p>
+      <h1 class="component-page-title">Radius</h1><p class="component-page-def">Nine graduated radius tokens plus a pill token. Components never use bare pixel values for border-radius.</p>
       <div class="component-platforms">
         <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
         <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
         <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
         <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
-      </div>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBSYWRpdXMg4oCUIEppb0dhbWVzIERMUyBzcGVjCgo+IFNvdXJjZTogYHJhZGl1cy9pbmRleC5odG1sYCBpbiB0aGUgSmlvR2FtZXMgRGVzaWduIFN5c3RlbS4KPiBUaGlzIHNwZWMgaXMgZ2VuZXJhdGVkIHZlcmJhdGltIGZyb20gdGhlIHBhZ2Ug4oCUIGRvIG5vdCBpbnZlbnQgdmFsdWVzIG5vdCBsaXN0ZWQgaGVyZS4KCioqUGF0aDoqKiBKaW9HYW1lcyBETFMg4oC6IFJhZGl1cwoKLS0tCgpOaW5lIGdyYWR1YXRlZCByYWRpdXMgdG9rZW5zIHBsdXMgYSBwaWxsIHRva2VuLiBDb21wb25lbnRzIG5ldmVyIHVzZSBiYXJlIHBpeGVsIHZhbHVlcyBmb3IgYm9yZGVyLXJhZGl1cy4KCjkgR1JBRFVBVEVEIFNURVBTICsgUElMTCDCtyBDT01QT05FTlQgTUFQUElORwoKIyMgUmFkaXVzIHNjYWxlCgpFYWNoIHRva2VuIHJlcHJlc2VudHMgYSBzdGVwIGluIHRoZSByYWRpdXMgaGllcmFyY2h5LiBTbWFsbGVyIHZhbHVlcyBhbmNob3IgYXJ0d29yay1sZWQgc3VyZmFjZXM7IGxhcmdlciB2YWx1ZXMgYmVsb25nIHRvIGludGVyYWN0aXZlIGNocm9tZSBhbmQgb3ZlcmxheSBsYXllcnMuCgojIyBDb21wb25lbnQg4oaSIHJhZGl1cyBtYXBwaW5nCgpPbmUgY29tcG9uZW50LCBvbmUgdG9rZW4uIERldmlhdGlvbnMgZnJvbSB0aGlzIHRhYmxlIHJlcXVpcmUgYSBnb3Zlcm5hbmNlIHVwZGF0ZS4KCnwgQ29tcG9uZW50IHwgVG9rZW4gfCBWYWx1ZSB8IE5vdGVzIHwKfC0tLXwtLS18LS0tfC0tLXwKfCBCdXR0b25zIHwgLS1waWxsIHwgMTAwcHggfCBGdWxsIHBpbGwgc2hhcGUgYWx3YXlzIHwKfCBQcmltYXJ5IENUQSB8IC0tcGlsbCB8IDEwMHB4IHwgTmV2ZXIgdXNlIC0tcjkgZm9yIGJ1dHRvbnMgfAp8IENhcmRzIChkZWZhdWx0KSB8IC0tcjQgfCAxNHB4IHwgU3RhbmRhcmQgbGFuZHNjYXBlL3NxdWFyZSBnYW1lIGNhcmQgfAp8IENvdmVyIHBvcnRyYWl0IGNhcmQgfCAtLXI1IHwgMTZweCB8IFBvcnRyYWl0IGFydHdvcmsgaW1hZ2UgfAp8IEhlcm8gLyBtYXJxdWVlIGNhcmRzIHwgLS1yMiB8IDEwcHggfCBMYXJnZXIgY2FudmFzIOKAlCBzbWFsbGVyIHJhZGl1cyB8CnwgQm90dG9tIHNoZWV0cyB8IC0tcjkgLS1yOSAwIDAgfCAyOHB4IHwgVG9wIGNvcm5lcnMgb25seTsgYm90dG9tIGlzIGZsdXNoIHwKfCBJbnB1dHMgJiB0ZXh0IGZpZWxkcyB8IC0tcjUgfCAxNnB4IHwgUGhvbmUgaW5wdXQsIHRleHQgZmllbGRzIHwKfCBPVFAgYm94ZXMgfCAtLXI0IHwgMTRweCB8IEluZGl2aWR1YWwgZGlnaXQgY2VsbCB8CnwgQ2hpcHMgJiB0YWdzIHwgLS1waWxsIHwgMTAwcHggfCBBY3Rpb24gY2hpcHMgYWx3YXlzIHBpbGwgfAp8IFBsYXRmb3JtIGNoaXBzICh0aWxlKSB8IC0tcjQgfCAxNHB4IHwgVGFsbGVyIHRpbGUgZm9ybWF0IOKAlCBwaWxsIGxvb2tzIHdyb25nIHwKfCBEaWFsb2dzICYgbW9kYWxzIHwgLS1yNyB8IDIwcHggfCBBbGwgY29ybmVycyB8CnwgUGFzcyBjYXJkcyB8IC0tcjcgfCAyMHB4IHwgUHJlbWl1bSBzdXJmYWNlIHwKfCBVcHNlbGwgY2FyZHMgfCAtLXI3IHwgMjBweCB8IFNhbWUgdGllciBhcyBwYXNzIGNhcmQgfAp8IEdlbnJlIHRpbGVzIHwgLS1yNSB8IDE2cHggfCBJbnRlcmFjdGl2ZSBvdmVybGF5IHwKfCBVU1AgdGlsZXMgfCAtLXI2IHwgMThweCB8IEJldHdlZW4gY2FyZCBhbmQgcGFzcyB0aWVyIHwKfCBOb3RpZmljYXRpb25zIC8gdG9hc3QgfCAtLXIzIHwgMTJweCB8IFRvYXN0ICsgaW4tYXBwIGJhbm5lcnMgfAp8IFRvb2x0aXBzIHwgLS1yMiB8IDEwcHggfCBTbWFsbCB0cmFuc2llbnQgY2FsbG91dCB8CnwgVGFiIGJhciBjb250YWluZXIgfCAtLXBpbGwgfCAxMDBweCB8IEZsb2F0aW5nIHBpbGwgdGFiIGJhciB8CnwgU2VhcmNoIGJhciB8IC0tcGlsbCB8IDEwMHB4IHwgQWx3YXlzIHBpbGwgfAp8IEJhZGdlIC8gcGlsbCB8IC0tcGlsbCB8IDEwMHB4IHwgSW5saW5lIGNvdW50IG9yIGxhYmVsIHwKfCBQcm9ncmVzcyBiYXIgfCAtLXBpbGwgfCAxMDBweCB8IFRyYWNrICsgZmlsbCBib3RoIHBpbGwgfAp8IEdGRiAvIGluZm8gY2FyZCB8IC0tcjMgfCAxMnB4IHwgQ29tcGFjdCBpbmZvIG1vZHVsZSB8CnwgQXZhdGFyIC8gcHJvZmlsZSBpbWFnZSB8IDUwJSB8IGNpcmN1bGFyIHwgT25seSBjYXNlIHdoZXJlIDUwJSBpcyBhbGxvd2VkIHwKCiMjIENvcm5lci1zcGVjaWZpYyByYWRpaQoKU29tZSBjb21wb25lbnRzIHVzZSBwYXJ0aWFsIHJhZGl1cyDigJQgdG9wLW9ubHkgZm9yIHNoZWV0cyBlbnRlcmluZyBmcm9tIHRoZSBib3R0b20sIGJvdHRvbS1vbmx5IGZvciBzdXJmYWNlcyBhdHRhY2hlZCB0byB0aGUgQXBwQmFyLgoKYGBgYAovKiBCb3R0b20gc2hlZXQ6IHRvcCBjb3JuZXJzIG9ubHkgKi8KLmJvdHRvbS1zaGVldCB7CiAgYm9yZGVyLXJhZGl1czogdmFyKC0tcjkpIHZhcigtLXI5KSAwIDA7Cn0KCi8qIEFwcEJhciBhdHRhY2hlZCBjYXJkOiBib3R0b20gY29ybmVycyBvbmx5ICovCi5hcHBiYXItY2FyZCB7CiAgYm9yZGVyLXJhZGl1czogMCAwIHZhcigtLXI1KSB2YXIoLS1yNSk7Cn0KYGBgYAoKIyMgVXNhZ2UgcnVsZXMKCi0tLQoKIyMgVG9rZW5zIHJlZmVyZW5jZWQgb24gdGhpcyBwYWdlCgpVc2UgdGhlc2UgZXhhY3QgdG9rZW5zIOKAlCBkZWZpbmVkIGluIGB0b2tlbnMvdG9rZW5zLmNzc2AuIERvIG5vdCBzdWJzdGl0dXRlIHJhdyB2YWx1ZXMuCgotIGAtLWJvcmRlcmAKLSBgLS1ib3JkZXItc3VidGxlYAotIGAtLWRlbW8tcGlsbC1oYAotIGAtLWRlbW8tcGlsbC13YAotIGAtLWRlbW8tc3dhdGNoYAotIGAtLWRpdmlkZXJgCi0gYC0tZ2xhc3MtMWAKLSBgLS1qaW9gCi0gYC0tcGlsbGAKLSBgLS1yMWAKLSBgLS1yMmAKLSBgLS1yM2AKLSBgLS1yNGAKLSBgLS1yNWAKLSBgLS1yNmAKLSBgLS1yN2AKLSBgLS1yOGAKLSBgLS1yOWAKLSBgLS1zcGFjZS0xYAotIGAtLXNwYWNlLTJgCi0gYC0tc3BhY2UtM2AKLSBgLS1zdXJmYWNlLTFgCi0gYC0tc3VyZmFjZS0yYAotIGAtLXN1cmZhY2UtM2AKLSBgLS10ZXh0YAotIGAtLXRleHQyYAotIGAtLXRleHQzYAoKLS0tCgojIyBCdWlsZCBydWxlcyAoYmluZGluZykKCjEuIFVzZSAqKm9ubHkqKiB0aGUgdG9rZW5zIGxpc3RlZCBhYm92ZS4gSWYgYSB2YWx1ZSB5b3UgbmVlZCBpcyBub3QgbGlzdGVkLCBzdG9wIGFuZCBhc2sg4oCUIGRvIG5vdCBpbnRyb2R1Y2UgYSByYXcgdmFsdWUuCjIuIEZvbnQgaXMgKipKaW9UeXBlKiogb25seS4gV2VpZ2h0czogMzAwLCA1MDAsIDcwMCwgOTAwLgozLiBSZXVzZSB0aGUgY29tcG9uZW50IENTUyBwYXR0ZXJucyBzaG93biBvbiB0aGUgc291cmNlIHBhZ2U7IGRvIG5vdCByZWRlc2lnbi4KNC4gTWF0Y2ggZXZlcnkgc3RhdGUgKGRlZmF1bHQsIGhvdmVyLCBmb2N1cywgYWN0aXZlLCBkaXNhYmxlZCwgbG9hZGluZykgc2hvd24gb24gdGhlIHBhZ2UuCjUuIEFjY2Vzc2liaWxpdHkgcmVxdWlyZW1lbnRzIG9uIHRoZSBwYWdlIGFyZSBtYW5kYXRvcnksIG5vdCBvcHRpb25hbC4K" download="radius-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
+    </div>
     </header>
 
     <!-- HERO -->
@@ -466,6 +466,6 @@
 
   </main>
   <script src="../sprite-loader.js"></script>
-<script src="../shell.js"></script>
+<script src="../shell.js?v=2"></script>
 </body>
 </html>

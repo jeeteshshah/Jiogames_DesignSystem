@@ -4,71 +4,71 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     body { background: var(--bg); color: var(--text); font-family: var(--jio-font); margin: 0; }
 
     
 
     /* ── Hero ── */
-    .component-hero { padding: 40px; display: flex; align-items: center; justify-content: center; border-radius: 16px; margin: 32px 40px; position: relative; overflow: hidden; min-height: 180px; }
-    .component-hero--dark { background: #0a0c14; border: 1px solid rgba(255,255,255,.07); }
-    .component-hero--grid { background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px); background-size: 32px 32px; }
-    .component-hero-inner { display: flex; flex-direction: column; align-items: center; gap: 16px; z-index: 1; }
-    .component-hero-caption { font-size: 11px; color: var(--text3); letter-spacing: .5px; text-align: center; }
-    .hero-glow { position: absolute; bottom: -40px; left: 50%; transform: translateX(-50%); width: 300px; height: 120px; background: radial-gradient(ellipse, rgba(0,168,89,.15) 0%, transparent 70%); pointer-events: none; }
+    
+    
+    
+    
+    
+    
 
     /* ── Intro ── */
-    .component-intro { padding: 0 40px 32px; max-width: 900px; }
-    .component-intro p { font-size: 15px; color: var(--text2); line-height: 1.7; margin: 0 0 20px; }
-    .component-summary-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-    .component-summary-list li { font-size: 14px; color: var(--text2); line-height: 1.6; padding-left: 18px; position: relative; }
-    .component-summary-list li::before { content: "—"; position: absolute; left: 0; color: var(--text3); }
-    .component-summary-list li strong { color: var(--text); font-weight: 700; }
+    
+    
+    
+    
+    
+    
 
     /* ── Best practices ── */
-    .component-best-practices { padding: 0 40px 32px; max-width: 900px; }
-    .component-best-practices h2 { font-size: 22px; font-weight: 700; color: var(--text); margin: 0 0 20px; }
+    
+    
     .ds-bp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .component-bp-card { border-radius: 12px; padding: 20px; border: 1px solid; }
-    .component-bp-card--do { background: rgba(0,168,89,.06); border-color: rgba(0,168,89,.2); }
-    .component-bp-card--dont { background: rgba(255,71,87,.06); border-color: rgba(255,71,87,.2); }
-    .component-bp-label { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; margin-bottom: 12px; }
-    .component-bp-label--do { color: #00A859; }
-    .component-bp-label--dont { color: #FF4757; }
-    .component-bp-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-    .component-bp-list li { font-size: 13px; color: var(--text2); line-height: 1.5; padding-left: 16px; position: relative; }
-    .component-bp-card--do .component-bp-list li::before { content: "✓"; position: absolute; left: 0; color: #00A859; font-weight: 700; }
-    .component-bp-card--dont .component-bp-list li::before { content: "✗"; position: absolute; left: 0; color: #FF4757; font-weight: 700; }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /* ── Content grid ── */
-    .component-content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 0 40px 32px; max-width: 900px; }
-    .component-content-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 20px; }
-    .component-content-title { font-size: 14px; font-weight: 700; color: var(--text); margin: 0 0 12px; }
+    
+    
+    
 
     /* ── Platform grid ── */
-    .component-platform-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 0 40px 32px; max-width: 900px; }
-    .component-platform-card { border-radius: 12px; padding: 20px; border: 1px solid rgba(255,255,255,.08); }
-    .component-platform-card--mobile { background: rgba(0,168,89,.05); border-color: rgba(0,168,89,.15); }
-    .component-platform-card--web { background: rgba(59,130,246,.05); border-color: rgba(59,130,246,.15); }
-    .component-platform-card--tv { background: rgba(139,92,246,.05); border-color: rgba(139,92,246,.15); }
-    .component-platform-card-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 12px; }
-    .component-platform-card ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; }
-    .component-platform-card li { font-size: 13px; color: var(--text2); padding-left: 14px; position: relative; }
-    .component-platform-card li::before { content: "·"; position: absolute; left: 0; color: var(--text3); }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /* ── Changelog ── */
-    .component-changelog { padding: 0 40px 48px; max-width: 900px; }
-    .component-changelog h2 { font-size: 22px; font-weight: 700; color: var(--text); margin: 0 0 20px; }
-    .component-changelog-entry { display: flex; gap: 20px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.06); align-items: flex-start; }
-    .component-changelog-entry:last-child { border-bottom: none; }
-    .component-changelog-version { font-size: 12px; font-weight: 700; color: #00A859; background: rgba(0,168,89,.12); border: 1px solid rgba(0,168,89,.2); border-radius: 6px; padding: 3px 8px; white-space: nowrap; }
-    .component-changelog-date { font-size: 12px; color: var(--text3); white-space: nowrap; padding-top: 2px; }
-    .component-changelog-desc { font-size: 14px; color: var(--text2); line-height: 1.5; padding-top: 1px; }
+    
+    
+    
+    
+    
+    
+    
 
     /* ── Note box ── */
-    .ds-note { background: rgba(59,130,246,.08); border: 1px solid rgba(59,130,246,.2); border-radius: 10px; padding: 14px 16px; font-size: 13px; color: var(--text2); line-height: 1.6; margin: 0 40px 24px; max-width: 820px; }
-    .ds-note strong { color: var(--text); }
+    
+    
 
     /* ── Section wrapper ── */
     .comp-section { padding: 0 40px 40px; max-width: 900px; }
@@ -129,24 +129,24 @@
 
     /* ── Demo wrapper ── */
     .demo-dark { background: #0a0c14; border: 1px solid rgba(255,255,255,.07); border-radius: 14px; padding: 32px; display: flex; flex-direction: column; gap: 28px; }
-    .demo-label { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: .7px; margin-bottom: 10px; }
+    .demo-label { font-size: 11px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: .7px; margin-bottom: 10px; }
 
     /* ── Size matrix ── */
     .size-matrix { width: 100%; border-collapse: collapse; font-size: 13px; }
     .size-matrix th { text-align: left; padding: 10px 14px; font-size: 11px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; border-bottom: 1px solid rgba(255,255,255,.08); }
     .size-matrix td { padding: 12px 14px; color: var(--text2); border-bottom: 1px solid rgba(255,255,255,.05); vertical-align: top; }
     .size-matrix tr:last-child td { border-bottom: none; }
-    .size-matrix td:first-child { font-weight: 600; color: var(--text); }
+    .size-matrix td:first-child { font-weight: 700; color: var(--text); }
     .size-matrix code { font-size: 11px; background: rgba(255,255,255,.07); padding: 2px 6px; border-radius: 4px; color: #00A859; font-family: monospace; }
     .na-cell { color: var(--text3); font-style: italic; }
 
     /* ── State grid ── */
-    .ds-state-grid { display: flex; gap: 12px; flex-wrap: wrap; }
+    
     .state-cell { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 10px; padding: 16px 12px; display: flex; flex-direction: column; align-items: center; gap: 10px; min-width: 90px; }
-    .state-cell-label { font-size: 10px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; text-align: center; }
+    .state-cell-label { font-size: 10px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; text-align: center; }
 
     /* ── A11y grid ── */
-    .a11y-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    
     .a11y-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 10px; padding: 16px; }
     .a11y-card-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .5px; }
     .a11y-card ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; }
@@ -155,12 +155,12 @@
     .a11y-card code { font-size: 11px; background: rgba(255,255,255,.07); padding: 1px 5px; border-radius: 4px; color: #00A859; font-family: monospace; }
 
     /* ── Token table ── */
-    .ds-token-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    .ds-token-table th { text-align: left; padding: 10px 14px; font-size: 11px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: .5px; border-bottom: 1px solid rgba(255,255,255,.08); }
-    .ds-token-table td { padding: 11px 14px; color: var(--text2); border-bottom: 1px solid rgba(255,255,255,.05); vertical-align: top; }
-    .ds-token-table tr:last-child td { border-bottom: none; }
-    .ds-token-table td:first-child code { font-size: 12px; background: rgba(255,255,255,.07); padding: 2px 7px; border-radius: 4px; color: #00A859; font-family: monospace; white-space: nowrap; }
-    .ds-token-table td:nth-child(2) { font-family: monospace; font-size: 12px; color: var(--text); }
+    
+    
+    
+    
+    
+    
 
     /* ── Anatomy ── */
     .anatomy-wrap { display: flex; gap: 32px; align-items: flex-start; }
@@ -171,7 +171,7 @@
     .anatomy-body { flex: 1; }
     .anatomy-label { font-size: 13px; font-weight: 700; color: var(--text); display: block; }
     .anatomy-desc { font-size: 12px; color: var(--text3); line-height: 1.5; display: block; margin-top: 2px; }
-    .anatomy-req { font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 4px; align-self: flex-start; flex-shrink: 0; }
+    .anatomy-req { font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; align-self: flex-start; flex-shrink: 0; }
     .req-required { background: rgba(0,168,89,.12); color: #00A859; border: 1px solid rgba(0,168,89,.2); }
     .req-optional { background: rgba(255,255,255,.07); color: var(--text3); border: 1px solid rgba(255,255,255,.1); }
 
@@ -186,26 +186,25 @@
       .component-page-header, .component-intro, .component-best-practices,
       .component-content-grid, .component-platform-grid, .component-changelog,
       .comp-section, .ds-note { padding-left: 20px; padding-right: 20px; }
-      .component-hero { margin-left: 16px; margin-right: 16px; padding: 24px 16px; overflow-x: auto; }
+      
       .tab-bar-demo { width: 340px; }
       .ds-bp-grid, .component-content-grid, .component-platform-grid, .a11y-grid { grid-template-columns: 1fr; }
       .anatomy-wrap { flex-direction: column; }
-      .ds-state-grid { gap: 8px; }
+      
     }
   </style>
 </head><body><main class="ds-content">
 
   <!-- ━━━━━━━━━━━━━━━━━━ 1. PAGE HEADER ━━━━━━━━━━━━━━━━━━ -->
   <div class="component-page-header">
-    <div class="component-breadcrumb">
-      <span>JioGames DLS</span>
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <span class="component-breadcrumb-link">JioGames DLS</span>
       <span class="component-breadcrumb-sep">›</span>
       <span>Components</span>
       <span class="component-breadcrumb-sep">›</span>
-      <span>Tab Bar</span>
-    </div>
-    <h1 class="component-page-title">Tab Bar</h1>
-    <p class="component-page-def">The tab bar provides persistent bottom navigation on mobile, giving players one-tap access to core JioGames destinations.</p>
+      <span class="component-breadcrumb-current">Tab Bar</span>
+    </nav>
+    <h1 class="component-page-title">Tab Bar</h1><p class="component-page-def">The tab bar provides persistent bottom navigation on mobile, giving players one-tap access to core JioGames destinations.</p>
     <div class="component-platforms">
       <span class="component-platform component-platform--mobile">
         <span class="component-platform-dot"></span>Mobile
@@ -216,6 +215,7 @@
       <span class="component-maturity component-maturity--stable">
         <span class="component-maturity--dot"></span>Stable
       </span>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBUYWIgQmFyIOKAlCBKaW9HYW1lcyBETFMgc3BlYwoKPiBTb3VyY2U6IGB0YWItYmFyL2luZGV4Lmh0bWxgIGluIHRoZSBKaW9HYW1lcyBEZXNpZ24gU3lzdGVtLgo+IFRoaXMgc3BlYyBpcyBnZW5lcmF0ZWQgdmVyYmF0aW0gZnJvbSB0aGUgcGFnZSDigJQgZG8gbm90IGludmVudCB2YWx1ZXMgbm90IGxpc3RlZCBoZXJlLgoKKipQYXRoOioqIEppb0dhbWVzIERMUyDigLogQ29tcG9uZW50cyDigLogVGFiIEJhcgoKLS0tCgpUaGUgdGFiIGJhciBwcm92aWRlcyBwZXJzaXN0ZW50IGJvdHRvbSBuYXZpZ2F0aW9uIG9uIG1vYmlsZSwgZ2l2aW5nIHBsYXllcnMgb25lLXRhcCBhY2Nlc3MgdG8gY29yZSBKaW9HYW1lcyBkZXN0aW5hdGlvbnMuCgpNb2JpbGUgYm90dG9tIHRhYiBiYXIgwrcgMzkzcHggwrcgNCB0YWJzCgpUaGUgdGFiIGJhciBpcyB0aGUgcHJpbWFyeSBuYXZpZ2F0aW9uIHN1cmZhY2Ugb24gbW9iaWxlLiBJdCBnaXZlcyBwbGF5ZXJzIGltbWVkaWF0ZSBhY2Nlc3MgdG8gdGhlIGZvdXIgY29yZSBKaW9HYW1lcyBkZXN0aW5hdGlvbnMgd2l0aG91dCBsZWF2aW5nIHRoZWlyIGN1cnJlbnQgY29udGV4dC4gVGhlIHRhYiBiYXIgaXMgYWx3YXlzIHZpc2libGUg4oCUIGl0IG5ldmVyIHNjcm9sbHMgYXdheSwgY29sbGFwc2VzLCBvciBoaWRlcy4KCi0gKipQZXJzaXN0ZW50LioqIEFsd2F5cyB2aXNpYmxlIGF0IGJvdHRvbSBvZiBzY3JlZW4uIFVzZXMgYHBvc2l0aW9uOiBzdGlja3lgIHdpdGggc2FmZS1hcmVhLWluc2V0LWJvdHRvbS4KLSAqKjQgdGFicy4qKiBIb21lLCBHYW1lcywgU3RvcmUsIFByb2ZpbGUuIFRoZSBmb3VyIGZpeGVkIGRlc3RpbmF0aW9ucy4gU3ViLXNlY3Rpb25zIHN1cmZhY2UgaW5zaWRlIGVhY2ggdGFiLCBub3QgYXMgYWRkaXRpb25hbCB0YWJzLgotICoqSWNvbiArIGxhYmVsLioqIEJvdGggcmVxdWlyZWQgb24gbW9iaWxlLiBJY29uLW9ubHkgdGFicyBhcmUgbm90IHBlcm1pdHRlZC4KLSAqKkFjdGl2ZSBzdGF0ZS4qKiBPbmUgdGFiIGlzIGFsd2F5cyBhY3RpdmUuIEFjdGl2ZSB0YWIgc2hvd3MgZ3JlZW4gaWNvbiwgZ3JlZW4gYm9sZCBsYWJlbCwgYW5kIGEgZ3JlZW4gaW5kaWNhdG9yIGRvdCBhYm92ZSB0aGUgaWNvbi4KCiMjIEJlc3QgUHJhY3RpY2VzCgotIEFsd2F5cyBzaG93IGljb24gKyBsYWJlbCBvbiBtb2JpbGUKLSBLZWVwIHRvIDQgdGFiczogSG9tZSwgR2FtZXMsIFN0b3JlLCBQcm9maWxlCi0gVXNlIHRoZSBhY3RpdmUgaW5kaWNhdG9yIChncmVlbiBkb3QgYWJvdmUgaWNvbikgY29uc2lzdGVudGx5Ci0gRW5zdXJlIDQ0cHggbWluaW11bSB0YXAgdGFyZ2V0cwotIEFwcGx5IHNhZmUtYXJlYS1pbnNldC1ib3R0b20gcGFkZGluZyBvbiBpT1MKLSBVc2Ugbm91bnMgYXMgbGFiZWxzOiBIb21lLCBHYW1lcywgU3RvcmUsIFByb2ZpbGUKCi0gRG9uJ3QgaGlkZSB0aGUgdGFiIGJhciBvbiBzY3JvbGwKLSBEb24ndCB1c2UgaWNvbnMgd2l0aG91dCBsYWJlbHMgb24gbW9iaWxlCi0gRG9uJ3QgYWRkIGEgNXRoIHRhYiDigJQgdXNlIGEgbWVudSBkcmF3ZXIgaW5zdGVhZAotIERvbid0IHVzZSB2ZXJicyBhcyB0YWIgbGFiZWxzIChCcm93c2UsIEZpbmQsIFNhdmUpCi0gRG9uJ3Qgc2hvdyB0YWIgYmFyIG9uIFRWIOKAlCB1c2Ugc2lkZWJhciBuYXYgcmFpbAotIERvbid0IHVzZSB0aGUgdGFiIGJhciBmb3IgY29udGV4dHVhbCBzdWItbmF2aWdhdGlvbgoKIyMgQW5hdG9teQoKVGhlIG1vYmlsZSB0YWIgYmFyIGNvbnNpc3RzIG9mIGEgY29udGFpbmVyIGhvdXNpbmcgNSB0YWIgaXRlbXMuIEVhY2ggaXRlbSBjYXJyaWVzIGFuIGljb24sIGEgbGFiZWwsIGFuZCB3aGVuIGFjdGl2ZSwgYSBncmVlbiBpbmRpY2F0b3IgZG90IGFib3ZlIHRoZSBpY29uLgoKIyMgVmFyaWFudHMKClRocmVlIGxheW91dCB2YXJpYW50cyBmb3IgZGlmZmVyZW50IHVzZSBjYXNlcyBhbmQgcGxhdGZvcm1zLgoKTm90ZTogVXNlIG9ubHkgb24gd2ViIOKAlCBsYWJlbHMgYXJlIHJlcXVpcmVkIG9uIG1vYmlsZS4KCiMjIFNpemVzIC8gUGxhdGZvcm0gTWF0cml4CgpIb3cgdGhlIHRhYiBiYXIgZGltZW5zaW9ucyBhZGFwdCBwZXIgcGxhdGZvcm0uCgp8IFByb3BlcnR5IHwgTW9iaWxlIHwgV2ViIHwgVFYgfAp8LS0tfC0tLXwtLS18LS0tfAp8IFRhYiBiYXIgaGVpZ2h0IHwgNjRweCBgdmFyKC0tdGFiLWJhci1oKWAgfCA0OHB4IChpbmxpbmUgaW4gaGVhZGVyKSB8IE4vQSB8CnwgVGFiIGl0ZW0gaGVpZ2h0IHwgNjRweCB8IDQ4cHggfCBOL0EgfAp8IEljb24gc2l6ZSB8IDI0cHggYHZhcigtLWljb24tc2l6ZS1iYXNlKWAgfCAyMHB4IHwgTi9BIHwKfCBMYWJlbCBmb250IHwgMTBweCAvIHdlaWdodCA3MDAgYWN0aXZlIHwgMTJweCB8IE4vQSB8CnwgVG91Y2ggdGFyZ2V0IHwgNDRweCBtaW4gfCA0MHB4IHwgTi9BIHwKfCBTYWZlIGFyZWEgfCBgZW52KHNhZmUtYXJlYS1pbnNldC1ib3R0b20pYCB8IG5vbmUgfCBub25lIHwKCiMjIFN0YXRlcwoKVGFiIGl0ZW1zIGhhdmUgZml2ZSBzdGF0ZXMuIEhvdmVyIGlzIHdlYi1vbmx5LiBEaXNhYmxlZCBpcyB1c2VkIHdoZW4gYSB0YWIgaXMgbG9ja2VkIGJlaGluZCBhdXRoIG9yIGEgZmVhdHVyZSBmbGFnLgoKLSAxIHdvcmQgcHJlZmVycmVkCi0gTm91bnMgb25seSDigJQgbm90IHZlcmJzCi0gYEhvbWVgIG5vdCBIb21lcGFnZQotIGBHYW1lc2Agbm90IEJyb3dzZQotIGBTdG9yZWAgbm90IFNob3Agb3IgQnV5Ci0gYFByb2ZpbGVgIG5vdCBNZSBvciBBY2NvdW50CgotIDQgdGFicyBtaW5pbXVtCi0gNCB0YWJzIG1heGltdW06IEhvbWUsIEdhbWVzLCBTdG9yZSwgUHJvZmlsZQotIElmIGEgZGVzdGluYXRpb24gZG9lc24ndCBmaXQgaW4gNSwgaGlkZSBpdCBpbiBhIHByb2ZpbGUvbWVudSBkcmF3ZXIKLSBQYXNzIGFuZCBwcm9tb3Rpb25zIGdvIGluIHRoZSBoZXJvIG9yIGFzIGZsb2F0aW5nIENUQXMKLSBOZXZlciBhZGQgYSAiTW9yZSIgdGFiIG9yIGV4Y2VlZCA0IHRhYnMKCi0gUHJpbWFyeSBuYXYgcGF0dGVybiDigJQgYWx3YXlzIHJlbmRlcmVkCi0gYHBvc2l0aW9uOiBzdGlja3k7IGJvdHRvbTogMGAKLSBTYWZlIGFyZWEgcGFkZGluZyDigJQgZW52KHNhZmUtYXJlYS1pbnNldC1ib3R0b20pCi0gNCB0YWJzIOKAlCBIb21lLCBHYW1lcywgU3RvcmUsIFByb2ZpbGUg4oCUIGljb24gKyBsYWJlbCByZXF1aXJlZAotIEhhcHRpYyBmZWVkYmFjayBvbiB0YXAKCi0gUmVuZGVyZWQgYXMgaG9yaXpvbnRhbCB0YWIgZ3JvdXAgaW4gcGFnZSBoZWFkZXIKLSBQaWxsIG9yIHVuZGVybGluZSBzdHlsZSDigJQgbm90IGEgYm90dG9tIGJhcgotIEhvdmVyIHN0YXRlcyBzdXBwb3J0ZWQKLSBDYW4gYWNjb21tb2RhdGUgdXAgdG8gNiBpdGVtcwotIE5vIHNhZmUgYXJlYSBwYWRkaW5nIG5lZWRlZAoKIyMgQWNjZXNzaWJpbGl0eQoKVGFiIGJhciByZXF1aXJlcyBjb3JyZWN0IEFSSUEgcm9sZXMsIGtleWJvYXJkIG5hdmlnYXRpb24sIGFuZCB2aXNpYmxlIGZvY3VzIHJpbmdzIG9uIHdlYi4KCi0gYGAgd3JhcHBpbmcgZWxlbWVudAotIEVhY2ggdGFiIGlzIGEgYGAgb3IgYGAgd2l0aCBgcm9sZT0idGFiImAKLSBgYXJpYS1jdXJyZW50PSJwYWdlImAgb24gdGhlIGFjdGl2ZSB0YWIKCi0gVGFiIC8gU2hpZnQrVGFiIHRvIG1vdmUgZm9jdXMgYmV0d2VlbiB0YWJzCi0gRW50ZXIgLyBTcGFjZSBhY3RpdmF0ZXMgYSBmb2N1c2VkIHRhYgotIE9ubHkgYWN0aXZlIHRhYiBoYXMgYHRhYmluZGV4PSIwImAg4oCUIG90aGVycyB1c2UgYC0xYAoKLSBgYXJpYS1sYWJlbGAgd2l0aCBmdWxsIG5hbWUgb24gaWNvbi1vbmx5IHRhYnMKLSBCYWRnZSBjb3VudDogYGFyaWEtbGFiZWw9IlByb2ZpbGUsIDMgbm90aWZpY2F0aW9ucyJgCi0gSGlkZSBkZWNvcmF0aXZlIGljb25zIGZyb20gc2NyZWVuIHJlYWRlcnMgd2l0aCBgYXJpYS1oaWRkZW49InRydWUiYAoKLSAycHggZm9jdXMgcmluZyB1c2luZyBgdmFyKC0tamlvKWAgY29sb3IKLSBNaW5pbXVtIDQ0cHggdG91Y2ggdGFyZ2V0IG9uIG1vYmlsZQotIE5vIGhvdmVyLW9ubHkgc3RhdGVzIG9uIG1vYmlsZSDigJQga2V5Ym9hcmQgKyBmb2N1cyBtdXN0IHdvcmsKCiMjIFJlbGF0ZWQgVG9rZW5zCgp8IFRva2VuIHwgVmFsdWUgfCBVc2FnZSB8CnwtLS18LS0tfC0tLXwKfCBgLS10YWItYmFyLWhgIHwgNjRweCB8IFRhYiBiYXIgaGVpZ2h0IHwKfCBgLS1pY29uLXNpemUtYmFzZWAgfCAyNHB4IHwgVGFiIGljb24gc2l6ZSB8CnwgYC0taWNvbi1jb2xvci1kZWZhdWx0YCB8IHJnYmEoMjU1LDI1NSwyNTUsLjQ1KSB8IEluYWN0aXZlIGljb24gY29sb3IgfAp8IGAtLWljb24tY29sb3ItYWN0aXZlYCB8ICMwMEE4NTkgfCBBY3RpdmUgaWNvbiBjb2xvciB8CnwgYC0tdG91Y2gtbWluYCB8IDQ0cHggfCBNaW5pbXVtIHRvdWNoIHRhcmdldCB8CnwgYC0tbmVnYXRpdmVgIHwgI0ZGNDc1NyB8IEJhZGdlIC8gbm90aWZpY2F0aW9uIGNvbG9yIHwKfCBgLS1qaW9gIHwgIzAwQTg1OSB8IEFjdGl2ZSBsYWJlbCBhbmQgaW5kaWNhdG9yIHwKfCBgLS1zYWZlLWJvdGAgfCBlbnYoc2FmZS1hcmVhLWluc2V0LWJvdHRvbSkgfCBCb3R0b20gc2FmZSBhcmVhIHwKCiMjIFdoZW4gdG8gdXNlCgpVc2Ugd2hlbgoKLSBQcmltYXJ5IGJvdHRvbSBuYXZpZ2F0aW9uIG9uIG1vYmlsZTogSG9tZSwgQnJvd3NlLCBMaWJyYXJ5LCBQcm9maWxlCi0gMy01IHRvcC1sZXZlbCBkZXN0aW5hdGlvbnMgdGhhdCB1c2VycyBzd2l0Y2ggYmV0d2VlbiBmcmVxdWVudGx5Ci0gUGVyc2lzdGVudCBuYXZpZ2F0aW9uIHZpc2libGUgb24gZXZlcnkgbWFpbiBzY3JlZW4KCkRvbid0IHVzZSB3aGVuCgotIE1vcmUgdGhhbiA1IGl0ZW1zIOKAlCB2aXN1YWwgY3Jvd2RpbmcsIHVzZSBEcmF3ZXIgb3ZlcmZsb3cKLSBTZWNvbmRhcnkgaW4tcGFnZSBuYXZpZ2F0aW9uIHdpdGhpbiBhIHNjcmVlbiDigJQgdXNlIFRhYnMgY29tcG9uZW50Ci0gTmF2aWdhdGlvbiBpdGVtcyB0aGF0IGFyZSByYXJlbHkgdXNlZCDigJQgbW92ZSB0byBQcm9maWxlL1NldHRpbmdzCi0gSGlkaW5nIHRoZSB0YWIgYmFyIG9uIHNjcm9sbCBmb3IgY29udGVudCB0aGF0IG5lZWRzIG5hdmlnYXRpb24KCiMjIFZhcmlhbnRzCgojIyBTaXplcwoKfCBTaXplIHwgVG9rZW4gLyBIZWlnaHQgfCBVc2UgY2FzZSB8IFBsYXRmb3JtIHwKfC0tLXwtLS18LS0tfC0tLXwKfCBNb2JpbGUgfCA1NnB4IGhlaWdodCwgMjRweCBpY29ucyB8IFByaW1hcnkgbW9iaWxlIG5hdiB8IE1vYmlsZSB8CnwgV2ViIHRvcCBiYXIgfCA0OHB4IGhlaWdodCwgMjBweCBpY29ucyB8IFdlYiBhcHAgdG9wIG5hdiB8IFdlYiB8CnwgVFYgfCA3MnB4IGhlaWdodCwgMzJweCBpY29ucyB8IFRWIHByaW1hcnkgbmF2IHwgVFYgfAoKIyMgU3RhdGVzCgpEZWZhdWx0IChpbmFjdGl2ZSkKCkljb24gYW5kIGxhYmVsIGF0IHRleHQzIGNvbG9yOyBubyBpbmRpY2F0b3IKCkFjdGl2ZQoKSWNvbiBhbmQgbGFiZWwgdHVybiBqaW8tZ3JlZW47IGluZGljYXRvciBkb3Qgb3IgdW5kZXJsaW5lCgpIb3ZlcgoKU2xpZ2h0IGJhY2tncm91bmQgdGludDsgY3Vyc29yIHBvaW50ZXIKClByZXNzZWQKCkljb24gc2NhbGVzIGRvd24gdG8gMC44OCBtb21lbnRhcmlseSBvbiB0YXAKCldpdGggYmFkZ2UKCkNvdW50IGJhZGdlIG92ZXJsYXlzIGljb24gdG9wLXJpZ2h0CgpCYWRnZSBjbGVhcmVkCgpCYWRnZSBhbmltYXRlcyBvdXQgb24gcmVhZC9jbGVhciBhY3Rpb24KCkhpZGRlbiAoc2Nyb2xsKQoKVHJhbnNsYXRlZCAxMDAlIGRvd247IHJldmVhbGVkIG9uIHNjcm9sbC11cAoKIyMgTW90aW9uCgp8IEludGVyYWN0aW9uIHwgRWFzaW5nIHwgRHVyYXRpb24gfCBQcm9wZXJ0eSB8CnwtLS18LS0tfC0tLXwtLS18CnwgQWN0aXZlIGluZGljYXRvciBzbGlkZSB8IGAtLWVhc2Utb3V0YCB8IGAtLWR1ci1mYXN0YCB8IHRyYW5zZm9ybSB0cmFuc2xhdGVYIHwKfCBJY29uIHByZXNzIGJvdW5jZSB8IGAtLWVhc2Utb3V0YCB8IGAtLWR1ci1mYXN0YCB8IHRyYW5zZm9ybSBzY2FsZSgwLjg1IOKGkiAxLjEg4oaSIDEpIHwKfCBCYWRnZSBjb3VudCBwb3AgfCBgLS1lYXNlLW91dGAgfCBgLS1kdXItZmFzdGAgfCB0cmFuc2Zvcm0gc2NhbGUoMS40IOKGkiAxKSB8CnwgVGFiIGJhciBoaWRlIHwgYC0tZWFzZS1pbmAgfCBgLS1kdXItYmFzZWAgfCB0cmFuc2Zvcm0gdHJhbnNsYXRlWSgxMDAlKSB8CnwgVGFiIGJhciBzaG93IHwgYC0tZWFzZS1vdXRgIHwgYC0tZHVyLWJhc2VgIHwgdHJhbnNmb3JtIHRyYW5zbGF0ZVkoMCkgfAoKIyMgQVBJCgojIyMgQ1NTIGNsYXNzZXMKCnwgQ2xhc3MgfCBEZXNjcmlwdGlvbiB8CnwtLS18LS0tfAp8IGAuZHMtdGFiLWJhcmAgfCBSb290IOKAlCBmaXhlZCBib3R0b20gMCwgZnVsbCB3aWR0aCwgNTZweCBoZWlnaHQsIHN1cmZhY2UtMSwgYm9yZGVyLXRvcCB8CnwgYC5kcy10YWItYmFyX19pdGVtYCB8IFNpbmdsZSB0YWIg4oCUIGZsZXggY29sdW1uLCBjZW50ZXIsIGZsZXg6MSwgZ2FwIDNweCB8CnwgYC5kcy10YWItYmFyX19pY29uYCB8IDI0cHggU1ZHIOKAlCB0ZXh0MyBpbmFjdGl2ZSwgamlvIGFjdGl2ZSB8CnwgYC5kcy10YWItYmFyX19sYWJlbGAgfCAxMHB4IDcwMCDigJQgdGV4dDMgaW5hY3RpdmUsIGppbyBhY3RpdmUgfAp8IGAuZHMtdGFiLWJhcl9faXRlbS0tYWN0aXZlYCB8IEFjdGl2ZSBzdGF0ZSDigJQgamlvIGljb24gYW5kIGxhYmVsIHwKfCBgLmRzLXRhYi1iYXJfX2JhZGdlYCB8IENvdW50IGJhZGdlIOKAlCBwb3NpdGlvbiBhYnNvbHV0ZSwgdG9wLXJpZ2h0IG9mIGljb24gfAoKIyMjIFJlYWN0IHByb3BzCgp8IFByb3AgfCBUeXBlIHwgRGVmYXVsdCB8IERlc2NyaXB0aW9uIHwKfC0tLXwtLS18LS0tfC0tLXwKfCBgaXRlbXNgIHwgVGFiSXRlbVtdIHwgcmVxdWlyZWQgfCBUYWIgZGVmaW5pdGlvbnM6IGlkLCBsYWJlbCwgaWNvbiwgYmFkZ2UgfAp8IGBhY3RpdmVgIHwgc3RyaW5nIHwgcmVxdWlyZWQgfCBBY3RpdmUgdGFiIGlkIHwKfCBgb25DaGFuZ2VgIHwgKGlkOiBzdHJpbmcpID0+IHZvaWQgfCByZXF1aXJlZCB8IFRhYiBzd2l0Y2ggaGFuZGxlciB8CnwgYGhpZGVPblNjcm9sbGAgfCBib29sZWFuIHwgZmFsc2UgfCBIaWRlIGJhciB3aGVuIHNjcm9sbGluZyBkb3duLCBzaG93IG9uIHVwIHwKCiMjIFBsYXRmb3JtIHJ1bGVzCgpNb2JpbGUKCi0gRml4ZWQgYXQgYm90dG9tIOKAlCA1NnB4IGhlaWdodCwgc2FmZSBhcmVhIGluc2V0IHJlc3BlY3RlZAotIEl0ZW1zOiBmbGV4OjEgZXF1YWwgd2lkdGg7IGljb24gY2VudGVyZWQgYWJvdmUgbGFiZWwKLSBIaWRlcyBvbiBzY3JvbGwgZG93biB3aXRoaW4gY29udGVudDsgcmV2ZWFscyBvbiBzY3JvbGwgdXAKLSBNYXggNSBpdGVtcyDigJQgbW9yZSBpdGVtcyByZXF1aXJlIG92ZXJmbG93L21vcmUgbWVudSBwYXR0ZXJuCgpXZWIKCi0gVG9wIGhvcml6b250YWwgcG9zaXRpb24gb3IgbGVmdCBzaWRlYmFyIGRlcGVuZGluZyBvbiB2aWV3cG9ydAotIEtleWJvYXJkOiBUYWIgbmF2aWdhdGVzIGl0ZW1zOyBFbnRlci9TcGFjZSBhY3RpdmF0ZXMKLSBBY3RpdmUgdW5kZXJsaW5lIG9yIGZpbGxlZCBiYWNrZ3JvdW5kIGluZGljYXRvcgotIEJhZGdlIGNvdW50IHNob3duIGFzIHN1cGVyc2NyaXB0IG9uIGljb24KClRWCgotIExlZnQgc2lkZWJhciBuYXYgcmVwbGFjZXMgYm90dG9tIHRhYiBiYXIgb24gVFYKLSBJdGVtczogNzJweCBoZWlnaHQ7IDMycHggaWNvbnM7IDE4cHggbGFiZWxzCi0gRC1wYWQgVXAvRG93biBuYXZpZ2F0ZXM7IE9LIGVudGVycyBzZWN0aW9uOyBMZWZ0IHJlLWVudGVycyBuYXYgZnJvbSBjb250ZW50Ci0gQWN0aXZlIGl0ZW06IGppby1ncmVlbiBmdWxsIGJhY2tncm91bmQgZmlsbCBvbiB0aGUgc2lkZWJhciByb3cKCiMjIEFjY2Vzc2liaWxpdHkKCiMjIyBBUklBIGF0dHJpYnV0ZXMKCnwgQXR0cmlidXRlIHwgRWxlbWVudCB8IFZhbHVlIC8gbm90ZXMgfAp8LS0tfC0tLXwtLS18CnwgYHJvbGU9InRhYmxpc3QiYCB8IFRhYiBiYXIgY29udGFpbmVyIHwgSWRlbnRpZmllcyB0aGUgbmF2aWdhdGlvbiBhcyBhIHRhYiBsaXN0IHwKfCBgcm9sZT0idGFiImAgfCBFYWNoIHRhYiBpdGVtIHwgSW5kaXZpZHVhbCB0YWIgYnV0dG9uIHwKfCBgYXJpYS1zZWxlY3RlZGAgfCBBY3RpdmUgdGFiIHwgInRydWUiIG9uIGN1cnJlbnQgdGFiLCAiZmFsc2UiIG9uIG90aGVycyB8CnwgYGFyaWEtY29udHJvbHNgIHwgRWFjaCB0YWIgfCBJRCBvZiB0aGUgYXNzb2NpYXRlZCB0YWIgcGFuZWwgKHNjcmVlbiBjb250ZW50KSB8CnwgYGFyaWEtbGFiZWxgIHwgVGFiIGJhciB8ICJNYWluIG5hdmlnYXRpb24iIG9yICJBcHAgbmF2aWdhdGlvbiIgfAp8IGB0YWJpbmRleGAgfCBUYWJzIHwgMCBvbiBhY3RpdmUgdGFiLCAtMSBvbiBpbmFjdGl2ZSAocm92aW5nIHRhYmluZGV4KSB8CgojIyMgS2V5Ym9hcmQgaW50ZXJhY3Rpb24KCnwgS2V5IHwgQWN0aW9uIHwKfC0tLXwtLS18CnwgVGFiIHwgRW50ZXIgdGFiIGJhcjsgZm9jdXMgYWN0aXZlIHRhYiB8CnwgQXJyb3cgTGVmdC9SaWdodCB8IE5hdmlnYXRlIGJldHdlZW4gdGFicyB8CnwgRW50ZXIgLyBTcGFjZSB8IEFjdGl2YXRlIGZvY3VzZWQgdGFiIHwKfCBIb21lIC8gRW5kIHwgSnVtcCB0byBmaXJzdC9sYXN0IHRhYiB8CgojIyMgR3VpZGVsaW5lcwoKLSBVc2VzIHJvdmluZyB0YWJpbmRleCDigJQgb25seSBhY3RpdmUgdGFiIGlzIGluIHRhYiBvcmRlcjsgYXJyb3dzIG5hdmlnYXRlIG90aGVycwotIFNjcmVlbiByZWFkZXIgYW5ub3VuY2VzOiAiSG9tZSwgdGFiLCAxIG9mIDQsIHNlbGVjdGVkIgotIEJhZGdlIGNvdW50IGFubm91bmNlZCBhcyBwYXJ0IG9mIHRhYiBsYWJlbDogIkxpYnJhcnksIDMgbmV3IGl0ZW1zLCB0YWIiCi0gVGFiIHBhbmVscyAoc2NyZWVuIGNvbnRlbnQpIG5lZWQgYXJpYS1sYWJlbGxlZGJ5IHBvaW50aW5nIHRvIHRoZWlyIHRhYgoKIyMgQ29kZSBleGFtcGxlcwoKQ29weSB0aGVzZSBzbmlwcGV0cyBhcyBzdGFydGluZyBwb2ludHMuIEFsd2F5cyBsaW5rIGB0b2tlbnMvdG9rZW5zLmNzc2AsIGBjb21wb25lbnRzLmNzc2AsIGFuZCBgc3RhdGVzLmNzc2AgYmVmb3JlIHVzaW5nIGNvbXBvbmVudCBjbGFzc2VzLgoKYGBgYGh0bWwKPG5hdiBjbGFzcz0idGFiLWJhciIgcm9sZT0ibmF2aWdhdGlvbiIgYXJpYS1sYWJlbD0iTWFpbiBuYXZpZ2F0aW9uIj4KICA8YSBocmVmPSIvaG9tZSIgY2xhc3M9InRhYi1iYXJfX2l0ZW0gaXMtYWN0aXZlIiBhcmlhLWN1cnJlbnQ9InBhZ2UiPgogICAgPHN2ZyBjbGFzcz0iaWNvbiBpY29uLS1tIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHVzZSBocmVmPSIvc3ByaXRlLnN2ZyNpY19ob21lIj48L3VzZT48L3N2Zz4KICAgIDxzcGFuIGNsYXNzPSJ0YWItYmFyX19sYWJlbCI+SG9tZTwvc3Bhbj4KICA8L2E+CiAgPGEgaHJlZj0iL2dhbWVzIiBjbGFzcz0idGFiLWJhcl9faXRlbSI+CiAgICA8c3ZnIGNsYXNzPSJpY29uIGljb24tLW0iIGFyaWEtaGlkZGVuPSJ0cnVlIj48dXNlIGhyZWY9Ii9zcHJpdGUuc3ZnI2ljX2dhbWVzIj48L3VzZT48L3N2Zz4KICAgIDxzcGFuIGNsYXNzPSJ0YWItYmFyX19sYWJlbCI+R2FtZXM8L3NwYW4+CiAgPC9hPgogIDxhIGhyZWY9Ii9zdG9yZSIgY2xhc3M9InRhYi1iYXJfX2l0ZW0iPgogICAgPHN2ZyBjbGFzcz0iaWNvbiBpY29uLS1tIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHVzZSBocmVmPSIvc3ByaXRlLnN2ZyNpY19zdG9yZSI+PC91c2U+PC9zdmc+CiAgICA8c3BhbiBjbGFzcz0idGFiLWJhcl9fbGFiZWwiPlN0b3JlPC9zcGFuPgogIDwvYT4KICA8YSBocmVmPSIvcHJvZmlsZSIgY2xhc3M9InRhYi1iYXJfX2l0ZW0iPgogICAgPHN2ZyBjbGFzcz0iaWNvbiBpY29uLS1tIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PHVzZSBocmVmPSIvc3ByaXRlLnN2ZyNpY191c2VyIj48L3VzZT48L3N2Zz4KICAgIDxzcGFuIGNsYXNzPSJ0YWItYmFyX19sYWJlbCI+UHJvZmlsZTwvc3Bhbj4KICA8L2E+CjwvbmF2PgpgYGBgCgpgYGBgaHRtbAo8YSBocmVmPSIvcHJvZmlsZSIgY2xhc3M9InRhYi1iYXJfX2l0ZW0iPgogIDxzcGFuIHN0eWxlPSJwb3NpdGlvbjpyZWxhdGl2ZTtkaXNwbGF5OmlubGluZS1mbGV4Ij4KICAgIDxzdmcgY2xhc3M9Imljb24gaWNvbi0tbSIgYXJpYS1oaWRkZW49InRydWUiPjx1c2UgaHJlZj0iL3Nwcml0ZS5zdmcjaWNfdXNlciI+PC91c2U+PC9zdmc+CiAgICA8c3BhbiBjbGFzcz0iYmFkZ2UtY291bnQiIGFyaWEtbGFiZWw9IjMgbm90aWZpY2F0aW9ucyI+Mzwvc3Bhbj4KICA8L3NwYW4+CiAgPHNwYW4gY2xhc3M9InRhYi1iYXJfX2xhYmVsIj5Qcm9maWxlPC9zcGFuPgo8L2E+CmBgYGAKCiMjIENoYW5nZWxvZwoKLS0tCgojIyBUb2tlbnMgcmVmZXJlbmNlZCBvbiB0aGlzIHBhZ2UKClVzZSB0aGVzZSBleGFjdCB0b2tlbnMg4oCUIGRlZmluZWQgaW4gYHRva2Vucy90b2tlbnMuY3NzYC4gRG8gbm90IHN1YnN0aXR1dGUgcmF3IHZhbHVlcy4KCi0gYC0tYW1iZXJgCi0gYC0tYmdgCi0gYC0tYm9yZGVyLXN1YnRsZWAKLSBgLS1nb2xkYAotIGAtLWljb24tY29sb3ItZGVmYXVsdGAKLSBgLS1pY29uLXNpemUtYmFzZWAKLSBgLS1qaW9gCi0gYC0tamlvLWZvbnRgCi0gYC0tbmVnYXRpdmVgCi0gYC0tcGlsbGAKLSBgLS1yM2AKLSBgLS1yNGAKLSBgLS1zdXJmYWNlLTFgCi0gYC0tc3VyZmFjZS0yYAotIGAtLXRhYi1iYXItaGAKLSBgLS10ZXh0YAotIGAtLXRleHQyYAotIGAtLXRleHQzYAotIGAtLXRleHQ0YAoKLS0tCgojIyBCdWlsZCBydWxlcyAoYmluZGluZykKCjEuIFVzZSAqKm9ubHkqKiB0aGUgdG9rZW5zIGxpc3RlZCBhYm92ZS4gSWYgYSB2YWx1ZSB5b3UgbmVlZCBpcyBub3QgbGlzdGVkLCBzdG9wIGFuZCBhc2sg4oCUIGRvIG5vdCBpbnRyb2R1Y2UgYSByYXcgdmFsdWUuCjIuIEZvbnQgaXMgKipKaW9UeXBlKiogb25seS4gV2VpZ2h0czogMzAwLCA1MDAsIDcwMCwgOTAwLgozLiBSZXVzZSB0aGUgY29tcG9uZW50IENTUyBwYXR0ZXJucyBzaG93biBvbiB0aGUgc291cmNlIHBhZ2U7IGRvIG5vdCByZWRlc2lnbi4KNC4gTWF0Y2ggZXZlcnkgc3RhdGUgKGRlZmF1bHQsIGhvdmVyLCBmb2N1cywgYWN0aXZlLCBkaXNhYmxlZCwgbG9hZGluZykgc2hvd24gb24gdGhlIHBhZ2UuCjUuIEFjY2Vzc2liaWxpdHkgcmVxdWlyZW1lbnRzIG9uIHRoZSBwYWdlIGFyZSBtYW5kYXRvcnksIG5vdCBvcHRpb25hbC4K" download="tab-bar-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
     </div>
   </div>
 
@@ -675,6 +675,162 @@
   </div>
 
   <!-- ━━━━━━━━━━━━━━━━━━ 13. CODE EXAMPLES ━━━━━━━━━━━━━━━━━━ -->
+  <!-- WHEN TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use</h2>
+    <div class="ds-usage-grid">
+      <div class="ds-usage-card ds-usage-card--do">
+        <p class="ds-usage-label ds-usage-label--do">Use when</p>
+        <ul class="ds-usage-list">
+              <li>Primary bottom navigation on mobile: Home, Browse, Library, Profile</li>
+              <li>3-5 top-level destinations that users switch between frequently</li>
+              <li>Persistent navigation visible on every main screen</li>
+        </ul>
+      </div>
+      <div class="ds-usage-card ds-usage-card--dont">
+        <p class="ds-usage-label ds-usage-label--dont">Don't use when</p>
+        <ul class="ds-usage-list">
+              <li>More than 5 items — visual crowding, use Drawer overflow</li>
+              <li>Secondary in-page navigation within a screen — use Tabs component</li>
+              <li>Navigation items that are rarely used — move to Profile/Settings</li>
+              <li>Hiding the tab bar on scroll for content that needs navigation</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOTION -->
+  <!-- VARIANTS -->
+  <section class="ds-section" id="variants">
+    <h2 class="ds-section-title">Variants</h2>
+    <div style="margin-top:16px;"><span class="ds-variant-chip" style="display:inline-flex;align-items:center;gap:6px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--pill);padding:4px 12px;font-size:12px;font-weight:700;color:var(--text2);margin:4px 4px 0 0;">Bottom nav (mobile)</span><span class="ds-variant-chip" style="display:inline-flex;align-items:center;gap:6px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--pill);padding:4px 12px;font-size:12px;font-weight:700;color:var(--text2);margin:4px 4px 0 0;">Top nav (web)</span><span class="ds-variant-chip" style="display:inline-flex;align-items:center;gap:6px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--pill);padding:4px 12px;font-size:12px;font-weight:700;color:var(--text2);margin:4px 4px 0 0;">Icon only</span><span class="ds-variant-chip" style="display:inline-flex;align-items:center;gap:6px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--pill);padding:4px 12px;font-size:12px;font-weight:700;color:var(--text2);margin:4px 4px 0 0;">Icon + label (default)</span><span class="ds-variant-chip" style="display:inline-flex;align-items:center;gap:6px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--pill);padding:4px 12px;font-size:12px;font-weight:700;color:var(--text2);margin:4px 4px 0 0;">With badge</span></div>
+  </section>
+
+  <!-- SIZES -->
+  <section class="ds-section" id="sizes">
+    <h2 class="ds-section-title">Sizes</h2>
+    <table class="ds-api-table" style="margin-top:16px;">
+      <thead><tr><th>Size</th><th>Token / Height</th><th>Use case</th><th>Platform</th></tr></thead>
+      <tbody>
+        <tr><td>Mobile</td><td>56px height, 24px icons</td><td>Primary mobile nav</td><td>Mobile</td></tr>
+        <tr><td>Web top bar</td><td>48px height, 20px icons</td><td>Web app top nav</td><td>Web</td></tr>
+        <tr><td>TV</td><td>72px height, 32px icons</td><td>TV primary nav</td><td>TV</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- STATES -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:16px;">
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px;">
+        <p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 6px;">Default (inactive)</p>
+        <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5;">Icon and label at text3 color; no indicator</p>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px;">
+        <p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 6px;">Active</p>
+        <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5;">Icon and label turn jio-green; indicator dot or underline</p>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px;">
+        <p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 6px;">Hover</p>
+        <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5;">Slight background tint; cursor pointer</p>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px;">
+        <p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 6px;">Pressed</p>
+        <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5;">Icon scales down to 0.88 momentarily on tap</p>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px;">
+        <p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 6px;">With badge</p>
+        <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5;">Count badge overlays icon top-right</p>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px;">
+        <p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 6px;">Badge cleared</p>
+        <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5;">Badge animates out on read/clear action</p>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px;">
+        <p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 6px;">Hidden (scroll)</p>
+        <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5;">Translated 100% down; revealed on scroll-up</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-motion-table">
+      <thead><tr><th>Interaction</th><th>Easing</th><th>Duration</th><th>Property</th></tr></thead>
+      <tbody>
+        <tr><td>Active indicator slide</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>transform translateX</td></tr>
+        <tr><td>Icon press bounce</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>transform scale(0.85 → 1.1 → 1)</td></tr>
+        <tr><td>Badge count pop</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>transform scale(1.4 → 1)</td></tr>
+        <tr><td>Tab bar hide</td><td><code>--ease-in</code></td><td><code>--dur-base</code></td><td>transform translateY(100%)</td></tr>
+        <tr><td>Tab bar show</td><td><code>--ease-out</code></td><td><code>--dur-base</code></td><td>transform translateY(0)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- API -->
+  <section class="ds-section" id="api">
+    <h2 class="ds-section-title">API</h2>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:0 0 12px;">CSS classes</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>.ds-tab-bar</code></td><td>Root — fixed bottom 0, full width, 56px height, surface-1, border-top</td></tr>
+        <tr><td><code>.ds-tab-bar__item</code></td><td>Single tab — flex column, center, flex:1, gap 3px</td></tr>
+        <tr><td><code>.ds-tab-bar__icon</code></td><td>24px SVG — text3 inactive, jio active</td></tr>
+        <tr><td><code>.ds-tab-bar__label</code></td><td>10px 700 — text3 inactive, jio active</td></tr>
+        <tr><td><code>.ds-tab-bar__item--active</code></td><td>Active state — jio icon and label</td></tr>
+        <tr><td><code>.ds-tab-bar__badge</code></td><td>Count badge — position absolute, top-right of icon</td></tr>
+      </tbody>
+    </table>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 12px;">React props</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>items</code></td><td><span class="api-type">TabItem[]</span></td><td><span class="api-default">required</span></td><td>Tab definitions: id, label, icon, badge</td></tr>
+        <tr><td><code>active</code></td><td><span class="api-type">string</span></td><td><span class="api-default">required</span></td><td>Active tab id</td></tr>
+        <tr><td><code>onChange</code></td><td><span class="api-type">(id: string) => void</span></td><td><span class="api-default">required</span></td><td>Tab switch handler</td></tr>
+        <tr><td><code>hideOnScroll</code></td><td><span class="api-type">boolean</span></td><td><span class="api-default">false</span></td><td>Hide bar when scrolling down, show on up</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PLATFORM -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform rules</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:16px;">
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--gold);border-radius:var(--r4);padding:20px;background:var(--surface-1);">
+        <p style="font-size:12px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px;">Mobile</p>
+        <ul style="list-style:none;padding:0;margin:0;"><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Fixed at bottom — 56px height, safe area inset respected</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Items: flex:1 equal width; icon centered above label</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Hides on scroll down within content; reveals on scroll up</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Max 5 items — more items require overflow/more menu pattern</li></ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--amber);border-radius:var(--r4);padding:20px;background:var(--surface-1);">
+        <p style="font-size:12px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px;">Web</p>
+        <ul style="list-style:none;padding:0;margin:0;"><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Top horizontal position or left sidebar depending on viewport</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Keyboard: Tab navigates items; Enter/Space activates</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Active underline or filled background indicator</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Badge count shown as superscript on icon</li></ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid #F59E0B;border-radius:var(--r4);padding:20px;background:var(--surface-1);">
+        <p style="font-size:12px;font-weight:700;color:#F59E0B;text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px;">TV</p>
+        <ul style="list-style:none;padding:0;margin:0;"><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Left sidebar nav replaces bottom tab bar on TV</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Items: 72px height; 32px icons; 18px labels</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">D-pad Up/Down navigates; OK enters section; Left re-enters nav from content</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Active item: jio-green full background fill on the sidebar row</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <h3 style="font-size:13px;font-weight:700;color:var(--text);margin:16px 0 10px">ARIA attributes</h3>
+    <table style="width:100%;border-collapse:collapse;border:1px solid var(--border-subtle);border-radius:var(--r3);overflow:hidden;font-size:12px">
+      <thead><tr style="background:var(--surface-2)"><th style="text-align:left;padding:8px 12px;color:var(--text3);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px">Attribute</th><th style="text-align:left;padding:8px 12px;color:var(--text3);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px">Element</th><th style="text-align:left;padding:8px 12px;color:var(--text3);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px">Value / notes</th></tr></thead>
+      <tbody><tr><td><code style="font-family:monospace;font-size:11px;color:var(--jio);background:rgba(0,168,89,.1);padding:2px 5px;border-radius:3px">role="tablist"</code></td><td style="color:var(--text2);font-size:12px">Tab bar container</td><td style="color:var(--text3);font-size:12px">Identifies the navigation as a tab list</td></tr><tr><td><code style="font-family:monospace;font-size:11px;color:var(--jio);background:rgba(0,168,89,.1);padding:2px 5px;border-radius:3px">role="tab"</code></td><td style="color:var(--text2);font-size:12px">Each tab item</td><td style="color:var(--text3);font-size:12px">Individual tab button</td></tr><tr><td><code style="font-family:monospace;font-size:11px;color:var(--jio);background:rgba(0,168,89,.1);padding:2px 5px;border-radius:3px">aria-selected</code></td><td style="color:var(--text2);font-size:12px">Active tab</td><td style="color:var(--text3);font-size:12px">"true" on current tab, "false" on others</td></tr><tr><td><code style="font-family:monospace;font-size:11px;color:var(--jio);background:rgba(0,168,89,.1);padding:2px 5px;border-radius:3px">aria-controls</code></td><td style="color:var(--text2);font-size:12px">Each tab</td><td style="color:var(--text3);font-size:12px">ID of the associated tab panel (screen content)</td></tr><tr><td><code style="font-family:monospace;font-size:11px;color:var(--jio);background:rgba(0,168,89,.1);padding:2px 5px;border-radius:3px">aria-label</code></td><td style="color:var(--text2);font-size:12px">Tab bar</td><td style="color:var(--text3);font-size:12px">"Main navigation" or "App navigation"</td></tr><tr><td><code style="font-family:monospace;font-size:11px;color:var(--jio);background:rgba(0,168,89,.1);padding:2px 5px;border-radius:3px">tabindex</code></td><td style="color:var(--text2);font-size:12px">Tabs</td><td style="color:var(--text3);font-size:12px">0 on active tab, -1 on inactive (roving tabindex)</td></tr></tbody>
+    </table>
+    <h3 style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 10px">Keyboard interaction</h3>
+    <table style="width:100%;border-collapse:collapse;border:1px solid var(--border-subtle);border-radius:var(--r3);overflow:hidden;font-size:12px">
+      <thead><tr style="background:var(--surface-2)"><th style="text-align:left;padding:8px 12px;color:var(--text3);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px">Key</th><th style="text-align:left;padding:8px 12px;color:var(--text3);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px">Action</th></tr></thead>
+      <tbody><tr><td><kbd style="font-family:monospace;font-size:11px;background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:3px;padding:2px 6px;color:var(--text)">Tab</kbd></td><td style="color:var(--text2);font-size:12px">Enter tab bar; focus active tab</td></tr><tr><td><kbd style="font-family:monospace;font-size:11px;background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:3px;padding:2px 6px;color:var(--text)">Arrow Left/Right</kbd></td><td style="color:var(--text2);font-size:12px">Navigate between tabs</td></tr><tr><td><kbd style="font-family:monospace;font-size:11px;background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:3px;padding:2px 6px;color:var(--text)">Enter / Space</kbd></td><td style="color:var(--text2);font-size:12px">Activate focused tab</td></tr><tr><td><kbd style="font-family:monospace;font-size:11px;background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:3px;padding:2px 6px;color:var(--text)">Home / End</kbd></td><td style="color:var(--text2);font-size:12px">Jump to first/last tab</td></tr></tbody>
+    </table>
+    <h3 style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 10px">Guidelines</h3>
+    <ul style="list-style:none;padding:0;margin:0"><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:5px 0;border-bottom:.5px solid var(--border-subtle)">Uses roving tabindex — only active tab is in tab order; arrows navigate others</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:5px 0;border-bottom:.5px solid var(--border-subtle)">Screen reader announces: "Home, tab, 1 of 4, selected"</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:5px 0;border-bottom:.5px solid var(--border-subtle)">Badge count announced as part of tab label: "Library, 3 new items, tab"</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:5px 0;border-bottom:.5px solid var(--border-subtle)">Tab panels (screen content) need aria-labelledby pointing to their tab</li></ul>
+  </section>
+
   <section class="component-section" id="code-examples">
     <h2 class="ds-section-title" style="padding:0 40px">Code examples</h2>
     <div style="padding:0 40px 40px">
@@ -728,4 +884,4 @@
     </div>
   </div>
 
-</main><script src="../sprite-loader.js"></script><script src="../shell.js"></script></body></html>
+</main><script src="../sprite-loader.js"></script><script src="../shell.js?v=2"></script></body></html>

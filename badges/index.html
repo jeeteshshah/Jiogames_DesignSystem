@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     @keyframes pulse-live {
       0%, 100% { opacity: 1; }
@@ -16,15 +16,14 @@
 
   <!-- 1. PAGE HEADER -->
   <header class="component-page-header">
-    <nav class="component-breadcrumb">
-      <span>JioGames DLS</span>
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <span class="component-breadcrumb-link">JioGames DLS</span>
       <span class="component-breadcrumb-sep">›</span>
       <span>Components</span>
       <span class="component-breadcrumb-sep">›</span>
-      <span>Badges</span>
+      <span class="component-breadcrumb-current">Badges</span>
     </nav>
-    <h1 class="component-page-title">Badges</h1>
-    <p class="component-page-def">Badges are compact indicators that signal status, counts, categories, or premium access.</p>
+    <h1 class="component-page-title">Badges</h1><p class="component-page-def">Badges are compact indicators that signal status, counts, categories, or premium access.</p>
     <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
       <div class="component-platforms">
         <span class="component-platform component-platform--mobile">
@@ -36,7 +35,8 @@
         <span class="component-platform component-platform--tv">
           <span class="component-platform-dot"></span>TV
         </span>
-      </div>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBCYWRnZXMg4oCUIEppb0dhbWVzIERMUyBzcGVjCgo+IFNvdXJjZTogYGJhZGdlcy9pbmRleC5odG1sYCBpbiB0aGUgSmlvR2FtZXMgRGVzaWduIFN5c3RlbS4KPiBUaGlzIHNwZWMgaXMgZ2VuZXJhdGVkIHZlcmJhdGltIGZyb20gdGhlIHBhZ2Ug4oCUIGRvIG5vdCBpbnZlbnQgdmFsdWVzIG5vdCBsaXN0ZWQgaGVyZS4KCioqUGF0aDoqKiBKaW9HYW1lcyBETFMg4oC6IENvbXBvbmVudHMg4oC6IEJhZGdlcwoKLS0tCgpCYWRnZXMgYXJlIGNvbXBhY3QgaW5kaWNhdG9ycyB0aGF0IHNpZ25hbCBzdGF0dXMsIGNvdW50cywgY2F0ZWdvcmllcywgb3IgcHJlbWl1bSBhY2Nlc3MuCgpCYWRnZXMgaW4gY29udGV4dCDCtyBORVcsIExJVkUsIENvdW50LCBTdGF0dXMgZG90LCBQcmVtaXVtCgpCYWRnZXMgYXJlIG5vbi1pbnRlcmFjdGl2ZSwgb3ZlcmxhaWQgaW5kaWNhdG9ycyB0aGF0IGNvbW11bmljYXRlIHN0YXR1cywgY291bnRzLCBvciBjYXRlZ29yaWVzIHdpdGhvdXQgaW50ZXJydXB0aW5nIGEgdXNlcidzIGZsb3cuIFRoZXkgc2l0IG9uIHRvcCBvZiBvciBhbG9uZ3NpZGUgb3RoZXIgZWxlbWVudHMg4oCUIGdhbWUgY2FyZHMsIGljb25zLCByYWlsIGl0ZW1zIOKAlCBhbmQgY29udmV5IGluZm9ybWF0aW9uIGF0IGEgZ2xhbmNlLiBCZWNhdXNlIHRoZXkgYXJlIHB1cmVseSBpbmZvcm1hdGlvbmFsLCBiYWRnZXMgc2hvdWxkIG5ldmVyIGJlIHRhcHBhYmxlLiBGb3IgaW50ZXJhY3RpdmUgbGFiZWxzLCB1c2UgQ2hpcHMgaW5zdGVhZC4KCi0gKipJbmZvcm1hdGlvbmFsKiog4oCUIE5FVywgTElWRSwgU0FMRSwgSE9UIHNpZ25hbCBmcmVzaG5lc3Mgb3IgcmVhbC10aW1lIHN0YXRlCi0gKipDb3VudCAvIG5vdGlmaWNhdGlvbioqIOKAlCBudW1lcmljIGluZGljYXRvcnMgb24gaWNvbnMgb3IgYXZhdGFycyBzaG93aW5nIHVucmVhZCBpdGVtcwotICoqU3RhdHVzIGRvdCoqIOKAlCBtaW5pbWFsIHNpbmdsZS1waXhlbCBwcmVzZW5jZSBpbmRpY2F0b3IgKG9ubGluZSwgYWN0aXZlLCBpbi1nYW1lKQotICoqUHJlbWl1bSAvIGNhdGVnb3J5Kiog4oCUIGdyYWRpZW50IG9yIGdsYXNzLXN0eWxlIGxhYmVscyBtYXJraW5nIHBhc3MgYWNjZXNzIG9yIGdlbnJlIHRhZ3MKCi0gS2VlcCBpbmZvcm1hdGlvbmFsIGxhYmVscyB0byA0IGNoYXJhY3RlcnMgb3IgZmV3ZXIg4oCUIE5FVywgTElWRSwgSE9ULCBUT1AsIFNBTEUKLSBQYWlyIGEgc3RhdHVzIGRvdCB3aXRoIGEgdmlzaWJsZSB0ZXh0IGxhYmVsIG9yIGljb247IG5ldmVyIHJlbHkgb24gY29sb3IgYWxvbmUgdG8gY29udmV5IG1lYW5pbmcKLSBEaXNwbGF5ICI5OSsiIHdoZW4gYSBjb3VudCBleGNlZWRzIDk5IOKAlCBwcmV2ZW50IGxheW91dCBvdmVyZmxvdyBhbmQgY29nbml0aXZlIG92ZXJsb2FkCi0gQW5pbWF0ZSB0aGUgTElWRSBiYWRnZSB3aXRoIHRoZSBwdWxzZSBhbmltYXRpb24gc28gdXNlcnMgcmVnaXN0ZXIgcmVhbC10aW1lIHN0YXRlIGF0IGEgZ2xhbmNlCi0gUHJvdmlkZSBhIG1lYW5pbmdmdWwgYXJpYS1sYWJlbCBvbiBldmVyeSBiYWRnZSBmb3Igc2NyZWVuLXJlYWRlciB1c2VycwoKLSBVc2UgYmFkZ2VzIGFzIGludGVyYWN0aXZlIGNvbnRyb2xzIOKAlCB0aGV5IGFyZSBub3QgYnV0dG9uczsgdXNlIENoaXBzIGZvciB0YXBwYWJsZSBsYWJlbHMKLSBFeGNlZWQgNCBjaGFyYWN0ZXJzIGluIGluZm9ybWF0aW9uYWwgYmFkZ2VzIOKAlCAiTkVXRVNUIiBvciAiU1RSRUFNSU5HIiBicmVhayB0aGUgcGlsbCBzaGFwZQotIFVzZSBjb2xvciBhcyB0aGUgc29sZSBzdGF0dXMgc2lnbmFsIOKAlCBhbHdheXMgYWRkIGFuIGljb24gb3IgbGFiZWwgYWxvbmdzaWRlIGFueSBjb2xvcmVkIGRvdAotIFN0YWNrIG1vcmUgdGhhbiAyIGJhZGdlcyBpbiB0aGUgc2FtZSBjb3JuZXIgb2YgYSBjYXJkIOKAlCBvY2NsdWRlcyBhcnQgYW5kIGNyZWF0ZXMgdmlzdWFsIG5vaXNlCi0gU2hvdyBhIGNvdW50IGJhZGdlIHdpdGggdmFsdWUgIjAiIOKAlCBoaWRlIHRoZSBiYWRnZSBlbnRpcmVseSB3aGVuIHRoZXJlIGlzIG5vdGhpbmcgdG8gcmVwb3J0CgoxLiAxIENvbnRhaW5lciBzaGFwZSBSZXF1aXJlZCBQaWxsIChib3JkZXItcmFkaXVzOiAxMDBweCkgZm9yIGluZm9ybWF0aW9uYWwgYW5kIGNvdW50IHZhcmlhbnRzLiBEb3QgKGJvcmRlci1yYWRpdXM6IDUwJSkgZm9yIHN0YXR1cyBpbmRpY2F0b3IuIFNoYXBlIG11c3QgcmVtYWluIGNvbnNpc3RlbnQgcGVyIHZhcmlhbnQgYWNyb3NzIGFsbCBwbGF0Zm9ybXMuIGBib3JkZXItcmFkaXVzOiB2YXIoLS1waWxsKWAKMi4gMiBMYWJlbCB0ZXh0IG9yIGNvdW50IFJlcXVpcmVkIFVwcGVyY2FzZSB0ZXh0IGZvciBpbmZvcm1hdGlvbmFsIGJhZGdlcyAobWF4IDQgY2hhcnMpLiBOdW1lcmljIHN0cmluZyBmb3IgY291bnQgYmFkZ2VzLiBObyB0ZXh0IGZvciBkb3QgYmFkZ2VzLiBgZm9udC1zaXplOiA5cHg7IGZvbnQtd2VpZ2h0OiA5MDA7IHRleHQtdHJhbnNmb3JtOiB1cHBlcmNhc2VgCjMuIDMgRG90IGluZGljYXRvciBPcHRpb25hbCBVc2VkIG9ubHkgaW4gdGhlIGRvdC9zdGF0dXMgdmFyaWFudC4gQW4gOMOXOHB4IGZpbGxlZCBjaXJjbGUg4oCUIG5vIHRleHQsIG5vIGJvcmRlci4gQXBwZWFycyBzdGFuZGFsb25lIG9yIGFsb25nc2lkZSBhIGxhYmVsIGluIGEgbGlzdCByb3cuIGB3aWR0aDogOHB4OyBoZWlnaHQ6IDhweDsgYm9yZGVyLXJhZGl1czogNTAlYAo0LiA0IENvbG9yIGZpbGwgT3B0aW9uYWwgU2VtYW50aWMgYmFja2dyb3VuZCBjb2xvciBjYXJyaWVzIG1lYW5pbmcuIEdyZWVuIGZvciBwb3NpdGl2ZS9uZXcsIHJlZCBmb3IgbGl2ZS9hbGVydCwgZ3JhZGllbnQgZm9yIHByZW1pdW0sIGdsYXNzIGZvciBnZW5yZS4gQWx3YXlzIHBhaXJlZCB3aXRoIHRleHQgb3IgYXJpYS1sYWJlbCDigJQgbmV2ZXIgY29sb3IgYWxvbmUuIGBiYWNrZ3JvdW5kOiB2YXIoLS1qaW8tc29mdCkgfCB2YXIoLS1uZWdhdGl2ZSkgfCB2YXIoLS1wcmVtaXVtLWdyYWRpZW50KWAKCiMjIFZhcmlhbnRzCgpBbGwgYmFkZ2UgdmFyaWFudHMgc2hhcmUgdGhlIHNhbWUgYmFzZSBwaWxsIHNoYXBlLiBFYWNoIHZhcmlhbnQgaGFzIGEgZml4ZWQgc2VtYW50aWMgbWVhbmluZyDigJQgZG8gbm90IHJlcHVycG9zZSBjb2xvcnMgYWNyb3NzIHZhcmlhbnQgdHlwZXMuCgojIyBTaXplcwoKQmFkZ2Ugc2l6ZSBzY2FsZXMgd2l0aCBjb250ZXh0LiBNb3N0IHN1cmZhY2VzIHVzZSB0aGUgZGVmYXVsdCBzaXplLiBDb21wYWN0IGZpdHMgY291bnQgZG90cyBvbiBkZW5zZSBpY29uIHJvd3MuIExhcmdlIHdvcmtzIGZvciBoZXJvIGxhYmVscyBvbiBhIGdhbWUgZGV0YWlsIHBhZ2UuIFRWIHNjYWxlIGVuc3VyZXMgbGVnaWJpbGl0eSBhdCAzLW1ldHJlIHZpZXdpbmcgZGlzdGFuY2UuCgojIyBTdGF0ZXMKCkJhZGdlcyBhcmUgc3RhdGVsZXNzIGJ5IG5hdHVyZSDigJQgdGhleSBkb24ndCBoYXZlIGhvdmVyLCBmb2N1cywgb3IgcHJlc3NlZCBzdGF0ZXMuIFRoZSBvbmx5IGJlaGF2aW9yYWwgdmFyaWF0aW9uIGlzIHRoZSBhbmltYXRlZCBwdWxzZSBmb3IgTElWRSwgb3ZlcmZsb3cgdHJ1bmNhdGlvbiBmb3IgY291bnQsIGFuZCBpbmFjdGl2ZSBkaW1taW5nIGZvciBzdGF0dXMgZG90cy4KCiMjIENvbnRlbnQgZ3VpZGFuY2UKCkJhZGdlIGNvcHkgaXMgb25lIG9mIHRoZSBoaWdoZXN0LWRlbnNpdHkgdGV4dCBzdXJmYWNlcyBpbiB0aGUgc3lzdGVtLiBFdmVyeSBjaGFyYWN0ZXIgY29zdHMgcHJvcG9ydGlvbmFsbHkgbW9yZSBzcGFjZS4gRm9sbG93IHRoZXNlIHJ1bGVzIHRvIHN0YXkgY29uc2lzdGVudC4KCi0gQWx3YXlzIHVwcGVyY2FzZSwgYWx3YXlzIG1heCA0IGNoYXJhY3RlcnMKLSBXcml0ZSAqKk5FVyoqLCBub3QgTkVXRVNUIG9yIFJFQ0VOVAotIFdyaXRlICoqTElWRSoqLCBub3QgU1RSRUFNSU5HIG9yIEFJUklORwotIFdyaXRlICoqSE9UKiosIG5vdCBQT1BVTEFSIG9yIFRSRU5ESU5HCi0gVXNlIGdlbnJlIG5hbWVzIChBY3Rpb24sIFJQRykgbm90IGRlc2NyaXB0b3JzIChGdW4sIENvb2wpCi0gTG9jYWxpemUgbGFiZWwgdGV4dCBmb3IgcmVnaW9uYWwgYnVpbGRzIOKAlCBrZWVwIHNhbWUgY2hhcmFjdGVyIGxpbWl0CgotIFNob3cgbnVtZXJpYyB2YWx1ZSBmcm9tIDHigJM5OSBkaXJlY3RseTogIjMiLCAiNDIiLCAiOTkiCi0gV2hlbiBjb3VudCBleGNlZWRzIDk5LCBhbHdheXMgc2hvdyAqKjk5KyoqIOKAlCBuZXZlciAiMTAwIiBvciBoaWdoZXIKLSBXaGVuIGNvdW50IGlzIDAsIGhpZGUgdGhlIGJhZGdlIGVudGlyZWx5IOKAlCBkb24ndCBzaG93ICIwIgotIFVzZSBgYXJpYS1sYWJlbD0iMyBub3RpZmljYXRpb25zImAgbm90IGBhcmlhLWxhYmVsPSIzImAKLSBEb24ndCBwYWQgc2luZ2xlIGRpZ2l0czogIjMiIG5vdCAiMDMiCgojIyBQbGF0Zm9ybSBjb25zaWRlcmF0aW9ucwoKQmFkZ2VzIGFkYXB0IGluIHNpemUgYW5kIHBvc2l0aW9uaW5nIGFjcm9zcyBzdXJmYWNlcy4gQ29yZSBzZW1hbnRpY3Mgc3RheSBmaXhlZCDigJQgb25seSBzY2FsZSBhbmQgaW50ZXJhY3Rpb24gYWZmb3JkYW5jZXMgdmFyeS4KCi0gT3ZlcmxheSBiYWRnZXMgdXNlIGBwb3NpdGlvbjphYnNvbHV0ZWAgcmVsYXRpdmUgdG8gcGFyZW50IGNvbnRhaW5lcgotIE9mZnNldCA4cHggZnJvbSB0aGUgbmVhcmVzdCBlZGdlIOKAlCBuZXZlciBmbHVzaCB0byB0aGUgY29ybmVyCi0gRG8gbm90IG9ic2N1cmUgdGhlIHZpc3VhbCBjZW50ZXIgb3IgbWFpbiBmb2NhbCBwb2ludCBvZiBnYW1lIGFydAotIExpbWl0IHRvIDEgb3ZlcmxheSBiYWRnZSBwZXIgY2FyZCBlZGdlIChtYXggMiBiYWRnZXMgdG90YWwgcGVyIGNhcmQpCi0gVXNlIGRlZmF1bHQgc2l6ZSAoM3B4IDdweCBwYWRkaW5nLCA5cHggZm9udCkKCi0gQWRkIGEgYHRpdGxlYCBhdHRyaWJ1dGUgb3IgdG9vbHRpcCBvbiBob3ZlciB0byBleHBhbmQgc2hvcnQgbGFiZWxzIGZvciBhY2Nlc3NpYmlsaXR5Ci0gQ291bnQgYmFkZ2VzIG9uIGljb24gYnV0dG9ucyBnZXQgYGFyaWEtbGl2ZT0icG9saXRlImAgd2hlbiBjb3VudCB1cGRhdGVzIGR5bmFtaWNhbGx5Ci0gTElWRSBiYWRnZSB0b29sdGlwOiAiVGhpcyBzdHJlYW0gaXMgY3VycmVudGx5IGxpdmUiCi0gQ3Vyc29yIHJlbWFpbnMgZGVmYXVsdCAobm90IHBvaW50ZXIpIOKAlCBiYWRnZXMgYXJlIG5vdCBpbnRlcmFjdGl2ZQotIFVzZSBkZWZhdWx0IHNpemU7IGxhcmdlIHNpemUgb25seSBvbiBoZXJvL2RldGFpbCBwYWdlIGhlYWRlcnMKCi0gQWx3YXlzIHVzZSBUViBzY2FsZSAoNnB4IDE0cHggcGFkZGluZywgMTFweCBmb250KSDigJQgZGVmYXVsdCBpcyB1bnJlYWRhYmxlIGF0IDNtCi0gQXZvaWQgY291bnQgYmFkZ2VzIG9uIFRWIOKAlCByZXBsYWNlIHdpdGggaW5saW5lIHRleHQgIjMgbmV3IiBpbiBhIGxpc3Qgcm93Ci0gTElWRSBiYWRnZSBtdXN0IHJlbWFpbiBmdWxseSB2aXNpYmxlIGV2ZW4gd2hlbiBjYXJkIGlzIGluIGFuIHVuZm9jdXNlZCBzdGF0ZQotIERvIG5vdCB1c2UgZG90LW9ubHkgc3RhdHVzIG9uIFRWIOKAlCB0b28gc21hbGw7IHVzZSBhIGNvbG9yZWQgcGlsbCBsYWJlbCBpbnN0ZWFkCi0gUHVsc2UgYW5pbWF0aW9uIGlzIHNhZmUgZm9yIFRWIOKAlCBpdCBpcyBzbG93IGVub3VnaCB0byBhdm9pZCBmbGlja2VyIHRocmVzaG9sZHMKCiMjIEFjY2Vzc2liaWxpdHkKCkJhZGdlcyBjYXJyeSBtZWFuaW5nIHRoYXQgbWF5IG5vdCBiZSBwZXJjZWl2YWJsZSB0byBhbGwgdXNlcnMuIEV2ZXJ5IGJhZGdlIG11c3QgcHJvdmlkZSBhIHByb2dyYW1tYXRpYyB0ZXh0IGVxdWl2YWxlbnQg4oCUIGRvIG5vdCByZWx5IG9uIHZpc3VhbCBzaGFwZSBvciBjb2xvciBhbG9uZS4KCnwgVmFyaWFudCB8IFJvbGUgLyBhdHRyaWJ1dGUgfCBHdWlkYW5jZSB8CnwtLS18LS0tfC0tLXwKfCBJbmZvcm1hdGlvbmFsIChORVcsIExJVkUpIHwgYGFyaWEtbGFiZWxgIHwgRGVzY3JpYmUgdGhlIGNvbnRlbnQgc3RhdGUsIG5vdCBqdXN0IHRoZSB3b3JkLiBVc2UgYGFyaWEtbGFiZWw9Ik5ldyBnYW1lIGFkZGVkImAgbm90IGBhcmlhLWxhYmVsPSJORVciYC4gfAp8IENvdW50IGJhZGdlIHwgYGFyaWEtbGFiZWxgIHwgSW5jbHVkZSB0aGUgbm91bi4gYGFyaWEtbGFiZWw9IjMgbm90aWZpY2F0aW9ucyJgIOKAlCBub3QganVzdCBgYXJpYS1sYWJlbD0iMyJgLiBVc2UgIjk5IG9yIG1vcmUgbm90aWZpY2F0aW9ucyIgZm9yIG92ZXJmbG93LiB8CnwgTElWRSBiYWRnZSB8IGBhcmlhLWxpdmU9InBvbGl0ZSJgIHwgQWRkIGBhcmlhLWxpdmU9InBvbGl0ZSJgIHRvIHRoZSBwYXJlbnQgY29udGFpbmVyIHdoZW4gTElWRSBiYWRnZSBhcHBlYXJzL2Rpc2FwcGVhcnMgZHluYW1pY2FsbHkgc28gc2NyZWVuIHJlYWRlcnMgYW5ub3VuY2UgdGhlIHN0YXRlIGNoYW5nZS4gfAp8IFN0YXR1cyBkb3QgfCBgcm9sZT0ic3RhdHVzImAgKyB2aXN1YWxseSBoaWRkZW4gdGV4dCB8IFRoZSBkb3QgaXRzZWxmIGhhcyBubyByZWFkYWJsZSB0ZXh0LiBBZGQgYSB2aXN1YWxseSBoaWRkZW4gYE9ubGluZWAgc2libGluZy4gTmV2ZXIgdXNlIGRvdCBjb2xvciBhbG9uZSBmb3IgbWVhbmluZy4gfAp8IFByZW1pdW0gYmFkZ2UgfCBgYXJpYS1sYWJlbGAgfCBgYXJpYS1sYWJlbD0iSmlvR2FtZXMgUGFzcyByZXF1aXJlZCJgIOKAlCBncmFkaWVudCBmaWxsIGFsb25lIGRvZXMgbm90IGNvbnZleSBnYXRlIHN0YXR1cyB0byBhc3Npc3RpdmUgdGVjaC4gfAp8IEFsbCB2YXJpYW50cyB8IENvbG9yIGNvbnRyYXN0IHwgQWxsIGJhZGdlIHRleHQgbXVzdCBtZWV0IFdDQUcgQUEgbWluaW11bSA0LjU6MSBhZ2FpbnN0IGJhZGdlIGJhY2tncm91bmQuIFRoZSBncmVlbi1vbi1kYXJrLWdyZWVuIGluZm9ybWF0aW9uYWwgc3R5bGUgcGFzc2VzIGF0IDQuNzoxIOKAlCBkbyBub3QgbGlnaHRlbiB0aGUgYmFja2dyb3VuZCBmdXJ0aGVyLiB8CgojIyBSZWxhdGVkIHRva2VucwoKUmVmZXJlbmNlIHRoZXNlIHRva2VucyB3aGVuIGltcGxlbWVudGluZyBiYWRnZSBzdHlsZXMuIE5ldmVyIGhhcmRjb2RlIGhleCB2YWx1ZXMgZGlyZWN0bHkg4oCUIGFsd2F5cyB1c2UgdGhlIHRva2VuIHRvIHN0YXkgaW4gc3luYyB3aXRoIHRoZW1lIHVwZGF0ZXMuCgp8IFRva2VuIHwgVmFsdWUgfCBVc2FnZSB8CnwtLS18LS0tfC0tLXwKfCBgLS1qaW9gIHwgYCMwMEE4NTlgIHwgTkVXIGJhZGdlIHRleHQgY29sb3IsIGFjdGl2ZSBzdGF0dXMgZG90IGZpbGwgfAp8IGAtLWppby1zb2Z0YCB8IGByZ2JhKDAsMTY4LDg5LC4xMilgIHwgTkVXIGJhZGdlIGJhY2tncm91bmQgZmlsbCAoaW5mb3JtYXRpb25hbCB2YXJpYW50KSB8CnwgYC0tbmVnYXRpdmVgIHwgYCNGRjQ3NTdgIHwgQ291bnQgYmFkZ2UgYmFja2dyb3VuZCwgTElWRSBiYWRnZSBiYWNrZ3JvdW5kIHwKfCBgLS1wcmVtaXVtLWdyYWRpZW50YCB8IGBsaW5lYXItZ3JhZGllbnQoMTM1ZGVnLCAjMDBjYzY1LCAjMDBFODcwKWAgfCBQcmVtaXVtIGJhZGdlIGJhY2tncm91bmQgZmlsbCB8CnwgYC0tcHJlbWl1bS1ib3JkZXJgIHwgYHJnYmEoMCwyMDQsMTAxLC4zNSlgIHwgUHJlbWl1bSBiYWRnZSBib3JkZXIgc3Ryb2tlIChvcHRpb25hbCwgdXNlIGZvciBvdXRsaW5lZCB2YXJpYW50KSB8CnwgYC0tcGlsbGAgfCBgMTAwcHhgIHwgQm9yZGVyLXJhZGl1cyBmb3IgYWxsIHBpbGwtc2hhcGVkIGJhZGdlIHZhcmlhbnRzIHwKfCBgLS1ib3JkZXItc3VidGxlYCB8IGByZ2JhKDI1NSwyNTUsMjU1LC4wOClgIHwgR2VucmUgdGFnIGJhY2tncm91bmQgZmlsbCAoZ2xhc3MvZnJvc3RlZCB2YXJpYW50KSB8CgojIyBXaGVuIHRvIHVzZQoKVXNlIHdoZW4KCi0gVW5yZWFkIG5vdGlmaWNhdGlvbiBjb3VudHMgb24gdGFiIGJhciBpY29ucyBvciBsaXN0IGl0ZW1zCi0gU3RhdHVzIGxhYmVscyBvbiBnYW1lIGNhcmRzIChOZXcsIEhvdCwgTGl2ZSwgU2FsZSkKLSBQYXNzIHRpZXIgaW5kaWNhdG9ycyAoTW9iaWxlIFBhc3MsIFVsdGltYXRlIFBhc3MpCi0gQWNoaWV2ZW1lbnQgdW5sb2NrIGluZGljYXRvcnMgb24gcHJvZmlsZSBzY3JlZW5zCgpEb24ndCB1c2Ugd2hlbgoKLSBMb25nIHRleHQgKG1vcmUgdGhhbiB+MTIgY2hhcmFjdGVycykg4oCUIHVzZSBhIGNoaXAgb3IgbGFiZWwgaW5zdGVhZAotIENyaXRpY2FsIGVycm9yIG1lc3NhZ2VzIOKAlCB1c2UgYSBiYW5uZXIgb3IgdG9hc3QgaW5zdGVhZAotIERlY29yYXRpdmUgb25seSB1c2VzIHdpdGhvdXQgbWVhbmluZ2Z1bCBzdGF0dXMgaW5mb3JtYXRpb24KLSBTdGFja2luZyBtdWx0aXBsZSBiYWRnZXMgb24gb25lIGVsZW1lbnQg4oCUIHBpY2sgdGhlIG1vc3QgaW1wb3J0YW50CgojIyBNb3Rpb24KCnwgSW50ZXJhY3Rpb24gfCBFYXNpbmcgfCBEdXJhdGlvbiB8IFByb3BlcnR5IHwKfC0tLXwtLS18LS0tfC0tLXwKfCBDb3VudCBjaGFuZ2UgfCBgLS1lYXNlLW91dGAgfCBgLS1kdXItZmFzdGAgfCB0cmFuc2Zvcm0gc2NhbGUoMS4zIOKGkiAxKSB8CnwgQXBwZWFyIHwgYC0tZWFzZS1vdXRgIHwgYC0tZHVyLWZhc3RgIHwgdHJhbnNmb3JtIHNjYWxlKDAg4oaSIDEpLCBvcGFjaXR5IHwKfCBEaXNtaXNzIHwgYC0tZWFzZS1pbmAgfCBgLS1kdXItZmFzdGAgfCB0cmFuc2Zvcm0gc2NhbGUoMSDihpIgMCksIG9wYWNpdHkgfAoKIyMgQVBJCgojIyMgQ1NTIGNsYXNzZXMKCnwgQ2xhc3MgfCBEZXNjcmlwdGlvbiB8CnwtLS18LS0tfAp8IGAuZHMtYmFkZ2VgIHwgUm9vdCBiYWRnZSDigJQgcGlsbCBzaGFwZSwgbnVtZXJpYyBvciBzaG9ydCB0ZXh0IHwKfCBgLmRzLWJhZGdlLS1kb3RgIHwgRG90LW9ubHkgYmFkZ2UgKG5vIHRleHQsIGZvciB1bnJlYWQgaW5kaWNhdG9yKSB8CnwgYC5kcy1iYWRnZS0tbmV3YCB8IEdyZWVuICJOZXciIGxhYmVsIHwKfCBgLmRzLWJhZGdlLS1ob3RgIHwgQW1iZXIgIkhvdCIgbGFiZWwgfAp8IGAuZHMtYmFkZ2UtLWxpdmVgIHwgUmVkIHB1bHNpbmcgIkxpdmUiIGxhYmVsIHwKfCBgLmRzLWJhZGdlLS1zYWxlYCB8IFB1cnBsZSAiU2FsZSIgbGFiZWwgfAp8IGAuZHMtYmFkZ2UtLXBhc3NgIHwgSmlvR2FtZXMgUGFzcyB0aWVyIGJhZGdlIHwKCiMjIyBSZWFjdCBwcm9wcwoKfCBQcm9wIHwgVHlwZSB8IERlZmF1bHQgfCBEZXNjcmlwdGlvbiB8CnwtLS18LS0tfC0tLXwtLS18CnwgYHZhcmlhbnRgIHwgImRlZmF1bHQiIHwgImRvdCIgfCAibmV3IiB8ICJob3QiIHwgImxpdmUiIHwgInNhbGUiIHwgInBhc3MiIHwgImRlZmF1bHQiIHwgVmlzdWFsIHN0eWxlIHwKfCBgY291bnRgIHwgbnVtYmVyIHwgdW5kZWZpbmVkIHwgTnVtZXJpYyBjb3VudCDigJQgc2hvd3MgIjk5KyIgYWJvdmUgOTkgfAp8IGBtYXhgIHwgbnVtYmVyIHwgOTkgfCBUaHJlc2hvbGQgYmVmb3JlIHNob3dpbmcgIisiIHN1ZmZpeCB8CnwgYHNob3daZXJvYCB8IGJvb2xlYW4gfCBmYWxzZSB8IFNob3cgYmFkZ2UgZXZlbiB3aGVuIGNvdW50IGlzIDAgfAp8IGBjaGlsZHJlbmAgfCBSZWFjdE5vZGUgfCB1bmRlZmluZWQgfCBFbGVtZW50IHRvIGF0dGFjaCB0aGUgYmFkZ2UgdG8gfAoKIyMgQ29kZSBleGFtcGxlcwoKQ29weSB0aGVzZSBzbmlwcGV0cyBhcyBzdGFydGluZyBwb2ludHMuIEFsd2F5cyBsaW5rIGB0b2tlbnMvdG9rZW5zLmNzc2AsIGBjb21wb25lbnRzLmNzc2AsIGFuZCBgc3RhdGVzLmNzc2AgYmVmb3JlIHVzaW5nIGNvbXBvbmVudCBjbGFzc2VzLgoKYGBgYGh0bWwKPHNwYW4gY2xhc3M9ImJhZGdlIGJhZGdlLS1uZXciPk5ldzwvc3Bhbj4KPHNwYW4gY2xhc3M9ImJhZGdlIGJhZGdlLS1saXZlIj5MaXZlPC9zcGFuPgo8c3BhbiBjbGFzcz0iYmFkZ2UgYmFkZ2UtLXByZW1pdW0iPlBhc3M8L3NwYW4+CjxzcGFuIGNsYXNzPSJiYWRnZSBiYWRnZS0tZnJlZSI+RnJlZTwvc3Bhbj4KPHNwYW4gY2xhc3M9ImJhZGdlIGJhZGdlLS1zYWxlIj5TYWxlPC9zcGFuPgpgYGBgCgpgYGBgaHRtbAo8c3BhbiBzdHlsZT0icG9zaXRpb246cmVsYXRpdmU7ZGlzcGxheTppbmxpbmUtZmxleCI+CiAgPHN2ZyBjbGFzcz0iaWNvbiBpY29uLS1tIiBhcmlhLWhpZGRlbj0idHJ1ZSI+CiAgICA8dXNlIGhyZWY9Ii9zcHJpdGUuc3ZnI2ljX2JlbGwiPjwvdXNlPgogIDwvc3ZnPgogIDxzcGFuIGNsYXNzPSJiYWRnZS1jb3VudCIgYXJpYS1sYWJlbD0iMyBub3RpZmljYXRpb25zIj4zPC9zcGFuPgo8L3NwYW4+CmBgYGAKCiMjIENoYW5nZWxvZwoKQWRkZWQgYGJhZGdlLWxpdmUtcHVsc2VgIENTUyBhbmltYXRpb24gZm9yIExJVkUgYmFkZ2UuIEFkZGVkIFRWIHNjYWxlIHNpemUgdGllciAoNnB4IDE0cHggcGFkZGluZywgMTFweCBmb250LXNpemUpLiBVcGRhdGVkIGFjY2Vzc2liaWxpdHkgdGFibGUgd2l0aCBgYXJpYS1saXZlYCBndWlkYW5jZSBmb3IgZHluYW1pYyBjb3VudCBiYWRnZXMuCgpJbml0aWFsIGNvbXBvbmVudCByZWxlYXNlLiBJbmNsdWRlcyBJbmZvcm1hdGlvbmFsLCBDb3VudCwgU3RhdHVzIGRvdCwgUHJlbWl1bSwgYW5kIEdlbnJlIHRhZyB2YXJpYW50cy4gRGVmYXVsdCBhbmQgY29tcGFjdCBzaXplIHRpZXJzLiBGdWxsIGFuYXRvbXkgZG9jdW1lbnRhdGlvbiBhbmQgYmVzdCBwcmFjdGljZXMuCgotLS0KCiMjIFRva2VucyByZWZlcmVuY2VkIG9uIHRoaXMgcGFnZQoKVXNlIHRoZXNlIGV4YWN0IHRva2VucyDigJQgZGVmaW5lZCBpbiBgdG9rZW5zL3Rva2Vucy5jc3NgLiBEbyBub3Qgc3Vic3RpdHV0ZSByYXcgdmFsdWVzLgoKLSBgLS1qaW8tc29mdGAKLSBgLS1uZWdhdGl2ZWAKLSBgLS1waWxsYAotIGAtLXByZW1pdW0tZ3JhZGllbnRgCi0gYC0tdGV4dGAKCi0tLQoKIyMgQnVpbGQgcnVsZXMgKGJpbmRpbmcpCgoxLiBVc2UgKipvbmx5KiogdGhlIHRva2VucyBsaXN0ZWQgYWJvdmUuIElmIGEgdmFsdWUgeW91IG5lZWQgaXMgbm90IGxpc3RlZCwgc3RvcCBhbmQgYXNrIOKAlCBkbyBub3QgaW50cm9kdWNlIGEgcmF3IHZhbHVlLgoyLiBGb250IGlzICoqSmlvVHlwZSoqIG9ubHkuIFdlaWdodHM6IDMwMCwgNTAwLCA3MDAsIDkwMC4KMy4gUmV1c2UgdGhlIGNvbXBvbmVudCBDU1MgcGF0dGVybnMgc2hvd24gb24gdGhlIHNvdXJjZSBwYWdlOyBkbyBub3QgcmVkZXNpZ24uCjQuIE1hdGNoIGV2ZXJ5IHN0YXRlIChkZWZhdWx0LCBob3ZlciwgZm9jdXMsIGFjdGl2ZSwgZGlzYWJsZWQsIGxvYWRpbmcpIHNob3duIG9uIHRoZSBwYWdlLgo1LiBBY2Nlc3NpYmlsaXR5IHJlcXVpcmVtZW50cyBvbiB0aGUgcGFnZSBhcmUgbWFuZGF0b3J5LCBub3Qgb3B0aW9uYWwuCg==" download="badges-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
+    </div>
       <span class="component-maturity component-maturity--stable">
         <span class="component-maturity--dot"></span>Stable
       </span>
@@ -483,6 +483,94 @@
   </section>
 
   <!-- CODE EXAMPLES -->
+  <!-- WHEN TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use</h2>
+    <div class="ds-usage-grid">
+      <div class="ds-usage-card ds-usage-card--do">
+        <p class="ds-usage-label ds-usage-label--do">Use when</p>
+        <ul class="ds-usage-list">
+              <li>Unread notification counts on tab bar icons or list items</li>
+              <li>Status labels on game cards (New, Hot, Live, Sale)</li>
+              <li>Pass tier indicators (Mobile Pass, Ultimate Pass)</li>
+              <li>Achievement unlock indicators on profile screens</li>
+        </ul>
+      </div>
+      <div class="ds-usage-card ds-usage-card--dont">
+        <p class="ds-usage-label ds-usage-label--dont">Don't use when</p>
+        <ul class="ds-usage-list">
+              <li>Long text (more than ~12 characters) — use a chip or label instead</li>
+              <li>Critical error messages — use a banner or toast instead</li>
+              <li>Decorative only uses without meaningful status information</li>
+              <li>Stacking multiple badges on one element — pick the most important</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOTION -->
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-motion-table">
+      <thead><tr><th>Interaction</th><th>Easing</th><th>Duration</th><th>Property</th></tr></thead>
+      <tbody>
+        <tr><td>Count change</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>transform scale(1.3 → 1)</td></tr>
+        <tr><td>Appear</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>transform scale(0 → 1), opacity</td></tr>
+        <tr><td>Dismiss</td><td><code>--ease-in</code></td><td><code>--dur-fast</code></td><td>transform scale(1 → 0), opacity</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- API -->
+  <section class="ds-section" id="api">
+    <h2 class="ds-section-title">API</h2>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:0 0 12px;">CSS classes</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>.ds-badge</code></td><td>Root badge — pill shape, numeric or short text</td></tr>
+        <tr><td><code>.ds-badge--dot</code></td><td>Dot-only badge (no text, for unread indicator)</td></tr>
+        <tr><td><code>.ds-badge--new</code></td><td>Green "New" label</td></tr>
+        <tr><td><code>.ds-badge--hot</code></td><td>Amber "Hot" label</td></tr>
+        <tr><td><code>.ds-badge--live</code></td><td>Red pulsing "Live" label</td></tr>
+        <tr><td><code>.ds-badge--sale</code></td><td>Purple "Sale" label</td></tr>
+        <tr><td><code>.ds-badge--pass</code></td><td>JioGames Pass tier badge</td></tr>
+      </tbody>
+    </table>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 12px;">React props</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>variant</code></td><td><span class="api-type">"default" | "dot" | "new" | "hot" | "live" | "sale" | "pass"</span></td><td><span class="api-default">"default"</span></td><td>Visual style</td></tr>
+        <tr><td><code>count</code></td><td><span class="api-type">number</span></td><td><span class="api-default">undefined</span></td><td>Numeric count — shows "99+" above 99</td></tr>
+        <tr><td><code>max</code></td><td><span class="api-type">number</span></td><td><span class="api-default">99</span></td><td>Threshold before showing "+" suffix</td></tr>
+        <tr><td><code>showZero</code></td><td><span class="api-type">boolean</span></td><td><span class="api-default">false</span></td><td>Show badge even when count is 0</td></tr>
+        <tr><td><code>children</code></td><td><span class="api-type">ReactNode</span></td><td><span class="api-default">undefined</span></td><td>Element to attach the badge to</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  
+
+  
+
+  
+
+  
+
   <section class="component-section" id="code-examples">
     <h2 class="ds-section-title">Code examples</h2>
     <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
@@ -525,4 +613,4 @@
     </div>
   </section>
 
-</main><script src="../sprite-loader.js"></script><script src="../shell.js"></script></body></html>
+</main><script src="../sprite-loader.js"></script><script src="../shell.js?v=2"></script></body></html>

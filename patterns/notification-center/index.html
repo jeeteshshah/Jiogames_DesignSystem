@@ -1,0 +1,332 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notification Center — JioGames DLS Patterns</title>
+  <link rel="stylesheet" href="../../tokens/tokens.css">
+  <link rel="stylesheet" href="../../components.css">
+  <link rel="stylesheet" href="../../states.css">
+  <link rel="stylesheet" href="../../shell.css?v=3">
+</head>
+<body>
+<main class="ds-main">
+
+  <header class="component-page-header">
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <a href="../../" class="component-breadcrumb-link">JioGames DLS</a>
+      <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+      <a href="../" class="component-breadcrumb-link">Patterns</a>
+      <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="component-breadcrumb-current">Notification Center</span>
+    </nav>
+    <h1 class="component-page-title">Notification Center</h1>
+    <p class="component-page-def">A persistent, accumulated record of notifications the user can review and dismiss at their own pace — distinct from the transient Toast component, which delivers in-the-moment feedback.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+      <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+      <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+    </div>
+  </header>
+
+  <!-- PURPOSE -->
+  <section class="ds-section" id="purpose">
+    <h2 class="ds-section-title">Purpose</h2>
+    <p style="font-size:13px;color:var(--text2);line-height:1.6;margin-top:12px">Toast handles real-time, interruptive feedback that disappears after a few seconds. The Notification Center handles everything that needs to persist: pass expiry warnings, new game additions, achievements, failed payments. Users should be able to open the center at any time and review what happened — even if they were away from the app when events occurred. The center is the durable layer; Toast is the ephemeral layer. They serve different user needs and should not be conflated.</p>
+    <div style="margin-top:16px;padding:16px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+        <div>
+          <p style="font-size:12px;font-weight:700;color:var(--text);margin:0 0 8px">Toast — use for</p>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px">
+            <li style="font-size:12px;color:var(--text2)">· Action confirmation ("Game added to library")</li>
+            <li style="font-size:12px;color:var(--text2)">· Copy success, form saved</li>
+            <li style="font-size:12px;color:var(--text2)">· Transient errors ("Couldn't save")</li>
+            <li style="font-size:12px;color:var(--text2)">· Auto-dismisses, no persistence needed</li>
+          </ul>
+        </div>
+        <div>
+          <p style="font-size:12px;font-weight:700;color:var(--text);margin:0 0 8px">Notification Center — use for</p>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px">
+            <li style="font-size:12px;color:var(--text2)">· Pass expiry warnings</li>
+            <li style="font-size:12px;color:var(--text2)">· New games added to pass</li>
+            <li style="font-size:12px;color:var(--text2)">· Achievements, rewards earned</li>
+            <li style="font-size:12px;color:var(--text2)">· Payment failures, billing events</li>
+            <li style="font-size:12px;color:var(--text2)">· System messages (maintenance, updates)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHEN TO USE / WHEN NOT TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use / When not to use</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px">
+      <div style="padding:20px;background:var(--status-positive-soft);border:1px solid var(--status-positive-border);border-radius:var(--r4)">
+        <p style="font-size:12px;font-weight:700;color:var(--status-positive);margin:0 0 12px">Use when</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:16px;position:relative"><span style="position:absolute;left:2px;color:var(--status-positive)">·</span>The event is relevant beyond the current session (pass expiry, payment issue)</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:16px;position:relative"><span style="position:absolute;left:2px;color:var(--status-positive)">·</span>The user may have missed a Toast (was away, screen off)</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:16px;position:relative"><span style="position:absolute;left:2px;color:var(--status-positive)">·</span>The notification requires a follow-up action (renew pass, retry payment)</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:16px;position:relative"><span style="position:absolute;left:2px;color:var(--status-positive)">·</span>The event is meaningful to log (achievement, reward)</li>
+        </ul>
+      </div>
+      <div style="padding:20px;background:var(--status-negative-soft);border:1px solid var(--status-negative-border);border-radius:var(--r4)">
+        <p style="font-size:12px;font-weight:700;color:var(--status-negative);margin:0 0 12px">Do not use when</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:16px;position:relative"><span style="position:absolute;left:2px;color:var(--status-negative)">·</span>The feedback is immediate confirmation of a just-completed action — use Toast instead</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:16px;position:relative"><span style="position:absolute;left:2px;color:var(--status-negative)">·</span>The message is purely informational with no action potential</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:16px;position:relative"><span style="position:absolute;left:2px;color:var(--status-negative)">·</span>The event repeats so frequently it would flood the center (e.g. every minor app update)</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:16px;position:relative"><span style="position:absolute;left:2px;color:var(--status-negative)">·</span>The message requires immediate interruption — use a modal or dialog instead</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <section class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;margin-top:20px">
+      <div style="display:grid;grid-template-columns:28px 180px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:22px;height:22px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--jio)">A</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Page / panel header</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Title "Notifications" + "Mark all read" text action (right-aligned). Badge count shown in tab bar icon, not repeated in header.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:28px 180px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:22px;height:22px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--jio)">B</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Date group header</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Sticky label: "Today", "Yesterday", "Earlier this week", "Older". Muted text, small caps style. Groups help users scan without reading timestamps on every row.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:28px 180px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:22px;height:22px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--jio)">C</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Notification row</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Icon (type-colored) + title + body snippet + timestamp. Unread: green dot, bold title, slightly lighter surface (<code class="ds-code">var(--surface-2)</code>). Read: no dot, normal weight, darker surface (<code class="ds-code">var(--surface-1)</code>).</span>
+      </div>
+      <div style="display:grid;grid-template-columns:28px 180px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:22px;height:22px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--jio)">D</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Unread indicator</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">8px circle in <code class="ds-code">var(--jio)</code>, positioned left of icon column. Hidden when row is read.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:28px 180px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:22px;height:22px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--jio)">E</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Swipe-to-dismiss</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Swipe left on mobile reveals a red "Delete" action. Full swipe dismisses. Must have an accessible button fallback (long-press menu or row action icon).</span>
+      </div>
+      <div style="display:grid;grid-template-columns:28px 180px 1fr;gap:16px;padding:14px 20px;align-items:start">
+        <div style="width:22px;height:22px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--jio)">F</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Empty state</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Centered illustration area + "You're all caught up" heading + "New notifications about your games and pass will appear here" body copy. No CTA needed.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOW -->
+  <section class="ds-section" id="flow">
+    <h2 class="ds-section-title">Flow</h2>
+    <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;margin-top:20px">
+      <div style="display:grid;grid-template-columns:32px 180px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">1</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Event arrives</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Backend pushes notification. Badge count on tab bar icon increments. If app is foregrounded, a Toast may also fire for immediate awareness — these are complementary, not redundant.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 180px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">2</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">User opens center</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Taps notification bell/tab. List loads grouped by date. Unread items visually distinct. "Mark all read" available if any unread exist.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 180px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">3</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Reading / marking</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Focusing a row marks it read (reduces unread count, removes dot, adjusts surface color). Accessible users: focus moves through list by Tab/D-pad, each item auto-marks as read on focus.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 180px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">4</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Tapping a notification</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Deep-links to the relevant screen (game detail, pass management, achievement screen). Row marked read. Back navigation returns to notification center.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 180px 1fr;gap:16px;padding:14px 20px;align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">5</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Dismissal</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Swipe-to-delete or button removes row with brief collapse animation. After 30 days, notifications auto-expire server-side. User has no manual "clear all" bulk-delete — only per-item dismiss.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATES -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <table class="ds-api-table" style="margin-top:16px">
+      <thead><tr><th>State</th><th>Visual treatment</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Unread</td>
+          <td>Green dot + bold title + <code class="ds-code">var(--surface-2)</code> background</td>
+          <td>Lighter surface vs. read state creates passive visual hierarchy without requiring the user to count dots</td>
+        </tr>
+        <tr>
+          <td>Read</td>
+          <td>No dot + normal weight title + <code class="ds-code">var(--surface-1)</code> background</td>
+          <td>Dimmer surface recedes; still fully legible</td>
+        </tr>
+        <tr>
+          <td>Loading</td>
+          <td>Skeleton rows (3–5 rows)</td>
+          <td>Shown on initial center open if data not yet cached</td>
+        </tr>
+        <tr>
+          <td>Empty</td>
+          <td>Illustration + "You're all caught up"</td>
+          <td>No CTA. Centered vertically in available space.</td>
+        </tr>
+        <tr>
+          <td>Warning type</td>
+          <td>Icon in <code class="ds-code">var(--status-warning)</code></td>
+          <td>Pass expiry, billing warnings</td>
+        </tr>
+        <tr>
+          <td>Info type</td>
+          <td>Icon in <code class="ds-code">var(--status-info)</code></td>
+          <td>New game added to pass</td>
+        </tr>
+        <tr>
+          <td>Positive type</td>
+          <td>Icon in <code class="ds-code">var(--status-positive)</code></td>
+          <td>Achievement unlocked, reward credited</td>
+        </tr>
+        <tr>
+          <td>Negative type</td>
+          <td>Icon in <code class="ds-code">var(--status-negative)</code></td>
+          <td>Payment failed</td>
+        </tr>
+        <tr>
+          <td>Neutral / system type</td>
+          <td>Icon in <code class="ds-code">var(--text3)</code></td>
+          <td>Maintenance notices, system messages</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PLATFORM BEHAVIOR -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform behavior</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:16px">
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--jio);border-radius:var(--r4);padding:20px;background:var(--surface-1)">
+        <p style="font-size:12px;font-weight:700;color:var(--jio);margin:0 0 12px">Mobile</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Full-screen page (standard navigation push). No overlay or panel.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Swipe-left on rows reveals delete action. Full horizontal swipe = instant dismiss.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Badge count on tab bar icon. Clears to zero when all items read.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Date group headers stick to top of scroll area as user scrolls through groups.</li>
+        </ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--gold);border-radius:var(--r4);padding:20px;background:var(--surface-1)">
+        <p style="font-size:12px;font-weight:700;color:var(--gold);margin:0 0 12px">Web</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Side panel (slide in from right, max-width 400px) or full-page route depending on viewport width.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Narrow (≤ 768px): full page. Wide: side panel with scrim behind.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">No swipe-to-dismiss on web — use a delete icon button on each row instead.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Keyboard: Escape closes side panel. Tab navigates rows. Delete key on focused row = dismiss.</li>
+        </ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--amber);border-radius:var(--r4);padding:20px;background:var(--surface-1)">
+        <p style="font-size:12px;font-weight:700;color:var(--amber);margin:0 0 12px">TV</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Full-screen page. No panel — panels are awkward on TV focus model.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">D-pad Up/Down navigates rows. Select/OK opens deep link. Back exits center.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Delete action: D-pad right on a focused row reveals "Dismiss" button, focusable with D-pad right again.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">TV focus ring: <code class="ds-code">var(--tv-focus-shadow)</code> on each row.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOTION -->
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-api-table" style="margin-top:16px">
+      <thead><tr><th>Moment</th><th>Token</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Row mark-read transition</td><td><code class="ds-code">var(--dur-default)</code> 200ms</td><td>Background lightness and dot opacity crossfade. No layout shift.</td></tr>
+        <tr><td>Dismiss row collapse</td><td><code class="ds-code">var(--dur-pop)</code> 280ms, <code class="ds-code">var(--spring)</code></td><td>Row height animates to 0, rows below slide up. Avoid jarring jump.</td></tr>
+        <tr><td>Unread dot appear</td><td><code class="ds-code">var(--dur-fast)</code> 120ms</td><td>Scale 0 → 1. Only on initial page load; no pop-in during session.</td></tr>
+        <tr><td>Panel slide in (web)</td><td><code class="ds-code">var(--dur-sheet)</code> 400ms, <code class="ds-code">var(--spring)</code></td><td>Translates from right edge. Scrim fades in simultaneously.</td></tr>
+        <tr><td>Badge count update</td><td><code class="ds-code">var(--dur-pop)</code> 280ms</td><td>Badge scales 0 → 1 on first appear; count change uses crossfade only.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;margin-top:16px">
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span><strong style="color:var(--text)">Tab bar badge:</strong> <code class="ds-code">aria-label="Notifications, 3 unread"</code>. Update the count dynamically. When zero: <code class="ds-code">aria-label="Notifications"</code>.</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span><strong style="color:var(--text)">Unread state:</strong> Do not rely on color dot alone. Unread rows should include a visually-hidden "Unread" label or use <code class="ds-code">aria-label</code> on the row that includes this context.</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span><strong style="color:var(--text)">Mark read on focus:</strong> When a user tabs or D-pads to a row, mark it read. This matches sighted users' visual scan behaviour. Announce read status change via <code class="ds-code">aria-live="polite"</code>.</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span><strong style="color:var(--text)">Swipe-to-dismiss fallback:</strong> Every notification row must have a non-gesture dismiss path — a button with <code class="ds-code">aria-label="Dismiss [notification title]"</code>. This serves keyboard, switch-access, and screen reader users.</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span><strong style="color:var(--text)">Deep link rows:</strong> Each row should be a focusable element with <code class="ds-code">role="link"</code> or <code class="ds-code">&lt;a&gt;</code>. Include destination context in aria-label: "View Tomb Raider — new game added to pass".</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span><strong style="color:var(--text)">Timestamps:</strong> Relative timestamps ("2 hours ago") should have a <code class="ds-code">title</code> attribute with the absolute datetime so users can hover/inspect for precision. Machine-readable: <code class="ds-code">&lt;time datetime="2026-06-29T10:30:00"&gt;</code>.</li>
+    </ul>
+  </section>
+
+  <!-- CONTENT GUIDANCE -->
+  <section class="ds-section" id="content">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <table class="ds-api-table" style="margin-top:16px">
+      <thead><tr><th>Type</th><th>Title format</th><th>Body format</th><th>Timestamp rule</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Pass expiry warning</td>
+          <td>"Your pass expires in 3 days"</td>
+          <td>"Renew now to keep playing your favourite games without interruption."</td>
+          <td>Relative: "2 hours ago"</td>
+        </tr>
+        <tr>
+          <td>New game on pass</td>
+          <td>"New on your pass: [Game Title]"</td>
+          <td>"Start playing today — included in your JioGames Pass."</td>
+          <td>Relative if &lt; 3 days</td>
+        </tr>
+        <tr>
+          <td>Achievement</td>
+          <td>"Achievement unlocked: [Name]"</td>
+          <td>Short description of the achievement. Keep to 1 sentence.</td>
+          <td>Relative if &lt; 3 days</td>
+        </tr>
+        <tr>
+          <td>Payment failed</td>
+          <td>"Payment failed"</td>
+          <td>"We couldn't process your payment. Update your details to continue."</td>
+          <td>Absolute if &gt; 3 days: "12 Jun"</td>
+        </tr>
+        <tr>
+          <td>System</td>
+          <td>Short factual title</td>
+          <td>Neutral, third-person. No exclamation marks on system notices.</td>
+          <td>Absolute date always</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:16px;padding:16px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3)">
+      <p style="font-size:12px;font-weight:700;color:var(--text);margin:0 0 6px">Grouping and persistence rules</p>
+      <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px">
+        <li style="font-size:12px;color:var(--text2);line-height:1.5">· Date groups: Today, Yesterday, Earlier this week, Older. Notifications older than 3 days collapse into "Older" group.</li>
+        <li style="font-size:12px;color:var(--text2);line-height:1.5">· Notifications persist until user dismisses them or they are 30 days old (auto-expire server-side).</li>
+        <li style="font-size:12px;color:var(--text2);line-height:1.5">· Do not duplicate identical notifications within 24 hours — deduplicate on backend before delivering.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- RELATED COMPONENTS -->
+  <section class="ds-section" id="components">
+    <h2 class="ds-section-title">Related components</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px">
+      <a href="../../toast/" class="ds-chip ds-chip--default">Toast</a>
+      <a href="../../banners/" class="ds-chip ds-chip--default">Banner</a>
+      <a href="../../lists/" class="ds-chip ds-chip--default">Lists</a>
+      <a href="../../skeleton/" class="ds-chip ds-chip--default">Skeleton</a>
+      <a href="../../dialogs/" class="ds-chip ds-chip--default">Dialog</a>
+      <a href="../empty-search/" class="ds-chip ds-chip--default">Empty state</a>
+    </div>
+  </section>
+
+</main>
+<script src="../../shell.js?v=2"></script>
+</body></html>

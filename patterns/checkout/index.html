@@ -1,0 +1,176 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment &amp; Checkout — JioGames DLS Patterns</title>
+  <link rel="stylesheet" href="../../tokens/tokens.css">
+  <link rel="stylesheet" href="../../components.css">
+  <link rel="stylesheet" href="../../states.css">
+  <link rel="stylesheet" href="../../shell.css?v=3">
+</head>
+<body>
+<main class="ds-main">
+
+  <header class="component-page-header">
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <a href="../../" class="component-breadcrumb-link">JioGames DLS</a>
+      <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+      <a href="../" class="component-breadcrumb-link">Patterns</a>
+      <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="component-breadcrumb-current">Payment &amp; Checkout</span>
+    </nav>
+    <h1 class="component-page-title">Payment &amp; Checkout</h1>
+    <p class="component-page-def">The complete flow for JioGames Pass subscription purchase — from entry point to confirmed or failed state.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+      <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+      <span class="component-maturity component-maturity--beta"><span class="component-maturity--dot"></span>Beta</span>
+    </div>
+  </header>
+
+  <!-- FLOW MAP -->
+  <section class="ds-section" id="flow">
+    <h2 class="ds-section-title">Flow map</h2>
+    <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;margin-top:20px">
+      <div style="display:grid;grid-template-columns:32px 140px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">1</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Entry</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">User taps upgrade CTA on home rail, game detail, or locked content overlay. Entry source is logged for analytics.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 140px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">2</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Plan selection</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Pass cards shown (Mobile / Ultimate). One plan pre-selected based on entry context. Feature comparison table below cards. Coupon/offer badge if eligible.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 140px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">3</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Coupon / offer</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Optional step. Input field with apply CTA. Success shows discounted price in green badge. Failure shows inline error below field (not toast).</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 140px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">4</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Payment method</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">List of saved methods + add new. Selected method highlighted with jio-green border. Order summary pinned at bottom.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 140px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">5</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Processing</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Full-screen loading state. CTA enters loading state. Page interaction disabled. Skeleton not used here — payment is a point-in-time action, not a content load.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 140px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">6a</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Success</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Full-screen confirmation with plan name, start date, and "Start playing" CTA. Toast summary shown on return to home.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 140px 1fr;gap:16px;padding:14px 20px;align-items:start">
+        <div style="width:24px;height:24px;background:rgba(255,71,87,.12);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--status-negative)">6b</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Failure / retry</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Error dialog (not toast) with specific reason if available. Primary CTA: Try again. Secondary: Change payment method. Third attempt shows customer support link.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENTRY POINTS -->
+  <section class="ds-section" id="entry-points">
+    <h2 class="ds-section-title">Entry points</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:16px">
+      <div style="padding:16px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px">Home upgrade rail</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">Combined pass upsell card in home rail. Non-dismissible for free users.</div>
+      </div>
+      <div style="padding:16px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px">Locked game overlay</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">Tapping Play on a Premium-only game. Overlay shows lock icon + "Unlock with Pass" CTA.</div>
+      </div>
+      <div style="padding:16px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px">Profile / account</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">Upgrade section in profile. For lapsed users: "Reactivate pass" entry.</div>
+      </div>
+      <div style="padding:16px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px">Banner dismissal</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">Inline dismissible banner on home (State 8). "See plans" CTA opens checkout directly at plan selection.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM DIFFERENCES -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform differences</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:16px">
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--jio);border-radius:var(--r4);padding:20px;background:var(--surface-1)">
+        <p style="font-size:12px;font-weight:700;color:var(--jio);margin:0 0 12px">Mobile</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Full-screen sheets for each step</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Back swipe navigates to previous step</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Payment methods via native payment sheet</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Order summary pinned above safe area bottom</li>
+        </ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--gold);border-radius:var(--r4);padding:20px;background:var(--surface-1)">
+        <p style="font-size:12px;font-weight:700;color:var(--gold);margin:0 0 12px">Web</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Modal dialog (max-width 640px) over blurred bg</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Multi-step within dialog, no page navigation</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Escape key: confirm-cancel dialog before closing</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Sticky order summary in right column on ≥1024px</li>
+        </ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--amber);border-radius:var(--r4);padding:20px;background:var(--surface-1)">
+        <p style="font-size:12px;font-weight:700;color:var(--amber);margin:0 0 12px">TV</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">TV checkout is typically QR code to mobile</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Show QR + "Continue on phone" message</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Poll for completion; auto-advance on success</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Back always available via remote Back button</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATES TO HANDLE -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States to handle</h2>
+    <table class="ds-api-table" style="margin-top:16px">
+      <thead><tr><th>State</th><th>Component</th><th>Behaviour</th></tr></thead>
+      <tbody>
+        <tr><td>Loading — plan fetch</td><td>Pass cards skeleton</td><td>Show skeleton cards while plans load. Never show empty layout.</td></tr>
+        <tr><td>Coupon valid</td><td>Banner (success variant)</td><td>Show green inline banner with discounted price. Original price struck through.</td></tr>
+        <tr><td>Coupon invalid</td><td>Input error state</td><td>Red border + error message below input. Toast not used here.</td></tr>
+        <tr><td>Payment processing</td><td>Button loading state</td><td>CTA shows spinner. Page interaction disabled. Timeout after 30s.</td></tr>
+        <tr><td>Payment success</td><td>Full-screen confirmation</td><td>Green check animation (respect prefers-reduced-motion). Plan name + date prominent.</td></tr>
+        <tr><td>Payment failed</td><td>Dialog (error variant)</td><td>Specific reason if known. Retry + change method options always present.</td></tr>
+        <tr><td>Network offline</td><td>Banner (warning variant)</td><td>Persistent banner at top. Disable pay CTA. Auto-retry when back online.</td></tr>
+        <tr><td>Already subscribed</td><td>Banner (info variant)</td><td>If user lands on checkout while subscribed, show current plan details + manage CTA.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;margin-top:16px">
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Multi-step flow: announce step progress with <code class="ds-code">aria-live="polite"</code> on step heading</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Plan selection: radio group pattern with <code class="ds-code">role="radiogroup"</code></li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Loading state: <code class="ds-code">aria-busy="true"</code> on the payment container</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Success: focus moves to confirmation heading automatically</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Error dialog: focus trapped inside. Escape + explicit close button both dismiss.</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Price and plan differences must not rely on colour alone — use text labels alongside green/default badges</li>
+    </ul>
+  </section>
+
+  <!-- COMPONENTS USED -->
+  <section class="ds-section" id="components">
+    <h2 class="ds-section-title">Components used</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px">
+      <a href="../../pass-cards/" class="ds-chip ds-chip--default">Pass cards</a>
+      <a href="../../buttons/" class="ds-chip ds-chip--default">Buttons</a>
+      <a href="../../dialogs/" class="ds-chip ds-chip--default">Dialog</a>
+      <a href="../../banners/" class="ds-chip ds-chip--default">Banner</a>
+      <a href="../../toast/" class="ds-chip ds-chip--default">Toast</a>
+      <a href="../../inputs/" class="ds-chip ds-chip--default">Input</a>
+      <a href="../../skeleton/" class="ds-chip ds-chip--default">Skeleton</a>
+      <a href="../../lists/" class="ds-chip ds-chip--default">Lists</a>
+    </div>
+  </section>
+
+</main>
+<script src="../../shell.js?v=2"></script>
+</body></html>

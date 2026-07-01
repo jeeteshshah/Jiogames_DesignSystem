@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Typography — JioGames DLS</title>
   <link rel="stylesheet" href="../tokens/tokens.css">
-  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../components.css?v=2">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     /* ── Page-specific: Typography ── */
 
@@ -475,18 +475,18 @@
     <!-- ── Page header ── -->
     <header class="component-page-header">
       <nav class="component-breadcrumb" aria-label="Breadcrumb">
-        <a href="../" class="component-breadcrumb-link">JioGames DLS</a>
-        <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+        <span class="component-breadcrumb-link">JioGames DLS</span>
+        <span class="component-breadcrumb-sep">›</span>
         <span class="component-breadcrumb-current">Typography</span>
       </nav>
-      <h1 class="component-page-title">Typography</h1>
-      <p class="component-page-def">JioType is the exclusive typeface for JioGames. Four weights. One family. Zero exceptions.</p>
+      <h1 class="component-page-title">Typography</h1><p class="component-page-def">JioType is the exclusive typeface for JioGames. Four weights. One family. Zero exceptions.</p>
       <div class="component-platforms">
         <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
         <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
         <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
         <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
-      </div>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBUeXBvZ3JhcGh5IOKAlCBKaW9HYW1lcyBETFMgc3BlYwoKPiBTb3VyY2U6IGB0eXBvZ3JhcGh5L2luZGV4Lmh0bWxgIGluIHRoZSBKaW9HYW1lcyBEZXNpZ24gU3lzdGVtLgo+IFRoaXMgc3BlYyBpcyBnZW5lcmF0ZWQgdmVyYmF0aW0gZnJvbSB0aGUgcGFnZSDigJQgZG8gbm90IGludmVudCB2YWx1ZXMgbm90IGxpc3RlZCBoZXJlLgoKKipQYXRoOioqIEppb0dhbWVzIERMUyDigLogVHlwb2dyYXBoeQoKLS0tCgpKaW9UeXBlIGlzIHRoZSBleGNsdXNpdmUgdHlwZWZhY2UgZm9yIEppb0dhbWVzLiBGb3VyIHdlaWdodHMuIE9uZSBmYW1pbHkuIFplcm8gZXhjZXB0aW9ucy4KCkpJT1RZUEUgwrcgMzAwIC8gNTAwIC8gNzAwIC8gOTAwIFdFSUdIVFMgwrcgREFSSyBGSVJTVAoKKipEZXNpZ25lcnMgY2hvb3NlIGEgc2VtYW50aWMgcm9sZSwgbm90IGEgZm9udCBzaXplLioqIEV2ZXJ5IGVsZW1lbnQgbWFwcyB0byBvbmUgb2YgMjEgdHlwZSByb2xlcyBkZWZpbmVkIGJ5IHRoZSBETFMuIFRoZSBwbGF0Zm9ybSByZXNvbHZlcyB0aGUgcGl4ZWwgc2l6ZSBhdXRvbWF0aWNhbGx5IHZpYSBtZWRpYSBxdWVyaWVzIOKAlCBNb2JpbGUgaXMgdGhlIGJhc2UsIFdlYiBvdmVycmlkZXMgYXQgNzY4cHgsIFRWIGF0IDEyODBweCArIDcyMHB4LgoKIyMgVHlwZSBzY2FsZQoKRWFjaCBzcGVjaW1lbiB1c2VzIHRoZSBleGFjdCBDU1MgY2xhc3MuIFJpZ2h0IHBhbmVsIHNob3dzIG1vYmlsZSB2YWx1ZXMg4oCUIFdlYiBhbmQgVFYgc2NhbGUgdXAgdmlhIG1lZGlhIHF1ZXJ5LgoKTG9uZyByZWFkYWJsZSBib2R5IHRleHQgZm9yIGRlc2NyaXB0aW9ucyBhbmQgaW50cm9kdWN0b3J5IHN1bW1hcmllcyB3aGVyZSByZWFkYWJpbGl0eSBtYXR0ZXJzIG1vc3QuCgpEZWZhdWx0IGJvZHkgdGV4dCBmb3IgYWxsIHN0YW5kYXJkIGNvbnRlbnQgYWNyb3NzIHRoZSBhcHAuIE1vc3QtdXNlZCBib2R5IHNpemUuCgpTZWNvbmRhcnkgYm9keSB0ZXh0IGZvciBoZWxwZXIgY29udGVudCBhbmQgc3VwcG9ydGluZyBpbmZvcm1hdGlvbiBpbiBjb21wYWN0IGNvbnRleHRzLgoKRGVuc2Ugc2Vjb25kYXJ5IGNvcHkgZm9yIG1ldGFkYXRhIGFuZCB0aWdodCBVSSBjb250ZXh0cyB3aGVyZSBzcGFjZSBpcyBsaW1pdGVkLgoKTGFzdCBwbGF5ZWQgMyBob3VycyBhZ28gwrcgNC44IOKYhSDCtyAxMjBLIHJldmlld3MKClVwZGF0ZWQgMiBkYXlzIGFnbyDCtyAyNTZNQiDCtyBBZ2UgMTIrCgpCeSBjb250aW51aW5nIHlvdSBhZ3JlZSB0byBvdXIgVGVybXMgb2YgU2VydmljZSBhbmQgUHJpdmFjeSBQb2xpY3kuIEF1dG8tcmVuZXdzIHVubGVzcyBjYW5jZWxsZWQuCgojIyBGb250IHdlaWdodHMKCkppb1R5cGUgaGFzIGV4YWN0bHkgZm91ciB2YWxpZCB3ZWlnaHRzLiBFdmVyeSBvdGhlciB3ZWlnaHQgdmFsdWUgaXMgYmFubmVkIOKAlCBpbmNsdWRpbmcgNDAwLCA2MDAsIGFuZCA4MDAuCgojIyBGb250IGZhbWlseQoKSmlvVHlwZSBpcyBsb2FkZWQgdmlhIGBAZm9udC1mYWNlYCBpbiB0b2tlbnMuY3NzIGZyb20gYC9Bc3NldHMvZm9udC9gLiBJdCBpcyBhbHdheXMgcHJlc2VudCBvbiB0aGUgRExTIHNlcnZlci4gVGhlIGZhbGxiYWNrIGNoYWluIGFjdGl2YXRlcyBvbmx5IG9uIGV4dGVybmFsIG1hY2hpbmVzIHdoZXJlIHRoZSBmb250IGZpbGUgaXMgdW5hdmFpbGFibGUuCgojIyBQbGF0Zm9ybSBzY2FsaW5nCgpEZXNpZ25lcnMgYXNzaWduIGEgc2VtYW50aWMgcm9sZS4gVGhlIHBsYXRmb3JtIHJlc29sdmVzIHRoZSBwaXhlbCBzaXplIHZpYSBtZWRpYSBxdWVyeS4gTmV2ZXIgaGFuZC1waWNrIGEgc2l6ZSBmb3IgV2ViIG9yIFRWLgoKfCBTdHlsZSB8IENTUyBjbGFzcyB8IE1vYmlsZSB8IFdlYiDiiaU3NjhweCB8IFRWIOKJpTEyODBweCB8IFdlaWdodCB8CnwtLS18LS0tfC0tLXwtLS18LS0tfC0tLXwKfCBkaXNwbGF5LWxnIHwgYC50ZXh0LWRpc3BsYXktbGdgIHwgNDggLyA1NiB8IDY0IC8gNzIgfCA3MiAvIDgwIHwgOTAwIHwKfCBkaXNwbGF5LW1kIHwgYC50ZXh0LWRpc3BsYXktbWRgIHwgNDAgLyA0OCB8IDU2IC8gNjQgfCA2NCAvIDcyIHwgOTAwIHwKfCBkaXNwbGF5LXNtIHwgYC50ZXh0LWRpc3BsYXktc21gIHwgMzIgLyA0MCB8IDQ4IC8gNTYgfCA1NiAvIDY0IHwgOTAwIHwKfCBoZWFkbGluZS1sZyB8IGAudGV4dC1oZWFkbGluZS1sZ2AgfCAyOCAvIDM2IHwgNDAgLyA0OCB8IDQ4IC8gNTYgfCA5MDAgfAp8IGhlYWRsaW5lLW1kIHwgYC50ZXh0LWhlYWRsaW5lLW1kYCB8IDI0IC8gMzIgfCAzMiAvIDQwIHwgNDAgLyA0OCB8IDkwMCB8CnwgaGVhZGxpbmUtc20gfCBgLnRleHQtaGVhZGxpbmUtc21gIHwgMjIgLyAyOCB8IDI4IC8gMzYgfCAzMiAvIDQwIHwgNzAwIHwKfCB0aXRsZS1sZyB8IGAudGV4dC10aXRsZS1sZ2AgfCAyMCAvIDI4IHwgMjQgLyAzMiB8IDMwIC8gMzggfCA3MDAgfAp8IHRpdGxlLW1kIHwgYC50ZXh0LXRpdGxlLW1kYCB8IDE4IC8gMjYgfCAyMiAvIDMwIHwgMjYgLyAzNCB8IDcwMCB8CnwgdGl0bGUtc20gfCBgLnRleHQtdGl0bGUtc21gIHwgMTYgLyAyNCB8IDE4IC8gMjYgfCAyMiAvIDMwIHwgNzAwIHwKfCB0aXRsZS14cyB8IGAudGV4dC10aXRsZS14c2AgfCAxNSAvIDIyIHwgMTYgLyAyNCB8IDIwIC8gMjggfCA3MDAgfAp8IGJvZHktbGcgfCBgLnRleHQtYm9keS1sZ2AgfCAxNyAvIDI2IHwgMTggLyAyOCB8IDI0IC8gMzQgfCA1MDAgfAp8IGJvZHktbWQgfCBgLnRleHQtYm9keS1tZGAgfCAxNSAvIDI0IHwgMTYgLyAyNiB8IDIyIC8gMzIgfCA1MDAgfAp8IGJvZHktc20gfCBgLnRleHQtYm9keS1zbWAgfCAxNCAvIDIyIHwgMTQgLyAyMiB8IDIwIC8gMjggfCA1MDAgfAp8IGJvZHkteHMgfCBgLnRleHQtYm9keS14c2AgfCAxMiAvIDE4IHwgMTMgLyAyMCB8IDE4IC8gMjYgfCA1MDAgfAp8IGxhYmVsLWxnIHwgYC50ZXh0LWxhYmVsLWxnYCB8IDE1IC8gMjAgfCAxNiAvIDIyIHwgMjAgLyAyNiB8IDcwMCB8CnwgbGFiZWwtbWQgfCBgLnRleHQtbGFiZWwtbWRgIHwgMTQgLyAxOCB8IDE0IC8gMjAgfCAxOCAvIDI0IHwgNzAwIHwKfCBsYWJlbC1zbSB8IGAudGV4dC1sYWJlbC1zbWAgfCAxMiAvIDE2IHwgMTIgLyAxNiB8IDE2IC8gMjIgfCA3MDAgfAp8IGxhYmVsLXhzIHwgYC50ZXh0LWxhYmVsLXhzYCB8IDExIC8gMTQgfCAxMSAvIDE0IHwgMTQgLyAyMCB8IDcwMCB8CnwgY2FwdGlvbi1tZCB8IGAudGV4dC1jYXB0aW9uLW1kYCB8IDEyIC8gMTYgfCAxMiAvIDE4IHwgMTYgLyAyMiB8IDUwMCB8CnwgY2FwdGlvbi1zbSB8IGAudGV4dC1jYXB0aW9uLXNtYCB8IDExIC8gMTQgfCAxMSAvIDE2IHwgMTQgLyAyMCB8IDUwMCB8CnwgbGVnYWwgfCBgLnRleHQtbGVnYWxgIHwgMTAgLyAxNCB8IDExIC8gMTYgfCAxNCAvIDIwIHwgNTAwIHwKCiMjIEl0YWxpYyAqYWNjZW50KgoKU2VjdGlvbiBhbmQgcmFpbCBoZWFkaW5ncyB1c2UgYSBzaW5nbGUgaXRhbGljIGBgIG9uIHRoZSBsYXN0IChvciBtb3N0IGV2b2NhdGl2ZSkgd29yZC4gQSBjaGV2cm9uLXJpZ2h0IGZvbGxvd3MgdGhlIGhlYWRpbmcg4oCUIHRhcHBpbmcgaXQgbmF2aWdhdGVzIHRvIHRoZSBmdWxsIHNlY3Rpb24gcGFnZS4KCiMjIEp1bXAgYmFjayAqaW4qCgojIyBQb3B1bGFyIGluICpNdW1iYWkqCgojIyBGcmVlIHRvICpwbGF5KgoKIyMgSGlkZGVuICpnZW1zKgoKIyMgTmFtaW5nIGNyb3Nzd2FsawoKVHdvIHBhcmFsbGVsIG5hbWluZyBzeXN0ZW1zIGV4aXN0IGluIHRoZSBETFMuICoqRGVzaWduIHJvbGVzKiogKHdoYXQgRmlnbWEgYW5kIGRlc2lnbmVycyB1c2UpIG1hcCB0byAqKkNTUyB1dGlsaXR5IGNsYXNzZXMqKiAod2hhdCBlbmdpbmVlcnMgcHV0IGluIEhUTUwpLiBUaGlzIHRhYmxlIGlzIHRoZSBjYW5vbmljYWwgbWFwcGluZyDigJQgbmV2ZXIgaW52ZW50IGEgbmV3IG5hbWUgaW4gZWl0aGVyIHN5c3RlbSB3aXRob3V0IGFkZGluZyBpdCBoZXJlLgoKfCBEZXNpZ24gcm9sZSB8IENTUyB1dGlsaXR5IGNsYXNzIHwgRmlnbWEgc3R5bGUgbmFtZSB8IFNwZWMgY2xhc3MgKHByZXZpZXcgb25seSkgfCBUeXBpY2FsIGVsZW1lbnQgfAp8LS0tfC0tLXwtLS18LS0tfC0tLXwKfCAqKkRpc3BsYXkgLyBIZXJvKiogfCBgLnRleHQtaGVyb2AgfCBgVHlwZS9IZXJvYCB8IGAuc3BlYy1kaXNwbGF5YCB8IGBgIGZ1bGwtc2NyZWVuIGhlcm8gfAp8ICoqU2NyZWVuIFRpdGxlKiogfCBgLnRleHQtc2NyZWVuLXRpdGxlYCB8IGBUeXBlL1NjcmVlbiBUaXRsZWAgfCBgLnNwZWMtaDFgIHwgYGAgaW5zaWRlIEFwcEJhciBvciBwYWdlIHwKfCAqKlNoZWV0IFRpdGxlKiogfCBgLnRleHQtc2hlZXQtdGl0bGVgIHwgYFR5cGUvU2hlZXQgVGl0bGVgIHwgYC5zcGVjLWgyYCB8IGBgIGJvdHRvbSBzaGVldCwgZGlhbG9nIHwKfCAqKlJhaWwgVGl0bGUqKiB8IGAudGV4dC1yYWlsLXRpdGxlYCB8IGBUeXBlL1JhaWwgVGl0bGVgIHwgYC5zcGVjLWgzYCB8IGBgIG9yIGBgIGNvbnRlbnQgcmFpbCB8CnwgKipDYXJkIFRpdGxlKiogfCBgLnRleHQtY2FyZC10aXRsZWAgfCBgVHlwZS9DYXJkIFRpdGxlYCB8IGAuc3BlYy1oNGAgfCBgYCBvciBgYCBpbnNpZGUgY2FyZCB8CnwgKipCb2R5IExhcmdlKiogfCBgLnRleHQtYm9keS1sZ2AgfCBgVHlwZS9Cb2R5IExhcmdlYCB8IGAuc3BlYy1ib2R5LWxnYCB8IGBgIGhlcm8gZGVzY3JpcHRpb24gfAp8ICoqQm9keSoqIHwgYC50ZXh0LWJvZHlgIHwgYFR5cGUvQm9keWAgfCBgLnNwZWMtYm9keWAgfCBgYCBkZWZhdWx0IHJlYWRpbmcgdGV4dCB8CnwgKipCb2R5IFNtYWxsKiogfCBgLnRleHQtYm9keS1zbWAgfCBgVHlwZS9Cb2R5IFNtYWxsYCB8IGAuc3BlYy1ib2R5LXNtYCB8IGBgIHNlY29uZGFyeSAvIG1ldGFkYXRhIHwKfCAqKkNhcHRpb24qKiB8IGAudGV4dC1jYXB0aW9uYCB8IGBUeXBlL0NhcHRpb25gIHwgYC5zcGVjLWNhcHRpb25gIHwgYGAgcmF0aW5ncywgdGltZXN0YW1wcyB8CnwgKipCYWRnZSAvIExhYmVsKiogfCBgLnRleHQtYmFkZ2VgIHwgYFR5cGUvQmFkZ2VgIHwgYC5zcGVjLWxhYmVsYCB8IGBgIGNoaXBzLCBiYWRnZXMsIHRhZ3MgfAp8ICoqUHJpY2UqKiB8IGAudGV4dC1wcmljZWAgfCBgVHlwZS9QcmljZWAgfCBgLnNwZWMtcHJpY2VgIHwgYGAgcGFzcyBwbGFuIHByaWNpbmcgfAp8ICoqQ1RBKiogfCBgLnRleHQtY3RhYCB8IGBUeXBlL0NUQWAgfCBgLnNwZWMtY3RhYCB8IGBgIGJ1dHRvbiBsYWJlbCB8CnwgKipPdmVybGluZSAvIE1pY3JvKiogfCBgLnRleHQtb3ZlcmxpbmVgIHwgYFR5cGUvT3ZlcmxpbmVgIHwgYC5zcGVjLW1pY3JvYCB8IGBgIHNlY3Rpb24gZXllYnJvd3MsIHRhZ3MgfAoKIyMgVXNhZ2UgcnVsZXMKClRoZXNlIHJ1bGVzIGFyZSBlbmZvcmNlZCBieSBgdG9rZW5zL3ZhbGlkYXRlLnNoYC4gRVJScyBibG9jayBzaGlwcGluZy4KCi0tLQoKIyMgVG9rZW5zIHJlZmVyZW5jZWQgb24gdGhpcyBwYWdlCgpVc2UgdGhlc2UgZXhhY3QgdG9rZW5zIOKAlCBkZWZpbmVkIGluIGB0b2tlbnMvdG9rZW5zLmNzc2AuIERvIG5vdCBzdWJzdGl0dXRlIHJhdyB2YWx1ZXMuCgotIGAtLWFtYmVyYAotIGAtLWJvcmRlci1zdWJ0bGVgCi0gYC0tY2FyZC1iZ2AKLSBgLS1jb2RlLWdyZWVuYAotIGAtLWRpdmlkZXJgCi0gYC0tamlvYAotIGAtLWppby1mb250YAotIGAtLWppby1zb2Z0YAotIGAtLXBpbGxgCi0gYC0tcjJgCi0gYC0tcjNgCi0gYC0tcjRgCi0gYC0tc3BhY2UtMC01YAotIGAtLXNwYWNlLTFgCi0gYC0tc3BhY2UtMS01YAotIGAtLXNwYWNlLTJgCi0gYC0tc3BhY2UtM2AKLSBgLS1zcGFjZS00YAotIGAtLXN1cmZhY2UtMWAKLSBgLS1zdXJmYWNlLTJgCi0gYC0tdGV4dGAKLSBgLS10ZXh0MmAKLSBgLS10ZXh0M2AKLSBgLS10ZXh0NGAKCi0tLQoKIyMgQnVpbGQgcnVsZXMgKGJpbmRpbmcpCgoxLiBVc2UgKipvbmx5KiogdGhlIHRva2VucyBsaXN0ZWQgYWJvdmUuIElmIGEgdmFsdWUgeW91IG5lZWQgaXMgbm90IGxpc3RlZCwgc3RvcCBhbmQgYXNrIOKAlCBkbyBub3QgaW50cm9kdWNlIGEgcmF3IHZhbHVlLgoyLiBGb250IGlzICoqSmlvVHlwZSoqIG9ubHkuIFdlaWdodHM6IDMwMCwgNTAwLCA3MDAsIDkwMC4KMy4gUmV1c2UgdGhlIGNvbXBvbmVudCBDU1MgcGF0dGVybnMgc2hvd24gb24gdGhlIHNvdXJjZSBwYWdlOyBkbyBub3QgcmVkZXNpZ24uCjQuIE1hdGNoIGV2ZXJ5IHN0YXRlIChkZWZhdWx0LCBob3ZlciwgZm9jdXMsIGFjdGl2ZSwgZGlzYWJsZWQsIGxvYWRpbmcpIHNob3duIG9uIHRoZSBwYWdlLgo1LiBBY2Nlc3NpYmlsaXR5IHJlcXVpcmVtZW50cyBvbiB0aGUgcGFnZSBhcmUgbWFuZGF0b3J5LCBub3Qgb3B0aW9uYWwuCg==" download="typography-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
+    </div>
     </header>
 
     <!-- HERO -->
@@ -507,7 +507,7 @@
     <div class="typo-callout">
       <span class="typo-callout-icon">→</span>
       <p class="typo-callout-text">
-        <strong>Designers choose a semantic role, not a font size.</strong> Every element maps to one of 10 type roles defined by the DLS. The platform resolves the pixel size automatically via media queries — Mobile is the base, Web overrides at 768px, TV at 1280px + 720px.
+        <strong>Designers choose a semantic role, not a font size.</strong> Every element maps to one of 21 type roles defined by the DLS. The platform resolves the pixel size automatically via media queries — Mobile is the base, Web overrides at 768px, TV at 1280px + 720px.
       </p>
     </div>
 
@@ -515,183 +515,270 @@
          SECTION 1 — TYPE SCALE
     ═══════════════════════════════════════════════════════ -->
     <section class="ds-section" id="type-scale">
-      <div class="ds-section-eyebrow">Section 01</div>
-      <h2 class="ds-section-title">Type scale</h2>
-      <p class="ds-section-desc">Each specimen shows the role rendered at its exact specification. Right panel lists the governing values.</p>
+  <div class="ds-section-eyebrow">Section 01</div>
+  <h2 class="ds-section-title">Type scale</h2>
+  <p class="ds-section-desc">Each specimen uses the exact CSS class. Right panel shows mobile values — Web and TV scale up via media query.</p>
 
-      <!-- Display -->
-      <div class="typo-section-label">Display &amp; Headings</div>
+  <!-- Display -->
+  <div class="typo-section-label">Display</div>
 
-      <div class="typo-row">
-        <div class="typo-specimen">
-          <span class="spec-display">Discover Your Next Game</span>
-        </div>
-        <div class="typo-meta">
-          <div class="typo-meta-role">Display</div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">40px</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">900 Black</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">1.1</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Tracking</span><span class="typo-meta-val">−0.8px</span></div>
-          <div class="typo-meta-usage">Hero banners, splash screens</div>
-        </div>
-      </div>
+  <div class="typo-row">
+    <div class="typo-specimen"><span class="text-display-lg">Level Up</span></div>
+    <div class="typo-meta">
+      <div class="typo-meta-role">display-lg</div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">48px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">56px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">900</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Tracking</span><span class="typo-meta-val">−1.5px</span></div>
+      <div class="typo-meta-usage">Campaign hero, launch screen, premium pass hero</div>
+    </div>
+  </div>
 
-      <!-- H1 -->
-      <div class="typo-row">
-        <div class="typo-specimen">
-          <span class="spec-h1">Top Games This Week</span>
-        </div>
-        <div class="typo-meta">
-          <div class="typo-meta-role">H1</div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">32px</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">900 Black</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">1.15</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Tracking</span><span class="typo-meta-val">−0.6px</span></div>
-          <div class="typo-meta-usage">Page titles, section heroes</div>
-        </div>
-      </div>
+  <div class="typo-row">
+    <div class="typo-specimen"><span class="text-display-md">Your Games</span></div>
+    <div class="typo-meta">
+      <div class="typo-meta-role">display-md</div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">40px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">48px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">900</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Tracking</span><span class="typo-meta-val">−1.2px</span></div>
+      <div class="typo-meta-usage">Hero title, game detail hero</div>
+    </div>
+  </div>
 
-      <!-- H2 -->
-      <div class="typo-row">
-        <div class="typo-specimen">
-          <span class="spec-h2">Action &amp; Adventure</span>
-        </div>
-        <div class="typo-meta">
-          <div class="typo-meta-role">H2</div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">24px</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">700 Bold</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">1.2</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Tracking</span><span class="typo-meta-val">−0.4px</span></div>
-          <div class="typo-meta-usage">Section headings, category titles</div>
-        </div>
-      </div>
+  <div class="typo-row">
+    <div class="typo-specimen"><span class="text-display-sm">Top Picks</span></div>
+    <div class="typo-meta">
+      <div class="typo-meta-role">display-sm</div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">32px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">40px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">900</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Tracking</span><span class="typo-meta-val">−0.8px</span></div>
+      <div class="typo-meta-usage">Section hero, promo headline</div>
+    </div>
+  </div>
 
-      <!-- H3 -->
-      <div class="typo-row">
-        <div class="typo-specimen">
-          <span class="spec-h3">Featured Today</span>
-        </div>
-        <div class="typo-meta">
-          <div class="typo-meta-role">H3</div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">20px</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">700 Bold</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">1.25</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Tracking</span><span class="typo-meta-val">−0.2px</span></div>
-          <div class="typo-meta-usage">Sub-section headings, card titles</div>
-        </div>
-      </div>
+  <!-- Headline -->
+  <div class="typo-section-label">Headline</div>
 
-      <!-- H4 -->
-      <div class="typo-row">
-        <div class="typo-specimen">
-          <span class="spec-h4">Game Details</span>
-        </div>
-        <div class="typo-meta">
-          <div class="typo-meta-role">H4</div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">17px</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">700 Bold</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">1.3</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Tracking</span><span class="typo-meta-val">0px</span></div>
-          <div class="typo-meta-usage">Component headings, drawer titles</div>
-        </div>
-      </div>
+  <div class="typo-row">
+    <div class="typo-specimen"><span class="text-headline-lg">Top Games This Week</span></div>
+    <div class="typo-meta">
+      <div class="typo-meta-role">headline-lg</div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">28px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">36px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">900</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Tracking</span><span class="typo-meta-val">−0.6px</span></div>
+      <div class="typo-meta-usage">Page title, major screen heading</div>
+    </div>
+  </div>
 
-      <!-- Body text group -->
-      <div class="typo-section-label">Body text</div>
+  <div class="typo-row">
+    <div class="typo-specimen"><span class="text-headline-md">Action &amp; Adventure</span></div>
+    <div class="typo-meta">
+      <div class="typo-meta-role">headline-md</div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">24px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">32px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">900</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Tracking</span><span class="typo-meta-val">−0.4px</span></div>
+      <div class="typo-meta-usage">Screen title, sheet title</div>
+    </div>
+  </div>
 
-      <!-- Body-lg -->
-      <div class="typo-row">
-        <div class="typo-specimen typo-specimen--tall">
-          <p class="spec-body-lg">Body text large, used for descriptions and introductory summaries where readability at distance matters.</p>
-        </div>
-        <div class="typo-meta">
-          <div class="typo-meta-role">Body-lg</div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">16px</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">500 Medium</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">1.6</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Tracking</span><span class="typo-meta-val">0px</span></div>
-          <div class="typo-meta-usage">Intro paragraphs, featured descriptions</div>
-        </div>
-      </div>
+  <div class="typo-row">
+    <div class="typo-specimen"><span class="text-headline-sm">Featured Today</span></div>
+    <div class="typo-meta">
+      <div class="typo-meta-role">headline-sm</div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">22px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">28px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">700</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Tracking</span><span class="typo-meta-val">−0.3px</span></div>
+      <div class="typo-meta-usage">Large section heading</div>
+    </div>
+  </div>
 
-      <!-- Body -->
-      <div class="typo-row">
-        <div class="typo-specimen typo-specimen--tall">
-          <p class="spec-body">Body text default. The main reading font for all standard content across the app.</p>
-        </div>
-        <div class="typo-meta">
-          <div class="typo-meta-role">Body</div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">15px</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">500 Medium</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">1.6</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Tracking</span><span class="typo-meta-val">0px</span></div>
-          <div class="typo-meta-usage">Standard descriptions, settings text</div>
-        </div>
-      </div>
+  <!-- Title -->
+  <div class="typo-section-label">Title</div>
 
-      <!-- Body-sm -->
-      <div class="typo-row">
-        <div class="typo-specimen typo-specimen--tall">
-          <p class="spec-body-sm">Smaller body text used in secondary contexts, metadata, and supporting information.</p>
-        </div>
-        <div class="typo-meta">
-          <div class="typo-meta-role">Body-sm</div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">13px</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">500 Medium</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">1.5</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Tracking</span><span class="typo-meta-val">0px</span></div>
-          <div class="typo-meta-usage">Secondary content, card metadata</div>
-        </div>
-      </div>
+  <div class="typo-row">
+    <div class="typo-specimen"><span class="text-title-lg">Jump Back In</span></div>
+    <div class="typo-meta">
+      <div class="typo-meta-role">title-lg</div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">20px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">28px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">700</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Tracking</span><span class="typo-meta-val">−0.2px</span></div>
+      <div class="typo-meta-usage">Rail title, card group heading</div>
+    </div>
+  </div>
 
-      <!-- Small text group -->
-      <div class="typo-section-label">Small &amp; utility text</div>
+  <div class="typo-row">
+    <div class="typo-specimen"><span class="text-title-md">Tomb Raider</span></div>
+    <div class="typo-meta">
+      <div class="typo-meta-role">title-md</div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">18px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">26px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">700</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Tracking</span><span class="typo-meta-val">0</span></div>
+      <div class="typo-meta-usage">Card title, dialog title</div>
+    </div>
+  </div>
 
-      <!-- Caption -->
-      <div class="typo-row">
-        <div class="typo-specimen typo-specimen--tall">
-          <p class="spec-caption">Caption text for ratings, timestamps, and supplementary metadata.</p>
-        </div>
-        <div class="typo-meta">
-          <div class="typo-meta-role">Caption</div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">12px</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">500 Medium</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">1.4</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Tracking</span><span class="typo-meta-val">0px</span></div>
-          <div class="typo-meta-usage">Image captions, timestamps, badges</div>
-        </div>
-      </div>
+  <div class="typo-row">
+    <div class="typo-specimen"><span class="text-title-sm">Mobile Pass</span></div>
+    <div class="typo-meta">
+      <div class="typo-meta-role">title-sm</div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">16px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">24px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">700</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Tracking</span><span class="typo-meta-val">0</span></div>
+      <div class="typo-meta-usage">Compact card title, list title</div>
+    </div>
+  </div>
 
-      <!-- Label -->
-      <div class="typo-row">
-        <div class="typo-specimen">
-          <span class="spec-label">SECTION LABEL</span>
-        </div>
-        <div class="typo-meta">
-          <div class="typo-meta-role">Label</div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">11px</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">700 Bold</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Tracking</span><span class="typo-meta-val">1px</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Case</span><span class="typo-meta-val">UPPERCASE</span></div>
-          <div class="typo-meta-usage">Category eyebrows, status labels</div>
-        </div>
-      </div>
+  <div class="typo-row">
+    <div class="typo-specimen"><span class="text-title-xs">Game Details</span></div>
+    <div class="typo-meta">
+      <div class="typo-meta-role">title-xs</div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">15px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">22px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">700</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Tracking</span><span class="typo-meta-val">0</span></div>
+      <div class="typo-meta-usage">Dense UI title</div>
+    </div>
+  </div>
 
-      <!-- Micro -->
-      <div class="typo-row">
-        <div class="typo-specimen">
-          <span class="spec-micro">MICRO LABEL</span>
-        </div>
-        <div class="typo-meta">
-          <div class="typo-meta-role">Micro</div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">10px</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">700 Bold</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Tracking</span><span class="typo-meta-val">1.4px</span></div>
-          <div class="typo-meta-row"><span class="typo-meta-key">Case</span><span class="typo-meta-val">UPPERCASE</span></div>
-          <div class="typo-meta-usage">Tiny badges, version numbers</div>
-        </div>
-      </div>
-    </section>
+  <!-- Body -->
+  <div class="typo-section-label">Body</div>
+
+  <div class="typo-row">
+    <div class="typo-specimen typo-specimen--tall"><p class="text-body-lg">Long readable body text for descriptions and introductory summaries where readability matters most.</p></div>
+    <div class="typo-meta">
+      <div class="typo-meta-role">body-lg</div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">17px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">26px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">500</span></div>
+      <div class="typo-meta-usage">Long readable body, descriptions</div>
+    </div>
+  </div>
+
+  <div class="typo-row">
+    <div class="typo-specimen typo-specimen--tall"><p class="text-body-md">Default body text for all standard content across the app. Most-used body size.</p></div>
+    <div class="typo-meta">
+      <div class="typo-meta-role">body-md</div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">15px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">24px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">500</span></div>
+      <div class="typo-meta-usage">Default body text</div>
+    </div>
+  </div>
+
+  <div class="typo-row">
+    <div class="typo-specimen typo-specimen--tall"><p class="text-body-sm">Secondary body text for helper content and supporting information in compact contexts.</p></div>
+    <div class="typo-meta">
+      <div class="typo-meta-role">body-sm</div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">14px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">22px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">500</span></div>
+      <div class="typo-meta-usage">Secondary body, helper content</div>
+    </div>
+  </div>
+
+  <div class="typo-row">
+    <div class="typo-specimen typo-specimen--tall"><p class="text-body-xs">Dense secondary copy for metadata and tight UI contexts where space is limited.</p></div>
+    <div class="typo-meta">
+      <div class="typo-meta-role">body-xs</div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">12px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">18px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">500</span></div>
+      <div class="typo-meta-usage">Dense secondary copy</div>
+    </div>
+  </div>
+
+  <!-- Label -->
+  <div class="typo-section-label">Label</div>
+
+  <div class="typo-row">
+    <div class="typo-specimen"><span class="text-label-lg">Get All Screen Pass</span></div>
+    <div class="typo-meta">
+      <div class="typo-meta-role">label-lg</div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">15px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">20px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">700</span></div>
+      <div class="typo-meta-usage">CTA label, primary nav label</div>
+    </div>
+  </div>
+
+  <div class="typo-row">
+    <div class="typo-specimen"><span class="text-label-md">Play Now</span></div>
+    <div class="typo-meta">
+      <div class="typo-meta-role">label-md</div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">14px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">18px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">700</span></div>
+      <div class="typo-meta-usage">Button label, tabs, form label</div>
+    </div>
+  </div>
+
+  <div class="typo-row">
+    <div class="typo-specimen"><span class="text-label-sm">New Release</span></div>
+    <div class="typo-meta">
+      <div class="typo-meta-role">label-sm</div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">12px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">16px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">700</span></div>
+      <div class="typo-meta-usage">Badge, chip, metadata label</div>
+    </div>
+  </div>
+
+  <div class="typo-row">
+    <div class="typo-specimen"><span class="text-label-xs">Free to Play</span></div>
+    <div class="typo-meta">
+      <div class="typo-meta-role">label-xs</div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">11px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">14px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">700</span></div>
+      <div class="typo-meta-usage">Tiny badge, overline</div>
+    </div>
+  </div>
+
+  <!-- Caption & Legal -->
+  <div class="typo-section-label">Caption &amp; Legal</div>
+
+  <div class="typo-row">
+    <div class="typo-specimen typo-specimen--tall"><p class="text-caption-md">Last played 3 hours ago · 4.8 ★ · 120K reviews</p></div>
+    <div class="typo-meta">
+      <div class="typo-meta-role">caption-md</div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">12px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">16px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">500</span></div>
+      <div class="typo-meta-usage">Captions, timestamps, metadata</div>
+    </div>
+  </div>
+
+  <div class="typo-row">
+    <div class="typo-specimen typo-specimen--tall"><p class="text-caption-sm">Updated 2 days ago · 256MB · Age 12+</p></div>
+    <div class="typo-meta">
+      <div class="typo-meta-role">caption-sm</div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">11px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">14px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">500</span></div>
+      <div class="typo-meta-usage">Fine metadata</div>
+    </div>
+  </div>
+
+  <div class="typo-row">
+    <div class="typo-specimen typo-specimen--tall"><p class="text-legal">By continuing you agree to our Terms of Service and Privacy Policy. Auto-renews unless cancelled.</p></div>
+    <div class="typo-meta">
+      <div class="typo-meta-role">legal</div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Size</span><span class="typo-meta-val">10px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Line-h</span><span class="typo-meta-val">14px</span></div>
+      <div class="typo-meta-row"><span class="typo-meta-key">Weight</span><span class="typo-meta-val typo-meta-val--green">500</span></div>
+      <div class="typo-meta-usage">Terms, disclaimers, legal copy</div>
+    </div>
+  </div>
+
+</section>
 
     <!-- ═══════════════════════════════════════════════════════
          SECTION 2 — FONT WEIGHTS
@@ -764,9 +851,9 @@
         <div class="ds-dont">
           <div class="ds-dont-body">
             <div style="display:flex;flex-direction:column;gap:var(--space-1);">
-              <div style="font-family:monospace;font-size:13px;color:var(--text3);text-decoration:line-through;">font-weight: 400</div>
-              <div style="font-family:monospace;font-size:13px;color:var(--text3);text-decoration:line-through;">font-weight: 600</div>
-              <div style="font-family:monospace;font-size:13px;color:var(--text3);text-decoration:line-through;">font-weight: 800</div>
+              <div style="font-family:monospace;font-size:13px;color:var(--text3);text-decoration:line-through;">font-weight: 500</div>
+              <div style="font-family:monospace;font-size:13px;color:var(--text3);text-decoration:line-through;">font-weight: 700</div>
+              <div style="font-family:monospace;font-size:13px;color:var(--text3);text-decoration:line-through;">font-weight: 900</div>
               <div style="font-family:monospace;font-size:13px;color:var(--text3);text-decoration:line-through;">font-weight: normal</div>
             </div>
           </div>
@@ -843,102 +930,236 @@
          SECTION 4 — PLATFORM SCALE
     ═══════════════════════════════════════════════════════ -->
     <section class="ds-section" id="platform-scale">
-      <div class="ds-section-eyebrow">Section 04</div>
-      <h2 class="ds-section-title">Platform scaling</h2>
-      <p class="ds-section-desc">Designers assign a semantic role. The platform resolves the pixel size automatically. Never hand-pick a size for TV or Web — use the class and let the media query do it.</p>
+  <div class="ds-section-eyebrow">Section 04</div>
+  <h2 class="ds-section-title">Platform scaling</h2>
+  <p class="ds-section-desc">Designers assign a semantic role. The platform resolves the pixel size via media query. Never hand-pick a size for Web or TV.</p>
 
-      <div class="scale-table-wrap">
-        <table class="scale-table">
-          <thead>
-            <tr>
-              <th>Role</th>
-              <th>CSS Class</th>
-              <th>Mobile</th>
-              <th>Web ≥768px</th>
-              <th>TV ≥1280px</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Hero</td>
-              <td><code class="scale-badge">.text-hero</code></td>
-              <td class="size-val">36px / 900</td>
-              <td class="size-val size-val--highlight">64px / 900</td>
-              <td class="size-val size-val--highlight">80px / 900</td>
-            </tr>
-            <tr>
-              <td>Screen Title</td>
-              <td><code class="scale-badge">.text-screen-title</code></td>
-              <td class="size-val">28px / 900</td>
-              <td class="size-val size-val--highlight">48px / 900</td>
-              <td class="size-val size-val--highlight">48px / 900</td>
-            </tr>
-            <tr>
-              <td>Sheet Title</td>
-              <td><code class="scale-badge">.text-sheet-title</code></td>
-              <td class="size-val">26px / 900</td>
-              <td class="size-val size-val--highlight">32px / 900</td>
-              <td class="size-val size-val--highlight">40px / 900</td>
-            </tr>
-            <tr>
-              <td>Rail Title</td>
-              <td><code class="scale-badge">.text-rail-title</code></td>
-              <td class="size-val">18px / 900</td>
-              <td class="size-val size-val--highlight">24px / 900</td>
-              <td class="size-val size-val--highlight">32px / 900</td>
-            </tr>
-            <tr>
-              <td>Card Title</td>
-              <td><code class="scale-badge">.text-card-title</code></td>
-              <td class="size-val">22px / 900</td>
-              <td class="size-val">26px / 900</td>
-              <td class="size-val">22px / 900</td>
-            </tr>
-            <tr>
-              <td>Body</td>
-              <td><code class="scale-badge">.text-body</code></td>
-              <td class="size-val">14px / 500</td>
-              <td class="size-val">16px / 500</td>
-              <td class="size-val size-val--highlight">24px / 500</td>
-            </tr>
-            <tr>
-              <td>Caption</td>
-              <td><code class="scale-badge">.text-caption</code></td>
-              <td class="size-val">12px / 500</td>
-              <td class="size-val">13px / 500</td>
-              <td class="size-val size-val--highlight">20px / 500</td>
-            </tr>
-            <tr>
-              <td>Badge</td>
-              <td><code class="scale-badge">.text-badge</code></td>
-              <td class="size-val">11px / 700</td>
-              <td class="size-val">12px / 700</td>
-              <td class="size-val size-val--highlight">18px / 700</td>
-            </tr>
-            <tr>
-              <td>Price</td>
-              <td><code class="scale-badge">.text-price</code></td>
-              <td class="size-val">22px / 900</td>
-              <td class="size-val">30px / 900</td>
-              <td class="size-val size-val--highlight">36px / 900</td>
-            </tr>
-            <tr>
-              <td>CTA</td>
-              <td><code class="scale-badge">.text-cta</code></td>
-              <td class="size-val">16px / 700</td>
-              <td class="size-val">18px / 700</td>
-              <td class="size-val size-val--highlight">22px / 700</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+  <div class="scale-table-wrap">
+    <table class="scale-table">
+      <thead>
+        <tr>
+          <th>Style</th>
+          <th>CSS class</th>
+          <th>Mobile</th>
+          <th>Web ≥768px</th>
+          <th>TV ≥1280px</th>
+          <th>Weight</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>display-lg</td><td><code class="scale-badge">.text-display-lg</code></td><td class="size-val">48 / 56</td><td class="size-val size-val--highlight">64 / 72</td><td class="size-val size-val--highlight">72 / 80</td><td class="size-val">900</td></tr>
+        <tr><td>display-md</td><td><code class="scale-badge">.text-display-md</code></td><td class="size-val">40 / 48</td><td class="size-val size-val--highlight">56 / 64</td><td class="size-val size-val--highlight">64 / 72</td><td class="size-val">900</td></tr>
+        <tr><td>display-sm</td><td><code class="scale-badge">.text-display-sm</code></td><td class="size-val">32 / 40</td><td class="size-val size-val--highlight">48 / 56</td><td class="size-val size-val--highlight">56 / 64</td><td class="size-val">900</td></tr>
+        <tr><td>headline-lg</td><td><code class="scale-badge">.text-headline-lg</code></td><td class="size-val">28 / 36</td><td class="size-val size-val--highlight">40 / 48</td><td class="size-val size-val--highlight">48 / 56</td><td class="size-val">900</td></tr>
+        <tr><td>headline-md</td><td><code class="scale-badge">.text-headline-md</code></td><td class="size-val">24 / 32</td><td class="size-val size-val--highlight">32 / 40</td><td class="size-val size-val--highlight">40 / 48</td><td class="size-val">900</td></tr>
+        <tr><td>headline-sm</td><td><code class="scale-badge">.text-headline-sm</code></td><td class="size-val">22 / 28</td><td class="size-val size-val--highlight">28 / 36</td><td class="size-val size-val--highlight">32 / 40</td><td class="size-val">700</td></tr>
+        <tr><td>title-lg</td><td><code class="scale-badge">.text-title-lg</code></td><td class="size-val">20 / 28</td><td class="size-val size-val--highlight">24 / 32</td><td class="size-val size-val--highlight">30 / 38</td><td class="size-val">700</td></tr>
+        <tr><td>title-md</td><td><code class="scale-badge">.text-title-md</code></td><td class="size-val">18 / 26</td><td class="size-val size-val--highlight">22 / 30</td><td class="size-val size-val--highlight">26 / 34</td><td class="size-val">700</td></tr>
+        <tr><td>title-sm</td><td><code class="scale-badge">.text-title-sm</code></td><td class="size-val">16 / 24</td><td class="size-val size-val--highlight">18 / 26</td><td class="size-val size-val--highlight">22 / 30</td><td class="size-val">700</td></tr>
+        <tr><td>title-xs</td><td><code class="scale-badge">.text-title-xs</code></td><td class="size-val">15 / 22</td><td class="size-val size-val--highlight">16 / 24</td><td class="size-val size-val--highlight">20 / 28</td><td class="size-val">700</td></tr>
+        <tr><td>body-lg</td><td><code class="scale-badge">.text-body-lg</code></td><td class="size-val">17 / 26</td><td class="size-val size-val--highlight">18 / 28</td><td class="size-val size-val--highlight">24 / 34</td><td class="size-val">500</td></tr>
+        <tr><td>body-md</td><td><code class="scale-badge">.text-body-md</code></td><td class="size-val">15 / 24</td><td class="size-val size-val--highlight">16 / 26</td><td class="size-val size-val--highlight">22 / 32</td><td class="size-val">500</td></tr>
+        <tr><td>body-sm</td><td><code class="scale-badge">.text-body-sm</code></td><td class="size-val">14 / 22</td><td class="size-val">14 / 22</td><td class="size-val size-val--highlight">20 / 28</td><td class="size-val">500</td></tr>
+        <tr><td>body-xs</td><td><code class="scale-badge">.text-body-xs</code></td><td class="size-val">12 / 18</td><td class="size-val size-val--highlight">13 / 20</td><td class="size-val size-val--highlight">18 / 26</td><td class="size-val">500</td></tr>
+        <tr><td>label-lg</td><td><code class="scale-badge">.text-label-lg</code></td><td class="size-val">15 / 20</td><td class="size-val size-val--highlight">16 / 22</td><td class="size-val size-val--highlight">20 / 26</td><td class="size-val">700</td></tr>
+        <tr><td>label-md</td><td><code class="scale-badge">.text-label-md</code></td><td class="size-val">14 / 18</td><td class="size-val">14 / 20</td><td class="size-val size-val--highlight">18 / 24</td><td class="size-val">700</td></tr>
+        <tr><td>label-sm</td><td><code class="scale-badge">.text-label-sm</code></td><td class="size-val">12 / 16</td><td class="size-val">12 / 16</td><td class="size-val size-val--highlight">16 / 22</td><td class="size-val">700</td></tr>
+        <tr><td>label-xs</td><td><code class="scale-badge">.text-label-xs</code></td><td class="size-val">10 / 13</td><td class="size-val">10 / 13</td><td class="size-val size-val--highlight">14 / 20</td><td class="size-val">700</td></tr>
+        <tr><td>caption-md</td><td><code class="scale-badge">.text-caption-md</code></td><td class="size-val">12 / 16</td><td class="size-val size-val--highlight">12 / 18</td><td class="size-val size-val--highlight">16 / 22</td><td class="size-val">500</td></tr>
+        <tr><td>caption-sm</td><td><code class="scale-badge">.text-caption-sm</code></td><td class="size-val">11 / 14</td><td class="size-val size-val--highlight">11 / 16</td><td class="size-val size-val--highlight">14 / 20</td><td class="size-val">500</td></tr>
+        <tr><td>legal</td><td><code class="scale-badge">.text-legal</code></td><td class="size-val">10 / 14</td><td class="size-val size-val--highlight">11 / 16</td><td class="size-val size-val--highlight">14 / 20</td><td class="size-val">500</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
 
     <!-- ═══════════════════════════════════════════════════════
          SECTION 5 — USAGE RULES
     ═══════════════════════════════════════════════════════ -->
-    <section class="ds-section" id="usage-rules">
+    <section class="ds-section" id="italic-accent">
+      <div class="ds-section-eyebrow">Section 04b</div>
+      <h2 class="ds-section-title">Italic <em style="font-style:italic;font-weight:500;color:var(--jio)">accent</em></h2>
+      <p class="ds-section-desc">Section and rail headings use a single italic <code style="font-family:monospace;font-size:12px;color:var(--code-green);background:var(--surface-2);padding:1px 5px;border-radius:4px;">&lt;em&gt;</code> on the last (or most evocative) word. A chevron-right follows the heading — tapping it navigates to the full section page.</p>
+
+      <div class="ds-demo ds-demo--dark" style="padding:32px 40px;display:flex;flex-direction:column;gap:20px">
+        <a href="#" style="display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:inherit" onclick="return false">
+          <h2 style="font-family:var(--jio-font);font-size:18px;font-weight:900;color:var(--text);letter-spacing:-.3px;margin:0">Jump back <em style="font-style:italic;font-weight:500;color:var(--jio)">in</em></h2>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="color:var(--text3);flex-shrink:0;margin-top:1px"><use href="../sprite.svg#ic_chevron_right"></use></svg>
+        </a>
+        <a href="#" style="display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:inherit" onclick="return false">
+          <h2 style="font-family:var(--jio-font);font-size:18px;font-weight:900;color:var(--text);letter-spacing:-.3px;margin:0">Popular in <em style="font-style:italic;font-weight:500;color:var(--jio)">Mumbai</em></h2>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="color:var(--text3);flex-shrink:0;margin-top:1px"><use href="../sprite.svg#ic_chevron_right"></use></svg>
+        </a>
+        <a href="#" style="display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:inherit" onclick="return false">
+          <h2 style="font-family:var(--jio-font);font-size:18px;font-weight:900;color:var(--text);letter-spacing:-.3px;margin:0">Free to <em style="font-style:italic;font-weight:500;color:var(--jio)">play</em></h2>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="color:var(--text3);flex-shrink:0;margin-top:1px"><use href="../sprite.svg#ic_chevron_right"></use></svg>
+        </a>
+        <a href="#" style="display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:inherit" onclick="return false">
+          <h2 style="font-family:var(--jio-font);font-size:18px;font-weight:900;color:var(--text);letter-spacing:-.3px;margin:0">Hidden <em style="font-style:italic;font-weight:500;color:var(--jio)">gems</em></h2>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="color:var(--text3);flex-shrink:0;margin-top:1px"><use href="../sprite.svg#ic_chevron_right"></use></svg>
+        </a>
+      </div>
+
+      <div class="ds-anatomy" style="margin-top:24px">
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:12px">Token</div>
+          <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:16px 20px;font-family:monospace;font-size:12px;line-height:1.8;color:var(--text2)">
+            .text-rail-title {<br>
+            &nbsp;&nbsp;font-size: 18px;<br>
+            &nbsp;&nbsp;font-weight: 900;<br>
+            &nbsp;&nbsp;letter-spacing: -0.3px;<br>
+            }<br>
+            .text-rail-title em {<br>
+            &nbsp;&nbsp;font-style: italic;<br>
+            &nbsp;&nbsp;font-weight: 500;<br>
+            &nbsp;&nbsp;color: var(--jio);<br>
+            }
+          </div>
+        </div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:12px">Usage</div>
+          <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:16px 20px;font-family:monospace;font-size:12px;line-height:1.8;color:var(--text2)">
+            &lt;a href="/section" class="rail-title-link"&gt;<br>
+            &nbsp;&nbsp;&lt;h2 class="text-rail-title"&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Jump back &lt;em&gt;in&lt;/em&gt;<br>
+            &nbsp;&nbsp;&lt;/h2&gt;<br>
+            &nbsp;&nbsp;&lt;svg class="icon icon--s"&gt;<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&lt;use href="sprite.svg#ic_chevron_right"&gt;&lt;/use&gt;<br>
+            &nbsp;&nbsp;&lt;/svg&gt;<br>
+            &lt;/a&gt;
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-rules" style="margin-top:24px">
+        <div class="ds-rule ds-rule--pass">Wrap the last or most evocative word in <code style="font-family:monospace;font-size:11px">&lt;em&gt;</code> — one word max per heading.</div>
+        <div class="ds-rule ds-rule--pass">Always include the chevron — it signals the heading is tappable and leads to a full section page.</div>
+        <div class="ds-rule ds-rule--pass">Wrap the entire heading + chevron in an <code style="font-family:monospace;font-size:11px">&lt;a&gt;</code> — the full row is the tap target, not just the icon.</div>
+        <div class="ds-rule ds-rule--fail">Use <code style="font-family:monospace;font-size:11px">font-style: italic</code> inline — always via the <code style="font-family:monospace;font-size:11px">em</code> element so screen readers convey emphasis.</div>
+        <div class="ds-rule ds-rule--fail">Omit the chevron on non-navigable headings — if tapping does nothing, use a plain heading with no link wrapper.</div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION — NAMING CROSSWALK
+    ═══════════════════════════════════════════════════════ -->
+    <section class="ds-section" id="crosswalk">
       <div class="ds-section-eyebrow">Section 05</div>
+      <h2 class="ds-section-title">Naming crosswalk</h2>
+      <p class="ds-section-desc">Two parallel naming systems exist in the DLS. <strong style="color:var(--text)">Design roles</strong> (what Figma and designers use) map to <strong style="color:var(--text)">CSS utility classes</strong> (what engineers put in HTML). This table is the canonical mapping — never invent a new name in either system without adding it here.</p>
+
+      <table class="ds-api-table" style="margin-top:20px">
+        <thead>
+          <tr>
+            <th>Design role</th>
+            <th>CSS utility class</th>
+            <th>Figma style name</th>
+            <th>Spec class (preview only)</th>
+            <th>Typical element</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Display / Hero</strong></td>
+            <td><code>.text-hero</code></td>
+            <td><code>Type/Hero</code></td>
+            <td><code>.spec-display</code></td>
+            <td><code>&lt;h1&gt;</code> full-screen hero</td>
+          </tr>
+          <tr>
+            <td><strong>Screen Title</strong></td>
+            <td><code>.text-screen-title</code></td>
+            <td><code>Type/Screen Title</code></td>
+            <td><code>.spec-h1</code></td>
+            <td><code>&lt;h1&gt;</code> inside AppBar or page</td>
+          </tr>
+          <tr>
+            <td><strong>Sheet Title</strong></td>
+            <td><code>.text-sheet-title</code></td>
+            <td><code>Type/Sheet Title</code></td>
+            <td><code>.spec-h2</code></td>
+            <td><code>&lt;h2&gt;</code> bottom sheet, dialog</td>
+          </tr>
+          <tr>
+            <td><strong>Rail Title</strong></td>
+            <td><code>.text-rail-title</code></td>
+            <td><code>Type/Rail Title</code></td>
+            <td><code>.spec-h3</code></td>
+            <td><code>&lt;h2&gt;</code> or <code>&lt;h3&gt;</code> content rail</td>
+          </tr>
+          <tr>
+            <td><strong>Card Title</strong></td>
+            <td><code>.text-card-title</code></td>
+            <td><code>Type/Card Title</code></td>
+            <td><code>.spec-h4</code></td>
+            <td><code>&lt;h3&gt;</code> or <code>&lt;p&gt;</code> inside card</td>
+          </tr>
+          <tr>
+            <td><strong>Body Large</strong></td>
+            <td><code>.text-body-lg</code></td>
+            <td><code>Type/Body Large</code></td>
+            <td><code>.spec-body-lg</code></td>
+            <td><code>&lt;p&gt;</code> hero description</td>
+          </tr>
+          <tr>
+            <td><strong>Body</strong></td>
+            <td><code>.text-body</code></td>
+            <td><code>Type/Body</code></td>
+            <td><code>.spec-body</code></td>
+            <td><code>&lt;p&gt;</code> default reading text</td>
+          </tr>
+          <tr>
+            <td><strong>Body Small</strong></td>
+            <td><code>.text-body-sm</code></td>
+            <td><code>Type/Body Small</code></td>
+            <td><code>.spec-body-sm</code></td>
+            <td><code>&lt;p&gt;</code> secondary / metadata</td>
+          </tr>
+          <tr>
+            <td><strong>Caption</strong></td>
+            <td><code>.text-caption</code></td>
+            <td><code>Type/Caption</code></td>
+            <td><code>.spec-caption</code></td>
+            <td><code>&lt;span&gt;</code> ratings, timestamps</td>
+          </tr>
+          <tr>
+            <td><strong>Badge / Label</strong></td>
+            <td><code>.text-badge</code></td>
+            <td><code>Type/Badge</code></td>
+            <td><code>.spec-label</code></td>
+            <td><code>&lt;span&gt;</code> chips, badges, tags</td>
+          </tr>
+          <tr>
+            <td><strong>Price</strong></td>
+            <td><code>.text-price</code></td>
+            <td><code>Type/Price</code></td>
+            <td><code>.spec-price</code></td>
+            <td><code>&lt;span&gt;</code> pass plan pricing</td>
+          </tr>
+          <tr>
+            <td><strong>CTA</strong></td>
+            <td><code>.text-cta</code></td>
+            <td><code>Type/CTA</code></td>
+            <td><code>.spec-cta</code></td>
+            <td><code>&lt;span&gt;</code> button label</td>
+          </tr>
+          <tr>
+            <td><strong>Overline / Micro</strong></td>
+            <td><code>.text-overline</code></td>
+            <td><code>Type/Overline</code></td>
+            <td><code>.spec-micro</code></td>
+            <td><code>&lt;span&gt;</code> section eyebrows, tags</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);border-radius:var(--r3);padding:14px 16px;margin-top:20px;font-size:13px;color:var(--text2);line-height:1.6">
+        <strong style="color:var(--amber)">Spec classes are preview-only.</strong> <code style="font-size:11px;color:var(--jio)">.spec-*</code> classes exist only in this documentation site to demonstrate the type scale. They are not exported to product code. Engineers use <code style="font-size:11px;color:var(--jio)">.text-*</code> classes from <code style="font-size:11px;color:var(--jio)">tokens/tokens.css</code>.
+      </div>
+    </section>
+
+    <section class="ds-section" id="usage-rules">
+      <div class="ds-section-eyebrow">Section 06</div>
       <h2 class="ds-section-title">Usage rules</h2>
       <p class="ds-section-desc">These rules are enforced by <code style="font-family:monospace;font-size:12px;color:#a8e6c5;background:var(--surface-2);padding:1px 5px;border-radius:4px;">tokens/validate.sh</code>. ERRs block shipping.</p>
 
@@ -958,11 +1179,8 @@
       </div>
     </section>
 
-
-    <!-- CHANGELOG -->
-
   </main>
   <script src="../sprite-loader.js"></script>
-<script src="../shell.js"></script>
+<script src="../shell.js?v=2"></script>
 </body>
 </html>

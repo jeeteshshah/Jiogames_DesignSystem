@@ -1,0 +1,136 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Onboarding — JioGames DLS Patterns</title>
+  <link rel="stylesheet" href="../../tokens/tokens.css">
+  <link rel="stylesheet" href="../../components.css">
+  <link rel="stylesheet" href="../../states.css">
+  <link rel="stylesheet" href="../../shell.css?v=3">
+</head>
+<body>
+<main class="ds-main">
+
+  <header class="component-page-header">
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <a href="../../" class="component-breadcrumb-link">JioGames DLS</a>
+      <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+      <a href="../" class="component-breadcrumb-link">Patterns</a>
+      <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="component-breadcrumb-current">Onboarding</span>
+    </nav>
+    <h1 class="component-page-title">Onboarding</h1>
+    <p class="component-page-def">Genre and platform preference collection for new users. Appears after OTP verification for States 1 and 3. Skippable at every step — JioGames never gates access on preference completion.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+      <span class="component-maturity component-maturity--beta"><span class="component-maturity--dot"></span>Beta</span>
+    </div>
+  </header>
+
+  <!-- FLOW MAP -->
+  <section class="ds-section" id="flow">
+    <h2 class="ds-section-title">Flow map</h2>
+    <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;margin-top:20px">
+      <div style="display:grid;grid-template-columns:32px 160px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">1</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Welcome screen</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Brief value prop. State 3 (subscriber bundled) shows green banner "Pass included with your plan". Step count shown (e.g. "Step 1 of 2").</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 160px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">2</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Genre selection</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Grid of genre tiles (min 3 selections required). Progress bar advances. "Skip" always visible in top-right. Continue CTA disabled until ≥3 selected.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 160px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">3</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Platform selection</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">2 choices: Mobile only, or All Screens. No minimum. "Skip" still available. Single-select, not multi-select.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 160px 1fr;gap:16px;padding:14px 20px;align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">4</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Done → Home</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Brief confirmation animation (500ms, respect prefers-reduced-motion). Navigate to home with personalised rail set. No explicit done screen — animate out directly to home.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKIP LOGIC -->
+  <section class="ds-section" id="skip">
+    <h2 class="ds-section-title">Skip logic</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px">
+      <div style="padding:16px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:8px">Skip genre step</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">Platform step still shown. Preferences saved as empty array. Home uses non-personalised default rails.</div>
+      </div>
+      <div style="padding:16px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:8px">Skip all (top-level)</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">Both steps skipped. Navigates directly to home. API call still sent with empty preferences (not omitted).</div>
+      </div>
+      <div style="padding:16px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:8px">Skip platform step</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">Genre prefs saved. Platform defaults to Mobile. Same result as selecting Mobile explicitly.</div>
+      </div>
+      <div style="padding:16px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:8px">Resume partial</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">If user kills app mid-flow: resume at last incomplete step on next open (within 7 days). After 7 days: skip, go to home.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATE VARIATIONS -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">State variations</h2>
+    <table class="ds-api-table" style="margin-top:16px">
+      <thead><tr><th>App state</th><th>Trigger</th><th>Difference</th></tr></thead>
+      <tbody>
+        <tr><td>State 1 — New user</td><td>OTP → Genre → Platform → Home</td><td>Standard flow. No banner. Neutral green CTA.</td></tr>
+        <tr><td>State 3 — Subscriber bundled</td><td>OTP → [Green banner] → Genre → Platform → Home</td><td>Green banner at top of each pref screen: "Your Jio plan includes JioGames Pass Mobile."</td></tr>
+        <tr><td>State 7 — Lapsed new</td><td>OTP → Welcome Back + inline prefs → Home</td><td>Welcome Back screen replaces Step 1. Prefs inline (not separate screens). Single "Let's go" CTA.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- GENRE TILE SPEC -->
+  <section class="ds-section" id="genre-tiles">
+    <h2 class="ds-section-title">Genre tile spec</h2>
+    <p style="font-size:13px;color:var(--text2);line-height:1.6;margin-top:12px">Genre tiles are NOT a DLS component (no standalone page). They are a pattern-exclusive primitive.</p>
+    <table class="ds-api-table" style="margin-top:16px">
+      <thead><tr><th>Property</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>Size</td><td>104px × 104px on 2-column grid, 8px gap</td></tr>
+        <tr><td>Border radius</td><td><code class="ds-code">var(--r4)</code></td></tr>
+        <tr><td>Background</td><td>Game cover image (object-fit:cover) with 40% dark scrim</td></tr>
+        <tr><td>Label</td><td>Genre name, bottom-left, 12px, font-weight:700, white</td></tr>
+        <tr><td>Selected state</td><td>Border: 2px solid <code class="ds-code">var(--jio)</code>. Check icon top-right. Scrim lightens to 20%.</td></tr>
+        <tr><td>Unselected state</td><td>No border. Scrim 40%.</td></tr>
+        <tr><td>Min selections</td><td>3 required before Continue CTA enables</td></tr>
+        <tr><td>Count badge</td><td>None visible — selection count tracked in sub-copy below grid ("3 selected")</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;margin-top:16px">
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Genre grid: <code class="ds-code">role="group"</code> with accessible name "Select genres". Each tile: <code class="ds-code">role="checkbox"</code> with game name + "selected/not selected" state.</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Progress bar: <code class="ds-code">role="progressbar"</code>, <code class="ds-code">aria-valuenow</code>, <code class="ds-code">aria-valuemin="0"</code>, <code class="ds-code">aria-valuemax="2"</code></li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Skip button always reachable before grid in tab order</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Continue CTA: <code class="ds-code">aria-disabled="true"</code> (not <code class="ds-code">disabled</code>) until 3 genres selected — remains focusable</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>On step advance: focus moves to new step heading via <code class="ds-code">tabIndex="-1"</code> + JS focus()</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Completion animation: <code class="ds-code">prefers-reduced-motion: reduce</code> → skip to home immediately</li>
+    </ul>
+  </section>
+
+  <!-- COMPONENTS USED -->
+  <section class="ds-section" id="components">
+    <h2 class="ds-section-title">Components used</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px">
+      <a href="../../buttons/" class="ds-chip ds-chip--default">Buttons</a>
+      <a href="../../banners/" class="ds-chip ds-chip--default">Banner</a>
+      <a href="../../progress/" class="ds-chip ds-chip--default">Progress</a>
+    </div>
+    <p style="font-size:12px;color:var(--text3);margin-top:12px">Genre tiles are pattern-only — not a standalone DLS component.</p>
+  </section>
+
+</main>
+<script src="../../shell.js?v=2"></script>
+</body></html>

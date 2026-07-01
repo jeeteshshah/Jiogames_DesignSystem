@@ -1,0 +1,251 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infinite Scroll, Pagination &amp; Load More — JioGames DLS Patterns</title>
+  <link rel="stylesheet" href="../../tokens/tokens.css">
+  <link rel="stylesheet" href="../../components.css">
+  <link rel="stylesheet" href="../../states.css">
+  <link rel="stylesheet" href="../../shell.css?v=3">
+</head>
+<body>
+<main class="ds-main">
+
+  <header class="component-page-header">
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <a href="../../" class="component-breadcrumb-link">JioGames DLS</a>
+      <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+      <a href="../" class="component-breadcrumb-link">Patterns</a>
+      <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="component-breadcrumb-current">Infinite Scroll, Pagination &amp; Load More</span>
+    </nav>
+    <h1 class="component-page-title">Infinite Scroll, Pagination &amp; Load More</h1>
+    <p class="component-page-def">Three distinct patterns for progressively revealing content. Each serves a different user mental model — choose based on whether users are browsing, searching, or managing a known collection.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+      <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+      <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+    </div>
+  </header>
+
+  <!-- PURPOSE -->
+  <section class="ds-section" id="purpose">
+    <h2 class="ds-section-title">Purpose</h2>
+    <p style="font-size:13px;color:var(--text2);line-height:1.6;margin-top:12px">Progressive loading patterns balance the cost of fetching all data upfront against the friction of manual navigation. The correct choice depends on whether users have a destination in mind (pagination), are browsing without one (infinite scroll), or want deliberate control over when more content loads (Load More). Getting this decision wrong creates poor experiences: infinite scroll on a library means users lose their place; pagination on a discovery feed adds unnecessary friction.</p>
+  </section>
+
+  <!-- WHEN TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use / When not to use</h2>
+    <div style="margin-top:16px;overflow-x:auto">
+      <table class="ds-api-table">
+        <thead>
+          <tr>
+            <th style="min-width:140px">Pattern</th>
+            <th>Use when</th>
+            <th>Do not use when</th>
+            <th>JioGames examples</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Infinite Scroll</strong></td>
+            <td style="font-size:12px;color:var(--text2);line-height:1.5">User is browsing without a specific destination. Content is roughly homogeneous (all games). Engagement is the goal — keep users in flow.</td>
+            <td style="font-size:12px;color:var(--text2);line-height:1.5">User needs to return to an exact position. Content is search results. Back navigation must restore context. Footer links must be reachable.</td>
+            <td style="font-size:12px;color:var(--text2);line-height:1.5">Home feed rails, genre browse, discovery pages</td>
+          </tr>
+          <tr>
+            <td><strong>Pagination</strong></td>
+            <td style="font-size:12px;color:var(--text2);line-height:1.5">User needs to know their position in results. URL sharability matters (page=3 is linkable). User may navigate back to the same page repeatedly.</td>
+            <td style="font-size:12px;color:var(--text2);line-height:1.5">Casual discovery feeds where position is irrelevant. TV surfaces where D-pad pagination is cumbersome.</td>
+            <td style="font-size:12px;color:var(--text2);line-height:1.5">Search results, filtered catalogue views</td>
+          </tr>
+          <tr>
+            <td><strong>Load More button</strong></td>
+            <td style="font-size:12px;color:var(--text2);line-height:1.5">User controls when to fetch. List has a known or moderate length. Page footer must be reachable. User may want to stop at a point in the list.</td>
+            <td style="font-size:12px;color:var(--text2);line-height:1.5">Short lists where all items fit in one view. Infinite feeds where stopping points are arbitrary.</td>
+            <td style="font-size:12px;color:var(--text2);line-height:1.5">Game library, purchase history, saved games</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <section class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:16px">
+      <div style="padding:20px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <p style="font-size:12px;font-weight:700;color:var(--text);margin:0 0 12px">Infinite Scroll</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--text)">Sentinel element</strong> — zero-height div at end of list; observed by IntersectionObserver</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--text)">Skeleton row(s)</strong> — 2–4 skeleton cards shown while next batch loads</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--text)">End-of-list indicator</strong> — "You've seen everything" when no more results</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--text)">Error inline banner</strong> — with retry CTA, does not block existing content</li>
+        </ul>
+      </div>
+      <div style="padding:20px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <p style="font-size:12px;font-weight:700;color:var(--text);margin:0 0 12px">Pagination</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--text)">Previous / Next buttons</strong> — always visible when applicable; disabled at bounds</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--text)">Page indicator</strong> — "Page 3 of 12" or numbered page chips on web</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--text)">Results count</strong> — "Showing 41–60 of 240 results" pinned near controls</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--text)">Navigation landmark</strong> — <code class="ds-code">role="navigation"</code> wrapping the controls</li>
+        </ul>
+      </div>
+      <div style="padding:20px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <p style="font-size:12px;font-weight:700;color:var(--text);margin:0 0 12px">Load More</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--text)">Load More button</strong> — secondary variant; includes count hint in label</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--text)">Loading state</strong> — button enters spinner state; no layout shift</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--text)">Result count label</strong> — "Showing 20 of 87" above the button</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--text)">End state</strong> — button removed, "All items loaded" message shown</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOW -->
+  <section class="ds-section" id="flow">
+    <h2 class="ds-section-title">Flow</h2>
+    <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;margin-top:20px">
+      <div style="display:grid;grid-template-columns:32px 200px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">1</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Initial load</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">First batch of 20 items loads. Skeleton shown until first response arrives. IntersectionObserver (infinite scroll) or button (Load More) is mounted after first render.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 200px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">2</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Prefetch trigger</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5"><strong>Infinite scroll only:</strong> When the user is 5 items from the end of the current batch, silently fetch the next 20 in the background. This eliminates the loading gap in most connection conditions.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 200px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">3</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Load triggered</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Sentinel observed (infinite scroll) or button tapped (Load More). Skeleton appended to list. Button enters loading state. Pagination navigates to new page, full skeleton shown.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 200px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">4</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Content arrives</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Skeleton slots replaced with real items. <strong>Focus management:</strong> Load More — move focus to first new item. Pagination — move focus to first result item and announce new page via <code class="ds-code">aria-live</code>.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 200px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">5a</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">End of results</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Show end-of-list state. Remove Load More button or sentinel. Pagination: disable Next button. Infinite scroll: show "You've seen it all" message.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 200px 1fr;gap:16px;padding:14px 20px;align-items:start">
+        <div style="width:24px;height:24px;background:var(--error-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--status-negative)">5b</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Load error</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Inline banner below existing content: "Couldn't load more — Retry". Existing items intact. Button reverts to non-loading state. <code class="ds-code">aria-live="assertive"</code> announces error.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATES -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States to handle</h2>
+    <table class="ds-api-table" style="margin-top:16px">
+      <thead><tr><th>State</th><th>All patterns</th><th>Specific notes</th></tr></thead>
+      <tbody>
+        <tr><td>Loading initial batch</td><td>Full-list skeleton</td><td>Never show empty layout — skeleton fills the expected item count</td></tr>
+        <tr><td>Loading next batch</td><td>Append 2–4 skeleton rows / cards</td><td>Infinite scroll: below current items. Load More: button spinner. Pagination: full page skeleton</td></tr>
+        <tr><td>Empty (zero results)</td><td>Empty state illustration + message</td><td>See Empty State pattern for copy guidelines</td></tr>
+        <tr><td>End of list</td><td>Remove trigger mechanism</td><td>Show "All [N] games loaded" or "You've seen everything"</td></tr>
+        <tr><td>Error loading more</td><td>Inline error + retry CTA</td><td>Do not toast — error is inline to the loading region</td></tr>
+        <tr><td>Network offline</td><td>Warning banner + disable trigger</td><td>Auto-retry when connection restored</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PLATFORM BEHAVIOR -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform behavior</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:16px">
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--jio);border-radius:var(--r4);padding:20px;background:var(--surface-1)">
+        <p style="font-size:12px;font-weight:700;color:var(--jio);margin:0 0 12px">Mobile</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Browse/home: infinite scroll. Store scroll position in <code class="ds-code">history.state</code> so back navigation restores position.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Game library: Load More button. Users managing a list want deliberate control.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Search: pagination with Prev/Next. Mobile pagination shows only Prev / Next + "Page N of M" — no numbered chips (too small to tap accurately).</li>
+        </ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--gold);border-radius:var(--r4);padding:20px;background:var(--surface-1)">
+        <p style="font-size:12px;font-weight:700;color:var(--gold);margin:0 0 12px">Web</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Search results: numbered page chips (1 2 3 … 12) + Prev/Next. URL param <code class="ds-code">?page=N</code> is deep-linkable and shareable.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Browse feeds: infinite scroll with 20-item batches and prefetch at 5-from-end.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Game library: Load More button with "Showing N of M games" count label.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Keyboard: Load More button must be reachable by Tab; Enter triggers load.</li>
+        </ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--amber);border-radius:var(--r4);padding:20px;background:var(--surface-1)">
+        <p style="font-size:12px;font-weight:700;color:var(--amber);margin:0 0 12px">TV</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Infinite scroll is supported on TV — D-pad focus naturally moves into new items as they load.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">When next batch loads during D-pad navigation: focus first new item automatically.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Avoid Load More button on TV — it interrupts the natural D-pad flow. Prefer automatic loading.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Numbered pagination is acceptable for search on TV; keep to 5 visible page chips max.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOTION -->
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-api-table" style="margin-top:16px">
+      <thead><tr><th>Moment</th><th>Token</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>New items enter (infinite scroll)</td><td><code class="ds-code">var(--dur-pop)</code> 280ms, <code class="ds-code">var(--ease-out)</code></td><td>Fade in + translate-Y 12px → 0. Stagger at <code class="ds-code">var(--stagger-step)</code> 60ms per item. Max 4 items staggered — beyond that all animate simultaneously.</td></tr>
+        <tr><td>Load More button loading state</td><td><code class="ds-code">var(--dur-default)</code> 200ms</td><td>Label fades, spinner appears. No layout shift — button maintains height.</td></tr>
+        <tr><td>Pagination page transition</td><td><code class="ds-code">var(--dur-screen)</code> 420ms, <code class="ds-code">var(--ease-screen)</code></td><td>Outgoing items fade out, incoming items fade in. No slide — pagination is not a spatial navigation.</td></tr>
+        <tr><td>Skeleton → content swap</td><td><code class="ds-code">var(--dur-fast)</code> 120ms</td><td>Crossfade. Do not animate individual skeleton elements independently — too noisy.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;margin-top:16px">
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span><strong style="color:var(--text)">Load More button:</strong> <code class="ds-code">aria-label="Load more games, 20 more available"</code>. Update the count as remaining items change.</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span><strong style="color:var(--text)">Pagination nav:</strong> Wrap controls in <code class="ds-code">&lt;nav role="navigation" aria-label="Search results pages"&gt;</code>. Current page: <code class="ds-code">aria-current="page"</code>.</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span><strong style="color:var(--text)">Infinite scroll announcements:</strong> Use <code class="ds-code">aria-live="polite"</code> region to announce count after each load, e.g. "Loaded 20 more games. Showing 60 total."</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span><strong style="color:var(--text)">Focus recovery — Load More:</strong> After new items insert, move focus to the first newly added item so keyboard users can immediately navigate into new content.</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span><strong style="color:var(--text)">Focus recovery — Pagination:</strong> After page change, move focus to the first result item (or the heading above results).</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span><strong style="color:var(--text)">Scroll position persistence:</strong> Store <code class="ds-code">scrollY</code> in <code class="ds-code">history.state</code> before navigating away. Restore on back navigation to prevent user losing place in a long infinite scroll list.</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span><strong style="color:var(--text)">Loading state:</strong> Apply <code class="ds-code">aria-busy="true"</code> to the list container while a batch is loading. Remove on completion.</li>
+    </ul>
+  </section>
+
+  <!-- CONTENT GUIDANCE -->
+  <section class="ds-section" id="content">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <table class="ds-api-table" style="margin-top:16px">
+      <thead><tr><th>Element</th><th>Copy</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Load More button</td><td>"Load more games" / "Load 20 more"</td><td>Always include the item count when known. "Load more" alone is vague.</td></tr>
+        <tr><td>Loading button state</td><td>Button label hidden, spinner shown</td><td>Screen reader still reads button label via accessible name — do not clear it.</td></tr>
+        <tr><td>Results count</td><td>"Showing 20 of 87 games"</td><td>Update live as more items load.</td></tr>
+        <tr><td>End of list</td><td>"You've seen all 87 games"</td><td>Use the actual count. Avoid "No more results" — sounds like an error.</td></tr>
+        <tr><td>Infinite scroll end</td><td>"You've seen it all — check back for new arrivals"</td><td>Friendly, not a dead end. Only show if content refreshes over time.</td></tr>
+        <tr><td>Load error</td><td>"Couldn't load more — Retry"</td><td>Inline, directly below existing content. Single-line.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- RELATED COMPONENTS -->
+  <section class="ds-section" id="components">
+    <h2 class="ds-section-title">Related components</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px">
+      <a href="../../buttons/" class="ds-chip ds-chip--default">Buttons</a>
+      <a href="../../skeleton/" class="ds-chip ds-chip--default">Skeleton</a>
+      <a href="../../spinner/" class="ds-chip ds-chip--default">Spinner</a>
+      <a href="../../banners/" class="ds-chip ds-chip--default">Banner</a>
+      <a href="../empty-search/" class="ds-chip ds-chip--default">Empty state</a>
+      <a href="../pull-to-refresh/" class="ds-chip ds-chip--default">Pull to Refresh</a>
+    </div>
+  </section>
+
+</main>
+<script src="../../shell.js?v=2"></script>
+</body></html>

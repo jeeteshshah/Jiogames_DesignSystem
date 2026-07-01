@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     /* ── Toast component ── */
     .toast-demo-screen {
@@ -25,18 +25,7 @@
       flex-direction: column;
       gap: 8px;
     }
-    .toast {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      box-shadow: 0 8px 24px rgba(0,0,0,.5);
-      position: relative;
-      overflow: hidden;
-    }
+    
     .toast-icon {
       width: 18px;
       height: 18px;
@@ -142,7 +131,7 @@
     }
     .state-step-label {
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--text3);
       text-transform: uppercase;
       letter-spacing: .06em;
@@ -166,26 +155,10 @@
     }
 
     /* Sizes table */
-    .sizes-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-    }
-    .sizes-table th,
-    .sizes-table td {
-      padding: 10px 14px;
-      border: 1px solid var(--border-subtle);
-      text-align: left;
-    }
-    .sizes-table th {
-      background: var(--surface-1);
-      color: var(--text2);
-      font-weight: 600;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-    }
-    .sizes-table td { color: var(--text); }
+    
+    
+    
+    
     .sizes-table .na { color: var(--text3); font-style: italic; }
 
     /* Content grid */
@@ -301,7 +274,7 @@
     .a11y-table th {
       background: var(--surface-1);
       color: var(--text2);
-      font-weight: 600;
+      font-weight: 700;
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: .06em;
@@ -365,11 +338,16 @@
 </head><body><main class="ds-content">
 
   <!-- ── PAGE HEADER ── -->
-  <div class="component-breadcrumb">JioGames DLS &rsaquo; Components &rsaquo; Toast</div>
+  <nav class="component-breadcrumb" aria-label="Breadcrumb">
+    <span class="component-breadcrumb-link">JioGames DLS</span>
+    <span class="component-breadcrumb-sep">›</span>
+    <span>Components</span>
+    <span class="component-breadcrumb-sep">›</span>
+    <span class="component-breadcrumb-current">Toast</span>
+  </nav>
 
   <div class="component-page-header">
-    <h1 class="component-page-title">Toast</h1>
-    <p class="component-page-def">Toasts provide brief, non-blocking feedback after a player completes an action.</p>
+    <h1 class="component-page-title">Toast</h1><p class="component-page-def">Toasts provide brief, non-blocking feedback after a player completes an action.</p>
     <div class="component-platforms">
       <span class="component-platform component-platform--mobile">
         <span class="component-platform-dot"></span>Mobile
@@ -380,6 +358,7 @@
       <span class="component-platform component-platform--tv">
         <span class="component-platform-dot"></span>TV <span class="badge-na">N/A</span>
       </span>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBUb2FzdCDigJQgSmlvR2FtZXMgRExTIHNwZWMKCj4gU291cmNlOiBgdG9hc3QvaW5kZXguaHRtbGAgaW4gdGhlIEppb0dhbWVzIERlc2lnbiBTeXN0ZW0uCj4gVGhpcyBzcGVjIGlzIGdlbmVyYXRlZCB2ZXJiYXRpbSBmcm9tIHRoZSBwYWdlIOKAlCBkbyBub3QgaW52ZW50IHZhbHVlcyBub3QgbGlzdGVkIGhlcmUuCgoqKlBhdGg6KiogSmlvR2FtZXMgRExTIOKAuiBDb21wb25lbnRzIOKAuiBUb2FzdAoKLS0tCgpUb2FzdHMgcHJvdmlkZSBicmllZiwgbm9uLWJsb2NraW5nIGZlZWRiYWNrIGFmdGVyIGEgcGxheWVyIGNvbXBsZXRlcyBhbiBhY3Rpb24uCgoqKlRWIHBsYXRmb3JtOioqIFRoZSBUb2FzdCBjb21wb25lbnQgaXMgbm90IHVzZWQgb24gVFYuIFVzZSB0aGUgKipCYW5uZXIqKiBjb21wb25lbnQgZm9yIHBlcnNpc3RlbnQgZmVlZGJhY2sgb24gdGhlIFRWIHN1cmZhY2UuCgpUaHJlZSB0b2FzdCB2YXJpYW50cyBzdGFja2VkIGF0IHRoZSBib3R0b20gb2YgYSBzY3JlZW4uIE9sZGVzdCBkaXNtaXNzZXMgZmlyc3QuCgpUb2FzdHMgYXBwZWFyIGJyaWVmbHkgYXQgdGhlIGJvdHRvbSBvZiB0aGUgc2NyZWVuIHRvIGNvbmZpcm0gdGhhdCBhbiBhY3Rpb24gY29tcGxldGVkIOKAlCBzdWNjZXNzZnVsbHkgb3Igb3RoZXJ3aXNlLiBUaGV5IGFyZSBub24tYmxvY2tpbmc6IHRoZSBwbGF5ZXIgY2FuIGtlZXAgaW50ZXJhY3Rpbmcgd2l0aCB0aGUgYXBwIHdoaWxlIHRoZSB0b2FzdCBpcyB2aXNpYmxlLiBUb2FzdHMgYXV0by1kaXNtaXNzIGFmdGVyIDQgc2Vjb25kcy4gRm9yIHBlcnNpc3RlbnQgZmVlZGJhY2ssIHVzZSBhIEJhbm5lciBpbnN0ZWFkLgoKLSAqKkJvdHRvbS1hbmNob3JlZC4qKiBUb2FzdHMgYWx3YXlzIGFwcGVhciBhdCB0aGUgYm90dG9tLCBhYm92ZSB0aGUgbmF2IGJhci4KLSAqKkF1dG8tZGlzbWlzcy4qKiBWaXNpYmxlIGZvciA0IHNlY29uZHMuIE5ldmVyIHJlcXVpcmUgYSBwbGF5ZXIgYWN0aW9uIHRvIGRpc21pc3MuCi0gKipOb24tYmxvY2tpbmcuKiogTmV2ZXIgY292ZXIgcHJpbWFyeSBpbnRlcmFjdGl2ZSBjb250ZW50IG9yIG5hdmlnYXRpb24uCi0gKipCcmllZiBtZXNzYWdlLioqIE1heCA2MCBjaGFyYWN0ZXJzLiBObyBwdW5jdHVhdGlvbiBhdCBlbmQuCgojIyBXaGVuIHRvIHVzZQoKVXNlIHdoZW4KCi0gQnJpZWYgZmVlZGJhY2sgYWZ0ZXIgYSB1c2VyIGFjdGlvbiAoZ2FtZSBhZGRlZCB0byBsaWJyYXJ5LCBwYXNzIGFjdGl2YXRlZCkKLSBUcmFuc2llbnQgc3VjY2Vzcy9lcnJvciBjb25maXJtYXRpb25zIHRoYXQgYXV0by1kaXNtaXNzCi0gVW5kbyBwcm9tcHRzIGltbWVkaWF0ZWx5IGFmdGVyIGEgcmV2ZXJzaWJsZSBhY3Rpb24KCkRvbid0IHVzZSB3aGVuCgotIFBlcnNpc3RlbnQgbWVzc2FnZXMgdGhhdCByZXF1aXJlIHVzZXIgYWN0aW9uIOKAlCB1c2UgQmFubmVyCi0gRGVzdHJ1Y3RpdmUgY29uZmlybWF0aW9ucyDigJQgdXNlIERpYWxvZwotIE1vcmUgdGhhbiBvbmUgdG9hc3QgYXQgYSB0aW1lIOKAlCBxdWV1ZSB0aGVtCi0gVG9hc3RzIHRoYXQgY29udGFpbiBpbnRlcmFjdGl2ZSBmb3JtcyBvciBtdWx0aS1zdGVwIGZsb3dzCgojIyBCZXN0IHByYWN0aWNlcwoKLSBLZWVwIG1lc3NhZ2UgdW5kZXIgNjAgY2hhcmFjdGVycwotIFVzZSBwYXN0IHRlbnNlIGZvciBzdWNjZXNzOiAiR2FtZSBhZGRlZCIsICJQYXNzIGFjdGl2YXRlZCIKLSBVc2UgcHJlc2VudCB0ZW5zZSBmb3IgZXJyb3JzOiAiQ2FuJ3QgY29ubmVjdCIsICJEb3dubG9hZCBmYWlsZWQiCi0gU3RhY2sgdG9hc3RzIChtYXggMyB2aXNpYmxlIGF0IG9uY2UpOyBvbGRlc3QgZGlzbWlzc2VzIGZpcnN0Ci0gSW5jbHVkZSBhY3Rpb24gbGluayBvbmx5IHdoZW4gdW5kbyBvciBmb2xsb3ctdXAgaXMgbWVhbmluZ2Z1bAotIE1hdGNoIGljb24gdG8gc2VtYW50aWMgbWVhbmluZyAoZ3JlZW4gY2hlY2ssIHJlZCDDlywgc3Bpbm5lcikKCi0gRG9uJ3QgdXNlIHRvYXN0cyBmb3IgZXJyb3JzIHRoYXQgcmVxdWlyZSB1c2VyIHJlc29sdXRpb24g4oCUIHVzZSBhIEJhbm5lciBvciBkaWFsb2cKLSBEb24ndCBlbmQgdG9hc3QgbWVzc2FnZXMgd2l0aCBwZXJpb2RzCi0gRG9uJ3QgdXNlIHRvYXN0cyBvbiBUViAodXNlIEJhbm5lciBjb21wb25lbnQgaW5zdGVhZCkKLSBEb24ndCBzaG93IG1vcmUgdGhhbiAzIHRvYXN0cyBzaW11bHRhbmVvdXNseQotIERvbid0IHVzZSB0b2FzdHMgZm9yIHByb21vdGlvbmFsIGNvbnRlbnQKLSBEb24ndCBjaGFuZ2UgdG9hc3QgcG9zaXRpb24gKG11c3QgYmUgYm90dG9tIG9mIHNjcmVlbiwgYWJvdmUgdGFiIGJhcikKCiMjIEFuYXRvbXkKCkZpdmUgZGlzdGluY3QgcGFydHMgbWFrZSB1cCBhIHRvYXN0LiBDb250YWluZXIgYW5kIG1lc3NhZ2UgYXJlIGFsd2F5cyByZXF1aXJlZDsgaWNvbiBpcyBzdHJvbmdseSByZWNvbW1lbmRlZDsgYWN0aW9uIGxpbmsgYW5kIHRpbWVyIGJhciBhcmUgb3B0aW9uYWwuCgoxLiAxICoqVG9hc3QgY29udGFpbmVyKiog4oCUIFJlcXVpcmVkLiBib3JkZXItcmFkaXVzOiAxNHB4OyBwYWRkaW5nOiAxMnB4IDE0cHguIEJhY2tncm91bmQgLS1zdXJmYWNlLTIgd2l0aCBhIC0tYm9yZGVyIHN0cm9rZSBhbmQgZWxldmF0aW9uIHNoYWRvdy4KMi4gMiAqKkljb24gKHN0YXR1cykqKiDigJQgUmVxdWlyZWQuIDE4IMOXIDE4cHguIEdyZWVuIGNoZWNrIGZvciBzdWNjZXNzLCByZWQgw5cgZm9yIGVycm9yLCBhbWJlciAhIGZvciB3YXJuaW5nLCBncmF5IOKEuSBmb3IgaW5mbywgc3Bpbm5lciBmb3IgbG9hZGluZy4gZmxleC1zaHJpbms6IDAuCjMuIDMgKipNZXNzYWdlIHRleHQqKiDigJQgUmVxdWlyZWQuIE1heCA2MCBjaGFyYWN0ZXJzLiBmb250LXNpemU6IDEzcHg7IGZvbnQtd2VpZ2h0OiA1MDAuIE9uZSBsaW5lIHByZWZlcnJlZDsgdHdvIGxpbmVzIG1heGltdW0uCjQuIDQgKipBY3Rpb24gbGluayoqIOKAlCBPcHRpb25hbC4gMeKAkzIgd29yZHMgb25seS4gR3JlZW4gY29sb3IgKC0tamlvKS4gIlVuZG8iLCAiVmlldyIsICJSZXRyeSIuIE5vIGJ1dHRvbiBjaHJvbWUuIEtleWJvYXJkLWZvY3VzYWJsZSB3aGlsZSB0b2FzdCBpcyB2aXNpYmxlLgo1LiA1ICoqQXV0by1kaXNtaXNzIHRpbWVyIGJhcioqIOKAlCBPcHRpb25hbC4gMnB4IGJhciBhbmNob3JlZCB0byB0aGUgYm90dG9tIGVkZ2Ugb2YgdGhlIGNvbnRhaW5lci4gQW5pbWF0ZXMgZnJvbSAxMDAlIHRvIDAlIHdpZHRoIG92ZXIgNCBzZWNvbmRzLCBwcm92aWRpbmcgYSB2aXN1YWwgY291bnRkb3duLgoKIyMgVmFyaWFudHMKClNpeCBzZW1hbnRpYyB2YXJpYW50cyBjb3ZlciBhbGwgZmVlZGJhY2sgc2NlbmFyaW9zIGluIEppb0dhbWVzLgoKUGFzdCB0ZW5zZS4gQ29uZmlybXMgdGhlIGFjdGlvbiBjb21wbGV0ZWQuIEdyZWVuIGljb24uCgpQcmVzZW50IHRlbnNlLiBEZXNjcmliZXMgdGhlIHByb2JsZW0uIFJlZCBpY29uIGFuZCB0aW1lciBiYXIuCgpBbWJlciBpY29uLiBOb24tY3JpdGljYWwgaXNzdWUgdGhhdCBtYXkgcmVxdWlyZSBhdHRlbnRpb24uCgpOZXV0cmFsLiBDb21tdW5pY2F0ZXMgc3RhdHVzIHdpdGhvdXQgc3VjY2VzcyBvciBmYWlsdXJlLgoKU3Bpbm5lciBpY29uLiBQcmVzZW50LWNvbnRpbnVvdXMgbWVzc2FnZS4gUHJvZ3Jlc3MgYmFyIGFjdGl2ZS4KCkFkZHMgYSBncmVlbiBhY3Rpb24gbGluayBmb3IgdW5kbyBvciBmb2xsb3ctdXAuIDHigJMyIHdvcmRzLgoKIyMgU2l6ZXMKClR3byBoZWlnaHQgcHJvZmlsZXMgZXhpc3Q6IENvbXBhY3QgKGljb24gKyB0ZXh0IG9ubHkpIGFuZCBTdGFuZGFyZCAod2l0aCBhbiBhY3Rpb24gbGluaykuIEhlaWdodHMgYXJlIHRoZSBuYXR1cmFsIGhlaWdodCB3aXRoIGRlZmluZWQgcGFkZGluZyDigJQgZG8gbm90IGhhcmRjb2RlLgoKfCBTaXplIHwgQ29udGVudCB8IE1vYmlsZSBoZWlnaHQgfCBXZWIgaGVpZ2h0IHwgVFYgfAp8LS0tfC0tLXwtLS18LS0tfC0tLXwKfCAqKkNvbXBhY3QqKiB8IEljb24gKyBtZXNzYWdlIHRleHQgfCA0NHB4IHwgNDRweCB8IE5vdCBhcHBsaWNhYmxlIOKAlCB1c2UgQmFubmVyIHwKfCAqKlN0YW5kYXJkKiogfCBJY29uICsgbWVzc2FnZSArIGFjdGlvbiBsaW5rIHwgNDhweCB8IDQ4cHggfCBOb3QgYXBwbGljYWJsZSDigJQgdXNlIEJhbm5lciB8CgpIZWlnaHRzIGFzc3VtZSBzaW5nbGUtbGluZSBtZXNzYWdlLiBBIHR3by1saW5lIG1lc3NhZ2Ugd2lsbCBpbmNyZWFzZSBoZWlnaHQgbmF0dXJhbGx5LiBQYWRkaW5nIGlzIGFsd2F5cyAxMnB4IDE0cHguCgojIyBTdGF0ZXMgJiBtb3Rpb24KClRvYXN0cyBoYXZlIHRocmVlIG1vdGlvbiBwaGFzZXM6IEVudGVyLCBWaXNpYmxlLCBhbmQgRXhpdC4gQWxsIGFuaW1hdGlvbnMgcmVzcGVjdCBwcmVmZXJzLXJlZHVjZWQtbW90aW9uLgoKIyMgQ29udGVudCBndWlkZWxpbmVzCgpUb2FzdCBtZXNzYWdlcyBhcmUgc2hvcnQgY29uZmlybWF0aW9ucywgbm90IGV4cGxhbmF0aW9ucy4gTWF0Y2ggdGVuc2UgdG8gc2VtYW50aWMgdHlwZSBhbmQga2VlcCB0byB0aGUgcG9pbnQuCgpQYXN0IHRlbnNlLiBDb25maXJtIHRoZSBvYmplY3QgdGhhdCB3YXMgYWN0ZWQgb24uCgpQcmVzZW50IHRlbnNlLiBEZXNjcmliZSB0aGUgcHJvYmxlbSwgbm90IHRoZSBjYXVzZS4KClRoZXNlIHBhdHRlcm5zIGFyZSBiYW5uZWQgaW4gSmlvR2FtZXMgdG9hc3RzLgoKIyMgUGxhdGZvcm0gYmVoYXZpb3VyCgpUb2FzdHMgYWRhcHQgdGhlaXIgcG9zaXRpb24gYW5kIHdpZHRoIGJhc2VkIG9uIHRoZSBwbGF0Zm9ybSBzdXJmYWNlLgoKQW5jaG9yZWQgKipib3R0b206IDE2cHggYWJvdmUgdGhlIHRhYiBiYXIqKiAob3Igc2NyZWVuIGJvdHRvbSBpZiBubyB0YWIgYmFyIHByZXNlbnQpLiBGdWxsIHdpZHRoIHdpdGggKioxNnB4IGhvcml6b250YWwgbWFyZ2lucyoqLiBCb3R0b20gc2FmZS1hcmVhIGluc2V0IGlzIGFsd2F5cyByZXNwZWN0ZWQgb24gbm90Y2hlZCBkZXZpY2VzLiBTdGFja3MgdXB3YXJkIHdoZW4gbXVsdGlwbGUgdG9hc3RzIGFyZSBxdWV1ZWQuCgpGbG9hdHMgaW4gdGhlICoqYm90dG9tLXJpZ2h0IGNvcm5lcioqIG9mIHRoZSB2aWV3cG9ydC4gKipNYXgtd2lkdGg6IDM2MHB4KiouIE5vdCBmdWxsLXdpZHRoLiBQb3NpdGlvbmVkIGFib3ZlIGFueSBzdGlja3kgZm9vdGVycy4gUmlnaHQtYWxpZ25lZCBzdGFjazsgbmV3ZXIgdG9hc3RzIHB1c2ggb2xkZXIgb25lcyB1cHdhcmQuIEhvdmVyIHBhdXNlcyB0aGUgYXV0by1kaXNtaXNzIHRpbWVyLgoKVG9hc3QgaXMgKipub3QgYXZhaWxhYmxlIG9uIHRoZSBUViBzdXJmYWNlLioqCgojIyBNb3Rpb24KCnwgSW50ZXJhY3Rpb24gfCBFYXNpbmcgfCBEdXJhdGlvbiB8IFByb3BlcnR5IHwKfC0tLXwtLS18LS0tfC0tLXwKfCBTbGlkZSBpbiAoYm90dG9tKSB8IGAtLWVhc2Utb3V0YCB8IGAtLWR1ci1mYXN0YCB8IHRyYW5zZm9ybSB0cmFuc2xhdGVZKDEwMCUg4oaSIDApLCBvcGFjaXR5IHwKfCBTbGlkZSBvdXQgfCBgLS1lYXNlLWluYCB8IGAtLWR1ci1mYXN0YCB8IHRyYW5zZm9ybSB0cmFuc2xhdGVZKDAg4oaSIDEwMCUpLCBvcGFjaXR5IHwKfCBBdXRvLWRpc21pc3MgcHJvZ3Jlc3MgfCBgbGluZWFyYCB8IGAzMDAwbXNgIHwgd2lkdGggb2YgcHJvZ3Jlc3MgaW5kaWNhdG9yIHwKfCBTdGFjayBleHBhbmQgKG11bHRpcGxlKSB8IGAtLWVhc2Utb3V0YCB8IGAtLWR1ci1mYXN0YCB8IHRyYW5zZm9ybSB0cmFuc2xhdGVZLCBzY2FsZSB8CgojIyBBY2Nlc3NpYmlsaXR5CgpUb2FzdHMgbXVzdCBiZSBhbm5vdW5jZWQgdG8gc2NyZWVuIHJlYWRlcnMgd2l0aG91dCBpbnRlcnJ1cHRpbmcgdGhlIGN1cnJlbnQgaW50ZXJhY3Rpb24gZmxvdyB1bm5lY2Vzc2FyaWx5LgoKfCBBdHRyaWJ1dGUgfCBWYWx1ZSB8IE5vdGVzIHwKfC0tLXwtLS18LS0tfAp8IHJvbGUgfCBzdGF0dXMgKHN1Y2Nlc3MsIGluZm8pYWxlcnQgKGVycm9yLCB3YXJuaW5nKSB8IFVzZSByb2xlPSJhbGVydCIgZm9yIGVycm9ycyBhbmQgd2FybmluZ3Mg4oCUIHRoaXMgaW50ZXJydXB0cyB0aGUgc2NyZWVuIHJlYWRlci4gVXNlIHJvbGU9InN0YXR1cyIgZm9yIHBvbGl0ZSBhbm5vdW5jZW1lbnRzLiB8CnwgYXJpYS1saXZlIHwgQXV0by1zZXQgYnkgcm9sZSB8IEZvciBsb2FkaW5nIHRvYXN0cywgZXhwbGljaXRseSBzZXQgYXJpYS1saXZlPSJwb2xpdGUiLiBEbyBub3Qgc2V0IGFyaWEtbGl2ZT0iYXNzZXJ0aXZlIiB1bmxlc3MgdGhlIHZhcmlhbnQgaXMgZXJyb3Igb3Igd2FybmluZy4gfAp8IEZvY3VzIG1hbmFnZW1lbnQgfCBOb24tZm9jdXNhYmxlIGNvbnRhaW5lciB8IFRoZSB0b2FzdCBjb250YWluZXIgaXRzZWxmIGlzIG5vdCBpbiB0aGUgdGFiIG9yZGVyLiBPbmx5IHRoZSBvcHRpb25hbCBhY3Rpb24gbGluayByZWNlaXZlcyBmb2N1cyAodmlhIFRhYikgd2hpbGUgdGhlIHRvYXN0IGlzIHZpc2libGUuIHwKfCBBY3Rpb24gbGluayBrZXlib2FyZCB8IEZvY3VzYWJsZSB2aWEgVGFiIHwgV2hlbiBhbiBhY3Rpb24gbGluayBpcyBwcmVzZW50LCBpdCBtdXN0IGJlIHJlYWNoYWJsZSBieSBrZXlib2FyZCB0YWIgd2hpbGUgdGhlIHRvYXN0IGlzIG9uIHNjcmVlbi4gQWN0aXZhdGluZyBpdCBzaG91bGQgZGlzbWlzcyB0aGUgdG9hc3QuIHwKfCBwcmVmZXJzLXJlZHVjZWQtbW90aW9uIHwgSW5zdGFudCBhcHBlYXIvZGlzYXBwZWFyIHwgRW50ZXIgYW5kIGV4aXQgYW5pbWF0aW9ucyBhcmUgZGlzYWJsZWQuIFRvYXN0cyBzdGlsbCBhcHBlYXIgYW5kIGRpc2FwcGVhcjsgb25seSB0aGUgdHJhbnNsYXRlK2ZhZGUgdHJhbnNpdGlvbnMgYXJlIHN1cHByZXNzZWQuIFRoZSB0aW1lciBiYXIgYW5pbWF0aW9uIGlzIGFsc28gc3RvcHBlZC4gfAp8IExpdmUgcmVnaW9uIHwgT3V0c2lkZSBtYWluIGNvbnRlbnQgfCBUaGUgdG9hc3QgY29udGFpbmVyIGVsZW1lbnQgc2hvdWxkIGJlIHBsYWNlZCBhdCB0aGUgZW5kIG9mIHRoZSBkb2N1bWVudCBib2R5LCBvdXRzaWRlIDxtYWluPiwgc28gbGl2ZSByZWdpb24gYW5ub3VuY2VtZW50cyBkbyBub3QgaW50ZXJmZXJlIHdpdGggaW4tcGFnZSBBUklBIGxhbmRtYXJrcy4gfAoKIyMgUGxhdGZvcm0gY29uc2lkZXJhdGlvbnMKCi0gQXBwZWFycyBhdCBib3R0b20sIGFib3ZlIG5hdmlnYXRpb24gYmFyIHdpdGggMTZweCBnYXAKLSBBdXRvLWRpc21pc3MgYWZ0ZXIgM+KAkzVzOyBzd2lwZSB1cCB0byBkaXNtaXNzIGVhcmx5Ci0gTWF4IG9uZSB0b2FzdCB2aXNpYmxlIGF0IGEgdGltZTsgcXVldWUgYWRkaXRpb25hbCB0b2FzdHMKLSBOZXZlciB1c2UgdG9hc3RzIGZvciBlcnJvcnMgdGhhdCByZXF1aXJlIHVzZXIgYWN0aW9uIOKAlCB1c2UgZGlhbG9nIG9yIGJhbm5lcgoKLSBBcHBlYXJzIGJvdHRvbS1yaWdodCBvbiBkZXNrdG9wOyBib3R0b20tY2VudHJlIG9uIG5hcnJvdyB3ZWIKLSBBdXRvLWRpc21pc3MgYWZ0ZXIgNOKAkzZzOyBjbG9zZSBidXR0b24gYWx3YXlzIHZpc2libGUKLSBSb2xlPSJzdGF0dXMiIGZvciBpbmZvOyByb2xlPSJhbGVydCIgZm9yIGVycm9yL3dhcm5pbmcKLSBTdGFjayB2ZXJ0aWNhbGx5IGlmIG11bHRpcGxlOyBuZXdlc3Qgb24gdG9wCgotIEFwcGVhcnMgdG9wLXJpZ2h0OyBuZXZlciBvYnNjdXJlcyBwcmltYXJ5IGNvbnRlbnQgYXJlYQotIE5vdCBmb2N1c2FibGUg4oCUIFRWIHVzZXIgY2Fubm90IGludGVyYWN0IHdpdGggdG9hc3QKLSBMb25nZXIgZGlzbWlzcyB0aW1lOiA24oCTOHMgdG8gYWNjb3VudCBmb3IgcmVhZGluZyBhdCBkaXN0YW5jZQotIEtlZXAgbWVzc2FnZSB1bmRlciA2MCBjaGFyYWN0ZXJzOyBsYXJnZSBmb250IChtaW4gMThweCkKCiMjIENvbnRlbnQgZ3VpZGFuY2UKCiMjIyBNZXNzYWdlIGxlbmd0aAoKS2VlcCB0b2FzdCBtZXNzYWdlcyB0byAxIGxpbmUsIDYwIGNoYXJhY3RlcnMgbWF4LiBJZiBtb3JlIGV4cGxhbmF0aW9uIGlzIG5lZWRlZCwgdXNlIGEgYmFubmVyIG9yIGRpYWxvZyBpbnN0ZWFkLgoKIyMjIFRvbmUKCkJlIGRpcmVjdCBhbmQgY2FsbS4gIkdhbWUgYWRkZWQgdG8gbGlicmFyeSIgbm90ICJHcmVhdCEgWW91ciBnYW1lIHdhcyBzdWNjZXNzZnVsbHkgYWRkZWQgdG8geW91ciBsaWJyYXJ5ISIKCiMjIyBBY3Rpb24gbGFiZWwKCklmIHRoZSB0b2FzdCBoYXMgYW4gYWN0aW9uLCB1c2UgYSBzcGVjaWZpYyB2ZXJiOiAiVW5kbyIsICJWaWV3IiwgIlJldHJ5Ii4gTmV2ZXIgdXNlICJDbGljayBoZXJlIiBvciAiTGVhcm4gbW9yZSIuCgojIyMgRXJyb3IgdG9hc3RzCgpFcnJvciB0b2FzdHMgbXVzdCBoYXZlIGEgUmV0cnkgYWN0aW9uIG9yIGV4cGxhaW4gd2hhdCB0byBkbyBuZXh0LiAiRmFpbGVkIHRvIHNhdmUg4oCUIFJldHJ5IiBpcyBjb3JyZWN0LiAiRXJyb3Igb2NjdXJyZWQiIGFsb25lIGlzIG5vdC4KCiMjIFJlbGF0ZWQgdG9rZW5zCgpUaGVzZSBkZXNpZ24gdG9rZW5zIGFyZSBjb25zdW1lZCBkaXJlY3RseSBieSB0aGUgVG9hc3QgY29tcG9uZW50LiBEbyBub3QgaGFyZC1jb2RlIHRoZWlyIHZhbHVlcy4KCiMjIEFQSQoKIyMjIENTUyBjbGFzc2VzCgp8IENsYXNzIHwgRGVzY3JpcHRpb24gfAp8LS0tfC0tLXwKfCBgLmRzLXRvYXN0YCB8IFJvb3Qg4oCUIHN1cmZhY2UtMiwgYm9yZGVyLXN1YnRsZSwgcjQsIHBhZGRpbmcgMTRweCAxNnB4LCBzaGFkb3cgfAp8IGAuZHMtdG9hc3QtLXN1Y2Nlc3NgIHwgR3JlZW4gbGVmdCBib3JkZXIgYWNjZW50IHwKfCBgLmRzLXRvYXN0LS1lcnJvcmAgfCBSZWQgbGVmdCBib3JkZXIgYWNjZW50IHwKfCBgLmRzLXRvYXN0LS13YXJuaW5nYCB8IEFtYmVyIGxlZnQgYm9yZGVyIGFjY2VudCB8CnwgYC5kcy10b2FzdF9faWNvbmAgfCBMZWFkaW5nIHN0YXR1cyBpY29uIOKAlCAyMHB4IHwKfCBgLmRzLXRvYXN0X19ib2R5YCB8IFRleHQgY29udGVudCDigJQgZmxleCBjb2x1bW4gZ2FwIDJweCB8CnwgYC5kcy10b2FzdF9fdGl0bGVgIHwgMTRweCA2MDAgdGV4dCB8CnwgYC5kcy10b2FzdF9fZGVzY3JpcHRpb25gIHwgMTNweCB0ZXh0MyB8CnwgYC5kcy10b2FzdF9fYWN0aW9uYCB8IENUQSBsaW5rIOKAlCBqaW8tZ3JlZW4gdGV4dCB8CnwgYC5kcy10b2FzdF9fY2xvc2VgIHwgRGlzbWlzcyDDlyBidXR0b24gfAoKIyMjIFJlYWN0IHByb3BzCgp8IFByb3AgfCBUeXBlIHwgRGVmYXVsdCB8IERlc2NyaXB0aW9uIHwKfC0tLXwtLS18LS0tfC0tLXwKfCBgdmFyaWFudGAgfCAiZGVmYXVsdCIgfCAic3VjY2VzcyIgfCAiZXJyb3IiIHwgIndhcm5pbmciIHwgImRlZmF1bHQiIHwgU2VtYW50aWMgY29sb3IgfAp8IGB0aXRsZWAgfCBzdHJpbmcgfCByZXF1aXJlZCB8IFRvYXN0IGhlYWRsaW5lIHwKfCBgZGVzY3JpcHRpb25gIHwgc3RyaW5nIHwgdW5kZWZpbmVkIHwgT3B0aW9uYWwgc3VwcG9ydGluZyB0ZXh0IHwKfCBgZHVyYXRpb25gIHwgbnVtYmVyIHwgMzAwMCB8IEF1dG8tZGlzbWlzcyBkZWxheSBpbiBtcyAoSW5maW5pdHkgPSBwZXJzaXN0ZW50KSB8CnwgYGFjdGlvbmAgfCB7IGxhYmVsOiBzdHJpbmc7IG9uQ2xpY2s6ICgpID0+IHZvaWQgfSB8IHVuZGVmaW5lZCB8IFVuZG8vQ1RBIGJ1dHRvbiB8CnwgYG9uRGlzbWlzc2AgfCAoKSA9PiB2b2lkIHwgdW5kZWZpbmVkIHwgRmlyZWQgb24gY2xvc2UgfAoKIyMgQ29kZSBleGFtcGxlcwoKQ29weSB0aGVzZSBzbmlwcGV0cyBhcyBzdGFydGluZyBwb2ludHMuIEFsd2F5cyBsaW5rIGB0b2tlbnMvdG9rZW5zLmNzc2AsIGBjb21wb25lbnRzLmNzc2AsIGFuZCBgc3RhdGVzLmNzc2AgYmVmb3JlIHVzaW5nIGNvbXBvbmVudCBjbGFzc2VzLgoKYGBgYGh0bWwKPGRpdiBjbGFzcz0idG9hc3QgdG9hc3QtLXN1Y2Nlc3MiIHJvbGU9InN0YXR1cyIgYXJpYS1saXZlPSJwb2xpdGUiPgogIDxzdmcgY2xhc3M9Imljb24gaWNvbi0tbSIgYXJpYS1oaWRkZW49InRydWUiPjx1c2UgaHJlZj0iL3Nwcml0ZS5zdmcjaWNfY2hlY2siPjwvdXNlPjwvc3ZnPgogIDxzcGFuIGNsYXNzPSJ0b2FzdF9fbWVzc2FnZSI+R2FtZSBhZGRlZCB0byBsaWJyYXJ5PC9zcGFuPgogIDxidXR0b24gY2xhc3M9ImJ0biBidG4tLXRleHQgYnRuLS14cyBidG4tLWh1ZyB0b2FzdF9fYWN0aW9uIj5VbmRvPC9idXR0b24+CiAgPGJ1dHRvbiBjbGFzcz0iYnRuIGJ0bi0taWNvbiB0b2FzdF9fY2xvc2UiIGFyaWEtbGFiZWw9IkRpc21pc3MiPuKclTwvYnV0dG9uPgo8L2Rpdj4KYGBgYAoKYGBgYApmdW5jdGlvbiBzaG93VG9hc3QobWVzc2FnZSwgdHlwZSA9ICdzdWNjZXNzJywgZHVyYXRpb24gPSA0MDAwKSB7CiAgY29uc3QgdG9hc3QgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdkaXYnKTsKICB0b2FzdC5jbGFzc05hbWUgPSBgdG9hc3QgdG9hc3QtLSR7dHlwZX1gOwogIHRvYXN0LnNldEF0dHJpYnV0ZSgncm9sZScsIHR5cGUgPT09ICdlcnJvcicgPyAnYWxlcnQnIDogJ3N0YXR1cycpOwogIHRvYXN0LnNldEF0dHJpYnV0ZSgnYXJpYS1saXZlJywgdHlwZSA9PT0gJ2Vycm9yJyA/ICdhc3NlcnRpdmUnIDogJ3BvbGl0ZScpOwogIHRvYXN0LmlubmVySFRNTCA9IGA8c3BhbiBjbGFzcz0idG9hc3RfX21lc3NhZ2UiPiR7bWVzc2FnZX08L3NwYW4+YDsKICBkb2N1bWVudC5ib2R5LmFwcGVuZENoaWxkKHRvYXN0KTsKICByZXF1ZXN0QW5pbWF0aW9uRnJhbWUoKCkgPT4gdG9hc3QuY2xhc3NMaXN0LmFkZCgnaXMtdmlzaWJsZScpKTsKICBzZXRUaW1lb3V0KCgpID0+IHsKICAgIHRvYXN0LmNsYXNzTGlzdC5yZW1vdmUoJ2lzLXZpc2libGUnKTsKICAgIHRvYXN0LmFkZEV2ZW50TGlzdGVuZXIoJ3RyYW5zaXRpb25lbmQnLCAoKSA9PiB0b2FzdC5yZW1vdmUoKSwgeyBvbmNlOiB0cnVlIH0pOwogIH0sIGR1cmF0aW9uKTsKfQoKLy8gVXNhZ2UKc2hvd1RvYXN0KCdHYW1lIGFkZGVkIHRvIGxpYnJhcnknLCAnc3VjY2VzcycpOwpzaG93VG9hc3QoJ0ZhaWxlZCB0byBzYXZlIOKAlCBjaGVjayBjb25uZWN0aW9uJywgJ2Vycm9yJyk7CmBgYGAKCi0tLQoKIyMgVG9rZW5zIHJlZmVyZW5jZWQgb24gdGhpcyBwYWdlCgpVc2UgdGhlc2UgZXhhY3QgdG9rZW5zIOKAlCBkZWZpbmVkIGluIGB0b2tlbnMvdG9rZW5zLmNzc2AuIERvIG5vdCBzdWJzdGl0dXRlIHJhdyB2YWx1ZXMuCgotIGAtLWFtYmVyYAotIGAtLWJvcmRlcmAKLSBgLS1ib3JkZXItc3VidGxlYAotIGAtLWppb2AKLSBgLS1uZWdhdGl2ZWAKLSBgLS1yM2AKLSBgLS1yNGAKLSBgLS1zcHJpbmdgCi0gYC0tc3VyZmFjZS0xYAotIGAtLXN1cmZhY2UtMmAKLSBgLS10ZXh0YAotIGAtLXRleHQyYAotIGAtLXRleHQzYAotIGAtLXRleHQ0YAoKLS0tCgojIyBCdWlsZCBydWxlcyAoYmluZGluZykKCjEuIFVzZSAqKm9ubHkqKiB0aGUgdG9rZW5zIGxpc3RlZCBhYm92ZS4gSWYgYSB2YWx1ZSB5b3UgbmVlZCBpcyBub3QgbGlzdGVkLCBzdG9wIGFuZCBhc2sg4oCUIGRvIG5vdCBpbnRyb2R1Y2UgYSByYXcgdmFsdWUuCjIuIEZvbnQgaXMgKipKaW9UeXBlKiogb25seS4gV2VpZ2h0czogMzAwLCA1MDAsIDcwMCwgOTAwLgozLiBSZXVzZSB0aGUgY29tcG9uZW50IENTUyBwYXR0ZXJucyBzaG93biBvbiB0aGUgc291cmNlIHBhZ2U7IGRvIG5vdCByZWRlc2lnbi4KNC4gTWF0Y2ggZXZlcnkgc3RhdGUgKGRlZmF1bHQsIGhvdmVyLCBmb2N1cywgYWN0aXZlLCBkaXNhYmxlZCwgbG9hZGluZykgc2hvd24gb24gdGhlIHBhZ2UuCjUuIEFjY2Vzc2liaWxpdHkgcmVxdWlyZW1lbnRzIG9uIHRoZSBwYWdlIGFyZSBtYW5kYXRvcnksIG5vdCBvcHRpb25hbC4K" download="toast-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
     </div>
     <div class="tv-note-banner" style="margin-top:14px;">
       <span class="tv-note-banner-icon">📺</span>
@@ -438,6 +417,30 @@
   </div>
 
   <!-- ── BEST PRACTICES ── -->
+  <!-- WHEN TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use</h2>
+    <div class="ds-usage-grid">
+      <div class="ds-usage-card ds-usage-card--do">
+        <p class="ds-usage-label ds-usage-label--do">Use when</p>
+        <ul class="ds-usage-list">
+              <li>Brief feedback after a user action (game added to library, pass activated)</li>
+              <li>Transient success/error confirmations that auto-dismiss</li>
+              <li>Undo prompts immediately after a reversible action</li>
+        </ul>
+      </div>
+      <div class="ds-usage-card ds-usage-card--dont">
+        <p class="ds-usage-label ds-usage-label--dont">Don't use when</p>
+        <ul class="ds-usage-list">
+              <li>Persistent messages that require user action — use Banner</li>
+              <li>Destructive confirmations — use Dialog</li>
+              <li>More than one toast at a time — queue them</li>
+              <li>Toasts that contain interactive forms or multi-step flows</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <div class="ds-section" id="best-practices">
     <h2 class="ds-section-title">Best practices</h2>
     <div class="component-best-practices">
@@ -783,6 +786,20 @@
   </div>
 
   <!-- ── ACCESSIBILITY ── -->
+  <!-- MOTION -->
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-motion-table">
+      <thead><tr><th>Interaction</th><th>Easing</th><th>Duration</th><th>Property</th></tr></thead>
+      <tbody>
+        <tr><td>Slide in (bottom)</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>transform translateY(100% → 0), opacity</td></tr>
+        <tr><td>Slide out</td><td><code>--ease-in</code></td><td><code>--dur-fast</code></td><td>transform translateY(0 → 100%), opacity</td></tr>
+        <tr><td>Auto-dismiss progress</td><td><code>linear</code></td><td><code>3000ms</code></td><td>width of progress indicator</td></tr>
+        <tr><td>Stack expand (multiple)</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>transform translateY, scale</td></tr>
+      </tbody>
+    </table>
+  </section>
+
   <div class="ds-section" id="accessibility">
     <h2 class="ds-section-title">Accessibility</h2>
     <p class="ds-section-desc">Toasts must be announced to screen readers without interrupting the current interaction flow unnecessarily.</p>
@@ -902,6 +919,39 @@
   </div>
 
   <!-- ── CODE EXAMPLES ── -->
+  <!-- API -->
+  <section class="ds-section" id="api">
+    <h2 class="ds-section-title">API</h2>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:0 0 12px;">CSS classes</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>.ds-toast</code></td><td>Root — surface-2, border-subtle, r4, padding 14px 16px, shadow</td></tr>
+        <tr><td><code>.ds-toast--success</code></td><td>Green left border accent</td></tr>
+        <tr><td><code>.ds-toast--error</code></td><td>Red left border accent</td></tr>
+        <tr><td><code>.ds-toast--warning</code></td><td>Amber left border accent</td></tr>
+        <tr><td><code>.ds-toast__icon</code></td><td>Leading status icon — 20px</td></tr>
+        <tr><td><code>.ds-toast__body</code></td><td>Text content — flex column gap 2px</td></tr>
+        <tr><td><code>.ds-toast__title</code></td><td>14px 600 text</td></tr>
+        <tr><td><code>.ds-toast__description</code></td><td>13px text3</td></tr>
+        <tr><td><code>.ds-toast__action</code></td><td>CTA link — jio-green text</td></tr>
+        <tr><td><code>.ds-toast__close</code></td><td>Dismiss × button</td></tr>
+      </tbody>
+    </table>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 12px;">React props</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>variant</code></td><td><span class="api-type">"default" | "success" | "error" | "warning"</span></td><td><span class="api-default">"default"</span></td><td>Semantic color</td></tr>
+        <tr><td><code>title</code></td><td><span class="api-type">string</span></td><td><span class="api-default">required</span></td><td>Toast headline</td></tr>
+        <tr><td><code>description</code></td><td><span class="api-type">string</span></td><td><span class="api-default">undefined</span></td><td>Optional supporting text</td></tr>
+        <tr><td><code>duration</code></td><td><span class="api-type">number</span></td><td><span class="api-default">3000</span></td><td>Auto-dismiss delay in ms (Infinity = persistent)</td></tr>
+        <tr><td><code>action</code></td><td><span class="api-type">{ label: string; onClick: () => void }</span></td><td><span class="api-default">undefined</span></td><td>Undo/CTA button</td></tr>
+        <tr><td><code>onDismiss</code></td><td><span class="api-type">() => void</span></td><td><span class="api-default">undefined</span></td><td>Fired on close</td></tr>
+      </tbody>
+    </table>
+  </section>
+
   <section class="component-section" id="code-examples">
     <h2 class="ds-section-title">Code examples</h2>
     <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
@@ -937,4 +987,4 @@ showToast('Failed to save — check connection', 'error');</code></pre>
   </section>
 
 
-</main><script src="../sprite-loader.js"></script><script src="../shell.js"></script></body></html>
+</main><script src="../sprite-loader.js"></script><script src="../shell.js?v=2"></script></body></html>

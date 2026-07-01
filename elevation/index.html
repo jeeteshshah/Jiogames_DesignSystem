@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     /* ── Shadow scale cards ── */
     .shadow-grid {
@@ -184,18 +184,18 @@
 
     <header class="component-page-header">
       <nav class="component-breadcrumb" aria-label="Breadcrumb">
-        <a href="../" class="component-breadcrumb-link">JioGames DLS</a>
-        <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+        <span class="component-breadcrumb-link">JioGames DLS</span>
+        <span class="component-breadcrumb-sep">›</span>
         <span class="component-breadcrumb-current">Elevation</span>
       </nav>
-      <h1 class="component-page-title">Elevation</h1>
-      <p class="component-page-def">Surface ladder, shadow scale, and elevation pairing rules for JioGames dark UI.</p>
+      <h1 class="component-page-title">Elevation</h1><p class="component-page-def">Surface ladder, shadow scale, and elevation pairing rules for JioGames dark UI.</p>
       <div class="component-platforms">
         <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
         <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
         <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
         <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
-      </div>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBFbGV2YXRpb24g4oCUIEppb0dhbWVzIERMUyBzcGVjCgo+IFNvdXJjZTogYGVsZXZhdGlvbi9pbmRleC5odG1sYCBpbiB0aGUgSmlvR2FtZXMgRGVzaWduIFN5c3RlbS4KPiBUaGlzIHNwZWMgaXMgZ2VuZXJhdGVkIHZlcmJhdGltIGZyb20gdGhlIHBhZ2Ug4oCUIGRvIG5vdCBpbnZlbnQgdmFsdWVzIG5vdCBsaXN0ZWQgaGVyZS4KCioqUGF0aDoqKiBKaW9HYW1lcyBETFMg4oC6IEVsZXZhdGlvbgoKLS0tCgpTdXJmYWNlIGxhZGRlciwgc2hhZG93IHNjYWxlLCBhbmQgZWxldmF0aW9uIHBhaXJpbmcgcnVsZXMgZm9yIEppb0dhbWVzIGRhcmsgVUkuCgpTVVJGQUNFIExBRERFUiDCtyBiZyDihpIgc3VyZmFjZS00IOKGkiBnbGFzcyDCtyBUT0tFTi1CQVNFRAoKIyMgU2hhZG93IHNjYWxlCgpTZXZlbiBzaGFkb3cgbGV2ZWxzIGNvdmVyIGV2ZXJ5IHVzZSBjYXNlIGZyb20gZmxhdCBwYWdlIGVsZW1lbnRzIHRvIHRvcC1vZi1zdGFjayBUViBjYXJkcy4gVXNlIHNoYWRvdyB0b2tlbnMgZnJvbSB0b2tlbnMuY3NzIOKAlCBub3QgcmF3IGJveC1zaGFkb3cgdmFsdWVzLgoKU2hhZG93IHRva2VucyBgLS1zaGFkb3ctMWAgdGhyb3VnaCBgLS1zaGFkb3ctNGAgYXJlIGRlZmluZWQgaW4gdG9rZW5zLmNzcy4gVXNlIHRoZXNlIHRva2Vucywgbm90IHJhdyBgYm94LXNoYWRvd2AgdmFsdWVzLgoKYGBgYGNzcwoKLmNhcmQgICAgICAgICAgIHsgYm94LXNoYWRvdzogdmFyKC0tc2hhZG93LTIpOyB9Ci5jYXJkOmhvdmVyICAgICB7IGJveC1zaGFkb3c6IHZhcigtLXNoYWRvdy0zKTsgfQouY2FyZC5hY3RpdmUgICAgeyBib3gtc2hhZG93OiB2YXIoLS1qaW8tZ2xvdyk7IH0KYGBgYAoKIyMgU3VyZmFjZSBsYWRkZXIKClNpeCBvcGFxdWUgc3VyZmFjZSB0b2tlbnMgY3JlYXRlIHRoZSBkZXB0aCByYW1wLiBFYWNoIHN0ZXAgaXMgc2xpZ2h0bHkgbGlnaHRlciB0aGFuIHRoZSBvbmUgYmVsb3cgaXQg4oCUIGNvbW11bmljYXRpbmcgdGhhdCBpdCBzaXRzIG9uIHRvcCBvZiBpdC4KCiMjIEVsZXZhdGlvbiArIHN1cmZhY2UgcGFpcmluZwoKU2hhZG93IGFuZCBzdXJmYWNlIGFyZSBhbHdheXMgdXNlZCB0b2dldGhlci4gRWFjaCBsYXllciBoYXMgYSBjYW5vbmljYWwgc3VyZmFjZSB0b2tlbiBhbmQgc2hhZG93IHRva2VuIHBhaXIuIERvIG5vdCBtaXggbGV2ZWxzLgoKfCBMYXllciB8IFN1cmZhY2UgdG9rZW4gfCBTaGFkb3cgdG9rZW4gfCBUeXBpY2FsIGNvbXBvbmVudCB8CnwtLS18LS0tfC0tLXwtLS18CnwgMCDigJQgUGFnZSB8IC0tYmcgfCBub25lIHwgUGFnZSBiYWNrZ3JvdW5kIHwKfCAxIOKAlCBDb250ZW50IHwgLS1jYXJkLWJnIHwgLS1zaGFkb3ctMiB8IEdhbWUgY2FyZHMsIGxpc3QgaXRlbXMgfAp8IDIg4oCUIEZsb2F0IHwgLS1zdXJmYWNlLTIgfCAtLXNoYWRvdy0zIHwgRHJvcGRvd25zLCBwb3BvdmVycyB8CnwgMyDigJQgT3ZlcmxheSB8IC0tc3VyZmFjZS0zIHwgLS1zaGFkb3ctNCB8IEJvdHRvbSBzaGVldHMsIGRpYWxvZ3MgfAp8IDQg4oCUIFRvcCB8IC0tc3VyZmFjZS00IHwgLS1zaGFkb3ctNCB8IE9uLXNjcmVlbiBrZXlib2FyZCB8CgojIyBBY3RpdmUgLyBzZWxlY3RlZCBzdGF0ZXMKCkFjdGl2ZSBhbmQgc2VsZWN0ZWQgc3RhdGVzIHVzZSBgdmFyKC0tamlvLWdsb3cpYCBpbnN0ZWFkIG9mIGdyZXkgc2hhZG93cy4gQSBncmVlbiBib3JkZXIgYXQgcmVkdWNlZCBvcGFjaXR5IGFjY29tcGFuaWVzIHRoZSBnbG93LiBOZXZlciB1c2UgZ3JleSBib3gtc2hhZG93cyBvbiBzZWxlY3RlZCBlbGVtZW50cy4KCmBgYGAKCi8qIFN0YW5kYXJkIGNhcmQg4oCUIGdyZXkgc2hhZG93ICovCi5jYXJkIHsKICBiYWNrZ3JvdW5kOiAgdmFyKC0tY2FyZC1iZyk7CiAgYm94LXNoYWRvdzogIHZhcigtLXNoYWRvdy0yKTsKICBib3JkZXI6ICAgICAgMXB4IHNvbGlkIHZhcigtLWJvcmRlcik7Cn0KCi8qIEFjdGl2ZSAvIHNlbGVjdGVkIGNhcmQg4oCUIGdyZWVuIGdsb3csIG5vIGdyZXkgc2hhZG93ICovCi5jYXJkLnNlbGVjdGVkIHsKICBib3gtc2hhZG93OiAgdmFyKC0tamlvLWdsb3cpOwogIGJvcmRlci1jb2xvcjogcmdiYSgwLDE2OCw4OSwuNCk7Cn0KYGBgYAoKIyMgVXNhZ2UgcnVsZXMKCi0tLQoKIyMgVG9rZW5zIHJlZmVyZW5jZWQgb24gdGhpcyBwYWdlCgpVc2UgdGhlc2UgZXhhY3QgdG9rZW5zIOKAlCBkZWZpbmVkIGluIGB0b2tlbnMvdG9rZW5zLmNzc2AuIERvIG5vdCBzdWJzdGl0dXRlIHJhdyB2YWx1ZXMuCgotIGAtLWJnYAotIGAtLWJvcmRlcmAKLSBgLS1ib3JkZXItc3VidGxlYAotIGAtLWNhcmQtYmdgCi0gYC0tZGl2aWRlcmAKLSBgLS1nbGFzcy0xYAotIGAtLWppb2AKLSBgLS1qaW8tZ2xvd2AKLSBgLS1yMmAKLSBgLS1yNWAKLSBgLS1zaGFkb3ctMmAKLSBgLS1zaGFkb3ctM2AKLSBgLS1zcGFjZS0xYAotIGAtLXNwYWNlLTJgCi0gYC0tc3BhY2UtM2AKLSBgLS1zcGFjZS00YAotIGAtLXN1cmZhY2UtMWAKLSBgLS1zdXJmYWNlLTJgCi0gYC0tc3VyZmFjZS0zYAotIGAtLXN1cmZhY2UtNGAKLSBgLS10ZXh0YAotIGAtLXRleHQyYAotIGAtLXRleHQzYAotIGAtLXRleHQ0YAoKLS0tCgojIyBCdWlsZCBydWxlcyAoYmluZGluZykKCjEuIFVzZSAqKm9ubHkqKiB0aGUgdG9rZW5zIGxpc3RlZCBhYm92ZS4gSWYgYSB2YWx1ZSB5b3UgbmVlZCBpcyBub3QgbGlzdGVkLCBzdG9wIGFuZCBhc2sg4oCUIGRvIG5vdCBpbnRyb2R1Y2UgYSByYXcgdmFsdWUuCjIuIEZvbnQgaXMgKipKaW9UeXBlKiogb25seS4gV2VpZ2h0czogMzAwLCA1MDAsIDcwMCwgOTAwLgozLiBSZXVzZSB0aGUgY29tcG9uZW50IENTUyBwYXR0ZXJucyBzaG93biBvbiB0aGUgc291cmNlIHBhZ2U7IGRvIG5vdCByZWRlc2lnbi4KNC4gTWF0Y2ggZXZlcnkgc3RhdGUgKGRlZmF1bHQsIGhvdmVyLCBmb2N1cywgYWN0aXZlLCBkaXNhYmxlZCwgbG9hZGluZykgc2hvd24gb24gdGhlIHBhZ2UuCjUuIEFjY2Vzc2liaWxpdHkgcmVxdWlyZW1lbnRzIG9uIHRoZSBwYWdlIGFyZSBtYW5kYXRvcnksIG5vdCBvcHRpb25hbC4K" download="elevation-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
+    </div>
     </header>
 
     <!-- HERO -->
@@ -473,6 +473,6 @@
 
   </main>
   <script src="../sprite-loader.js"></script>
-<script src="../shell.js"></script>
+<script src="../shell.js?v=2"></script>
 </body>
 </html>

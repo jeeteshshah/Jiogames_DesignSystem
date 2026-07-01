@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     /* ── Easing cards ── */
     .easing-grid {
@@ -59,7 +59,7 @@
       height: 32px;
       background: var(--jio);
       border-radius: var(--r2);
-      transition: transform 200ms;
+      transition: transform var(--dur-default);
     }
     /* Each box uses its own timing function inline via style attribute */
     .easing-demo-track:hover .easing-demo-box {
@@ -97,7 +97,7 @@
       vertical-align: middle;
     }
     .dur-table tr:last-child td { border-bottom: none; }
-    .dur-table .t { font-family: monospace; font-size: 12px; color: #a8e6c5; }
+    .dur-table .t { font-family: monospace; font-size: 12px; color: var(--jio-3); }
     .dur-table .v { font-family: monospace; font-size: 12px; color: var(--text3); }
     .dur-table tbody tr:hover { background: var(--glass-1); }
 
@@ -187,7 +187,7 @@
     .tv-rule-body code {
       font-family: monospace;
       font-size: 11px;
-      color: #a8e6c5;
+      color: var(--jio-3);
       background: var(--surface-3);
       padding: 1px 5px;
       border-radius: var(--r1);
@@ -199,6 +199,166 @@
     .tv-rule-card--forbidden .tv-rule-heading {
       color: var(--negative);
     }
+
+    /* ── Principle cards ── */
+    .principle-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--space-2);
+    }
+    .principle-card {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      padding: var(--space-3);
+      display: flex;
+      flex-direction: column;
+    }
+    .principle-num {
+      font-family: monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--jio);
+      margin-bottom: var(--space-0-5);
+    }
+    .principle-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: var(--space-1);
+    }
+    .principle-body {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+    .principle-body code {
+      font-family: monospace; font-size: 11px; color: var(--jio-3);
+    }
+
+    /* ── Generic motion table (levels, component map, governance) ── */
+    .m-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+    .m-table th {
+      text-align: left;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--text3);
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--surface-1);
+      vertical-align: bottom;
+    }
+    .m-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--divider);
+      color: var(--text2);
+      font-weight: 500;
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .m-table tr:last-child td { border-bottom: none; }
+    .m-table tbody tr:hover { background: var(--glass-1); }
+    .m-table code,
+    .m-table .t {
+      font-family: monospace; font-size: 11px; color: var(--jio-3);
+      white-space: nowrap;
+    }
+    .m-table .lvl {
+      font-family: monospace; font-size: 12px; font-weight: 700; color: var(--jio);
+    }
+    .m-table .neg { color: var(--negative); }
+    .m-table-wrap { overflow-x: auto; }
+
+    /* ── Recipe cards ── */
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--space-2);
+    }
+    .recipe-card {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      padding: var(--space-3);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+    .recipe-name {
+      font-size: 14px; font-weight: 700; color: var(--text);
+    }
+    .recipe-use {
+      font-size: 12px; font-weight: 500; color: var(--text3); line-height: 1.5;
+    }
+    .recipe-tokens {
+      font-family: monospace; font-size: 10.5px; color: var(--jio-3);
+      line-height: 1.6; margin: var(--space-0-5) 0;
+    }
+    .recipe-motion {
+      font-size: 12.5px; font-weight: 500; color: var(--text2); line-height: 1.55;
+    }
+    .recipe-line {
+      font-size: 11.5px; font-weight: 500; line-height: 1.5;
+      display: flex; gap: 6px;
+    }
+    .recipe-line .lbl {
+      font-weight: 700; flex-shrink: 0; width: 56px;
+    }
+    .recipe-line--do .lbl { color: var(--positive, var(--jio)); }
+    .recipe-line--dont .lbl { color: var(--negative); }
+    .recipe-line--rm .lbl { color: var(--amber); }
+    .recipe-line .txt { color: var(--text2); }
+
+    /* ── QA checklist ── */
+    .qa-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: var(--space-2);
+    }
+    .qa-group-title {
+      font-size: 11px; font-weight: 700; letter-spacing: .6px;
+      text-transform: uppercase; color: var(--jio);
+      margin-bottom: var(--space-1-5);
+    }
+    .qa-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--space-1); }
+    .qa-list li {
+      font-size: 12.5px; font-weight: 500; color: var(--text2);
+      line-height: 1.5; padding-left: 24px; position: relative;
+    }
+    .qa-list li::before {
+      content: '';
+      position: absolute; left: 0; top: 2px;
+      width: 14px; height: 14px;
+      border: 1.5px solid var(--border-strong, var(--text3));
+      border-radius: var(--r1);
+    }
+    .qa-list li code { font-family: monospace; font-size: 11px; color: var(--jio-3); }
+
+    /* ── New token mini tables ── */
+    .mini-table-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2);
+    }
+    @media (max-width: 720px) { .mini-table-grid { grid-template-columns: 1fr; } }
+
+    /* ── Continuity callout ── */
+    .continuity-note {
+      background: var(--surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r4);
+      padding: var(--space-3);
+      font-size: 13px; font-weight: 500; color: var(--text2); line-height: 1.65;
+    }
+    .continuity-note code { font-family: monospace; font-size: 12px; color: var(--jio-3); }
   </style>
 </head>
 <body>
@@ -206,18 +366,18 @@
 
     <header class="component-page-header">
       <nav class="component-breadcrumb" aria-label="Breadcrumb">
-        <a href="../" class="component-breadcrumb-link">JioGames DLS</a>
-        <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+        <span class="component-breadcrumb-link">JioGames DLS</span>
+        <span class="component-breadcrumb-sep">›</span>
         <span class="component-breadcrumb-current">Motion</span>
       </nav>
-      <h1 class="component-page-title">Motion</h1>
-      <p class="component-page-def">Easing curves, duration tokens, and animation principles for JioGames across Mobile, Web, and TV.</p>
+      <h1 class="component-page-title">Motion</h1><p class="component-page-def">Easing curves, duration tokens, principles, recipes, and governance for JioGames motion across Mobile, Web, and TV. Motion is calm, fluid, spatial, and purposeful — it communicates state, not decoration.</p>
       <div class="component-platforms">
         <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
         <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
         <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
         <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
-      </div>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBNb3Rpb24g4oCUIEppb0dhbWVzIERMUyBzcGVjCgo+IFNvdXJjZTogYG1vdGlvbi9pbmRleC5odG1sYCBpbiB0aGUgSmlvR2FtZXMgRGVzaWduIFN5c3RlbS4KPiBUaGlzIHNwZWMgaXMgZ2VuZXJhdGVkIHZlcmJhdGltIGZyb20gdGhlIHBhZ2Ug4oCUIGRvIG5vdCBpbnZlbnQgdmFsdWVzIG5vdCBsaXN0ZWQgaGVyZS4KCioqUGF0aDoqKiBKaW9HYW1lcyBETFMg4oC6IE1vdGlvbgoKLS0tCgpFYXNpbmcgY3VydmVzLCBkdXJhdGlvbiB0b2tlbnMsIHByaW5jaXBsZXMsIHJlY2lwZXMsIGFuZCBnb3Zlcm5hbmNlIGZvciBKaW9HYW1lcyBtb3Rpb24gYWNyb3NzIE1vYmlsZSwgV2ViLCBhbmQgVFYuIE1vdGlvbiBpcyBjYWxtLCBmbHVpZCwgc3BhdGlhbCwgYW5kIHB1cnBvc2VmdWwg4oCUIGl0IGNvbW11bmljYXRlcyBzdGF0ZSwgbm90IGRlY29yYXRpb24uCgpFQVNJTkcgQ1VSVkVTIMK3IERVUkFUSU9OIFNDQUxFIMK3IFJFRFVDRUQgTU9USU9OIFJFQURZCgojIyBNb3Rpb24gcHJpbmNpcGxlcwoKRWlnaHQgbm9uLW5lZ290aWFibGUgcnVsZXMuIEV2ZXJ5IGltcGxlbWVudGF0aW9uIGRlY2lzaW9uIGlzIHRlc3RlZCBhZ2FpbnN0IHRoZXNlLiBVc2UgQXBwbGUtbGV2ZWwgcmVzdHJhaW50IGFzIHRoZSBxdWFsaXR5IGJhciDigJQgbW90aW9uIHNvIHdlbGwtbWF0Y2hlZCB0byB0aGUgaW50ZXJhY3Rpb24gdGhhdCB1c2VycyBuZXZlciBub3RpY2UgaXQsIGJ1dCB3b3VsZCBmZWVsIGl0cyBhYnNlbmNlLgoKIyMgRWFzaW5nIHRva2VucwoKRml2ZSBuYW1lZCBlYXNpbmcgY3VydmVzIGNvdmVyIGV2ZXJ5IG1vdGlvbiBjYXRlZ29yeS4gSG92ZXIgZWFjaCBjYXJkIHRvIHNlZSB0aGUgZWFzaW5nIGluIGFjdGlvbi4KCiMjIER1cmF0aW9uIHRva2VucwoKRHVyYXRpb24gdG9rZW5zIGFyZSBkZWZpbmVkIGluIHRva2Vucy5jc3MgYW5kIG11c3QgYmUgcmVmZXJlbmNlZCB2aWEgYHZhcigtLWR1ci0qKWAg4oCUIG5ldmVyIHJhdyBtaWxsaXNlY29uZHMgaW4gY29tcG9uZW50IENTUy4KCnwgVG9rZW4gfCBWYWx1ZSB8IFB1cnBvc2UgfCBUeXBpY2FsIHVzZSB8CnwtLS18LS0tfC0tLXwtLS18CnwgLS1kdXItaW5zdGFudCB8IDkwbXMgfCBNaWNyby1mZWVkYmFjayB8IFRpbnkgdGFwIGZlZWRiYWNrLCByaXBwbGUsIGljb24gc3RhdGUgY2hhbmdlcyB8CnwgLS1kdXItZmFzdCB8IDEyMG1zIHwgUXVpY2sgcmVzcG9uc2UgfCBQcmVzcywgZm9jdXMgcmluZywgY2hpcCBzZWxlY3QgfAp8IC0tZHVyLWRlZmF1bHQgfCAyMDBtcyB8IFN0YW5kYXJkIFVJIHwgTm9ybWFsIGNvbXBvbmVudCBzdGF0ZSB0cmFuc2l0aW9ucywgZmFkZXMgfAp8IC0tZHVyLXBvcCB8IDI4MG1zIHwgUG9wLWluIGZlZWRiYWNrIHwgT1RQIGJveCBmaWxsLCBjaGVjayBpY29uIGFwcGVhciwgZHJvcGRvd25zIHwKfCAtLWR1ci1zbG93IHwgMzIwbXMgfCBEZWxpYmVyYXRlIHNsaWRlIHwgU2hlZXQgLyBkcmF3ZXIgLyBjYXJvdXNlbCBzbGlkZSwgY2hhcnQgcmV2ZWFsIHwKfCAtLWR1ci1lcnJvciB8IDM4MG1zIHwgRXJyb3IgZmVlZGJhY2sgfCBTaGFrZSBhbmltYXRpb25zLCB2YWxpZGF0aW9uIGVycm9ycyB8CnwgLS1kdXItc2hlZXQgfCA0MDBtcyB8IFNoZWV0IHNsaWRlcyB8IEJvdHRvbSBzaGVldCBvcGVuIC8gY2xvc2UgfAp8IC0tZHVyLWVudGVyIHwgNDIwbXMgfCBDb250ZW50IGVudGVyIHwgZmFkZS11cCwgdGlsZS1pbiwgc3RhZ2dlciBlbnRyYW5jZXMgfAp8IC0tZHVyLXNjcmVlbiB8IDQyMG1zIHwgU2NyZWVuIHRyYW5zaXRpb25zIHwgRnVsbCBzY3JlZW4tdG8tc2NyZWVuIG5hdmlnYXRpb24gfAp8IC0tZHVyLXR2LWVudGVyIHwgNTYwbXMgfCBUViBmb2N1cyAvIGVudGVyIHwgRC1wYWQgbmF2aWdhdGlvbiwgbGFyZ2VyIGNhbnZhcyBzZXR0bGUgfAp8IC0tZHVyLXNoaW1tZXIgfCAxNjAwbXMgfCBMb2FkaW5nIGxvb3AgfCBTa2VsZXRvbiBzaGltbWVyIGxvb3AgY3ljbGUgfAp8IC0tZHVyLWljb24tc3BpbiB8IDEwMDBtcyB8IExvYWRpbmcgbG9vcCB8IExvYWRpbmcgaWNvbiByb3RhdGlvbiBsb29wIHwKfCAtLWR1ci1yZWR1Y2VkLWZhZGUgfCAxMDBtcyB8IFJlZHVjZWQgbW90aW9uIHwgR2VudGxlIGNyb3NzZmFkZSDigJQgTk9UIGNvbGxhcHNlZCB0byAwbXMgfAp8IC0tZHVyLXJlZHVjZWQtaW5zdGFudCB8IDFtcyB8IFJlZHVjZWQgbW90aW9uIHwgU25hcCBzdGF0ZSBjaGFuZ2UsIHRlY2huaWNhbGx5IG5vbi16ZXJvIHwKfCAtLXN0YWdnZXItc3RhcnQgfCA1MG1zIHwgU3RhZ2dlciB8IEZpcnN0IGl0ZW0gZGVsYXkgfAp8IC0tc3RhZ2dlci1zdGVwIHwgNjBtcyB8IFN0YWdnZXIgfCBQZXItaXRlbSBkZWxheSBpbmNyZW1lbnQgKG1heCA2IGl0ZW1zKSB8CgojIyMgRHVyYXRpb24gc2NhbGUg4oCUIHJlbGF0aXZlIGxlbmd0aHMKCiMjIE1vdmVtZW50IGRpc3RhbmNlICYgaW50ZXJhY3RpdmUgc2NhbGUKClRyYW5zbGF0ZSBvZmZzZXRzIGFuZCBmZWVkYmFjayBzY2FsZSB2YWx1ZXMgYXJlIHRva2VuaXNlZC4gVXNlIGB2YXIoLS1tb3ZlLSopYCBmb3IgdHJhbnNsYXRlIGRpc3RhbmNlcyBpbiBlbnRlci9leGl0IGtleWZyYW1lcywgYW5kIHRoZSBzY2FsZSB0b2tlbnMgZm9yIGdvdmVybmVkIGludGVyYWN0aXZlIGZlZWRiYWNrIOKAlCAqKm5ldmVyIGV4Y2VlZCB0aGVzZSBzY2FsZSB2YWx1ZXMqKiAoc2VlIFNvZnQgTGFuZGluZyBydWxlcykuCgp8IE1vdmVtZW50IHwgVmFsdWUgfCBVc2UgfAp8LS0tfC0tLXwtLS18CnwgLS1tb3ZlLXNtIHwgOHB4IHwgU21hbGwgb2Zmc2V0IOKAlCB0b2FzdCwgdG9vbHRpcCBlbnRlciB8CnwgLS1tb3ZlLW1kIHwgMjBweCB8IFN0YW5kYXJkIGZhZGUtdXAgZW50ZXIgKG1vYmlsZS93ZWIpIHwKfCAtLW1vdmUtdHYgfCAzMnB4IHwgVFYgY29udGVudCBlbnRyYW5jZSB0cmFuc2xhdGUgZGlzdGFuY2UgfAoKfCBTY2FsZSB8IFZhbHVlIHwgVXNlIHwKfC0tLXwtLS18LS0tfAp8IC0tc2NhbGUtcHJlc3Mtc20gfCAwLjk2IHwgU21hbGwgQ1RBIC8gY2hpcCBwcmVzcyB8CnwgLS1zY2FsZS1wcmVzcyB8IDAuOTggfCBDYXJkIC8gYnV0dG9uIHByZXNzIHwKfCAtLXNjYWxlLXNlbGVjdCB8IDEuMDMgfCBTZWxlY3Rpb24g4oCUIGNvbWVzIGZvcndhcmQgfAp8IC0tc2NhbGUtdHYtZm9jdXMgfCAxLjA1IHwgVFYgZm9jdXMg4oCUIHNwYXRpYWwgc2hpZnQgfAoKIyMgTW90aW9uIHVzYWdlIGxldmVscyAoTDDigJNMNSkKCkEgdGF4b25vbXkgb2YgaG93IG11Y2ggbW90aW9uIGEgc3VyZmFjZSBlYXJucy4gUGljayB0aGUgbG93ZXN0IGxldmVsIHRoYXQgZG9lcyB0aGUgam9iLiBIaWdoZXIgbGV2ZWxzIG5lZWQgbW9yZSBqdXN0aWZpY2F0aW9uIGFuZCBzdHJpY3RlciB0b2tlbiBkaXNjaXBsaW5lLgoKfCBMZXZlbCB8IE5hbWUgfCBXaGF0IHwgV2hlbiB0byB1c2UgfCBXaGVuIE5PVCB8IFRva2VucyB8CnwtLS18LS0tfC0tLXwtLS18LS0tfC0tLXwKfCBMMCB8IE5vbmUgfCBObyBtb3Rpb24gYXQgYWxsLiBTdGF0aWMsIGluc3RhbnQuIHwgQ3JpdGljYWwgaW5mbzogcHJpY2luZywgbGVnYWwsIHBheW1lbnQgdG90YWxzLCBPVFAgZGlnaXRzIGFmdGVyIGVudHJ5LiB8IEFueXRoaW5nIHRoZSB1c2VyIG11c3QgcmVhZCBwcmVjaXNlbHkuIHwgbm9uZSB8CnwgTDEgfCBNaWNybyBmZWVkYmFjayB8IFRhcCwgcHJlc3MsIGZvY3VzLCBjaGlwIHNlbGVjdC4gfCBDb25maXJtIGEgZGlzY3JldGUgaW5wdXQgaW1tZWRpYXRlbHkuIHwgQW1iaWVudCBvciBhdHRlbnRpb24tZ3JhYmJpbmcgbW90aW9uLiB8IGAtLWR1ci1pbnN0YW50YCAvIGAtLWR1ci1mYXN0YCDCtyBgLS1zcHJpbmdgIMK3IGAtLXNjYWxlLXByZXNzYCB8CnwgTDIgfCBDb21wb25lbnQgdHJhbnNpdGlvbiB8IFN0YXRlIGNoYW5nZXMg4oCUIGhvdmVy4oaSc2VsZWN0ZWQsIGVycm9yLCB0YWIgc3dpdGNoLiB8IENvbW11bmljYXRlIGEgY29tcG9uZW50J3Mgc3RhdGUgY2hhbmdlIGluIHBsYWNlLiB8IFBhZ2Ugb3Igc3VyZmFjZSBjaGFuZ2VzLiB8IGAtLWR1ci1mYXN0YCAvIGAtLWR1ci1kZWZhdWx0YCDCtyBgLS1zcHJpbmdgIChgLS1zcHJpbmctYm91bmNlYCBzdWNjZXNzIG9ubHkpIHwKfCBMMyB8IFN1cmZhY2UgdHJhbnNpdGlvbiB8IFNoZWV0cywgbW9kYWxzLCBkcm9wZG93bnMsIHRvb2x0aXBzLiB8IEEgc3VyZmFjZSBlbnRlcnMgb3IgbGVhdmVzIGFib3ZlIHRoZSBjdXJyZW50IHNjcmVlbi4gfCBGdWxsIHBhZ2UgbmF2aWdhdGlvbi4gfCBgLS1kdXItc2hlZXRgIMK3IGAtLXNwcmluZ2AgwrcgYmFja2Ryb3AgZmFkZSB8CnwgTDQgfCBQYWdlIC8gZmxvdyB0cmFuc2l0aW9uIHwgU2NyZWVuLXRvLXNjcmVlbjsgbG9naW4sIHBheW1lbnQsIHN1YnNjcmlwdGlvbiBmbG93IHN0ZXBzLiB8IFRoZSB3aG9sZSBzY3JlZW4gY2hhbmdlcy4gfCBJbi1wbGFjZSBjb250ZW50IHVwZGF0ZXMuIHwgYC0tZHVyLXNjcmVlbmAgwrcgYC0tZWFzZS1zY3JlZW5gIChUVjogYC0tZWFzZS1vdXRgIGNyb3NzZmFkZSkgfAp8IEw1IHwgSGVybyAvIGNhbXBhaWduIG1vdGlvbiB8IEhlcm8gYnJlYXRoaW5nLCBtYXJxdWVlLCByZXdhcmQgY2VsZWJyYXRpb24sIHBhc3MgdW5sb2NrLiB8IENpbmVtYXRpYyBtb21lbnRzLCBzcGFyaW5nbHkuIHwgRXZlciBvbiBUVi4gUm91dGluZSBVSS4gfCDCpzQgYW1iaWVudCBjb25zdGFudHMgwrcgYC0tc3ByaW5nLWJvdW5jZWAgb25lLXNob3QgfAoKIyMgQ29tcG9uZW50IG1vdGlvbiBtYXAKCk9uZSBjb21wb25lbnQsIG9uZSBjb250cmFjdGVkIG1vdGlvbi4gRG8gbm90IGludmVudCBtb3Rpb24gcGVyLXNjcmVlbi4gUmVkdWNlZC1tb3Rpb24gYmVoYXZpb3VyIGlzIHBhcnQgb2YgdGhlIGNvbnRyYWN0LgoKfCBDb21wb25lbnQgfCBUcmlnZ2VyIHwgTW90aW9uIHwgVG9rZW5zIHwgUmVkdWNlZCBtb3Rpb24gfAp8LS0tfC0tLXwtLS18LS0tfC0tLXwKfCBQcmltYXJ5IGJ1dHRvbiB8IFByZXNzIHwgc2NhbGUoLjk3KSB8IGAtLWR1ci1mYXN0YCDCtyBgLS1zcHJpbmdgIHwgTm9uZSDigJQgaW5zdGFudCB8CnwgU21hbGwgQ1RBIHwgUHJlc3MgfCBzY2FsZSguOTYpIHwgYC0tZHVyLWZhc3RgIMK3IGAtLXNwcmluZ2AgfCBOb25lIOKAlCBpbnN0YW50IHwKfCBHaG9zdCBidXR0b24gfCBQcmVzcyB8IG9wYWNpdHkgLjYgfCBgLS1kdXItZmFzdGAgfCBOb25lIOKAlCBpbnN0YW50IHwKfCBJY29uIGJ1dHRvbiB8IFByZXNzIHwgc2NhbGUoLjk2KSArIHN0YXRlIHRpbnQgfCBgLS1kdXItZmFzdGAgwrcgYC0tc3ByaW5nYCB8IEluc3RhbnQgdGludCB8CnwgQWN0aW9uIGNoaXAgfCBQcmVzcyB8IHNjYWxlKC45NSkgfCBgLS1kdXItZmFzdGAgwrcgYC0tc3ByaW5nYCB8IE5vbmUg4oCUIGluc3RhbnQgfAp8IFBsYXRmb3JtIGNoaXAgfCBQcmVzcyAvIHNlbGVjdCB8IHNjYWxlKC45NSkgKyBzZWxlY3RlZCBnbG93IHwgYC0tZHVyLWZhc3RgIMK3IGAtLXNwcmluZ2AgfCBJbnN0YW50IGJvcmRlciBjaGFuZ2UgfAp8IEdlbnJlIHRpbGUgfCBTZWxlY3QgfCBzY2FsZSgxLjAzKSArIGdsb3cgfCBgLS1zcHJpbmctYm91bmNlYCDCtyBgLS1kdXItZmFzdGAgfCBJbnN0YW50IGJvcmRlciAvIGdsb3cgfAp8IFRhYnMgfCBTd2l0Y2ggfCBBY3RpdmUgaW5kaWNhdG9yIHNsaWRlcyB8IGAtLWR1ci1kZWZhdWx0YCDCtyBgLS1zcHJpbmdgIHwgSW5zdGFudCBzd2l0Y2ggfAp8IENhcmQgKG1vYmlsZSkgfCBQcmVzcyB8IHNjYWxlKC45OCkgfCBgLS1kdXItZmFzdGAgwrcgYC0tc3ByaW5nYCB8IE5vbmUg4oCUIGluc3RhbnQgfAp8IENhcmQgKHdlYikgfCBIb3ZlciB8IEdsb3cgKyBzY2FsZSgxLjAxKSB8IGAtLWR1ci1kZWZhdWx0YCDCtyBgLS1zcHJpbmdgIHwgR2xvdyBvbmx5LCB0cmFuc2Zvcm06IG5vbmUgfAp8IENhcmQgKFRWKSB8IEZvY3VzIHwgc2NhbGUoMS4wNSkgKyBzdHJvbmcgZ2xvdyB8IGAtLWR1ci1mYXN0YCDCtyBgLS1zcHJpbmdgIHwgR2xvdyBzdGF5cywgdHJhbnNmb3JtOiBub25lIHwKfCBHYW1lIGNhcmQgfCBMYXVuY2ggfCBzY2FsZSguOTgpICsgc2NyZWVuIGNyb3NzZmFkZSB8IGAtLWR1ci1mYXN0YCArIGAtLWR1ci1zY3JlZW5gIMK3IGAtLWVhc2Utc2NyZWVuYCB8IEluc3RhbnQgc2NyZWVuIGNoYW5nZSB8CnwgU3Vic2NyaXB0aW9uIC8gUGFzcyBjYXJkIHwgUHJlc3MgLyBzZWxlY3QgfCBzY2FsZSguOTgpOyBzZWxlY3QgZ2xvdyBzZXR0bGUgfCBgLS1kdXItZmFzdGAgwrcgYC0tc3ByaW5nYCB8IEluc3RhbnQgc3RhdGU7IHN0YXRpYyBnbG93IHwKfCBCYW5uZXIgfCBFbnRlciAvIGRpc21pc3MgfCBmYWRlLXVwIGVudGVyLCBmYWRlIG91dCB8IGAtLWR1ci1lbnRlcmAgwrcgYC0tc3ByaW5nYCAob3V0OiBgLS1lYXNlLW91dGApIHwgSW5zdGFudCBzaG93IC8gaGlkZSB8CnwgUmFpbCAvIGNhcm91c2VsIHwgU2Nyb2xsIHwgTmF0aXZlIHNjcm9sbCArIHNuYXAgfCBgc2Nyb2xsLWJlaGF2aW9yOiBzbW9vdGhgIHwgU2FtZSB8CnwgQm90dG9tIHNoZWV0IHwgT3BlbiAvIGNsb3NlIHwgdHJhbnNsYXRlWSArIGJhY2tkcm9wIGZhZGUgfCBgLS1kdXItc2hlZXRgIMK3IGAtLXNwcmluZ2AgfCBTbmFwIOKAlCB0cmFuc2l0aW9uOiBub25lIHwKfCBNb2RhbCAvIERpYWxvZyB8IE9wZW4gfCBzY2FsZS1mcm9tIC45NiArIGJhY2tkcm9wIGZhZGUgfCBgLS1kdXItc2hlZXRgIMK3IGAtLXNwcmluZ2AgfCBJbnN0YW50IHNob3csIGJhY2tkcm9wIGZhZGUgb25seSB8CnwgRHJvcGRvd24gfCBPcGVuIHwgZmFkZSArIHNsaWRlLWRvd24gOHB4IHwgYC0tZHVyLXBvcGAgwrcgYC0tZWFzZS1vdXRgIHwgSW5zdGFudCBzaG93IHwKfCBUb29sdGlwIHwgQXBwZWFyIHwgZmFkZSArIDhweCBvZmZzZXQgfCBgLS1kdXItZGVmYXVsdGAgwrcgYC0tZWFzZS1vdXRgIMK3IGAtLW1vdmUtc21gIHwgSW5zdGFudCBhcHBlYXIgfAp8IFRvYXN0IHwgQXBwZWFyIC8gZGlzbWlzcyB8IGZhZGUtdXAgOHB4IC8gZmFkZSBvdXQgfCBgLS1kdXItZGVmYXVsdGAgwrcgYC0tc3ByaW5nYCAob3V0OiBgLS1lYXNlLW91dGApIHwgSW5zdGFudCBhcHBlYXIgLyByZW1vdmUgfAp8IFNlYXJjaCB8IEZvY3VzIC8gZXhwYW5kIHwgYm9yZGVyICsgZ2xvdzsgcmVzdWx0cyBmYWRlLXVwIHwgYC0tZHVyLWZhc3RgIC8gYC0tZHVyLWRlZmF1bHRgIMK3IGAtLXNwcmluZ2AgfCBJbnN0YW50IGJvcmRlcjsgZmFkZS1pbiByZXN1bHRzIHwKfCBUZXh0IGlucHV0IHwgRm9jdXMgfCBib3JkZXIg4oaSIC0tamlvICsgZ2xvdyB8IGAtLWR1ci1mYXN0YCDCtyBgLS1zcHJpbmdgIHwgSW5zdGFudCBib3JkZXIgY2hhbmdlIHwKfCBPVFAgYm94IHwgRmlsbCAvIGVycm9yIHwgYm94LXBvcCBmaWxsOyBzaGFrZSBvbiBlcnJvciB8IGAtLWR1ci1wb3BgIMK3IGAtLXNwcmluZy1ib3VuY2VgIC8gYC0tZHVyLWVycm9yYCDCtyBgLS1lYXNlLWVycm9yYCB8IEluc3RhbnQgdGludDsgc3RhdGljIGVycm9yIGJvcmRlciB8CnwgTmF2aWdhdGlvbiB8IFNjcmVlbiBjaGFuZ2UgfCBIb3Jpem9udGFsIHNsaWRlIChUVjogY3Jvc3NmYWRlKSB8IGAtLWR1ci1zY3JlZW5gIMK3IGAtLWVhc2Utc2NyZWVuYCB8IE9wYWNpdHkgY3Jvc3NmYWRlIGAtLWR1ci1yZWR1Y2VkLWZhZGVgIHwKfCBTa2VsZXRvbiAvIHNoaW1tZXIgfCBMb2FkaW5nIHwgU2hpbW1lciBzd2VlcCAodHJhbnNsYXRlWCkgfCBgLS1kdXItc2hpbW1lcmAgwrcgbGluZWFyIHwgU3RhdGljIHBsYWNlaG9sZGVyIOKAlCBhbmltYXRpb246IG5vbmUgfAp8IFByb2dyZXNzIGluZGljYXRvciB8IFByb2dyZXNzIHwgc2NhbGVYIGZpbGwgKHJvdGF0ZSBmb3Igc3Bpbm5lcikgfCBgLS1kdXItZGVmYXVsdGAgLyBgLS1kdXItaWNvbi1zcGluYCDCtyBsaW5lYXIgfCBTdGF0aWMgLyBkZXRlcm1pbmF0ZSB2YWx1ZSB8CnwgQmFkZ2UgfCDigJQgfCBObyBlbnRyYW5jZSBtb3Rpb24gfCBub25lIHwgTm9uZSB8CnwgRm9jdXMgcmluZyB8IEZvY3VzIHwgYm94LXNoYWRvdyBhcHBlYXJzIHwgYC0tZHVyLWZhc3RgIMK3IGAtLWVhc2Utb3V0YCB8IEdsb3cgc3RheXMg4oCUIG5ldmVyIHJlbW92ZWQgfAp8IFRWIGZvY3VzYWJsZSB8IEQtcGFkIGZvY3VzIHwgR2xvdyArIHNjYWxlKDEuMDUpIHwgYC0tZHVyLWZhc3RgIMK3IGAtLXNwcmluZ2AgfCBHbG93IHN0YXlzLCB0cmFuc2Zvcm06IG5vbmUgfAoKIyMgTW90aW9uIHJlY2lwZXMKClNpeHRlZW4gcmV1c2FibGUgcmVjaXBlcy4gS2V5ZnJhbWUgbmFtZXMgcmVmZXJlbmNlIHRoZSDCpzEzIEtleWZyYW1lIExpYnJhcnkg4oCUIGNvcHkgdGhlbSB1bm1vZGlmaWVkIGludG8gcHJvdG90eXBlczsgaW1wb3J0IHRoZSBzaGFyZWQgbGlicmFyeSBpbiBwcm9kdWN0aW9uLgoKIyMgQ3Jvc3MtZGV2aWNlIGNvbnRpbnVpdHkKClJlc3VtZSBhbmQgaGFuZG9mZiBhcmUgY29udGVudCBzdGF0ZXMsIG5vdCBtb3Rpb24gc3BlY3RhY2xlcy4KCiMjIFJlZHVjZWQgbW90aW9uCgpXaGVuIGBwcmVmZXJzLXJlZHVjZWQtbW90aW9uOiByZWR1Y2VgIGlzIHNldCwgZHVyYXRpb24gdG9rZW5zIGFyZSBvdmVycmlkZGVuIGluIHRva2Vucy5jc3MuIEFuaW1hdGlvbiBwcm9wZXJ0aWVzIHRoZW1zZWx2ZXMgYXJlIG5vdCByZW1vdmVkIOKAlCBvbmx5IHRoZWlyIGR1cmF0aW9ucywgc28gbm8gbGF5b3V0IHNoaWZ0cyBvY2N1ci4gUmVkdWNlZCBtb3Rpb24gbXVzdCBmZWVsICpkZXNpZ25lZCosIG5vdCBicm9rZW4uCgpgYGBgCkBtZWRpYSAocHJlZmVycy1yZWR1Y2VkLW1vdGlvbjogcmVkdWNlKSB7CiAgOnJvb3QgewogICAgLS1kdXItaW5zdGFudDogIDBtczsKICAgIC0tZHVyLWZhc3Q6ICAgICAwbXM7CiAgICAtLWR1ci1kZWZhdWx0OiAgMG1zOwogICAgLS1kdXItcG9wOiAgICAgIDBtczsKICAgIC0tZHVyLXNsb3c6ICAgICAwbXM7CiAgICAtLWR1ci1lcnJvcjogICAgMG1zOwogICAgLS1kdXItZW50ZXI6ICAgIDBtczsKICAgIC0tZHVyLXNjcmVlbjogICAwbXM7CiAgICAtLWR1ci10di1lbnRlcjogMG1zOwogICAgLS1kdXItc2hlZXQ6ICAgIDEwMG1zOwogICAgLyogLS1kdXItcmVkdWNlZC1mYWRlICgxMDBtcykgYW5kIC0tZHVyLXJlZHVjZWQtaW5zdGFudCAoMW1zKSAqLwogICAgLyogYXJlIGludGVudGlvbmFsbHkgTk9UIGNvbGxhcHNlZCDigJQgdGhleSBhcmUgcmVkdWNlZC1tb3Rpb24gdmFsdWVzICovCiAgfQp9CgovKiBBbWJpZW50IGxvb3BzIG11c3QgYmUgZXhwbGljaXRseSBzdG9wcGVkICovCkBtZWRpYSAocHJlZmVycy1yZWR1Y2VkLW1vdGlvbjogcmVkdWNlKSB7CiAgLm1hcnF1ZWUtcm93LCAuaGVyby1iZywgLmF1cm9yYSB7CiAgICBhbmltYXRpb246IG5vbmU7CiAgfQogIC8qIFNoaW1tZXI6IGEgemVyby1kdXJhdGlvbiBsb29wIHN0aWxsIGZsYXNoZXMg4oCUIHJlbW92ZSBpdCAqLwogIC5zaGltbWVyLXdyYXA6OmFmdGVyIHsKICAgIGFuaW1hdGlvbjogbm9uZTsKICAgIGRpc3BsYXk6ICAgIG5vbmU7CiAgfQp9CmBgYGAKCiMjIFRWIG1vdGlvbgoKVFYgaXMgYSAxMC1mb290IFVJIGRyaXZlbiBieSBELXBhZC4gTW90aW9uIG11c3QgYmUgbGFyZ2VyLCBzbGlnaHRseSBzbG93ZXIsIGFuZCBjb21wbGV0ZWx5IHJlc3RyYWluZWQuIE5vIGFtYmllbnQgbG9vcHMsIG5vIHByZXNzIGZlZWRiYWNrLCBubyBzaGVldHMuCgpgYGBgCi8qIFRWIGZvY3VzIHN0YXRlICovCi5mb2N1c2FibGU6Zm9jdXMtdmlzaWJsZSB7CiAgdHJhbnNmb3JtOiAgc2NhbGUodmFyKC0tc2NhbGUtdHYtZm9jdXMpKTsKICBib3gtc2hhZG93OiB2YXIoLS1qaW8tZ2xvdyk7CiAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIHZhcigtLWR1ci1mYXN0KSB2YXIoLS1zcHJpbmcpLAogICAgICAgICAgICAgIGJveC1zaGFkb3cgdmFyKC0tZHVyLWZhc3QpIHZhcigtLWVhc2Utb3V0KTsKICBvdXRsaW5lOiAgICBub25lOwp9CgovKiBUViBjb250ZW50IGVudHJhbmNlIOKAlCBubyBzdGFnZ2VyICovCi50di1jYXJkIHsKICBhbmltYXRpb246IGZhZGUtdXAgdmFyKC0tZHVyLXR2LWVudGVyKSB2YXIoLS1zcHJpbmcpIGJvdGg7Cn0KYGBgYAoKIyMgVXNhZ2UgcnVsZXMKCiMjIE1vdGlvbiBnb3Zlcm5hbmNlCgpTdGFuZGluZyBydWxlcyB0aGF0IGdhdGUgZXZlcnkgbmV3IHBhdHRlcm4uIFRoZSB0b2tlbiBtYW5kYXRlIGlzIG5vbi1uZWdvdGlhYmxlOiAqKmlmIG5vIHRva2VuIGV4aXN0cyBmb3IgYSB2YWx1ZSB5b3UgbmVlZCwgc3RvcCBhbmQgYXNrIHRoZSBETFMgb3duZXIqKiDigJQgZG8gbm90IGhhcmRjb2RlLgoKIyMgTW90aW9uIFFBIGNoZWNrbGlzdAoKUnVuIGJlZm9yZSBldmVyeSBtb3Rpb24gcmV2aWV3LiBHcm91cGVkIGJ5IGNvbmNlcm4g4oCUIGFsbCBib3hlcyBtdXN0IGNoZWNrLgoKLSBBbGwgZHVyYXRpb25zIHVzZSBgdmFyKC0tZHVyLSopYCB0b2tlbnMKLSBBbGwgZWFzaW5nIHVzZXMgYC0tc3ByaW5nYCAvIGAtLXNwcmluZy1ib3VuY2VgIC8gYC0tZWFzZS1zY3JlZW5gIC8gYC0tZWFzZS1vdXRgIC8gYC0tZWFzZS1lcnJvcmAKLSBObyBgdHJhbnNpdGlvbjogYWxsYAotIFJhdyB2YWx1ZXMgb25seSBpbnNpZGUgwqcxMyBrZXlmcmFtZXMgb3Igwqc0IGNvbnN0YW50cwoKLSBFdmVyeSBtb3Rpb24gaGFzIGEgbmFtZWQgY2F1c2UKLSBFdmVyeSBtb3Rpb24gaGFzIGEgc3BhdGlhbCBzb3VyY2Ug4oCUIG5vdGhpbmcgYXBwZWFycyBmcm9tIG5vd2hlcmUKLSBCYWNrLW5hdmlnYXRpb24gcmV2ZXJzZXMgdGhlIG9yaWdpbmFsIGRpcmVjdGlvbgotIFJhaWwgc2Nyb2xsIHBvc2l0aW9uIHByZXNlcnZlZCBhZnRlciBpbnRlcmFjdGlvbgotIE5vIG9ycGhhbiBhbmltYXRpb25zCgotIFNjYWxlIGxpbWl0cyByZXNwZWN0ZWQ6IC45NuKAky45OCBwcmVzcywgMS4wMyBzZWxlY3QsIDEuMDUgVFYgZm9jdXMKLSBgLS1zcHJpbmctYm91bmNlYCBvbmx5IGZvciBvbmUtc2hvdCBjZWxlYnJhdGlvbgotIGBzaGFrZWAgcGxheXMgb25jZSDigJQgbm90IGxvb3BlZAotIFN1Y2Nlc3Mgc2V0dGxlcyBhZnRlciBvbmUgYmVhdAotIE5vIGJvdW5jZSBvciBvc2NpbGxhdGlvbiBhZnRlciBzdGF0ZSBpcyBzZXQKCi0gT25seSBgdHJhbnNmb3JtYCAvIGBvcGFjaXR5YCBhbmltYXRlZCBpbiBsb29wcwotIFByb2dyZXNzIGJhcnMgdXNlIGB0cmFuc2Zvcm06IHNjYWxlWCgpYAotIFNoaW1tZXIgdXNlcyBgdHJhbnNmb3JtOiB0cmFuc2xhdGVYKClgIG92ZXJsYXkKLSBObyBgd2lkdGhgL2BoZWlnaHRgL2B0b3BgL2BsZWZ0YCBpbiBsb29wcwoKLSBUVjogbm8gYW1iaWVudCwgbm8gcHJlc3MgYm91bmNlLCBubyBiYWNrZHJvcC1maWx0ZXIsIG5vIHN0YWdnZXIKLSBUVjogY29udGVudCBlbnRyYW5jZSB1c2VzIGAtLWR1ci10di1lbnRlcmAKLSBXZWI6IGhvdmVyIHN0YXRlcyBleGlzdDsga2V5Ym9hcmQgZm9jdXMgaGFzIGVxdWl2YWxlbnQgYWZmb3JkYW5jZQotIE1vYmlsZTogaGFwdGljIHBhaXJpbmcgaW50ZW50IGRvY3VtZW50ZWQKCi0gQW1iaWVudCBsb29wcyBzdG9wIGNvbXBsZXRlbHkKLSBTY3JlZW4gdHJhbnNpdGlvbnMgYmVjb21lIG9wYWNpdHkgZmFkZXMKLSBTdGFnZ2VyIGNvbGxhcHNlcyB0byBzaW11bHRhbmVvdXMgZmFkZQotIFNoaW1tZXIgYmVjb21lcyBzdGF0aWMgcGxhY2Vob2xkZXIKLSBGb2N1cyBnbG93IGlzIE5PVCByZW1vdmVkCi0gRXJyb3IgY29tbXVuaWNhdGVzIHZpYSBjb2xvdXIvaWNvbiwgbm90IG1vdGlvbiBhbG9uZQoKLSBObyBtb3Rpb24gb24gcHJpY2luZywgcGF5bWVudCB0b3RhbHMsIHN1YnNjcmlwdGlvbiB0ZXJtcwotIE5vIG1vdGlvbiBvbiBsZWdhbCBjb3B5LCBhZ2Ugb3Igc2FmZXR5IHdhcm5pbmdzCi0gTm8gbW90aW9uIG9uIE9UUCBkaWdpdHMgYWZ0ZXIgZW50cnkKLSBObyBtb3Rpb24gb24gY3JpdGljYWwgQ1RBcyBtaWQtc3RhdGUtY2hhbmdlCgotIE1vdGlvbiBoYXMgYSBjbGVhciBjYXVzZSBhbmQgc3BhdGlhbCBzb3VyY2UKLSBTZXR0bGVzIGNsZWFubHkg4oCUIG5vIGplbGxvLCBubyBzdXN0YWluZWQgYm91bmNlCi0gRG9lcyBub3QgZmlnaHQgdXNlciBpbnB1dCBvciBkZWxheSB0YXNrIGNvbXBsZXRpb24KLSBSZWR1Y2VkIG1vdGlvbiBmZWVscyBkZXNpZ25lZCwgbm90IGJyb2tlbgotIENyaXRpY2FsIGluZm8gaXMgbmV2ZXIgY29tbXVuaWNhdGVkIGJ5IG1vdGlvbiBhbG9uZQoKLS0tCgojIyBUb2tlbnMgcmVmZXJlbmNlZCBvbiB0aGlzIHBhZ2UKClVzZSB0aGVzZSBleGFjdCB0b2tlbnMg4oCUIGRlZmluZWQgaW4gYHRva2Vucy90b2tlbnMuY3NzYC4gRG8gbm90IHN1YnN0aXR1dGUgcmF3IHZhbHVlcy4KCi0gYC0tYW1iZXJgCi0gYC0tYm9yZGVyLXN0cm9uZ2AKLSBgLS1ib3JkZXItc3VidGxlYAotIGAtLWNhcmQtYmdgCi0gYC0tZGl2aWRlcmAKLSBgLS1kdXItYAotIGAtLWR1ci1kZWZhdWx0YAotIGAtLWR1ci1mYXN0YAotIGAtLWR1ci10di1lbnRlcmAKLSBgLS1lYXNlLW91dGAKLSBgLS1nbGFzcy0xYAotIGAtLWppb2AKLSBgLS1qaW8tM2AKLSBgLS1qaW8tYnJpZ2h0YAotIGAtLWppby1nbG93YAotIGAtLW1vdmUtYAotIGAtLW5lZ2F0aXZlYAotIGAtLXBpbGxgCi0gYC0tcG9zaXRpdmVgCi0gYC0tcjFgCi0gYC0tcjJgCi0gYC0tcjNgCi0gYC0tcjRgCi0gYC0tcjVgCi0gYC0tc2NhbGUtdHYtZm9jdXNgCi0gYC0tc3BhY2UtMC01YAotIGAtLXNwYWNlLTFgCi0gYC0tc3BhY2UtMS01YAotIGAtLXNwYWNlLTJgCi0gYC0tc3BhY2UtM2AKLSBgLS1zcHJpbmdgCi0gYC0tc3VyZmFjZS0xYAotIGAtLXN1cmZhY2UtMmAKLSBgLS1zdXJmYWNlLTNgCi0gYC0tdGV4dGAKLSBgLS10ZXh0MmAKLSBgLS10ZXh0M2AKLSBgLS10ZXh0NGAKLSBgLS11bHRpbWF0ZWAKCi0tLQoKIyMgQnVpbGQgcnVsZXMgKGJpbmRpbmcpCgoxLiBVc2UgKipvbmx5KiogdGhlIHRva2VucyBsaXN0ZWQgYWJvdmUuIElmIGEgdmFsdWUgeW91IG5lZWQgaXMgbm90IGxpc3RlZCwgc3RvcCBhbmQgYXNrIOKAlCBkbyBub3QgaW50cm9kdWNlIGEgcmF3IHZhbHVlLgoyLiBGb250IGlzICoqSmlvVHlwZSoqIG9ubHkuIFdlaWdodHM6IDMwMCwgNTAwLCA3MDAsIDkwMC4KMy4gUmV1c2UgdGhlIGNvbXBvbmVudCBDU1MgcGF0dGVybnMgc2hvd24gb24gdGhlIHNvdXJjZSBwYWdlOyBkbyBub3QgcmVkZXNpZ24uCjQuIE1hdGNoIGV2ZXJ5IHN0YXRlIChkZWZhdWx0LCBob3ZlciwgZm9jdXMsIGFjdGl2ZSwgZGlzYWJsZWQsIGxvYWRpbmcpIHNob3duIG9uIHRoZSBwYWdlLgo1LiBBY2Nlc3NpYmlsaXR5IHJlcXVpcmVtZW50cyBvbiB0aGUgcGFnZSBhcmUgbWFuZGF0b3J5LCBub3Qgb3B0aW9uYWwuCg==" download="motion-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
+    </div>
     </header>
 
     <!-- HERO -->
@@ -228,20 +388,24 @@
           <div style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Easing</div>
           <div style="display:flex;flex-direction:column;gap:8px">
             <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:80px;height:3px;background:linear-gradient(90deg,var(--ultimate) 0%,var(--jio-bright) 60%,var(--surface-3) 100%);border-radius:2px"></div>
+              <div style="font-size:11px;color:var(--text2)">--spring</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:80px;height:3px;background:linear-gradient(90deg,var(--jio) 0%,var(--jio-bright) 80%,var(--ultimate) 100%);border-radius:2px"></div>
+              <div style="font-size:11px;color:var(--text2)">--spring-bounce</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:80px;height:3px;background:linear-gradient(90deg,var(--surface-3) 0%,var(--jio-bright) 50%,var(--surface-3) 100%);border-radius:2px"></div>
+              <div style="font-size:11px;color:var(--text2)">--ease-screen</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
               <div style="width:80px;height:3px;background:linear-gradient(90deg,var(--jio) 0%,var(--jio-bright) 100%);border-radius:2px"></div>
               <div style="font-size:11px;color:var(--text2)">--ease-out</div>
             </div>
             <div style="display:flex;align-items:center;gap:10px">
-              <div style="width:80px;height:3px;background:linear-gradient(90deg,var(--jio-bright) 0%,var(--jio) 100%);border-radius:2px"></div>
-              <div style="font-size:11px;color:var(--text2)">--ease-in</div>
-            </div>
-            <div style="display:flex;align-items:center;gap:10px">
-              <div style="width:80px;height:3px;background:linear-gradient(90deg,var(--surface-3) 0%,var(--jio-bright) 50%,var(--surface-3) 100%);border-radius:2px"></div>
-              <div style="font-size:11px;color:var(--text2)">--ease-in-out</div>
-            </div>
-            <div style="display:flex;align-items:center;gap:10px">
-              <div style="width:80px;height:3px;background:linear-gradient(90deg,var(--ultimate) 0%,var(--jio-bright) 60%,var(--surface-3) 100%);border-radius:2px"></div>
-              <div style="font-size:11px;color:var(--text2)">--spring</div>
+              <div style="width:80px;height:3px;background:linear-gradient(90deg,var(--negative) 0%,var(--jio-bright) 50%,var(--negative) 100%);border-radius:2px"></div>
+              <div style="font-size:11px;color:var(--text2)">--ease-error</div>
             </div>
           </div>
         </div>
@@ -250,7 +414,7 @@
           <div style="display:flex;flex-direction:column;gap:8px">
             <div style="display:flex;align-items:center;gap:10px">
               <div style="width:20px;height:20px;border-radius:var(--r2);background:var(--jio);opacity:.9"></div>
-              <div style="font-size:11px;color:var(--text2)">--dur-instant · 80ms</div>
+              <div style="font-size:11px;color:var(--text2)">--dur-instant · 90ms</div>
             </div>
             <div style="display:flex;align-items:center;gap:10px">
               <div style="width:30px;height:20px;border-radius:var(--r2);background:var(--jio);opacity:.75"></div>
@@ -258,17 +422,70 @@
             </div>
             <div style="display:flex;align-items:center;gap:10px">
               <div style="width:50px;height:20px;border-radius:var(--r2);background:var(--jio);opacity:.6"></div>
-              <div style="font-size:11px;color:var(--text2)">--dur-base · 200ms</div>
+              <div style="font-size:11px;color:var(--text2)">--dur-default · 200ms</div>
             </div>
             <div style="display:flex;align-items:center;gap:10px">
-              <div style="width:70px;height:20px;border-radius:var(--r2);background:var(--jio);opacity:.45"></div>
-              <div style="font-size:11px;color:var(--text2)">--dur-slow · 320ms</div>
+              <div style="width:64px;height:20px;border-radius:var(--r2);background:var(--jio);opacity:.45"></div>
+              <div style="font-size:11px;color:var(--text2)">--dur-enter · 420ms</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:80px;height:20px;border-radius:var(--r2);background:var(--jio);opacity:.32"></div>
+              <div style="font-size:11px;color:var(--text2)">--dur-tv-enter · 560ms</div>
             </div>
           </div>
         </div>
       </div>
       <p class="component-hero-caption">EASING CURVES · DURATION SCALE · REDUCED MOTION READY</p>
     </div>
+
+    <!-- Section A: Motion principles -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Motion principles</h2>
+      <p class="ds-section-desc">Eight non-negotiable rules. Every implementation decision is tested against these. Use Apple-level restraint as the quality bar — motion so well-matched to the interaction that users never notice it, but would feel its absence.</p>
+
+      <div class="principle-grid">
+        <div class="principle-card">
+          <div class="principle-num">01</div>
+          <div class="principle-title">Token-first</div>
+          <div class="principle-body">Duration and easing tokens are the source of truth. Component CSS uses <code>var(--dur-fast)</code>, never <code>120ms</code>.</div>
+        </div>
+        <div class="principle-card">
+          <div class="principle-num">02</div>
+          <div class="principle-title">Raw values only in approved contexts</div>
+          <div class="principle-body">Raw ms or <code>cubic-bezier</code> are allowed only inside §13 keyframe recipes or the §4 Motion Constants table. Everywhere else, tokens.</div>
+        </div>
+        <div class="principle-card">
+          <div class="principle-num">03</div>
+          <div class="principle-title">Compositor properties for movement</div>
+          <div class="principle-body">Use <code>transform</code> and <code>opacity</code> for movement and loops. One-shot <code>border-color</code> / <code>background</code> / <code>box-shadow</code> allowed when tokenised and not looped.</div>
+        </div>
+        <div class="principle-card">
+          <div class="principle-num">04</div>
+          <div class="principle-title">Spring easing as default</div>
+          <div class="principle-body"><code>--spring</code> for most enters. <code>--spring-bounce</code> only for one-shot celebration (OTP fill, success) — one per flow maximum.</div>
+        </div>
+        <div class="principle-card">
+          <div class="principle-num">05</div>
+          <div class="principle-title">Reduced motion is mandatory</div>
+          <div class="principle-body">Every animated component has a fallback. Focus glow is exempt — it is an affordance, never removed.</div>
+        </div>
+        <div class="principle-card">
+          <div class="principle-num">06</div>
+          <div class="principle-title">Purposeful, not decorative</div>
+          <div class="principle-body">If removing an animation makes the UI clearer, remove it. Every motion answers: what changed, why, and where to look next.</div>
+        </div>
+        <div class="principle-card">
+          <div class="principle-num">07</div>
+          <div class="principle-title">Interactive UI under 500ms</div>
+          <div class="principle-body">All interactive feedback completes in under 500ms. TV enter may go up to <code>--dur-tv-enter</code> (560ms). Ambient loops are exempt.</div>
+        </div>
+        <div class="principle-card">
+          <div class="principle-num">08</div>
+          <div class="principle-title">Motion communicates state</div>
+          <div class="principle-body">Not personality. Not brand energy. State, relationship, and feedback — nothing else.</div>
+        </div>
+      </div>
+    </section>
 
     <!-- Section 1: Easing tokens -->
     <section class="ds-section">
@@ -281,7 +498,7 @@
         <div class="easing-card">
           <div class="easing-token-name">--spring</div>
           <div class="easing-value">cubic-bezier(.22,1,.36,1)</div>
-          <div class="easing-desc">Natural settling. Elements entering from off-screen, panels appearing. The default enter easing for most UI.</div>
+          <div class="easing-desc">Natural settling. Default enter for most UI — elements entering from off-screen, panels appearing, sheets sliding up.</div>
           <div class="easing-demo-track">
             <div class="easing-demo-box" style="transition-timing-function:cubic-bezier(.22,1,.36,1);"></div>
           </div>
@@ -292,7 +509,7 @@
         <div class="easing-card">
           <div class="easing-token-name">--spring-bounce</div>
           <div class="easing-value">cubic-bezier(.34,1.56,.64,1)</div>
-          <div class="easing-desc">Playful bounce. Pop-in cards, achievement unlocked, reward reveals. Use sparingly — one per flow maximum.</div>
+          <div class="easing-desc">Playful bounce. One-shot celebration only — OTP fill, achievement unlocked, reward reveals. One per flow maximum.</div>
           <div class="easing-demo-track">
             <div class="easing-demo-box" style="transition-timing-function:cubic-bezier(.34,1.56,.64,1);"></div>
           </div>
@@ -314,7 +531,7 @@
         <div class="easing-card">
           <div class="easing-token-name">--ease-out</div>
           <div class="easing-value">cubic-bezier(0,0,.2,1)</div>
-          <div class="easing-desc">Standard decelerating motion. Button feedback, list reveals, fade-ins. Safe default when unsure.</div>
+          <div class="easing-desc">Standard decelerating motion. Fades, overlays, tooltip enter, list reveals. Safe default when unsure.</div>
           <div class="easing-demo-track">
             <div class="easing-demo-box" style="transition-timing-function:cubic-bezier(0,0,.2,1);"></div>
           </div>
@@ -332,13 +549,24 @@
           <div class="easing-hint">Hover to preview</div>
         </div>
 
+        <!-- ease-emphasized -->
+        <div class="easing-card">
+          <div class="easing-token-name">--ease-emphasized</div>
+          <div class="easing-value">cubic-bezier(.32,.72,0,1)</div>
+          <div class="easing-desc">Emphasized decelerate. Bottom sheets, drawers, deliberate slides. Stronger initial speed than --spring, settles firmly without bounce.</div>
+          <div class="easing-demo-track">
+            <div class="easing-demo-box" style="transition-timing-function:cubic-bezier(.32,.72,0,1);"></div>
+          </div>
+          <div class="easing-hint">Hover to preview</div>
+        </div>
+
       </div>
     </section>
 
     <!-- Section 2: Duration tokens -->
     <section class="ds-section">
       <h2 class="ds-section-title">Duration tokens</h2>
-      <p class="ds-section-desc">Duration tokens are defined in tokens.css and must be referenced via <code style="font-family:monospace;font-size:12px;color:#a8e6c5;">var(--dur-*)</code> — never raw milliseconds in component CSS.</p>
+      <p class="ds-section-desc">Duration tokens are defined in tokens.css and must be referenced via <code style="font-family:monospace;font-size:12px;color:var(--jio-3);">var(--dur-*)</code> — never raw milliseconds in component CSS.</p>
 
       <div class="ds-demo" >
         <table class="dur-table">
@@ -351,66 +579,22 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td class="t">--dur-instant</td>
-              <td class="v">90ms</td>
-              <td>Micro-feedback</td>
-              <td>Icon state changes, toggle switches</td>
-            </tr>
-            <tr>
-              <td class="t">--dur-fast</td>
-              <td class="v">120ms</td>
-              <td>Quick response</td>
-              <td>Button press feedback, chip selection</td>
-            </tr>
-            <tr>
-              <td class="t">--dur-default</td>
-              <td class="v">200ms</td>
-              <td>Standard UI</td>
-              <td>Most transitions, fades, state changes</td>
-            </tr>
-            <tr>
-              <td class="t">--dur-pop</td>
-              <td class="v">280ms</td>
-              <td>Pop-in content</td>
-              <td>Cards appearing, dropdowns opening</td>
-            </tr>
-            <tr>
-              <td class="t">--dur-error</td>
-              <td class="v">380ms</td>
-              <td>Error feedback</td>
-              <td>Shake animations, validation errors</td>
-            </tr>
-            <tr>
-              <td class="t">--dur-sheet</td>
-              <td class="v">400ms</td>
-              <td>Sheet slides</td>
-              <td>Bottom sheet open / close</td>
-            </tr>
-            <tr>
-              <td class="t">--dur-enter</td>
-              <td class="v">420ms</td>
-              <td>Screen enters</td>
-              <td>New page appearing, overlay entering</td>
-            </tr>
-            <tr>
-              <td class="t">--dur-screen</td>
-              <td class="v">420ms</td>
-              <td>Screen transitions</td>
-              <td>Full navigation transitions</td>
-            </tr>
-            <tr>
-              <td class="t">--dur-tv-enter</td>
-              <td class="v">560ms</td>
-              <td>TV focus / enter</td>
-              <td>D-pad navigation, focus transitions</td>
-            </tr>
-            <tr>
-              <td class="t">--dur-shimmer</td>
-              <td class="v">1600ms</td>
-              <td>Loading state</td>
-              <td>Skeleton shimmer loop</td>
-            </tr>
+            <tr><td class="t">--dur-instant</td><td class="v">90ms</td><td>Micro-feedback</td><td>Tiny tap feedback, ripple, icon state changes</td></tr>
+            <tr><td class="t">--dur-fast</td><td class="v">120ms</td><td>Quick response</td><td>Press, focus ring, chip select</td></tr>
+            <tr><td class="t">--dur-default</td><td class="v">200ms</td><td>Standard UI</td><td>Normal component state transitions, fades</td></tr>
+            <tr><td class="t">--dur-pop</td><td class="v">280ms</td><td>Pop-in feedback</td><td>OTP box fill, check icon appear, dropdowns</td></tr>
+            <tr><td class="t">--dur-slow</td><td class="v">320ms</td><td>Deliberate slide</td><td>Sheet / drawer / carousel slide, chart reveal</td></tr>
+            <tr><td class="t">--dur-error</td><td class="v">380ms</td><td>Error feedback</td><td>Shake animations, validation errors</td></tr>
+            <tr><td class="t">--dur-sheet</td><td class="v">400ms</td><td>Sheet slides</td><td>Bottom sheet open / close</td></tr>
+            <tr><td class="t">--dur-enter</td><td class="v">420ms</td><td>Content enter</td><td>fade-up, tile-in, stagger entrances</td></tr>
+            <tr><td class="t">--dur-screen</td><td class="v">420ms</td><td>Screen transitions</td><td>Full screen-to-screen navigation</td></tr>
+            <tr><td class="t">--dur-tv-enter</td><td class="v">560ms</td><td>TV focus / enter</td><td>D-pad navigation, larger canvas settle</td></tr>
+            <tr><td class="t">--dur-shimmer</td><td class="v">1600ms</td><td>Loading loop</td><td>Skeleton shimmer loop cycle</td></tr>
+            <tr><td class="t">--dur-icon-spin</td><td class="v">1000ms</td><td>Loading loop</td><td>Loading icon rotation loop</td></tr>
+            <tr><td class="t">--dur-reduced-fade</td><td class="v">100ms</td><td>Reduced motion</td><td>Gentle crossfade — NOT collapsed to 0ms</td></tr>
+            <tr><td class="t">--dur-reduced-instant</td><td class="v">1ms</td><td>Reduced motion</td><td>Snap state change, technically non-zero</td></tr>
+            <tr><td class="t">--stagger-start</td><td class="v">50ms</td><td>Stagger</td><td>First item delay</td></tr>
+            <tr><td class="t">--stagger-step</td><td class="v">60ms</td><td>Stagger</td><td>Per-item delay increment (max 6 items)</td></tr>
           </tbody>
         </table>
       </div>
@@ -471,20 +655,341 @@
       </div>
     </section>
 
+    <!-- Section B: New token sections -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Movement distance &amp; interactive scale</h2>
+      <p class="ds-section-desc">Translate offsets and feedback scale values are tokenised. Use <code style="font-family:monospace;font-size:12px;color:var(--jio-3);">var(--move-*)</code> for translate distances in enter/exit keyframes, and the scale tokens for governed interactive feedback — <strong>never exceed these scale values</strong> (see Soft Landing rules).</p>
+
+      <div class="mini-table-grid">
+        <div class="ds-demo">
+          <table class="dur-table">
+            <thead><tr><th>Movement</th><th>Value</th><th>Use</th></tr></thead>
+            <tbody>
+              <tr><td class="t">--move-sm</td><td class="v">8px</td><td>Small offset — toast, tooltip enter</td></tr>
+              <tr><td class="t">--move-md</td><td class="v">20px</td><td>Standard fade-up enter (mobile/web)</td></tr>
+              <tr><td class="t">--move-tv</td><td class="v">32px</td><td>TV content entrance translate distance</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="ds-demo">
+          <table class="dur-table">
+            <thead><tr><th>Scale</th><th>Value</th><th>Use</th></tr></thead>
+            <tbody>
+              <tr><td class="t">--scale-press-sm</td><td class="v">0.96</td><td>Small CTA / chip press</td></tr>
+              <tr><td class="t">--scale-press</td><td class="v">0.98</td><td>Card / button press</td></tr>
+              <tr><td class="t">--scale-select</td><td class="v">1.03</td><td>Selection — comes forward</td></tr>
+              <tr><td class="t">--scale-tv-focus</td><td class="v">1.05</td><td>TV focus — spatial shift</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section C: Usage levels -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Motion usage levels (L0–L5)</h2>
+      <p class="ds-section-desc">A taxonomy of how much motion a surface earns. Pick the lowest level that does the job. Higher levels need more justification and stricter token discipline.</p>
+
+      <div class="m-table-wrap">
+        <table class="m-table">
+          <thead>
+            <tr><th>Level</th><th>Name</th><th>What</th><th>When to use</th><th>When NOT</th><th>Tokens</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="lvl">L0</td>
+              <td>None</td>
+              <td>No motion at all. Static, instant.</td>
+              <td>Critical info: pricing, legal, payment totals, OTP digits after entry.</td>
+              <td class="neg">Anything the user must read precisely.</td>
+              <td>none</td>
+            </tr>
+            <tr>
+              <td class="lvl">L1</td>
+              <td>Micro feedback</td>
+              <td>Tap, press, focus, chip select.</td>
+              <td>Confirm a discrete input immediately.</td>
+              <td class="neg">Ambient or attention-grabbing motion.</td>
+              <td><code>--dur-instant</code> / <code>--dur-fast</code> · <code>--spring</code> · <code>--scale-press</code></td>
+            </tr>
+            <tr>
+              <td class="lvl">L2</td>
+              <td>Component transition</td>
+              <td>State changes — hover→selected, error, tab switch.</td>
+              <td>Communicate a component's state change in place.</td>
+              <td class="neg">Page or surface changes.</td>
+              <td><code>--dur-fast</code> / <code>--dur-default</code> · <code>--spring</code> (<code>--spring-bounce</code> success only)</td>
+            </tr>
+            <tr>
+              <td class="lvl">L3</td>
+              <td>Surface transition</td>
+              <td>Sheets, modals, dropdowns, tooltips.</td>
+              <td>A surface enters or leaves above the current screen.</td>
+              <td class="neg">Full page navigation.</td>
+              <td><code>--dur-sheet</code> · <code>--spring</code> · backdrop fade</td>
+            </tr>
+            <tr>
+              <td class="lvl">L4</td>
+              <td>Page / flow transition</td>
+              <td>Screen-to-screen; login, payment, subscription flow steps.</td>
+              <td>The whole screen changes.</td>
+              <td class="neg">In-place content updates.</td>
+              <td><code>--dur-screen</code> · <code>--ease-screen</code> (TV: <code>--ease-out</code> crossfade)</td>
+            </tr>
+            <tr>
+              <td class="lvl">L5</td>
+              <td>Hero / campaign motion</td>
+              <td>Hero breathing, marquee, reward celebration, pass unlock.</td>
+              <td>Cinematic moments, sparingly.</td>
+              <td class="neg">Ever on TV. Routine UI.</td>
+              <td>§4 ambient constants · <code>--spring-bounce</code> one-shot</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section D: Component motion map -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Component motion map</h2>
+      <p class="ds-section-desc">One component, one contracted motion. Do not invent motion per-screen. Reduced-motion behaviour is part of the contract.</p>
+
+      <div class="m-table-wrap">
+        <table class="m-table">
+          <thead>
+            <tr><th>Component</th><th>Trigger</th><th>Motion</th><th>Tokens</th><th>Reduced motion</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Primary button</td><td>Press</td><td>scale(.97)</td><td><code>--dur-fast</code> · <code>--spring</code></td><td>None — instant</td></tr>
+            <tr><td>Small CTA</td><td>Press</td><td>scale(.96)</td><td><code>--dur-fast</code> · <code>--spring</code></td><td>None — instant</td></tr>
+            <tr><td>Ghost button</td><td>Press</td><td>opacity .6</td><td><code>--dur-fast</code></td><td>None — instant</td></tr>
+            <tr><td>Icon button</td><td>Press</td><td>scale(.96) + state tint</td><td><code>--dur-fast</code> · <code>--spring</code></td><td>Instant tint</td></tr>
+            <tr><td>Action chip</td><td>Press</td><td>scale(.95)</td><td><code>--dur-fast</code> · <code>--spring</code></td><td>None — instant</td></tr>
+            <tr><td>Platform chip</td><td>Press / select</td><td>scale(.95) + selected glow</td><td><code>--dur-fast</code> · <code>--spring</code></td><td>Instant border change</td></tr>
+            <tr><td>Genre tile</td><td>Select</td><td>scale(1.03) + glow</td><td><code>--spring-bounce</code> · <code>--dur-fast</code></td><td>Instant border / glow</td></tr>
+            <tr><td>Tabs</td><td>Switch</td><td>Active indicator slides</td><td><code>--dur-default</code> · <code>--spring</code></td><td>Instant switch</td></tr>
+            <tr><td>Card (mobile)</td><td>Press</td><td>scale(.98)</td><td><code>--dur-fast</code> · <code>--spring</code></td><td>None — instant</td></tr>
+            <tr><td>Card (web)</td><td>Hover</td><td>Glow + scale(1.01)</td><td><code>--dur-default</code> · <code>--spring</code></td><td>Glow only, transform: none</td></tr>
+            <tr><td>Card (TV)</td><td>Focus</td><td>scale(1.05) + strong glow</td><td><code>--dur-fast</code> · <code>--spring</code></td><td>Glow stays, transform: none</td></tr>
+            <tr><td>Game card</td><td>Launch</td><td>scale(.98) + screen crossfade</td><td><code>--dur-fast</code> + <code>--dur-screen</code> · <code>--ease-screen</code></td><td>Instant screen change</td></tr>
+            <tr><td>Subscription / Pass card</td><td>Press / select</td><td>scale(.98); select glow settle</td><td><code>--dur-fast</code> · <code>--spring</code></td><td>Instant state; static glow</td></tr>
+            <tr><td>Banner</td><td>Enter / dismiss</td><td>fade-up enter, fade out</td><td><code>--dur-enter</code> · <code>--spring</code> (out: <code>--ease-out</code>)</td><td>Instant show / hide</td></tr>
+            <tr><td>Rail / carousel</td><td>Scroll</td><td>Native scroll + snap</td><td><code>scroll-behavior: smooth</code></td><td>Same</td></tr>
+            <tr><td>Bottom sheet</td><td>Open / close</td><td>translateY + backdrop fade</td><td><code>--dur-sheet</code> · <code>--spring</code></td><td>Snap — transition: none</td></tr>
+            <tr><td>Modal / Dialog</td><td>Open</td><td>scale-from .96 + backdrop fade</td><td><code>--dur-sheet</code> · <code>--spring</code></td><td>Instant show, backdrop fade only</td></tr>
+            <tr><td>Dropdown</td><td>Open</td><td>fade + slide-down 8px</td><td><code>--dur-pop</code> · <code>--ease-out</code></td><td>Instant show</td></tr>
+            <tr><td>Tooltip</td><td>Appear</td><td>fade + 8px offset</td><td><code>--dur-default</code> · <code>--ease-out</code> · <code>--move-sm</code></td><td>Instant appear</td></tr>
+            <tr><td>Toast</td><td>Appear / dismiss</td><td>fade-up 8px / fade out</td><td><code>--dur-default</code> · <code>--spring</code> (out: <code>--ease-out</code>)</td><td>Instant appear / remove</td></tr>
+            <tr><td>Search</td><td>Focus / expand</td><td>border + glow; results fade-up</td><td><code>--dur-fast</code> / <code>--dur-default</code> · <code>--spring</code></td><td>Instant border; fade-in results</td></tr>
+            <tr><td>Text input</td><td>Focus</td><td>border → --jio + glow</td><td><code>--dur-fast</code> · <code>--spring</code></td><td>Instant border change</td></tr>
+            <tr><td>OTP box</td><td>Fill / error</td><td>box-pop fill; shake on error</td><td><code>--dur-pop</code> · <code>--spring-bounce</code> / <code>--dur-error</code> · <code>--ease-error</code></td><td>Instant tint; static error border</td></tr>
+            <tr><td>Navigation</td><td>Screen change</td><td>Horizontal slide (TV: crossfade)</td><td><code>--dur-screen</code> · <code>--ease-screen</code></td><td>Opacity crossfade <code>--dur-reduced-fade</code></td></tr>
+            <tr><td>Skeleton / shimmer</td><td>Loading</td><td>Shimmer sweep (translateX)</td><td><code>--dur-shimmer</code> · linear</td><td>Static placeholder — animation: none</td></tr>
+            <tr><td>Progress indicator</td><td>Progress</td><td>scaleX fill (rotate for spinner)</td><td><code>--dur-default</code> / <code>--dur-icon-spin</code> · linear</td><td>Static / determinate value</td></tr>
+            <tr><td>Badge</td><td>—</td><td>No entrance motion</td><td>none</td><td>None</td></tr>
+            <tr><td>Focus ring</td><td>Focus</td><td>box-shadow appears</td><td><code>--dur-fast</code> · <code>--ease-out</code></td><td>Glow stays — never removed</td></tr>
+            <tr><td>TV focusable</td><td>D-pad focus</td><td>Glow + scale(1.05)</td><td><code>--dur-fast</code> · <code>--spring</code></td><td>Glow stays, transform: none</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section E: Motion recipes -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Motion recipes</h2>
+      <p class="ds-section-desc">Sixteen reusable recipes. Keyframe names reference the §13 Keyframe Library — copy them unmodified into prototypes; import the shared library in production.</p>
+
+      <div class="recipe-grid">
+
+        <div class="recipe-card">
+          <div class="recipe-name">Subtle fade-in</div>
+          <div class="recipe-use">Quiet content that has no spatial source.</div>
+          <div class="recipe-tokens">fade-in · --dur-default · --ease-out</div>
+          <div class="recipe-motion">Opacity 0 → 1, no translate.</div>
+          <div class="recipe-line recipe-line--do"><span class="lbl">Do</span><span class="txt">Use when an element has no clear origin direction.</span></div>
+          <div class="recipe-line recipe-line--dont"><span class="lbl">Don't</span><span class="txt">Use for content that enters from below — use fade-up.</span></div>
+          <div class="recipe-line recipe-line--rm"><span class="lbl">Reduced</span><span class="txt">fade-in at --dur-reduced-instant.</span></div>
+        </div>
+
+        <div class="recipe-card">
+          <div class="recipe-name">Soft scale press</div>
+          <div class="recipe-use">Button / card tap confirmation.</div>
+          <div class="recipe-tokens">--dur-fast · --spring · --scale-press</div>
+          <div class="recipe-motion">scale(.98) on press, settles back to 1.</div>
+          <div class="recipe-line recipe-line--do"><span class="lbl">Do</span><span class="txt">Keep within --scale-press-sm / --scale-press.</span></div>
+          <div class="recipe-line recipe-line--dont"><span class="lbl">Don't</span><span class="txt">Scale below .95 or add bounce.</span></div>
+          <div class="recipe-line recipe-line--rm"><span class="lbl">Reduced</span><span class="txt">No motion — instant.</span></div>
+        </div>
+
+        <div class="recipe-card">
+          <div class="recipe-name">Card lift (web hover)</div>
+          <div class="recipe-use">Signal interactivity on pointer devices.</div>
+          <div class="recipe-tokens">--dur-default · --spring</div>
+          <div class="recipe-motion">Subtle glow + scale(1.01) on hover.</div>
+          <div class="recipe-line recipe-line--do"><span class="lbl">Do</span><span class="txt">Use transform + box-shadow only.</span></div>
+          <div class="recipe-line recipe-line--dont"><span class="lbl">Don't</span><span class="txt">Lift via margin/top — layout thrash.</span></div>
+          <div class="recipe-line recipe-line--rm"><span class="lbl">Reduced</span><span class="txt">Glow only, transform: none.</span></div>
+        </div>
+
+        <div class="recipe-card">
+          <div class="recipe-name">Rail scroll</div>
+          <div class="recipe-use">Horizontal carousel navigation.</div>
+          <div class="recipe-tokens">scroll-behavior: smooth</div>
+          <div class="recipe-motion">Native touch / wheel scroll with snap.</div>
+          <div class="recipe-line recipe-line--do"><span class="lbl">Do</span><span class="txt">Preserve scroll position after interaction.</span></div>
+          <div class="recipe-line recipe-line--dont"><span class="lbl">Don't</span><span class="txt">Force JS momentum on mouse wheel.</span></div>
+          <div class="recipe-line recipe-line--rm"><span class="lbl">Reduced</span><span class="txt">Same — native scroll.</span></div>
+        </div>
+
+        <div class="recipe-card">
+          <div class="recipe-name">Focus glow</div>
+          <div class="recipe-use">Keyboard / D-pad focus affordance.</div>
+          <div class="recipe-tokens">--dur-fast · --ease-out</div>
+          <div class="recipe-motion">box-shadow ring appears around target.</div>
+          <div class="recipe-line recipe-line--do"><span class="lbl">Do</span><span class="txt">Keep glow on every platform.</span></div>
+          <div class="recipe-line recipe-line--dont"><span class="lbl">Don't</span><span class="txt">Loop or pulse the glow.</span></div>
+          <div class="recipe-line recipe-line--rm"><span class="lbl">Reduced</span><span class="txt">Glow stays — it is an affordance, never removed.</span></div>
+        </div>
+
+        <div class="recipe-card">
+          <div class="recipe-name">Bottom sheet enter</div>
+          <div class="recipe-use">Mobile sheet rising from bottom.</div>
+          <div class="recipe-tokens">--dur-sheet · --spring</div>
+          <div class="recipe-motion">translateY(100%) → 0 + backdrop fade.</div>
+          <div class="recipe-line recipe-line--do"><span class="lbl">Do</span><span class="txt">Originate below viewport, return there.</span></div>
+          <div class="recipe-line recipe-line--dont"><span class="lbl">Don't</span><span class="txt">Bounce at top or slide from side.</span></div>
+          <div class="recipe-line recipe-line--rm"><span class="lbl">Reduced</span><span class="txt">transition: none — snap open.</span></div>
+        </div>
+
+        <div class="recipe-card">
+          <div class="recipe-name">Modal enter</div>
+          <div class="recipe-use">Centered dialog above content.</div>
+          <div class="recipe-tokens">--dur-sheet · --spring</div>
+          <div class="recipe-motion">scale .96 → 1 + backdrop fade; emerge from trigger when possible.</div>
+          <div class="recipe-line recipe-line--do"><span class="lbl">Do</span><span class="txt">Emerge from the card that triggered it.</span></div>
+          <div class="recipe-line recipe-line--dont"><span class="lbl">Don't</span><span class="txt">Appear from screen centre for a corner trigger.</span></div>
+          <div class="recipe-line recipe-line--rm"><span class="lbl">Reduced</span><span class="txt">Backdrop fade only, no scale.</span></div>
+        </div>
+
+        <div class="recipe-card">
+          <div class="recipe-name">Toast enter</div>
+          <div class="recipe-use">Transient notification.</div>
+          <div class="recipe-tokens">--dur-default · --spring · --move-sm</div>
+          <div class="recipe-motion">fade-up 8px in; fade out on dismiss.</div>
+          <div class="recipe-line recipe-line--do"><span class="lbl">Do</span><span class="txt">Rise gently from its anchored edge.</span></div>
+          <div class="recipe-line recipe-line--dont"><span class="lbl">Don't</span><span class="txt">Slide in from the side.</span></div>
+          <div class="recipe-line recipe-line--rm"><span class="lbl">Reduced</span><span class="txt">Instant appear / remove.</span></div>
+        </div>
+
+        <div class="recipe-card">
+          <div class="recipe-name">Skeleton shimmer</div>
+          <div class="recipe-use">Loading placeholder.</div>
+          <div class="recipe-tokens">shimmer · --dur-shimmer · linear</div>
+          <div class="recipe-motion">translateX(-100% → 100%) gradient overlay.</div>
+          <div class="recipe-line recipe-line--do"><span class="lbl">Do</span><span class="txt">Animate transform, not background-position.</span></div>
+          <div class="recipe-line recipe-line--dont"><span class="lbl">Don't</span><span class="txt">Use shimmer on TV.</span></div>
+          <div class="recipe-line recipe-line--rm"><span class="lbl">Reduced</span><span class="txt">animation: none; display: none — static.</span></div>
+        </div>
+
+        <div class="recipe-card">
+          <div class="recipe-name">Page transition</div>
+          <div class="recipe-use">Screen-to-screen navigation.</div>
+          <div class="recipe-tokens">--dur-screen · --ease-screen</div>
+          <div class="recipe-motion">Horizontal slide; back reverses direction.</div>
+          <div class="recipe-line recipe-line--do"><span class="lbl">Do</span><span class="txt">Reverse the original motion on back-nav.</span></div>
+          <div class="recipe-line recipe-line--dont"><span class="lbl">Don't</span><span class="txt">Fade back to something that slid in.</span></div>
+          <div class="recipe-line recipe-line--rm"><span class="lbl">Reduced</span><span class="txt">Opacity crossfade at --dur-reduced-fade.</span></div>
+        </div>
+
+        <div class="recipe-card">
+          <div class="recipe-name">Tab switch</div>
+          <div class="recipe-use">Move between tabbed views.</div>
+          <div class="recipe-tokens">--dur-default · --spring</div>
+          <div class="recipe-motion">Active indicator slides to the new tab.</div>
+          <div class="recipe-line recipe-line--do"><span class="lbl">Do</span><span class="txt">Animate the indicator with transform.</span></div>
+          <div class="recipe-line recipe-line--dont"><span class="lbl">Don't</span><span class="txt">Fade the entire tab content.</span></div>
+          <div class="recipe-line recipe-line--rm"><span class="lbl">Reduced</span><span class="txt">Instant switch.</span></div>
+        </div>
+
+        <div class="recipe-card">
+          <div class="recipe-name">Content refresh</div>
+          <div class="recipe-use">In-place content update.</div>
+          <div class="recipe-tokens">fade-up · --dur-enter · --spring · stagger</div>
+          <div class="recipe-motion">New items fade-up with 6-item stagger.</div>
+          <div class="recipe-line recipe-line--do"><span class="lbl">Do</span><span class="txt">Stagger only items that belong together.</span></div>
+          <div class="recipe-line recipe-line--dont"><span class="lbl">Don't</span><span class="txt">Stagger unrelated elements decoratively.</span></div>
+          <div class="recipe-line recipe-line--rm"><span class="lbl">Reduced</span><span class="txt">Collapse stagger — fade-in only.</span></div>
+        </div>
+
+        <div class="recipe-card">
+          <div class="recipe-name">Game card focus (TV)</div>
+          <div class="recipe-use">10-foot D-pad navigation.</div>
+          <div class="recipe-tokens">--dur-fast · --spring · --scale-tv-focus</div>
+          <div class="recipe-motion">scale(1.05) + strong glow ring on focus.</div>
+          <div class="recipe-line recipe-line--do"><span class="lbl">Do</span><span class="txt">Always pair scale with glow.</span></div>
+          <div class="recipe-line recipe-line--dont"><span class="lbl">Don't</span><span class="txt">Use hover or press feedback on TV.</span></div>
+          <div class="recipe-line recipe-line--rm"><span class="lbl">Reduced</span><span class="txt">Glow stays, transform: none.</span></div>
+        </div>
+
+        <div class="recipe-card">
+          <div class="recipe-name">Subscription card selection</div>
+          <div class="recipe-use">Choosing a plan / pass.</div>
+          <div class="recipe-tokens">--scale-select · --spring-bounce · --dur-fast</div>
+          <div class="recipe-motion">scale(1.03) + glow, one beat then settle.</div>
+          <div class="recipe-line recipe-line--do"><span class="lbl">Do</span><span class="txt">Keep pricing text static — L0.</span></div>
+          <div class="recipe-line recipe-line--dont"><span class="lbl">Don't</span><span class="txt">Animate the price amount.</span></div>
+          <div class="recipe-line recipe-line--rm"><span class="lbl">Reduced</span><span class="txt">Instant select state, static glow.</span></div>
+        </div>
+
+        <div class="recipe-card">
+          <div class="recipe-name">Success confirmation</div>
+          <div class="recipe-use">OTP fill, pass unlock, payment done.</div>
+          <div class="recipe-tokens">check-scale / box-pop · --dur-pop · --spring-bounce</div>
+          <div class="recipe-motion">Icon scales up once, glow settles. One beat.</div>
+          <div class="recipe-line recipe-line--do"><span class="lbl">Do</span><span class="txt">Celebrate once, then stop.</span></div>
+          <div class="recipe-line recipe-line--dont"><span class="lbl">Don't</span><span class="txt">Keep celebrating after state is set.</span></div>
+          <div class="recipe-line recipe-line--rm"><span class="lbl">Reduced</span><span class="txt">Instant icon, static glow.</span></div>
+        </div>
+
+        <div class="recipe-card">
+          <div class="recipe-name">Error feedback</div>
+          <div class="recipe-use">Invalid input, OTP error.</div>
+          <div class="recipe-tokens">shake · --dur-error · --ease-error</div>
+          <div class="recipe-motion">Horizontal shake once + border → --negative.</div>
+          <div class="recipe-line recipe-line--do"><span class="lbl">Do</span><span class="txt">Play once (iteration-count: 1).</span></div>
+          <div class="recipe-line recipe-line--dont"><span class="lbl">Don't</span><span class="txt">Loop the shake or pulse.</span></div>
+          <div class="recipe-line recipe-line--rm"><span class="lbl">Reduced</span><span class="txt">Static border + icon — no shake.</span></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section F: Cross-device continuity -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Cross-device continuity</h2>
+      <p class="ds-section-desc">Resume and handoff are content states, not motion spectacles.</p>
+      <div class="continuity-note">
+        "Continue playing" and cross-device resume transitions should bring the resumed content in with a gentle <code>fade-up</code> at <code>--dur-enter</code> — never a flashy zoom or cinematic reveal. Handing a session from phone to TV (or back) is a quiet confirmation that the user is in the right place, not a celebration. Reserve <code>--spring-bounce</code> and L5 motion for genuine reward moments; resume is L3 at most.
+      </div>
+    </section>
+
     <!-- Section 3: Reduced motion -->
     <section class="ds-section">
       <h2 class="ds-section-title">Reduced motion</h2>
-      <p class="ds-section-desc">When <code style="font-family:monospace;font-size:12px;color:#a8e6c5;">prefers-reduced-motion: reduce</code> is set, duration tokens are overridden in tokens.css. Animation properties themselves are not removed — only their durations, so no layout shifts occur.</p>
+      <p class="ds-section-desc">When <code style="font-family:monospace;font-size:12px;color:var(--jio-3);">prefers-reduced-motion: reduce</code> is set, duration tokens are overridden in tokens.css. Animation properties themselves are not removed — only their durations, so no layout shifts occur. Reduced motion must feel <em>designed</em>, not broken.</p>
 
       <pre class="ds-code"><span class="k">@media</span> (prefers-reduced-motion: reduce) {
   <span class="k">:root</span> {
-    <span class="t">--dur-instant</span>: <span class="v">0ms</span>;
-    <span class="t">--dur-fast</span>:    <span class="v">0ms</span>;
-    <span class="t">--dur-default</span>: <span class="v">0ms</span>;
-    <span class="t">--dur-pop</span>:     <span class="v">0ms</span>;
-    <span class="t">--dur-enter</span>:   <span class="v">0ms</span>;
-    <span class="t">--dur-screen</span>:  <span class="v">0ms</span>;
-    <span class="t">--dur-tv-enter</span>:<span class="v">0ms</span>;
+    <span class="t">--dur-instant</span>:  <span class="v">0ms</span>;
+    <span class="t">--dur-fast</span>:     <span class="v">0ms</span>;
+    <span class="t">--dur-default</span>:  <span class="v">0ms</span>;
+    <span class="t">--dur-pop</span>:      <span class="v">0ms</span>;
+    <span class="t">--dur-slow</span>:     <span class="v">0ms</span>;
+    <span class="t">--dur-error</span>:    <span class="v">0ms</span>;
+    <span class="t">--dur-enter</span>:    <span class="v">0ms</span>;
+    <span class="t">--dur-screen</span>:   <span class="v">0ms</span>;
+    <span class="t">--dur-tv-enter</span>: <span class="v">0ms</span>;
+    <span class="t">--dur-sheet</span>:    <span class="v">100ms</span>;
     <span class="c">/* --dur-reduced-fade (100ms) and --dur-reduced-instant (1ms) */</span>
     <span class="c">/* are intentionally NOT collapsed — they are reduced-motion values */</span>
   }
@@ -503,7 +1008,7 @@
 }</pre>
 
       <div class="rm-note">
-        <strong style="color:var(--amber);">Note:</strong> Shimmer animations must be explicitly removed (<code style="font-family:monospace;color:#a8e6c5;">display:none</code> or <code style="font-family:monospace;color:#a8e6c5;">animation:none</code>) for users with reduced motion. A zero-duration loop still flashes on every frame.
+        <strong style="color:var(--amber);">Note:</strong> Shimmer animations must be explicitly removed (<code style="font-family:monospace;color:var(--jio-3);">display:none</code> or <code style="font-family:monospace;color:var(--jio-3);">animation:none</code>) for users with reduced motion. A zero-duration loop still flashes on every frame. Focus glow is the one exception — it is an accessibility affordance and is <strong>never</strong> removed on any platform.
       </div>
     </section>
 
@@ -515,15 +1020,15 @@
       <div class="tv-rules-grid" style="margin-bottom:var(--space-3);">
         <div class="tv-rule-card">
           <div class="tv-rule-heading">Focus transitions</div>
-          <div class="tv-rule-body">All focus moves use <code>--dur-tv-enter</code> (560ms) + <code>--spring</code>. No instant cuts between focus states.</div>
+          <div class="tv-rule-body">All focus moves use <code>--dur-tv-enter</code> (560ms) + <code>--spring</code> for content entrance. No instant cuts between focus states.</div>
         </div>
         <div class="tv-rule-card">
           <div class="tv-rule-heading">Card focus state</div>
-          <div class="tv-rule-body">Focused card scales to <code>scale(1.05)</code> with <code>--spring</code> easing and mandatory <code>--jio-glow</code> box-shadow.</div>
+          <div class="tv-rule-body">Focused card scales to <code>scale(1.05)</code> (<code>--scale-tv-focus</code>) with <code>--spring</code> easing and mandatory <code>--jio-glow</code> box-shadow.</div>
         </div>
         <div class="tv-rule-card">
           <div class="tv-rule-heading">Focus ring timing</div>
-          <div class="tv-rule-body">Focus ring appears in 150ms with <code>--ease-out</code> — intentionally faster than content transitions so navigation feels instant.</div>
+          <div class="tv-rule-body">Focus ring appears in <code>--dur-fast</code> (120ms) with <code>--ease-out</code> — intentionally faster than content transitions so navigation feels instant.</div>
         </div>
         <div class="tv-rule-card">
           <div class="tv-rule-heading">Screen transitions</div>
@@ -535,16 +1040,16 @@
         </div>
         <div class="tv-rule-card">
           <div class="tv-rule-heading">Content entrance</div>
-          <div class="tv-rule-body">Use <code>--dur-tv-enter</code> with <code>fade-up</code> keyframe (32px translate). Stagger collapses — all items enter simultaneously on TV.</div>
+          <div class="tv-rule-body">Use <code>--dur-tv-enter</code> with <code>fade-up</code> keyframe (<code>--move-tv</code> 32px translate). Stagger collapses — all items enter simultaneously on TV.</div>
         </div>
       </div>
 
       <pre class="ds-code"><span class="c">/* TV focus state */</span>
 <span class="k">.focusable:focus-visible</span> {
-  <span class="p">transform</span>:  <span class="v">scale(1.05)</span>;
+  <span class="p">transform</span>:  <span class="v">scale(var(--scale-tv-focus))</span>;
   <span class="p">box-shadow</span>: <span class="t">var(--jio-glow)</span>;
   <span class="p">transition</span>: transform <span class="t">var(--dur-fast)</span> <span class="t">var(--spring)</span>,
-              box-shadow <span class="t">var(--dur-fast)</span> <span class="t">var(--spring)</span>;
+              box-shadow <span class="t">var(--dur-fast)</span> <span class="t">var(--ease-out)</span>;
   <span class="p">outline</span>:    <span class="v">none</span>;
 }
 
@@ -570,11 +1075,110 @@
       </div>
     </section>
 
+    <!-- Section G: Governance -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Motion governance</h2>
+      <p class="ds-section-desc">Standing rules that gate every new pattern. The token mandate is non-negotiable: <strong>if no token exists for a value you need, stop and ask the DLS owner</strong> — do not hardcode.</p>
+      <div class="ds-rules">
+        <div class="ds-rule ds-rule--pass">Every duration and easing maps to a token in tokens.css.</div>
+        <div class="ds-rule ds-rule--pass">Reduced motion is implemented for every animated component.</div>
+        <div class="ds-rule ds-rule--pass">New patterns are added to this library (keyframe §13, via RFC) before use in any screen.</div>
+        <div class="ds-rule ds-rule--pass">Motion is tested across Mobile, Web, and TV before ship.</div>
+        <div class="ds-rule ds-rule--fail">Raw milliseconds or <code>cubic-bezier</code> in component CSS — only §13 keyframes and §4 constants may use raw values.</div>
+        <div class="ds-rule ds-rule--fail">One-off easing or duration values invented per screen.</div>
+        <div class="ds-rule ds-rule--fail">Custom spring curves without DLS owner approval.</div>
+        <div class="ds-rule ds-rule--fail">Hardcoding a value because no token exists — stop and ask the DLS owner instead.</div>
+      </div>
+    </section>
 
-    <!-- CHANGELOG -->
+    <!-- Section H: QA checklist -->
+    <section class="ds-section">
+      <h2 class="ds-section-title">Motion QA checklist</h2>
+      <p class="ds-section-desc">Run before every motion review. Grouped by concern — all boxes must check.</p>
+
+      <div class="qa-grid">
+        <div>
+          <div class="qa-group-title">Token compliance</div>
+          <ul class="qa-list">
+            <li>All durations use <code>var(--dur-*)</code> tokens</li>
+            <li>All easing uses <code>--spring</code> / <code>--spring-bounce</code> / <code>--ease-screen</code> / <code>--ease-out</code> / <code>--ease-error</code></li>
+            <li>No <code>transition: all</code></li>
+            <li>Raw values only inside §13 keyframes or §4 constants</li>
+          </ul>
+        </div>
+        <div>
+          <div class="qa-group-title">Spatial &amp; causal</div>
+          <ul class="qa-list">
+            <li>Every motion has a named cause</li>
+            <li>Every motion has a spatial source — nothing appears from nowhere</li>
+            <li>Back-navigation reverses the original direction</li>
+            <li>Rail scroll position preserved after interaction</li>
+            <li>No orphan animations</li>
+          </ul>
+        </div>
+        <div>
+          <div class="qa-group-title">Settling &amp; restraint</div>
+          <ul class="qa-list">
+            <li>Scale limits respected: .96–.98 press, 1.03 select, 1.05 TV focus</li>
+            <li><code>--spring-bounce</code> only for one-shot celebration</li>
+            <li><code>shake</code> plays once — not looped</li>
+            <li>Success settles after one beat</li>
+            <li>No bounce or oscillation after state is set</li>
+          </ul>
+        </div>
+        <div>
+          <div class="qa-group-title">Performance</div>
+          <ul class="qa-list">
+            <li>Only <code>transform</code> / <code>opacity</code> animated in loops</li>
+            <li>Progress bars use <code>transform: scaleX()</code></li>
+            <li>Shimmer uses <code>transform: translateX()</code> overlay</li>
+            <li>No <code>width</code>/<code>height</code>/<code>top</code>/<code>left</code> in loops</li>
+          </ul>
+        </div>
+        <div>
+          <div class="qa-group-title">Platform</div>
+          <ul class="qa-list">
+            <li>TV: no ambient, no press bounce, no backdrop-filter, no stagger</li>
+            <li>TV: content entrance uses <code>--dur-tv-enter</code></li>
+            <li>Web: hover states exist; keyboard focus has equivalent affordance</li>
+            <li>Mobile: haptic pairing intent documented</li>
+          </ul>
+        </div>
+        <div>
+          <div class="qa-group-title">Reduced motion</div>
+          <ul class="qa-list">
+            <li>Ambient loops stop completely</li>
+            <li>Screen transitions become opacity fades</li>
+            <li>Stagger collapses to simultaneous fade</li>
+            <li>Shimmer becomes static placeholder</li>
+            <li>Focus glow is NOT removed</li>
+            <li>Error communicates via colour/icon, not motion alone</li>
+          </ul>
+        </div>
+        <div>
+          <div class="qa-group-title">Do not animate</div>
+          <ul class="qa-list">
+            <li>No motion on pricing, payment totals, subscription terms</li>
+            <li>No motion on legal copy, age or safety warnings</li>
+            <li>No motion on OTP digits after entry</li>
+            <li>No motion on critical CTAs mid-state-change</li>
+          </ul>
+        </div>
+        <div>
+          <div class="qa-group-title">Motion clarity</div>
+          <ul class="qa-list">
+            <li>Motion has a clear cause and spatial source</li>
+            <li>Settles cleanly — no jello, no sustained bounce</li>
+            <li>Does not fight user input or delay task completion</li>
+            <li>Reduced motion feels designed, not broken</li>
+            <li>Critical info is never communicated by motion alone</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
   </main>
   <script src="../sprite-loader.js"></script>
-<script src="../shell.js"></script>
+<script src="../shell.js?v=2"></script>
 </body>
 </html>

@@ -7,97 +7,95 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     body { background: var(--bg); color: var(--text); font-family: var(--jio-font); margin: 0; }
 
-    .component-hero { border-radius: 20px; overflow: hidden; margin-bottom: 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; min-height: 320px; padding: 48px 32px 32px; }
-    .component-hero--dark { background: #060810; }
-    .component-hero--grid { background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: 32px 32px; background-color: #060810; border: 1px solid var(--border-subtle); }
-    .component-hero-inner { display: flex; flex-direction: column; align-items: center; gap: 28px; position: relative; z-index: 2; }
-    .component-hero-caption { display: block; font-size: 10px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--text4); margin-top: 24px; position: relative; z-index: 2; }
-    .hero-glow { position: absolute; width: 360px; height: 200px; border-radius: var(--pill); background: radial-gradient(ellipse, rgba(0,168,89,.15) 0%, transparent 70%); pointer-events: none; z-index: 1; }
+    
+    
+    
+    
+    
+    
 
-    .component-intro { margin-bottom: 48px; }
-    .component-intro p { font-size: 15px; font-weight: 500; color: var(--text2); line-height: 1.65; margin-bottom: 20px; max-width: 640px; }
-    .component-summary-list { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border-subtle); border-radius: 14px; overflow: hidden; list-style: none; padding: 0; margin: 0; }
-    .component-summary-list li { padding: 14px 20px; border-bottom: 1px solid var(--border-subtle); font-size: 13px; font-weight: 500; color: var(--text2); line-height: 1.55; }
-    .component-summary-list li:last-child { border-bottom: none; }
-    .component-summary-list li strong { color: var(--text); font-weight: 700; }
+    
+    
+    
+    
+    
+    
 
-    .component-best-practices { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
-    .component-bp-card { border-radius: 14px; overflow: hidden; border: 1.5px solid; }
-    .component-bp-card--do { border-color: rgba(0,168,89,.3); }
-    .component-bp-card--dont { border-color: rgba(255,71,87,.3); }
-    .component-bp-label { display: flex; align-items: center; gap: 6px; padding: 10px 16px; font-size: 10px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; }
-    .component-bp-label--do { background: rgba(0,168,89,.07); color: var(--jio); }
-    .component-bp-label--dont { background: rgba(255,71,87,.07); color: var(--negative); }
-    .component-bp-label--do::before { content: '\2713'; font-size: 11px; }
-    .component-bp-label--dont::before { content: '\2715'; font-size: 11px; }
-    .component-bp-list { padding: 16px 20px 20px; background: var(--surface-1); margin: 0; display: flex; flex-direction: column; gap: 8px; list-style: none; }
-    .component-bp-list li { font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.5; padding-left: 14px; position: relative; }
-    .component-bp-list li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
-    .component-platform-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
-    .component-platform-card { background: var(--surface-1); border: 1px solid var(--border-subtle); border-radius: var(--r4); padding: 20px; }
-    .component-platform-card--mobile { border-top: 2px solid rgba(110,231,183,.4); }
-    .component-platform-card--web { border-top: 2px solid rgba(147,197,253,.4); }
-    .component-platform-card--tv { border-top: 2px solid rgba(251,191,36,.4); }
-    .component-platform-card-title { font-size: 11px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--text3); margin-bottom: 12px; }
-    .component-platform-card--mobile .component-platform-card-title { color: #6ee7b7; }
-    .component-platform-card--web .component-platform-card-title { color: #93c5fd; }
-    .component-platform-card--tv .component-platform-card-title { color: #fbbf24; }
-    .component-platform-card ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
-    .component-platform-card li { font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.5; padding-left: 14px; position: relative; }
-    .component-platform-card li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
-    .component-changelog { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; }
-    .component-changelog-entry { display: grid; grid-template-columns: 56px 80px 1fr; gap: 16px; align-items: start; padding: 14px 20px; border-bottom: 1px solid var(--border-subtle); font-size: 12px; }
-    .component-changelog-entry:last-child { border-bottom: none; }
-    .component-changelog-version { font-family: monospace; font-weight: 700; color: var(--jio); font-size: 11px; }
-    .component-changelog-date { color: var(--text3); font-weight: 500; }
-    .component-changelog-desc { color: var(--text2); line-height: 1.5; }
+    
+    
+    
+    
+    
+    
 
-    .a11y-grid { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; margin-top: 24px; }
-    .a11y-row { display: grid; grid-template-columns: 140px 1fr; gap: 0; border-bottom: 1px solid var(--border-subtle); }
-    .a11y-row:last-child { border-bottom: none; }
-    .a11y-label { padding: 16px 16px 14px; font-size: 11px; font-weight: 700; color: var(--text3); letter-spacing: .3px; background: var(--surface-2); text-transform: uppercase; display: flex; align-items: flex-start; }
-    .a11y-content { padding: 14px 20px; font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.6; background: var(--surface-1); }
-    .a11y-content ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 5px; }
-    .a11y-content li { padding-left: 14px; position: relative; }
-    .a11y-content li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+    
+    
+    
+    
+    
+    
+    
+    
 
-    .ds-token-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; font-size: 12px; }
-    .ds-token-table thead th { background: var(--surface-2); padding: 10px 16px; text-align: left; font-size: 9px; font-weight: 700; letter-spacing: .7px; text-transform: uppercase; color: var(--text3); border-bottom: 1px solid var(--border-subtle); }
-    .ds-token-table tbody td { padding: 12px 16px; border-bottom: 1px solid var(--border-subtle); color: var(--text2); vertical-align: middle; }
-    .ds-token-table tbody tr:last-child td { border-bottom: none; }
-    .ds-token-table tbody tr:hover td { background: var(--surface-2); }
-    .ds-token-name { font-family: monospace; color: #a8e6c5; font-size: 11px; }
-    .ds-token-value { font-family: monospace; color: var(--text3); font-size: 11px; }
-    .ds-token-swatch { display: inline-block; width: 16px; height: 16px; border-radius: 4px; border: 1px solid var(--border-subtle); vertical-align: middle; }
+    
+    
+    
+    
+    
+    
+    
+    
 
-    .ds-anatomy { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 24px; }
-    .ds-anatomy-preview { background: var(--surface-1); border: 1px solid var(--border-subtle); border-radius: var(--r4); padding: 24px; display: flex; align-items: center; justify-content: center; }
-    .ds-anatomy-list { display: flex; flex-direction: column; gap: 16px; }
-    .ds-anatomy-item { display: grid; grid-template-columns: 20px 1fr; gap: 12px; align-items: flex-start; }
-    .ds-anatomy-callout-num { width: 20px; height: 20px; border-radius: 50%; background: var(--jio); color: #000; font-size: 10px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .ds-anatomy-callout-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--jio); flex-shrink: 0; }
-    .ds-anatomy-label { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-    .ds-anatomy-desc { font-size: 12px; color: var(--text2); line-height: 1.55; }
-    .ds-anatomy-token { font-size: 10px; font-family: monospace; color: var(--text4); margin-top: 4px; }
-    .ds-anatomy-required { display: inline-block; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: var(--pill); background: rgba(0,168,89,.1); color: var(--jio); letter-spacing: .3px; margin-left: 6px; text-transform: uppercase; }
-    .ds-anatomy-optional { display: inline-block; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: var(--pill); background: rgba(255,255,255,.06); color: var(--text3); letter-spacing: .3px; margin-left: 6px; text-transform: uppercase; }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     @keyframes shimmer { 0% { background-position: -400px 0; } 100% { background-position: 400px 0; } }
-    .skeleton { background: linear-gradient(90deg, var(--surface-2) 25%, var(--surface-3) 50%, var(--surface-2) 75%); background-size: 800px 100%; animation: shimmer 1.4s infinite linear; border-radius: 6px; }
+    
 
     /* Benefit list item */
     .benefit-item { font-size: 12px; color: var(--text2); padding-left: 14px; position: relative; line-height: 1.6; }
     .benefit-item::before { content: ''; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 50%; background: var(--jio); }
 
-    @media (max-width: 760px) {
-      .component-best-practices, .component-platform-grid, .ds-anatomy { grid-template-columns: 1fr; }
-    }
+    
   </style>
 </head>
 <body>
@@ -105,20 +103,20 @@
 
   <!-- 1. PAGE HEADER -->
   <div class="component-page-header">
-    <div class="component-breadcrumb">
-      <a href="../index.html">JioGames DLS</a>
-      <span class="component-breadcrumb-sep">&#x203A;</span>
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <span class="component-breadcrumb-link">JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
       <span>Components</span>
-      <span class="component-breadcrumb-sep">&#x203A;</span>
-      <span>Pass Cards</span>
-    </div>
-    <h1 class="component-page-title">Pass Cards</h1>
-    <p class="component-page-def">Pass cards present JioGames subscription plans &#x2014; Mobile, Ultimate, and All Screen &#x2014; with pricing, benefits, and clear CTAs.</p>
+      <span class="component-breadcrumb-sep">›</span>
+      <span class="component-breadcrumb-current">Pass Cards</span>
+    </nav>
+    <h1 class="component-page-title">Pass Cards</h1><p class="component-page-def">Pass cards present JioGames subscription plans &#x2014; Mobile, Ultimate, and All Screen &#x2014; with pricing, benefits, and clear CTAs.</p>
     <div class="component-platforms">
       <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
       <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
       <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
       <span class="component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBQYXNzIENhcmRzIOKAlCBKaW9HYW1lcyBETFMgc3BlYwoKPiBTb3VyY2U6IGBwYXNzLWNhcmRzL2luZGV4Lmh0bWxgIGluIHRoZSBKaW9HYW1lcyBEZXNpZ24gU3lzdGVtLgo+IFRoaXMgc3BlYyBpcyBnZW5lcmF0ZWQgdmVyYmF0aW0gZnJvbSB0aGUgcGFnZSDigJQgZG8gbm90IGludmVudCB2YWx1ZXMgbm90IGxpc3RlZCBoZXJlLgoKKipQYXRoOioqIEppb0dhbWVzIERMUyDigLogQ29tcG9uZW50cyDigLogUGFzcyBDYXJkcwoKLS0tCgpQYXNzIGNhcmRzIHByZXNlbnQgSmlvR2FtZXMgc3Vic2NyaXB0aW9uIHBsYW5zIOKAlCBNb2JpbGUsIFVsdGltYXRlLCBhbmQgQWxsIFNjcmVlbiDigJQgd2l0aCBwcmljaW5nLCBiZW5lZml0cywgYW5kIGNsZWFyIENUQXMuCgotIDEwMCsgZ2FtZXMKLSBNb2JpbGUgb25seQotIENhbmNlbCBhbnl0aW1lCi0gTm8gYWRzCgotIDMwMCsgZ2FtZXMKLSBNb2JpbGUgKyBUViArIFdlYgotIEZhbWlseSBzaGFyaW5nCi0gTm8gYWRzCi0gRWFybHkgYWNjZXNzCgpQYXNzIGNhcmRzIGFyZSB0aGUgcHJpbWFyeSBjb252ZXJzaW9uIHN1cmZhY2UgZm9yIEppb0dhbWVzIHN1YnNjcmlwdGlvbnMuIFRoZXkgbXVzdCBjb21tdW5pY2F0ZSB2YWx1ZSBjbGVhcmx5LCBoaWdobGlnaHQgZGlmZmVyZW50aWF0aW9uLCBhbmQgZHJpdmUgY29uZmlkZW50IHN1YnNjcmlwdGlvbiBkZWNpc2lvbnMuCgotICoqVGhyZWUgcGFzcyB0aWVycyoqIOKAlCBNb2JpbGUsIFVsdGltYXRlLCBhbmQgQWxsIFNjcmVlbiDigJQgZWFjaCB3aXRoIGRpc3RpbmN0IHZpc3VhbCB0cmVhdG1lbnQuCi0gKipDdXJyZW50IHBsYW4gc3RhdGUqKiBzdXBwcmVzc2VzIHRoZSBDVEEgYW5kIHNob3dzIGEgIkN1cnJlbnQgcGxhbiIgYmFkZ2UgaW5zdGVhZC4KLSAqKkV4cGlyZWQgc3RhdGUqKiB1c2VzIG11dGVkIHRyZWF0bWVudCBhbmQgYSAiUmVuZXciIENUQS4KLSAqKlJlY29tbWVuZGVkIHBhc3MqKiBnZXRzIHZpc3VhbCBlbXBoYXNpcyB2aWEgdGhlICJNb3N0IFBvcHVsYXIiIHJpYmJvbiBhbmQgZWxldmF0ZWQgc2hhZG93LgoKIyMgV2hlbiB0byB1c2UKClVzZSB3aGVuCgotIFBhc3Mgc3Vic2NyaXB0aW9uIHBsYW4gc2VsZWN0aW9uIG9uIHVwc2VsbCBzY3JlZW5zCi0gUGFzcyBzdGF0dXMgZGlzcGxheSBpbiBhY2NvdW50L3Byb2ZpbGUgc2V0dGluZ3MKLSBDb21wYXJpc29uIGJldHdlZW4gTW9iaWxlIFBhc3MgYW5kIFVsdGltYXRlIFBhc3MgdGllcnMKLSBSZW5ld2FsIHByb21wdHMgb24gbGFwc2VkIHN1YnNjcmliZXIgcmUtZW5nYWdlbWVudCBzY3JlZW5zCgpEb24ndCB1c2Ugd2hlbgoKLSBHZW5lcmljIG1hcmtldGluZyBjYXJkcyB1bnJlbGF0ZWQgdG8gc3Vic2NyaXB0aW9uIHBsYW5zCi0gTW9yZSB0aGFuIDIgcGFzcyB0aWVycyBzaWRlIGJ5IHNpZGUgb24gbW9iaWxlCi0gU2hvd2luZyBwcmljaW5nIHdpdGhvdXQgY2xlYXJseSBpbmRpY2F0aW5nIHRoZSBiaWxsaW5nIHBlcmlvZAoKIyMgQmVzdCBwcmFjdGljZXMKClBhc3MgY2FyZHMgYXJlIGNvbnZlcnNpb24tY3JpdGljYWwuIENsYXJpdHkgYW5kIGhpZXJhcmNoeSBkcml2ZSBkZWNpc2lvbnMg4oCUIG5ldmVyIHNhY3JpZmljZSBlaXRoZXIgZm9yIGRlY29yYXRpb24uCgotIExlYWQgd2l0aCBwbGFuIG5hbWUsIHRoZW4gcHJpY2UsIHRoZW4gYmVuZWZpdHMKLSBIaWdobGlnaHQgdGhlIHJlY29tbWVuZGVkIHBsYW4gd2l0aCBhICJNb3N0IFBvcHVsYXIiIHJpYmJvbgotIEtlZXAgYmVuZWZpdHMgdG8gM+KAkzUgaXRlbXMKLSBVc2Ugc3BlY2lmaWMgQ1RBcyAoIkdldCBNb2JpbGUgUGFzcyIgbm90ICJTdWJzY3JpYmUiKQotIFNob3cgY3VycmVudCBwbGFuIHN0YXRlIGNsZWFybHkgd2l0aCBhIGJhZGdlCgotIFVzZSBpZGVudGljYWwgdmlzdWFsIHdlaWdodCBmb3IgYWxsIHBhc3MgdGllcnMKLSBTaG93IHByaWNlIHdpdGhvdXQgYmlsbGluZyBwZXJpb2QgKGFsd2F5cyAi4oK5OTkvbW9udGgiKQotIExpc3QgbW9yZSB0aGFuIDUgYmVuZWZpdHMg4oCUIG92ZXJ3aGVsbWluZwotIFVzZSBhIGdlbmVyaWMgIlN1YnNjcmliZSIgQ1RBCi0gU2hvdyBleHBpcmVkIGFuZCBhY3RpdmUgcGxhbnMgYXQgdGhlIHNhbWUgdmlzdWFsIHByb21pbmVuY2UKCiMjIEFuYXRvbXkKCkFsbCBwYXNzIGNhcmRzIHNoYXJlIHRoZSBzYW1lIHNpeC1zbG90IHN0cnVjdHVyZS4gVGhlIGNvbnRhaW5lciwgcGxhbiBiYWRnZSwgcHJpY2UgZGlzcGxheSwgYmVuZWZpdHMgbGlzdCwgYW5kIENUQSBhcmUgcmVxdWlyZWQuIFRoZSByaWJib24gaXMgb3B0aW9uYWwuCgotIDEwMCsgZ2FtZXMKLSBNb2JpbGUgb25seQotIENhbmNlbCBhbnl0aW1lCgojIyBWYXJpYW50cwoKRml2ZSB2YXJpYW50cyBjb3ZlciBhbGwgc3Vic2NyaXB0aW9uIGNvbnRleHRzLiBFYWNoIGhhcyBkaXN0aW5jdCB2aXN1YWwgdHJlYXRtZW50IHRvIGNvbW11bmljYXRlIHRpZXIsIHN0YXR1cywgYW5kIGF2YWlsYWJpbGl0eS4KCi0gMTAwKyBnYW1lcwotIE1vYmlsZSBvbmx5Ci0gTm8gYWRzCgotIDMwMCsgZ2FtZXMKLSBBbGwgcGxhdGZvcm1zCi0gRmFtaWx5IHNoYXJpbmcKCi0gNTAwKyBnYW1lcwotIEFsbCBzY3JlZW5zCi0gNiBwcm9maWxlcwoKIyMgU2l6ZXMKClBhc3MgY2FyZHMgaGF2ZSB0d28gc2l6ZXMuIFVzZSB0aGUgZnVsbCBjYXJkIG9uIHNlbGVjdGlvbiBhbmQgdXBzZWxsIHNjcmVlbnM7IHVzZSB0aGUgY29tcGFjdCBjYXJkIGluc2lkZSBib3R0b20gc2hlZXRzLCBkcmF3ZXJzLCBhbmQgYWNjb3VudCBzdW1tYXJ5IHJvd3MuCgotIE1pbiB3aWR0aDogMjgwcHggwrcgbWF4IHdpZHRoOiAxMDAlIG9mIGNvbnRhaW5lcgotIEludGVybmFsIHBhZGRpbmc6IGB2YXIoLS1jYXJkLXBhZGRpbmcpYCA9IDIwcHgKLSBCb3JkZXItcmFkaXVzOiBgdmFyKC0tcjUpYAotIFVzZWQgb246IHBhc3Mgc2VsZWN0aW9uLCB1cHNlbGwgc2hlZXQsIG9uYm9hcmRpbmcKCi0gRml4ZWQgaGVpZ2h0OiA3MnB4IMK3IGZ1bGwgd2lkdGggb2YgY29udGFpbmVyCi0gSW50ZXJuYWwgcGFkZGluZzogMTJweCAxNnB4Ci0gQm9yZGVyLXJhZGl1czogYHZhcigtLXI0KWAKLSBVc2VkIG9uOiBhY2NvdW50IHN1bW1hcnksIGJvdHRvbSBzaGVldCBoZWFkZXIsIHBsYW4gcm93IGluIHNldHRpbmdzCgotIE1pbiB3aWR0aDogMzYwcHggwrcgZnVsbCBjYXJkIGxheW91dAotIExhcmdlciB0ZXh0OiBwYXNzIG5hbWUgMjBweCwgcHJpY2UgMzZweAotIEFsbCBpbnRlcmFjdGl2ZSBlbGVtZW50cyBtdXN0IGJlIGZvY3VzLXJpbmcgbmF2aWdhYmxlCi0gVXNlZCBvbjogVFYgcGFzcyBzZWxlY3Rpb24gc2NyZWVuIG9ubHkKCiMjIFN0YXRlcwoKUGFzcyBjYXJkcyByZXNwb25kIHRvIGZpdmUgc3RhdGVzLiBUaGUgY3VycmVudCBhbmQgcmVjb21tZW5kZWQgc3RhdGVzIHVzZSB2aXN1YWwgZW1waGFzaXM7IGV4cGlyZWQgYW5kIGxvYWRpbmcgc3VwcHJlc3Mgb3Igc2ltcGxpZnkgdGhlIGNhcmQuCgojIyBDb250ZW50CgpQYXNzIGNhcmQgY29weSBtdXN0IGJlIHByZWNpc2UgYW5kIGFjdGlvbi1vcmllbnRlZC4gRXZlcnkgd29yZCBhZmZlY3RzIGNvbnZlcnNpb24uCgotIMK3QWxsIGNhcHMsIDlweCwgbGV0dGVyLXNwYWNpbmcgMS41cHgKLSDCt0NvbG9yIHBlciB0aWVyIChncmVlbiAvIHZpb2xldCAvIHZpb2xldCkKLSDCt05ldmVyIGFiYnJldmlhdGUg4oCUICJNb2JpbGUgUGFzcyIgbm90ICJNb2JpbGUiCgotIMK3TGFyZ2UgcHJpY2U6IDMycHgsIHdlaWdodCA5MDAKLSDCt0Fsd2F5cyBpbmNsdWRlIGJpbGxpbmcgcGVyaW9kICjigrk5OS9tb250aCkKLSDCt1Nob3cgc2F2aW5ncyBiYWRnZSBmb3IgYW5udWFsIHBsYW5zIGlmIGFwcGxpY2FibGUKCi0gwrdQcmVzZW50IHRlbnNlLCBhY3Rpb24tb3JpZW50ZWQgKCJQbGF5IG9uIG1vYmlsZSIpCi0gwrcz4oCTNSBpdGVtcyBtYXhpbXVtCi0gwrdMZWFkIHdpdGggdGhlIG1vc3QgZGlmZmVyZW50aWF0aW5nIGJlbmVmaXQKCi0gwrdEZWZhdWx0OiAiR2V0IFtQbGFuIE5hbWVdIgotIMK3Q3VycmVudDogIk1hbmFnZSBwbGFuIgotIMK3RXhwaXJlZDogIlJlbmV3IFtQbGFuIE5hbWVdIgoKIyMgUGxhdGZvcm0gY29uc2lkZXJhdGlvbnMKClBhc3MgY2FyZCBsYXlvdXQgYWRhcHRzIHNpZ25pZmljYW50bHkgYWNyb3NzIHBsYXRmb3Jtcy4gTW9iaWxlIHNob3dzIG9uZSBjYXJkIGF0IGEgdGltZTsgd2ViIGNvbXBhcmVzIHNpZGUtYnktc2lkZTsgVFYgdXNlcyBhIGZ1bGwtc2NyZWVuIGZvcm1hdC4KCi0gRnVsbC13aWR0aCBzdGFja2VkIGNhcmRzLCBvbmUgcGVyIHNjcmVlbgotIFN3aXBlIGJldHdlZW4gcGxhbnMgKGNhcm91c2VsKQotIFN0aWNreSBDVEEgYXQgYm90dG9tCi0gUHJvZ3Jlc3MgZG90cyBzaG93IHBsYW4gcG9zaXRpb24KLSBUb3VjaCB0YXJnZXQgb24gQ1RBOiBtaW4gNTRweCBoZWlnaHQKCi0gMuKAkzMgY2FyZHMgc2lkZS1ieS1zaWRlCi0gTWF4LXdpZHRoIDQ4MHB4IGVhY2ggY2FyZAotIEhvdmVyIHN0YXRlOiBzbGlnaHQgc2NhbGUgKDEuMDEpICsgc2hhZG93Ci0gUmVjb21tZW5kZWQgY2FyZCBpcyB2aXN1YWxseSBlbGV2YXRlZAotIENUQSB0cmlnZ2VycyBzdWJzY3JpcHRpb24gZmxvdyBpbiBkcmF3ZXIKCi0gRnVsbC1zY3JlZW4gcGxhbiBjb21wYXJpc29uIGxheW91dAotIENhcmQgd2lkdGggNjQwcHggZm9yIDEwLWZvb3QgcmVhZGFiaWxpdHkKLSBGb2N1cyByaW5nIDNweCwgY2xlYXJseSB2aXNpYmxlCi0gRC1wYWQgbGVmdC9yaWdodCBzd2l0Y2hlcyBwbGFucwotIFNlbGVjdGVkIHN0YXRlICsgZm9jdXNlZCBzdGF0ZXMgY29tYmluZWQKCiMjIE1vdGlvbgoKfCBJbnRlcmFjdGlvbiB8IEVhc2luZyB8IER1cmF0aW9uIHwgUHJvcGVydHkgfAp8LS0tfC0tLXwtLS18LS0tfAp8IENhcmQgc2VsZWN0IHwgYC0tZWFzZS1vdXRgIHwgYC0tZHVyLWZhc3RgIHwgYm9yZGVyLWNvbG9yLCBib3gtc2hhZG93IHwKfCBSZWNvbW1lbmRlZCBiYWRnZSBwdWxzZSB8IGBlYXNlLWluLW91dGAgfCBgMnMgaW5maW5pdGVgIHwgYm94LXNoYWRvdyBzY2FsZSB8CnwgUHJpY2UgcmV2ZWFsIHwgYC0tZWFzZS1vdXRgIHwgYC0tZHVyLWJhc2VgIHwgb3BhY2l0eSwgdHJhbnNmb3JtIHRyYW5zbGF0ZVkoOHB4IOKGkiAwKSB8CnwgQ1RBIGhvdmVyIHwgYC0tZWFzZS1vdXRgIHwgYC0tZHVyLWZhc3RgIHwgYmFja2dyb3VuZCwgdHJhbnNmb3JtIHNjYWxlKDEuMDIpIHwKCiMjIFBsYXRmb3JtIHJ1bGVzCgpNb2JpbGUKCi0gRnVsbC13aWR0aCBzaW5nbGUgY2FyZCBwZXIgc2NyZWVuIG9yIHN0YWNrZWQgdmVydGljYWxseSB3aXRoIDE2cHggZ2FwCi0gUmVjb21tZW5kZWQgYmFkZ2UgYXQgdG9wIG9mIGNhcmQg4oCUIG5vdCBpbnNpZGUgaGVhZGVyCi0gQ1RBIGJ1dHRvbjogZnVsbCB3aWR0aCwgcHJpbWFyeSB2YXJpYW50LCA0OHB4IGhlaWdodAotIFByaWNlIGRpc3BsYXllZCBsYXJnZSAoMjhweCA3MDApIOKAlCBrZXkgZGVjaXNpb24gZHJpdmVyCgpXZWIKCi0gU2lkZS1ieS1zaWRlIHR3by1jb2x1bW4gbGF5b3V0IGZvciBNb2JpbGUgdnMuIFVsdGltYXRlIGNvbXBhcmlzb24KLSBIb3Zlcjogc2NhbGUoMS4wMikgKyBkZWVwZXIgYm9yZGVyIGdsb3cgb24gc2VsZWN0ZWQgY2FyZAotIEZlYXR1cmUgbGlzdDogbWF4IDYgaXRlbXMg4oCUIHRydW5jYXRlIG9yIGxpbmsgdG8gZnVsbCBkZXRhaWxzCgpUVgoKLSBGdWxsLXNjcmVlbiB1cHNlbGwgbGF5b3V0IOKAlCBvbmUgY2FyZCBwZXIgc2NyZWVuIG9yIHZlcnRpY2FsIGNvbXBhcmUKLSBELXBhZCBVcC9Eb3duIG5hdmlnYXRlcyBmZWF0dXJlIGxpc3Q7IExlZnQvUmlnaHQgc3dpdGNoZXMgcGxhbgotIENUQSBidXR0b246IDY0cHggaGVpZ2h0IFRWIHZhcmlhbnQ7IHByb21pbmVudCBqaW8tZ3JlZW4gZmlsbAotIFByaWNlIGFuZCBwbGFuIG5hbWU6IG1pbiAyOHB4IGFuZCAyNHB4IOKAlCByZWFkYWJsZSBhdCAxMCBmZWV0CgojIyBBY2Nlc3NpYmlsaXR5CgpQYXNzIGNhcmRzIHByZXNlbnQgZmluYW5jaWFsIGRlY2lzaW9ucy4gRXZlcnkgZWxlbWVudCBtdXN0IGJlIGNvcnJlY3RseSBhbm5vdW5jZWQgdG8gc2NyZWVuIHJlYWRlciB1c2Vycywgd2l0aCBwcmljaW5nIGNsZWFybHkgbGFiZWxlZC4KCi0gVGFiIOKAlCBtb3ZlcyBiZXR3ZWVuIHBsYW4gY2FyZHMgYW5kIENUQXMKLSBFbnRlciDigJQgYWN0aXZhdGVzIHRoZSBDVEEKLSBGb2N1cyByaW5nIDJweCBzb2xpZCBgdmFyKC0tamlvKWAsIG9mZnNldCAzcHggb24gQ1RBIGJ1dHRvbgoKIyMgUmVsYXRlZCB0b2tlbnMKClBhc3MgY2FyZCB2aXN1YWwgdHJlYXRtZW50IGlzIGRlZmluZWQgdmlhIHRoZXNlIGRlc2lnbiB0b2tlbnMuIFRpZXItc3BlY2lmaWMgZ3JhZGllbnQgYW5kIGJvcmRlciB2YWx1ZXMgYXJlIHNldCBwZXIgcGxhbi4KCnwgVG9rZW4gfCBWYWx1ZSB8IFN3YXRjaCB8IFVzYWdlIHwKfC0tLXwtLS18LS0tfC0tLXwKfCAtLWppbyB8ICMwMEE4NTkgfCAgIHwgTW9iaWxlIFBhc3MgYWNjZW50LCBiZW5lZml0cyBkb3QsIENUQSB8CnwgLS12aW9sZXQgfCAjOEU1QkZGIHwgICB8IFVsdGltYXRlICsgQWxsIFNjcmVlbiBQYXNzIGFjY2VudCB8CnwgLS1wb3B1bGFyLWdvbGQgfCAjRjdBQjIwIHwgICB8ICJNb3N0IFBvcHVsYXIiIHJpYmJvbiBiYWNrZ3JvdW5kIHwKfCAtLXI3IHwgMjBweCB8IOKAlCB8IFBhc3MgY2FyZCBib3JkZXItcmFkaXVzIHwKfCAtLXByZW1pdW0tZ3JhZGllbnQgfCBsaW5lYXItZ3JhZGllbnQoMTQ1ZGVnLCAjMGQwYTIwLCAjMWExMDQwKSB8ICAgfCBVbHRpbWF0ZSAvIEFsbCBTY3JlZW4gY2FyZCBiYWNrZ3JvdW5kIHwKfCAtLXByZW1pdW0tYm9yZGVyIHwgcmdiYSgxMzgsOTEsMjU1LC40KSB8ICAgfCBVbHRpbWF0ZSBQYXNzIGNhcmQgYm9yZGVyIHwKfCAtLXByZW1pdW0tZ2xvdyB8IDAgMCAyNHB4IHJnYmEoMTQyLDkxLDI1NSwuMjUpIHwg4oCUIHwgUmVjb21tZW5kZWQgY2FyZCBlbGV2YXRlZCBzaGFkb3cgfAp8IC0tbmVnYXRpdmUgfCAjRkY0NzU3IHwgICB8ICJFeHBpcmVkIiBzdGF0dXMgbGFiZWwgfAoKIyMgQVBJCgojIyMgQ1NTIGNsYXNzZXMKCnwgQ2xhc3MgfCBEZXNjcmlwdGlvbiB8CnwtLS18LS0tfAp8IGAuZHMtcGFzcy1jYXJkYCB8IFJvb3Qg4oCUIHN1cmZhY2UtMSwgYm9yZGVyLXN1YnRsZSwgcjUsIG92ZXJmbG93IGhpZGRlbiB8CnwgYC5kcy1wYXNzLWNhcmQtLW1vYmlsZWAgfCBNb2JpbGUgUGFzcyDigJQgamlvLWdyZWVuIGFjY2VudCBoZWFkZXIgfAp8IGAuZHMtcGFzcy1jYXJkLS11bHRpbWF0ZWAgfCBVbHRpbWF0ZSBQYXNzIOKAlCBnb2xkL3ByZW1pdW0gZ3JhZGllbnQgaGVhZGVyIHwKfCBgLmRzLXBhc3MtY2FyZC0tc2VsZWN0ZWRgIHwgU2VsZWN0ZWQgc3RhdGUg4oCUIGppbyBib3JkZXIsIGppby1zb2Z0IGJnIHRpbnQgfAp8IGAuZHMtcGFzcy1jYXJkX19oZWFkZXJgIHwgQ29sb3JlZCB0b3Agc2VjdGlvbiB3aXRoIHBhc3MgbmFtZSBhbmQgaWNvbiB8CnwgYC5kcy1wYXNzLWNhcmRfX3ByaWNlYCB8IExhcmdlIHByaWNlIGRpc3BsYXkg4oCUIDI4cHggNzAwIHwKfCBgLmRzLXBhc3MtY2FyZF9fZmVhdHVyZXNgIHwgRmVhdHVyZSBsaXN0IOKAlCBidWxsZXQgaXRlbXMgfAp8IGAuZHMtcGFzcy1jYXJkX19jdGFgIHwgU3Vic2NyaWJlIGJ1dHRvbiDigJQgZnVsbCB3aWR0aCwgcHJpbWFyeSB8CgojIyMgUmVhY3QgcHJvcHMKCnwgUHJvcCB8IFR5cGUgfCBEZWZhdWx0IHwgRGVzY3JpcHRpb24gfAp8LS0tfC0tLXwtLS18LS0tfAp8IGB0aWVyYCB8ICJtb2JpbGUiIHwgInVsdGltYXRlIiB8IHJlcXVpcmVkIHwgUGFzcyB0aWVyIHwKfCBgcHJpY2VgIHwgc3RyaW5nIHwgcmVxdWlyZWQgfCBGb3JtYXR0ZWQgcHJpY2Ugc3RyaW5nIChlLmcuICLigrkyOTkvbW8iKSB8CnwgYGZlYXR1cmVzYCB8IHN0cmluZ1tdIHwgcmVxdWlyZWQgfCBGZWF0dXJlIGJ1bGxldCBwb2ludHMgfAp8IGBzZWxlY3RlZGAgfCBib29sZWFuIHwgZmFsc2UgfCBIaWdobGlnaHRlZC9jaG9zZW4gc3RhdGUgfAp8IGBvblNlbGVjdGAgfCAoKSA9PiB2b2lkIHwgdW5kZWZpbmVkIHwgU2VsZWN0aW9uIGhhbmRsZXIgfAp8IGByZWNvbW1lbmRlZGAgfCBib29sZWFuIHwgZmFsc2UgfCBTaG93ICJSZWNvbW1lbmRlZCIgYmFkZ2UgfAp8IGBjdGFMYWJlbGAgfCBzdHJpbmcgfCAiU3Vic2NyaWJlIiB8IENUQSBidXR0b24gdGV4dCB8CnwgYG9uQ3RhYCB8ICgpID0+IHZvaWQgfCB1bmRlZmluZWQgfCBDVEEgYnV0dG9uIGhhbmRsZXIgfAoKIyMgQ29kZSBleGFtcGxlcwoKQ29weSB0aGVzZSBzbmlwcGV0cyBhcyBzdGFydGluZyBwb2ludHMuIEFsd2F5cyBsaW5rIGB0b2tlbnMvdG9rZW5zLmNzc2AsIGBjb21wb25lbnRzLmNzc2AsIGFuZCBgc3RhdGVzLmNzc2AgYmVmb3JlIHVzaW5nIGNvbXBvbmVudCBjbGFzc2VzLgoKYGBgYGh0bWwKPGRpdiBjbGFzcz0icGFzcy1tb2JpbGUiPgogIDxkaXYgY2xhc3M9InBhc3MtY2FyZF9fZXllYnJvdyI+TW9iaWxlIFBhc3M8L2Rpdj4KICA8ZGl2IGNsYXNzPSJwYXNzLWNhcmRfX3ByaWNlIj4KICAgIDxzcGFuIGNsYXNzPSJwYXNzLWNhcmRfX2N1cnJlbmN5Ij7igrk8L3NwYW4+CiAgICA8c3BhbiBjbGFzcz0icGFzcy1jYXJkX19hbW91bnQiPjk5PC9zcGFuPgogICAgPHNwYW4gY2xhc3M9InBhc3MtY2FyZF9fcGVyaW9kIj4vbW9udGg8L3NwYW4+CiAgPC9kaXY+CiAgPHVsIGNsYXNzPSJwYXNzLWNhcmRfX3BlcmtzIj4KICAgIDxsaT5QbGF5IG9uIDEgbW9iaWxlIGRldmljZTwvbGk+CiAgICA8bGk+MzAwKyBnYW1lcyBpbmNsdWRlZDwvbGk+CiAgICA8bGk+Q2FuY2VsIGFueXRpbWU8L2xpPgogIDwvdWw+CiAgPGJ1dHRvbiBjbGFzcz0iYnRuIGJ0bi0tcHJpbWFyeSBidG4tLW0gYnRuLS1mdWxsIj5HZXQgTW9iaWxlIFBhc3M8L2J1dHRvbj4KPC9kaXY+CmBgYGAKCmBgYGBodG1sCjxkaXYgY2xhc3M9InBhc3MtdWx0aW1hdGUiPgogIDxkaXYgY2xhc3M9InBhc3MtY2FyZF9fZXllYnJvdyI+CiAgICBVbHRpbWF0ZSBQYXNzCiAgICA8c3BhbiBjbGFzcz0idXBzZWxsLXBvcHVsYXIiPk1vc3QgcG9wdWxhcjwvc3Bhbj4KICA8L2Rpdj4KICA8ZGl2IGNsYXNzPSJwYXNzLWNhcmRfX3ByaWNlIj4KICAgIDxzcGFuIGNsYXNzPSJwYXNzLWNhcmRfX2N1cnJlbmN5Ij7igrk8L3NwYW4+CiAgICA8c3BhbiBjbGFzcz0icGFzcy1jYXJkX19hbW91bnQiPjE5OTwvc3Bhbj4KICAgIDxzcGFuIGNsYXNzPSJwYXNzLWNhcmRfX3BlcmlvZCI+L21vbnRoPC9zcGFuPgogIDwvZGl2PgogIDx1bCBjbGFzcz0icGFzcy1jYXJkX19wZXJrcyI+CiAgICA8bGk+UGxheSBvbiA1IHNjcmVlbnM8L2xpPgogICAgPGxpPk1vYmlsZSArIFRWICsgV2ViPC9saT4KICAgIDxsaT5FeGNsdXNpdmUgdGl0bGVzIGluY2x1ZGVkPC9saT4KICA8L3VsPgogIDxidXR0b24gY2xhc3M9ImJ0biBidG4tLXByaW1hcnkgYnRuLS1tIGJ0bi0tZnVsbCI+R2V0IFVsdGltYXRlIFBhc3M8L2J1dHRvbj4KPC9kaXY+CmBgYGAKCi0tLQoKIyMgVG9rZW5zIHJlZmVyZW5jZWQgb24gdGhpcyBwYWdlCgpVc2UgdGhlc2UgZXhhY3QgdG9rZW5zIOKAlCBkZWZpbmVkIGluIGB0b2tlbnMvdG9rZW5zLmNzc2AuIERvIG5vdCBzdWJzdGl0dXRlIHJhdyB2YWx1ZXMuCgotIGAtLWFtYmVyYAotIGAtLWJnYAotIGAtLWJvcmRlci1zdWJ0bGVgCi0gYC0tY2FyZC1wYWRkaW5nYAotIGAtLWdvbGRgCi0gYC0tamlvYAotIGAtLWppby1mb250YAotIGAtLW5lZ2F0aXZlYAotIGAtLXBpbGxgCi0gYC0tcG9wdWxhci1nb2xkYAotIGAtLXI0YAotIGAtLXI1YAotIGAtLXI3YAotIGAtLXN1cmZhY2UtMWAKLSBgLS10ZXh0YAotIGAtLXRleHQtaW52YAotIGAtLXRleHQyYAotIGAtLXRleHQzYAotIGAtLXRleHQ0YAotIGAtLXZpb2xldGAKCi0tLQoKIyMgQnVpbGQgcnVsZXMgKGJpbmRpbmcpCgoxLiBVc2UgKipvbmx5KiogdGhlIHRva2VucyBsaXN0ZWQgYWJvdmUuIElmIGEgdmFsdWUgeW91IG5lZWQgaXMgbm90IGxpc3RlZCwgc3RvcCBhbmQgYXNrIOKAlCBkbyBub3QgaW50cm9kdWNlIGEgcmF3IHZhbHVlLgoyLiBGb250IGlzICoqSmlvVHlwZSoqIG9ubHkuIFdlaWdodHM6IDMwMCwgNTAwLCA3MDAsIDkwMC4KMy4gUmV1c2UgdGhlIGNvbXBvbmVudCBDU1MgcGF0dGVybnMgc2hvd24gb24gdGhlIHNvdXJjZSBwYWdlOyBkbyBub3QgcmVkZXNpZ24uCjQuIE1hdGNoIGV2ZXJ5IHN0YXRlIChkZWZhdWx0LCBob3ZlciwgZm9jdXMsIGFjdGl2ZSwgZGlzYWJsZWQsIGxvYWRpbmcpIHNob3duIG9uIHRoZSBwYWdlLgo1LiBBY2Nlc3NpYmlsaXR5IHJlcXVpcmVtZW50cyBvbiB0aGUgcGFnZSBhcmUgbWFuZGF0b3J5LCBub3Qgb3B0aW9uYWwuCg==" download="pass-cards-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
     </div>
   </div>
 
@@ -147,7 +145,7 @@
         <!-- Ultimate Pass Card -->
         <div style="width:220px;border-radius:var(--r7);padding:24px;background:linear-gradient(145deg,#0d0a20,#1a1040);border:1px solid rgba(138,91,255,.4);position:relative">
           <!-- Ribbon -->
-          <div style="position:absolute;top:12px;right:-4px;background:var(--popular-gold);color:#000;font-size:9px;font-weight:900;padding:3px 10px;border-radius:3px;letter-spacing:.5px">MOST POPULAR</div>
+          <div style="position:absolute;top:12px;right:-4px;background:var(--popular-gold);color:var(--text-inv);font-size:9px;font-weight:900;padding:3px 10px;border-radius:3px;letter-spacing:.5px">MOST POPULAR</div>
           <div style="font-size:9px;font-weight:900;letter-spacing:1.5px;color:#a78bfa;text-transform:uppercase;margin-bottom:12px">Ultimate Pass</div>
           <div style="display:flex;align-items:baseline;gap:4px;margin-bottom:16px">
             <span style="font-size:32px;font-weight:900;color:var(--text);line-height:1">&#x20B9;199</span>
@@ -180,6 +178,30 @@
   </section>
 
   <!-- 4. BEST PRACTICES -->
+  <!-- WHEN TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use</h2>
+    <div class="ds-usage-grid">
+      <div class="ds-usage-card ds-usage-card--do">
+        <p class="ds-usage-label ds-usage-label--do">Use when</p>
+        <ul class="ds-usage-list">
+              <li>Pass subscription plan selection on upsell screens</li>
+              <li>Pass status display in account/profile settings</li>
+              <li>Comparison between Mobile Pass and Ultimate Pass tiers</li>
+              <li>Renewal prompts on lapsed subscriber re-engagement screens</li>
+        </ul>
+      </div>
+      <div class="ds-usage-card ds-usage-card--dont">
+        <p class="ds-usage-label ds-usage-label--dont">Don't use when</p>
+        <ul class="ds-usage-list">
+              <li>Generic marketing cards unrelated to subscription plans</li>
+              <li>More than 2 pass tiers side by side on mobile</li>
+              <li>Showing pricing without clearly indicating the billing period</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <section class="ds-section" id="best-practices">
     <h2 class="ds-section-title">Best practices</h2>
     <p class="ds-section-desc">Pass cards are conversion-critical. Clarity and hierarchy drive decisions &#x2014; never sacrifice either for decoration.</p>
@@ -336,7 +358,7 @@
       <!-- Ultimate Pass -->
       <div style="position:relative">
         <div style="width:150px;border-radius:var(--r7);padding:18px;background:linear-gradient(145deg,#0d0a20,#1a1040);border:1px solid rgba(138,91,255,.4);position:relative">
-          <div style="position:absolute;top:10px;right:-4px;background:var(--popular-gold);color:#000;font-size:7px;font-weight:900;padding:2px 8px;border-radius:3px">MOST POPULAR</div>
+          <div style="position:absolute;top:10px;right:-4px;background:var(--popular-gold);color:var(--text-inv);font-size:7px;font-weight:900;padding:2px 8px;border-radius:3px">MOST POPULAR</div>
           <div style="font-size:8px;font-weight:900;letter-spacing:1.5px;color:#a78bfa;text-transform:uppercase;margin-bottom:8px">Ultimate Pass</div>
           <div style="display:flex;align-items:baseline;gap:3px;margin-bottom:10px">
             <span style="font-size:22px;font-weight:900;color:var(--text);line-height:1">&#x20B9;199</span>
@@ -378,7 +400,7 @@
             <span style="font-size:22px;font-weight:900;color:var(--text3);line-height:1">&#x20B9;99</span>
             <span style="font-size:10px;color:var(--text4)">/mo</span>
           </div>
-          <div style="font-size:9px;color:var(--negative);margin-bottom:10px;font-weight:600">Expired</div>
+          <div style="font-size:9px;color:var(--negative);margin-bottom:10px;font-weight:700">Expired</div>
           <button class="btn btn--secondary btn--s btn--hug" style="width:100%;justify-content:center;font-size:10px;pointer-events:none">Renew Mobile Pass</button>
         </div>
         <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-top:10px">Expired / Lapsed</div>
@@ -445,7 +467,7 @@
       <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
         <div style="width:120px;border-radius:14px;padding:14px;background:linear-gradient(145deg,#0a1f12,#0d2e1a);border:1px solid rgba(0,168,89,.3)">
           <div style="font-size:7px;font-weight:900;letter-spacing:1px;color:var(--jio);text-transform:uppercase;margin-bottom:6px">Mobile Pass</div>
-          <div style="font-size:18px;font-weight:900;color:var(--text);margin-bottom:8px">&#x20B9;99<span style="font-size:9px;color:var(--text3);font-weight:400">/mo</span></div>
+          <div style="font-size:18px;font-weight:900;color:var(--text);margin-bottom:8px">&#x20B9;99<span style="font-size:9px;color:var(--text3);font-weight:500">/mo</span></div>
           <button class="btn btn--primary btn--s btn--hug" style="width:100%;justify-content:center;font-size:9px;pointer-events:none">Get Pass</button>
         </div>
         <span style="font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Default</span>
@@ -454,7 +476,7 @@
       <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
         <div style="width:120px;border-radius:14px;padding:14px;background:linear-gradient(145deg,#0a1f12,#0d2e1a);border:1px solid rgba(0,168,89,.3);box-shadow:0 0 0 2px var(--jio)">
           <div style="font-size:7px;font-weight:900;letter-spacing:1px;color:var(--jio);text-transform:uppercase;margin-bottom:6px">Mobile Pass</div>
-          <div style="font-size:18px;font-weight:900;color:var(--text);margin-bottom:4px">&#x20B9;99<span style="font-size:9px;color:var(--text3);font-weight:400">/mo</span></div>
+          <div style="font-size:18px;font-weight:900;color:var(--text);margin-bottom:4px">&#x20B9;99<span style="font-size:9px;color:var(--text3);font-weight:500">/mo</span></div>
           <div style="font-size:8px;color:var(--jio);font-weight:700;margin-bottom:8px">&#x2713; Current plan</div>
           <button class="btn btn--secondary btn--s btn--hug" style="width:100%;justify-content:center;font-size:9px;pointer-events:none">Manage</button>
         </div>
@@ -464,7 +486,7 @@
       <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
         <div style="width:120px;border-radius:14px;padding:14px;background:linear-gradient(145deg,#0a1f12,#0d2e1a);border:1px solid rgba(0,168,89,.15);opacity:.6">
           <div style="font-size:7px;font-weight:900;letter-spacing:1px;color:var(--text3);text-transform:uppercase;margin-bottom:6px">Mobile Pass</div>
-          <div style="font-size:18px;font-weight:900;color:var(--text3);margin-bottom:4px">&#x20B9;99<span style="font-size:9px;color:var(--text4);font-weight:400">/mo</span></div>
+          <div style="font-size:18px;font-weight:900;color:var(--text3);margin-bottom:4px">&#x20B9;99<span style="font-size:9px;color:var(--text4);font-weight:500">/mo</span></div>
           <div style="font-size:8px;color:var(--negative);margin-bottom:8px">Expired</div>
           <button class="btn btn--secondary btn--s btn--hug" style="width:100%;justify-content:center;font-size:9px;pointer-events:none">Renew</button>
         </div>
@@ -473,9 +495,9 @@
 
       <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
         <div style="width:120px;border-radius:14px;padding:14px;background:linear-gradient(145deg,#0d0a20,#1a1040);border:1px solid rgba(138,91,255,.4);position:relative">
-          <div style="position:absolute;top:8px;right:-3px;background:var(--popular-gold);color:#000;font-size:6px;font-weight:900;padding:2px 6px;border-radius:2px">POPULAR</div>
+          <div style="position:absolute;top:8px;right:-3px;background:var(--popular-gold);color:var(--text-inv);font-size:6px;font-weight:900;padding:2px 6px;border-radius:2px">POPULAR</div>
           <div style="font-size:7px;font-weight:900;letter-spacing:1px;color:#a78bfa;text-transform:uppercase;margin-bottom:6px">Ultimate</div>
-          <div style="font-size:18px;font-weight:900;color:var(--text);margin-bottom:8px">&#x20B9;199<span style="font-size:9px;color:var(--text3);font-weight:400">/mo</span></div>
+          <div style="font-size:18px;font-weight:900;color:var(--text);margin-bottom:8px">&#x20B9;199<span style="font-size:9px;color:var(--text3);font-weight:500">/mo</span></div>
           <button class="btn btn--ultimate btn--s btn--hug" style="width:100%;justify-content:center;font-size:9px;pointer-events:none">Get Pass</button>
         </div>
         <span style="font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3)">Recommended</span>
@@ -572,6 +594,39 @@
   </section>
 
   <!-- 10. ACCESSIBILITY -->
+  <!-- MOTION -->
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-motion-table">
+      <thead><tr><th>Interaction</th><th>Easing</th><th>Duration</th><th>Property</th></tr></thead>
+      <tbody>
+        <tr><td>Card select</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>border-color, box-shadow</td></tr>
+        <tr><td>Recommended badge pulse</td><td><code>ease-in-out</code></td><td><code>2s infinite</code></td><td>box-shadow scale</td></tr>
+        <tr><td>Price reveal</td><td><code>--ease-out</code></td><td><code>--dur-base</code></td><td>opacity, transform translateY(8px → 0)</td></tr>
+        <tr><td>CTA hover</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>background, transform scale(1.02)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PLATFORM -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform rules</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:16px;">
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--gold);border-radius:var(--r4);padding:20px;background:var(--surface-1);">
+        <p style="font-size:12px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px;">Mobile</p>
+        <ul style="list-style:none;padding:0;margin:0;"><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Full-width single card per screen or stacked vertically with 16px gap</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Recommended badge at top of card — not inside header</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">CTA button: full width, primary variant, 48px height</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Price displayed large (28px 700) — key decision driver</li></ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--amber);border-radius:var(--r4);padding:20px;background:var(--surface-1);">
+        <p style="font-size:12px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px;">Web</p>
+        <ul style="list-style:none;padding:0;margin:0;"><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Side-by-side two-column layout for Mobile vs. Ultimate comparison</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Hover: scale(1.02) + deeper border glow on selected card</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Feature list: max 6 items — truncate or link to full details</li></ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid #F59E0B;border-radius:var(--r4);padding:20px;background:var(--surface-1);">
+        <p style="font-size:12px;font-weight:700;color:#F59E0B;text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px;">TV</p>
+        <ul style="list-style:none;padding:0;margin:0;"><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Full-screen upsell layout — one card per screen or vertical compare</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">D-pad Up/Down navigates feature list; Left/Right switches plan</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">CTA button: 64px height TV variant; prominent jio-green fill</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Price and plan name: min 28px and 24px — readable at 10 feet</li></ul>
+      </div>
+    </div>
+  </section>
+
   <section class="ds-section" id="accessibility">
     <h2 class="ds-section-title">Accessibility</h2>
     <p class="ds-section-desc">Pass cards present financial decisions. Every element must be correctly announced to screen reader users, with pricing clearly labeled.</p>
@@ -675,6 +730,39 @@
   </section>
 
   <!-- 12. CODE EXAMPLES -->
+  <!-- API -->
+  <section class="ds-section" id="api">
+    <h2 class="ds-section-title">API</h2>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:0 0 12px;">CSS classes</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>.ds-pass-card</code></td><td>Root — surface-1, border-subtle, r5, overflow hidden</td></tr>
+        <tr><td><code>.ds-pass-card--mobile</code></td><td>Mobile Pass — jio-green accent header</td></tr>
+        <tr><td><code>.ds-pass-card--ultimate</code></td><td>Ultimate Pass — gold/premium gradient header</td></tr>
+        <tr><td><code>.ds-pass-card--selected</code></td><td>Selected state — jio border, jio-soft bg tint</td></tr>
+        <tr><td><code>.ds-pass-card__header</code></td><td>Colored top section with pass name and icon</td></tr>
+        <tr><td><code>.ds-pass-card__price</code></td><td>Large price display — 28px 700</td></tr>
+        <tr><td><code>.ds-pass-card__features</code></td><td>Feature list — bullet items</td></tr>
+        <tr><td><code>.ds-pass-card__cta</code></td><td>Subscribe button — full width, primary</td></tr>
+      </tbody>
+    </table>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 12px;">React props</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>tier</code></td><td><span class="api-type">"mobile" | "ultimate"</span></td><td><span class="api-default">required</span></td><td>Pass tier</td></tr>
+        <tr><td><code>price</code></td><td><span class="api-type">string</span></td><td><span class="api-default">required</span></td><td>Formatted price string (e.g. "₹299/mo")</td></tr>
+        <tr><td><code>features</code></td><td><span class="api-type">string[]</span></td><td><span class="api-default">required</span></td><td>Feature bullet points</td></tr>
+        <tr><td><code>selected</code></td><td><span class="api-type">boolean</span></td><td><span class="api-default">false</span></td><td>Highlighted/chosen state</td></tr>
+        <tr><td><code>onSelect</code></td><td><span class="api-type">() => void</span></td><td><span class="api-default">undefined</span></td><td>Selection handler</td></tr>
+        <tr><td><code>recommended</code></td><td><span class="api-type">boolean</span></td><td><span class="api-default">false</span></td><td>Show "Recommended" badge</td></tr>
+        <tr><td><code>ctaLabel</code></td><td><span class="api-type">string</span></td><td><span class="api-default">"Subscribe"</span></td><td>CTA button text</td></tr>
+        <tr><td><code>onCta</code></td><td><span class="api-type">() => void</span></td><td><span class="api-default">undefined</span></td><td>CTA button handler</td></tr>
+      </tbody>
+    </table>
+  </section>
+
   <section class="component-section" id="code-examples">
     <h2 class="ds-section-title">Code examples</h2>
     <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
@@ -721,6 +809,6 @@
 
 </main>
 <script src="../sprite-loader.js"></script>
-<script src="../shell.js"></script>
+<script src="../shell.js?v=2"></script>
 </body>
 </html>

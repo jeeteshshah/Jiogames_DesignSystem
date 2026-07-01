@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JioGames Design Language System — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=6">
+  <style>
+    /* ── Homepage-specific ── */
+    /* body styles handled by shell.css (display:grid 3-col) */
+
+    /* ── Hero ── */
+    .home-hero {
+      border-top: 2px solid var(--jio);
+      background: var(--bg);
+      padding: 72px 56px 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .home-hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, var(--jio) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .home-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--jio-soft);
+      color: var(--jio);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: var(--pill);
+      border: 1px solid rgba(0,168,89,.25);
+      margin-bottom: 20px;
+    }
+    .home-hero-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: var(--pill);
+      background: var(--jio);
+    }
+    .home-hero-title {
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: -1.5px;
+      line-height: 1.05;
+      margin-bottom: 16px;
+      max-width: 700px;
+    }
+    .home-hero-subtitle {
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.55;
+      max-width: 540px;
+    }
+    .home-hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .home-hero-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .home-hero-stat-n {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: -.5px;
+    }
+    .home-hero-stat-l {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text3);
+    }
+    .home-hero-sep {
+      width: 1px;
+      height: 32px;
+      background: var(--border-subtle);
+    }
+
+    /* ── Content wrapper ── */
+    .home-content {
+      padding: 56px 56px 80px;
+      max-width: 1100px;
+    }
+
+    /* ── Section label ── */
+    .home-section-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .home-section-title {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--text);
+      letter-spacing: -.4px;
+      margin-bottom: 6px;
+    }
+    .home-section-desc {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      max-width: 520px;
+    }
+
+    /* ── Principles ── */
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 64px;
+    }
+    .principle-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r5);
+      padding: 24px;
+      position: relative;
+    }
+    .principle-num {
+      width: 28px;
+      height: 28px;
+      border-radius: var(--pill);
+      background: var(--jio-soft);
+      border: 1px solid rgba(0,168,89,.25);
+      color: var(--jio);
+      font-size: 12px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .principle-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -.2px;
+      margin-bottom: 8px;
+    }
+    .principle-desc {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+
+    /* ── Colour swatches ── */
+    .swatch-section {
+      margin-bottom: 64px;
+    }
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 12px;
+    }
+    .swatch-card {
+      background: var(--card-bg);
+      border-radius: var(--r3);
+      overflow: hidden;
+      border: 1px solid var(--border-subtle);
+    }
+    .swatch-block {
+      height: 48px;
+    }
+    .swatch-info {
+      padding: 10px 12px;
+    }
+    .swatch-token {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text);
+      font-family: monospace;
+    }
+    .swatch-hex {
+      font-size: 10px;
+      color: var(--text3);
+      font-family: monospace;
+      margin-top: 2px;
+    }
+
+    /* ── Nav cards (Foundations / Components) ── */
+    .nav-section {
+      margin-bottom: 64px;
+    }
+    .nav-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .nav-card {
+      text-decoration: none;
+      display: block;
+      padding: 20px;
+      background: var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--r5);
+      transition: border-color 150ms, box-shadow 150ms;
+    }
+    .nav-card:hover {
+      border-color: rgba(0,168,89,.35);
+      box-shadow: 0 0 0 1px rgba(0,168,89,.1);
+    }
+    .nav-card-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0;
+      margin-bottom: 6px;
+    }
+    .nav-card-desc {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text2);
+      line-height: 1.5;
+    }
+
+    /* ── Footer ── */
+    .home-footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 32px 56px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text4);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Sidebar injected by shell.js -->
+
+<main class="ds-main" style="padding:0;overflow-y:auto;">
+
+  <!-- ── Hero ── -->
+  <div class="home-hero">
+    <div class="home-hero-badge">v1.0</div>
+    <h1 class="home-hero-title">JioGames Design Language System</h1>
+<p style="margin-top:12px"><a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBKaW9HYW1lcyBEZXNpZ24gTGFuZ3VhZ2UgU3lzdGVtIOKAlCBKaW9HYW1lcyBETFMgc3BlYwoKPiBTb3VyY2U6IGBvdmVydmlldy9pbmRleC5odG1sYCBpbiB0aGUgSmlvR2FtZXMgRGVzaWduIFN5c3RlbS4KPiBUaGlzIHNwZWMgaXMgZ2VuZXJhdGVkIHZlcmJhdGltIGZyb20gdGhlIHBhZ2Ug4oCUIGRvIG5vdCBpbnZlbnQgdmFsdWVzIG5vdCBsaXN0ZWQgaGVyZS4KCi0tLQoKW+KGkyBEb3dubG9hZCBNRF0oZGF0YTp0ZXh0L21hcmtkb3duO2NoYXJzZXQ9dXRmLTg7YmFzZTY0LEl5QkthVzlIWVcxbGN5QkVaWE5wWjI0Z1RHRnVaM1ZoWjJVZ1UzbHpkR1Z0SU9LQWxDQkthVzlIWVcxbGN5QkVURk1nYzNCbFl3b0tQaUJUYjNWeVkyVTZJR0J2ZG1WeWRtbGxkeTlwYm1SbGVDNW9kRzFzWUNCcGJpQjBhR1VnU21sdlIyRnRaWE1nUkdWemFXZHVJRk41YzNSbGJTNEtQaUJVYUdseklITndaV01nYVhNZ1oyVnVaWEpoZEdWa0lIWmxjbUpoZEdsdElHWnliMjBnZEdobElIQmhaMlVnNG9DVUlHUnZJRzV2ZENCcGJuWmxiblFnZG1Gc2RXVnpJRzV2ZENCc2FYTjBaV1FnYUdWeVpTNEtDaTB0TFFvS1ZHaGxJSE5wYm1kc1pTQnpiM1Z5WTJVZ2IyWWdkSEoxZEdnZ1ptOXlJRXBwYjBkaGJXVnpJRlZKSUdGamNtOXpjeUJOYjJKcGJHVXNJRmRsWWl3Z1lXNWtJRlJXTGdvS0l5TWdRblZwYkhRZ2IyNGdkR2h5WldVZ2JtOXVMVzVsWjI5MGFXRmliR1Z6Q2dwRmRtVnllU0JrWldOcGMybHZiaUJwYmlCMGFHVWdSRXhUSUdac2IzZHpJR1p5YjIwZ2RHaGxjMlVnY0hKcGJtTnBjR3hsY3k0Z1YyaGxiaUJwYmlCa2IzVmlkQ3dnY21WMGRYSnVJSFJ2SUhSb1pXMHVDZ3BCYkd3Z2MzVnlabUZqWlhNZ1lYSmxJR1JoY21zdUlFcHBiMGRoYldWeklHZHlaV1Z1SUdseklIUm9aU0J6YjJ4bElHSnlZVzVrSUdGalkyVnVkQ0RpZ0pRZ2JtVjJaWElnWW14MVpTQnZjaUJ3ZFhKd2JHVXVJRVYyWlhKNUlHTnZiRzkxY2lCa1pXTnBjMmx2YmlCeVpXbHVabTl5WTJWeklIUm9aU0JuWVcxcGJtY2dZWFJ0YjNOd2FHVnlaUzRLQ2tWMlpYSjVJR0Z1YVcxaGRHbHZiaUJvWVhNZ1lTQjBiMnRsYmk0Z1UzQnlhVzVuSUdWaGMybHVaeUJtYjNJZ1pXNTBaWEp6TENCcGJuTjBZVzUwSUdadmNpQlVWaUJtYjJOMWN5NGdRVzVwYldGMGFXOXVJRzExYzNRZ1pXRnliaUJwZEhNZ2NHeGhZMlVnNG9DVUlHNWxkbVZ5SUdadmNpQnBkSE1nYjNkdUlITmhhMlV1Q2dwTmIySnBiR1VnZEc5MVkyZ3NJRmRsWWlCd2IybHVkR1Z5SUNzZ2EyVjVZbTloY21Rc0lGUldJRVF0Y0dGa0xpQkZZV05vSUhCc1lYUm1iM0p0SUdoaGN5QnBkSE1nYjNkdUlITndZV05wYm1jc0lITnBlbWx1Wnl3Z1lXNWtJRzF2ZEdsdmJpQnlkV3hsY3k0Z1RtOGdiMjVsTFhOcGVtVXRabWwwY3kxaGJHd3VDZ29qSXlCUmRXbGpheUJ5WldabGNtVnVZMlVLQ2tOdmNtVWdkRzlyWlc1eklHRjBJR0VnWjJ4aGJtTmxMaUJUWldVZ1cwTnZiRzkxY25NZzRvYVNYU2d1TGk5amIyeHZkWEp6THlrZ1ptOXlJSFJvWlNCbWRXeHNJSE41YzNSbGJTNEtDaU1qSUVOdmNtVWdZblZwYkdScGJtY2dZbXh2WTJ0ekNncERiMnh2ZFhJc0lIUjVjR1VzSUhOd1lXTnBibWNzSUcxdmRHbHZiaURpZ0pRZ2RHaGxJSEpoZHlCdFlYUmxjbWxoYkNCbGRtVnllU0JqYjIxd2IyNWxiblFnYVhNZ1luVnBiSFFnWm5KdmJTNEtDaU1qSUZCeWIyUjFZM1JwYjI0dGNtVmhaSGtnWTI5dGNHOXVaVzUwY3dvS1FXeHNJR052YlhCdmJtVnVkSE1nYzJocGNDQjNhWFJvSUhSdmEyVnVJSE53WldOekxDQndiR0YwWm05eWJTQjJZWEpwWVc1MGN5d2djM1JoZEdWekxDQmhibVFnWkc4dlpHOXVKM1FnWjNWcFpHRnVZMlV1Q2dvakl5Qk5kV3gwYVMxamIyMXdiMjVsYm5RZ1ZWZ2dabXh2ZDNNS0NrVnVaQzEwYnkxbGJtUWdhVzUwWlhKaFkzUnBiMjRnY0dGMGRHVnlibk1nWW5WcGJIUWdabkp2YlNCRVRGTWdZMjl0Y0c5dVpXNTBjeTRnVW1WbVpYSmxibU5sSUdKbFptOXlaU0JrWlhOcFoyNXBibWNnYm1WM0lHWnNiM2R6TGdvS0xTMHRDZ29qSXlCVWIydGxibk1nY21WbVpYSmxibU5sWkNCdmJpQjBhR2x6SUhCaFoyVUtDbFZ6WlNCMGFHVnpaU0JsZUdGamRDQjBiMnRsYm5NZzRvQ1VJR1JsWm1sdVpXUWdhVzRnWUhSdmEyVnVjeTkwYjJ0bGJuTXVZM056WUM0Z1JHOGdibTkwSUhOMVluTjBhWFIxZEdVZ2NtRjNJSFpoYkhWbGN5NEtDaTBnWUMwdFltZGdDaTBnWUMwdFltOXlaR1Z5TFhOMVluUnNaV0FLTFNCZ0xTMWpZWEprTFdKbllBb3RJR0F0TFdwcGIyQUtMU0JnTFMxcWFXOHRjMjltZEdBS0xTQmdMUzF3YVd4c1lBb3RJR0F0TFhJellBb3RJR0F0TFhJMVlBb3RJR0F0TFhSbGVIUmdDaTBnWUMwdGRHVjRkREpnQ2kwZ1lDMHRkR1Y0ZEROZ0NpMGdZQzB0ZEdWNGREUmdDZ290TFMwS0NpTWpJRUoxYVd4a0lISjFiR1Z6SUNoaWFXNWthVzVuS1FvS01TNGdWWE5sSUNvcWIyNXNlU29xSUhSb1pTQjBiMnRsYm5NZ2JHbHpkR1ZrSUdGaWIzWmxMaUJKWmlCaElIWmhiSFZsSUhsdmRTQnVaV1ZrSUdseklHNXZkQ0JzYVhOMFpXUXNJSE4wYjNBZ1lXNWtJR0Z6YXlEaWdKUWdaRzhnYm05MElHbHVkSEp2WkhWalpTQmhJSEpoZHlCMllXeDFaUzRLTWk0Z1JtOXVkQ0JwY3lBcUtrcHBiMVI1Y0dVcUtpQnZibXg1TGlCWFpXbG5hSFJ6T2lBek1EQXNJRFV3TUN3Z056QXdMQ0E1TURBdUNqTXVJRkpsZFhObElIUm9aU0JqYjIxd2IyNWxiblFnUTFOVElIQmhkSFJsY201eklITm9iM2R1SUc5dUlIUm9aU0J6YjNWeVkyVWdjR0ZuWlRzZ1pHOGdibTkwSUhKbFpHVnphV2R1TGdvMExpQk5ZWFJqYUNCbGRtVnllU0J6ZEdGMFpTQW9aR1ZtWVhWc2RDd2dhRzkyWlhJc0lHWnZZM1Z6TENCaFkzUnBkbVVzSUdScGMyRmliR1ZrTENCc2IyRmthVzVuS1NCemFHOTNiaUJ2YmlCMGFHVWdjR0ZuWlM0S05TNGdRV05qWlhOemFXSnBiR2wwZVNCeVpYRjFhWEpsYldWdWRITWdiMjRnZEdobElIQmhaMlVnWVhKbElHMWhibVJoZEc5eWVTd2dibTkwSUc5d2RHbHZibUZzTGdvPSkKClRoZSBzaW5nbGUgc291cmNlIG9mIHRydXRoIGZvciBKaW9HYW1lcyBVSSBhY3Jvc3MgTW9iaWxlLCBXZWIsIGFuZCBUVi4KCiMjIEJ1aWx0IG9uIHRocmVlIG5vbi1uZWdvdGlhYmxlcwoKRXZlcnkgZGVjaXNpb24gaW4gdGhlIERMUyBmbG93cyBmcm9tIHRoZXNlIHByaW5jaXBsZXMuIFdoZW4gaW4gZG91YnQsIHJldHVybiB0byB0aGVtLgoKQWxsIHN1cmZhY2VzIGFyZSBkYXJrLiBKaW9HYW1lcyBncmVlbiBpcyB0aGUgc29sZSBicmFuZCBhY2NlbnQg4oCUIG5ldmVyIGJsdWUgb3IgcHVycGxlLiBFdmVyeSBjb2xvdXIgZGVjaXNpb24gcmVpbmZvcmNlcyB0aGUgZ2FtaW5nIGF0bW9zcGhlcmUuCgpFdmVyeSBhbmltYXRpb24gaGFzIGEgdG9rZW4uIFNwcmluZyBlYXNpbmcgZm9yIGVudGVycywgaW5zdGFudCBmb3IgVFYgZm9jdXMuIEFuaW1hdGlvbiBtdXN0IGVhcm4gaXRzIHBsYWNlIOKAlCBuZXZlciBmb3IgaXRzIG93biBzYWtlLgoKTW9iaWxlIHRvdWNoLCBXZWIgcG9pbnRlciArIGtleWJvYXJkLCBUViBELXBhZC4gRWFjaCBwbGF0Zm9ybSBoYXMgaXRzIG93biBzcGFjaW5nLCBzaXppbmcsIGFuZCBtb3Rpb24gcnVsZXMuIE5vIG9uZS1zaXplLWZpdHMtYWxsLgoKIyMgUXVpY2sgcmVmZXJlbmNlCgpDb3JlIHRva2VucyBhdCBhIGdsYW5jZS4gU2VlIFtDb2xvdXJzIOKGkl0oLi4vY29sb3Vycy8pIGZvciB0aGUgZnVsbCBzeXN0ZW0uCgojIyBDb3JlIGJ1aWxkaW5nIGJsb2NrcwoKQ29sb3VyLCB0eXBlLCBzcGFjaW5nLCBtb3Rpb24g4oCUIHRoZSByYXcgbWF0ZXJpYWwgZXZlcnkgY29tcG9uZW50IGlzIGJ1aWx0IGZyb20uCgojIyBQcm9kdWN0aW9uLXJlYWR5IGNvbXBvbmVudHMKCkFsbCBjb21wb25lbnRzIHNoaXAgd2l0aCB0b2tlbiBzcGVjcywgcGxhdGZvcm0gdmFyaWFudHMsIHN0YXRlcywgYW5kIGRvL2Rvbid0IGd1aWRhbmNlLgoKIyMgTXVsdGktY29tcG9uZW50IFVYIGZsb3dzCgpFbmQtdG8tZW5kIGludGVyYWN0aW9uIHBhdHRlcm5zIGJ1aWx0IGZyb20gRExTIGNvbXBvbmVudHMuIFJlZmVyZW5jZSBiZWZvcmUgZGVzaWduaW5nIG5ldyBmbG93cy4KCi0tLQoKIyMgVG9rZW5zIHJlZmVyZW5jZWQgb24gdGhpcyBwYWdlCgpVc2UgdGhlc2UgZXhhY3QgdG9rZW5zIOKAlCBkZWZpbmVkIGluIGB0b2tlbnMvdG9rZW5zLmNzc2AuIERvIG5vdCBzdWJzdGl0dXRlIHJhdyB2YWx1ZXMuCgotIGAtLWJnYAotIGAtLWJvcmRlci1zdWJ0bGVgCi0gYC0tY2FyZC1iZ2AKLSBgLS1qaW9gCi0gYC0tamlvLXNvZnRgCi0gYC0tcGlsbGAKLSBgLS1yM2AKLSBgLS1yNWAKLSBgLS10ZXh0YAotIGAtLXRleHQyYAotIGAtLXRleHQzYAotIGAtLXRleHQ0YAoKLS0tCgojIyBCdWlsZCBydWxlcyAoYmluZGluZykKCjEuIFVzZSAqKm9ubHkqKiB0aGUgdG9rZW5zIGxpc3RlZCBhYm92ZS4gSWYgYSB2YWx1ZSB5b3UgbmVlZCBpcyBub3QgbGlzdGVkLCBzdG9wIGFuZCBhc2sg4oCUIGRvIG5vdCBpbnRyb2R1Y2UgYSByYXcgdmFsdWUuCjIuIEZvbnQgaXMgKipKaW9UeXBlKiogb25seS4gV2VpZ2h0czogMzAwLCA1MDAsIDcwMCwgOTAwLgozLiBSZXVzZSB0aGUgY29tcG9uZW50IENTUyBwYXR0ZXJucyBzaG93biBvbiB0aGUgc291cmNlIHBhZ2U7IGRvIG5vdCByZWRlc2lnbi4KNC4gTWF0Y2ggZXZlcnkgc3RhdGUgKGRlZmF1bHQsIGhvdmVyLCBmb2N1cywgYWN0aXZlLCBkaXNhYmxlZCwgbG9hZGluZykgc2hvd24gb24gdGhlIHBhZ2UuCjUuIEFjY2Vzc2liaWxpdHkgcmVxdWlyZW1lbnRzIG9uIHRoZSBwYWdlIGFyZSBtYW5kYXRvcnksIG5vdCBvcHRpb25hbC4K" download="overview-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a></p><p class="home-hero-subtitle">The single source of truth for JioGames UI across Mobile, Web, and TV.</p>
+    <div class="home-hero-meta">
+      <div class="home-hero-stat">
+        <span class="home-hero-stat-n">54</span>
+        <span class="home-hero-stat-l">Components</span>
+      </div>
+      <div class="home-hero-sep"></div>
+      <div class="home-hero-stat">
+        <span class="home-hero-stat-n">3</span>
+        <span class="home-hero-stat-l">Platforms</span>
+      </div>
+      <div class="home-hero-sep"></div>
+      <div class="home-hero-stat">
+        <span class="home-hero-stat-n">501</span>
+        <span class="home-hero-stat-l">Design tokens</span>
+      </div>
+      <div class="home-hero-sep"></div>
+      <div class="home-hero-stat">
+        <span class="home-hero-stat-n">1,646</span>
+        <span class="home-hero-stat-l">Icons</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Page content ── -->
+  <div class="home-content">
+
+    <!-- Principles -->
+    <section style="margin-bottom:64px;">
+      <div class="home-section-eyebrow">Design Principles</div>
+      <h2 class="home-section-title">Built on three non-negotiables</h2>
+      <p class="home-section-desc">Every decision in the DLS flows from these principles. When in doubt, return to them.</p>
+      <div class="principles-grid">
+        <div class="principle-card">
+          <div class="principle-num">1</div>
+          <div class="principle-title">Dark-first, green-first</div>
+          <p class="principle-desc">All surfaces are dark. JioGames green is the sole brand accent — never blue or purple. Every colour decision reinforces the gaming atmosphere.</p>
+        </div>
+        <div class="principle-card">
+          <div class="principle-num">2</div>
+          <div class="principle-title">Motion with purpose</div>
+          <p class="principle-desc">Every animation has a token. Spring easing for enters, instant for TV focus. Animation must earn its place — never for its own sake.</p>
+        </div>
+        <div class="principle-card">
+          <div class="principle-num">3</div>
+          <div class="principle-title">Platform-native</div>
+          <p class="principle-desc">Mobile touch, Web pointer + keyboard, TV D-pad. Each platform has its own spacing, sizing, and motion rules. No one-size-fits-all.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Colour quick ref -->
+    <section class="swatch-section">
+      <div class="home-section-eyebrow">Colour tokens</div>
+      <h2 class="home-section-title">Quick reference</h2>
+      <p class="home-section-desc">Core tokens at a glance. See <a href="../colours/" style="color:var(--jio);text-decoration:none;font-weight:700;">Colours →</a> for the full system.</p>
+      <div class="swatch-grid">
+        <div class="swatch-card">
+          <div class="swatch-block" style="background:#00A859;"></div>
+          <div class="swatch-info"><div class="swatch-token">--jio</div><div class="swatch-hex">#00A859</div></div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-block" style="background:#22C16C;"></div>
+          <div class="swatch-info"><div class="swatch-token">--jio-2</div><div class="swatch-hex">#22C16C</div></div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-block" style="background:#00E870;"></div>
+          <div class="swatch-info"><div class="swatch-token">--jio-bright</div><div class="swatch-hex">#00E870</div></div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-block" style="background:#00cc65;"></div>
+          <div class="swatch-info"><div class="swatch-token">--ultimate</div><div class="swatch-hex">#00cc65</div></div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-block" style="background:#06080F;border-bottom:1px solid rgba(255,255,255,.08);"></div>
+          <div class="swatch-info"><div class="swatch-token">--bg</div><div class="swatch-hex">#06080F</div></div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-block" style="background:#111115;border-bottom:1px solid rgba(255,255,255,.08);"></div>
+          <div class="swatch-info"><div class="swatch-token">--card-bg</div><div class="swatch-hex">#111115</div></div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-block" style="background:#0E1119;border-bottom:1px solid rgba(255,255,255,.08);"></div>
+          <div class="swatch-info"><div class="swatch-token">--surface-1</div><div class="swatch-hex">#0E1119</div></div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-block" style="background:#161A24;border-bottom:1px solid rgba(255,255,255,.08);"></div>
+          <div class="swatch-info"><div class="swatch-token">--surface-2</div><div class="swatch-hex">#161A24</div></div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-block" style="background:#1F2432;border-bottom:1px solid rgba(255,255,255,.08);"></div>
+          <div class="swatch-info"><div class="swatch-token">--surface-3</div><div class="swatch-hex">#1F2432</div></div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-block" style="background:#F4F2EE;"></div>
+          <div class="swatch-info"><div class="swatch-token">--text</div><div class="swatch-hex">#F4F2EE</div></div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-block" style="background:#A8ADBA;"></div>
+          <div class="swatch-info"><div class="swatch-token">--text2</div><div class="swatch-hex">#A8ADBA</div></div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-block" style="background:#6B7280;"></div>
+          <div class="swatch-info"><div class="swatch-token">--text3</div><div class="swatch-hex">#6B7280</div></div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-block" style="background:#FF4757;"></div>
+          <div class="swatch-info"><div class="swatch-token">--negative</div><div class="swatch-hex">#FF4757</div></div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-block" style="background:#F59E0B;"></div>
+          <div class="swatch-info"><div class="swatch-token">--amber</div><div class="swatch-hex">#F59E0B</div></div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-block" style="background:#8E5BFF;"></div>
+          <div class="swatch-info"><div class="swatch-token">--violet</div><div class="swatch-hex">#8E5BFF</div></div>
+        </div>
+        <div class="swatch-card">
+          <div class="swatch-block" style="background:#26D6C9;"></div>
+          <div class="swatch-info"><div class="swatch-token">--cyan</div><div class="swatch-hex">#26D6C9</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Foundations -->
+    <section class="nav-section">
+      <div class="home-section-eyebrow">Foundations</div>
+      <h2 class="home-section-title">Core building blocks</h2>
+      <p class="home-section-desc">Colour, type, spacing, motion — the raw material every component is built from.</p>
+      <div class="nav-cards-grid">
+        <a href="../colours/" class="nav-card">
+          <div class="nav-card-label">Colours</div>
+          <div class="nav-card-desc">Complete colour system — brand, neutrals, functional, semantic.</div>
+        </a>
+        <a href="../typography/" class="nav-card">
+          <div class="nav-card-label">Typography</div>
+          <div class="nav-card-desc">JioType scale, weights, roles, and responsive sizing.</div>
+        </a>
+        <a href="../spacing/" class="nav-card">
+          <div class="nav-card-label">Spacing</div>
+          <div class="nav-card-desc">8px base scale, gutters, component gaps across all platforms.</div>
+        </a>
+        <a href="../radius/" class="nav-card">
+          <div class="nav-card-label">Radius</div>
+          <div class="nav-card-desc">Canonical radius map from r1 (8px) to pill (100px).</div>
+        </a>
+        <a href="../motion/" class="nav-card">
+          <div class="nav-card-label">Motion</div>
+          <div class="nav-card-desc">Easing tokens, duration scale, spring curves, TV overrides.</div>
+        </a>
+        <a href="../elevation/" class="nav-card">
+          <div class="nav-card-label">Elevation</div>
+          <div class="nav-card-desc">Surface ladder, glass layers, glow — no grey drop-shadows.</div>
+        </a>
+        <a href="../icons/" class="nav-card">
+          <div class="nav-card-label">Icons</div>
+          <div class="nav-card-desc">Solid-glyph DLS icon library. fill:currentColor always.</div>
+        </a>
+        <a href="../accessibility/" class="nav-card">
+          <div class="nav-card-label">Accessibility</div>
+          <div class="nav-card-desc">Contrast matrix, focus states, ARIA patterns, TV D-pad.</div>
+        </a>
+        <a href="../governance/" class="nav-card">
+          <div class="nav-card-label">Governance</div>
+          <div class="nav-card-desc">RFC process, semver, deprecation policy, release checklist.</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Components -->
+    <section class="nav-section">
+      <div class="home-section-eyebrow">Components</div>
+      <h2 class="home-section-title">Production-ready components</h2>
+      <p class="home-section-desc">All components ship with token specs, platform variants, states, and do/don't guidance.</p>
+
+      <div style="font-size:11px;font-weight:700;color:var(--text2);margin:0 0 10px;">Navigation</div>
+      <div class="nav-cards-grid" style="margin-top:0;margin-bottom:32px;">
+        <a href="../appbar/" class="nav-card">
+          <div class="nav-card-label">App Bar</div>
+          <div class="nav-card-desc">Home, inner, game-detail — all AppBar variants and scroll states.</div>
+        </a>
+        <a href="../navigation/" class="nav-card">
+          <div class="nav-card-label">Navigation</div>
+          <div class="nav-card-desc">AppBar variants — home, inner, game detail. Scroll behaviour.</div>
+        </a>
+        <a href="../tab-bar/" class="nav-card">
+          <div class="nav-card-label">Tab Bar</div>
+          <div class="nav-card-desc">Bottom nav for mobile. 4–5 items, active state, badge.</div>
+        </a>
+        <a href="../navigation-menu/" class="nav-card">
+          <div class="nav-card-label">Navigation Menu</div>
+          <div class="nav-card-desc">Mega-menu for web. Multi-level with keyboard navigation.</div>
+        </a>
+        <a href="../tabs/" class="nav-card">
+          <div class="nav-card-label">Tabs</div>
+          <div class="nav-card-desc">Horizontal tab strip — scrollable, with icons, across platforms.</div>
+        </a>
+      </div>
+
+      <div style="font-size:11px;font-weight:700;color:var(--text2);margin:0 0 10px;">Content & Display</div>
+      <div class="nav-cards-grid" style="margin-top:0;margin-bottom:32px;">
+        <a href="../cards/" class="nav-card">
+          <div class="nav-card-label">Cards</div>
+          <div class="nav-card-desc">Game, genre, pass, thumbnail — landscape and portrait variants.</div>
+        </a>
+        <a href="../rails/" class="nav-card">
+          <div class="nav-card-label">Rails</div>
+          <div class="nav-card-desc">Horizontal scroll rails — game, genre, continue, pass upsell.</div>
+        </a>
+        <a href="../carousel-component/" class="nav-card">
+          <div class="nav-card-label">Carousel</div>
+          <div class="nav-card-desc">Full-width hero carousel with pagination dots and autoplay.</div>
+        </a>
+        <a href="../genre-tiles/" class="nav-card">
+          <div class="nav-card-label">Genre Tiles</div>
+          <div class="nav-card-desc">Square genre tiles with coloured backgrounds and icons.</div>
+        </a>
+        <a href="../pass-cards/" class="nav-card">
+          <div class="nav-card-label">Pass Cards</div>
+          <div class="nav-card-desc">Mobile Pass, All Screen Pass — pricing, features, CTA.</div>
+        </a>
+        <a href="../lists/" class="nav-card">
+          <div class="nav-card-label">Lists</div>
+          <div class="nav-card-desc">Single-line, double-line, with icon, avatar, and trailing.</div>
+        </a>
+        <a href="../avatar/" class="nav-card">
+          <div class="nav-card-label">Avatar</div>
+          <div class="nav-card-desc">User avatar — image, initials fallback, size scale, group stack.</div>
+        </a>
+        <a href="../badges/" class="nav-card">
+          <div class="nav-card-label">Badges</div>
+          <div class="nav-card-desc">Status, popular, new, live, rating — colour-coded by type.</div>
+        </a>
+        <a href="../chips/" class="nav-card">
+          <div class="nav-card-label">Chips</div>
+          <div class="nav-card-desc">Filter, genre, platform, tag chips. Selected and unselected.</div>
+        </a>
+        <a href="../page-dots/" class="nav-card">
+          <div class="nav-card-label">Page Dots</div>
+          <div class="nav-card-desc">Pagination indicator for carousels and onboarding flows.</div>
+        </a>
+        <a href="../skeleton/" class="nav-card">
+          <div class="nav-card-label">Skeleton</div>
+          <div class="nav-card-desc">Loading placeholders — card, rail, list, and text skeletons.</div>
+        </a>
+        <a href="../chart/" class="nav-card">
+          <div class="nav-card-label">Chart</div>
+          <div class="nav-card-desc">Bar and line charts for analytics and usage dashboards.</div>
+        </a>
+      </div>
+
+      <div style="font-size:11px;font-weight:700;color:var(--text2);margin:0 0 10px;">Input & Forms</div>
+      <div class="nav-cards-grid" style="margin-top:0;margin-bottom:32px;">
+        <a href="../buttons/" class="nav-card">
+          <div class="nav-card-label">Buttons</div>
+          <div class="nav-card-desc">Primary, secondary, ghost, icon-only. All platforms + TV focus.</div>
+        </a>
+        <a href="../inputs/" class="nav-card">
+          <div class="nav-card-label">Inputs</div>
+          <div class="nav-card-desc">Text, OTP, search, phone number. Error and disabled states.</div>
+        </a>
+        <a href="../search/" class="nav-card">
+          <div class="nav-card-label">Search</div>
+          <div class="nav-card-desc">Search bar, suggestions, recent, voice — mobile and web.</div>
+        </a>
+        <a href="../checkbox/" class="nav-card">
+          <div class="nav-card-label">Checkbox</div>
+          <div class="nav-card-desc">Single and group checkboxes. Checked, unchecked, indeterminate.</div>
+        </a>
+        <a href="../radio/" class="nav-card">
+          <div class="nav-card-label">Radio</div>
+          <div class="nav-card-desc">Radio button groups. Single selection with label and description.</div>
+        </a>
+        <a href="../toggle/" class="nav-card">
+          <div class="nav-card-label">Toggle</div>
+          <div class="nav-card-desc">On/off toggle with green active state and animated thumb.</div>
+        </a>
+        <a href="../toggle-group/" class="nav-card">
+          <div class="nav-card-label">Toggle Group</div>
+          <div class="nav-card-desc">Segmented control — single and multi-select button groups.</div>
+        </a>
+        <a href="../select/" class="nav-card">
+          <div class="nav-card-label">Select</div>
+          <div class="nav-card-desc">Dropdown select — native and custom variants with search.</div>
+        </a>
+        <a href="../combobox/" class="nav-card">
+          <div class="nav-card-label">Combobox</div>
+          <div class="nav-card-desc">Searchable select with autocomplete and keyboard navigation.</div>
+        </a>
+        <a href="../slider/" class="nav-card">
+          <div class="nav-card-label">Slider</div>
+          <div class="nav-card-desc">Range slider — single and dual thumb, with step markers.</div>
+        </a>
+        <a href="../textarea/" class="nav-card">
+          <div class="nav-card-label">Textarea</div>
+          <div class="nav-card-desc">Multi-line text input with auto-grow and character count.</div>
+        </a>
+        <a href="../label/" class="nav-card">
+          <div class="nav-card-label">Label</div>
+          <div class="nav-card-desc">Form field labels — required, optional, disabled states.</div>
+        </a>
+        <a href="../calendar/" class="nav-card">
+          <div class="nav-card-label">Calendar</div>
+          <div class="nav-card-desc">Date picker calendar — single, range, with disabled dates.</div>
+        </a>
+        <a href="../date-picker/" class="nav-card">
+          <div class="nav-card-label">Date Picker</div>
+          <div class="nav-card-desc">Date input with popover calendar and format validation.</div>
+        </a>
+        <a href="../forms/" class="nav-card">
+          <div class="nav-card-label">Forms</div>
+          <div class="nav-card-desc">Form layouts, validation, field groups, error patterns.</div>
+        </a>
+        <a href="../command/" class="nav-card">
+          <div class="nav-card-label">Command</div>
+          <div class="nav-card-desc">Command palette with fuzzy search. Keyboard-first interface.</div>
+        </a>
+      </div>
+
+      <div style="font-size:11px;font-weight:700;color:var(--text2);margin:0 0 10px;">Overlays & Feedback</div>
+      <div class="nav-cards-grid" style="margin-top:0;margin-bottom:32px;">
+        <a href="../dialogs/" class="nav-card">
+          <div class="nav-card-label">Dialogs</div>
+          <div class="nav-card-desc">Confirm, destructive, info. With and without icon headers.</div>
+        </a>
+        <a href="../bottom-sheet/" class="nav-card">
+          <div class="nav-card-label">Bottom Sheet</div>
+          <div class="nav-card-desc">Handle, drag, snap points. Mobile only — not available on TV.</div>
+        </a>
+        <a href="../drawer/" class="nav-card">
+          <div class="nav-card-label">Drawer</div>
+          <div class="nav-card-desc">Side panel sliding from left or right. Filters, detail, and settings.</div>
+        </a>
+        <a href="../toast/" class="nav-card">
+          <div class="nav-card-label">Toast</div>
+          <div class="nav-card-desc">Success, error, warning, info. Auto-dismiss with duration.</div>
+        </a>
+        <a href="../banners/" class="nav-card">
+          <div class="nav-card-label">Banners</div>
+          <div class="nav-card-desc">Inline banners for pass, promo, warning, and system states.</div>
+        </a>
+        <a href="../popover/" class="nav-card">
+          <div class="nav-card-label">Popover</div>
+          <div class="nav-card-desc">Anchored overlay for rich content. Dismissible, with arrow.</div>
+        </a>
+        <a href="../tooltip/" class="nav-card">
+          <div class="nav-card-label">Tooltip</div>
+          <div class="nav-card-desc">Brief contextual label on hover or focus. No interactive content.</div>
+        </a>
+        <a href="../hover-card/" class="nav-card">
+          <div class="nav-card-label">Hover Card</div>
+          <div class="nav-card-desc">Rich preview on hover — game info, user profile, pass detail.</div>
+        </a>
+        <a href="../context-menu/" class="nav-card">
+          <div class="nav-card-label">Context Menu</div>
+          <div class="nav-card-desc">Right-click menu with actions, icons, and sub-menus.</div>
+        </a>
+        <a href="../dropdown-menu/" class="nav-card">
+          <div class="nav-card-label">Dropdown Menu</div>
+          <div class="nav-card-desc">Trigger-anchored menu — single and grouped actions.</div>
+        </a>
+        <a href="../menubar/" class="nav-card">
+          <div class="nav-card-label">Menubar</div>
+          <div class="nav-card-desc">Horizontal application menu bar for web desktop layouts.</div>
+        </a>
+        <a href="../progress-bar/" class="nav-card">
+          <div class="nav-card-label">Progress Bar</div>
+          <div class="nav-card-desc">Determinate and indeterminate progress. Linear and segmented.</div>
+        </a>
+      </div>
+
+      <div style="font-size:11px;font-weight:700;color:var(--text2);margin:0 0 10px;">Layout & Structure</div>
+      <div class="nav-cards-grid" style="margin-top:0;margin-bottom:32px;">
+        <a href="../accordion/" class="nav-card">
+          <div class="nav-card-label">Accordion</div>
+          <div class="nav-card-desc">Expand/collapse sections. Single and multi-open variants.</div>
+        </a>
+        <a href="../collapsible/" class="nav-card">
+          <div class="nav-card-label">Collapsible</div>
+          <div class="nav-card-desc">Animate-height show/hide for arbitrary content blocks.</div>
+        </a>
+        <a href="../separator/" class="nav-card">
+          <div class="nav-card-label">Separator</div>
+          <div class="nav-card-desc">Horizontal and vertical dividers — solid and gradient variants.</div>
+        </a>
+        <a href="../aspect-ratio/" class="nav-card">
+          <div class="nav-card-label">Aspect Ratio</div>
+          <div class="nav-card-desc">Ratio-locking container. 16:9, 4:3, 1:1 — responsive-safe.</div>
+        </a>
+        <a href="../scroll-area/" class="nav-card">
+          <div class="nav-card-label">Scroll Area</div>
+          <div class="nav-card-desc">Custom scrollbar styled to DLS spec. Vertical and horizontal.</div>
+        </a>
+        <a href="../resizable/" class="nav-card">
+          <div class="nav-card-label">Resizable</div>
+          <div class="nav-card-desc">Drag-to-resize panel splits for web layouts.</div>
+        </a>
+        <a href="../data-table/" class="nav-card">
+          <div class="nav-card-label">Data Table</div>
+          <div class="nav-card-desc">Sortable, filterable table — sticky header, row selection.</div>
+        </a>
+      </div>
+
+      <div style="font-size:11px;font-weight:700;color:var(--text2);margin:0 0 10px;">Platform Specific</div>
+      <div class="nav-cards-grid" style="margin-top:0;margin-bottom:0;">
+        <a href="../tv-focus/" class="nav-card">
+          <div class="nav-card-label">TV Focus</div>
+          <div class="nav-card-desc">D-pad navigation, focus ring spec, spatial layout, key map.</div>
+        </a>
+        <a href="../templates/" class="nav-card">
+          <div class="nav-card-label">Templates</div>
+          <div class="nav-card-desc">Full-screen templates — home, game detail, pass, login.</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Patterns -->
+    <section class="nav-section">
+      <div class="home-section-eyebrow">Patterns</div>
+      <h2 class="home-section-title">Multi-component UX flows</h2>
+      <p class="home-section-desc">End-to-end interaction patterns built from DLS components. Reference before designing new flows.</p>
+      <div class="nav-cards-grid">
+        <a href="../patterns/" class="nav-card">
+          <div class="nav-card-label">All Patterns</div>
+          <div class="nav-card-desc">Index of all documented UX flows across the system.</div>
+        </a>
+        <a href="../patterns/checkout/" class="nav-card">
+          <div class="nav-card-label">Payment & Checkout</div>
+          <div class="nav-card-desc">Pass purchase, payment entry, confirmation — end-to-end.</div>
+        </a>
+        <a href="../patterns/onboarding/" class="nav-card">
+          <div class="nav-card-label">Onboarding</div>
+          <div class="nav-card-desc">First-run genre/platform prefs, welcome screens, skip flow.</div>
+        </a>
+        <a href="../patterns/game-launch/" class="nav-card">
+          <div class="nav-card-label">Game Launch</div>
+          <div class="nav-card-desc">Pre-launch states, loading, error, and resume flows.</div>
+        </a>
+        <a href="../patterns/empty-search/" class="nav-card">
+          <div class="nav-card-label">Empty Search</div>
+          <div class="nav-card-desc">Zero results state with suggestions and recovery paths.</div>
+        </a>
+        <a href="../patterns/pull-to-refresh/" class="nav-card">
+          <div class="nav-card-label">Pull to Refresh</div>
+          <div class="nav-card-desc">Threshold, spinner, and snap-back animation spec.</div>
+        </a>
+        <a href="../patterns/load-more/" class="nav-card">
+          <div class="nav-card-label">Infinite Scroll</div>
+          <div class="nav-card-desc">Sentinel-based load-more with skeleton and error states.</div>
+        </a>
+        <a href="../patterns/notification-center/" class="nav-card">
+          <div class="nav-card-label">Notification Center</div>
+          <div class="nav-card-desc">Grouped notifications, read/unread, dismiss, deep-link.</div>
+        </a>
+        <a href="../patterns/share/" class="nav-card">
+          <div class="nav-card-label">Share & Invite</div>
+          <div class="nav-card-desc">Native share sheet, copy link, referral code entry.</div>
+        </a>
+      </div>
+    </section>
+
+  </div><!-- /home-content -->
+
+  <!-- Footer -->
+  <div class="home-footer">
+    JioGames Design Language System v1.0 · Not for external distribution
+  </div>
+
+</main>
+
+<script src="../sprite-loader.js"></script>
+<script src="../shell.js?v=2"></script>
+</body>
+</html>

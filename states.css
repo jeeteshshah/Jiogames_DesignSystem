@@ -172,7 +172,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--space-1);
   border-radius: inherit;
 }
 .card__lock-icon { font-size: 24px; }
@@ -184,7 +184,7 @@
 
 /* State: claimed/owned */
 .card--owned { border-color: var(--success-border); }
-.card--owned::after { content: '✓ Owned'; position: absolute; top: 8px; right: 8px; background: var(--success); color: #000; font-size: 10px; font-weight: 900; padding: 3px 8px; border-radius: var(--pill); }
+.card--owned::after { content: '✓ Owned'; position: absolute; top: 8px; right: 8px; background: var(--success); color: var(--text-inv); font-size: 10px; font-weight: 900; padding: 3px 8px; border-radius: var(--pill); }
 
 /* State: unavailable */
 .card--unavailable { opacity: var(--unavailable-opacity); filter: grayscale(.4); pointer-events: none; }
@@ -229,9 +229,10 @@
 
 /* Card badges */
 .card__badge { position: absolute; top: 8px; left: 8px; font-size: 10px; font-weight: 900; padding: 3px 8px; border-radius: var(--pill); line-height: 1.3; }
-.card__badge--new     { background: var(--jio); color: #000; }
-.card__badge--live    { background: var(--negative); color: #fff; animation: jio-pulse 2s ease-in-out infinite; }
-.card__badge--premium { background: var(--premium-gradient); color: #000; }
+.card__badge--new     { background: var(--jio); color: var(--text-inv); }
+/* 2s = approved ambient pulse constant (motion.md §4) */
+.card__badge--live    { background: var(--negative); color: var(--text); animation: jio-pulse 2s ease-in-out infinite; }
+.card__badge--premium { background: var(--premium-gradient); color: var(--text-inv); }
 .card__badge--rating  { background: rgba(0,0,0,.72); color: var(--text); backdrop-filter: blur(4px); }
 
 /* Progress bar (continue card) */
@@ -242,7 +243,7 @@
    INPUT / FORM STATE SYSTEM
    ============================================================ */
 
-.input-wrap { display: flex; flex-direction: column; gap: 6px; }
+.input-wrap { display: flex; flex-direction: column; gap: var(--space-0-5); }
 .input-label {
   font-size: 11px;
   font-weight: 700;
@@ -281,9 +282,9 @@
 .chip {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--space-0-5);
   height: 32px;
-  padding: 0 12px;
+  padding: 0 var(--space-1-5);
   border-radius: var(--pill);
   border: 1.5px solid var(--border);
   background: transparent;
@@ -345,7 +346,7 @@
   font-size: 10px;
   min-width: 18px;
   height: 18px;
-  padding: 0 5px;
+  padding: 0 var(--space-0-5);
 }
 .badge--count.badge--lg { min-width: 22px; height: 22px; font-size: 11px; padding: 0 6px; }
 
@@ -355,9 +356,9 @@
 .badge--dot.badge--warning { background: var(--warning); }
 
 /* Label badges */
-.badge--new     { background: var(--jio); color: #000; font-size: 10px; padding: 3px 8px; }
-.badge--live    { background: var(--negative); color: #fff; font-size: 10px; padding: 3px 8px; animation: jio-pulse 2s ease-in-out infinite; }
-.badge--premium { background: var(--premium-gradient); color: #000; font-size: 10px; padding: 3px 8px; }
+.badge--new     { background: var(--jio); color: var(--text-inv); font-size: 10px; padding: 3px 8px; }
+.badge--live    { background: var(--negative); color: var(--text); font-size: 10px; padding: 3px 8px; animation: jio-pulse 2s ease-in-out infinite; }
+.badge--premium { background: var(--premium-gradient); color: var(--text-inv); font-size: 10px; padding: 3px 8px; }
 .badge--warning { background: var(--warning-soft); border: 1px solid var(--warning-border); color: var(--warning-text); font-size: 10px; padding: 3px 8px; }
 .badge--success { background: var(--success-soft); border: 1px solid var(--success-border); color: var(--success-text); font-size: 10px; padding: 3px 8px; }
 .badge--error   { background: var(--error-soft); border: 1px solid var(--error-border); color: var(--error-text); font-size: 10px; padding: 3px 8px; }
@@ -466,7 +467,7 @@
 
 .state-matrix {
   display: grid;
-  gap: 1px;
+  gap: var(--space-0-25);
   background: var(--border-subtle);
   border: 1px solid var(--border-subtle);
   border-radius: var(--r5);
@@ -479,12 +480,12 @@
 }
 .state-matrix__cell {
   background: var(--surface-1);
-  padding: 16px 12px;
+  padding: var(--space-2) var(--space-1-5);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: var(--space-1);
   min-height: 80px;
 }
 .state-matrix__cell--header {
@@ -494,7 +495,7 @@
   letter-spacing: .8px;
   text-transform: uppercase;
   color: var(--text3);
-  padding: 10px 12px;
+  padding: var(--space-1) var(--space-1-5);
   min-height: 0;
   text-align: center;
 }
@@ -503,7 +504,7 @@
   font-size: 11px;
   font-weight: 700;
   color: var(--text2);
-  padding: 12px;
+  padding: var(--space-1-5);
   align-items: flex-start;
   justify-content: center;
 }

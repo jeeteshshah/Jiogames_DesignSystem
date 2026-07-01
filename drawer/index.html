@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     body { background: var(--bg); color: var(--text); font-family: var(--jio-font); margin: 0; }
 
@@ -19,13 +19,13 @@
     }
     .drawer-demo-scrim {
       position: absolute; inset: 0; background: rgba(0,0,0,.6);
-      transition: opacity 300ms; pointer-events: none;
+      transition: opacity var(--dur-pop) var(--ease-out); pointer-events: none;
     }
     .drawer-panel {
       position: absolute; top: 0; bottom: 0; width: 280px;
       background: var(--surface-2); border-right: 1px solid var(--border-subtle);
       display: flex; flex-direction: column;
-      transition: transform 320ms var(--ease-out, cubic-bezier(.2,0,0,1));
+      transition: transform var(--dur-slow) var(--ease-emphasized);
       z-index: 10;
     }
     .drawer-panel--left  { left: 0; transform: translateX(0); }
@@ -42,7 +42,7 @@
       background: rgba(255,255,255,.07); color: var(--text2);
       display: flex; align-items: center; justify-content: center;
       cursor: pointer; font-size: 16px; line-height: 1;
-      transition: background 150ms, color 150ms; flex-shrink: 0;
+      transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out); flex-shrink: 0;
     }
     .drawer-close-btn:hover { background: rgba(255,255,255,.12); color: var(--text); }
     .drawer-desc { font-size: 12px; color: var(--text3); padding: 6px 20px 0; }
@@ -56,18 +56,18 @@
       display: flex; gap: 8px;
     }
     .drawer-btn {
-      flex: 1; height: 40px; border-radius: var(--r3); border: none; font-family: var(--jio-font);
-      font-size: 13px; font-weight: 700; cursor: pointer; transition: opacity 150ms;
+      flex: 1; height: var(--ctrl-h-ghost); border-radius: var(--r3); border: none; font-family: var(--jio-font);
+      font-size: 13px; font-weight: 700; cursor: pointer; transition: opacity var(--dur-fast) var(--ease-out);
     }
-    .drawer-btn--primary { background: var(--jio); color: #000; }
+    .drawer-btn--primary { background: var(--jio); color: var(--text-inv); }
     .drawer-btn--ghost { background: rgba(255,255,255,.07); color: var(--text2); }
 
     /* Demo controls */
     .demo-controls { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 5; }
     .demo-trigger {
-      height: 36px; padding: 0 16px; border-radius: var(--r3); border: 1px solid var(--border-subtle);
+      height: var(--ctrl-h-sm); padding: 0 16px; border-radius: var(--r3); border: 1px solid var(--border-subtle);
       background: rgba(255,255,255,.07); color: var(--text); font-family: var(--jio-font);
-      font-size: 12px; font-weight: 600; cursor: pointer; transition: background 150ms, border-color 150ms;
+      font-size: 12px; font-weight: 700; cursor: pointer; transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
     }
     .demo-trigger:hover { background: rgba(255,255,255,.12); border-color: var(--border); }
 
@@ -77,7 +77,7 @@
       height: 34px; padding: 0 14px; border-radius: var(--r3);
       border: 1px solid var(--border-subtle); background: var(--surface-1);
       color: var(--text3); font-family: var(--jio-font); font-size: 12px;
-      font-weight: 600; cursor: pointer; transition: all 150ms;
+      font-weight: 700; cursor: pointer; transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
     }
     .variant-tab.active { background: rgba(0,168,89,.12); border-color: rgba(0,168,89,.4); color: var(--jio); }
 
@@ -86,46 +86,46 @@
     .anatomy-row { display: grid; grid-template-columns: 180px 1fr auto; gap: 20px; align-items: center; padding: 14px 20px; border-bottom: 1px solid var(--border-subtle); }
     .anatomy-row:last-child { border-bottom: none; }
     .anatomy-num { width: 22px; height: 22px; border-radius: 50%; background: rgba(0,168,89,.15); border: 1px solid rgba(0,168,89,.3); font-size: 11px; font-weight: 700; color: var(--jio); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .anatomy-name { font-size: 13px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 10px; }
+    .anatomy-name { font-size: 13px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 10px; }
     .anatomy-desc { font-size: 12px; color: var(--text3); line-height: 1.5; }
     .anatomy-badge { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: var(--pill); flex-shrink: 0; }
     .anatomy-badge--req { background: rgba(0,168,89,.12); color: var(--jio); }
     .anatomy-badge--opt { background: rgba(255,255,255,.06); color: var(--text3); }
 
     /* Code block */
-    .ds-code-block { background: var(--surface-1); border: 1px solid var(--border-subtle); border-radius: var(--r3); padding: 20px; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 12px; line-height: 1.7; color: var(--text2); overflow-x: auto; margin-top: 16px; }
-    .ds-code-block .k { color: var(--code-green, #a8e6c5); }
-    .ds-code-block .c { color: var(--text4); font-style: italic; }
-    .ds-code-block .s { color: #fbbf24; }
+    
+    
+    
+    
 
     /* Token table */
-    .ds-token-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    .ds-token-table th { text-align: left; font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: .05em; padding: 8px 12px; border-bottom: 1px solid var(--border-subtle); }
-    .ds-token-table td { padding: 10px 12px; border-bottom: 1px solid var(--border-subtle); color: var(--text2); }
-    .ds-token-table tr:last-child td { border-bottom: none; }
-    .ds-token-table code { font-family: 'SF Mono', monospace; font-size: 11px; background: rgba(255,255,255,.06); padding: 2px 5px; border-radius: 4px; color: var(--text); }
+    
+    
+    
+    
+    
 
-    .ds-section { margin-bottom: 56px; }
-    .ds-section-title { font-size: 20px; font-weight: 700; color: var(--text); margin: 0 0 8px; letter-spacing: -.2px; }
-    .ds-section-desc { font-size: 14px; color: var(--text2); margin: 0 0 24px; line-height: 1.6; }
+    
+    
+    
   </style>
 </head>
 <body><main class="ds-content">
 
   <header class="component-page-header">
-    <nav class="component-breadcrumb">
-      <a href="../index.html">JioGames DLS</a>
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <span class="component-breadcrumb-link">JioGames DLS</span>
       <span class="component-breadcrumb-sep">›</span>
       <span>Components</span>
       <span class="component-breadcrumb-sep">›</span>
-      <span>Drawer</span>
+      <span class="component-breadcrumb-current">Drawer</span>
     </nav>
-    <h1 class="component-page-title">Drawer</h1>
-    <p class="component-page-def">A panel that slides in from the left or right edge of the screen. Used for filters, contextual settings, and secondary navigation without leaving the current view.</p>
+    <h1 class="component-page-title">Drawer</h1><p class="component-page-def">A panel that slides in from the left or right edge of the screen. Used for filters, contextual settings, and secondary navigation without leaving the current view.</p>
     <div class="component-platforms">
       <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
       <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
       <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBEcmF3ZXIg4oCUIEppb0dhbWVzIERMUyBzcGVjCgo+IFNvdXJjZTogYGRyYXdlci9pbmRleC5odG1sYCBpbiB0aGUgSmlvR2FtZXMgRGVzaWduIFN5c3RlbS4KPiBUaGlzIHNwZWMgaXMgZ2VuZXJhdGVkIHZlcmJhdGltIGZyb20gdGhlIHBhZ2Ug4oCUIGRvIG5vdCBpbnZlbnQgdmFsdWVzIG5vdCBsaXN0ZWQgaGVyZS4KCioqUGF0aDoqKiBKaW9HYW1lcyBETFMg4oC6IENvbXBvbmVudHMg4oC6IERyYXdlcgoKLS0tCgpBIHBhbmVsIHRoYXQgc2xpZGVzIGluIGZyb20gdGhlIGxlZnQgb3IgcmlnaHQgZWRnZSBvZiB0aGUgc2NyZWVuLiBVc2VkIGZvciBmaWx0ZXJzLCBjb250ZXh0dWFsIHNldHRpbmdzLCBhbmQgc2Vjb25kYXJ5IG5hdmlnYXRpb24gd2l0aG91dCBsZWF2aW5nIHRoZSBjdXJyZW50IHZpZXcuCgpOYXJyb3cgeW91ciBnYW1lIGxpYnJhcnkKClRvbWIgUmFpZGVyIMK3IEFjdGlvbiBBZHZlbnR1cmUKCkNsaWNrIGJ1dHRvbnMgdG8gcHJldmlldyBkcmF3ZXIgZGlyZWN0aW9ucwoKIyMgVmFyaWFudHMKClR3byBkaXJlY3Rpb25zIGNvdmVyIGFsbCBKaW9HYW1lcyBzdXJmYWNlcy4gRGlyZWN0aW9uIGlzIGRldGVybWluZWQgYnkgY29udGVudCB0eXBlIOKAlCBmaWx0ZXJzIGZyb20gdGhlIGxlZnQsIGNvbnRleHR1YWwgZGV0YWlsIGZyb20gdGhlIHJpZ2h0LgoKIyMgQW5hdG9teQoKVGhlIGRyYXdlciBpcyBhIGxheWVyZWQgc3lzdGVtOiBzY3JpbSBjYXRjaGVzIGRpc21pc3NhbCB0YXBzLCB0aGUgcGFuZWwgc2xpZGVzIG92ZXIgY29udGVudCwgYW5kIHRoZSBpbnRlcm5hbCBsYXlvdXQgZm9sbG93cyBoZWFkZXIg4oaSIHNjcm9sbGFibGUgYm9keSDihpIgZml4ZWQgZm9vdGVyLgoKIyMgQVBJCgojIyMgQ1NTIGNsYXNzZXMKCnwgQ2xhc3MgfCBEZXNjcmlwdGlvbiB8CnwtLS18LS0tfAp8IGAuZHMtZHJhd2VyYCB8IFJvb3QgcGFuZWwg4oCUIGZpeGVkIHNpZGUsIGZ1bGwgaGVpZ2h0LCBzdXJmYWNlLTEgfAp8IGAuZHMtZHJhd2VyLS1sZWZ0YCB8IFNsaWRlcyBmcm9tIGxlZnQgZWRnZSB8CnwgYC5kcy1kcmF3ZXItLXJpZ2h0YCB8IFNsaWRlcyBmcm9tIHJpZ2h0IGVkZ2UgfAp8IGAuZHMtZHJhd2VyX19oZWFkZXJgIHwgVGl0bGUgcm93IHdpdGggY2xvc2UgYnV0dG9uIHwKfCBgLmRzLWRyYXdlcl9fYm9keWAgfCBTY3JvbGxhYmxlIGNvbnRlbnQgYXJlYSB8CnwgYC5kcy1kcmF3ZXJfX3NjcmltYCB8IEZ1bGwtc2NyZWVuIGJhY2tkcm9wIHwKCiMjIyBSZWFjdCBwcm9wcwoKfCBQcm9wIHwgVHlwZSB8IERlZmF1bHQgfCBEZXNjcmlwdGlvbiB8CnwtLS18LS0tfC0tLXwtLS18CnwgYG9wZW5gIHwgYm9vbGVhbiB8IHJlcXVpcmVkIHwgQ29udHJvbHMgZHJhd2VyIHZpc2liaWxpdHkgfAp8IGBvbkNsb3NlYCB8ICgpID0+IHZvaWQgfCByZXF1aXJlZCB8IENsb3NlIGhhbmRsZXIgfAp8IGBzaWRlYCB8ICJsZWZ0IiB8ICJyaWdodCIgfCAibGVmdCIgfCBTbGlkZSBkaXJlY3Rpb24gfAp8IGB3aWR0aGAgfCBudW1iZXIgfCBzdHJpbmcgfCAzMjAgfCBQYW5lbCB3aWR0aCBpbiBweCBvciBDU1Mgc3RyaW5nIHwKfCBgdGl0bGVgIHwgc3RyaW5nIHwgdW5kZWZpbmVkIHwgSGVhZGVyIHRpdGxlIHRleHQgfAp8IGBjaGlsZHJlbmAgfCBSZWFjdE5vZGUgfCByZXF1aXJlZCB8IERyYXdlciBib2R5IGNvbnRlbnQgfAoKIyMgQ29kZQoKSFRNTCBzdHJ1Y3R1cmUuIE9wZW4vY2xvc2UgaXMgZHJpdmVuIGJ5IHRvZ2dsaW5nIGAuaXMtb3BlbmAgb24gdGhlIHBhbmVsIGFuZCBzY3JpbS4KCmBgYGAKPCEtLSBTY3JpbSAtLT4KPGRpdiBjbGFzcz0iZHJhd2VyLXNjcmltIiBkYXRhLWRyYXdlci1jbG9zZT48L2Rpdj4KCjwhLS0gUGFuZWwgKGxlZnQgb3IgcmlnaHQpIC0tPgo8YXNpZGUgY2xhc3M9ImRyYXdlciBkcmF3ZXItLWxlZnQiIHJvbGU9ImRpYWxvZyIKICAgICAgIGFyaWEtbW9kYWw9InRydWUiIGFyaWEtbGFiZWw9IkZpbHRlcnMiPgoKICA8ZGl2IGNsYXNzPSJkcmF3ZXItaGVhZGVyIj4KICAgIDxoMiBjbGFzcz0iZHJhd2VyLXRpdGxlIj5GaWx0ZXJzPC9oMj4KICAgIDxidXR0b24gY2xhc3M9ImRyYXdlci1jbG9zZSIgYXJpYS1sYWJlbD0iQ2xvc2UgZmlsdGVycyI+CiAgICAgIDxzdmc+PHVzZSBocmVmPSIjaWNfY2xvc2UiPjwvdXNlPjwvc3ZnPgogICAgPC9idXR0b24+CiAgPC9kaXY+CgogIDxkaXYgY2xhc3M9ImRyYXdlci1ib2R5Ij4KICAgIDwhLS0gU2Nyb2xsYWJsZSBjb250ZW50IC0tPgogIDwvZGl2PgoKICA8ZGl2IGNsYXNzPSJkcmF3ZXItZm9vdGVyIj4KICAgIDxidXR0b24gY2xhc3M9ImJ0biBidG4tLWdob3N0Ij5SZXNldDwvYnV0dG9uPgogICAgPGJ1dHRvbiBjbGFzcz0iYnRuIGJ0bi0tcHJpbWFyeSI+QXBwbHk8L2J1dHRvbj4KICA8L2Rpdj4KPC9hc2lkZT4KYGBgYAoKYGBgYAovKiBPcGVuIHN0YXRlICovCi5kcmF3ZXIgeyB0cmFuc2Zvcm06IHRyYW5zbGF0ZVgoLTEwMCUpOyB0cmFuc2l0aW9uOiB0cmFuc2Zvcm0gdmFyKC0tZHVyLXNsb3cpIHZhcigtLWVhc2Utb3V0KTsgfQouZHJhd2VyLS1yaWdodCB7IHRyYW5zZm9ybTogdHJhbnNsYXRlWCgxMDAlKTsgfQouZHJhd2VyLmlzLW9wZW4geyB0cmFuc2Zvcm06IHRyYW5zbGF0ZVgoMCk7IH0KLmRyYXdlci1zY3JpbSB7IG9wYWNpdHk6IDA7IHBvaW50ZXItZXZlbnRzOiBub25lOyB0cmFuc2l0aW9uOiBvcGFjaXR5IDI4MG1zOyB9Ci5kcmF3ZXItc2NyaW0uaXMtb3BlbiB7IG9wYWNpdHk6IDE7IHBvaW50ZXItZXZlbnRzOiBhdXRvOyB9CmBgYGAKCiMjIFRva2VucwoKfCBUb2tlbiB8IFZhbHVlIHwgVXNhZ2UgfAp8LS0tfC0tLXwtLS18CnwgYC0tc3VyZmFjZS0yYCB8IFBhbmVsIGJhY2tncm91bmQgfCBEcmF3ZXIgcGFuZWwgYmcgfAp8IGAtLWJvcmRlci1zdWJ0bGVgIHwgUGFuZWwgZWRnZSBib3JkZXIgfCBMZWZ0L3JpZ2h0IGJvcmRlciBvZiBwYW5lbCB8CnwgYC0tZWFzZS1lbXBoYXNpemVkYCB8IGN1YmljLWJlemllciguMzIsLjcyLDAsMSkgfCBTbGlkZS1pbiBlYXNpbmcgfAp8IGAtLWR1ci1zbG93YCB8IDMyMG1zIHwgT3BlbiB0cmFuc2l0aW9uIHwKfCBgLS1kdXItcG9wYCB8IDI4MG1zIHwgU2NyaW0gZmFkZSB8CnwgMjgwcHggbW9iaWxlIC8gMzYwcHggd2ViIHwgV2lkdGggfCBQYW5lbCB3aWR0aCB8CnwgcmdiYSgwLDAsMCwuNikgfCBTY3JpbSB8IEJhY2tkcm9wIG92ZXJsYXkgfAoKIyMgR3VpZGVsaW5lcwoKLSDCt1VzZSBsZWZ0IGRyYXdlciBmb3IgZ2xvYmFsIGZpbHRlcnMgYW5kIGZhY2V0ZWQgc2VhcmNoCi0gwrdBbHdheXMgcHJvdmlkZSBhIGNsb3NlIGJ1dHRvbiBBTkQgc2NyaW0gdGFwIHRvIGRpc21pc3MKLSDCt0tlZXAgZm9vdGVyIGFjdGlvbnMgc3RpY2t5IOKAlCBuZXZlciBsZXQgdGhlbSBzY3JvbGwgYXdheQotIMK3VHJhcCBmb2N1cyBpbnNpZGUgdGhlIGRyYXdlciB3aGlsZSBvcGVuCi0gwrdVc2UgYGFyaWEtbW9kYWw9InRydWUiYCBvbiB0aGUgcGFuZWwKCi0gwrdEb24ndCBzdGFjayBtdWx0aXBsZSBkcmF3ZXJzIOKAlCB1c2UgYSBzaW5nbGUgbGF5ZXIKLSDCt0Rvbid0IG9wZW4gYSBkcmF3ZXIgd2lkZXIgdGhhbiA4MCUgb2YgdGhlIHZpZXdwb3J0Ci0gwrdEb24ndCB1c2UgZm9yIHByaW1hcnkgY29udGVudCDigJQgdXNlIGEgZnVsbCBwYWdlIGluc3RlYWQKLSDCt0Rvbid0IHNraXAgdGhlIHRyYW5zaXRpb24g4oCUIGFicnVwdCBhcHBlYXJhbmNlIGZlZWxzIGJyb2tlbgotIMK3RG9uJ3QgY29uZnVzZSB3aXRoIEJvdHRvbSBTaGVldCDigJQgRHJhd2VyIGlzIGFsd2F5cyBzaWRlCgojIyBXaGVuIHRvIHVzZQoKVXNlIHdoZW4KCi0gU2lkZSBuYXZpZ2F0aW9uIHBhbmVsIG9uIHdlYi90YWJsZXQgKHNsaWRlcyBpbiBmcm9tIGxlZnQpCi0gU2V0dGluZ3MgcGFuZWwgb24gZGVza3RvcCB0aGF0IGRvZXNuJ3QgaGlkZSB0aGUgbWFpbiBjb250ZW50IGVudGlyZWx5Ci0gRmlsdGVyIHBhbmVsIG9uIGJyb3dzZS9kaXNjb3Zlcnkgc2NyZWVucyAoc2xpZGVzIGZyb20gcmlnaHQpCgpEb24ndCB1c2Ugd2hlbgoKLSBNb2JpbGUgcHJpbWFyeSBuYXZpZ2F0aW9uIOKAlCB1c2UgVGFiIEJhciBpbnN0ZWFkCi0gUmVwbGFjaW5nIEJvdHRvbSBTaGVldCBvbiBtb2JpbGUg4oCUIERyYXdlciBpcyBhIHdlYi90YWJsZXQgcGF0dGVybgotIENvbnRlbnQgdGhhdCBzaG91bGQgYmUgYWx3YXlzIHZpc2libGUg4oCUIHVzZSBhIHNpZGViYXIgbGF5b3V0CgojIyBTaXplcwoKfCBTaXplIHwgVG9rZW4gLyBIZWlnaHQgfCBVc2UgY2FzZSB8IFBsYXRmb3JtIHwKfC0tLXwtLS18LS0tfC0tLXwKfCBOYXJyb3cgfCAyNDBweCB3aWR0aCB8IE5hdiAvIHF1aWNrIGZpbHRlciB8IFdlYiB8CnwgRGVmYXVsdCB8IDMyMHB4IHdpZHRoIHwgU3RhbmRhcmQgc2lkZSBwYW5lbCB8IFdlYiB8CnwgV2lkZSB8IDQ4MHB4IHdpZHRoIHwgUmljaCBzZXR0aW5ncyBwYW5lbCB8IFdlYiB8CgojIyBTdGF0ZXMKCkNsb3NlZAoKT2ZmLXNjcmVlbiBhdCAtMTAwJSB0cmFuc2xhdGVYOyBzY3JpbSBoaWRkZW4KCk9wZW5pbmcKClNsaWRlcyBpbiB3aXRoIGVhc2Utb3V0OyBzY3JpbSBmYWRlcyBpbgoKT3BlbgoKRnVsbHkgdmlzaWJsZTsgZm9jdXMgdHJhcHBlZCBpbnNpZGUgZHJhd2VyCgpDbG9zaW5nCgpTbGlkZXMgb3V0IHdpdGggZWFzZS1pbjsgc2NyaW0gZmFkZXMgb3V0CgpTY3JvbGxlZAoKSGVhZGVyIHN0YXlzIGZpeGVkOyBib2R5IHNjcm9sbHMgaW5kZXBlbmRlbnRseQoKIyMgTW90aW9uCgp8IEludGVyYWN0aW9uIHwgRWFzaW5nIHwgRHVyYXRpb24gfCBQcm9wZXJ0eSB8CnwtLS18LS0tfC0tLXwtLS18CnwgT3BlbiAobGVmdCkgfCBgLS1lYXNlLW91dGAgfCBgLS1kdXItYmFzZWAgfCB0cmFuc2Zvcm0gdHJhbnNsYXRlWCgtMTAwJSDihpIgMCkgfAp8IE9wZW4gKHJpZ2h0KSB8IGAtLWVhc2Utb3V0YCB8IGAtLWR1ci1iYXNlYCB8IHRyYW5zZm9ybSB0cmFuc2xhdGVYKDEwMCUg4oaSIDApIHwKfCBDbG9zZSB8IGAtLWVhc2UtaW5gIHwgYC0tZHVyLWZhc3RgIHwgdHJhbnNmb3JtIHRyYW5zbGF0ZVggfAp8IFNjcmltIGZhZGUgfCBgLS1lYXNlLW91dGAgfCBgLS1kdXItYmFzZWAgfCBvcGFjaXR5IHwKfCBDb250ZW50IHN0YWdnZXIgfCBgLS1lYXNlLW91dGAgfCBgLS1kdXItZmFzdGAgfCBvcGFjaXR5IChpdGVtcyBkZWxheWVkIDQwbXMgZWFjaCkgfAoKIyMgUGxhdGZvcm0gcnVsZXMKCk1vYmlsZQoKLSBOb3QgdXNlZCBvbiBtb2JpbGUg4oCUIHVzZSBCb3R0b20gU2hlZXQgaW5zdGVhZAotIEV4Y2VwdGlvbjogZnVsbC1zY3JlZW4gbmF2IGRyYXdlciAoaGFtYnVyZ2VyIG1lbnUpIG9uIG1vYmlsZSB3ZWIKCldlYgoKLSBMZWZ0IGRyYXdlcjogcHJpbWFyeSBuYXYg4oCUIHBlcnNpc3RzIG9yIG92ZXJsYXlzIG9uIHNtYWxsZXIgc2NyZWVucwotIFJpZ2h0IGRyYXdlcjogZmlsdGVycywgc2V0dGluZ3MsIGRldGFpbCBwYW5lbHMKLSBLZXlib2FyZDogRXNjYXBlIGNsb3NlczsgZm9jdXMgdHJhcHBlZCBpbnNpZGUgd2hpbGUgb3BlbgotIE92ZXJsYXkgc2NyaW0gb24gd2lkdGhzIGJlbG93IDEwMjRweDsgcHVzaCBsYXlvdXQgb24gd2lkZXIgc2NyZWVucwoKVFYKCi0gTm90IHVzZWQgb24gVFYg4oCUIHVzZSBhIGZ1bGxzY3JlZW4gb3ZlcmxheSBvciBmb2N1c2VkIHNpZGUgcGFuZWwKCiMjIEFjY2Vzc2liaWxpdHkKCi0gwrdFc2MgY2xvc2VzIHRoZSBkcmF3ZXIKLSDCt1RhYiBjeWNsZXMgdGhyb3VnaCBmb2N1c2FibGUgZWxlbWVudHMgaW5zaWRlCi0gwrdGb2N1cyByZXR1cm5zIHRvIHRyaWdnZXIgb24gY2xvc2UKCi0gwrdgcm9sZT0iZGlhbG9nImAgb24gcGFuZWwKLSDCt2BhcmlhLW1vZGFsPSJ0cnVlImAgdG8gdHJhcCBzY3JlZW4gcmVhZGVyCi0gwrdgYXJpYS1sYWJlbGAgb3IgYGFyaWEtbGFiZWxsZWRieWAgZm9yIHRpdGxlCgotLS0KCiMjIFRva2VucyByZWZlcmVuY2VkIG9uIHRoaXMgcGFnZQoKVXNlIHRoZXNlIGV4YWN0IHRva2VucyDigJQgZGVmaW5lZCBpbiBgdG9rZW5zL3Rva2Vucy5jc3NgLiBEbyBub3Qgc3Vic3RpdHV0ZSByYXcgdmFsdWVzLgoKLSBgLS1hbWJlcmAKLSBgLS1iZ2AKLSBgLS1ib3JkZXJgCi0gYC0tYm9yZGVyLXN1YnRsZWAKLSBgLS1jdHJsLWgtZ2hvc3RgCi0gYC0tY3RybC1oLXNtYAotIGAtLWR1ci1mYXN0YAotIGAtLWR1ci1wb3BgCi0gYC0tZHVyLXNsb3dgCi0gYC0tZWFzZS1lbXBoYXNpemVkYAotIGAtLWVhc2Utb3V0YAotIGAtLWdvbGRgCi0gYC0tamlvYAotIGAtLWppby1mb250YAotIGAtLXBpbGxgCi0gYC0tcjJgCi0gYC0tcjNgCi0gYC0tcjRgCi0gYC0tc3VyZmFjZS0xYAotIGAtLXN1cmZhY2UtMmAKLSBgLS10ZXh0YAotIGAtLXRleHQtaW52YAotIGAtLXRleHQyYAotIGAtLXRleHQzYAoKLS0tCgojIyBCdWlsZCBydWxlcyAoYmluZGluZykKCjEuIFVzZSAqKm9ubHkqKiB0aGUgdG9rZW5zIGxpc3RlZCBhYm92ZS4gSWYgYSB2YWx1ZSB5b3UgbmVlZCBpcyBub3QgbGlzdGVkLCBzdG9wIGFuZCBhc2sg4oCUIGRvIG5vdCBpbnRyb2R1Y2UgYSByYXcgdmFsdWUuCjIuIEZvbnQgaXMgKipKaW9UeXBlKiogb25seS4gV2VpZ2h0czogMzAwLCA1MDAsIDcwMCwgOTAwLgozLiBSZXVzZSB0aGUgY29tcG9uZW50IENTUyBwYXR0ZXJucyBzaG93biBvbiB0aGUgc291cmNlIHBhZ2U7IGRvIG5vdCByZWRlc2lnbi4KNC4gTWF0Y2ggZXZlcnkgc3RhdGUgKGRlZmF1bHQsIGhvdmVyLCBmb2N1cywgYWN0aXZlLCBkaXNhYmxlZCwgbG9hZGluZykgc2hvd24gb24gdGhlIHBhZ2UuCjUuIEFjY2Vzc2liaWxpdHkgcmVxdWlyZW1lbnRzIG9uIHRoZSBwYWdlIGFyZSBtYW5kYXRvcnksIG5vdCBvcHRpb25hbC4K" download="drawer-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
     </div>
   </header>
 
@@ -250,6 +250,35 @@
   </section>
 
   <!-- 4. CODE -->
+  <!-- API -->
+  <section class="ds-section" id="api">
+    <h2 class="ds-section-title">API</h2>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:0 0 12px;">CSS classes</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>.ds-drawer</code></td><td>Root panel — fixed side, full height, surface-1</td></tr>
+        <tr><td><code>.ds-drawer--left</code></td><td>Slides from left edge</td></tr>
+        <tr><td><code>.ds-drawer--right</code></td><td>Slides from right edge</td></tr>
+        <tr><td><code>.ds-drawer__header</code></td><td>Title row with close button</td></tr>
+        <tr><td><code>.ds-drawer__body</code></td><td>Scrollable content area</td></tr>
+        <tr><td><code>.ds-drawer__scrim</code></td><td>Full-screen backdrop</td></tr>
+      </tbody>
+    </table>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 12px;">React props</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>open</code></td><td><span class="api-type">boolean</span></td><td><span class="api-default">required</span></td><td>Controls drawer visibility</td></tr>
+        <tr><td><code>onClose</code></td><td><span class="api-type">() => void</span></td><td><span class="api-default">required</span></td><td>Close handler</td></tr>
+        <tr><td><code>side</code></td><td><span class="api-type">"left" | "right"</span></td><td><span class="api-default">"left"</span></td><td>Slide direction</td></tr>
+        <tr><td><code>width</code></td><td><span class="api-type">number | string</span></td><td><span class="api-default">320</span></td><td>Panel width in px or CSS string</td></tr>
+        <tr><td><code>title</code></td><td><span class="api-type">string</span></td><td><span class="api-default">undefined</span></td><td>Header title text</td></tr>
+        <tr><td><code>children</code></td><td><span class="api-type">ReactNode</span></td><td><span class="api-default">required</span></td><td>Drawer body content</td></tr>
+      </tbody>
+    </table>
+  </section>
+
   <section class="ds-section" id="code">
     <h2 class="ds-section-title">Code</h2>
     <p class="ds-section-desc">HTML structure. Open/close is driven by toggling <code>.is-open</code> on the panel and scrim.</p>
@@ -278,7 +307,7 @@
 <span class="k">&lt;/aside&gt;</span></pre>
 
     <pre class="ds-code-block"><span class="c">/* Open state */</span>
-.drawer { transform: translateX(-100%); transition: transform 320ms var(--ease-out); }
+.drawer { transform: translateX(-100%); transition: transform var(--dur-slow) var(--ease-out); }
 .drawer--right { transform: translateX(100%); }
 .drawer.is-open { transform: translateX(0); }
 .drawer-scrim { opacity: 0; pointer-events: none; transition: opacity 280ms; }
@@ -294,9 +323,9 @@
         <tbody>
           <tr><td><code>--surface-2</code></td><td>Panel background</td><td>Drawer panel bg</td></tr>
           <tr><td><code>--border-subtle</code></td><td>Panel edge border</td><td>Left/right border of panel</td></tr>
-          <tr><td><code>--ease-out</code></td><td>cubic-bezier(.2,0,0,1)</td><td>Slide-in easing</td></tr>
-          <tr><td>320ms</td><td>Duration</td><td>Open transition</td></tr>
-          <tr><td>280ms</td><td>Duration</td><td>Scrim fade</td></tr>
+          <tr><td><code>--ease-emphasized</code></td><td>cubic-bezier(.32,.72,0,1)</td><td>Slide-in easing</td></tr>
+          <tr><td><code>--dur-slow</code></td><td>320ms</td><td>Open transition</td></tr>
+          <tr><td><code>--dur-pop</code></td><td>280ms</td><td>Scrim fade</td></tr>
           <tr><td>280px mobile / 360px web</td><td>Width</td><td>Panel width</td></tr>
           <tr><td>rgba(0,0,0,.6)</td><td>Scrim</td><td>Backdrop overlay</td></tr>
         </tbody>
@@ -332,6 +361,103 @@
   </section>
 
   <!-- 7. ACCESSIBILITY -->
+  <!-- WHEN TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use</h2>
+    <div class="ds-usage-grid">
+      <div class="ds-usage-card ds-usage-card--do">
+        <p class="ds-usage-label ds-usage-label--do">Use when</p>
+        <ul class="ds-usage-list">
+              <li>Side navigation panel on web/tablet (slides in from left)</li>
+              <li>Settings panel on desktop that doesn't hide the main content entirely</li>
+              <li>Filter panel on browse/discovery screens (slides from right)</li>
+        </ul>
+      </div>
+      <div class="ds-usage-card ds-usage-card--dont">
+        <p class="ds-usage-label ds-usage-label--dont">Don't use when</p>
+        <ul class="ds-usage-list">
+              <li>Mobile primary navigation — use Tab Bar instead</li>
+              <li>Replacing Bottom Sheet on mobile — Drawer is a web/tablet pattern</li>
+              <li>Content that should be always visible — use a sidebar layout</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOTION -->
+  <!-- SIZES -->
+  <section class="ds-section" id="sizes">
+    <h2 class="ds-section-title">Sizes</h2>
+    <table class="ds-api-table" style="margin-top:16px;">
+      <thead><tr><th>Size</th><th>Token / Height</th><th>Use case</th><th>Platform</th></tr></thead>
+      <tbody>
+        <tr><td>Narrow</td><td>240px width</td><td>Nav / quick filter</td><td>Web</td></tr>
+        <tr><td>Default</td><td>320px width</td><td>Standard side panel</td><td>Web</td></tr>
+        <tr><td>Wide</td><td>480px width</td><td>Rich settings panel</td><td>Web</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- STATES -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:16px;">
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px;">
+        <p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 6px;">Closed</p>
+        <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5;">Off-screen at -100% translateX; scrim hidden</p>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px;">
+        <p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 6px;">Opening</p>
+        <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5;">Slides in with ease-out; scrim fades in</p>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px;">
+        <p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 6px;">Open</p>
+        <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5;">Fully visible; focus trapped inside drawer</p>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px;">
+        <p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 6px;">Closing</p>
+        <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5;">Slides out with ease-in; scrim fades out</p>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px;">
+        <p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 6px;">Scrolled</p>
+        <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5;">Header stays fixed; body scrolls independently</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-motion-table">
+      <thead><tr><th>Interaction</th><th>Easing</th><th>Duration</th><th>Property</th></tr></thead>
+      <tbody>
+        <tr><td>Open (left)</td><td><code>--ease-out</code></td><td><code>--dur-base</code></td><td>transform translateX(-100% → 0)</td></tr>
+        <tr><td>Open (right)</td><td><code>--ease-out</code></td><td><code>--dur-base</code></td><td>transform translateX(100% → 0)</td></tr>
+        <tr><td>Close</td><td><code>--ease-in</code></td><td><code>--dur-fast</code></td><td>transform translateX</td></tr>
+        <tr><td>Scrim fade</td><td><code>--ease-out</code></td><td><code>--dur-base</code></td><td>opacity</td></tr>
+        <tr><td>Content stagger</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>opacity (items delayed 40ms each)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PLATFORM -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform rules</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:16px;">
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--gold);border-radius:var(--r4);padding:20px;background:var(--surface-1);">
+        <p style="font-size:12px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px;">Mobile</p>
+        <ul style="list-style:none;padding:0;margin:0;"><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Not used on mobile — use Bottom Sheet instead</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Exception: full-screen nav drawer (hamburger menu) on mobile web</li></ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--amber);border-radius:var(--r4);padding:20px;background:var(--surface-1);">
+        <p style="font-size:12px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px;">Web</p>
+        <ul style="list-style:none;padding:0;margin:0;"><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Left drawer: primary nav — persists or overlays on smaller screens</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Right drawer: filters, settings, detail panels</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Keyboard: Escape closes; focus trapped inside while open</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Overlay scrim on widths below 1024px; push layout on wider screens</li></ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid #F59E0B;border-radius:var(--r4);padding:20px;background:var(--surface-1);">
+        <p style="font-size:12px;font-weight:700;color:#F59E0B;text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px;">TV</p>
+        <ul style="list-style:none;padding:0;margin:0;"><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Not used on TV — use a fullscreen overlay or focused side panel</li></ul>
+      </div>
+    </div>
+  </section>
+
   <section class="ds-section" id="accessibility">
     <h2 class="ds-section-title">Accessibility</h2>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
@@ -357,7 +483,7 @@
 </main>
 
 <script src="../sprite-loader.js"></script>
-<script src="../shell.js"></script>
+<script src="../shell.js?v=2"></script>
 <script>
   function openDrawer(side) {
     var left  = document.getElementById('panel-left');

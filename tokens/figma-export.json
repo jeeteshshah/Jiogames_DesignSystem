@@ -1,0 +1,200 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "_meta": {
+    "version": "1.0.0",
+    "source": "tokens.json",
+    "note": "W3C Design Token Community Group format. Import into Figma via Variables → Import."
+  },
+
+  "Color": {
+    "Brand": {
+      "jio":        { "$value": "#00A859", "$type": "color", "$description": "Primary brand green" },
+      "jio-2":      { "$value": "#22C16C", "$type": "color" },
+      "jio-3":      { "$value": "#88E5AB", "$type": "color" },
+      "jio-bright": { "$value": "#00E870", "$type": "color" },
+      "jio-glow":   { "$value": "rgba(0,200,100,0.35)", "$type": "color" },
+      "jio-soft":   { "$value": "rgba(0,168,89,0.12)", "$type": "color" }
+    },
+    "Pass": {
+      "ultimate":               { "$value": "#00cc65", "$type": "color" },
+      "ultimate-glow":          { "$value": "rgba(0,200,100,0.35)", "$type": "color" },
+      "popular-gold":           { "$value": "#F7AB20", "$type": "color" },
+      "popular-gold-2":         { "$value": "#FFCF5C", "$type": "color" },
+      "pass-mobile-bg":         { "$value": "#061A10", "$type": "color" },
+      "pass-ultimate-bg-start": { "$value": "#051F12", "$type": "color" },
+      "pass-ultimate-bg-end":   { "$value": "#071A1A", "$type": "color" }
+    },
+    "Functional": {
+      "gold":       { "$value": "#FFC23D", "$type": "color" },
+      "gold-laurel":{ "$value": "#c9a84c", "$type": "color" },
+      "amber":      { "$value": "#F59E0B", "$type": "color" },
+      "amber-soft": { "$value": "rgba(245,158,11,0.15)", "$type": "color" },
+      "red":        { "$value": "#FF4757", "$type": "color" },
+      "pink":       { "$value": "#FF3D7F", "$type": "color" },
+      "negative":   { "$value": "#FF4757", "$type": "color" },
+      "positive":   { "$value": "#00A859", "$type": "color" }
+    },
+    "Background": {
+      "bg":        { "$value": "#06080F", "$type": "color", "$description": "Main page background" },
+      "card-bg":   { "$value": "#111115", "$type": "color" },
+      "sheet-bg":  { "$value": "#0e1118", "$type": "color" },
+      "sheet-top": { "$value": "#131720", "$type": "color" }
+    },
+    "Surface": {
+      "surface-1": { "$value": "#0E1119", "$type": "color" },
+      "surface-2": { "$value": "#161A24", "$type": "color" },
+      "surface-3": { "$value": "#1F2432", "$type": "color" },
+      "surface-4": { "$value": "#2A3142", "$type": "color" },
+      "glass-1":   { "$value": "rgba(255,255,255,0.055)", "$type": "color" },
+      "glass-2":   { "$value": "rgba(255,255,255,0.03)", "$type": "color" },
+      "chip-bg":   { "$value": "#0c0f14", "$type": "color" }
+    },
+    "Text": {
+      "text":     { "$value": "#F4F2EE", "$type": "color", "$description": "Primary text" },
+      "text2":    { "$value": "#A8ADBA", "$type": "color", "$description": "Secondary text" },
+      "text3":    { "$value": "#6B7280", "$type": "color", "$description": "Muted/placeholder" },
+      "text4":    { "$value": "#454A57", "$type": "color", "$description": "Disabled text" },
+      "text-inv": { "$value": "#000000", "$type": "color", "$description": "Inverse (on green CTAs)" }
+    },
+    "Border": {
+      "border":          { "$value": "rgba(255,255,255,0.1)",  "$type": "color" },
+      "border-strong":   { "$value": "rgba(255,255,255,0.14)", "$type": "color" },
+      "border-subtle":   { "$value": "rgba(255,255,255,0.08)", "$type": "color" },
+      "border-ultimate": { "$value": "rgba(0,204,101,0.3)",    "$type": "color" },
+      "divider":         { "$value": "rgba(255,255,255,0.07)", "$type": "color" },
+      "hairline":        { "$value": "rgba(255,255,255,0.08)", "$type": "color" },
+      "hairline-2":      { "$value": "rgba(255,255,255,0.16)", "$type": "color" }
+    },
+    "State": {
+      "success":         { "$value": "#00A859", "$type": "color" },
+      "success-soft":    { "$value": "rgba(0,168,89,0.12)", "$type": "color" },
+      "success-border":  { "$value": "rgba(0,168,89,0.3)", "$type": "color" },
+      "warning":         { "$value": "#F59E0B", "$type": "color" },
+      "warning-soft":    { "$value": "rgba(245,158,11,0.12)", "$type": "color" },
+      "warning-border":  { "$value": "rgba(245,158,11,0.3)", "$type": "color" },
+      "error":           { "$value": "#FF4757", "$type": "color" },
+      "error-soft":      { "$value": "rgba(255,71,87,0.12)", "$type": "color" },
+      "error-border":    { "$value": "rgba(255,71,87,0.3)", "$type": "color" },
+      "premium":         { "$value": "#00cc65", "$type": "color" },
+      "premium-soft":    { "$value": "rgba(0,204,101,0.1)", "$type": "color" },
+      "premium-border":  { "$value": "rgba(0,204,101,0.35)", "$type": "color" }
+    }
+  },
+
+  "Spacing": {
+    "scale": {
+      "0":    { "$value": "0px",  "$type": "dimension" },
+      "0-25": { "$value": "2px",  "$type": "dimension" },
+      "0-5":  { "$value": "4px",  "$type": "dimension" },
+      "1":    { "$value": "8px",  "$type": "dimension" },
+      "1-5":  { "$value": "12px", "$type": "dimension" },
+      "2":    { "$value": "16px", "$type": "dimension" },
+      "3":    { "$value": "24px", "$type": "dimension" },
+      "4":    { "$value": "32px", "$type": "dimension" },
+      "5":    { "$value": "40px", "$type": "dimension" },
+      "6":    { "$value": "48px", "$type": "dimension" },
+      "8":    { "$value": "64px", "$type": "dimension" },
+      "10":   { "$value": "80px", "$type": "dimension" },
+      "12":   { "$value": "96px", "$type": "dimension" }
+    },
+    "semantic": {
+      "gutter":            { "$value": "16px", "$type": "dimension", "$description": "Mobile: 16px / Web: 40px / TV: 80px" },
+      "section-gap":       { "$value": "32px", "$type": "dimension" },
+      "card-gap":          { "$value": "12px", "$type": "dimension" },
+      "component-padding": { "$value": "16px", "$type": "dimension" },
+      "card-padding":      { "$value": "16px", "$type": "dimension" },
+      "sheet-padding":     { "$value": "24px", "$type": "dimension" },
+      "hero-gap":          { "$value": "32px", "$type": "dimension" }
+    }
+  },
+
+  "Radius": {
+    "r1":   { "$value": "8px",   "$type": "dimension" },
+    "r2":   { "$value": "10px",  "$type": "dimension" },
+    "r3":   { "$value": "12px",  "$type": "dimension", "$description": "Square cards" },
+    "r4":   { "$value": "14px",  "$type": "dimension", "$description": "Inputs, OTP boxes" },
+    "r5":   { "$value": "16px",  "$type": "dimension", "$description": "Landscape & portrait cards" },
+    "r6":   { "$value": "18px",  "$type": "dimension" },
+    "r7":   { "$value": "20px",  "$type": "dimension" },
+    "r8":   { "$value": "22px",  "$type": "dimension" },
+    "r9":   { "$value": "28px",  "$type": "dimension" },
+    "pill": { "$value": "100px", "$type": "dimension", "$description": "Chips, tags, pill buttons" }
+  },
+
+  "Typography": {
+    "family": {
+      "base": { "$value": "JioType", "$type": "fontFamily", "$description": "Only allowed font. Weights: 300/500/700/900 only." }
+    },
+    "weight": {
+      "light":  { "$value": 300, "$type": "fontWeight" },
+      "medium": { "$value": 500, "$type": "fontWeight" },
+      "bold":   { "$value": 700, "$type": "fontWeight" },
+      "black":  { "$value": 900, "$type": "fontWeight" }
+    }
+  },
+
+  "Motion": {
+    "easing": {
+      "spring":        { "$value": "cubic-bezier(0.22,1,0.36,1)",        "$type": "cubicBezier", "$description": "Default for most transitions" },
+      "spring-bounce": { "$value": "cubic-bezier(0.34,1.56,0.64,1)",     "$type": "cubicBezier", "$description": "Confirmations, success states" },
+      "ease-screen":   { "$value": "cubic-bezier(0.42,0,0.18,1)",        "$type": "cubicBezier", "$description": "Full-screen transitions" },
+      "ease-out":      { "$value": "cubic-bezier(0,0,0.2,1)",            "$type": "cubicBezier" },
+      "ease-error":    { "$value": "cubic-bezier(0.36,0.07,0.19,0.97)",  "$type": "cubicBezier", "$description": "Shake animation" }
+    },
+    "duration": {
+      "instant":   { "$value": "90ms",   "$type": "duration", "$description": "Icon state swaps" },
+      "fast":      { "$value": "120ms",  "$type": "duration", "$description": "Micro feedback" },
+      "default":   { "$value": "200ms",  "$type": "duration", "$description": "Standard transitions" },
+      "pop":       { "$value": "280ms",  "$type": "duration", "$description": "Cards, chips" },
+      "error":     { "$value": "380ms",  "$type": "duration", "$description": "Shake" },
+      "sheet":     { "$value": "400ms",  "$type": "duration", "$description": "Bottom sheets" },
+      "enter":     { "$value": "420ms",  "$type": "duration", "$description": "Screen enter" },
+      "screen":    { "$value": "420ms",  "$type": "duration", "$description": "Page nav" },
+      "tv-enter":  { "$value": "560ms",  "$type": "duration", "$description": "TV screen transitions" },
+      "shimmer":   { "$value": "1600ms", "$type": "duration", "$description": "Skeleton shimmer loop" }
+    }
+  },
+
+  "Size": {
+    "control": {
+      "ctrl-h":       { "$value": "54px", "$type": "dimension", "$description": "Default CTA height (mobile)" },
+      "ctrl-h-sm":    { "$value": "36px", "$type": "dimension" },
+      "ctrl-h-ghost": { "$value": "44px", "$type": "dimension" },
+      "touch-min":    { "$value": "44px", "$type": "dimension", "$description": "Minimum touch target" }
+    },
+    "component": {
+      "tab-bar-h":    { "$value": "64px", "$type": "dimension" },
+      "app-bar-h":    { "$value": "64px", "$type": "dimension" },
+      "status-bar-h": { "$value": "44px", "$type": "dimension" },
+      "otp-box-w":    { "$value": "50px", "$type": "dimension" },
+      "otp-box-h":    { "$value": "64px", "$type": "dimension" },
+      "card-wide-w":  { "$value": "272px","$type": "dimension", "$description": "Landscape card width (mobile)" },
+      "card-sq":      { "$value": "96px", "$type": "dimension" },
+      "genre-tile-h": { "$value": "156px","$type": "dimension" }
+    },
+    "icon": {
+      "xs":   { "$value": "14px", "$type": "dimension" },
+      "sm":   { "$value": "16px", "$type": "dimension" },
+      "md":   { "$value": "20px", "$type": "dimension" },
+      "base": { "$value": "24px", "$type": "dimension", "$description": "Default icon size" },
+      "lg":   { "$value": "32px", "$type": "dimension" },
+      "xl":   { "$value": "40px", "$type": "dimension" }
+    },
+    "button": {
+      "mobile": {
+        "xs": { "$value": "28px", "$type": "dimension" },
+        "s":  { "$value": "36px", "$type": "dimension" },
+        "m":  { "$value": "44px", "$type": "dimension" },
+        "l":  { "$value": "54px", "$type": "dimension" },
+        "xl": { "$value": "64px", "$type": "dimension" }
+      },
+      "tv": {
+        "xs": { "$value": "48px", "$type": "dimension" },
+        "s":  { "$value": "56px", "$type": "dimension" },
+        "m":  { "$value": "64px", "$type": "dimension" },
+        "l":  { "$value": "72px", "$type": "dimension" },
+        "xl": { "$value": "80px", "$type": "dimension" }
+      }
+    }
+  }
+}

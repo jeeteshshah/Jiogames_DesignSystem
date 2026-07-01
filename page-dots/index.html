@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     /* ── Page-specific styles ── */
     body { background: var(--bg); color: var(--text); font-family: var(--jio-font); margin: 0; }
@@ -12,55 +12,11 @@
     /* Component page header */
 
     /* ── Hero ── */
-    .component-hero {
-      border-radius: 20px;
-      overflow: hidden;
-      margin-bottom: 48px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      min-height: 280px;
-      padding: 48px 32px 32px;
-    }
-    .component-hero--grid {
-      background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-      background-size: 32px 32px;
-      background-color: #060810;
-      border: 1px solid var(--border-subtle);
-    }
-    .component-hero-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 24px;
-      position: relative;
-      z-index: 2;
-      width: 100%;
-    }
-    .component-hero-caption {
-      display: block;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .6px;
-      text-transform: uppercase;
-      color: var(--text4);
-      margin-top: 16px;
-      position: relative;
-      z-index: 2;
-    }
-    .hero-glow {
-      position: absolute;
-      width: 320px;
-      height: 180px;
-      border-radius: var(--pill);
-      background: radial-gradient(ellipse, rgba(0,168,89,.18) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 1;
-    }
+    
+    
+    
+    
+    
 
     /* ── Dot primitives ── */
     .dot-inactive {
@@ -152,97 +108,29 @@
     .dot-numbered-total { color: var(--text3); }
 
     /* ── Intro ── */
-    .component-intro { margin-bottom: 48px; }
-    .component-intro p {
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.65;
-      margin-bottom: 20px;
-      max-width: 640px;
-    }
-    .component-summary-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border: 1px solid var(--border-subtle);
-      border-radius: 14px;
-      overflow: hidden;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .component-summary-list li {
-      padding: 14px 20px;
-      border-bottom: 1px solid var(--border-subtle);
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.55;
-    }
-    .component-summary-list li:last-child { border-bottom: none; }
-    .component-summary-list li strong { color: var(--text); font-weight: 700; }
+    
+    
+    
+    
+    
+    
 
     /* ── Best practices ── */
-    .component-best-practices {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 24px;
-    }
-    .component-bp-card {
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1.5px solid;
-    }
-    .component-bp-card--do   { border-color: rgba(0,168,89,.3); }
-    .component-bp-card--dont { border-color: rgba(255,71,87,.3); }
-    .component-bp-label {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 10px 16px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .6px;
-      text-transform: uppercase;
-    }
-    .component-bp-label--do   { background: rgba(0,168,89,.07);  color: var(--jio); }
-    .component-bp-label--dont { background: rgba(255,71,87,.07); color: #ff4757; }
-    .component-bp-label--do::before   { content: '\2713'; font-size: 11px; }
-    .component-bp-label--dont::before { content: '\2715'; font-size: 11px; }
-    .component-bp-list {
-      padding: 16px 20px 20px;
-      background: var(--surface-1);
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      list-style: none;
-    }
-    .component-bp-list li {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.5;
-      padding-left: 14px;
-      position: relative;
-    }
-    .component-bp-list li::before {
-      content: '\00B7';
-      position: absolute;
-      left: 3px;
-      color: var(--text4);
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /* ── Section heading ── */
-    .ds-section-title {
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--text);
-      letter-spacing: -.4px;
-      margin-bottom: 8px;
-    }
+    
     .ds-section-sub {
       font-size: 14px;
       font-weight: 500;
@@ -277,7 +165,7 @@
       border: 1px solid rgba(0,168,89,.25);
       color: var(--jio);
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 900;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -375,12 +263,7 @@
     }
 
     /* ── Sizes table ── */
-    .sizes-table {
-      border: 1px solid var(--border-subtle);
-      border-radius: 14px;
-      overflow: hidden;
-      margin-top: 24px;
-    }
+    
     .sizes-table-head {
       display: grid;
       grid-template-columns: 1.5fr 1fr 1fr 1fr;
@@ -478,11 +361,14 @@
 
     /* Transitioning animation */
     @keyframes pill-expand {
-      0%   { width: 8px; }
-      45%  { width: 22px; }
-      100% { width: 20px; }
+      0%   { transform: scaleX(1); }
+      45%  { transform: scaleX(1.1); }
+      100% { transform: scaleX(1); }
     }
     .dot-active-pill--anim {
+      width: 20px;
+      transform-origin: left center;
+      /* 700ms = approved ambient pill-breath constant (motion.md §4); easing is --spring */
       animation: pill-expand 700ms cubic-bezier(.22,1,.36,1) infinite alternate;
     }
 
@@ -583,12 +469,7 @@
     }
 
     /* ── Accessibility ── */
-    .a11y-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-top: 24px;
-    }
+    
     .a11y-card {
       background: var(--surface-1);
       border: 1px solid var(--border-subtle);
@@ -667,66 +548,29 @@
     }
 
     /* ── Changelog ── */
-    .component-changelog {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border: 1px solid var(--border-subtle);
-      border-radius: 14px;
-      overflow: hidden;
-    }
-    .component-changelog-entry {
-      display: grid;
-      grid-template-columns: 56px 80px 1fr;
-      gap: 16px;
-      align-items: start;
-      padding: 14px 20px;
-      border-bottom: 1px solid var(--border-subtle);
-      font-size: 12px;
-    }
-    .component-changelog-entry:last-child { border-bottom: none; }
-    .component-changelog-version {
-      font-family: monospace;
-      font-weight: 700;
-      color: var(--jio);
-      font-size: 11px;
-    }
-    .component-changelog-date {
-      color: var(--text3);
-      font-weight: 500;
-    }
-    .component-changelog-desc {
-      color: var(--text2);
-      line-height: 1.5;
-    }
+    
+    
+    
+    
+    
+    
 
     /* ── Note ── */
-    .ds-note {
-      background: rgba(0,168,89,.06);
-      border: 1px solid rgba(0,168,89,.2);
-      border-radius: 10px;
-      padding: 14px 18px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.55;
-      margin-top: 16px;
-    }
-    .ds-note strong { color: var(--jio); }
+    
+    
   </style>
 </head><body><main class="ds-content">
 
   <!-- ═══════════════════════════════════════════ PAGE HEADER -->
   <div class="component-page-header">
-    <nav class="component-breadcrumb">
-      <a href="../index.html">JioGames DLS</a>
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <span class="component-breadcrumb-link">JioGames DLS</span>
       <span class="component-breadcrumb-sep">›</span>
-      <a href="../index.html#components">Components</a>
+      <span>Components</span>
       <span class="component-breadcrumb-sep">›</span>
-      <span>Page Dots</span>
+      <span class="component-breadcrumb-current">Page Dots</span>
     </nav>
-    <h1 class="component-page-title">Page Dots</h1>
-    <p class="component-page-def">Page dots indicate position within a paginated sequence such as hero carousels and onboarding flows.</p>
+    <h1 class="component-page-title">Page Dots</h1><p class="component-page-def">Page dots indicate position within a paginated sequence such as hero carousels and onboarding flows.</p>
     <div class="component-platforms">
       <span class="component-platform component-platform--mobile">
         <span class="component-platform-dot"></span>Mobile
@@ -740,6 +584,7 @@
       <span class="component-maturity component-maturity--stable">
         <span class="component-maturity--dot"></span>Stable
       </span>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBQYWdlIERvdHMg4oCUIEppb0dhbWVzIERMUyBzcGVjCgo+IFNvdXJjZTogYHBhZ2UtZG90cy9pbmRleC5odG1sYCBpbiB0aGUgSmlvR2FtZXMgRGVzaWduIFN5c3RlbS4KPiBUaGlzIHNwZWMgaXMgZ2VuZXJhdGVkIHZlcmJhdGltIGZyb20gdGhlIHBhZ2Ug4oCUIGRvIG5vdCBpbnZlbnQgdmFsdWVzIG5vdCBsaXN0ZWQgaGVyZS4KCioqUGF0aDoqKiBKaW9HYW1lcyBETFMg4oC6IENvbXBvbmVudHMg4oC6IFBhZ2UgRG90cwoKLS0tCgpQYWdlIGRvdHMgaW5kaWNhdGUgcG9zaXRpb24gd2l0aGluIGEgcGFnaW5hdGVkIHNlcXVlbmNlIHN1Y2ggYXMgaGVybyBjYXJvdXNlbHMgYW5kIG9uYm9hcmRpbmcgZmxvd3MuCgojIyBPdmVydmlldwoKUGFnZSBkb3RzIGdpdmUgcGxheWVycyBhbiBpbnN0YW50IHNwYXRpYWwgcmVhZCBvZiB0aGVpciBwb3NpdGlvbiBpbiBhIHNlcXVlbmNlIOKAlCBjYXJvdXNlbHMsIG9uYm9hcmRpbmcgZmxvd3MsIGltYWdlIGdhbGxlcmllcy4gVGhlIGFjdGl2ZSBkb3QgZXhwYW5kcyBpbnRvIGEgcGlsbCB0byBkcmF3IHRoZSBleWUgd2l0aG91dCBhZGRpbmcgdmlzdWFsIHdlaWdodC4KCi0gKipBY3RpdmUgcGlsbCBub3QgZG90LioqIEFjdGl2ZSBwb3NpdGlvbiB1c2VzIGFuIGV4cGFuZGVkIHBpbGwgKDIww5c4cHggbW9iaWxlKSBub3QgYSBmaWxsZWQgZG90LCBmb3IgY2xlYXJlciBhZmZvcmRhbmNlLgotICoqTWluaW1hbCBmb290cHJpbnQuKiogRG90cyBsaXZlIGJlbG93IGNvbnRlbnQsIG5ldmVyIG92ZXIgaXQuIE1heCA5IGRvdHMgdmlzaWJsZTsgdXNlIG92ZXJmbG93IGNsaXBwaW5nIGJleW9uZCB0aGF0LgotICoqQ2Fyb3VzZWwgdXNlIG9ubHkuKiogRG9uJ3QgdXNlIHBhZ2UgZG90cyBmb3IgdmVydGljYWwgc2Nyb2xsIHBvc2l0aW9uIOKAlCB1c2UgYSBwcm9ncmVzcyBiYXIgaW5zdGVhZC4KLSAqKkF1dG8tYWR2YW5jZSB0aW1pbmcuKiogV2hlbiBhIGNhcm91c2VsIGF1dG8tYWR2YW5jZXMsIGFuaW1hdGUgdGhlIGFjdGl2ZSBwaWxsJ3Mgd2lkdGgsIG5vdCBqdXN0IGl0cyBwb3NpdGlvbi4KCiMjIEJlc3QgcHJhY3RpY2VzCgpXaGF0IHRvIGRvIGFuZCB3aGF0IHRvIGF2b2lkLgoKLSBVc2UgdGhlIHBpbGwgdmFyaWFudCAoYWN0aXZlIGRvdCBleHBhbmRzKSBmb3IgaGVybyBjYXJvdXNlbHMKLSBDZW50ZXIgZG90IHRyYWNrcyBob3Jpem9udGFsbHkgYmVuZWF0aCB0aGUgY2Fyb3VzZWwKLSBLZWVwIGluYWN0aXZlIGRvdHMgYXQgOHB4IChtb2JpbGUpIG9yIHByb3BvcnRpb25hbGx5IHNtYWxsZXIKLSBVc2UgdGhlIGJhciB2YXJpYW50IGZvciBmdWxsLXdpZHRoIGNvdmVyYWdlIGxpa2Ugc3RvcmllcwotIExpbWl0IHRvIDkgdmlzaWJsZSBkb3RzIG1heDsgY2xpcCBvciB1c2UgbnVtYmVyZWQgdmFyaWFudCBmb3IgbW9yZQotIEFuaW1hdGUgYWN0aXZlIHN0YXRlIHdpdGggQ1NTIHRyYW5zaXRpb24gKG5vdCBKUykKCi0gRG9uJ3QgdXNlIHNhbWUtc2l6ZSBkb3RzIGZvciBhY3RpdmUgYW5kIGluYWN0aXZlIOKAlCBsb3NlcyBhZmZvcmRhbmNlCi0gRG9uJ3QgcGxhY2UgZG90cyBvdmVyIGltYWdlIGNvbnRlbnQgKHVzZSBzZW1pLXRyYW5zcGFyZW50IG92ZXJsYXkgcmVnaW9uKQotIERvbid0IHVzZSBwYWdlIGRvdHMgZm9yIHZlcnRpY2FsIHBhZ2luYXRpb24KLSBEb24ndCBzaG93IGRvdHMgd2hlbiB0aGVyZSdzIG9ubHkgMSBwYWdlCi0gRG9uJ3QgYW5pbWF0ZSBiZXlvbmQgMjAwbXMg4oCUIHNob3VsZCBmZWVsIGluc3RhbnQgbm90IHNsdWdnaXNoCi0gRG9uJ3QgdXNlIGRvdHMgYXMgYnV0dG9ucyB3aXRob3V0IGFkZXF1YXRlIDQ0cHggdG91Y2ggdGFyZ2V0cwoKIyMgQW5hdG9teQoKVGhlIGZvdXIgcmVxdWlyZWQgcGFydHMgb2YgZXZlcnkgcGFnZSBkb3RzIHRyYWNrLgoKIyMgVmFyaWFudHMKCkNob29zZSB0aGUgdmFyaWFudCB0aGF0IGZpdHMgdGhlIHN1cmZhY2UgZGVuc2l0eSBhbmQgc2Nyb2xsIGRpcmVjdGlvbi4KCiMjIFNpemVzCgpEb3QgZGltZW5zaW9ucyBzY2FsZSBhY3Jvc3MgcGxhdGZvcm1zIHRvIG1hdGNoIGludGVyYWN0aW9uIG1vZGFsaXR5IGFuZCB2aWV3aW5nIGRpc3RhbmNlLgoKIyMgU3RhdGVzCgpBbGwgc3RhdGVzIGEgZG90IHRyYWNrIGNhbiBlbnRlciBkdXJpbmcgYSB1c2VyIHNlc3Npb24uCgojIyBDb250ZW50ICYgTW90aW9uCgpUaGVyZSBpcyBubyB0ZXh0IGluIHRoaXMgY29tcG9uZW50LiBUaGVzZSBzcGVjcyBnb3Zlcm4gaXRzIGJlaGF2aW91ci4KCmBgYGAKdHJhbnNpdGlvbjogd2lkdGggMjAwbXMgY3ViaWMtYmV6aWVyKC4yMiwxLC4zNiwxKTsKYGBgYAoKLSBIaWRlIHRoZSBlbnRpcmUgZG90IHRyYWNrIHdoZW4gcGFnZSBjb3VudCA9IDEuIEEgc2luZ2xlIHBhZ2UgaGFzIG5vIHBvc2l0aW9uIHRvIGluZGljYXRlLgotIFNob3cgYXQgMiBvciBtb3JlIHBhZ2VzLgotIE1heGltdW0gOSB2aXNpYmxlIGRvdHMuIEZvciBzZXF1ZW5jZXMgb2YgMTArIHBhZ2VzLCBzd2l0Y2ggdG8gdGhlIE51bWJlcmVkIHZhcmlhbnQuCgojIyBQbGF0Zm9ybSBndWlkYW5jZQoKU2l6ZXMgYW5kIGludGVyYWN0aW9uIG1vZGVscyBkaWZmZXIgYWNyb3NzIE1vYmlsZSwgV2ViLCBhbmQgVFYuCgotIDhweCBpbmFjdGl2ZSBkb3RzLCAyMMOXOHB4IGFjdGl2ZSBwaWxsCi0gNDRweCB0b3VjaCB0YXJnZXRzIHZpYSB3cmFwcGVyIGBgIHBlciBkb3QKLSBHYXAgNnB4IGJldHdlZW4gZG90cwotIFRyYWNrIHNpdHMgMTJweCBiZWxvdyBjYXJvdXNlbCBib3R0b20gZWRnZQoKLSBTYW1lIGRvdCBzaXplcyBhcyBtb2JpbGUgKDIww5c4cHggYWN0aXZlLCA4w5c4cHggaW5hY3RpdmUpCi0gMzJweCB0b3VjaCBhcmVhIGFjY2VwdGFibGUg4oCUIG1vdXNlIHVzZXJzIGNsaWNrIHByZWNpc2VseQotIE1vdXNlIGhvdmVyIGNhbiBwcmV2aWV3IG5leHQgc2xpZGUgKGN1cnNvcjogcG9pbnRlcikKLSBHYXAgNnB4IGJldHdlZW4gZG90cwoKLSAxMHB4IGluYWN0aXZlLCAyOMOXMTJweCBhY3RpdmUgcGlsbAotIEdhcCA4cHggdG8gYWlkIHJlYWRhYmlsaXR5IGF0IGRpc3RhbmNlCi0gUHVyZWx5IHZpc3VhbCBpbmRpY2F0b3Ig4oCUIG5vdCBpbnRlcmFjdGl2ZQotIEQtcGFkIGNvbnRyb2xzIHNsaWRlcyBkaXJlY3RseSwgbm90IHRoZSBkb3QgdHJhY2sKCiMjIEFjY2Vzc2liaWxpdHkKClNlbWFudGljIG1hcmt1cCBhbmQgQVJJQSByZXF1aXJlbWVudHMgZm9yIGludGVyYWN0aXZlIGFuZCBkZWNvcmF0aXZlIHVzZS4KCi0gYHJvbGU9InRhYmxpc3QiYCBvbiB0aGUgZG90IHRyYWNrIHdyYXBwZXIKLSBgcm9sZT0idGFiImAgb24gZWFjaCBpbmRpdmlkdWFsIGRvdCBidXR0b24KLSBgYXJpYS1zZWxlY3RlZD0idHJ1ZSJgIG9uIHRoZSBhY3RpdmUgZG90Ci0gYGFyaWEtbGFiZWw9IlNsaWRlIDIgb2YgNSJgIG9uIGVhY2ggZG90IGJ1dHRvbgotIEFycm93IGtleXMgbmF2aWdhdGUgYmV0d2VlbiBzbGlkZXM7IGRvdHMgYXJlIHRhYiBzdG9wcwoKLSBgcm9sZT0icHJlc2VudGF0aW9uImAgb24gdGhlIHRyYWNrCi0gYGFyaWEtaGlkZGVuPSJ0cnVlImAgb24gdGhlIGVudGlyZSB0cmFjawotIEFubm91bmNlIHNsaWRlIGNoYW5nZXMgdmlhIGBhcmlhLWxpdmU9InBvbGl0ZSJgIHJlZ2lvbiBlbHNld2hlcmUgaW4gbGF5b3V0Ci0gRC1wYWQgbmF2aWdhdGlvbiBjb250cm9scyB0aGUgY2Fyb3VzZWwsIG5vdCB0aGUgZG90cwoKIyMgQ29udGVudCBndWlkYW5jZQoKIyMjIENvdW50CgpVc2UgcGFnZSBkb3RzIGZvciAy4oCTOCBzbGlkZXMuIEFib3ZlIDggc2xpZGVzLCBzd2l0Y2ggdG8gYSBudW1lcmljIGluZGljYXRvciAoIjMgLyAxMiIpIG9yIHJlbW92ZSBlbnRpcmVseSBhbmQgcmVseSBvbiBnZXN0dXJlIGFmZm9yZGFuY2UuCgojIyMgQWNjZXNzaWJsZSBsYWJlbHMKCkVhY2ggZG90IGJ1dHRvbiBuZWVkcyBhbiBhcmlhLWxhYmVsOiAiU2xpZGUgMSBvZiA1IiwgIlNsaWRlIDIgb2YgNSIuIFRoZSBhY3RpdmUgZG90IGdldHMgYXJpYS1jdXJyZW50PSJ0cnVlIi4KCiMjIyBQbGFjZW1lbnQKCkFsd2F5cyBjZW50cmVkIGJlbG93IHRoZSBjYXJvdXNlbC4gRG8gbm90IHBsYWNlIGluc2lkZSB0aGUgY2Fyb3VzZWwgY29udGVudCBhcmVhLiBNaW5pbXVtIDEycHggZ2FwIGZyb20gYm90dG9tIG9mIGNhcm91c2VsLgoKIyMgUmVsYXRlZCB0b2tlbnMKCkRlc2lnbiB0b2tlbnMgY29uc3VtZWQgYnkgdGhpcyBjb21wb25lbnQuCgojIyBXaGVuIHRvIHVzZQoKVXNlIHdoZW4KCi0gQ2Fyb3VzZWwgcG9zaXRpb24gaW5kaWNhdG9yIGJlbG93IGEgaGVybyBiYW5uZXIgb3IgZmVhdHVyZSBjYXJvdXNlbAotIE9uYm9hcmRpbmcgc3RlcCBwcm9ncmVzcyAoc2xpZGUgMSBvZiA0KQotIEltYWdlIGdhbGxlcnkgcG9zaXRpb24gaW4gZ2FtZSBkZXRhaWwgcGFnZXMKLSBXYWxrdGhyb3VnaCBzdGVwIGluZGljYXRvcnMKCkRvbid0IHVzZSB3aGVuCgotIE1vcmUgdGhhbiA4IHN0ZXBzIOKAlCB1c2UgYSBudW1iZXJlZCBzdGVwIGluZGljYXRvciBpbnN0ZWFkCi0gQ29udGVudCBoaWRkZW4gYmVoaW5kIGRvdHMgdGhhdCB1c2VycyBtdXN0IHNlZSDigJQgcHJvdmlkZSBzd2lwZSBhZmZvcmRhbmNlCi0gQXMgdGhlIHNvbGUgbmF2aWdhdGlvbiBtZWNoYW5pc20g4oCUIHBhaXIgd2l0aCBzd2lwZSBnZXN0dXJlCgojIyBNb3Rpb24KCnwgSW50ZXJhY3Rpb24gfCBFYXNpbmcgfCBEdXJhdGlvbiB8IFByb3BlcnR5IHwKfC0tLXwtLS18LS0tfC0tLXwKfCBBY3RpdmUgZG90IGV4cGFuZCB8IGAtLWVhc2Utb3V0YCB8IGAtLWR1ci1mYXN0YCB8IHdpZHRoICg2cHgg4oaSIDE4cHgpLCBib3JkZXItcmFkaXVzIHwKfCBJbmFjdGl2ZSBkb3Qgc2hyaW5rIHwgYC0tZWFzZS1vdXRgIHwgYC0tZHVyLWZhc3RgIHwgd2lkdGggKDE4cHgg4oaSIDZweCkgfAp8IERvdCB0cmFuc2l0aW9uIG9uIHNsaWRlIHwgYC0tZWFzZS1vdXRgIHwgYC0tZHVyLWJhc2VgIHwgdHJhbnNmb3JtIHRyYW5zbGF0ZVgsIG9wYWNpdHkgfAoKIyMgQVBJCgojIyMgQ1NTIGNsYXNzZXMKCnwgQ2xhc3MgfCBEZXNjcmlwdGlvbiB8CnwtLS18LS0tfAp8IGAuZHMtcGFnZS1kb3RzYCB8IFJvb3Qg4oCUIGZsZXggcm93LCBnYXAgNnB4LCBjZW50ZXIgYWxpZ25lZCB8CnwgYC5kcy1wYWdlLWRvdGAgfCBTaW5nbGUgZG90IOKAlCA2cHggY2lyY2xlLCB0ZXh0MyBjb2xvciB8CnwgYC5kcy1wYWdlLWRvdC0tYWN0aXZlYCB8IEFjdGl2ZSBkb3Qg4oCUIDE4cHggd2lkZSBwaWxsLCBqaW8tZ3JlZW4gfAoKIyMjIFJlYWN0IHByb3BzCgp8IFByb3AgfCBUeXBlIHwgRGVmYXVsdCB8IERlc2NyaXB0aW9uIHwKfC0tLXwtLS18LS0tfC0tLXwKfCBgY291bnRgIHwgbnVtYmVyIHwgcmVxdWlyZWQgfCBUb3RhbCBudW1iZXIgb2Ygc2xpZGVzL3BhZ2VzIHwKfCBgYWN0aXZlYCB8IG51bWJlciB8IHJlcXVpcmVkIHwgQ3VycmVudCBhY3RpdmUgaW5kZXggKDAtYmFzZWQpIHwKfCBgb25Eb3RDbGlja2AgfCAoaW5kZXg6IG51bWJlcikgPT4gdm9pZCB8IHVuZGVmaW5lZCB8IERvdCBjbGljayBoYW5kbGVyIGZvciBtYW51YWwgbmF2aWdhdGlvbiB8CgojIyBDb2RlIGV4YW1wbGVzCgpDb3B5IHRoZXNlIHNuaXBwZXRzIGFzIHN0YXJ0aW5nIHBvaW50cy4gQWx3YXlzIGxpbmsgYHRva2Vucy90b2tlbnMuY3NzYCwgYGNvbXBvbmVudHMuY3NzYCwgYW5kIGBzdGF0ZXMuY3NzYCBiZWZvcmUgdXNpbmcgY29tcG9uZW50IGNsYXNzZXMuCgpgYGBgaHRtbAo8ZGl2CiAgY2xhc3M9InBhZ2UtZG90cyIKICByb2xlPSJ0YWJsaXN0IgogIGFyaWEtbGFiZWw9IlNsaWRlIG5hdmlnYXRpb24iCj4KICA8YnV0dG9uCiAgICBjbGFzcz0icGFnZS1kb3QgcGFnZS1kb3QtLWFjdGl2ZSIKICAgIHJvbGU9InRhYiIKICAgIGFyaWEtc2VsZWN0ZWQ9InRydWUiCiAgICBhcmlhLWxhYmVsPSJTbGlkZSAxIG9mIDQiCiAgICBhcmlhLWN1cnJlbnQ9InRydWUiCiAgPjwvYnV0dG9uPgogIDxidXR0b24KICAgIGNsYXNzPSJwYWdlLWRvdCIKICAgIHJvbGU9InRhYiIKICAgIGFyaWEtc2VsZWN0ZWQ9ImZhbHNlIgogICAgYXJpYS1sYWJlbD0iU2xpZGUgMiBvZiA0IgogID48L2J1dHRvbj4KICA8YnV0dG9uCiAgICBjbGFzcz0icGFnZS1kb3QiCiAgICByb2xlPSJ0YWIiCiAgICBhcmlhLXNlbGVjdGVkPSJmYWxzZSIKICAgIGFyaWEtbGFiZWw9IlNsaWRlIDMgb2YgNCIKICA+PC9idXR0b24+CiAgPGJ1dHRvbgogICAgY2xhc3M9InBhZ2UtZG90IgogICAgcm9sZT0idGFiIgogICAgYXJpYS1zZWxlY3RlZD0iZmFsc2UiCiAgICBhcmlhLWxhYmVsPSJTbGlkZSA0IG9mIDQiCiAgPjwvYnV0dG9uPgo8L2Rpdj4KYGBgYAoKYGBgYApjb25zdCBkb3RzID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvckFsbCgnLnBhZ2UtZG90Jyk7CmNvbnN0IGNhcm91c2VsID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcignLmNhcm91c2VsJyk7CgpmdW5jdGlvbiBzZXRBY3RpdmVEb3QoaW5kZXgpIHsKICBkb3RzLmZvckVhY2goKGRvdCwgaSkgPT4gewogICAgY29uc3QgYWN0aXZlID0gaSA9PT0gaW5kZXg7CiAgICBkb3QuY2xhc3NMaXN0LnRvZ2dsZSgncGFnZS1kb3QtLWFjdGl2ZScsIGFjdGl2ZSk7CiAgICBkb3Quc2V0QXR0cmlidXRlKCdhcmlhLXNlbGVjdGVkJywgU3RyaW5nKGFjdGl2ZSkpOwogICAgZG90LnNldEF0dHJpYnV0ZSgnYXJpYS1jdXJyZW50JywgYWN0aXZlID8gJ3RydWUnIDogJ2ZhbHNlJyk7CiAgfSk7Cn0KCi8vIENhbGwgb24gY2Fyb3VzZWwgc2Nyb2xsL3N3aXBlCmNhcm91c2VsLmFkZEV2ZW50TGlzdGVuZXIoJ3Njcm9sbCcsICgpID0+IHsKICBjb25zdCBpbmRleCA9IE1hdGgucm91bmQoY2Fyb3VzZWwuc2Nyb2xsTGVmdCAvIGNhcm91c2VsLm9mZnNldFdpZHRoKTsKICBzZXRBY3RpdmVEb3QoaW5kZXgpOwp9KTsKYGBgYAoKIyMgQ2hhbmdlbG9nCgpWZXJzaW9uIGhpc3RvcnkgZm9yIHRoaXMgY29tcG9uZW50LgoKLS0tCgojIyBUb2tlbnMgcmVmZXJlbmNlZCBvbiB0aGlzIHBhZ2UKClVzZSB0aGVzZSBleGFjdCB0b2tlbnMg4oCUIGRlZmluZWQgaW4gYHRva2Vucy90b2tlbnMuY3NzYC4gRG8gbm90IHN1YnN0aXR1dGUgcmF3IHZhbHVlcy4KCi0gYC0tYmdgCi0gYC0tYm9yZGVyLXN1YnRsZWAKLSBgLS1qaW9gCi0gYC0tamlvLWZvbnRgCi0gYC0tc3ByaW5nYAotIGAtLXN1cmZhY2UtMWAKLSBgLS1zdXJmYWNlLTJgCi0gYC0tdGV4dGAKLSBgLS10ZXh0MmAKLSBgLS10ZXh0M2AKLSBgLS10ZXh0NGAKCi0tLQoKIyMgQnVpbGQgcnVsZXMgKGJpbmRpbmcpCgoxLiBVc2UgKipvbmx5KiogdGhlIHRva2VucyBsaXN0ZWQgYWJvdmUuIElmIGEgdmFsdWUgeW91IG5lZWQgaXMgbm90IGxpc3RlZCwgc3RvcCBhbmQgYXNrIOKAlCBkbyBub3QgaW50cm9kdWNlIGEgcmF3IHZhbHVlLgoyLiBGb250IGlzICoqSmlvVHlwZSoqIG9ubHkuIFdlaWdodHM6IDMwMCwgNTAwLCA3MDAsIDkwMC4KMy4gUmV1c2UgdGhlIGNvbXBvbmVudCBDU1MgcGF0dGVybnMgc2hvd24gb24gdGhlIHNvdXJjZSBwYWdlOyBkbyBub3QgcmVkZXNpZ24uCjQuIE1hdGNoIGV2ZXJ5IHN0YXRlIChkZWZhdWx0LCBob3ZlciwgZm9jdXMsIGFjdGl2ZSwgZGlzYWJsZWQsIGxvYWRpbmcpIHNob3duIG9uIHRoZSBwYWdlLgo1LiBBY2Nlc3NpYmlsaXR5IHJlcXVpcmVtZW50cyBvbiB0aGUgcGFnZSBhcmUgbWFuZGF0b3J5LCBub3Qgb3B0aW9uYWwuCg==" download="page-dots-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
     </div>
   </div>
 
@@ -1163,38 +1008,9 @@
     </div>
   </section>
 
-  <section id="platform-considerations" class="component-section">
-  <h2 class="ds-section-title">Platform considerations</h2>
-  <div class="component-platform-grid">
-    <div class="component-platform component-platform--mobile">
-      <div class="component-platform-label">Mobile</div>
-      <ul class="component-platform-list">
-        <li>Swipe gesture on carousel drives dot state</li>
-        <li>Tap on dot navigates to that slide</li>
-        <li>Standard size: 6px inactive, 18px active</li>
-        <li>Place below carousel with 12px gap</li>
-      </ul>
-    </div>
-    <div class="component-platform component-platform--web">
-      <div class="component-platform-label">Web</div>
-      <ul class="component-platform-list">
-        <li>Click on dot navigates to slide</li>
-        <li>Arrow key left/right drives carousel and syncs dots</li>
-        <li>Each dot is a focusable button with aria-label</li>
-        <li>Hover state: dot lightens slightly</li>
-      </ul>
-    </div>
-    <div class="component-platform component-platform--tv">
-      <div class="component-platform-label">TV</div>
-      <ul class="component-platform-list">
-        <li>Dots are decorative only — D-pad drives carousel directly</li>
-        <li>Do not make individual dots focusable on TV</li>
-        <li>Increase dot size to 10px / 28px for 10-foot legibility</li>
-        <li>Active dot may use a progress-bar style for timed carousels</li>
-      </ul>
-    </div>
-  </div>
-</section>
+  
+
+  
 
 <section id="content" class="component-section">
   <h2 class="ds-section-title">Content guidance</h2>
@@ -1253,6 +1069,87 @@
   </section>
 
   <!-- ═══════════════════════════════════════════ CODE EXAMPLES -->
+  <!-- WHEN TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use</h2>
+    <div class="ds-usage-grid">
+      <div class="ds-usage-card ds-usage-card--do">
+        <p class="ds-usage-label ds-usage-label--do">Use when</p>
+        <ul class="ds-usage-list">
+              <li>Carousel position indicator below a hero banner or feature carousel</li>
+              <li>Onboarding step progress (slide 1 of 4)</li>
+              <li>Image gallery position in game detail pages</li>
+              <li>Walkthrough step indicators</li>
+        </ul>
+      </div>
+      <div class="ds-usage-card ds-usage-card--dont">
+        <p class="ds-usage-label ds-usage-label--dont">Don't use when</p>
+        <ul class="ds-usage-list">
+              <li>More than 8 steps — use a numbered step indicator instead</li>
+              <li>Content hidden behind dots that users must see — provide swipe affordance</li>
+              <li>As the sole navigation mechanism — pair with swipe gesture</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOTION -->
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-motion-table">
+      <thead><tr><th>Interaction</th><th>Easing</th><th>Duration</th><th>Property</th></tr></thead>
+      <tbody>
+        <tr><td>Active dot expand</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>width (6px → 18px), border-radius</td></tr>
+        <tr><td>Inactive dot shrink</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>width (18px → 6px)</td></tr>
+        <tr><td>Dot transition on slide</td><td><code>--ease-out</code></td><td><code>--dur-base</code></td><td>transform translateX, opacity</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- API -->
+  <section class="ds-section" id="api">
+    <h2 class="ds-section-title">API</h2>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:0 0 12px;">CSS classes</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>.ds-page-dots</code></td><td>Root — flex row, gap 6px, center aligned</td></tr>
+        <tr><td><code>.ds-page-dot</code></td><td>Single dot — 6px circle, text3 color</td></tr>
+        <tr><td><code>.ds-page-dot--active</code></td><td>Active dot — 18px wide pill, jio-green</td></tr>
+      </tbody>
+    </table>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 12px;">React props</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>count</code></td><td><span class="api-type">number</span></td><td><span class="api-default">required</span></td><td>Total number of slides/pages</td></tr>
+        <tr><td><code>active</code></td><td><span class="api-type">number</span></td><td><span class="api-default">required</span></td><td>Current active index (0-based)</td></tr>
+        <tr><td><code>onDotClick</code></td><td><span class="api-type">(index: number) => void</span></td><td><span class="api-default">undefined</span></td><td>Dot click handler for manual navigation</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  
+
+  
+
+  
+
+  
+
   <section class="component-section" id="code-examples" style="margin-bottom:48px;">
     <h2 class="ds-section-title">Code examples</h2>
     <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
@@ -1335,4 +1232,4 @@ carousel.addEventListener('scroll', () => {
     </div>
   </section>
 
-</main><script src="../sprite-loader.js"></script><script src="../shell.js"></script></body></html>
+</main><script src="../sprite-loader.js"></script><script src="../shell.js?v=2"></script></body></html>

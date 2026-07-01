@@ -4,41 +4,40 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     .calendar { width: 280px; background: var(--surface-2); border: 1px solid var(--border-subtle); border-radius: var(--r5); overflow: hidden; font-family: var(--jio-font); }
     .calendar-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; border-bottom: 1px solid var(--border-subtle); }
     .calendar-month { font-size: 15px; font-weight: 700; color: var(--text); }
-    .calendar-nav { background: none; border: none; color: var(--text3); cursor: pointer; padding: 4px 8px; border-radius: var(--r3); font-size: 16px; transition: all var(--dur-fast) var(--ease-out); }
+    .calendar-nav { background: none; border: none; color: var(--text3); cursor: pointer; padding: 4px 8px; border-radius: var(--r3); font-size: 16px; transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out); }
     .calendar-nav:hover { color: var(--text); background: var(--glass-1); }
     .calendar-grid { padding: 12px; }
     .calendar-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); margin-bottom: 6px; }
     .calendar-weekday { text-align: center; font-size: 11px; font-weight: 700; color: var(--text3); padding: 4px 0; }
     .calendar-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
-    .calendar-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-radius: var(--pill); font-size: 13px; font-weight: 500; color: var(--text); cursor: pointer; border: none; background: transparent; transition: all var(--dur-fast) var(--ease-out); position: relative; font-family: var(--jio-font); }
+    .calendar-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-radius: var(--pill); font-size: 13px; font-weight: 500; color: var(--text); cursor: pointer; border: none; background: transparent; transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out); position: relative; font-family: var(--jio-font); }
     .calendar-day:hover { background: var(--glass-1); }
     .calendar-day.is-today { font-weight: 900; color: var(--jio); }
-    .calendar-day.is-selected { background: var(--jio); color: #000; font-weight: 700; }
+    .calendar-day.is-selected { background: var(--jio); color: var(--text-inv); font-weight: 700; }
     .calendar-day.is-outside { color: var(--text4); }
     .calendar-day.is-disabled { opacity: 0.3; pointer-events: none; }
     .calendar-day.has-event::after { content: ''; display: block; width: 4px; height: 4px; border-radius: var(--pill); background: var(--jio); position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); }
-    .calendar-day.is-selected.has-event::after { background: #000; }
-    .calendar-day.is-range-start { background: var(--jio); color: #000; font-weight: 700; border-radius: var(--pill) 0 0 var(--pill); }
-    .calendar-day.is-range-end { background: var(--jio); color: #000; font-weight: 700; border-radius: 0 var(--pill) var(--pill) 0; }
+    .calendar-day.is-selected.has-event::after { background: var(--bg); }
+    .calendar-day.is-range-start { background: var(--jio); color: var(--text-inv); font-weight: 700; border-radius: var(--pill) 0 0 var(--pill); }
+    .calendar-day.is-range-end { background: var(--jio); color: var(--text-inv); font-weight: 700; border-radius: 0 var(--pill) var(--pill) 0; }
     .calendar-day.is-in-range { background: var(--jio-soft); color: var(--text); border-radius: 0; }
   </style>
 </head><body><main class="ds-content">
 
   <header class="component-page-header">
-    <nav class="component-breadcrumb">
-      <span>JioGames DLS</span>
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <span class="component-breadcrumb-link">JioGames DLS</span>
       <span class="component-breadcrumb-sep">›</span>
       <span>Components</span>
       <span class="component-breadcrumb-sep">›</span>
-      <span>Calendar</span>
+      <span class="component-breadcrumb-current">Calendar</span>
     </nav>
-    <h1 class="component-page-title">Calendar</h1>
-    <p class="component-page-def">Month-view date grid for selecting dates. Used for game release schedules, event dates, and subscription renewal dates in JioGames. Not a full date-picker — pairs with the Date Picker component.</p>
+    <h1 class="component-page-title">Calendar</h1><p class="component-page-def">Month-view date grid for selecting dates. Used for game release schedules, event dates, and subscription renewal dates in JioGames. Not a full date-picker — pairs with the Date Picker component.</p>
     <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
       <div class="component-platforms">
         <span class="component-platform component-platform--mobile">
@@ -47,7 +46,8 @@
         <span class="component-platform component-platform--web">
           <span class="component-platform-dot"></span>Web
         </span>
-      </div>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBDYWxlbmRhciDigJQgSmlvR2FtZXMgRExTIHNwZWMKCj4gU291cmNlOiBgY2FsZW5kYXIvaW5kZXguaHRtbGAgaW4gdGhlIEppb0dhbWVzIERlc2lnbiBTeXN0ZW0uCj4gVGhpcyBzcGVjIGlzIGdlbmVyYXRlZCB2ZXJiYXRpbSBmcm9tIHRoZSBwYWdlIOKAlCBkbyBub3QgaW52ZW50IHZhbHVlcyBub3QgbGlzdGVkIGhlcmUuCgoqKlBhdGg6KiogSmlvR2FtZXMgRExTIOKAuiBDb21wb25lbnRzIOKAuiBDYWxlbmRhcgoKLS0tCgpNb250aC12aWV3IGRhdGUgZ3JpZCBmb3Igc2VsZWN0aW5nIGRhdGVzLiBVc2VkIGZvciBnYW1lIHJlbGVhc2Ugc2NoZWR1bGVzLCBldmVudCBkYXRlcywgYW5kIHN1YnNjcmlwdGlvbiByZW5ld2FsIGRhdGVzIGluIEppb0dhbWVzLiBOb3QgYSBmdWxsIGRhdGUtcGlja2VyIOKAlCBwYWlycyB3aXRoIHRoZSBEYXRlIFBpY2tlciBjb21wb25lbnQuCgpDYWxlbmRhciDCtyBKdW5lIDIwMjYgwrcgdG9kYXk9MjYgKGdyZWVuKSDCtyBzZWxlY3RlZD0xNSDCtyBldmVudCBkb3RzIG9uIHJlbGVhc2UgZGF0ZXMKClRoZSBDYWxlbmRhciBjb21wb25lbnQgcmVuZGVycyBhIG1vbnRoLXZpZXcgZ3JpZCBvZiBkYXlzIGZvciBkYXRlIHNlbGVjdGlvbi4gSXQgaXMgYSBsb3ctbGV2ZWwgcHJpbWl0aXZlIOKAlCBpdCBpcyBhbG1vc3QgYWx3YXlzIHVzZWQgaW5zaWRlIHRoZSBEYXRlIFBpY2tlciBjb21wb25lbnQsIGJ1dCBjYW4gYWxzbyBiZSByZW5kZXJlZCBzdGFuZGFsb25lIGFzIGEgcmVhZC1vbmx5IGV2ZW50IGNhbGVuZGFyIGZvciBnYW1lIHJlbGVhc2Ugc2NoZWR1bGVzIGFuZCB0b3VybmFtZW50IGRhdGVzLiBUaGUgQ2FsZW5kYXIgZG9lcyBub3QgbWFuYWdlIGl0cyBvd24gc3RhdGU7IHRoZSBwYXJlbnQgY29tcG9uZW50IG9yIHBhZ2UgY29udHJvbHMgdGhlIHNlbGVjdGVkIGRhdGUocykuCgotICoqU2luZ2xlIHNlbGVjdCoqIOKAlCB0YXAgb3IgY2xpY2sgYSBkYXkgdG8gc2VsZWN0IGl0OyBwcmV2aW91cyBzZWxlY3Rpb24gY2xlYXJzCi0gKipSYW5nZSBzZWxlY3QqKiDigJQgdGFwIHN0YXJ0IGRhdGUsIHRoZW4gZW5kIGRhdGU7IGRheXMgaW4gYmV0d2VlbiBmaWxsIHdpdGggdGludGVkIGJhY2tncm91bmQKLSAqKlJlYWQtb25seSoqIOKAlCBubyBkYXkgaW50ZXJhY3Rpb24sIHVzZWQgZm9yIGV2ZW50IGNhbGVuZGFycyBzaG93aW5nIHJlbGVhc2Ugc2NoZWR1bGVzCi0gKipFdmVudCBkb3RzKiog4oCUIHNtYWxsIGdyZWVuIGRvdCBiZWxvdyB0aGUgZGF5IG51bWJlciBtYXJrcyBkYXRlcyB3aXRoIGdhbWUgcmVsZWFzZXMgb3IgZXZlbnRzCgotIFVzZSBldmVudCBkb3RzIChub3QgY291bnRzIG9yIG51bWJlcnMpIGZvciBtYXJraW5nIGdhbWUgcmVsZWFzZSBkYXRlcyBvbiB0aGUgZ3JpZAotIEtlZXAgdG9kYXkncyBkYXRlIHZpc3VhbGx5IGRpc3RpbmN0IHdpdGggYm9sZCB3ZWlnaHQgYW5kIGdyZWVuIGNvbG9yIGV2ZW4gd2hlbiBub3Qgc2VsZWN0ZWQKLSBOYXZpZ2F0ZSBtb250aHMgb25seSB3aXRoIHByZXYvbmV4dCBhcnJvd3Mg4oCUIGRvIG5vdCBvZmZlciBhIHllYXIvbW9udGggZHJvcGRvd24gaW4gY29tcGFjdCBjb250ZXh0cwotIERpbSBvdXRzaWRlLW1vbnRoIGRheXMgdG8gNDAlIG9wYWNpdHkgc28gdGhlIGN1cnJlbnQgbW9udGggZ3JpZCBpcyB0aGUgdmlzdWFsIGZvY3VzCi0gT24gbW9iaWxlLCBtYWtlIGVhY2ggZGF5IGNlbGwgYXQgbGVhc3QgNDDDlzQwcHggZm9yIGNvbWZvcnRhYmxlIHRodW1iIHRhcHBpbmcKCi0gU2hvdyBtb3JlIHRoYW4gMyBldmVudCBkb3RzIHBlciBkYXkg4oCUIGxpbmsgdG8gYSBsaXN0IHZpZXcgZm9yIGRheXMgd2l0aCBtYW55IGV2ZW50cwotIEFsbG93IHNlbGVjdGluZyBkaXNhYmxlZCBkYXRlcyDigJQgcG9pbnRlci1ldmVudHM6IG5vbmUgaXMgbm90IGVub3VnaDsgYmxvY2sga2V5Ym9hcmQgc2VsZWN0aW9uIHRvbwotIFVzZSB0aGUgY2FsZW5kYXIgYXMgYSBuYXZpZ2F0aW9uIHdpZGdldCDigJQgaXQgc2VsZWN0cyBkYXRlcywgaXQgZG9lcyBub3QgbmF2aWdhdGUgdG8gcGFnZXMKLSBSZW5kZXIgdGhlIGNhbGVuZGFyIG9uIFRWIOKAlCBubyBwb2ludGVyLCBELXBhZCBkYXRlIHBpY2tpbmcgaXMgdW51c2FibGU7IHVzZSBkYXRlIHRleHQgaW5wdXQgaW5zdGVhZAotIFN0YXJ0IHdlZWtzIG9uIGEgZGF5IG90aGVyIHRoYW4gU3VuZGF5IGluIHRoZSBKaW9HYW1lcyBjb250ZXh0IOKAlCBJbmRpYSBsb2NhbGUgZXhwZWN0YXRpb24KCjEuIDEgSGVhZGVyIFJlcXVpcmVkIE1vbnRoICsgeWVhciBsYWJlbCBjZW50cmVkLiBQcmV2L25leHQgYXJyb3cgYnV0dG9ucyBvbiBlaXRoZXIgc2lkZS4gSGVhZGVyIGlzIGFsd2F5cyB2aXNpYmxlIOKAlCBuZXZlciBoaWRkZW4uIGBib3JkZXItYm90dG9tOiAxcHggc29saWQgdmFyKC0tYm9yZGVyLXN1YnRsZSlgCjIuIDIgV2Vla2RheSBsYWJlbHMgUmVxdWlyZWQgU2luZ2xlLWxldHRlciBhYmJyZXZpYXRlZCB3ZWVrZGF5IGhlYWRlcnMgKFMgTSBUIFcgVCBGIFMpLiAxMXB4IGJvbGQsIG11dGVkIGNvbG9yLiBOb3QgaW50ZXJhY3RpdmUuIGBmb250LXNpemU6IDExcHg7IGZvbnQtd2VpZ2h0OiA3MDA7IGNvbG9yOiB2YXIoLS10ZXh0MylgCjMuIDMgRGF5IGdyaWQgUmVxdWlyZWQgNy1jb2x1bW4gZ3JpZC4gRWFjaCBkYXkgaXMgYSBidXR0b24gd2l0aCBhc3BlY3QtcmF0aW8gMS4gT3V0c2lkZS1tb250aCBkYXlzIHJlbmRlcmVkIGJ1dCBkaW1tZWQuIEhvdmVyLCB0b2RheSwgc2VsZWN0ZWQsIGRpc2FibGVkLCBhbmQgcmFuZ2Ugc3RhdGVzIGFwcGxpZWQgYXMgbW9kaWZpZXIgY2xhc3Nlcy4gYGRpc3BsYXk6IGdyaWQ7IGdyaWQtdGVtcGxhdGUtY29sdW1uczogcmVwZWF0KDcsIDFmcilgCjQuIDQgRXZlbnQgZG90IE9wdGlvbmFsIDTDlzRweCBncmVlbiBkb3QgdmlhIDo6YWZ0ZXIgcHNldWRvLWVsZW1lbnQuIE9ubHkgdXNlZCBpbiBldmVudCBjYWxlbmRhciB2YXJpYW50LiBNYXggb25lIGRvdCBwZXIgZGF5IOKAlCBub3QgYSBjb3VudCBpbmRpY2F0b3IuIGB3aWR0aDogNHB4OyBoZWlnaHQ6IDRweDsgYmFja2dyb3VuZDogdmFyKC0tamlvKTsgYm9yZGVyLXJhZGl1czogdmFyKC0tcGlsbClgCgojIyBWYXJpYW50cwoKVGhyZWUgdXNhZ2UgbW9kZXMg4oCUIHNpbmdsZSBzZWxlY3QsIHJhbmdlIHNlbGVjdCwgYW5kIHJlYWQtb25seSBldmVudCB2aWV3LgoKIyMgU2l6ZXMKClRocmVlIGZpeGVkIHdpZHRocyDigJQgdGhlIGdyaWQgc2NhbGVzIHByb3BvcnRpb25hbGx5IHdpdGhpbiBlYWNoLiBBbHdheXMgdXNlIHRoZSBkZWZhdWx0ICgyODBweCkgaW5zaWRlIERhdGUgUGlja2VyLgoKfCBTaXplIHwgV2lkdGggfCBEYXkgZm9udCB8IFVzYWdlIHwKfC0tLXwtLS18LS0tfC0tLXwKfCBDb21wYWN0IHwgYDI0MHB4YCB8IGAxMXB4YCB8IFRpZ2h0IHNpZGViYXJzLCBwb3BvdmVyIGNvbnRleHRzIHdpdGggbGltaXRlZCBzcGFjZSB8CnwgRGVmYXVsdCB8IGAyODBweGAgfCBgMTNweGAgfCBEYXRlIFBpY2tlciBwb3BvdmVyLCBzdGFuZGFsb25lIGlubGluZSBjYWxlbmRhciB8CnwgTGFyZ2UgfCBgMzIwcHhgIHwgYDE0cHhgIHwgRnVsbC1wYWdlIGV2ZW50IGNhbGVuZGFyLCByZWxlYXNlIHNjaGVkdWxlIHZpZXcgfAoKIyMgU3RhdGVzCgpFYWNoIGRheSBidXR0b24gY2FycmllcyBvbmUgb3IgbW9yZSBzdGF0ZSBtb2RpZmllciBjbGFzc2VzLiBTdGF0ZXMgYXJlIG11dHVhbGx5IGV4Y2x1c2l2ZSBleGNlcHQgaGFzLWV2ZW50LCB3aGljaCBjYW4gY29tYmluZSB3aXRoIGFueSBkYXkgc3RhdGUuCgojIyBDb250ZW50IGd1aWRhbmNlCgotIFVzZSBldmVudCBkb3RzIGZvciBtYXJraW5nIGdhbWUgcmVsZWFzZSBkYXRlcyDigJQgbm90IGZvciBjb3VudHMKLSBOZXZlciBzaG93IG1vcmUgdGhhbiBvbmUgZG90IHBlciBkYXkgb24gdGhlIGdyaWQg4oCUIGxpbmsgZGF5cyB3aXRoIDMrIGV2ZW50cyB0byBhIGxpc3QgdmlldwotIERvdCBjb2xvciBpcyBhbHdheXMgYHZhcigtLWppbylgIOKAlCBubyBzZW1hbnRpYyBjb2xvciB2YXJpYXRpb24KLSBPbiBzZWxlY3RlZCBkYXlzLCBkb3QgY2hhbmdlcyB0byBgIzAwMGAgZm9yIGNvbnRyYXN0IGFnYWluc3QgZ3JlZW4gZmlsbAoKLSBIZWFkZXIgZm9ybWF0OiAiTW9udGggWVlZWSIg4oCUICJKdW5lIDIwMjYiLCBuZXZlciAiSnVuICcyNiIgb3IgIjA2LzIwMjYiCi0gUHJldi9uZXh0IGFycm93cyBvbmx5IGluIGNvbXBhY3QgY29udGV4dHMg4oCUIG5vIG1vbnRoL3llYXIgZHJvcGRvd24KLSBMYXJnZSBzdGFuZGFsb25lIGNhbGVuZGFyIG1heSBvZmZlciBhIHllYXIgcGlja2VyIHZpYSBoZWFkZXIgY2xpY2sKLSBEaXNhYmxlIHBhc3QgbW9udGhzIHdoZW4gY2FsZW5kYXIgaXMgdXNlZCBmb3IgZnV0dXJlIGV2ZW50IGJvb2tpbmcKCiMjIFBsYXRmb3JtIGNvbnNpZGVyYXRpb25zCgotIEZ1bGwtd2lkdGggY2FsZW5kYXIg4oCUIG5vIGZpeGVkIDI4MHB4OyBzcGFucyBjb250YWluZXIgd2lkdGgKLSBEYXkgY2VsbHMgbWluaW11bSA0NHB4IGhlaWdodCBmb3IgY29tZm9ydGFibGUgdGh1bWIgdGFwcGluZwotIFN3aXBlIGxlZnQvcmlnaHQgb24gdGhlIGdyaWQgdG8gY2hhbmdlIG1vbnRocwotIEhhcHRpYyBmZWVkYmFjayBvbiBkYXkgc2VsZWN0aW9uIHdoZXJlIE9TIHN1cHBvcnRzIGl0CgotIDI4MHB4IGZpeGVkIHdpZHRoLCBwb3NpdGlvbmVkIGJlbG93IGRhdGUgaW5wdXQgYXMgYSBwb3BvdmVyCi0gQXJyb3cga2V5IG5hdmlnYXRpb24gYmV0d2VlbiBkYXlzIHdpdGhpbiB0aGUgZ3JpZAotIFBhZ2UgVXAgLyBQYWdlIERvd24gY2hhbmdlcyBtb250aHMKLSBIb21lIC8gRW5kIGp1bXBzIHRvIGZpcnN0L2xhc3QgZGF5IG9mIGN1cnJlbnQgbW9udGgKCi0gTm90IGFwcGxpY2FibGUg4oCUIEQtcGFkIGRhdGUgcGlja2luZyBvbiBhIDctY29sdW1uIGdyaWQgaXMgdW51c2FibGUKLSBVc2UgYSBkYXRlIHRleHQgaW5wdXQgb3IgcHJlLWZpbGxlZCBkYXRlIGNoaXBzIGluc3RlYWQKLSBSZWFkLW9ubHkgZXZlbnQgY2FsZW5kYXIgY2FuIHJlbmRlciBvbiBUViBpZiBub3QgaW50ZXJhY3RpdmUKCiMjIEFjY2Vzc2liaWxpdHkKCnwgRWxlbWVudCB8IFJvbGUgLyBhdHRyaWJ1dGUgfCBHdWlkYW5jZSB8CnwtLS18LS0tfC0tLXwKfCBEYXkgZ3JpZCBjb250YWluZXIgfCBgcm9sZT0iZ3JpZCJgIHwgYGFyaWEtbGFiZWw9Ikp1bmUgMjAyNiJgIOKAlCB1cGRhdGVzIGR5bmFtaWNhbGx5IGFzIG1vbnRoIGNoYW5nZXMuIHwKfCBEYXkgYnV0dG9uIHwgYHJvbGU9ImdyaWRjZWxsImAgfCBgYXJpYS1zZWxlY3RlZD0idHJ1ZS9mYWxzZSJgLCBgYXJpYS1kaXNhYmxlZD0idHJ1ZSJgIGZvciBkaXNhYmxlZCBkYXlzLiB8CnwgVG9kYXkgfCBgYXJpYS1jdXJyZW50PSJkYXRlImAgfCBBcHBsaWVkIHRvIHRvZGF5J3MgY2VsbCBvbmx5LiBTY3JlZW4gcmVhZGVycyBhbm5vdW5jZSAidG9kYXkiIGluIGFkZGl0aW9uIHRvIHRoZSBkYXRlIG51bWJlci4gfAp8IEV2ZW50IGRvdCB8IFZpc3VhbGx5IGhpZGRlbiB0ZXh0IHwgQWRkIGAsIGdhbWUgcmVsZWFzZWAgaW5zaWRlIHRoZSBkYXkgYnV0dG9uIHNvIHRoZSBldmVudCBpcyBhbm5vdW5jZWQuIHwKfCBLZXlib2FyZCBuYXYgfCBBcnJvdyBrZXlzIHwg4oaR4oaTIG1vdmVzIHdlZWsgcm93cywg4oaQ4oaSIG1vdmVzIGRheXMsIFBhZ2UgVXAvRG93biBjaGFuZ2VzIG1vbnRocy4gRm9jdXMgbXVzdCBiZSBtYW5hZ2VkIG1hbnVhbGx5IOKAlCBub3QgbmF0aXZlIHRhYiBvcmRlci4gfAp8IE5hdiBidXR0b25zIHwgYGFyaWEtbGFiZWxgIHwgIlByZXZpb3VzIG1vbnRoIiBhbmQgIk5leHQgbW9udGgiIOKAlCBub3QganVzdCDigLkgYW5kIOKAui4gfAoKIyMgUmVsYXRlZCB0b2tlbnMKCnwgVG9rZW4gfCBWYWx1ZSB8IFVzYWdlIHwKfC0tLXwtLS18LS0tfAp8IGAtLXN1cmZhY2UtMmAgfCDigJQgfCBDYWxlbmRhciBwYW5lbCBiYWNrZ3JvdW5kIHwKfCBgLS1ib3JkZXItc3VidGxlYCB8IGByZ2JhKDI1NSwyNTUsMjU1LC4wOClgIHwgUGFuZWwgYm9yZGVyLCBoZWFkZXIgYm90dG9tIGJvcmRlciB8CnwgYC0tamlvYCB8IGAjMDBBODU5YCB8IFNlbGVjdGVkIGRheSBmaWxsLCB0b2RheSB0ZXh0IGNvbG9yLCBldmVudCBkb3QgY29sb3IgfAp8IGAtLWppby1zb2Z0YCB8IGByZ2JhKDAsMTY4LDg5LC4xMilgIHwgSW4tcmFuZ2UgZGF5IGJhY2tncm91bmQgZmlsbCB8CnwgYC0tZ2xhc3MtMWAgfCBgcmdiYSgyNTUsMjU1LDI1NSwuMDUpYCB8IEhvdmVyZWQgZGF5IGJhY2tncm91bmQgfAp8IGAtLXRleHQzYCB8IGByZ2JhKDI0NCwyNDIsMjM4LC4zMilgIHwgV2Vla2RheSBsYWJlbHMsIG5hdiBhcnJvdyBjb2xvciB8CnwgYC0tdGV4dDRgIHwg4oCUIHwgT3V0c2lkZS1tb250aCBkYXkgbnVtYmVycyB8CnwgYC0tcGlsbGAgfCBgMTAwcHhgIHwgRGF5IGNlbGwgYm9yZGVyLXJhZGl1cyAoY2lyY2xlIHNoYXBlKSB8CnwgYC0tcjVgIHwg4oCUIHwgQ2FsZW5kYXIgcGFuZWwgYm9yZGVyLXJhZGl1cyB8CgojIyBXaGVuIHRvIHVzZQoKVXNlIHdoZW4KCi0gRXZlbnQgc2NoZWR1bGluZyBhbmQgZGF0ZSBzZWxlY3Rpb24gaW4gZm9ybXMKLSBEYXRlIHJhbmdlIHBpY2tlcnMgZm9yIGZpbHRlcnMgKGUuZy4gc3Vic2NyaXB0aW9uIGhpc3RvcnkpCi0gQm9va2luZyBmbG93cyB3aGVyZSBzcGVjaWZpYyBkYXRlcyBtdXN0IGJlIHNlbGVjdGVkCgpEb24ndCB1c2Ugd2hlbgoKLSBTZWxlY3Rpbmcgb25seSBhIHllYXIgb3IgbW9udGgg4oCUIHVzZSBhIHNpbXBsZXIgc2VsZWN0L2Ryb3Bkb3duCi0gUmVhZC1vbmx5IGRhdGUgZGlzcGxheSDigJQgdXNlIGEgZm9ybWF0dGVkIHRleHQgbGFiZWwKLSBNdWx0aXBsZSBpbmRlcGVuZGVudCBjYWxlbmRhcnMgb24gdGhlIHNhbWUgc2NyZWVuCgojIyBNb3Rpb24KCnwgSW50ZXJhY3Rpb24gfCBFYXNpbmcgfCBEdXJhdGlvbiB8IFByb3BlcnR5IHwKfC0tLXwtLS18LS0tfC0tLXwKfCBNb250aCBjaGFuZ2UgKG5leHQpIHwgYC0tZWFzZS1vdXRgIHwgYC0tZHVyLWZhc3RgIHwgdHJhbnNmb3JtIHRyYW5zbGF0ZVgoLTEwMCUg4oaSIDApLCBvcGFjaXR5IHwKfCBNb250aCBjaGFuZ2UgKHByZXYpIHwgYC0tZWFzZS1vdXRgIHwgYC0tZHVyLWZhc3RgIHwgdHJhbnNmb3JtIHRyYW5zbGF0ZVgoMTAwJSDihpIgMCksIG9wYWNpdHkgfAp8IERheSBzZWxlY3QgfCBgLS1lYXNlLW91dGAgfCBgODBtc2AgfCBiYWNrZ3JvdW5kLCB0cmFuc2Zvcm0gc2NhbGUgfAp8IFJhbmdlIGhpZ2hsaWdodCB8IGAtLWVhc2Utb3V0YCB8IGAtLWR1ci1mYXN0YCB8IGJhY2tncm91bmQgfAp8IEZvY3VzIHJpbmcgfCBgaW5zdGFudGAgfCBgMG1zYCB8IG91dGxpbmUgfAoKIyMgQVBJCgojIyMgQ1NTIGNsYXNzZXMKCnwgQ2xhc3MgfCBEZXNjcmlwdGlvbiB8CnwtLS18LS0tfAp8IGAuZHMtY2FsZW5kYXJgIHwgUm9vdCBjYWxlbmRhciBjb250YWluZXIgfAp8IGAuZHMtY2FsZW5kYXJfX25hdmAgfCBNb250aC95ZWFyIG5hdmlnYXRpb24gcm93IHwKfCBgLmRzLWNhbGVuZGFyX19ncmlkYCB8IDctY29sdW1uIGRheSBncmlkIHwKfCBgLmRzLWNhbGVuZGFyX19kYXlgIHwgSW5kaXZpZHVhbCBkYXkgY2VsbCDigJQgNDDDlzQwcHggdG91Y2ggdGFyZ2V0IHwKfCBgLmRzLWNhbGVuZGFyX19kYXktLXNlbGVjdGVkYCB8IFNlbGVjdGVkIGRheSDigJQgZ3JlZW4gZmlsbCB8CnwgYC5kcy1jYWxlbmRhcl9fZGF5LS10b2RheWAgfCBUb2RheSDigJQgZ3JlZW4gcmluZyB8CnwgYC5kcy1jYWxlbmRhcl9fZGF5LS1yYW5nZWAgfCBJbi1yYW5nZSBkYXlzIOKAlCBncmVlbiB0aW50IGZpbGwgfAp8IGAuZHMtY2FsZW5kYXJfX2RheS0tZGlzYWJsZWRgIHwgTm9uLXNlbGVjdGFibGUgZGF5IOKAlCAzOCUgb3BhY2l0eSB8CgojIyMgUmVhY3QgcHJvcHMKCnwgUHJvcCB8IFR5cGUgfCBEZWZhdWx0IHwgRGVzY3JpcHRpb24gfAp8LS0tfC0tLXwtLS18LS0tfAp8IGBtb2RlYCB8ICJzaW5nbGUiIHwgInJhbmdlIiB8ICJtdWx0aXBsZSIgfCAic2luZ2xlIiB8IFNlbGVjdGlvbiBtb2RlIHwKfCBgc2VsZWN0ZWRgIHwgRGF0ZSB8IERhdGVSYW5nZSB8IERhdGVbXSB8IHVuZGVmaW5lZCB8IENvbnRyb2xsZWQgc2VsZWN0ZWQgdmFsdWUgfAp8IGBvblNlbGVjdGAgfCAoZGF0ZSkgPT4gdm9pZCB8IHVuZGVmaW5lZCB8IEZpcmVkIG9uIGRheSBzZWxlY3Rpb24gfAp8IGBkaXNhYmxlZGAgfCBNYXRjaGVyIHwgTWF0Y2hlcltdIHwgdW5kZWZpbmVkIHwgRGlzYWJsZSBzcGVjaWZpYyBkYXRlcyBvciByYW5nZXMgfAp8IGBmcm9tRGF0ZWAgfCBEYXRlIHwgdW5kZWZpbmVkIHwgTWluaW11bSBzZWxlY3RhYmxlIGRhdGUgfAp8IGB0b0RhdGVgIHwgRGF0ZSB8IHVuZGVmaW5lZCB8IE1heGltdW0gc2VsZWN0YWJsZSBkYXRlIHwKCiMjIENvZGUgZXhhbXBsZXMKCmBgYGBodG1sCjxkaXYgY2xhc3M9ImNhbGVuZGFyIiByb2xlPSJncm91cCIgYXJpYS1sYWJlbD0iRGF0ZSBwaWNrZXIiPgogIDxkaXYgY2xhc3M9ImNhbGVuZGFyLWhlYWRlciI+CiAgICA8YnV0dG9uIGNsYXNzPSJjYWxlbmRhci1uYXYiIGFyaWEtbGFiZWw9IlByZXZpb3VzIG1vbnRoIj7igLk8L2J1dHRvbj4KICAgIDxzcGFuIGNsYXNzPSJjYWxlbmRhci1tb250aCIgYXJpYS1saXZlPSJwb2xpdGUiPkp1bmUgMjAyNjwvc3Bhbj4KICAgIDxidXR0b24gY2xhc3M9ImNhbGVuZGFyLW5hdiIgYXJpYS1sYWJlbD0iTmV4dCBtb250aCI+4oC6PC9idXR0b24+CiAgPC9kaXY+CiAgPGRpdiBjbGFzcz0iY2FsZW5kYXItZ3JpZCI+CiAgICA8ZGl2IGNsYXNzPSJjYWxlbmRhci13ZWVrZGF5cyIgcm9sZT0icm93Ij4KICAgICAgPGRpdiBjbGFzcz0iY2FsZW5kYXItd2Vla2RheSIgcm9sZT0iY29sdW1uaGVhZGVyIiBhcmlhLWxhYmVsPSJTdW5kYXkiPlM8L2Rpdj4KICAgICAgPGRpdiBjbGFzcz0iY2FsZW5kYXItd2Vla2RheSIgcm9sZT0iY29sdW1uaGVhZGVyIiBhcmlhLWxhYmVsPSJNb25kYXkiPk08L2Rpdj4KICAgICAgPCEtLSAuLi5UIFcgVCBGIFMgLS0+CiAgICA8L2Rpdj4KICAgIDxkaXYgY2xhc3M9ImNhbGVuZGFyLWRheXMiIHJvbGU9ImdyaWQiIGFyaWEtbGFiZWw9Ikp1bmUgMjAyNiI+CiAgICAgIDxidXR0b24gY2xhc3M9ImNhbGVuZGFyLWRheSBpcy1vdXRzaWRlIiByb2xlPSJncmlkY2VsbCIgYXJpYS1kaXNhYmxlZD0idHJ1ZSIgdGFiaW5kZXg9Ii0xIj48L2J1dHRvbj4KICAgICAgPGJ1dHRvbiBjbGFzcz0iY2FsZW5kYXItZGF5IiByb2xlPSJncmlkY2VsbCIgYXJpYS1zZWxlY3RlZD0iZmFsc2UiIHRhYmluZGV4PSItMSI+MTwvYnV0dG9uPgogICAgICA8YnV0dG9uIGNsYXNzPSJjYWxlbmRhci1kYXkgaXMtdG9kYXkiIHJvbGU9ImdyaWRjZWxsIiBhcmlhLWN1cnJlbnQ9ImRhdGUiIGFyaWEtc2VsZWN0ZWQ9ImZhbHNlIiB0YWJpbmRleD0iMCI+MjY8L2J1dHRvbj4KICAgICAgPGJ1dHRvbiBjbGFzcz0iY2FsZW5kYXItZGF5IGlzLXNlbGVjdGVkIiByb2xlPSJncmlkY2VsbCIgYXJpYS1zZWxlY3RlZD0idHJ1ZSIgdGFiaW5kZXg9Ii0xIj4xNTwvYnV0dG9uPgogICAgICA8IS0tIC4uLnJlbWFpbmluZyBkYXlzIC0tPgogICAgPC9kaXY+CiAgPC9kaXY+CjwvZGl2PgpgYGBgCgpgYGBgCjwhLS0gUmFuZ2U6IDEwIEp1biDihpIgMTUgSnVuIC0tPgo8YnV0dG9uIGNsYXNzPSJjYWxlbmRhci1kYXkgaXMtcmFuZ2Utc3RhcnQiIHJvbGU9ImdyaWRjZWxsIiBhcmlhLXNlbGVjdGVkPSJ0cnVlIgogIGFyaWEtbGFiZWw9IjEwIEp1bmUgMjAyNiwgcmFuZ2Ugc3RhcnQiPjEwPC9idXR0b24+Cgo8YnV0dG9uIGNsYXNzPSJjYWxlbmRhci1kYXkgaXMtaW4tcmFuZ2UiIHJvbGU9ImdyaWRjZWxsIiBhcmlhLXNlbGVjdGVkPSJmYWxzZSIKICBhcmlhLWxhYmVsPSIxMSBKdW5lIDIwMjYsIHdpdGhpbiBzZWxlY3RlZCByYW5nZSI+MTE8L2J1dHRvbj4KPGJ1dHRvbiBjbGFzcz0iY2FsZW5kYXItZGF5IGlzLWluLXJhbmdlIiByb2xlPSJncmlkY2VsbCIgYXJpYS1zZWxlY3RlZD0iZmFsc2UiCiAgYXJpYS1sYWJlbD0iMTIgSnVuZSAyMDI2LCB3aXRoaW4gc2VsZWN0ZWQgcmFuZ2UiPjEyPC9idXR0b24+CjwhLS0gLi4uMTMsIDE0IC0tPgoKPGJ1dHRvbiBjbGFzcz0iY2FsZW5kYXItZGF5IGlzLXJhbmdlLWVuZCIgcm9sZT0iZ3JpZGNlbGwiIGFyaWEtc2VsZWN0ZWQ9InRydWUiCiAgYXJpYS1sYWJlbD0iMTUgSnVuZSAyMDI2LCByYW5nZSBlbmQiPjE1PC9idXR0b24+CmBgYGAKCmBgYGAKPCEtLSBFdmVudCBkb3QgaXMgcHVyZWx5IGRlY29yYXRpdmUg4oCUIGhpZGRlbiB0ZXh0IGNhcnJpZXMgbWVhbmluZyAtLT4KPGJ1dHRvbiBjbGFzcz0iY2FsZW5kYXItZGF5IGhhcy1ldmVudCIgcm9sZT0iZ3JpZGNlbGwiIGFyaWEtc2VsZWN0ZWQ9ImZhbHNlIgogIGFyaWEtbGFiZWw9IjIgSnVuZSAyMDI2LCBnYW1lIHJlbGVhc2UiPgogIDIKICA8c3BhbiBjbGFzcz0ic3Itb25seSI+LCBnYW1lIHJlbGVhc2U8L3NwYW4+CjwvYnV0dG9uPgoKPCEtLSBzci1vbmx5IHV0aWxpdHkgY2xhc3MgKGFkZCB0byB5b3VyIGJhc2UgQ1NTIGlmIG5vdCBwcmVzZW50KSAtLT4KPHN0eWxlPgouc3Itb25seSB7CiAgcG9zaXRpb246IGFic29sdXRlOwogIHdpZHRoOiAxcHg7IGhlaWdodDogMXB4OwogIHBhZGRpbmc6IDA7IG1hcmdpbjogLTFweDsKICBvdmVyZmxvdzogaGlkZGVuOwogIGNsaXA6IHJlY3QoMCwwLDAsMCk7CiAgd2hpdGUtc3BhY2U6IG5vd3JhcDsKICBib3JkZXItd2lkdGg6IDA7Cn0KPC9zdHlsZT4KYGBgYAoKIyMgQ2hhbmdlbG9nCgpJbml0aWFsIGRyYWZ0LiBTaW5nbGUgc2VsZWN0LCByYW5nZSBzZWxlY3QsIGFuZCByZWFkLW9ubHkgZXZlbnQgdmFyaWFudHMuIFRocmVlIHNpemUgdGllcnMuIEZ1bGwgZGF5LXN0YXRlIGRvY3VtZW50YXRpb24sIEFSSUEgZ3JpZCBwYXR0ZXJuLCBldmVudCBkb3QgYWNjZXNzaWJsZSBtYXJrdXAgZ3VpZGFuY2UuCgotLS0KCiMjIFRva2VucyByZWZlcmVuY2VkIG9uIHRoaXMgcGFnZQoKVXNlIHRoZXNlIGV4YWN0IHRva2VucyDigJQgZGVmaW5lZCBpbiBgdG9rZW5zL3Rva2Vucy5jc3NgLiBEbyBub3Qgc3Vic3RpdHV0ZSByYXcgdmFsdWVzLgoKLSBgLS1iZ2AKLSBgLS1ib3JkZXItc3VidGxlYAotIGAtLWR1ci1mYXN0YAotIGAtLWVhc2Utb3V0YAotIGAtLWdsYXNzLTFgCi0gYC0tamlvYAotIGAtLWppby1mb250YAotIGAtLWppby1zb2Z0YAotIGAtLXBpbGxgCi0gYC0tcjNgCi0gYC0tcjVgCi0gYC0tc3VyZmFjZS0yYAotIGAtLXRleHRgCi0gYC0tdGV4dC1pbnZgCi0gYC0tdGV4dDNgCi0gYC0tdGV4dDRgCgotLS0KCiMjIEJ1aWxkIHJ1bGVzIChiaW5kaW5nKQoKMS4gVXNlICoqb25seSoqIHRoZSB0b2tlbnMgbGlzdGVkIGFib3ZlLiBJZiBhIHZhbHVlIHlvdSBuZWVkIGlzIG5vdCBsaXN0ZWQsIHN0b3AgYW5kIGFzayDigJQgZG8gbm90IGludHJvZHVjZSBhIHJhdyB2YWx1ZS4KMi4gRm9udCBpcyAqKkppb1R5cGUqKiBvbmx5LiBXZWlnaHRzOiAzMDAsIDUwMCwgNzAwLCA5MDAuCjMuIFJldXNlIHRoZSBjb21wb25lbnQgQ1NTIHBhdHRlcm5zIHNob3duIG9uIHRoZSBzb3VyY2UgcGFnZTsgZG8gbm90IHJlZGVzaWduLgo0LiBNYXRjaCBldmVyeSBzdGF0ZSAoZGVmYXVsdCwgaG92ZXIsIGZvY3VzLCBhY3RpdmUsIGRpc2FibGVkLCBsb2FkaW5nKSBzaG93biBvbiB0aGUgcGFnZS4KNS4gQWNjZXNzaWJpbGl0eSByZXF1aXJlbWVudHMgb24gdGhlIHBhZ2UgYXJlIG1hbmRhdG9yeSwgbm90IG9wdGlvbmFsLgo=" download="calendar-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
+    </div>
       <span class="component-maturity component-maturity--draft">
         <span class="component-maturity--dot"></span>Draft
       </span>
@@ -430,6 +430,96 @@
     </table>
   </section>
 
+  <!-- WHEN TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use</h2>
+    <div class="ds-usage-grid">
+      <div class="ds-usage-card ds-usage-card--do">
+        <p class="ds-usage-label ds-usage-label--do">Use when</p>
+        <ul class="ds-usage-list">
+              <li>Event scheduling and date selection in forms</li>
+              <li>Date range pickers for filters (e.g. subscription history)</li>
+              <li>Booking flows where specific dates must be selected</li>
+        </ul>
+      </div>
+      <div class="ds-usage-card ds-usage-card--dont">
+        <p class="ds-usage-label ds-usage-label--dont">Don't use when</p>
+        <ul class="ds-usage-list">
+              <li>Selecting only a year or month — use a simpler select/dropdown</li>
+              <li>Read-only date display — use a formatted text label</li>
+              <li>Multiple independent calendars on the same screen</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOTION -->
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-motion-table">
+      <thead><tr><th>Interaction</th><th>Easing</th><th>Duration</th><th>Property</th></tr></thead>
+      <tbody>
+        <tr><td>Month change (next)</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>transform translateX(-100% → 0), opacity</td></tr>
+        <tr><td>Month change (prev)</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>transform translateX(100% → 0), opacity</td></tr>
+        <tr><td>Day select</td><td><code>--ease-out</code></td><td><code>80ms</code></td><td>background, transform scale</td></tr>
+        <tr><td>Range highlight</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>background</td></tr>
+        <tr><td>Focus ring</td><td><code>instant</code></td><td><code>0ms</code></td><td>outline</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- API -->
+  <section class="ds-section" id="api">
+    <h2 class="ds-section-title">API</h2>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:0 0 12px;">CSS classes</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>.ds-calendar</code></td><td>Root calendar container</td></tr>
+        <tr><td><code>.ds-calendar__nav</code></td><td>Month/year navigation row</td></tr>
+        <tr><td><code>.ds-calendar__grid</code></td><td>7-column day grid</td></tr>
+        <tr><td><code>.ds-calendar__day</code></td><td>Individual day cell — 40×40px touch target</td></tr>
+        <tr><td><code>.ds-calendar__day--selected</code></td><td>Selected day — green fill</td></tr>
+        <tr><td><code>.ds-calendar__day--today</code></td><td>Today — green ring</td></tr>
+        <tr><td><code>.ds-calendar__day--range</code></td><td>In-range days — green tint fill</td></tr>
+        <tr><td><code>.ds-calendar__day--disabled</code></td><td>Non-selectable day — 38% opacity</td></tr>
+      </tbody>
+    </table>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 12px;">React props</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>mode</code></td><td><span class="api-type">"single" | "range" | "multiple"</span></td><td><span class="api-default">"single"</span></td><td>Selection mode</td></tr>
+        <tr><td><code>selected</code></td><td><span class="api-type">Date | DateRange | Date[]</span></td><td><span class="api-default">undefined</span></td><td>Controlled selected value</td></tr>
+        <tr><td><code>onSelect</code></td><td><span class="api-type">(date) => void</span></td><td><span class="api-default">undefined</span></td><td>Fired on day selection</td></tr>
+        <tr><td><code>disabled</code></td><td><span class="api-type">Matcher | Matcher[]</span></td><td><span class="api-default">undefined</span></td><td>Disable specific dates or ranges</td></tr>
+        <tr><td><code>fromDate</code></td><td><span class="api-type">Date</span></td><td><span class="api-default">undefined</span></td><td>Minimum selectable date</td></tr>
+        <tr><td><code>toDate</code></td><td><span class="api-type">Date</span></td><td><span class="api-default">undefined</span></td><td>Maximum selectable date</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  
+
+  
+
+  
+
+  
+
   <section class="component-section" id="code-examples">
     <h2 class="ds-section-title">Code examples</h2>
     <div class="component-code-block">
@@ -509,4 +599,4 @@
   </section>
 
 </main><script src="../sprite-loader.js"></script>
-<script src="../shell.js"></script></body></html>
+<script src="../shell.js?v=2"></script></body></html>

@@ -4,34 +4,34 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     .chart-wrap { width: 100%; }
     .chart-title { font-family: var(--jio-font); font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
     .chart-subtitle { font-size: 12px; color: var(--text3); margin-bottom: 16px; }
-    .chart-svg { width: 100%; display: block; }
+    .chart-svg { width: 100%; max-width: 300px; margin-inline: auto; display: block; }
     /* Bar */
-    .chart-bar { fill: var(--jio); transition: opacity 150ms ease; }
+    .chart-bar { fill: var(--jio); transition: opacity var(--dur-default) var(--ease-out); }
     .chart-bar:hover { opacity: 0.75; cursor: pointer; }
     .chart-bar--secondary { fill: var(--surface-3, rgba(255,255,255,.1)); }
     /* Line */
-    .chart-line { stroke: var(--jio); stroke-width: 2; fill: none; }
+    .chart-line { stroke: var(--jio); stroke-width: 1.5; fill: none; }
     .chart-area { fill: url(#chart-gradient); opacity: 0.2; }
     /* Donut */
     .chart-donut-track { fill: none; stroke: var(--surface-3, rgba(255,255,255,.1)); }
-    .chart-donut-fill { fill: none; stroke: var(--jio); stroke-linecap: round; transition: stroke-dasharray 600ms cubic-bezier(0.25,0.46,0.45,0.94); }
+    .chart-donut-fill { fill: none; stroke: var(--jio); stroke-linecap: round; transition: stroke-dasharray var(--dur-enter) var(--ease-out); }
     /* Legend */
     .chart-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 12px; }
     .chart-legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text2); }
     .chart-legend-dot { width: 8px; height: 8px; border-radius: var(--pill); flex-shrink: 0; }
     /* Axis labels */
-    .chart-axis-label { font-size: 10px; fill: var(--text3); font-family: var(--jio-font, 'Outfit', sans-serif); }
-    .chart-grid-line { stroke: var(--border-subtle, rgba(255,255,255,.08)); stroke-width: 1; }
+    .chart-axis-label { font-size: 8px; fill: var(--text3); font-family: var(--jio-font); }
+    .chart-grid-line { stroke: var(--border-subtle, rgba(255,255,255,.08)); stroke-width: 0.75; }
     /* Tooltip */
     .chart-tooltip { position: absolute; background: var(--surface-2); border: 1px solid var(--border-subtle); border-radius: var(--r3); padding: 6px 10px; font-size: 11px; font-weight: 700; color: var(--text); pointer-events: none; white-space: nowrap; }
     /* Donut label */
-    .chart-donut-label { font-size: 28px; font-weight: 900; fill: var(--text); font-family: var(--jio-font, 'Outfit', sans-serif); }
-    .chart-donut-sublabel { font-size: 11px; fill: var(--text3); font-family: var(--jio-font, 'Outfit', sans-serif); }
+    .chart-donut-label { font-size: 16px; font-weight: 900; fill: var(--text); font-family: var(--jio-font); }
+    .chart-donut-sublabel { font-size: 8px; fill: var(--text3); font-family: var(--jio-font); }
     /* Skeleton */
     .chart-skeleton { background: var(--surface-2); border-radius: var(--r4); animation: chart-skel 1.4s ease-in-out infinite; }
     @keyframes chart-skel { 0%,100%{opacity:1} 50%{opacity:.4} }
@@ -49,15 +49,14 @@
 
   <!-- 1. PAGE HEADER -->
   <header class="component-page-header">
-    <nav class="component-breadcrumb">
-      <span>JioGames DLS</span>
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <span class="component-breadcrumb-link">JioGames DLS</span>
       <span class="component-breadcrumb-sep">›</span>
       <span>Components</span>
       <span class="component-breadcrumb-sep">›</span>
-      <span>Chart</span>
+      <span class="component-breadcrumb-current">Chart</span>
     </nav>
-    <h1 class="component-page-title">Chart</h1>
-    <p class="component-page-def">Data visualisation for playtime trends, achievement progress, leaderboard history, and gaming stats. JioGames supports three chart types only: bar, line, and donut.</p>
+    <h1 class="component-page-title">Chart</h1><p class="component-page-def">Data visualisation for playtime trends, achievement progress, leaderboard history, and gaming stats. JioGames supports three chart types only: bar, line, and donut.</p>
     <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
       <div class="component-platforms">
         <span class="component-platform component-platform--mobile">
@@ -69,7 +68,8 @@
         <span class="component-platform component-platform--tv">
           <span class="component-platform-dot"></span>TV
         </span>
-      </div>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBDaGFydCDigJQgSmlvR2FtZXMgRExTIHNwZWMKCj4gU291cmNlOiBgY2hhcnQvaW5kZXguaHRtbGAgaW4gdGhlIEppb0dhbWVzIERlc2lnbiBTeXN0ZW0uCj4gVGhpcyBzcGVjIGlzIGdlbmVyYXRlZCB2ZXJiYXRpbSBmcm9tIHRoZSBwYWdlIOKAlCBkbyBub3QgaW52ZW50IHZhbHVlcyBub3QgbGlzdGVkIGhlcmUuCgoqKlBhdGg6KiogSmlvR2FtZXMgRExTIOKAuiBDb21wb25lbnRzIOKAuiBDaGFydAoKLS0tCgpEYXRhIHZpc3VhbGlzYXRpb24gZm9yIHBsYXl0aW1lIHRyZW5kcywgYWNoaWV2ZW1lbnQgcHJvZ3Jlc3MsIGxlYWRlcmJvYXJkIGhpc3RvcnksIGFuZCBnYW1pbmcgc3RhdHMuIEppb0dhbWVzIHN1cHBvcnRzIHRocmVlIGNoYXJ0IHR5cGVzIG9ubHk6IGJhciwgbGluZSwgYW5kIGRvbnV0LgoKQ2hhcnQgwrcgYmFyIChjb21wYXJpc29uKSwgbGluZSAod2l0aCBhcmVhKSwgZG9udXQgKDcyJSBjb21wbGV0aW9uKQoKQ2hhcnQgcmVuZGVycyBkYXRhIGFzIG9uZSBvZiB0aHJlZSBhcHByb3ZlZCB2aXN1YWwgZm9ybXM6IGJhciwgbGluZSwgb3IgZG9udXQuIFRoZXNlIHRocmVlIHR5cGVzIGNvdmVyIGV2ZXJ5IGdhbWluZyBkYXRhIHN0b3J5IEppb0dhbWVzIG5lZWRzIHRvIHRlbGwg4oCUIHRpbWUtYmFzZWQgY29tcGFyaXNvbnMgKGJhciksIHRyZW5kcyBvdmVyIHRpbWUgKGxpbmUpLCBhbmQgcHJvcG9ydGlvbnMgKGRvbnV0KS4gT3RoZXIgY2hhcnQgdHlwZXMgKHBpZSwgc2NhdHRlciwgcmFkYXIpIGFyZSBleHBsaWNpdGx5IGV4Y2x1ZGVkIGZyb20gdGhlIHN5c3RlbS4gSWYgeW91ciBkYXRhIGRvZXMgbm90IGZpdCBiYXIsIGxpbmUsIG9yIGRvbnV0LCByZWNvbnNpZGVyIHdoZXRoZXIgYSBjaGFydCBpcyB0aGUgcmlnaHQgcmVwcmVzZW50YXRpb24gYXQgYWxsLgoKLSAqKkJhcioqIOKAlCBjb21wYXJpbmcgdmFsdWVzIGFjcm9zcyBkaXNjcmV0ZSBjYXRlZ29yaWVzOiBkYWlseSBwbGF5dGltZSwgZ2FtZXMgYnkgZ2VucmUsIHNjb3JlIGJ5IHNlc3Npb24KLSAqKkJhciAoY29tcGFyaXNvbikqKiDigJQgdHdvIGJhcnMgcGVyIGNhdGVnb3J5IHVzaW5nIHByaW1hcnkgYW5kIHNlY29uZGFyeSBmaWxsczogdGhpcyB3ZWVrIHZzIGxhc3Qgd2VlawotICoqTGluZSoqIOKAlCB0cmVuZHMgb3ZlciBjb250aW51b3VzIHRpbWU6IFhQIGVhcm5lZCBwZXIgd2VlaywgcmFua2luZyBwb3NpdGlvbiBvdmVyIG1vbnRocwotICoqRG9udXQqKiDigJQgc2luZ2xlIHByb3BvcnRpb25hbCBtZXRyaWM6IGFjaGlldmVtZW50IGNvbXBsZXRpb24gJSwgcGFzcyB1c2FnZSwgc3RvcmFnZSBjb25zdW1lZAoKLSBBbHdheXMgaW5jbHVkZSBhIGNoYXJ0IHRpdGxlIGFuZCBhIHNvdXJjZSAvIGRhdGUgc3VidGl0bGUKLSBTdGFydCBZLWF4aXMgYXQgMCDigJQgbmV2ZXIgdHJ1bmNhdGUgdGhlIGJhc2VsaW5lIHRvIGV4YWdnZXJhdGUgYSB0cmVuZAotIFVzZSBgLS1qaW9gIGZvciB0aGUgcHJpbWFyeSBtZXRyaWMsIHN1cmZhY2UtMyBmb3IgY29tcGFyaXNvbiBvciBzZWNvbmRhcnkgc2VyaWVzCi0gU2hvdyB0b29sdGlwcyBvbiBob3ZlciB3aXRoIHRoZSBleGFjdCBudW1lcmljIHZhbHVlCi0gUHJvdmlkZSBhIGRhdGEgdGFibGUgYWx0ZXJuYXRpdmUgZm9yIHNjcmVlbiByZWFkZXJzIGJlbG93IGV2ZXJ5IGNoYXJ0Ci0gVXNlIHRoZSBkb251dCBjZW50ZXIgbGFiZWwgdG8gc2hvdyB0aGUgcHJpbWFyeSBwZXJjZW50YWdlIHZhbHVlCgotIFVzZSBtb3JlIHRoYW4gMiBjb2xvcnMgaW4gYSBzaW5nbGUgY2hhcnQg4oCUIHRoaXJkIGNvbG9yIGludHJvZHVjZXMgYW1iaWd1aXR5Ci0gVXNlIHBpZSBjaGFydHMg4oCUIGFsd2F5cyB1c2UgRG9udXQKLSBTaG93IGEgbGluZSBjaGFydCBvbiBtb2JpbGUg4oCUIHNtYWxsIHNjcmVlbnMgbWFrZSBkYXRhIHBvaW50cyB0b28gY2xvc2UgdG9nZXRoZXI7IHVzZSBiYXIgaW5zdGVhZAotIE9taXQgdGhlIGxlZ2VuZCB3aGVuIHR3byBzZXJpZXMgYXJlIHNob3duIOKAlCBhbHdheXMgbGFiZWwgYm90aAotIFVzZSBjaGFydCBhbmltYXRpb25zIG9uIFRWIOKAlCBob3ZlciB0b29sdGlwcyBhbmQgdHJhbnNpdGlvbnMgZG9uJ3QgYXBwbHkgYXQgZGlzdGFuY2UKCjEuIDEgR3JpZCBsaW5lcyBPcHRpb25hbCBIb3Jpem9udGFsIHJlZmVyZW5jZSBsaW5lcyBhdCBlYWNoIFktYXhpcyB0aWNrLiBVc2UgLS1ib3JkZXItc3VidGxlIChyZ2JhKDI1NSwyNTUsMjU1LC4wOCkpIOKAlCBzdWJ0bGUgZW5vdWdoIG5vdCB0byBjb21wZXRlIHdpdGggZGF0YSBtYXJrcy4gYHN0cm9rZTogdmFyKC0tYm9yZGVyLXN1YnRsZSk7IHN0cm9rZS13aWR0aDogMWAKMi4gMiBZLWF4aXMgbGFiZWxzIFJlcXVpcmVkIFJpZ2h0LWFsaWduZWQgdGV4dCBhbmNob3JlZCB0byB0aGUgbGVmdCBvZiB0aGUgY2hhcnQgYXJlYS4gMTBweCwgdGV4dDMgY29sb3IuIEFsd2F5cyBzdGFydCBhdCAwLiBNYXggNSB0aWNrcy4gSW5jbHVkZSB1bml0IGFiYnJldmlhdGlvbiBvbiB0aGUgdG9wIHRpY2sgb25seSAoNmgsIG5vdCBvbiBldmVyeSB0aWNrKS4gYGZvbnQtc2l6ZToxMHB4OyBmaWxsOnZhcigtLXRleHQzKTsgdGV4dC1hbmNob3I6ZW5kYAozLiAzIERhdGEgbWFyayAoYmFyIC8gbGluZSAvIGRvbnV0IGFyYykgUmVxdWlyZWQgQmFyOiByZWN0IHdpdGggcng6MiBhbmQgLS1qaW8gZmlsbC4gTGluZTogcG9seWxpbmUgd2l0aCBzdHJva2U6LS1qaW8sIGZpbGw6bm9uZS4gRG9udXQ6IGNpcmNsZSB3aXRoIHN0cm9rZS1kYXNoYXJyYXkgZHJpdmluZyB0aGUgZmlsbGVkIGFyYy4gQWxsIHN1cHBvcnQgaG92ZXIgb3BhY2l0eSByZWR1Y3Rpb24uIGBmaWxsOnZhcigtLWppbykgfCBzdHJva2U6dmFyKC0tamlvKWAKNC4gNCBYLWF4aXMgbGFiZWxzIFJlcXVpcmVkIENlbnRlci1hbmNob3JlZCB0ZXh0IGJlbG93IGVhY2ggYmFyIGdyb3VwIG9yIGRhdGEgcG9pbnQuIDEwcHgsIHRleHQzIGNvbG9yLiBBYmJyZXZpYXRlIHRvIGZpdCDigJQgIk1vbiIgbm90ICJNb25kYXkiLCAiV2sgMSIgbm90ICJXZWVrIDEiLiBgZm9udC1zaXplOjEwcHg7IGZpbGw6dmFyKC0tdGV4dDMpOyB0ZXh0LWFuY2hvcjptaWRkbGVgCgojIyBWYXJpYW50cwoKU2l4IGFwcHJvdmVkIGNoYXJ0IGZvcm1zIGJ1aWx0IGZyb20gdGhyZWUgYmFzZSB0eXBlcy4gRWFjaCBoYXMgYSBmaXhlZCBzZW1hbnRpYyByb2xlIOKAlCBkbyBub3Qgc3Vic3RpdHV0ZSBvbmUgZm9yIGFub3RoZXIuCgojIyBTaXplcwoKQ2hhcnQgaGVpZ2h0IGlzIGRlZmluZWQgYnkgdGhyZWUgdGllcnMuIFdpZHRoIGlzIGFsd2F5cyAxMDAlIG9mIHRoZSBjb250YWluZXIg4oCUIG5ldmVyIGZpeGVkLXdpZHRoIGNoYXJ0cy4KCnwgU2l6ZSB8IENsYXNzIHwgU1ZHIGhlaWdodCB8IFVzZSBjYXNlIHwKfC0tLXwtLS18LS0tfC0tLXwKfCBTIHwgYC5jaGFydC0tc2AgfCBgMTIwcHhgIHwgU3BhcmtsaW5lIGluIGEgc3RhdCBjYXJkLCBjb21wYWN0IGRhc2hib2FyZCB3aWRnZXQgfAp8IE0gfCBgLmNoYXJ0LS1tYCB8IGAyMDBweGAgfCBEZWZhdWx0IOKAlCBwcm9maWxlIHN0YXRzLCBnYW1lIGRldGFpbCBhbmFseXRpY3MgfAp8IEwgfCBgLmNoYXJ0LS1sYCB8IGAzMDBweGAgfCBGdWxsLXBhZ2UgYW5hbHl0aWNzIHZpZXcsIGV4cGFuZGVkIHBsYXl0aW1lIGJyZWFrZG93biB8CgojIyBTdGF0ZXMKCkNoYXJ0cyBoYXZlIGZvdXIgbm9uLWludGVyYWN0aXZlIHN0YXRlcyBhbmQgb25lIGludGVyYWN0aXZlIGhvdmVyIHN0YXRlLgoKIyMgQ29udGVudCBndWlkYW5jZQoKLSBDaGFydCB0aXRsZTogbm91biBwaHJhc2UgZGVzY3JpYmluZyB0aGUgbWV0cmljIOKAlCAiV2Vla2x5IHBsYXl0aW1lIiwgbm90ICJZb3VyIFN0YXRzIgotIFN1YnRpdGxlOiBkYXRhIHNvdXJjZSBhbmQgZGF0ZSByYW5nZSDigJQgIkhvdXJzIMK3IEp1biAyMDI2IgotIFktYXhpczogaW5jbHVkZSB1bml0IGFiYnJldmlhdGlvbiBvbiB0aGUgdG9wIHRpY2sgb25seSDigJQgIjZoIiBub3QgIjYgaG91cnMiCi0gWC1heGlzOiBhYmJyZXZpYXRlIHRvIHNpbmdsZSBsZXR0ZXJzIG9yICJXayBOIiDigJQgbmV2ZXIgZnVsbCBkYXkgb3IgbW9udGggbmFtZXMKLSBMZWdlbmQgbGFiZWxzOiAy4oCTMyB3b3JkcyBtYXhpbXVtIHBlciBzZXJpZXMKCi0gUHJpbWFyeSBzZXJpZXM6IGFsd2F5cyBgLS1qaW9gICgjMDBBODU5KQotIFNlY29uZGFyeSAvIGNvbXBhcmlzb24gc2VyaWVzOiBhbHdheXMgc3VyZmFjZS0zIChyZ2JhKDI1NSwyNTUsMjU1LC4xKSkKLSBNYXhpbXVtIDIgY29sb3JzIGluIGFueSBzaW5nbGUgY2hhcnQg4oCUIG5vIHRoaXJkIGRhdGEgc2VyaWVzCi0gTmV2ZXIgdXNlIHJlZCBmb3IgYSBkYXRhIHNlcmllcyDigJQgaXQgcmVhZHMgYXMgYW4gZXJyb3Igc3RhdGUKLSBEb251dCB0cmFjayAodW5maWxsZWQgcG9ydGlvbik6IHN1cmZhY2UtMywgbmV2ZXIgdHJhbnNwYXJlbnQKCiMjIFBsYXRmb3JtIGNvbnNpZGVyYXRpb25zCgotIEJhciBhbmQgRG9udXQgb25seSDigJQgbGluZSBjaGFydHMgYXJlIGhhcmQgdG8gcmVhZCBvbiBuYXJyb3cgdmlld3BvcnRzCi0gVXNlIFMgb3IgTSBzaXplIOKAlCBMIGhlaWdodCBmb3JjZXMgdW53YW50ZWQgdmVydGljYWwgc2Nyb2xsCi0gVGFwIG9uIGEgYmFyIHRvIHNob3cgdGhlIHRvb2x0aXAgKG5vIGhvdmVyIG9uIHRvdWNoKQotIERvbnV0IGNlbnRlciBsYWJlbCBtaW5pbXVtIDIwcHggZm9yIGxlZ2liaWxpdHkgb24gc21hbGwgc2NyZWVucwotIFByb3ZpZGUgdGhlIGRhdGEgdGFibGUgYWx0ZXJuYXRpdmUgdmlzdWFsbHkgY29sbGFwc2VkIGJ1dCBzY3JlZW4tcmVhZGVyIGFjY2Vzc2libGUKCi0gQWxsIHRocmVlIGNoYXJ0IHR5cGVzIGF2YWlsYWJsZQotIEhvdmVyIG9uIGRhdGEgbWFya3Mgc2hvd3MgdG9vbHRpcCB3aXRoIGV4YWN0IHZhbHVlCi0gVXNlIE0gb3IgTCBzaXplIGRlcGVuZGluZyBvbiB0aGUgcGFnZSBsYXlvdXQKLSBMZWdlbmQgY2FuIGJlIHBvc2l0aW9uZWQgcmlnaHQgb2YgdGhlIGNoYXJ0IGlmIHNwYWNlIGFsbG93cwotIFNWRyBjaGFydHMgbXVzdCBoYXZlIGByb2xlPSJpbWciYCArIGBhcmlhLWxhYmVsYCBkZXNjcmliaW5nIGFsbCBkYXRhCgotIERvbnV0IG9ubHkg4oCUIGJhciBhbmQgbGluZSByZXF1aXJlIHByZWNpc2Ugc3BhdGlhbCByZWFkaW5nIGF0IDNtCi0gRG9udXQgY2VudGVyIGxhYmVsIG1pbmltdW0gMzZweAotIExlZ2VuZCB0ZXh0IG1pbmltdW0gMThweAotIE5vIGhvdmVyIHRvb2x0aXBzIOKAlCBzaG93IGV4YWN0IHZhbHVlIGluIGNlbnRlciBsYWJlbCBvciBsZWdlbmQKLSBObyBhbmltYXRpb25zIOKAlCBzdGF0aWMgcmVuZGVyIG9ubHkgYXQgVFYgc2NhbGUKCiMjIEFjY2Vzc2liaWxpdHkKClNWRyBjaGFydHMgYXJlIGludmlzaWJsZSB0byBzY3JlZW4gcmVhZGVycyB1bmxlc3MgZXhwbGljaXRseSBkZXNjcmliZWQuIEV2ZXJ5IGNoYXJ0IG11c3QgaGF2ZSB0d28gYWNjZXNzaWJpbGl0eSBzdXJmYWNlczogYW4gYXJpYS1sYWJlbCBvbiB0aGUgU1ZHIHN1bW1hcmlzaW5nIHRoZSBkYXRhLCBhbmQgYSB2aXN1YWxseSBoaWRkZW4gZGF0YSB0YWJsZSBiZWxvdy4KCnwgUmVxdWlyZW1lbnQgfCBJbXBsZW1lbnRhdGlvbiB8IEd1aWRhbmNlIHwKfC0tLXwtLS18LS0tfAp8IFNWRyBkZXNjcmlwdGlvbiB8IGByb2xlPSJpbWciIGFyaWEtbGFiZWxgIHwgYXJpYS1sYWJlbCBtdXN0IGRlc2NyaWJlIHRoZSBjaGFydCB0eXBlIGFuZCBrZXkgZGF0YSBwb2ludHM6ICJCYXIgY2hhcnQ6IHdlZWtseSBwbGF5dGltZS4gTW9uIDEuNWgsIFR1ZSAzaCwgV2VkIDJoLCBUaHUgNGgsIEZyaSA1aCwgU2F0IDYuNWgsIFN1biA0LjVoIi4gfAp8IERhdGEgdGFibGUgYWx0ZXJuYXRpdmUgfCBgYCBiZWxvdyBjaGFydCB8IFByb3ZpZGUgYSB2aXN1YWxseSBoaWRkZW4gZGF0YSB0YWJsZSAoY2xhc3M9InNyLW9ubHkiKSB3aXRoIHRoZSBzYW1lIGRhdGEgYXMgdGhlIGNoYXJ0LiBTY3JlZW4gcmVhZGVycyBuYXZpZ2F0ZSBpdCB3aXRoIHN0YW5kYXJkIHRhYmxlIGNvbW1hbmRzLiB8CnwgSW5kaXZpZHVhbCBiYXJzIC8gcG9pbnRzIHwgYGAgaW5zaWRlIFNWRyBlbGVtZW50IHwgRWFjaCA8cmVjdD4gb3IgPGNpcmNsZT4gY2FuIGhhdmUgYSA8dGl0bGU+IGNoaWxkOiA8dGl0bGU+RnJpIMK3IDVoPC90aXRsZT4uIEJyb3dzZXJzIHN1cmZhY2UgdGhpcyBhcyBhIHRvb2x0aXAgYW5kIHNvbWUgc2NyZWVuIHJlYWRlcnMgcmVhZCBpdC4gfAp8IENvbG9yIGNvbnRyYXN0IHwgLS1qaW8gb24gZGFyayBiZyB8IEdyZWVuICgjMDBBODU5KSBvbiBkYXJrIGJhY2tncm91bmQgKCMwODBhMTApIHBhc3NlcyBXQ0FHIEFBIGF0IDMuMjoxIGZvciBsYXJnZSBncmFwaGljYWwgZWxlbWVudHMuIEZvciB0ZXh0IGxhYmVscywgdXNlIC0tdGV4dDMgd2hpY2ggcGFzc2VzIGF0IDQuNToxLiB8CnwgVG9vbHRpcCB8IGBhcmlhLWxpdmU9InBvbGl0ZSJgIHwgSWYgdGhlIHRvb2x0aXAgaXMgYSBET00gZWxlbWVudCAobm90IGp1c3QgYSBicm93c2VyIHRpdGxlIGF0dHJpYnV0ZSksIHdyYXAgaXQgaW4gYW4gYXJpYS1saXZlIHJlZ2lvbiBzbyBzY3JlZW4gcmVhZGVyIHVzZXJzIGhlYXIgdGhlIHZhbHVlIG9uIGhvdmVyL2ZvY3VzLiB8CgojIyBSZWxhdGVkIHRva2VucwoKfCBUb2tlbiB8IFZhbHVlIHwgVXNhZ2UgfAp8LS0tfC0tLXwtLS18CnwgYC0tamlvYCB8IGAjMDBBODU5YCB8IFByaW1hcnkgZGF0YSBzZXJpZXMgZmlsbCAoYmFycyksIGxpbmUgc3Ryb2tlLCBkb251dCBhcmMgc3Ryb2tlIHwKfCBgLS1zdXJmYWNlLTNgIHwgYHJnYmEoMjU1LDI1NSwyNTUsLjEpYCB8IFNlY29uZGFyeSAvIGNvbXBhcmlzb24gYmFyIGZpbGwsIGRvbnV0IHRyYWNrIHN0cm9rZSB8CnwgYC0tYm9yZGVyLXN1YnRsZWAgfCBgcmdiYSgyNTUsMjU1LDI1NSwuMDgpYCB8IEdyaWQgbGluZSBzdHJva2UgY29sb3IgfAp8IGAtLXRleHQzYCB8IGByZ2JhKDI0NCwyNDIsMjM4LC4zMilgIHwgQXhpcyBsYWJlbCB0ZXh0IGZpbGwsIHN1YnRpdGxlIGNvbG9yIHwKfCBgLS10ZXh0YCB8IGAjZjRmMmVlYCB8IENoYXJ0IHRpdGxlLCBkb251dCBjZW50ZXIgbGFiZWwgfAp8IGAtLXN1cmZhY2UtMmAgfCBg4oCUYCB8IFRvb2x0aXAgYmFja2dyb3VuZCwgbG9hZGluZyBza2VsZXRvbiBmaWxsIHwKfCBgLS1qaW8tZm9udGAgfCBgJ091dGZpdCcsIHNhbnMtc2VyaWZgIHwgQWxsIFNWRyB0ZXh0IOKAlCBheGlzIGxhYmVscywgZG9udXQgY2VudGVyLCB0aXRsZSB8CnwgYC0tcjRgIHwgYOKAlGAgfCBUb29sdGlwIGJvcmRlci1yYWRpdXMgfAoKIyMgV2hlbiB0byB1c2UKClVzZSB3aGVuCgotIFBhc3MgdXNhZ2Ugc3RhdGlzdGljcyBhbmQgZ2FtZSB0aW1lIGFuYWx5dGljcyBpbiBwcm9maWxlCi0gTGVhZGVyYm9hcmQgc2NvcmUgcHJvZ3Jlc3Npb24gb3ZlciB0aW1lCi0gUmV2ZW51ZS9kb3dubG9hZCBtZXRyaWNzIGluIGludGVybmFsIGRhc2hib2FyZHMKLSBBY2hpZXZlbWVudCBjb21wbGV0aW9uIHJhdGVzIGFzIHJhZGlhbCBvciBiYXIgY2hhcnRzCgpEb24ndCB1c2Ugd2hlbgoKLSBSZXBsYWNpbmcgZGF0YSB0YWJsZXMgd2hlbiBleGFjdCB2YWx1ZXMgbWF0dGVyIG1vcmUgdGhhbiB0cmVuZHMKLSBNb3JlIHRoYW4gNyBkYXRhIHNlcmllcyBvbiBhIHNpbmdsZSBjaGFydCDigJQgY29nbml0aXZlIG92ZXJsb2FkCi0gUHVyZWx5IGRlY29yYXRpdmUgZGF0YSB2aXN1YWxpemF0aW9uIHdpdGhvdXQgYWNjZXNzaWJsZSB0ZXh0IGZhbGxiYWNrCgojIyBNb3Rpb24KCnwgSW50ZXJhY3Rpb24gfCBFYXNpbmcgfCBEdXJhdGlvbiB8IFByb3BlcnR5IHwKfC0tLXwtLS18LS0tfC0tLXwKfCBCYXIgZ3JvdyB8IGAtLWVhc2Utb3V0YCB8IGAtLWR1ci1zbG93YCB8IGhlaWdodCAoc3RhZ2dlcmVkIHBlciBiYXIpIHwKfCBMaW5lIGRyYXcgfCBgLS1lYXNlLW91dGAgfCBgLS1kdXItc2xvd2AgfCBzdHJva2UtZGFzaG9mZnNldCB8CnwgVG9vbHRpcCBhcHBlYXIgfCBgLS1lYXNlLW91dGAgfCBgLS1kdXItZmFzdGAgfCBvcGFjaXR5LCB0cmFuc2Zvcm0gdHJhbnNsYXRlWSgtNHB4KSB8CnwgTGVnZW5kIGl0ZW0gaG92ZXIgfCBgLS1lYXNlLW91dGAgfCBgLS1kdXItZmFzdGAgfCBvcGFjaXR5IChvdGhlcnMgZGltIHRvIDAuNCkgfAoKIyMgQVBJCgojIyMgQ1NTIGNsYXNzZXMKCnwgQ2xhc3MgfCBEZXNjcmlwdGlvbiB8CnwtLS18LS0tfAp8IGAuZHMtY2hhcnRgIHwgUm9vdCBjaGFydCB3cmFwcGVyIOKAlCBzZXRzIGhlaWdodCBhbmQgcG9zaXRpb246cmVsYXRpdmUgfAp8IGAuZHMtY2hhcnRfX2NhbnZhc2AgfCBDaGFydC5qcyBjYW52YXMgZWxlbWVudCB8CnwgYC5kcy1jaGFydF9fbGVnZW5kYCB8IEN1c3RvbSBsZWdlbmQgcm93IGFib3ZlL2JlbG93IGNoYXJ0IHwKfCBgLmRzLWNoYXJ0X19sZWdlbmQtaXRlbWAgfCBDb2xvciBzd2F0Y2ggKyBsYWJlbCBwYWlyIHwKfCBgLmRzLWNoYXJ0X190b29sdGlwYCB8IEN1c3RvbSB0b29sdGlwIG92ZXJsYXkgfAoKIyMjIFJlYWN0IHByb3BzCgp8IFByb3AgfCBUeXBlIHwgRGVmYXVsdCB8IERlc2NyaXB0aW9uIHwKfC0tLXwtLS18LS0tfC0tLXwKfCBgdHlwZWAgfCAiYmFyIiB8ICJsaW5lIiB8ICJhcmVhIiB8ICJkb251dCIgfCAicmFkaWFsIiB8ICJiYXIiIHwgQ2hhcnQgdHlwZSB8CnwgYGRhdGFgIHwgQ2hhcnREYXRhIHwgcmVxdWlyZWQgfCBDaGFydC5qcy1jb21wYXRpYmxlIGRhdGEgb2JqZWN0IHwKfCBgaGVpZ2h0YCB8IG51bWJlciB8IDI0MCB8IENhbnZhcyBoZWlnaHQgaW4gcHggfAp8IGBsZWdlbmRgIHwgYm9vbGVhbiB8IHRydWUgfCBTaG93IGN1c3RvbSBsZWdlbmQgfAp8IGBhbmltYXRlYCB8IGJvb2xlYW4gfCB0cnVlIHwgRW5hYmxlIGVudGVyIGFuaW1hdGlvbnMgfAoKIyMgQ29kZSBleGFtcGxlcwoKYGBgYGh0bWwKPGRpdiBjbGFzcz0iY2hhcnQtd3JhcCBjaGFydC0tbSI+CiAgPGRpdiBjbGFzcz0iY2hhcnQtdGl0bGUiPldlZWtseSBwbGF5dGltZTwvZGl2PgogIDxkaXYgY2xhc3M9ImNoYXJ0LXN1YnRpdGxlIj5Ib3VycyDCtyBKdW4gMjAyNjwvZGl2PgogIDxzdmcgY2xhc3M9ImNoYXJ0LXN2ZyIKICAgICAgIHZpZXdCb3g9IjAgMCAyMjAgMTIwIgogICAgICAgcm9sZT0iaW1nIgogICAgICAgYXJpYS1sYWJlbD0iQmFyIGNoYXJ0OiBkYWlseSBwbGF5dGltZSB0aGlzIHdlZWsuIE1vbiAxLjVoLCBUdWUgM2gsIFdlZCAyaCwgVGh1IDRoLCBGcmkgNWgsIFNhdCA2LjVoLCBTdW4gNC41aCI+CgogICAgPCEtLSBHcmlkIGxpbmVzIC0tPgogICAgPGxpbmUgeDE9IjI0IiB5MT0iMTAiIHgyPSIyMTYiIHkyPSIxMCIgY2xhc3M9ImNoYXJ0LWdyaWQtbGluZSIvPgogICAgPGxpbmUgeDE9IjI0IiB5MT0iNDAiIHgyPSIyMTYiIHkyPSI0MCIgY2xhc3M9ImNoYXJ0LWdyaWQtbGluZSIvPgogICAgPGxpbmUgeDE9IjI0IiB5MT0iNzAiIHgyPSIyMTYiIHkyPSI3MCIgY2xhc3M9ImNoYXJ0LWdyaWQtbGluZSIvPgoKICAgIDwhLS0gWS1heGlzIGxhYmVscyAtLT4KICAgIDx0ZXh0IHg9IjIwIiB5PSIxMyIgY2xhc3M9ImNoYXJ0LWF4aXMtbGFiZWwiIHRleHQtYW5jaG9yPSJlbmQiPjZoPC90ZXh0PgogICAgPHRleHQgeD0iMjAiIHk9IjQzIiBjbGFzcz0iY2hhcnQtYXhpcy1sYWJlbCIgdGV4dC1hbmNob3I9ImVuZCI+M2g8L3RleHQ+CiAgICA8dGV4dCB4PSIyMCIgeT0iNzMiIGNsYXNzPSJjaGFydC1heGlzLWxhYmVsIiB0ZXh0LWFuY2hvcj0iZW5kIj4wPC90ZXh0PgoKICAgIDwhLS0gQmFycyAtLT4KICAgIDxyZWN0IHg9IjMwIiB5PSI2NiIgd2lkdGg9IjE4IiBoZWlnaHQ9IjE5IiBjbGFzcz0iY2hhcnQtYmFyIiByeD0iMiI+CiAgICAgIDx0aXRsZT5Nb24gwrcgMS41aDwvdGl0bGU+CiAgICA8L3JlY3Q+CiAgICA8IS0tIHJlcGVhdCBmb3IgZWFjaCBkYXkgLS0+CgogICAgPCEtLSBYLWF4aXMgbGFiZWxzIC0tPgogICAgPHRleHQgeD0iMzkiIHk9IjEwMCIgY2xhc3M9ImNoYXJ0LWF4aXMtbGFiZWwiIHRleHQtYW5jaG9yPSJtaWRkbGUiPk08L3RleHQ+CiAgICA8IS0tIHJlcGVhdCAtLT4KCiAgPC9zdmc+CjwvZGl2PgpgYGBgCgpgYGBgaHRtbAo8c3ZnIGNsYXNzPSJjaGFydC1zdmciIHZpZXdCb3g9IjAgMCAyMjAgMTIwIgogICAgIHJvbGU9ImltZyIKICAgICBhcmlhLWxhYmVsPSJMaW5lIGNoYXJ0OiBhY2hpZXZlbWVudCBYUCBwZXIgd2Vlay4gV2sxIDQwMCwgV2syIDY1MCwgV2szIDU4MCwgV2s0IDgyMCI+CgogIDxkZWZzPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJjaGFydC1ncmFkaWVudCIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAlIiAgIHN0b3AtY29sb3I9IiMwMEE4NTkiIHN0b3Atb3BhY2l0eT0iMSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMEE4NTkiIHN0b3Atb3BhY2l0eT0iMCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CgogIDwhLS0gQXJlYSBmaWxsIC0tPgogIDxwb2x5Z29uCiAgICBwb2ludHM9IjQ0LDYxIDEwOCwzOCAxNzIsNDQgMjE2LDE2IDIxNiw4NSA0NCw4NSIKICAgIGZpbGw9InVybCgjY2hhcnQtZ3JhZGllbnQpIgogICAgb3BhY2l0eT0iMC4yIi8+CgogIDwhLS0gTGluZSAtLT4KICA8cG9seWxpbmUKICAgIHBvaW50cz0iNDQsNjEgMTA4LDM4IDE3Miw0NCAyMTYsMTYiCiAgICBjbGFzcz0iY2hhcnQtbGluZSIKICAgIHN0cm9rZS1saW5lam9pbj0icm91bmQiCiAgICBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KCiAgPCEtLSBEYXRhIHBvaW50cyAtLT4KICA8Y2lyY2xlIGN4PSI0NCIgIGN5PSI2MSIgcj0iMy41IiBmaWxsPSJ2YXIoLS1qaW8pIj48dGl0bGU+V2sxIMK3IDQwMCBYUDwvdGl0bGU+PC9jaXJjbGU+CiAgPGNpcmNsZSBjeD0iMTA4IiBjeT0iMzgiIHI9IjMuNSIgZmlsbD0idmFyKC0tamlvKSI+PHRpdGxlPldrMiDCtyA2NTAgWFA8L3RpdGxlPjwvY2lyY2xlPgogIDxjaXJjbGUgY3g9IjE3MiIgY3k9IjQ0IiByPSIzLjUiIGZpbGw9InZhcigtLWppbykiPjx0aXRsZT5XazMgwrcgNTgwIFhQPC90aXRsZT48L2NpcmNsZT4KICA8Y2lyY2xlIGN4PSIyMTYiIGN5PSIxNiIgcj0iMy41IiBmaWxsPSJ2YXIoLS1qaW8pIj48dGl0bGU+V2s0IMK3IDgyMCBYUDwvdGl0bGU+PC9jaXJjbGU+Cgo8L3N2Zz4KYGBgYAoKYGBgYAo8IS0tCiAgRG9udXQgbWF0aDoKICBjaXJjdW1mZXJlbmNlID0gMiAqIM+AICogciA9IDIgKiAzLjE0MTU5ICogNDQg4omIIDI3Ni41CiAgZmlsbGVkIGFyYyAgICA9IHBlcmNlbnRhZ2UgKiBjaXJjdW1mZXJlbmNlCiAgNzIlICAgICAgICAgICA9IDAuNzIgKiAyNzYuNSDiiYggMTk5LjEKCiAgc3Ryb2tlLWRhc2hhcnJheSA9ICJmaWxsZWRfYXJjIHRvdGFsX2NpcmN1bWZlcmVuY2UiCiAgc3Ryb2tlLWRhc2hvZmZzZXQgcm90YXRlcyBzdGFydCBwb2ludDogb2Zmc2V0ID0gY2lyY3VtZmVyZW5jZSAqIDAuMjUKICAgICAgICAgICAgICAgICAgICAodG8gc3RhcnQgYXQgdG9wIGluc3RlYWQgb2YgcmlnaHQpCi0tPgo8c3ZnIHdpZHRoPSIxNjAiIGhlaWdodD0iMTYwIiB2aWV3Qm94PSIwIDAgMTIwIDEyMCIKICAgICByb2xlPSJpbWciCiAgICAgYXJpYS1sYWJlbD0iRG9udXQgY2hhcnQ6IDcyJSBhY2hpZXZlbWVudCBjb21wbGV0aW9uIGZvciBUb21iIFJhaWRlciI+CgogIDwhLS0gVHJhY2sgKHVuZmlsbGVkKSAtLT4KICA8Y2lyY2xlIGN4PSI2MCIgY3k9IjYwIiByPSI0NCIKICAgICAgICAgIGNsYXNzPSJjaGFydC1kb251dC10cmFjayIKICAgICAgICAgIHN0cm9rZS13aWR0aD0iMTAiLz4KCiAgPCEtLSBGaWxsIGFyYyAtLT4KICA8Y2lyY2xlIGN4PSI2MCIgY3k9IjYwIiByPSI0NCIKICAgICAgICAgIGNsYXNzPSJjaGFydC1kb251dC1maWxsIgogICAgICAgICAgc3Ryb2tlLXdpZHRoPSIxMCIKICAgICAgICAgIHN0cm9rZS1kYXNoYXJyYXk9IjE5OS41IDI3NyIKICAgICAgICAgIHN0cm9rZS1kYXNob2Zmc2V0PSI2OSIKICAgICAgICAgIHRyYW5zZm9ybT0icm90YXRlKC05MCA2MCA2MCkiLz4KCiAgPCEtLSBDZW50ZXIgbGFiZWwgLS0+CiAgPHRleHQgeD0iNjAiIHk9IjU1IgogICAgICAgIGNsYXNzPSJjaGFydC1kb251dC1sYWJlbCIKICAgICAgICB0ZXh0LWFuY2hvcj0ibWlkZGxlIgogICAgICAgIGRvbWluYW50LWJhc2VsaW5lPSJtaWRkbGUiPjcyJTwvdGV4dD4KICA8dGV4dCB4PSI2MCIgeT0iNzIiCiAgICAgICAgY2xhc3M9ImNoYXJ0LWRvbnV0LXN1YmxhYmVsIgogICAgICAgIHRleHQtYW5jaG9yPSJtaWRkbGUiPmNvbXBsZXRlPC90ZXh0PgoKPC9zdmc+Cgo8IS0tIEFjY2Vzc2libGUgZGF0YSB0YWJsZSAodmlzdWFsbHkgaGlkZGVuKSAtLT4KPHRhYmxlIGNsYXNzPSJzci1vbmx5Ij4KICA8Y2FwdGlvbj5Ub21iIFJhaWRlciBhY2hpZXZlbWVudCBjb21wbGV0aW9uPC9jYXB0aW9uPgogIDx0cj48dGg+U3RhdHVzPC90aD48dGg+UGVyY2VudGFnZTwvdGg+PC90cj4KICA8dHI+PHRkPkFjaGlldmVkPC90ZD48dGQ+NzIlPC90ZD48L3RyPgogIDx0cj48dGQ+UmVtYWluaW5nPC90ZD48dGQ+MjglPC90ZD48L3RyPgo8L3RhYmxlPgpgYGBgCgojIyBDaGFuZ2Vsb2cKCkluaXRpYWwgZHJhZnQuIENvdmVycyBiYXIsIGJhciBjb21wYXJpc29uLCBsaW5lLCBsaW5lIHdpdGggYXJlYSwgZG9udXQsIGFuZCBkb251dCB3aXRoIGxhYmVsIHZhcmlhbnRzLiBTL00vTCBzaXplcy4gTG9hZGluZywgZW1wdHksIGVycm9yLCBhbmQgaG92ZXIgc3RhdGVzLiBGdWxsIGFjY2Vzc2liaWxpdHkgZ3VpZGFuY2UgaW5jbHVkaW5nIGFyaWEtbGFiZWwgcGF0dGVybnMgYW5kIGRhdGEgdGFibGUgYWx0ZXJuYXRpdmUuIFBpZSBjaGFydCBleHBsaWNpdGx5IGV4Y2x1ZGVkIGZyb20gc3lzdGVtLgoKLS0tCgojIyBUb2tlbnMgcmVmZXJlbmNlZCBvbiB0aGlzIHBhZ2UKClVzZSB0aGVzZSBleGFjdCB0b2tlbnMg4oCUIGRlZmluZWQgaW4gYHRva2Vucy90b2tlbnMuY3NzYC4gRG8gbm90IHN1YnN0aXR1dGUgcmF3IHZhbHVlcy4KCi0gYC0tYm9yZGVyLXN1YnRsZWAKLSBgLS1kdXItZGVmYXVsdGAKLSBgLS1kdXItZW50ZXJgCi0gYC0tZWFzZS1vdXRgCi0gYC0tamlvYAotIGAtLWppby1mb250YAotIGAtLW5lZ2F0aXZlYAotIGAtLXBpbGxgCi0gYC0tcjNgCi0gYC0tcjRgCi0gYC0tcjVgCi0gYC0tc3VyZmFjZS0xYAotIGAtLXN1cmZhY2UtMmAKLSBgLS1zdXJmYWNlLTNgCi0gYC0tdGV4dGAKLSBgLS10ZXh0MmAKLSBgLS10ZXh0M2AKLSBgLS10ZXh0NGAKCi0tLQoKIyMgQnVpbGQgcnVsZXMgKGJpbmRpbmcpCgoxLiBVc2UgKipvbmx5KiogdGhlIHRva2VucyBsaXN0ZWQgYWJvdmUuIElmIGEgdmFsdWUgeW91IG5lZWQgaXMgbm90IGxpc3RlZCwgc3RvcCBhbmQgYXNrIOKAlCBkbyBub3QgaW50cm9kdWNlIGEgcmF3IHZhbHVlLgoyLiBGb250IGlzICoqSmlvVHlwZSoqIG9ubHkuIFdlaWdodHM6IDMwMCwgNTAwLCA3MDAsIDkwMC4KMy4gUmV1c2UgdGhlIGNvbXBvbmVudCBDU1MgcGF0dGVybnMgc2hvd24gb24gdGhlIHNvdXJjZSBwYWdlOyBkbyBub3QgcmVkZXNpZ24uCjQuIE1hdGNoIGV2ZXJ5IHN0YXRlIChkZWZhdWx0LCBob3ZlciwgZm9jdXMsIGFjdGl2ZSwgZGlzYWJsZWQsIGxvYWRpbmcpIHNob3duIG9uIHRoZSBwYWdlLgo1LiBBY2Nlc3NpYmlsaXR5IHJlcXVpcmVtZW50cyBvbiB0aGUgcGFnZSBhcmUgbWFuZGF0b3J5LCBub3Qgb3B0aW9uYWwuCg==" download="chart-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
+    </div>
       <span class="component-maturity component-maturity--draft">
         <span class="component-maturity--dot"></span>Draft
       </span>
@@ -319,12 +319,11 @@
         <div class="chart-subtitle">Category comparison · e.g. daily playtime</div>
         <svg class="chart-svg" viewBox="0 0 200 100" role="img" aria-label="Bar chart example">
           <line x1="20" y1="10" x2="196" y2="10" class="chart-grid-line"/>
-          <line x1="20" y1="40" x2="196" y2="40" class="chart-grid-line"/>
-          <line x1="20" y1="70" x2="196" y2="70" class="chart-grid-line"/>
+          <line x1="20" y1="45" x2="196" y2="45" class="chart-grid-line"/>
           <line x1="20" y1="80" x2="196" y2="80" class="chart-grid-line"/>
           <text x="16" y="13" class="chart-axis-label" text-anchor="end">6</text>
-          <text x="16" y="43" class="chart-axis-label" text-anchor="end">3</text>
-          <text x="16" y="73" class="chart-axis-label" text-anchor="end">0</text>
+          <text x="16" y="48" class="chart-axis-label" text-anchor="end">3</text>
+          <text x="16" y="83" class="chart-axis-label" text-anchor="end">0</text>
           <rect x="28" y="50" width="20" height="30" class="chart-bar" rx="2"/>
           <rect x="62" y="30" width="20" height="50" class="chart-bar" rx="2"/>
           <rect x="96" y="40" width="20" height="40" class="chart-bar" rx="2"/>
@@ -344,12 +343,11 @@
         <div class="chart-subtitle">Two series side-by-side · primary + secondary</div>
         <svg class="chart-svg" viewBox="0 0 200 100" role="img" aria-label="Comparison bar chart example">
           <line x1="20" y1="10" x2="196" y2="10" class="chart-grid-line"/>
-          <line x1="20" y1="40" x2="196" y2="40" class="chart-grid-line"/>
-          <line x1="20" y1="70" x2="196" y2="70" class="chart-grid-line"/>
+          <line x1="20" y1="45" x2="196" y2="45" class="chart-grid-line"/>
           <line x1="20" y1="80" x2="196" y2="80" class="chart-grid-line"/>
           <text x="16" y="13" class="chart-axis-label" text-anchor="end">6</text>
-          <text x="16" y="43" class="chart-axis-label" text-anchor="end">3</text>
-          <text x="16" y="73" class="chart-axis-label" text-anchor="end">0</text>
+          <text x="16" y="48" class="chart-axis-label" text-anchor="end">3</text>
+          <text x="16" y="83" class="chart-axis-label" text-anchor="end">0</text>
           <rect x="26" y="52" width="11" height="28" class="chart-bar chart-bar--secondary" rx="2"/>
           <rect x="38" y="45" width="11" height="35" class="chart-bar" rx="2"/>
           <rect x="62" y="35" width="11" height="45" class="chart-bar chart-bar--secondary" rx="2"/>
@@ -378,12 +376,11 @@
         <div class="chart-subtitle">Trend over time · no area fill</div>
         <svg class="chart-svg" viewBox="0 0 200 100" role="img" aria-label="Line chart example">
           <line x1="20" y1="10" x2="196" y2="10" class="chart-grid-line"/>
-          <line x1="20" y1="40" x2="196" y2="40" class="chart-grid-line"/>
-          <line x1="20" y1="70" x2="196" y2="70" class="chart-grid-line"/>
+          <line x1="20" y1="45" x2="196" y2="45" class="chart-grid-line"/>
           <line x1="20" y1="80" x2="196" y2="80" class="chart-grid-line"/>
           <text x="16" y="13" class="chart-axis-label" text-anchor="end">900</text>
-          <text x="16" y="43" class="chart-axis-label" text-anchor="end">600</text>
-          <text x="16" y="73" class="chart-axis-label" text-anchor="end">0</text>
+          <text x="16" y="48" class="chart-axis-label" text-anchor="end">600</text>
+          <text x="16" y="83" class="chart-axis-label" text-anchor="end">0</text>
           <polyline points="30,60 72,42 114,48 156,22 196,30" class="chart-line" stroke-linejoin="round" stroke-linecap="round"/>
           <circle cx="30" cy="60" r="3" fill="var(--jio)"/>
           <circle cx="72" cy="42" r="3" fill="var(--jio)"/>
@@ -394,7 +391,7 @@
           <text x="72" y="94" class="chart-axis-label" text-anchor="middle">Wk2</text>
           <text x="114" y="94" class="chart-axis-label" text-anchor="middle">Wk3</text>
           <text x="156" y="94" class="chart-axis-label" text-anchor="middle">Wk4</text>
-          <text x="196" y="94" class="chart-axis-label" text-anchor="middle">Wk5</text>
+          <text x="199" y="94" class="chart-axis-label" text-anchor="end">Wk5</text>
         </svg>
       </div>
 
@@ -410,12 +407,11 @@
             </linearGradient>
           </defs>
           <line x1="20" y1="10" x2="196" y2="10" class="chart-grid-line"/>
-          <line x1="20" y1="40" x2="196" y2="40" class="chart-grid-line"/>
-          <line x1="20" y1="70" x2="196" y2="70" class="chart-grid-line"/>
+          <line x1="20" y1="45" x2="196" y2="45" class="chart-grid-line"/>
           <line x1="20" y1="80" x2="196" y2="80" class="chart-grid-line"/>
           <text x="16" y="13" class="chart-axis-label" text-anchor="end">900</text>
-          <text x="16" y="43" class="chart-axis-label" text-anchor="end">600</text>
-          <text x="16" y="73" class="chart-axis-label" text-anchor="end">0</text>
+          <text x="16" y="48" class="chart-axis-label" text-anchor="end">600</text>
+          <text x="16" y="83" class="chart-axis-label" text-anchor="end">0</text>
           <polygon points="30,60 72,42 114,48 156,22 196,30 196,80 30,80" fill="url(#chart-gradient-2)" opacity="0.2"/>
           <polyline points="30,60 72,42 114,48 156,22 196,30" class="chart-line" stroke-linejoin="round" stroke-linecap="round"/>
           <circle cx="30" cy="60" r="3" fill="var(--jio)"/>
@@ -427,7 +423,7 @@
           <text x="72" y="94" class="chart-axis-label" text-anchor="middle">Wk2</text>
           <text x="114" y="94" class="chart-axis-label" text-anchor="middle">Wk3</text>
           <text x="156" y="94" class="chart-axis-label" text-anchor="middle">Wk4</text>
-          <text x="196" y="94" class="chart-axis-label" text-anchor="middle">Wk5</text>
+          <text x="199" y="94" class="chart-axis-label" text-anchor="end">Wk5</text>
         </svg>
       </div>
 
@@ -442,8 +438,8 @@
                     stroke-dasharray="163 226"
                     stroke-dashoffset="57"
                     transform="rotate(-90 50 50)"/>
-            <text x="50" y="46" class="chart-donut-label" text-anchor="middle" font-size="20">72%</text>
-            <text x="50" y="60" class="chart-donut-sublabel" text-anchor="middle" font-size="9">complete</text>
+            <text x="50" y="47" class="chart-donut-label" text-anchor="middle" font-size="13">72%</text>
+            <text x="50" y="59" class="chart-donut-sublabel" text-anchor="middle" font-size="7">complete</text>
           </svg>
           <div class="chart-legend" style="flex-direction:column; gap:8px;">
             <div class="chart-legend-item"><span class="chart-legend-dot" style="background:var(--jio);"></span>Achieved 72%</div>
@@ -463,8 +459,8 @@
                     stroke-dasharray="190 226"
                     stroke-dashoffset="57"
                     transform="rotate(-90 50 50)"/>
-            <text x="50" y="44" class="chart-donut-label" text-anchor="middle" font-size="18">340h</text>
-            <text x="50" y="58" class="chart-donut-sublabel" text-anchor="middle" font-size="9">played</text>
+            <text x="50" y="46" class="chart-donut-label" text-anchor="middle" font-size="13">340h</text>
+            <text x="50" y="58" class="chart-donut-sublabel" text-anchor="middle" font-size="7">played</text>
           </svg>
           <div style="flex:1;">
             <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:8px;">Pass usage</div>
@@ -672,6 +668,92 @@
   </section>
 
   <!-- CODE EXAMPLES -->
+  <!-- WHEN TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use</h2>
+    <div class="ds-usage-grid">
+      <div class="ds-usage-card ds-usage-card--do">
+        <p class="ds-usage-label ds-usage-label--do">Use when</p>
+        <ul class="ds-usage-list">
+              <li>Pass usage statistics and game time analytics in profile</li>
+              <li>Leaderboard score progression over time</li>
+              <li>Revenue/download metrics in internal dashboards</li>
+              <li>Achievement completion rates as radial or bar charts</li>
+        </ul>
+      </div>
+      <div class="ds-usage-card ds-usage-card--dont">
+        <p class="ds-usage-label ds-usage-label--dont">Don't use when</p>
+        <ul class="ds-usage-list">
+              <li>Replacing data tables when exact values matter more than trends</li>
+              <li>More than 7 data series on a single chart — cognitive overload</li>
+              <li>Purely decorative data visualization without accessible text fallback</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOTION -->
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-motion-table">
+      <thead><tr><th>Interaction</th><th>Easing</th><th>Duration</th><th>Property</th></tr></thead>
+      <tbody>
+        <tr><td>Bar grow</td><td><code>--ease-out</code></td><td><code>--dur-slow</code></td><td>height (staggered per bar)</td></tr>
+        <tr><td>Line draw</td><td><code>--ease-out</code></td><td><code>--dur-slow</code></td><td>stroke-dashoffset</td></tr>
+        <tr><td>Tooltip appear</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>opacity, transform translateY(-4px)</td></tr>
+        <tr><td>Legend item hover</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>opacity (others dim to 0.4)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- API -->
+  <section class="ds-section" id="api">
+    <h2 class="ds-section-title">API</h2>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:0 0 12px;">CSS classes</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>.ds-chart</code></td><td>Root chart wrapper — sets height and position:relative</td></tr>
+        <tr><td><code>.ds-chart__canvas</code></td><td>Chart.js canvas element</td></tr>
+        <tr><td><code>.ds-chart__legend</code></td><td>Custom legend row above/below chart</td></tr>
+        <tr><td><code>.ds-chart__legend-item</code></td><td>Color swatch + label pair</td></tr>
+        <tr><td><code>.ds-chart__tooltip</code></td><td>Custom tooltip overlay</td></tr>
+      </tbody>
+    </table>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 12px;">React props</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>type</code></td><td><span class="api-type">"bar" | "line" | "area" | "donut" | "radial"</span></td><td><span class="api-default">"bar"</span></td><td>Chart type</td></tr>
+        <tr><td><code>data</code></td><td><span class="api-type">ChartData</span></td><td><span class="api-default">required</span></td><td>Chart.js-compatible data object</td></tr>
+        <tr><td><code>height</code></td><td><span class="api-type">number</span></td><td><span class="api-default">240</span></td><td>Canvas height in px</td></tr>
+        <tr><td><code>legend</code></td><td><span class="api-type">boolean</span></td><td><span class="api-default">true</span></td><td>Show custom legend</td></tr>
+        <tr><td><code>animate</code></td><td><span class="api-type">boolean</span></td><td><span class="api-default">true</span></td><td>Enable enter animations</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  
+
+  
+
+  
+
+  
+
   <section class="component-section" id="code-examples">
     <h2 class="ds-section-title">Code examples</h2>
 
@@ -807,4 +889,4 @@
   </section>
 
 </main><script src="../sprite-loader.js"></script>
-<script src="../shell.js"></script></body></html>
+<script src="../shell.js?v=2"></script></body></html>

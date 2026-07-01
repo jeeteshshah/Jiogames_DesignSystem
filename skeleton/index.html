@@ -4,35 +4,21 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     @keyframes skeleton-shimmer {
       0% { background-position: -200% 0; }
       100% { background-position: 200% 0; }
     }
-    .skeleton {
-      background: linear-gradient(90deg, var(--surface-2) 25%, var(--surface-3) 50%, var(--surface-2) 75%);
-      background-size: 200% 100%;
-      animation: skeleton-shimmer 1.6s infinite linear;
-    }
-    .skeleton--text {
-      height: 10px;
-      border-radius: var(--pill);
-      width: 100%;
-      margin-bottom: 6px;
-    }
+    
+    
     .skeleton--card {
       width: 120px;
       height: 80px;
       border-radius: var(--r4);
       flex-shrink: 0;
     }
-    .skeleton--avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: var(--pill);
-      flex-shrink: 0;
-    }
+    
     .skeleton--hero {
       width: 100%;
       height: 120px;
@@ -43,21 +29,18 @@
       flex-direction: column;
       gap: 6px;
     }
-    @media (prefers-reduced-motion: reduce) {
-      .skeleton { animation: none; }
-    }
+    
   </style>
 </head><body><main class="ds-main">
 
   <!-- PAGE HEADER -->
   <header class="component-page-header">
     <nav class="component-breadcrumb" aria-label="Breadcrumb">
-      <a href="../" class="component-breadcrumb-link">JioGames DLS</a>
-      <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="component-breadcrumb-link">JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
       <span class="component-breadcrumb-current">Skeleton</span>
     </nav>
-    <h1 class="component-page-title">Skeleton Loader</h1>
-    <p class="component-page-def">Animated placeholder shapes that represent loading content before data arrives. Reduces perceived wait time for rails, cards, and game detail.</p>
+    <h1 class="component-page-title">Skeleton Loader</h1><p class="component-page-def">Animated placeholder shapes that represent loading content before data arrives. Reduces perceived wait time for rails, cards, and game detail.</p>
     <div class="component-platforms">
       <span class="component-platform component-platform--mobile">
         <span class="component-platform-dot"></span>Mobile
@@ -71,6 +54,7 @@
       <span class="component-maturity component-maturity--draft">
         <span class="component-maturity--dot"></span>Draft
       </span>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBTa2VsZXRvbiBMb2FkZXIg4oCUIEppb0dhbWVzIERMUyBzcGVjCgo+IFNvdXJjZTogYHNrZWxldG9uL2luZGV4Lmh0bWxgIGluIHRoZSBKaW9HYW1lcyBEZXNpZ24gU3lzdGVtLgo+IFRoaXMgc3BlYyBpcyBnZW5lcmF0ZWQgdmVyYmF0aW0gZnJvbSB0aGUgcGFnZSDigJQgZG8gbm90IGludmVudCB2YWx1ZXMgbm90IGxpc3RlZCBoZXJlLgoKKipQYXRoOioqIEppb0dhbWVzIERMUyDigLogU2tlbGV0b24KCi0tLQoKQW5pbWF0ZWQgcGxhY2Vob2xkZXIgc2hhcGVzIHRoYXQgcmVwcmVzZW50IGxvYWRpbmcgY29udGVudCBiZWZvcmUgZGF0YSBhcnJpdmVzLiBSZWR1Y2VzIHBlcmNlaXZlZCB3YWl0IHRpbWUgZm9yIHJhaWxzLCBjYXJkcywgYW5kIGdhbWUgZGV0YWlsLgoKU0hJTU1FUiBBTklNQVRJT04gwrcgU0hBUEUtTUFUQ0hFRCDCtyBTQ1JFRU4tUkVBREVSIEhJRERFTgoKIyMgSW50cm9kdWN0aW9uCgpXaGVuIHRvIHVzZSBza2VsZXRvbiBsb2FkZXJzIGluIEppb0dhbWVzLgoKVXNlIHNrZWxldG9uIGxvYWRlcnMgZm9yIGNvbnRlbnQgdGhhdCBsb2FkcyBhc3luY2hyb25vdXNseTogZ2FtZSByYWlscywgaGVybyBpbWFnZXMsIHByb2ZpbGUgZGF0YSwgYW5kIHNlYXJjaCByZXN1bHRzLiBTa2VsZXRvbnMgc2V0IHVzZXIgZXhwZWN0YXRpb25zIGJ5IGNvbW11bmljYXRpbmcgdGhlIHNoYXBlIGFuZCBwb3NpdGlvbiBvZiBpbmNvbWluZyBjb250ZW50IGJlZm9yZSB0aGUgZGF0YSBhcnJpdmVzLgoKLSAqKkdhbWUgcmFpbHMqKiDigJQgc2hvdyBhIHJvdyBvZiBjYXJkIHNrZWxldG9ucyB3aGlsZSB0aGUgZ2FtZSBsaXN0IGZldGNoZXMgZnJvbSB0aGUgQVBJCi0gKipIZXJvIGltYWdlcyoqIOKAlCBmaWxsIHRoZSBoZXJvIGJhbm5lciBhcmVhIHdpdGggYSBzaGFwZS1tYXRjaGVkIHNrZWxldG9uIHVudGlsIHRoZSBhc3NldCBsb2FkcwotICoqUHJvZmlsZSBkYXRhKiog4oCUIHJlcGxhY2UgYXZhdGFyIGFuZCB1c2VybmFtZSBhcmVhcyB3aXRoIGFwcHJvcHJpYXRlIHNoYXBlcyBkdXJpbmcgc2Vzc2lvbiBsb2FkCi0gKipTZWFyY2ggcmVzdWx0cyoqIOKAlCByZW5kZXIgYSBmdWxsIHNrZWxldG9uIGdyaWQgYmVmb3JlIHJlc3VsdHMgcG9wdWxhdGUgdG8gcHJldmVudCBsYXlvdXQgc2hpZnQKCkRvICoqTk9UKiogdXNlIHNrZWxldG9uIGxvYWRlcnMgZm9yIGluc3RhbnQgb3BlcmF0aW9ucyB1bmRlciAzMDBtcywgbmF2aWdhdGlvbiB0cmFuc2l0aW9ucyAodXNlIHBhZ2UgdHJhbnNpdGlvbnMgaW5zdGVhZCksIG9yIGVycm9yIHN0YXRlcy4gSWYgZGF0YSBmYWlscyB0byBsb2FkLCByZXBsYWNlIHRoZSBza2VsZXRvbiB3aXRoIGFuIGVycm9yIHN0YXRlIOKAlCBuZXZlciBsZWF2ZSBhIHNrZWxldG9uIG9uIHNjcmVlbiBpbmRlZmluaXRlbHkuCgojIyBXaGVuIHRvIHVzZQoKVXNlIHdoZW4KCi0gUGxhY2Vob2xkZXIgd2hpbGUgY29udGVudCBpcyBsb2FkaW5nIOKAlCBtYXRjaGVzIHRoZSBzaGFwZSBvZiB0aGUgZmluYWwgY29udGVudAotIEdhbWUgcmFpbCBjYXJkcyBkdXJpbmcgaW5pdGlhbCBkYXRhIGZldGNoCi0gUHJvZmlsZSBoZWFkZXIgd2hpbGUgdXNlciBkYXRhIGxvYWRzCi0gTGlzdCBpdGVtcyBiZWZvcmUgQVBJIHJlc3BvbnNlIGFycml2ZXMKCkRvbid0IHVzZSB3aGVuCgotIEluZGVmaW5pdGUgbG9hZGluZyBzdGF0ZXMgd2l0aCBubyB0aW1lb3V0IOKAlCBhZGQgYW4gZXJyb3Igc3RhdGUKLSBTaGFwZXMgdGhhdCBkb24ndCBtYXRjaCB0aGUgcmVhbCBjb250ZW50IOKAlCBjcmVhdGVzIGxheW91dCBzaGlmdCBvbiBsb2FkCi0gU2tlbGV0b24gZm9yIGNvbnRlbnQgdGhhdCBsb2FkcyBpbiB1bmRlciAzMDBtcyDigJQgZmxhc2ggaXMgd29yc2UgdGhhbiBubyBza2VsZXRvbgotIEFuaW1hdGVkIHNrZWxldG9uIG9uIFRWIOKAlCByZWR1Y2UgbW90aW9uIHByZWZlcmVuY2UgbXVzdCBiZSByZXNwZWN0ZWQKCiMjIEJlc3QgUHJhY3RpY2VzCgpGb2xsb3cgdGhlc2UgcnVsZXMgdG8ga2VlcCBza2VsZXRvbiBsb2FkZXJzIGNvbnNpc3RlbnQgYW5kIGFjY2Vzc2libGUgYWNyb3NzIGFsbCBKaW9HYW1lcyBzdXJmYWNlcy4KCi0gTWF0Y2ggc2tlbGV0b24gc2hhcGUgZXhhY3RseSB0byByZWFsIGNvbnRlbnQg4oCUIHdyb25nIHNoYXBlIGNhdXNlcyBsYXlvdXQgc2hpZnQgb24gcmV2ZWFsCi0gQW5pbWF0ZSBhbGwgc2tlbGV0b25zIG9uIHRoZSBzYW1lIHBoYXNlIOKAlCBzdGFnZ2VyaW5nIGNyZWF0ZXMgdmlzdWFsIG5vaXNlCi0gUmVtb3ZlIGZyb20gRE9NIChub3QganVzdCBoaWRlKSB3aGVuIGNvbnRlbnQgbG9hZHMg4oCUIHNjcmVlbiByZWFkZXJzIG11c3Qgbm90IGVuY291bnRlciBza2VsZXRvbiB0ZXh0Ci0gVXNlIG9uIGVudGlyZSBzZWN0aW9ucywgbm90IGluZGl2aWR1YWwgZWxlbWVudHMg4oCUIHBhcnRpYWwgc2tlbGV0b24gd2l0aGluIGxvYWRlZCBjb250ZW50IGlzIGRpc29yaWVudGluZwotIFJlc3BlY3QgYHByZWZlcnMtcmVkdWNlZC1tb3Rpb25gIOKAlCBkaXNhYmxlIHNoaW1tZXIgb24gVFYgYW5kIHJlZHVjZWQtbW90aW9uIGVudmlyb25tZW50cwoKLSBVc2Ugc2tlbGV0b24gbG9hZGVycyBmb3Igb3BlcmF0aW9ucyB0aGF0IGNvbXBsZXRlIGluIHVuZGVyIDMwMG1zIOKAlCB0aGV5IGNhdXNlIG1vcmUgYW54aWV0eSB0aGFuIHRoZXkgcmVzb2x2ZQotIExlYXZlIHNrZWxldG9uIGVsZW1lbnRzIGluIHRoZSBET00gYWZ0ZXIgY29udGVudCBoYXMgbG9hZGVkIOKAlCBhc3Npc3RpdmUgdGVjaG5vbG9neSB3aWxsIHJlYWQgdGhlbQotIE1peCBza2VsZXRvbiBhbmQgbG9hZGVkIGNvbnRlbnQgaW4gdGhlIHNhbWUgcmFpbCDigJQgc2hvdyBhbGwgb3Igbm90aGluZwotIFVzZSBhIGdlbmVyaWMgcmVjdGFuZ2xlIHdoZW4gdGhlIHJlYWwgY29udGVudCBpcyBjaXJjdWxhciBvciBwaWxsLXNoYXBlZAotIFN0YWNrIG11bHRpcGxlIHNrZWxldG9ucyBvZiBkaWZmZXJlbnQgYW5pbWF0aW9uIHBoYXNlcyDigJQgdGhleSBtdXN0IGFsbCBwdWxzZSB0b2dldGhlcgoKIyMgQW5hdG9teQoKU2tlbGV0b24gbG9hZGVycyBhcmUgY29tcG9zZWQgb2YgYSBzaGFwZSBjb250YWluZXIgYW5kIGFuIG9wdGlvbmFsIHNoaW1tZXIgZ3JhZGllbnQgb3ZlcmxheS4gTm8gdGV4dCwgaWNvbnMsIG9yIGludGVyYWN0aXZlIGVsZW1lbnRzIGFyZSBldmVyIHBsYWNlZCBpbnNpZGUgYSBza2VsZXRvbi4KCnwgUGFydCB8IEVsZW1lbnQgfCBUb2tlbiB8CnwtLS18LS0tfC0tLXwKfCBTaGFwZSB8IGBkaXYuc2tlbGV0b25gIHwgYGJhY2tncm91bmQ6IHZhcigtLXN1cmZhY2UtMilgIHwKfCBTaGltbWVyIHwgQ1NTIGdyYWRpZW50IGFuaW1hdGlvbiB8IGB2YXIoLS1zdXJmYWNlLTIpYCDihpIgYHZhcigtLXN1cmZhY2UtMylgIOKGkiBgdmFyKC0tc3VyZmFjZS0yKWAgfAp8IENvbnRhaW5lciB8IGBkaXYuc2tlbGV0b24tZ3JvdXBgIHwgTm8gdmlzdWFsIHN0eWxlIHwKfCBUZXh0IGxpbmUgfCBgZGl2LnNrZWxldG9uLnNrZWxldG9uLS10ZXh0YCB8IGBib3JkZXItcmFkaXVzOiB2YXIoLS1waWxsKWAgfAp8IENhcmQgfCBgZGl2LnNrZWxldG9uLnNrZWxldG9uLS1jYXJkYCB8IGBib3JkZXItcmFkaXVzOiB2YXIoLS1yNClgIHwKfCBBdmF0YXIgfCBgZGl2LnNrZWxldG9uLnNrZWxldG9uLS1hdmF0YXJgIHwgYGJvcmRlci1yYWRpdXM6IHZhcigtLXBpbGwpYCB8CnwgSGVybyB8IGBkaXYuc2tlbGV0b24uc2tlbGV0b24tLWhlcm9gIHwgYGJvcmRlci1yYWRpdXM6IHZhcigtLXI1KWAgfAoKIyMgVmFyaWFudHMKCkZvdXIgdmFyaWFudHMgY292ZXIgdGhlIHByaW1hcnkgY29udGVudCBzaGFwZXMgaW4gSmlvR2FtZXMuIEVhY2ggbWFwcyB0byBhIHNwZWNpZmljIHJlYWwtY29udGVudCB0eXBlIGFuZCB1c2VzIHRoZSBtYXRjaGluZyBib3JkZXItcmFkaXVzIHRva2VuLgoKIyMgU2l6ZXMKClNrZWxldG9uIHNpemVzIGRlcml2ZSBmcm9tIHRoZSByZWFsIGNvbXBvbmVudCB0aGV5IHJlcGxhY2UuIE5vIGluZGVwZW5kZW50IHNpemUgc2NhbGUg4oCUIG1hdGNoIHRoZSBleGFjdCBkaW1lbnNpb25zIG9mIHRoZSB0YXJnZXQgY29tcG9uZW50LgoKfCBDb250ZXh0IHwgV2lkdGggfCBIZWlnaHQgfCBSYWRpdXMgdG9rZW4gfAp8LS0tfC0tLXwtLS18LS0tfAp8IEdhbWUgY292ZXIgY2FyZCB8IDEyMHB4IHwgMTYwcHggfCBgLS1yNGAgfAp8IEdhbWUgaGVybyBiYW5uZXIgfCAxMDAlIHwgMjAwcHggfCBgLS1yNWAgfAp8IFJhaWwgdGh1bWJuYWlsIHwgMjEwcHggfCAxMjhweCB8IGAtLXI0YCB8CnwgVGV4dCDigJQgaGVhZGluZyB8IDUw4oCTNzAlIHwgMThweCB8IGAtLXBpbGxgIHwKfCBUZXh0IOKAlCBib2R5IHwgODDigJMxMDAlIHwgMTNweCB8IGAtLXBpbGxgIHwKfCBBdmF0YXIgfCA0MHB4IHwgNDBweCB8IGAtLXBpbGxgIHwKCiMjIFN0YXRlcwoKU2tlbGV0b24gbG9hZGVycyBoYXZlIHR3byBzdGF0ZXM6IGxvYWRpbmcgYW5kIGxvYWRlZC4gVGhlIHRyYW5zaXRpb24gYmV0d2VlbiB0aGVtIG11c3QgYmUgaGFuZGxlZCBpbiBKYXZhU2NyaXB0IOKAlCBuZXZlciBDU1MgdmlzaWJpbGl0eSBhbG9uZS4KCiMjIENvbnRlbnQKClNrZWxldG9uIGxvYWRlcnMgY29udGFpbiBubyByZWFkYWJsZSB0ZXh0LiBUaGUgc2hhcGUgY29tbXVuaWNhdGVzIHN0cnVjdHVyZSBvbmx5LgoKLSBLZWVwIHNrZWxldG9uIHNoYXBlcyBlbXB0eSDigJQgbm8gdGV4dCwgbm8gaWNvbnMsIG5vIHBsYWNlaG9sZGVyIGxhYmVscwotIExldCBzaGFwZSBhbmQgcG9zaXRpb24gY2FycnkgYWxsIHN0cnVjdHVyYWwgbWVhbmluZwotIFVzZSBgYXJpYS1oaWRkZW49InRydWUiYCBzbyBzY3JlZW4gcmVhZGVycyBza2lwIG92ZXIgc2tlbGV0b25zIGVudGlyZWx5CgotIE5ldmVyIHBsYWNlICJMb2FkaW5n4oCmIiBvciBhbnkgcGxhY2Vob2xkZXIgdGV4dCBpbnNpZGUgYSBza2VsZXRvbiBzaGFwZQotIERvIG5vdCB1c2UgYHJvbGU9ImltZyJgIG9yIGBhbHRgIGF0dHJpYnV0ZXMgb24gc2tlbGV0b24gZWxlbWVudHMKLSBEbyBub3QgdXNlIGFuaW1hdGVkIEdJRnMgb3Igc3Bpbm5lciBpY29ucyBhcyBza2VsZXRvbiBjb250ZW50CgojIyBQbGF0Zm9ybSBjb25zaWRlcmF0aW9ucwoKU2tlbGV0b24gYmVoYXZpb3IgYWRhcHRzIGJ5IHBsYXRmb3JtLiBTaGltbWVyIHNwZWVkIGFuZCBsaW5nZXIgZHVyYXRpb24gdmFyeSB0byBzdWl0IGVhY2ggc3VyZmFjZSdzIHBlcmZvcm1hbmNlIGFuZCB2aWV3aW5nIGNvbnRleHQuCgotIDEuNnMgc2hpbW1lciBzcGVlZCDigJQgbWF0Y2hlcyBuYXR1cmFsIHJlYWRpbmcgcmh5dGhtIG9uIHNtYWxsIHNjcmVlbnMKLSBGdWxsLXdpZHRoIHJhaWxzIOKAlCBza2VsZXRvbiBjYXJkcyBzaG91bGQgc3BhbiB0aGUgc2FtZSB3aWR0aCBhcyByZWFsIGNhcmRzIGluY2x1ZGluZyBndXR0ZXJzCi0gTWF0Y2ggY2FyZCBhc3BlY3QgcmF0aW8gZXhhY3RseSDigJQgY292ZXIgY2FyZHMgYXJlIHBvcnRyYWl0LCByYWlsIHRodW1ibmFpbHMgYXJlIGxhbmRzY2FwZQotIFJlbW92ZSBza2VsZXRvbiBmcm9tIERPTSBpbW1lZGlhdGVseSB3aGVuIGRhdGEgcmVzb2x2ZXMg4oCUIG5vIGxpbmdlcgoKLSBTYW1lIDEuNnMgc2hpbW1lciBzcGVlZCBhcyBtb2JpbGUgZm9yIGNvbnNpc3RlbmN5Ci0gV2lkZXIgbGF5b3V0IGFsbG93cyBtdWx0aS1jb2x1bW4gc2tlbGV0b24gZ3JpZHMg4oCUIG1hdGNoIHRoZSByZWFsIGdyaWQgY29sdW1uIGNvdW50Ci0gU2tlbGV0b24gbWF4LXdpZHRoIHNob3VsZCBtaXJyb3IgY29udGVudCBtYXgtd2lkdGggY29uc3RyYWludHMKLSBVc2UgQ1NTIGB3aWxsLWNoYW5nZTogYmFja2dyb3VuZC1wb3NpdGlvbmAgdG8gcHJvbW90ZSBzaGltbWVyIHRvIEdQVQoKLSBEaXNhYmxlIHNoaW1tZXIgYW5pbWF0aW9uIOKAlCB1c2Ugc3RhdGljIGBiYWNrZ3JvdW5kOiB2YXIoLS1zdXJmYWNlLTIpYCBmaWxsIGluc3RlYWQKLSBTaGltbWVyIGZsaWNrZXIgYXQgVFYgcmVmcmVzaCByYXRlcyBjYW4gdHJpZ2dlciBwaG90b3NlbnNpdGl2aXR5IGNvbmNlcm5zCi0gTGluZ2VyIHNrZWxldG9uIDUwMG1zIGFmdGVyIGRhdGEgYXJyaXZlcyB0byBwcmV2ZW50IGZsaWNrZXIgZnJvbSBuZWFyLWluc3RhbnQgY29udGVudCBmbGFzaAotIFRWIGZvY3VzIHJpbmcgbXVzdCBub3QgYXBwZWFyIG9uIHNrZWxldG9uIGVsZW1lbnRzIOKAlCB0aGV5IGFyZSBuZXZlciBmb2N1c2FibGUKCiMjIE1vdGlvbgoKfCBJbnRlcmFjdGlvbiB8IEVhc2luZyB8IER1cmF0aW9uIHwgUHJvcGVydHkgfAp8LS0tfC0tLXwtLS18LS0tfAp8IFNoaW1tZXIgc3dlZXAgfCBgbGluZWFyYCB8IGAxNDAwbXMgaW5maW5pdGVgIHwgYmFja2dyb3VuZC1wb3NpdGlvbiAoZ3JhZGllbnQgc2xpZGUpIHwKfCBGYWRlIHRvIGNvbnRlbnQgfCBgLS1lYXNlLW91dGAgfCBgLS1kdXItYmFzZWAgfCBvcGFjaXR5IGNyb3NzZmFkZSB8CgojIyBBY2Nlc3NpYmlsaXR5CgpTa2VsZXRvbiBsb2FkZXJzIG11c3QgYmUgaW52aXNpYmxlIHRvIGFzc2lzdGl2ZSB0ZWNobm9sb2d5IHdoaWxlIGxvYWRpbmcsIGFuZCBtdXN0IGFubm91bmNlIGNvbXBsZXRpb24gd2hlbiByZWFsIGNvbnRlbnQgYXJyaXZlcy4KCnwgQXR0cmlidXRlIHwgQXBwbGllZCB0byB8IEd1aWRhbmNlIHwKfC0tLXwtLS18LS0tfAp8IGBhcmlhLWhpZGRlbj0idHJ1ZSJgIHwgRXZlcnkgc2tlbGV0b24gZWxlbWVudCB8IFByZXZlbnRzIHNjcmVlbiByZWFkZXJzIGZyb20gcmVhZGluZyB0aGUgc2tlbGV0b24gc2hhcGUgYXMgY29udGVudC4gQXBwbGllZCB0byBlYWNoIGBkaXYuc2tlbGV0b25gIGFuZCBgZGl2LnNrZWxldG9uLWdyb3VwYC4gfAp8IGBhcmlhLWJ1c3k9InRydWUiYCB8IExvYWRpbmcgcmVnaW9uIHBhcmVudCB8IFNpZ25hbCB0byBhc3Npc3RpdmUgdGVjaG5vbG9neSB0aGF0IHRoZSByZWdpb24gaXMgdXBkYXRpbmcuIFNldCB0byBgZmFsc2VgIChvciByZW1vdmUpIG9uY2UgY29udGVudCBoYXMgbG9hZGVkLiBQbGFjZSBvbiB0aGUgd3JhcHBpbmcgc2VjdGlvbiwgbm90IG9uIGluZGl2aWR1YWwgc2tlbGV0b25zLiB8CnwgYGFyaWEtbGl2ZT0icG9saXRlImAgfCBMb2FkaW5nIHJlZ2lvbiBwYXJlbnQgfCBXaGVuIGBhcmlhLWJ1c3lgIHJlc29sdmVzIGFuZCByZWFsIGNvbnRlbnQgaXMgaW5zZXJ0ZWQsIGBhcmlhLWxpdmU9InBvbGl0ZSJgIGNhdXNlcyBzY3JlZW4gcmVhZGVycyB0byBhbm5vdW5jZSB0aGUgdXBkYXRlIGF0IHRoZSBuZXh0IHBhdXNlIGluIHNwZWVjaC4gfAp8IGBhcmlhLWxhYmVsYCB8IExvYWRpbmcgcmVnaW9uIHBhcmVudCB8IERlc2NyaWJlIHdoYXQgaXMgbG9hZGluZy4gRXhhbXBsZTogYGFyaWEtbGFiZWw9IkxvYWRpbmcgZ2FtZXMiYC4gRG8gbm90IHVzZSBhIGdlbmVyaWMgIkxvYWRpbmciIOKAlCBiZSBzcGVjaWZpYyBhYm91dCB0aGUgY29udGVudCB0eXBlLiB8CnwgYHJvbGU9ImltZyJgIC8gYGFsdGAgfCBOZXZlciB8IFNrZWxldG9uIHNoYXBlcyBtdXN0IG5ldmVyIGNhcnJ5IGltYWdlIHNlbWFudGljcy4gVGhleSBhcmUgZGVjb3JhdGl2ZSBsb2FkaW5nIGluZGljYXRvcnMsIG5vdCBtZWFuaW5nZnVsIGNvbnRlbnQgcmVwcmVzZW50YXRpb25zLiB8CgojIyBSZWxhdGVkIHRva2VucwoKVXNlIHRoZXNlIHRva2VucyB0byBpbXBsZW1lbnQgc2tlbGV0b24gc3R5bGVzLiBOZXZlciBoYXJkY29kZSBoZXggdmFsdWVzIOKAlCB0b2tlbiByZWZlcmVuY2VzIHN0YXkgaW4gc3luYyB3aXRoIHRoZW1lIHVwZGF0ZXMuCgp8IFRva2VuIHwgVmFsdWUgfCBVc2FnZSB8CnwtLS18LS0tfC0tLXwKfCBgLS1zdXJmYWNlLTJgIHwgYCMxNjFBMjRgIHwgU2tlbGV0b24gYmFzZSBmaWxsIOKAlCB0aGUgZGFyayByZXN0aW5nIGNvbG9yIG9mIHRoZSBzaGltbWVyIGdyYWRpZW50IHwKfCBgLS1zdXJmYWNlLTNgIHwgYCMxRjI0MzJgIHwgU2hpbW1lciBoaWdobGlnaHQg4oCUIHRoZSBsaWdodGVyIG1pZHBvaW50IG9mIHRoZSBncmFkaWVudCB0aGF0IGNyZWF0ZXMgdGhlIHN3ZWVwIGVmZmVjdCB8CnwgYC0tcjRgIHwgYDhweGAgfCBDYXJkIGFuZCByYWlsIHRodW1ibmFpbCBza2VsZXRvbiBib3JkZXItcmFkaXVzIHwKfCBgLS1yNWAgfCBgMTJweGAgfCBIZXJvIGJhbm5lciBza2VsZXRvbiBib3JkZXItcmFkaXVzIHwKfCBgLS1waWxsYCB8IGAxMDBweGAgfCBUZXh0IGxpbmUgYW5kIGF2YXRhciBza2VsZXRvbiBib3JkZXItcmFkaXVzIOKAlCBjcmVhdGVzIHRoZSBwaWxsIHNoYXBlIGZvciBpbmxpbmUgY29udGVudCB8CgojIyBBUEkKCiMjIyBDU1MgY2xhc3NlcwoKfCBDbGFzcyB8IERlc2NyaXB0aW9uIHwKfC0tLXwtLS18CnwgYC5kcy1za2VsZXRvbmAgfCBSb290IOKAlCBzdXJmYWNlLTIgYmcsIGJvcmRlci1yYWRpdXMgbWF0Y2hlcyB0YXJnZXQsIG92ZXJmbG93IGhpZGRlbiB8CnwgYC5kcy1za2VsZXRvbi0tdGV4dGAgfCBUZXh0IGxpbmUgc2hhcGUg4oCUIGhlaWdodCAxNHB4LCByMiwgZnVsbCB3aWR0aCBieSBkZWZhdWx0IHwKfCBgLmRzLXNrZWxldG9uLS1jaXJjbGVgIHwgQ2lyY3VsYXIg4oCUIGVxdWFsIHdpZHRoL2hlaWdodCwgci1waWxsIHwKfCBgLmRzLXNrZWxldG9uLS1jYXJkYCB8IENhcmQtc2hhcGVkIOKAlCBmdWxsIHdpZHRoLCBmaXhlZCBoZWlnaHQgfAp8IGAuZHMtc2tlbGV0b24tLXNoaW1tZXJgIHwgQW5pbWF0ZWQgc3dlZXAgb3ZlcmxheSB8CgojIyMgUmVhY3QgcHJvcHMKCnwgUHJvcCB8IFR5cGUgfCBEZWZhdWx0IHwgRGVzY3JpcHRpb24gfAp8LS0tfC0tLXwtLS18LS0tfAp8IGB2YXJpYW50YCB8ICJ0ZXh0IiB8ICJjaXJjbGUiIHwgImNhcmQiIHwgImN1c3RvbSIgfCAidGV4dCIgfCBTaGFwZSBwcmVzZXQgfAp8IGB3aWR0aGAgfCBudW1iZXIgfCBzdHJpbmcgfCAiMTAwJSIgfCBTa2VsZXRvbiB3aWR0aCB8CnwgYGhlaWdodGAgfCBudW1iZXIgfCBzdHJpbmcgfCAxNCB8IFNrZWxldG9uIGhlaWdodCBpbiBweCBvciBDU1Mgc3RyaW5nIHwKfCBgY291bnRgIHwgbnVtYmVyIHwgMSB8IE51bWJlciBvZiBza2VsZXRvbiBsaW5lcyB0byByZW5kZXIgfAp8IGBhbmltYXRlYCB8IGJvb2xlYW4gfCB0cnVlIHwgRW5hYmxlIHNoaW1tZXIgYW5pbWF0aW9uIHwKfCBgYm9yZGVyUmFkaXVzYCB8IHN0cmluZyB8IHVuZGVmaW5lZCB8IE92ZXJyaWRlIGJvcmRlci1yYWRpdXMgfAoKIyMgQ29kZSBleGFtcGxlcwoKQ29weSB0aGVzZSBzbmlwcGV0cyBhcyBzdGFydGluZyBwb2ludHMuIExpbmsgYHRva2Vucy90b2tlbnMuY3NzYCBhbmQgYGNvbXBvbmVudHMuY3NzYCBiZWZvcmUgdXNpbmcgY29tcG9uZW50IGNsYXNzZXMuCgpgYGBgCjwhLS0gVGV4dCBza2VsZXRvbiAtLT4KPGRpdiBjbGFzcz0ic2tlbGV0b24tZ3JvdXAiIGFyaWEtaGlkZGVuPSJ0cnVlIj4KICA8ZGl2IGNsYXNzPSJza2VsZXRvbiBza2VsZXRvbi0tdGV4dCIgc3R5bGU9IndpZHRoOjcwJSI+PC9kaXY+CiAgPGRpdiBjbGFzcz0ic2tlbGV0b24gc2tlbGV0b24tLXRleHQiIHN0eWxlPSJ3aWR0aDo1NSUiPjwvZGl2PgogIDxkaXYgY2xhc3M9InNrZWxldG9uIHNrZWxldG9uLS10ZXh0IiBzdHlsZT0id2lkdGg6NDAlIj48L2Rpdj4KPC9kaXY+CmBgYGAKCmBgYGAKPCEtLSBDYXJkIHNrZWxldG9uIC0tPgo8ZGl2IGNsYXNzPSJza2VsZXRvbiBza2VsZXRvbi0tY2FyZCIgYXJpYS1oaWRkZW49InRydWUiPjwvZGl2PgpgYGBgCgpgYGBgCjwhLS0gTG9hZGluZyByZWdpb24gd2l0aCBBUklBIC0tPgo8c2VjdGlvbiBhcmlhLWJ1c3k9InRydWUiIGFyaWEtbGl2ZT0icG9saXRlIiBhcmlhLWxhYmVsPSJMb2FkaW5nIGdhbWVzIj4KICA8ZGl2IGNsYXNzPSJza2VsZXRvbiBza2VsZXRvbi0taGVybyIgYXJpYS1oaWRkZW49InRydWUiPjwvZGl2PgogIDxkaXYgY2xhc3M9InNrZWxldG9uLWdyb3VwIiBhcmlhLWhpZGRlbj0idHJ1ZSI+CiAgICA8ZGl2IGNsYXNzPSJza2VsZXRvbiBza2VsZXRvbi0tdGV4dCIgc3R5bGU9IndpZHRoOjYwJSI+PC9kaXY+CiAgICA8ZGl2IGNsYXNzPSJza2VsZXRvbiBza2VsZXRvbi0tdGV4dCIgc3R5bGU9IndpZHRoOjQwJSI+PC9kaXY+CiAgPC9kaXY+Cjwvc2VjdGlvbj4KYGBgYAoKLS0tCgojIyBUb2tlbnMgcmVmZXJlbmNlZCBvbiB0aGlzIHBhZ2UKClVzZSB0aGVzZSBleGFjdCB0b2tlbnMg4oCUIGRlZmluZWQgaW4gYHRva2Vucy90b2tlbnMuY3NzYC4gRG8gbm90IHN1YnN0aXR1dGUgcmF3IHZhbHVlcy4KCi0gYC0tYm9yZGVyLXN1YnRsZWAKLSBgLS1jYXJkLWJnYAotIGAtLWppb2AKLSBgLS1uZWdhdGl2ZWAKLSBgLS1waWxsYAotIGAtLXI0YAotIGAtLXI1YAotIGAtLXN1cmZhY2UtMWAKLSBgLS1zdXJmYWNlLTJgCi0gYC0tc3VyZmFjZS0zYAotIGAtLXRleHRgCi0gYC0tdGV4dDJgCi0gYC0tdGV4dDNgCgotLS0KCiMjIEJ1aWxkIHJ1bGVzIChiaW5kaW5nKQoKMS4gVXNlICoqb25seSoqIHRoZSB0b2tlbnMgbGlzdGVkIGFib3ZlLiBJZiBhIHZhbHVlIHlvdSBuZWVkIGlzIG5vdCBsaXN0ZWQsIHN0b3AgYW5kIGFzayDigJQgZG8gbm90IGludHJvZHVjZSBhIHJhdyB2YWx1ZS4KMi4gRm9udCBpcyAqKkppb1R5cGUqKiBvbmx5LiBXZWlnaHRzOiAzMDAsIDUwMCwgNzAwLCA5MDAuCjMuIFJldXNlIHRoZSBjb21wb25lbnQgQ1NTIHBhdHRlcm5zIHNob3duIG9uIHRoZSBzb3VyY2UgcGFnZTsgZG8gbm90IHJlZGVzaWduLgo0LiBNYXRjaCBldmVyeSBzdGF0ZSAoZGVmYXVsdCwgaG92ZXIsIGZvY3VzLCBhY3RpdmUsIGRpc2FibGVkLCBsb2FkaW5nKSBzaG93biBvbiB0aGUgcGFnZS4KNS4gQWNjZXNzaWJpbGl0eSByZXF1aXJlbWVudHMgb24gdGhlIHBhZ2UgYXJlIG1hbmRhdG9yeSwgbm90IG9wdGlvbmFsLgo=" download="skeleton-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
     </div>
   </header>
 
@@ -111,6 +95,31 @@
   </section>
 
   <!-- 2. BEST PRACTICES -->
+  <!-- WHEN TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use</h2>
+    <div class="ds-usage-grid">
+      <div class="ds-usage-card ds-usage-card--do">
+        <p class="ds-usage-label ds-usage-label--do">Use when</p>
+        <ul class="ds-usage-list">
+              <li>Placeholder while content is loading — matches the shape of the final content</li>
+              <li>Game rail cards during initial data fetch</li>
+              <li>Profile header while user data loads</li>
+              <li>List items before API response arrives</li>
+        </ul>
+      </div>
+      <div class="ds-usage-card ds-usage-card--dont">
+        <p class="ds-usage-label ds-usage-label--dont">Don't use when</p>
+        <ul class="ds-usage-list">
+              <li>Indefinite loading states with no timeout — add an error state</li>
+              <li>Shapes that don't match the real content — creates layout shift on load</li>
+              <li>Skeleton for content that loads in under 300ms — flash is worse than no skeleton</li>
+              <li>Animated skeleton on TV — reduce motion preference must be respected</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <section class="ds-section" id="best-practices">
     <h2 class="ds-section-title">Best Practices</h2>
     <p class="ds-section-desc">Follow these rules to keep skeleton loaders consistent and accessible across all JioGames surfaces.</p>
@@ -355,7 +364,7 @@
     <p class="ds-section-desc">Skeleton loaders contain no readable text. The shape communicates structure only.</p>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:20px;">
       <div style="background:var(--card-bg); border:1px solid var(--border-subtle); border-top:2px solid rgba(0,168,89,.5); border-radius:14px; padding:20px;">
-        <div style="font-size:9px; font-weight:800; letter-spacing:.8px; text-transform:uppercase; color:var(--jio); margin-bottom:12px;">Do</div>
+        <div style="font-size:9px; font-weight:900; letter-spacing:.8px; text-transform:uppercase; color:var(--jio); margin-bottom:12px;">Do</div>
         <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
           <li style="font-size:12px; color:var(--text2); line-height:1.5;">Keep skeleton shapes empty — no text, no icons, no placeholder labels</li>
           <li style="font-size:12px; color:var(--text2); line-height:1.5;">Let shape and position carry all structural meaning</li>
@@ -363,7 +372,7 @@
         </ul>
       </div>
       <div style="background:var(--card-bg); border:1px solid var(--border-subtle); border-top:2px solid rgba(255,59,48,.4); border-radius:14px; padding:20px;">
-        <div style="font-size:9px; font-weight:800; letter-spacing:.8px; text-transform:uppercase; color:var(--negative); margin-bottom:12px;">Don't</div>
+        <div style="font-size:9px; font-weight:900; letter-spacing:.8px; text-transform:uppercase; color:var(--negative); margin-bottom:12px;">Don't</div>
         <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
           <li style="font-size:12px; color:var(--text2); line-height:1.5;">Never place "Loading…" or any placeholder text inside a skeleton shape</li>
           <li style="font-size:12px; color:var(--text2); line-height:1.5;">Do not use <code class="ds-code">role="img"</code> or <code class="ds-code">alt</code> attributes on skeleton elements</li>
@@ -413,6 +422,18 @@
   </section>
 
   <!-- 9. ACCESSIBILITY -->
+  <!-- MOTION -->
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-motion-table">
+      <thead><tr><th>Interaction</th><th>Easing</th><th>Duration</th><th>Property</th></tr></thead>
+      <tbody>
+        <tr><td>Shimmer sweep</td><td><code>linear</code></td><td><code>1400ms infinite</code></td><td>background-position (gradient slide)</td></tr>
+        <tr><td>Fade to content</td><td><code>--ease-out</code></td><td><code>--dur-base</code></td><td>opacity crossfade</td></tr>
+      </tbody>
+    </table>
+  </section>
+
   <section class="ds-section" id="accessibility">
     <h2 class="ds-section-title">Accessibility</h2>
     <p class="ds-section-desc">Skeleton loaders must be invisible to assistive technology while loading, and must announce completion when real content arrives.</p>
@@ -497,6 +518,34 @@
   </section>
 
   <!-- 11. CODE EXAMPLES -->
+  <!-- API -->
+  <section class="ds-section" id="api">
+    <h2 class="ds-section-title">API</h2>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:0 0 12px;">CSS classes</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>.ds-skeleton</code></td><td>Root — surface-2 bg, border-radius matches target, overflow hidden</td></tr>
+        <tr><td><code>.ds-skeleton--text</code></td><td>Text line shape — height 14px, r2, full width by default</td></tr>
+        <tr><td><code>.ds-skeleton--circle</code></td><td>Circular — equal width/height, r-pill</td></tr>
+        <tr><td><code>.ds-skeleton--card</code></td><td>Card-shaped — full width, fixed height</td></tr>
+        <tr><td><code>.ds-skeleton--shimmer</code></td><td>Animated sweep overlay</td></tr>
+      </tbody>
+    </table>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 12px;">React props</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>variant</code></td><td><span class="api-type">"text" | "circle" | "card" | "custom"</span></td><td><span class="api-default">"text"</span></td><td>Shape preset</td></tr>
+        <tr><td><code>width</code></td><td><span class="api-type">number | string</span></td><td><span class="api-default">"100%"</span></td><td>Skeleton width</td></tr>
+        <tr><td><code>height</code></td><td><span class="api-type">number | string</span></td><td><span class="api-default">14</span></td><td>Skeleton height in px or CSS string</td></tr>
+        <tr><td><code>count</code></td><td><span class="api-type">number</span></td><td><span class="api-default">1</span></td><td>Number of skeleton lines to render</td></tr>
+        <tr><td><code>animate</code></td><td><span class="api-type">boolean</span></td><td><span class="api-default">true</span></td><td>Enable shimmer animation</td></tr>
+        <tr><td><code>borderRadius</code></td><td><span class="api-type">string</span></td><td><span class="api-default">undefined</span></td><td>Override border-radius</td></tr>
+      </tbody>
+    </table>
+  </section>
+
   <section class="component-section" id="code-examples">
     <h2 class="ds-section-title">Code examples</h2>
     <p class="ds-section-desc">Copy these snippets as starting points. Link <code class="ds-code">tokens/tokens.css</code> and <code class="ds-code">components.css</code> before using component classes.</p>
@@ -533,4 +582,4 @@
   <!-- 12. CHANGELOG -->
 
 </main><script src="../sprite-loader.js"></script>
-<script src="../shell.js"></script></body></html>
+<script src="../shell.js?v=2"></script></body></html>

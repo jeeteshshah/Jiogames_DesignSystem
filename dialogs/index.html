@@ -7,141 +7,104 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     /* ── Page-specific styles ── */
     body { background: var(--bg); color: var(--text); font-family: var(--jio-font); margin: 0; }
 
     /* Hero */
-    .component-hero {
-      border-radius: 20px; overflow: hidden; margin-bottom: 48px;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      position: relative; min-height: 320px; padding: 48px 32px 32px;
-    }
-    .component-hero--dark { background: #060810; }
-    .component-hero--grid {
-      background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-      background-size: 32px 32px;
-      background-color: #060810;
-      border: 1px solid var(--border-subtle);
-    }
-    .component-hero-inner {
-      display: flex; flex-direction: column; align-items: center; gap: 28px;
-      position: relative; z-index: 2;
-    }
-    .component-hero-caption {
-      display: block; font-size: 10px; font-weight: 700; letter-spacing: .6px;
-      text-transform: uppercase; color: var(--text4); margin-top: 24px; position: relative; z-index: 2;
-    }
-    .hero-glow {
-      position: absolute; width: 320px; height: 180px; border-radius: var(--pill);
-      background: radial-gradient(ellipse, rgba(255,71,87,.15) 0%, transparent 70%);
-      pointer-events: none; z-index: 1;
-    }
+    
+    
+    
+    
+    
+    
 
     /* Intro */
-    .component-intro { margin-bottom: 48px; }
-    .component-intro p { font-size: 15px; font-weight: 500; color: var(--text2); line-height: 1.65; margin-bottom: 20px; max-width: 640px; }
-    .component-summary-list {
-      display: flex; flex-direction: column; gap: 0;
-      border: 1px solid var(--border-subtle); border-radius: 14px;
-      overflow: hidden; list-style: none; padding: 0; margin: 0;
-    }
-    .component-summary-list li {
-      padding: 14px 20px; border-bottom: 1px solid var(--border-subtle);
-      font-size: 13px; font-weight: 500; color: var(--text2); line-height: 1.55;
-    }
-    .component-summary-list li:last-child { border-bottom: none; }
-    .component-summary-list li strong { color: var(--text); font-weight: 700; }
+    
+    
+    
+    
+    
+    
 
     /* Best practices */
-    .component-best-practices { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
-    .component-bp-card { border-radius: 14px; overflow: hidden; border: 1.5px solid; }
-    .component-bp-card--do   { border-color: rgba(0,168,89,.3); }
-    .component-bp-card--dont { border-color: rgba(255,71,87,.3); }
-    .component-bp-label {
-      display: flex; align-items: center; gap: 6px; padding: 10px 16px;
-      font-size: 10px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase;
-    }
-    .component-bp-label--do   { background: rgba(0,168,89,.07);  color: var(--jio); }
-    .component-bp-label--dont { background: rgba(255,71,87,.07); color: var(--negative); }
-    .component-bp-label--do::before   { content: '\2713'; font-size: 11px; }
-    .component-bp-label--dont::before { content: '\2715'; font-size: 11px; }
-    .component-bp-list {
-      padding: 16px 20px 20px; background: var(--surface-1); margin: 0;
-      display: flex; flex-direction: column; gap: 8px; list-style: none;
-    }
-    .component-bp-list li {
-      font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.5;
-      padding-left: 14px; position: relative;
-    }
-    .component-bp-list li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /* Platform cards */
-    .component-platform-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
-    .component-platform-card { background: var(--surface-1); border: 1px solid var(--border-subtle); border-radius: var(--r4); padding: 20px; }
-    .component-platform-card--mobile { border-top: 2px solid rgba(110,231,183,.4); }
-    .component-platform-card--web    { border-top: 2px solid rgba(147,197,253,.4); }
-    .component-platform-card--tv     { border-top: 2px solid rgba(251,191,36,.4); }
-    .component-platform-card-title { font-size: 11px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--text3); margin-bottom: 12px; }
-    .component-platform-card--mobile .component-platform-card-title { color: #6ee7b7; }
-    .component-platform-card--web    .component-platform-card-title { color: #93c5fd; }
-    .component-platform-card--tv     .component-platform-card-title { color: #fbbf24; }
-    .component-platform-card ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
-    .component-platform-card li { font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.5; padding-left: 14px; position: relative; }
-    .component-platform-card li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /* Changelog */
-    .component-changelog { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; }
-    .component-changelog-entry { display: grid; grid-template-columns: 56px 80px 1fr; gap: 16px; align-items: start; padding: 14px 20px; border-bottom: 1px solid var(--border-subtle); font-size: 12px; }
-    .component-changelog-entry:last-child { border-bottom: none; }
-    .component-changelog-version { font-family: monospace; font-weight: 700; color: var(--jio); font-size: 11px; }
-    .component-changelog-date { color: var(--text3); font-weight: 500; }
-    .component-changelog-desc { color: var(--text2); line-height: 1.5; }
+    
+    
+    
+    
+    
+    
 
     /* A11y */
-    .a11y-grid { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; margin-top: 24px; }
-    .a11y-row { display: grid; grid-template-columns: 160px 1fr; gap: 0; border-bottom: 1px solid var(--border-subtle); }
-    .a11y-row:last-child { border-bottom: none; }
-    .a11y-label { padding: 14px 16px; font-size: 11px; font-weight: 700; color: var(--text3); letter-spacing: .3px; background: var(--surface-2); text-transform: uppercase; display: flex; align-items: flex-start; padding-top: 16px; }
-    .a11y-content { padding: 14px 20px; font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.6; background: var(--surface-1); }
-    .a11y-content code { font-family: monospace; font-size: 11px; color: #a8e6c5; background: rgba(0,168,89,.08); padding: 1px 5px; border-radius: 3px; }
+    
+    
+    
+    
+    
+    
 
     /* Token table */
-    .ds-token-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; font-size: 12px; }
-    .ds-token-table th { background: var(--surface-2); padding: 10px 16px; text-align: left; font-size: 10px; font-weight: 700; letter-spacing: .7px; text-transform: uppercase; color: var(--text3); border-bottom: 1px solid var(--border-subtle); }
-    .ds-token-table td { padding: 12px 16px; border-bottom: 1px solid var(--border-subtle); color: var(--text2); vertical-align: top; background: var(--surface-1); }
-    .ds-token-table tr:last-child td { border-bottom: none; }
-    .ds-token-table code { font-family: monospace; font-size: 11px; color: #a8e6c5; background: rgba(0,168,89,.08); padding: 1px 5px; border-radius: 3px; }
+    
+    
+    
+    
+    
 
     /* Sizes table */
-    .sizes-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; font-size: 12px; }
-    .sizes-table th { background: var(--surface-2); padding: 10px 16px; text-align: left; font-size: 10px; font-weight: 700; letter-spacing: .7px; text-transform: uppercase; color: var(--text3); border-bottom: 1px solid var(--border-subtle); }
-    .sizes-table th:nth-child(2) { color: #6ee7b7; }
-    .sizes-table th:nth-child(3) { color: #93c5fd; }
-    .sizes-table th:nth-child(4) { color: #fbbf24; }
-    .sizes-table td { padding: 12px 16px; border-bottom: 1px solid var(--border-subtle); color: var(--text2); vertical-align: top; background: var(--surface-1); }
-    .sizes-table tr:last-child td { border-bottom: none; }
-    .sizes-table td:first-child { font-weight: 600; color: var(--text); background: var(--surface-2); }
+    
+    
+    
+    
+    
+    
+    
+    
 
     /* Content grid */
-    .component-content-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
-    .component-content-card { background: var(--surface-1); border: 1px solid var(--border-subtle); border-radius: var(--r4); padding: 20px; }
-    .component-content-title { font-size: 12px; font-weight: 700; color: var(--text); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 12px; }
-    .component-content-card ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
-    .component-content-card li { font-size: 12px; font-weight: 500; color: var(--text2); line-height: 1.5; padding-left: 14px; position: relative; }
-    .component-content-card li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+    
+    
+    
+    
+    
+    
 
     /* Note */
-    .ds-note { background: rgba(0,168,89,.06); border: 1px solid rgba(0,168,89,.2); border-radius: var(--r3); padding: 14px 18px; font-size: 13px; font-weight: 500; color: var(--text2); line-height: 1.55; }
-    .ds-note strong { color: var(--jio); }
+    
+    
 
     /* States demo */
     .states-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; margin-top: 20px; }
     .state-cell { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-    .state-label { font-size: 10px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--text3); }
+    
 
     /* Variants demo */
     .variants-grid { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; margin-top: 20px; }
@@ -152,9 +115,7 @@
     .variant-desc { font-size: 12px; color: var(--text2); line-height: 1.55; }
 
     @media (max-width: 760px) {
-      .component-best-practices,
-      .component-content-grid,
-      .component-platform-grid { grid-template-columns: 1fr; }
+      
       .variant-row { grid-template-columns: 1fr; }
     }
   </style>
@@ -166,20 +127,20 @@
        1. PAGE HEADER
   =================================================== -->
   <div class="component-page-header">
-    <div class="component-breadcrumb">
-      <a href="../index.html">JioGames DLS</a>
-      <span class="component-breadcrumb-sep">&#x203A;</span>
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <span class="component-breadcrumb-link">JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
       <span>Components</span>
-      <span class="component-breadcrumb-sep">&#x203A;</span>
-      <span>Dialogs</span>
-    </div>
-    <h1 class="component-page-title">Dialogs</h1>
-    <p class="component-page-def">Dialogs present focused tasks or critical decisions that require player confirmation before proceeding.</p>
+      <span class="component-breadcrumb-sep">›</span>
+      <span class="component-breadcrumb-current">Dialogs</span>
+    </nav>
+    <h1 class="component-page-title">Dialogs</h1><p class="component-page-def">Dialogs present focused tasks or critical decisions that require player confirmation before proceeding.</p>
     <div class="component-platforms">
       <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
       <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
       <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
       <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBEaWFsb2dzIOKAlCBKaW9HYW1lcyBETFMgc3BlYwoKPiBTb3VyY2U6IGBkaWFsb2dzL2luZGV4Lmh0bWxgIGluIHRoZSBKaW9HYW1lcyBEZXNpZ24gU3lzdGVtLgo+IFRoaXMgc3BlYyBpcyBnZW5lcmF0ZWQgdmVyYmF0aW0gZnJvbSB0aGUgcGFnZSDigJQgZG8gbm90IGludmVudCB2YWx1ZXMgbm90IGxpc3RlZCBoZXJlLgoKKipQYXRoOioqIEppb0dhbWVzIERMUyDigLogQ29tcG9uZW50cyDigLogRGlhbG9ncwoKLS0tCgpEaWFsb2dzIHByZXNlbnQgZm9jdXNlZCB0YXNrcyBvciBjcml0aWNhbCBkZWNpc2lvbnMgdGhhdCByZXF1aXJlIHBsYXllciBjb25maXJtYXRpb24gYmVmb3JlIHByb2NlZWRpbmcuCgpEaWFsb2dzIGludGVycnVwdCB0aGUgcGxheWVyIHdpdGggYSBmb2N1c2VkIHF1ZXN0aW9uIG9yIHRhc2suIFRoZXkgYmxvY2sgYmFja2dyb3VuZCBpbnRlcmFjdGlvbiB1bnRpbCByZXNvbHZlZC4gVXNlIHNwYXJpbmdseSDigJQgZXZlcnkgZGlhbG9nIGFkZHMgZnJpY3Rpb24uCgotICoqV2hlbiB0byB1c2UuKiogQ29uZmlybWF0aW9uIGZvciBkZXN0cnVjdGl2ZSBvciBpcnJldmVyc2libGUgYWN0aW9ucywgY29sbGVjdGluZyBzaG9ydCBpbnB1dCwgYW5kIHN1cmZhY2luZyBjcml0aWNhbCBhbGVydHMgdGhhdCByZXF1aXJlIGFuIGltbWVkaWF0ZSByZXNwb25zZS4KLSAqKldoZW4gbm90IHRvIHVzZS4qKiBJbmZvcm1hdGlvbmFsIHRvYXN0cyBvciBzbmFja2JhcnMsIG5hdmlnYXRpb24gZGVjaXNpb25zLCBub24tdXJnZW50IG5vdGlmaWNhdGlvbnMsIGFuZCBjb25maXJtYXRpb25zIGZvciByZXZlcnNpYmxlIGFjdGlvbnMuCi0gKipJbnRlcnJ1cHRpb24gY29zdC4qKiBFdmVyeSBkaWFsb2cgcGF1c2VzIHRoZSBwbGF5ZXIncyBwcmltYXJ5IHRhc2suIFJlc2VydmUgZGlhbG9ncyBmb3IgbW9tZW50cyB3aGVyZSB0aGUgcmlzayBvZiBwcm9jZWVkaW5nIHdpdGhvdXQgY29uZmlybWF0aW9uIGlzIGhpZ2guCgojIyBXaGVuIHRvIHVzZQoKVXNlIHdoZW4KCi0gRGVzdHJ1Y3RpdmUgYWN0aW9uIGNvbmZpcm1hdGlvbiAoZGVsZXRlIGFjY291bnQsIGNhbmNlbCBzdWJzY3JpcHRpb24pCi0gQ3JpdGljYWwgZGVjaXNpb25zIHJlcXVpcmluZyBleHBsaWNpdCB1c2VyIGFja25vd2xlZGdlbWVudAotIFNob3J0IGZvcm1zIHRoYXQgc2hvdWxkIG5vdCBuYXZpZ2F0ZSBhd2F5IGZyb20gdGhlIGN1cnJlbnQgc2NyZWVuCi0gRXJyb3Igc3RhdGVzIHJlcXVpcmluZyBpbW1lZGlhdGUgdXNlciByZXNwb25zZQoKRG9uJ3QgdXNlIHdoZW4KCi0gTm9uLWNyaXRpY2FsIG1lc3NhZ2VzIOKAlCB1c2UgVG9hc3Qgb3IgQmFubmVyIGluc3RlYWQKLSBMYXJnZSBmb3JtcyBvciBtdWx0aS1zdGVwIGZsb3dzIOKAlCB1c2UgYSBkZWRpY2F0ZWQgc2NyZWVuIG9yIEJvdHRvbSBTaGVldAotIFN0YWNraW5nIG11bHRpcGxlIGRpYWxvZ3Mg4oCUIHJlc29sdmUgb25lIGJlZm9yZSBzaG93aW5nIGFub3RoZXIKLSBBdXRvLXNob3dpbmcgb24gcGFnZSBsb2FkIHdpdGhvdXQgdXNlciB0cmlnZ2VyCgojIyBCZXN0IHByYWN0aWNlcwoKRm9sbG93IHRoZXNlIHJ1bGVzIHRvIGtlZXAgZGlhbG9nIHVzYWdlIGNvbnNpc3RlbnQgYW5kIHJlc3BlY3RmdWwgb2YgdGhlIHBsYXllcidzIGF0dGVudGlvbi4KCi0gVXNlIGZvciBpcnJldmVyc2libGUgb3IgaGlnaC1zdGFrZXMgYWN0aW9ucyBvbmx5Ci0gS2VlcCBib2R5IGNvcHkgdG8gMiBzZW50ZW5jZXMgbWF4aW11bQotIExlYWQgd2l0aCB0aGUgbW9zdCBpbXBvcnRhbnQgaW5mb3JtYXRpb24gaW4gdGhlIHRpdGxlCi0gVXNlIHNwZWNpZmljIGJ1dHRvbiBsYWJlbHMg4oCUICJEZWxldGUgc2F2ZSBkYXRhIiwgbm90ICJPSyIKLSBBbmltYXRlIGluIHdpdGggZmFkZSArIHNjYWxlICgwLjkyIOKGkiAxLCAyMDBtcyBlYXNlLW91dCkKLSBSZXR1cm4gZm9jdXMgdG8gdGhlIHRyaWdnZXIgZWxlbWVudCBvbiBkaXNtaXNzCi0gQWx3YXlzIGluY2x1ZGUgYSBDYW5jZWwgb3IgZGlzbWlzc2FsIHBhdGgKCi0gVXNlIGZvciBub24tYmxvY2tpbmcgbWVzc2FnZXMg4oCUIHVzZSB0b2FzdHMgaW5zdGVhZAotIFN0YWNrIG11bHRpcGxlIGRpYWxvZ3Mgb24gdG9wIG9mIGVhY2ggb3RoZXIKLSBVc2UgZnVsbC1zY3JlZW4gZm9yIHNpbXBsZSAyLWJ1dHRvbiBjb25maXJtYXRpb24KLSBVc2UgdmFndWUgbGFiZWxzIGxpa2UgIk9LIiwgIlllcyIsIG9yICJObyIKLSBCbG9jayBkaWFsb2dzIHdpdGggaW5saW5lIGxvYWRpbmcgc3Bpbm5lcnMgb24gdGhlIHNjcmltCi0gQXV0by1vcGVuIGRpYWxvZ3Mgd2l0aG91dCBhIGNsZWFyIHVzZXIgdHJpZ2dlcgotIEV4Y2VlZCA0IGludGVyYWN0aXZlIGVsZW1lbnRzIGluc2lkZSB0aGUgZGlhbG9nCgojIyBBbmF0b215CgpFdmVyeSBkaWFsb2cgaXMgYnVpbHQgZnJvbSBmaXZlIHBhcnRzLiBUaGUgU2NyaW0sIENvbnRhaW5lciwgQm9keSwgYW5kIEJ1dHRvbiByb3cgYXJlIHJlcXVpcmVkLiBUaGUgSWNvbiBzbG90IGlzIG9wdGlvbmFsIGJ1dCBzdHJvbmdseSByZWNvbW1lbmRlZCBmb3IgZGVzdHJ1Y3RpdmUgYW5kIGFsZXJ0IHZhcmlhbnRzLgoKIyMgVmFyaWFudHMKCkZpdmUgZGlhbG9nIHZhcmlhbnRzIGNvdmVyIHRoZSBmdWxsIHJhbmdlIG9mIGJsb2NraW5nIGludGVyYWN0aW9ucy4gQ2hvb3NlIHRoZSBsb3dlc3Qtd2VpZ2h0IHZhcmlhbnQgdGhhdCBzdGlsbCBjb21tdW5pY2F0ZXMgdXJnZW5jeSBhY2N1cmF0ZWx5LgoKIyMgU2l6ZXMKCkRpYWxvZyBkaW1lbnNpb25zIGFyZSBmaXhlZCBwZXIgcGxhdGZvcm0uIERvIG5vdCByZXNpemUgZGlhbG9ncyBkeW5hbWljYWxseSDigJQgdXNlIHRoZSBwbGF0Zm9ybS1zcGVjaWZpYyB2YWx1ZXMgYmVsb3cuCgp8IFByb3BlcnR5IHwg8J+TsSBNb2JpbGUgfCDwn5K7IFdlYiB8IPCfk7ogVFYgfAp8LS0tfC0tLXwtLS18LS0tfAp8IE1heC13aWR0aCB8IDM2MHB4IHwgNDgwcHggfCA2NDBweCB8CnwgUGFkZGluZyB8IDI0cHggfCAzMnB4IHwgNDBweCB8CnwgVGl0bGUgZm9udC1zaXplIHwgMThweCB8IDIwcHggfCAyOHB4IHwKfCBCb2R5IGZvbnQtc2l6ZSB8IDE0cHggfCAxNXB4IHwgMjBweCB8CnwgQm9yZGVyLXJhZGl1cyB8IDIwcHggKHZhcigtLXI3KSkgfCAyMHB4ICh2YXIoLS1yNykpIHwgMjhweCB8CnwgQnV0dG9uIHNpemUgfCAuYnRuLS1tIHwgLmJ0bi0tbSB8IC5idG4tLWwgfAp8IFNjcmltIG9wYWNpdHkgfCAwLjU1IHwgMC41NSB8IDAuNyB8CgojIyBTdGF0ZXMKCkRpYWxvZ3MgaGF2ZSB0aHJlZSBsaWZlY3ljbGUgc3RhdGVzLiBVc2UgQ1NTIHRyYW5zaXRpb25zIHRvIHNtb290aCB0aGUgb3BlbmluZyBhbmQgY2xvc2luZyBleHBlcmllbmNlLgoKIyMgQ29udGVudAoKRGlhbG9nIGNvcHkgbXVzdCBiZSBkaXJlY3QsIHNwZWNpZmljLCBhbmQgY29uc2VxdWVudGlhbC4gVmFndWUgbGFuZ3VhZ2UgaW5jcmVhc2VzIGhlc2l0YXRpb24gYW5kIGVyb2RlcyBwbGF5ZXIgdHJ1c3QuCgotIE1heGltdW0gOCB3b3JkcwotIFNlbnRlbmNlIGNhc2UgdGhyb3VnaG91dAotIFF1ZXN0aW9uIGZvcm1hdCBmb3IgY29uZmlybWF0aW9uczogIkRlbGV0ZSBzYXZlIGRhdGE/IgotIFN0YXRlbWVudCBmb3IgYWxlcnRzOiAiU2Vzc2lvbiBleHBpcmVkIgotIE1hdGNoIHRoZSBhY3Rpb24gZXhhY3RseSDigJQgbm8gbWV0YXBob3JzCgotIE1heGltdW0gMiBzZW50ZW5jZXMKLSBQbGFpbiBsYW5ndWFnZSDigJQgbm8gamFyZ29uIG9yIHRlY2huaWNhbCB0ZXJtcwotIFN0YXRlIHdoYXQgaGFwcGVucyBBTkQgdGhlIGNvbnNlcXVlbmNlCi0gIlRoaXMgd2lsbCBwZXJtYW5lbnRseSByZW1vdmXigKYiIG5vdCAiRGF0YSB3aWxsIGJlIGRlbGV0ZWQiCi0gQXZvaWQgcmVwZWF0aW5nIHRoZSB0aXRsZSBpbiB0aGUgYm9keQoKLSBVc2UgdmVyYiBwaHJhc2VzLCBub3Qgbm91bnMKLSBNYXRjaCB0aGUgYWN0aW9uIGV4YWN0bHk6ICJEZWxldGUgc2F2ZSBkYXRhIiBub3QgIkRlbGV0ZSIKLSBTZWNvbmRhcnkgLyBjYW5jZWwgaXMgYWx3YXlzICJDYW5jZWwiCi0gUHJpbWFyeSBpcyBhbHdheXMgdGhlIGFjdGlvbiB2ZXJiCi0gTmV2ZXIgIk9LIiwgIlllcyIsICJObyIsIG9yICJDb25maXJtIgoKIyMgUGxhdGZvcm0gZ3VpZGFuY2UKCkRpYWxvZyBiZWhhdmlvciBhZGFwdHMgcGVyIHBsYXRmb3JtLiBUaGUgdmlzdWFsIHN0cnVjdHVyZSBzdGF5cyBjb25zaXN0ZW50OyBzY2FsZSBhbmQgaW50ZXJhY3Rpb24gbW9kZWwgZGlmZmVyLgoKLSBNYXgtd2lkdGg6IDM2MHB4LCBjZW50ZXJlZCBpbiB2aWV3cG9ydAotIEFwcGVhcnMgY2VudGVyZWQgb3IgYXMgZnVsbC1zY3JlZW4gb24gc21hbGwgcGhvbmVzCi0gQm9yZGVyLXJhZGl1czogMjBweCAodmFyKC0tcjcpKQotIFNjcmltIHRhcCBkaXNtaXNzZXMgbm9uLWNyaXRpY2FsIGRpYWxvZ3MKLSBGdWxsLXNjcmVlbiB2YXJpYW50IGF2YWlsYWJsZSBmb3IgY29tcGxleCB0YXNrcwotIE1pbmltdW0gdG91Y2ggdGFyZ2V0OiA0NHB4IGZvciBidXR0b25zCgotIE1heC13aWR0aDogNDgwcHgsIGFsd2F5cyBjZW50ZXJlZAotIE5ldmVyIGJvdHRvbS1zaGVldCBzdHlsZSBvbiBkZXNrdG9wCi0gQm9yZGVyLXJhZGl1czogMjBweCAodmFyKC0tcjcpKQotIEVzY2FwZSBrZXkgYWx3YXlzIGRpc21pc3NlcwotIEZ1bGwtc2NyZWVuIHZhcmlhbnQgbm90IHVzZWQKLSBCYWNrZHJvcCBjbGljayBkaXNtaXNzZXMgbm9uLWNyaXRpY2FsIGRpYWxvZ3MKCi0gTWF4LXdpZHRoOiA2NDBweCwgY2VudGVyZWQKLSBOZXZlciB1c2UgYm90dG9tIHNoZWV0IHN0eWxlCi0gQm9yZGVyLXJhZGl1czogMjhweCBmb3IgbGVnaWJpbGl0eSBhdCBkaXN0YW5jZQotIFVzZSAuYnRuLS1sIHNpemUsIG5ldmVyIC5idG4tLW0gb3Igc21hbGxlcgotIEQtcGFkIG5hdmlnYXRlcyBiZXR3ZWVuIGJ1dHRvbnMKLSBCYWNrIGJ1dHRvbiBvbiByZW1vdGUgZGlzbWlzc2VzCgojIyBNb3Rpb24KCnwgSW50ZXJhY3Rpb24gfCBFYXNpbmcgfCBEdXJhdGlvbiB8IFByb3BlcnR5IHwKfC0tLXwtLS18LS0tfC0tLXwKfCBPcGVuIHwgYC0tZWFzZS1vdXRgIHwgYC0tZHVyLWZhc3RgIHwgb3BhY2l0eSwgdHJhbnNmb3JtIHNjYWxlKDAuOTUg4oaSIDEpIHwKfCBDbG9zZSB8IGAtLWVhc2UtaW5gIHwgYC0tZHVyLWZhc3RgIHwgb3BhY2l0eSwgdHJhbnNmb3JtIHNjYWxlKDEg4oaSIDAuOTUpIHwKfCBTY3JpbSBmYWRlIGluIHwgYC0tZWFzZS1vdXRgIHwgYC0tZHVyLWZhc3RgIHwgb3BhY2l0eSB8CnwgU2NyaW0gZmFkZSBvdXQgfCBgLS1lYXNlLWluYCB8IGAtLWR1ci1mYXN0YCB8IG9wYWNpdHkgfAp8IFNoYWtlIChlcnJvcikgfCBgLS1lYXNlLW91dGAgfCBgNDAwbXNgIHwgdHJhbnNmb3JtIHRyYW5zbGF0ZVggKGtleWZyYW1lcykgfAoKIyMgQWNjZXNzaWJpbGl0eQoKRGlhbG9ncyBtdXN0IGJlIHVzYWJsZSBieSBrZXlib2FyZCwgc2NyZWVuIHJlYWRlciwgYW5kIGFzc2lzdGl2ZSB0ZWNobm9sb2d5LiBUaGVzZSByZXF1aXJlbWVudHMgYXJlIG5vbi1uZWdvdGlhYmxlLgoKIyMgUGxhdGZvcm0gY29uc2lkZXJhdGlvbnMKCi0gQXBwZWFycyBjZW50cmVkIHdpdGggZGFyayBiYWNrZHJvcDsgbWF4IHdpZHRoIDMyMHB4Ci0gVG91Y2ggb3V0c2lkZSBiYWNrZHJvcCBkaXNtaXNzZXMgd2hlbiBpc0Rpc21pc3NpYmxlIGlzIHRydWUKLSBMaW1pdCB0byAyIGFjdGlvbnM7IHN0YWNrIHZlcnRpY2FsbHkgaWYgbGFiZWxzIGFyZSBsb25nCi0gQXZvaWQgZGlhbG9ncyBkdXJpbmcgYWN0aXZlIGdhbWVwbGF5IOKAlCB1c2UgdG9hc3Qgb3IgYmFubmVyIGluc3RlYWQKCi0gTWF4IHdpZHRoIDQwMHB4OyBjZW50cmVkIHdpdGggc2VtaS10cmFuc3BhcmVudCBiYWNrZHJvcAotIEtleWJvYXJkOiBUYWIgY3ljbGVzIGZvY3VzOyBFc2MgZGlzbWlzc2VzOyBFbnRlciBjb25maXJtcyBwcmltYXJ5IGFjdGlvbgotIEZvY3VzIHRyYXBzIGluc2lkZSBkaWFsb2cgd2hpbGUgb3BlbgotIFNjcm9sbCBsb2NrIG9uIGJvZHkgd2hpbGUgZGlhbG9nIGlzIG9wZW4KCi0gUmVuZGVyIGFzIGZ1bGwtd2lkdGggY2VudHJlZCBjYXJkOyBhdm9pZCBzbWFsbCB0ZXh0Ci0gTWluaW11bSAyIEQtcGFkLWZvY3VzYWJsZSBhY3Rpb24gYnV0dG9ucwotIEJhY2sgYnV0dG9uIG9uIHJlbW90ZSA9IGNhbmNlbC9kaXNtaXNzCi0gVXNlIHNpemUgTCBvciBYTCBidXR0b25zIGluc2lkZSBUViBkaWFsb2dzCgojIyBSZWxhdGVkIHRva2VucwoKVGhlIGZvbGxvd2luZyBkZXNpZ24gdG9rZW5zIGNvbnRyb2wgZGlhbG9nIGFwcGVhcmFuY2UuIE92ZXJyaWRlIGF0IHRoZSBwbGF0Zm9ybS1zcGVjaWZpYyB0b2tlbiBsYXllciwgbmV2ZXIgaW5saW5lLgoKfCBUb2tlbiB8IERlZmF1bHQgdmFsdWUgfCBVc2FnZSB8CnwtLS18LS0tfC0tLXwKfCBgLS1vdmVybGF5LXNjcmltYCB8IHJnYmEoMCwwLDAsLjU1KSB8IFNjcmltIGJhY2tncm91bmQgYmVoaW5kIHRoZSBkaWFsb2cgfAp8IGAtLXI3YCB8IDIwcHggfCBEaWFsb2cgY29udGFpbmVyIGJvcmRlci1yYWRpdXMgfAp8IGAtLXN1cmZhY2UtMmAgfCAjMGUxMTE4IGFwcHJveC4gfCBEaWFsb2cgY2FyZCBiYWNrZ3JvdW5kIHwKfCBgLS1ib3JkZXJgIHwgcmdiYSgyNTUsMjU1LDI1NSwuMSkgYXBwcm94LiB8IERpYWxvZyBjYXJkIGJvcmRlciB8CnwgYC0tc2hhZG93LTRgIHwgMCAyNHB4IDQ4cHggcmdiYSgwLDAsMCwuNikgfCBFbGV2YXRpb24gc2hhZG93IG9uIGRpYWxvZyBjYXJkIHwKfCBgLS1kdXItcG9wYCB8IDIwMG1zIHwgT3BlbiBhbmltYXRpb24gZHVyYXRpb24gfAp8IGAtLWR1ci1kZWZhdWx0YCB8IDE1MG1zIHwgQ2xvc2UgYW5pbWF0aW9uIGR1cmF0aW9uIHwKCiMjIEFQSQoKIyMjIENTUyBjbGFzc2VzCgp8IENsYXNzIHwgRGVzY3JpcHRpb24gfAp8LS0tfC0tLXwKfCBgLmRzLWRpYWxvZ2AgfCBSb290IGRpYWxvZyBwYW5lbCDigJQgc3VyZmFjZS0yLCByNSwgbWF4LXcgNDgwcHggfAp8IGAuZHMtZGlhbG9nX19zY3JpbWAgfCBGdWxsLXNjcmVlbiBiYWNrZHJvcCDigJQgcmdiYSgwLDAsMCwuNikgfAp8IGAuZHMtZGlhbG9nX19oZWFkZXJgIHwgVGl0bGUgKyBvcHRpb25hbCBpY29uIHJvdyB8CnwgYC5kcy1kaWFsb2dfX3RpdGxlYCB8IERpYWxvZyB0aXRsZSDigJQgMThweCA3MDAgfAp8IGAuZHMtZGlhbG9nX19ib2R5YCB8IENvbnRlbnQgYXJlYSDigJQgMTRweCB0ZXh0MiB8CnwgYC5kcy1kaWFsb2dfX2Zvb3RlcmAgfCBBY3Rpb24gYnV0dG9ucyByb3cg4oCUIGZsZXggZW5kIHwKfCBgLmRzLWRpYWxvZ19fY2xvc2VgIHwgVG9wLXJpZ2h0IMOXIGJ1dHRvbiB8CgojIyMgUmVhY3QgcHJvcHMKCnwgUHJvcCB8IFR5cGUgfCBEZWZhdWx0IHwgRGVzY3JpcHRpb24gfAp8LS0tfC0tLXwtLS18LS0tfAp8IGBvcGVuYCB8IGJvb2xlYW4gfCByZXF1aXJlZCB8IENvbnRyb2xzIGRpYWxvZyB2aXNpYmlsaXR5IHwKfCBgb25PcGVuQ2hhbmdlYCB8IChvcGVuOiBib29sZWFuKSA9PiB2b2lkIHwgcmVxdWlyZWQgfCBDbG9zZSBoYW5kbGVyIHwKfCBgdGl0bGVgIHwgc3RyaW5nIHwgcmVxdWlyZWQgfCBEaWFsb2cgaGVhZGluZyB8CnwgYGRlc2NyaXB0aW9uYCB8IHN0cmluZyB8IHVuZGVmaW5lZCB8IEJvZHkgY29weSBiZWxvdyB0aXRsZSB8CnwgYGFjdGlvbnNgIHwgUmVhY3ROb2RlIHwgdW5kZWZpbmVkIHwgRm9vdGVyIGJ1dHRvbiByb3cgfAp8IGBzaXplYCB8ICJzbSIgfCAibWQiIHwgImxnIiB8ICJtZCIgfCBNYXgtd2lkdGggcHJlc2V0IHwKCiMjIENvZGUgZXhhbXBsZXMKCkNvcHkgdGhlc2Ugc25pcHBldHMgYXMgc3RhcnRpbmcgcG9pbnRzLiBBbHdheXMgbGluayBgdG9rZW5zL3Rva2Vucy5jc3NgLCBgY29tcG9uZW50cy5jc3NgLCBhbmQgYHN0YXRlcy5jc3NgIGJlZm9yZSB1c2luZyBjb21wb25lbnQgY2xhc3Nlcy4KCmBgYGAKPCEtLSBCYWNrZHJvcCAtLT4KPGRpdiBjbGFzcz0iZGlhbG9nLWJhY2tkcm9wIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PC9kaXY+Cgo8IS0tIERpYWxvZyAtLT4KPGRpdgogIGNsYXNzPSJkaWFsb2ciCiAgcm9sZT0iZGlhbG9nIgogIGFyaWEtbW9kYWw9InRydWUiCiAgYXJpYS1sYWJlbGxlZGJ5PSJkaWFsb2ctdGl0bGUiCiAgYXJpYS1kZXNjcmliZWRieT0iZGlhbG9nLWRlc2MiCj4KICA8aDIgaWQ9ImRpYWxvZy10aXRsZSIgY2xhc3M9ImRpYWxvZ19fdGl0bGUiPlJlbW92ZSBnYW1lPzwvaDI+CiAgPHAgaWQ9ImRpYWxvZy1kZXNjIiBjbGFzcz0iZGlhbG9nX19ib2R5Ij5UaGlzIHdpbGwgcmVtb3ZlIFdhciBUaHVuZGVyIGZyb20geW91ciBsaWJyYXJ5LjwvcD4KICA8ZGl2IGNsYXNzPSJkaWFsb2dfX2FjdGlvbnMiPgogICAgPGJ1dHRvbiBjbGFzcz0iYnRuIGJ0bi0tZ2hvc3QgYnRuLS1tIGJ0bi0taHVnIj5LZWVwPC9idXR0b24+CiAgICA8YnV0dG9uIGNsYXNzPSJidG4gYnRuLS1wcmltYXJ5IGJ0bi0tbSBidG4tLWh1ZyI+UmVtb3ZlPC9idXR0b24+CiAgPC9kaXY+CjwvZGl2PgpgYGBgCgpgYGBgCi8vIFRyYXAgZm9jdXMgaW5zaWRlIGRpYWxvZyB3aGlsZSBvcGVuCmZ1bmN0aW9uIHRyYXBGb2N1cyhkaWFsb2dFbCkgewogIGNvbnN0IGZvY3VzYWJsZSA9IGRpYWxvZ0VsLnF1ZXJ5U2VsZWN0b3JBbGwoCiAgICAnYnV0dG9uLCBbaHJlZl0sIGlucHV0LCBzZWxlY3QsIHRleHRhcmVhLCBbdGFiaW5kZXhdOm5vdChbdGFiaW5kZXg9Ii0xIl0pJwogICk7CiAgY29uc3QgZmlyc3QgPSBmb2N1c2FibGVbMF07CiAgY29uc3QgbGFzdCA9IGZvY3VzYWJsZVtmb2N1c2FibGUubGVuZ3RoIC0gMV07CiAgZGlhbG9nRWwuYWRkRXZlbnRMaXN0ZW5lcigna2V5ZG93bicsIChlKSA9PiB7CiAgICBpZiAoZS5rZXkgIT09ICdUYWInKSByZXR1cm47CiAgICBpZiAoZS5zaGlmdEtleSkgewogICAgICBpZiAoZG9jdW1lbnQuYWN0aXZlRWxlbWVudCA9PT0gZmlyc3QpIHsgZS5wcmV2ZW50RGVmYXVsdCgpOyBsYXN0LmZvY3VzKCk7IH0KICAgIH0gZWxzZSB7CiAgICAgIGlmIChkb2N1bWVudC5hY3RpdmVFbGVtZW50ID09PSBsYXN0KSB7IGUucHJldmVudERlZmF1bHQoKTsgZmlyc3QuZm9jdXMoKTsgfQogICAgfQogIH0pOwogIGZpcnN0LmZvY3VzKCk7Cn0KYGBgYAoKLS0tCgojIyBUb2tlbnMgcmVmZXJlbmNlZCBvbiB0aGlzIHBhZ2UKClVzZSB0aGVzZSBleGFjdCB0b2tlbnMg4oCUIGRlZmluZWQgaW4gYHRva2Vucy90b2tlbnMuY3NzYC4gRG8gbm90IHN1YnN0aXR1dGUgcmF3IHZhbHVlcy4KCi0gYC0tYmdgCi0gYC0tYm9yZGVyYAotIGAtLWJvcmRlci1zdWJ0bGVgCi0gYC0tZ2xhc3MtMWAKLSBgLS1qaW9gCi0gYC0tamlvLWZvbnRgCi0gYC0tbmVnYXRpdmVgCi0gYC0tcjRgCi0gYC0tcjdgCi0gYC0tc3VyZmFjZS0xYAotIGAtLXN1cmZhY2UtMmAKLSBgLS1zdXJmYWNlLTNgCi0gYC0tc3VyZmFjZS00YAotIGAtLXRleHRgCi0gYC0tdGV4dDJgCi0gYC0tdGV4dDNgCi0gYC0tdGV4dDRgCgotLS0KCiMjIEJ1aWxkIHJ1bGVzIChiaW5kaW5nKQoKMS4gVXNlICoqb25seSoqIHRoZSB0b2tlbnMgbGlzdGVkIGFib3ZlLiBJZiBhIHZhbHVlIHlvdSBuZWVkIGlzIG5vdCBsaXN0ZWQsIHN0b3AgYW5kIGFzayDigJQgZG8gbm90IGludHJvZHVjZSBhIHJhdyB2YWx1ZS4KMi4gRm9udCBpcyAqKkppb1R5cGUqKiBvbmx5LiBXZWlnaHRzOiAzMDAsIDUwMCwgNzAwLCA5MDAuCjMuIFJldXNlIHRoZSBjb21wb25lbnQgQ1NTIHBhdHRlcm5zIHNob3duIG9uIHRoZSBzb3VyY2UgcGFnZTsgZG8gbm90IHJlZGVzaWduLgo0LiBNYXRjaCBldmVyeSBzdGF0ZSAoZGVmYXVsdCwgaG92ZXIsIGZvY3VzLCBhY3RpdmUsIGRpc2FibGVkLCBsb2FkaW5nKSBzaG93biBvbiB0aGUgcGFnZS4KNS4gQWNjZXNzaWJpbGl0eSByZXF1aXJlbWVudHMgb24gdGhlIHBhZ2UgYXJlIG1hbmRhdG9yeSwgbm90IG9wdGlvbmFsLgo=" download="dialogs-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
     </div>
   </div>
 
@@ -232,6 +193,31 @@
   <!-- ===================================================
        4. BEST PRACTICES
   =================================================== -->
+  <!-- WHEN TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use</h2>
+    <div class="ds-usage-grid">
+      <div class="ds-usage-card ds-usage-card--do">
+        <p class="ds-usage-label ds-usage-label--do">Use when</p>
+        <ul class="ds-usage-list">
+              <li>Destructive action confirmation (delete account, cancel subscription)</li>
+              <li>Critical decisions requiring explicit user acknowledgement</li>
+              <li>Short forms that should not navigate away from the current screen</li>
+              <li>Error states requiring immediate user response</li>
+        </ul>
+      </div>
+      <div class="ds-usage-card ds-usage-card--dont">
+        <p class="ds-usage-label ds-usage-label--dont">Don't use when</p>
+        <ul class="ds-usage-list">
+              <li>Non-critical messages — use Toast or Banner instead</li>
+              <li>Large forms or multi-step flows — use a dedicated screen or Bottom Sheet</li>
+              <li>Stacking multiple dialogs — resolve one before showing another</li>
+              <li>Auto-showing on page load without user trigger</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <section class="ds-section" id="best-practices">
     <h2 class="ds-section-title">Best practices</h2>
     <p class="ds-section-desc">Follow these rules to keep dialog usage consistent and respectful of the player&#x27;s attention.</p>
@@ -497,7 +483,7 @@
         <!-- Opening -->
         <div class="state-cell">
           <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:16px 20px;opacity:.65;transform:scale(.92);width:180px">
-            <div style="font-size:12px;font-weight:800;color:var(--text);margin-bottom:4px">Opening</div>
+            <div style="font-size:12px;font-weight:900;color:var(--text);margin-bottom:4px">Opening</div>
             <div style="font-size:10px;color:var(--text3)">Fade 0&#x2192;1 + scale .92&#x2192;1</div>
             <div style="font-size:10px;color:var(--text4);margin-top:2px">200ms ease-out</div>
           </div>
@@ -508,7 +494,7 @@
         <!-- Default -->
         <div class="state-cell">
           <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:16px 20px;opacity:1;transform:scale(1);width:180px;box-shadow:0 12px 32px rgba(0,0,0,.5)">
-            <div style="font-size:12px;font-weight:800;color:var(--text);margin-bottom:4px">Default</div>
+            <div style="font-size:12px;font-weight:900;color:var(--text);margin-bottom:4px">Default</div>
             <div style="font-size:10px;color:var(--text3)">Fully visible, interactive</div>
             <div style="font-size:10px;color:var(--text4);margin-top:2px">opacity:1 · scale:1</div>
           </div>
@@ -519,7 +505,7 @@
         <!-- Closing -->
         <div class="state-cell">
           <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:16px 20px;opacity:.2;transform:scale(.96);width:180px">
-            <div style="font-size:12px;font-weight:800;color:var(--text);margin-bottom:4px">Closing</div>
+            <div style="font-size:12px;font-weight:900;color:var(--text);margin-bottom:4px">Closing</div>
             <div style="font-size:10px;color:var(--text3)">Fade 1&#x2192;0 · no scale</div>
             <div style="font-size:10px;color:var(--text4);margin-top:2px">150ms ease-in</div>
           </div>
@@ -618,6 +604,21 @@
   <!-- ===================================================
        11. ACCESSIBILITY
   =================================================== -->
+  <!-- MOTION -->
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-motion-table">
+      <thead><tr><th>Interaction</th><th>Easing</th><th>Duration</th><th>Property</th></tr></thead>
+      <tbody>
+        <tr><td>Open</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>opacity, transform scale(0.95 → 1)</td></tr>
+        <tr><td>Close</td><td><code>--ease-in</code></td><td><code>--dur-fast</code></td><td>opacity, transform scale(1 → 0.95)</td></tr>
+        <tr><td>Scrim fade in</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>opacity</td></tr>
+        <tr><td>Scrim fade out</td><td><code>--ease-in</code></td><td><code>--dur-fast</code></td><td>opacity</td></tr>
+        <tr><td>Shake (error)</td><td><code>--ease-out</code></td><td><code>400ms</code></td><td>transform translateX (keyframes)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
   <section class="ds-section" id="accessibility">
     <h2 class="ds-section-title">Accessibility</h2>
     <p class="ds-section-desc">Dialogs must be usable by keyboard, screen reader, and assistive technology. These requirements are non-negotiable.</p>
@@ -686,32 +687,7 @@
 </section>
 
   <!-- ===================================================
-       13. CONTENT GUIDANCE
-  =================================================== -->
-  <section id="content" class="component-section">
-  <h2 class="ds-section-title">Content guidance</h2>
-  <div class="component-content-grid">
-    <div>
-      <h3 class="ds-subsection-title">Title</h3>
-      <p class="ds-body">State the decision clearly in 4–6 words. Phrase as a question or outcome: "Remove this game?" not "Confirm action".</p>
-    </div>
-    <div>
-      <h3 class="ds-subsection-title">Body</h3>
-      <p class="ds-body">One sentence maximum. Explain the consequence, not the mechanism. "This will remove all your saved progress." not "This triggers a DELETE call."</p>
-    </div>
-    <div>
-      <h3 class="ds-subsection-title">Actions</h3>
-      <p class="ds-body">Confirm action on the right (primary), dismiss on the left (ghost or secondary). Never use "Yes/No" — use specific verbs like "Remove" and "Keep".</p>
-    </div>
-    <div>
-      <h3 class="ds-subsection-title">Tone</h3>
-      <p class="ds-body">Dialogs interrupt — keep them calm and direct. Avoid exclamation marks. Never use alarming language for non-destructive prompts.</p>
-    </div>
-  </div>
-</section>
-
-  <!-- ===================================================
-       14. RELATED TOKENS
+       13. RELATED TOKENS
   =================================================== -->
   <section class="ds-section" id="tokens">
     <h2 class="ds-section-title">Related tokens</h2>
@@ -735,6 +711,36 @@
   <!-- ===================================================
        CODE EXAMPLES
   =================================================== -->
+  <!-- API -->
+  <section class="ds-section" id="api">
+    <h2 class="ds-section-title">API</h2>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:0 0 12px;">CSS classes</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>.ds-dialog</code></td><td>Root dialog panel — surface-2, r5, max-w 480px</td></tr>
+        <tr><td><code>.ds-dialog__scrim</code></td><td>Full-screen backdrop — rgba(0,0,0,.6)</td></tr>
+        <tr><td><code>.ds-dialog__header</code></td><td>Title + optional icon row</td></tr>
+        <tr><td><code>.ds-dialog__title</code></td><td>Dialog title — 18px 700</td></tr>
+        <tr><td><code>.ds-dialog__body</code></td><td>Content area — 14px text2</td></tr>
+        <tr><td><code>.ds-dialog__footer</code></td><td>Action buttons row — flex end</td></tr>
+        <tr><td><code>.ds-dialog__close</code></td><td>Top-right × button</td></tr>
+      </tbody>
+    </table>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 12px;">React props</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>open</code></td><td><span class="api-type">boolean</span></td><td><span class="api-default">required</span></td><td>Controls dialog visibility</td></tr>
+        <tr><td><code>onOpenChange</code></td><td><span class="api-type">(open: boolean) => void</span></td><td><span class="api-default">required</span></td><td>Close handler</td></tr>
+        <tr><td><code>title</code></td><td><span class="api-type">string</span></td><td><span class="api-default">required</span></td><td>Dialog heading</td></tr>
+        <tr><td><code>description</code></td><td><span class="api-type">string</span></td><td><span class="api-default">undefined</span></td><td>Body copy below title</td></tr>
+        <tr><td><code>actions</code></td><td><span class="api-type">ReactNode</span></td><td><span class="api-default">undefined</span></td><td>Footer button row</td></tr>
+        <tr><td><code>size</code></td><td><span class="api-type">"sm" | "md" | "lg"</span></td><td><span class="api-default">"md"</span></td><td>Max-width preset</td></tr>
+      </tbody>
+    </table>
+  </section>
+
   <section class="component-section" id="code-examples">
     <h2 class="ds-section-title">Code examples</h2>
     <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
@@ -787,6 +793,6 @@ function trapFocus(dialogEl) {
 
 </main>
 <script src="../sprite-loader.js"></script>
-<script src="../shell.js"></script>
+<script src="../shell.js?v=2"></script>
 </body>
 </html>

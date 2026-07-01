@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[Component Name] — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=4">
+</head>
+<body>
+<main class="ds-content">
+
+  <!-- ============================================================
+       SECTION 1 — PAGE HEADER
+       Required fields: name, purpose (one sentence), platforms, status, Figma name
+  ============================================================ -->
+  <div class="component-page-header">
+    <div class="component-breadcrumb">
+      <a href="../index.html">JioGames DLS</a>
+      <span class="component-breadcrumb-sep">&#x203A;</span>
+      <span>Components</span>
+      <span class="component-breadcrumb-sep">&#x203A;</span>
+      <span>[Component Name]</span>
+    </div>
+    <h1 class="component-page-title">[Component Name]</h1>
+    <p class="component-page-def">[One sentence. What this component IS and what it DOES. Start with "A [noun]…" or "[Verb]s the…"]</p>
+
+    <!-- Platform chips + status + Figma link — all on one row -->
+    <div class="component-platforms">
+      <!-- Include only platforms this component ships on -->
+      <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+      <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+      <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+
+      <!-- Status: stable | beta | draft -->
+      <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+
+      <!-- Figma component name — link to Figma file if available -->
+      <a href="#" class="component-figma-chip" target="_blank" rel="noopener">
+        <svg width="10" height="14" viewBox="0 0 38 57" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M19 28.5A9.5 9.5 0 1 1 28.5 19 9.51 9.51 0 0 1 19 28.5z" fill="#1ABCFE"/>
+          <path d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5A9.5 9.5 0 0 1 0 47.5z" fill="#0ACF83"/>
+          <path d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19z" fill="#FF7262"/>
+          <path d="M0 9.5a9.5 9.5 0 0 0 9.5 9.5H19V0H9.5A9.5 9.5 0 0 0 0 9.5z" fill="#F24E1E"/>
+          <path d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z" fill="#A259FF"/>
+        </svg>
+        DLS / Components / [Figma Component Name]
+      </a>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       HERO — Live component preview
+       Show the most representative state. Grid bg preferred.
+  ============================================================ -->
+  <section class="component-hero component-hero--dark component-hero--grid" id="overview">
+    <div class="hero-glow" style="top:50%;left:50%;transform:translate(-50%,-50%)"></div>
+    <div class="component-hero-inner">
+
+      <!-- INSERT: live component demo here -->
+      <div style="color:var(--text3);font-size:13px;font-weight:500">[ Live preview — replace with real component ]</div>
+
+    </div>
+    <span class="component-hero-caption">[Variant shown] · [Platform] · [Scale]</span>
+  </section>
+
+  <!-- ============================================================
+       SECTION 2 — PURPOSE
+       Already covered by the one-sentence component-page-def above.
+       If more context is needed, use component-intro.
+  ============================================================ -->
+  <section class="component-intro" id="purpose">
+    <p>[2–3 sentences expanding on what the component does, how it fits in the product, and what it communicates to the player. Avoid feature lists — explain the mental model.]</p>
+    <ul class="component-summary-list">
+      <li><strong>[Key principle 1].</strong> [One sentence.]</li>
+      <li><strong>[Key principle 2].</strong> [One sentence.]</li>
+      <li><strong>[Key principle 3].</strong> [One sentence.]</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================
+       SECTION 3 — WHEN TO USE
+       SECTION 4 — WHEN NOT TO USE
+       Two columns, explicit. Not buried in best practices.
+  ============================================================ -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use</h2>
+    <p class="ds-section-desc">[One sentence framing when this is the right choice vs. alternatives.]</p>
+    <div class="ds-usage-grid">
+      <div class="ds-usage-card ds-usage-card--do">
+        <div class="ds-usage-label ds-usage-label--do">Use when</div>
+        <ul class="ds-usage-list">
+          <li>[Specific scenario where this component is correct choice]</li>
+          <li>[Another scenario — be specific, not generic]</li>
+          <li>[A third scenario]</li>
+          <li>[Optionally a fourth]</li>
+        </ul>
+      </div>
+      <div class="ds-usage-card ds-usage-card--dont">
+        <div class="ds-usage-label ds-usage-label--dont">Don't use when</div>
+        <ul class="ds-usage-list">
+          <li>[Scenario where a different component is better — name the alternative]</li>
+          <li>[Another anti-use case]</li>
+          <li>[Edge case that should use something else]</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 5 — VARIANTS
+       Show every variant with label. Use live components, not images.
+  ============================================================ -->
+  <section class="ds-section" id="variants">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">[How many variants exist and the hierarchy rule — e.g. "Use the lowest-weight variant that still communicates the action's importance."]</p>
+
+    <!-- Variant showcase grid — use real components -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-top:24px">
+
+      <div style="display:flex;flex-direction:column;gap:12px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:20px;align-items:flex-start">
+        <span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text3)">[Variant 1 name]</span>
+        <!-- INSERT: component variant 1 -->
+        <div style="color:var(--text3);font-size:12px">[ variant 1 ]</div>
+        <p style="font-size:12px;font-weight:500;color:var(--text3);margin:0;line-height:1.5">[When to use this variant]</p>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:20px;align-items:flex-start">
+        <span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text3)">[Variant 2 name]</span>
+        <!-- INSERT: component variant 2 -->
+        <div style="color:var(--text3);font-size:12px">[ variant 2 ]</div>
+        <p style="font-size:12px;font-weight:500;color:var(--text3);margin:0;line-height:1.5">[When to use this variant]</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 6 — SIZES
+       Show size scale. Use a matrix if platform-aware.
+  ============================================================ -->
+  <section class="ds-section" id="sizes">
+    <h2 class="ds-section-title">Sizes</h2>
+    <p class="ds-section-desc">[How sizing works. If platform-aware: "Size names describe hierarchy. Token aliases resolve to different px values per platform."]</p>
+
+    <!-- Size matrix table -->
+    <table class="ds-motion-table" style="margin-top:24px">
+      <thead>
+        <tr>
+          <th>Size</th>
+          <th>Token</th>
+          <th>Mobile</th>
+          <th>Web</th>
+          <th>TV</th>
+          <th>When to use</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>XS</td>
+          <td><code>--[token]-xs</code></td>
+          <td>[px]</td>
+          <td>[px]</td>
+          <td>[px]</td>
+          <td>[use case]</td>
+        </tr>
+        <tr>
+          <td>S</td>
+          <td><code>--[token]-s</code></td>
+          <td>[px]</td>
+          <td>[px]</td>
+          <td>[px]</td>
+          <td>[use case]</td>
+        </tr>
+        <tr>
+          <td>M</td>
+          <td><code>--[token]-m</code></td>
+          <td>[px]</td>
+          <td>[px]</td>
+          <td>[px]</td>
+          <td>[use case]</td>
+        </tr>
+        <tr>
+          <td>L</td>
+          <td><code>--[token]-l</code></td>
+          <td>[px]</td>
+          <td>[px]</td>
+          <td>[px]</td>
+          <td>Default CTA</td>
+        </tr>
+        <tr>
+          <td>XL</td>
+          <td><code>--[token]-xl</code></td>
+          <td>[px]</td>
+          <td>[px]</td>
+          <td>[px]</td>
+          <td>[use case]</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============================================================
+       SECTION 7 — STATES
+       Every applicable state from the DLS state model.
+       States: default | hover | pressed | focus | selected | disabled | loading | error | success | locked
+  ============================================================ -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <p class="ds-section-desc">[Which states this component supports. Every interactive component must declare all states — "not applicable" is a valid answer for some.]</p>
+
+    <!-- State showcase — use is-* helper classes from states.css -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin-top:24px">
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+        <!-- INSERT: component in default state -->
+        <div style="color:var(--text3);font-size:12px">[ default ]</div>
+        <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--text3);text-transform:uppercase">Default</span>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+        <!-- INSERT: component with is-focused class or :focus styles -->
+        <div style="color:var(--text3);font-size:12px">[ focus ]</div>
+        <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--jio);text-transform:uppercase">Focus</span>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+        <!-- INSERT: component with is-disabled class -->
+        <div style="color:var(--text3);font-size:12px">[ disabled ]</div>
+        <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--text3);text-transform:uppercase">Disabled</span>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+        <!-- INSERT: component with is-loading class -->
+        <div style="color:var(--text3);font-size:12px">[ loading ]</div>
+        <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--text3);text-transform:uppercase">Loading</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 8 — MOTION
+       List every animation this component uses — trigger, duration, easing.
+       If no animation: "This component has no animated states."
+  ============================================================ -->
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <p class="ds-section-desc">[Summarise the motion intent — e.g. "Transitions are fast and directional. They confirm user input without drawing attention away from content."]</p>
+
+    <table class="ds-motion-table">
+      <thead>
+        <tr>
+          <th>Interaction</th>
+          <th>Property</th>
+          <th>Duration</th>
+          <th>Easing</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Press / tap</td>
+          <td><code>transform: scale()</code></td>
+          <td><code>--dur-fast</code> (120ms)</td>
+          <td><code>--spring</code></td>
+          <td>Scale down on press, restore on release</td>
+        </tr>
+        <tr>
+          <td>Focus ring appear</td>
+          <td><code>box-shadow</code></td>
+          <td><code>--dur-instant</code> (90ms)</td>
+          <td><code>--ease-out</code></td>
+          <td>Focus ring must never be delayed</td>
+        </tr>
+        <tr>
+          <td>State change (hover→default)</td>
+          <td><code>background, border-color</code></td>
+          <td><code>--dur-fast</code> (120ms)</td>
+          <td><code>--spring</code></td>
+          <td>Explicit properties only — no transition:all</td>
+        </tr>
+        <tr>
+          <td>Loading spinner enter</td>
+          <td><code>opacity</code></td>
+          <td><code>--dur-default</code> (200ms)</td>
+          <td><code>--ease-out</code></td>
+          <td>Spinner fades in; label fades out simultaneously</td>
+        </tr>
+        <tr>
+          <td>[Add more rows as needed]</td>
+          <td><code></code></td>
+          <td><code></code></td>
+          <td><code></code></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top:12px;font-size:12px;font-weight:500;color:var(--text3);line-height:1.5">
+      Reduced motion: all transitions collapse to instant or minimal fade. Set via
+      <code class="ds-code">@media (prefers-reduced-motion: reduce)</code> — tokens handle this automatically.
+    </p>
+  </section>
+
+  <!-- ============================================================
+       SECTION 9 — CONTENT RULES
+       Copy guidelines specific to this component.
+  ============================================================ -->
+  <section class="ds-section" id="content">
+    <h2 class="ds-section-title">Content rules</h2>
+    <p class="ds-section-desc">[Copy guidelines for this component — labels, character limits, tone.]</p>
+
+    <div class="component-content-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px">
+      <div class="component-bp-card component-bp-card--do">
+        <span class="component-bp-label component-bp-label--do">Do</span>
+        <ul class="component-bp-list">
+          <li>[Specific copy rule — e.g. "Use action verbs: Play, Start, Continue"]</li>
+          <li>[Character limit if applicable]</li>
+          <li>[Tone or casing rule]</li>
+        </ul>
+      </div>
+      <div class="component-bp-card component-bp-card--dont">
+        <span class="component-bp-label component-bp-label--dont">Don't</span>
+        <ul class="component-bp-list">
+          <li>[Anti-pattern — e.g. "Don't use passive voice: 'Game is played'"]</li>
+          <li>[Avoid vague labels — e.g. "Don't use 'Click here'"]</li>
+          <li>[Truncation rule if any]</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 10 — DO / DON'T
+       Code-level usage rules — composition, structure, token choices.
+       Distinct from content rules (above) and when-to-use (structural).
+  ============================================================ -->
+  <section class="ds-section" id="best-practices">
+    <h2 class="ds-section-title">Do / Don't</h2>
+    <p class="ds-section-desc">Implementation-level rules that prevent the most common misuses.</p>
+
+    <div class="component-best-practices">
+      <div class="component-bp-card component-bp-card--do">
+        <span class="component-bp-label component-bp-label--do">Do</span>
+        <ul class="component-bp-list">
+          <li>[Specific implementation rule]</li>
+          <li>[Another rule — e.g. "Use --r5 for card radius, never raw 16px"]</li>
+          <li>[Platform-specific rule]</li>
+          <li>[Token rule]</li>
+        </ul>
+      </div>
+      <div class="component-bp-card component-bp-card--dont">
+        <span class="component-bp-label component-bp-label--dont">Don't</span>
+        <ul class="component-bp-list">
+          <li>[Anti-pattern — e.g. "Don't use transition:all"]</li>
+          <li>[Token violation — e.g. "Don't use raw hex #00A859 — use var(--jio)"]</li>
+          <li>[Composition mistake]</li>
+          <li>[Platform mistake]</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 11 — PLATFORM RULES
+       Different behaviour on Mobile / Web / TV.
+       If identical across platforms, say so.
+  ============================================================ -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform rules</h2>
+    <p class="ds-section-desc">[Summary of how behaviour differs — or confirm it's consistent.]</p>
+
+    <div class="component-platform-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:24px">
+
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:20px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+          <span class="component-platform component-platform--mobile" style="margin:0"><span class="component-platform-dot"></span>Mobile</span>
+        </div>
+        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:500;color:var(--text2);line-height:1.5">
+          <li>Touch target: minimum 44×44px</li>
+          <li>[Mobile-specific rule]</li>
+          <li>[Another mobile rule]</li>
+        </ul>
+      </div>
+
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:20px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+          <span class="component-platform component-platform--web" style="margin:0"><span class="component-platform-dot"></span>Web</span>
+        </div>
+        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:500;color:var(--text2);line-height:1.5">
+          <li>Hover state active</li>
+          <li>[Web-specific rule]</li>
+          <li>[Keyboard shortcut if any]</li>
+        </ul>
+      </div>
+
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:20px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+          <span class="component-platform component-platform--tv" style="margin:0"><span class="component-platform-dot"></span>TV</span>
+        </div>
+        <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:500;color:var(--text2);line-height:1.5">
+          <li>No hover — focus ring always visible</li>
+          <li>D-pad navigation. Focus order must be logical.</li>
+          <li>[TV-specific size or spacing rule]</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 12 — ACCESSIBILITY
+       WCAG requirements, ARIA roles, keyboard nav, focus, screen reader.
+  ============================================================ -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <p class="ds-section-desc">WCAG 2.1 AA minimum. These are not optional — ship nothing that violates them.</p>
+
+    <div class="a11y-table" style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;margin-top:24px">
+
+      <div style="display:grid;grid-template-columns:140px 1fr;gap:0;border-bottom:1px solid var(--border-subtle)">
+        <div style="padding:14px 16px;font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.3px;background:var(--surface-2);text-transform:uppercase;display:flex;align-items:flex-start;padding-top:16px">Role</div>
+        <div style="padding:14px 20px;font-size:12px;font-weight:500;color:var(--text2);line-height:1.6;background:var(--surface-1)">
+          <code class="ds-code">role="[role]"</code> — [what screen readers announce]
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:140px 1fr;gap:0;border-bottom:1px solid var(--border-subtle)">
+        <div style="padding:14px 16px;font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.3px;background:var(--surface-2);text-transform:uppercase;display:flex;align-items:flex-start;padding-top:16px">Labels</div>
+        <div style="padding:14px 20px;font-size:12px;font-weight:500;color:var(--text2);line-height:1.6;background:var(--surface-1)">
+          [When visible text is sufficient vs. when aria-label is required]
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:140px 1fr;gap:0;border-bottom:1px solid var(--border-subtle)">
+        <div style="padding:14px 16px;font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.3px;background:var(--surface-2);text-transform:uppercase;display:flex;align-items:flex-start;padding-top:16px">Keyboard</div>
+        <div style="padding:14px 20px;font-size:12px;font-weight:500;color:var(--text2);line-height:1.6;background:var(--surface-1)">
+          <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px">
+            <li><kbd>Tab</kbd> — focus</li>
+            <li><kbd>Enter</kbd> / <kbd>Space</kbd> — activate</li>
+            <li>[Other keyboard interactions]</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:140px 1fr;gap:0;border-bottom:1px solid var(--border-subtle)">
+        <div style="padding:14px 16px;font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.3px;background:var(--surface-2);text-transform:uppercase;display:flex;align-items:flex-start;padding-top:16px">Focus</div>
+        <div style="padding:14px 20px;font-size:12px;font-weight:500;color:var(--text2);line-height:1.6;background:var(--surface-1)">
+          Never suppress <code class="ds-code">:focus-visible</code>. Green glow ring: <code class="ds-code">box-shadow: 0 0 0 3px rgba(0,168,89,.15)</code>. TV: <code class="ds-code">var(--tv-focus-shadow)</code>.
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:140px 1fr;gap:0;border-bottom:1px solid var(--border-subtle)">
+        <div style="padding:14px 16px;font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.3px;background:var(--surface-2);text-transform:uppercase;display:flex;align-items:flex-start;padding-top:16px">Touch target</div>
+        <div style="padding:14px 20px;font-size:12px;font-weight:500;color:var(--text2);line-height:1.6;background:var(--surface-1)">
+          Minimum 44×44px on mobile (<code class="ds-code">--touch-min</code>). Visual size may be smaller — pad transparently.
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:140px 1fr;gap:0">
+        <div style="padding:14px 16px;font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.3px;background:var(--surface-2);text-transform:uppercase;display:flex;align-items:flex-start;padding-top:16px">Motion</div>
+        <div style="padding:14px 20px;font-size:12px;font-weight:500;color:var(--text2);line-height:1.6;background:var(--surface-1)">
+          Respect <code class="ds-code">prefers-reduced-motion</code>. Duration tokens automatically collapse — do not hardcode <code class="ds-code">ms</code> values in component CSS.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 13 — CSS CLASS / REACT API
+       Every class the component exposes. React props if applicable.
+       Two tabs: CSS | React
+  ============================================================ -->
+  <section class="ds-section" id="api">
+    <h2 class="ds-section-title">CSS class / React API</h2>
+    <p class="ds-section-desc">All classes this component exposes. Use these — never write one-off overrides.</p>
+
+    <!-- CSS tab (default) -->
+    <div style="margin-top:24px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-bottom:12px">CSS Classes</div>
+      <table class="ds-api-table">
+        <thead>
+          <tr>
+            <th style="width:200px">Class</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>.ds-[component]</code></td>
+            <td>
+              Base element. Required on root node.
+              <span class="api-desc">Always applied first.</span>
+            </td>
+          </tr>
+          <tr>
+            <td><code>.ds-[component]--[variant]</code></td>
+            <td>
+              [Variant name] variant.
+              <span class="api-desc">[When to use this variant.]</span>
+            </td>
+          </tr>
+          <tr>
+            <td><code>.ds-[component]--[size]</code></td>
+            <td>
+              [Size] size modifier.
+              <span class="api-desc">Mobile: [px] / Web: [px] / TV: [px]</span>
+            </td>
+          </tr>
+          <tr>
+            <td><code>.is-disabled</code></td>
+            <td>
+              Disabled state.
+              <span class="api-desc">Add aria-disabled="true" alongside this class.</span>
+            </td>
+          </tr>
+          <tr>
+            <td><code>.is-loading</code></td>
+            <td>
+              Loading state. Shows spinner, hides label.
+              <span class="api-desc">Keep element width stable during loading.</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- React API (if applicable) -->
+    <div style="margin-top:32px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-bottom:12px">React Props</div>
+      <table class="ds-api-table">
+        <thead>
+          <tr>
+            <th style="width:160px">Prop</th>
+            <th style="width:120px">Type</th>
+            <th style="width:120px">Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>variant</code></td>
+            <td><span class="api-type">'primary' | 'secondary' | 'ghost'</span></td>
+            <td><span class="api-default">'primary'</span></td>
+            <td>Visual variant</td>
+          </tr>
+          <tr>
+            <td><code>size</code></td>
+            <td><span class="api-type">'xs' | 's' | 'm' | 'l' | 'xl'</span></td>
+            <td><span class="api-default">'l'</span></td>
+            <td>Size token alias. Resolves per platform.</td>
+          </tr>
+          <tr>
+            <td><code>disabled</code></td>
+            <td><span class="api-type">boolean</span></td>
+            <td><span class="api-default">false</span></td>
+            <td>Disabled state. Sets aria-disabled and opacity.</td>
+          </tr>
+          <tr>
+            <td><code>loading</code></td>
+            <td><span class="api-type">boolean</span></td>
+            <td><span class="api-default">false</span></td>
+            <td>Shows spinner. Prevents re-submission.</td>
+          </tr>
+          <tr>
+            <td><code>asChild</code></td>
+            <td><span class="api-type">boolean</span></td>
+            <td><span class="api-default">false</span></td>
+            <td>Render as child element (Radix pattern).</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 14 — RELATED TOKENS
+       Every token this component consumes. Change here = change everywhere.
+  ============================================================ -->
+  <section class="ds-section" id="tokens">
+    <h2 class="ds-section-title">Related tokens</h2>
+    <p class="ds-section-desc">All values come from <code class="ds-code">tokens/tokens.css</code>. Never hardcode dimensions, colours, or durations in component CSS.</p>
+
+    <table class="ds-api-table" style="margin-top:24px">
+      <thead>
+        <tr>
+          <th style="width:240px">Token</th>
+          <th style="width:120px">Value</th>
+          <th>Used for</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>--[token-name]</code></td>
+          <td>[value]</td>
+          <td>[What property it controls on this component]</td>
+        </tr>
+        <tr>
+          <td><code>--[token-name-2]</code></td>
+          <td>[value]</td>
+          <td>[What property]</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============================================================
+       SECTION 15 — CODE EXAMPLES
+       Copy-pasteable patterns. HTML-first. React optional.
+  ============================================================ -->
+  <section class="ds-section" id="code">
+    <h2 class="ds-section-title">Code examples</h2>
+    <p class="ds-section-desc">Copy-pasteable patterns for every common use case.</p>
+
+    <!-- Example 1 -->
+    <h3 class="ds-subsection-title" style="margin-top:32px">[Most common use case]</h3>
+    <div class="component-code-block" style="margin-top:12px">
+      <div class="component-code-header">
+        <span>HTML</span>
+      </div>
+      <pre class="component-code-pre"><code>&lt;!-- [Component Name]: [variant], [size] --&gt;
+&lt;[element] class="ds-[component] ds-[component]--[variant] ds-[component]--[size]"
+         [aria-attributes]&gt;
+  [Content]
+&lt;/[element]&gt;</code></pre>
+    </div>
+
+    <!-- Example 2 -->
+    <h3 class="ds-subsection-title" style="margin-top:32px">[Second use case]</h3>
+    <div class="component-code-block" style="margin-top:12px">
+      <div class="component-code-header">
+        <span>HTML</span>
+      </div>
+      <pre class="component-code-pre"><code>&lt;!-- [Describe the pattern] --&gt;
+&lt;[element] class="ds-[component] ds-[component]--[variant]"&gt;
+  [Content]
+&lt;/[element]&gt;</code></pre>
+    </div>
+
+    <!-- React (if applicable) -->
+    <h3 class="ds-subsection-title" style="margin-top:32px">React</h3>
+    <div class="component-code-block" style="margin-top:12px">
+      <div class="component-code-header">
+        <span>TSX</span>
+      </div>
+      <pre class="component-code-pre"><code>import { [ComponentName] } from '@jiogames/dls';
+
+// [Most common use case]
+&lt;[ComponentName] variant="[variant]" size="l"&gt;
+  [Label]
+&lt;/[ComponentName]&gt;
+
+// [Second use case]
+&lt;[ComponentName] variant="[variant]" loading disabled&gt;
+  [Label]
+&lt;/[ComponentName]&gt;</code></pre>
+    </div>
+  </section>
+
+</main>
+
+<script src="../sprite-loader.js"></script>
+<script src="../shell.js?v=4"></script>
+</body>
+</html>

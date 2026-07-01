@@ -7,24 +7,24 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
 </head>
 <body>
   <main class="ds-main">
     <header class="component-page-header">
       <nav class="component-breadcrumb" aria-label="Breadcrumb">
-        <a href="../">JioGames DLS</a>
-        <span class="component-breadcrumb-sep" aria-hidden="true">›</span>
-        <span>Governance</span>
+        <span class="component-breadcrumb-link">JioGames DLS</span>
+        <span class="component-breadcrumb-sep">›</span>
+        <span class="component-breadcrumb-current">Governance</span>
       </nav>
-      <h1 class="component-page-title">Governance</h1>
-      <p class="component-page-def">Token naming conventions, versioning policy, the process for adding new tokens, component contracts, and deprecation patterns.</p>
+      <h1 class="component-page-title">Governance</h1><p class="component-page-def">Token naming conventions, versioning policy, the process for adding new tokens, component contracts, and deprecation patterns.</p>
       <div class="component-platforms">
         <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
         <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
         <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
         <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
-      </div>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBHb3Zlcm5hbmNlIOKAlCBKaW9HYW1lcyBETFMgc3BlYwoKPiBTb3VyY2U6IGBnb3Zlcm5hbmNlL2luZGV4Lmh0bWxgIGluIHRoZSBKaW9HYW1lcyBEZXNpZ24gU3lzdGVtLgo+IFRoaXMgc3BlYyBpcyBnZW5lcmF0ZWQgdmVyYmF0aW0gZnJvbSB0aGUgcGFnZSDigJQgZG8gbm90IGludmVudCB2YWx1ZXMgbm90IGxpc3RlZCBoZXJlLgoKKipQYXRoOioqIEppb0dhbWVzIERMUyDigLogR292ZXJuYW5jZQoKLS0tCgpUb2tlbiBuYW1pbmcgY29udmVudGlvbnMsIHZlcnNpb25pbmcgcG9saWN5LCB0aGUgcHJvY2VzcyBmb3IgYWRkaW5nIG5ldyB0b2tlbnMsIGNvbXBvbmVudCBjb250cmFjdHMsIGFuZCBkZXByZWNhdGlvbiBwYXR0ZXJucy4KClJGQyDihpIgUkVWSUVXIOKGkiBCVUlMRCDihpIgU0hJUCDCtyBTRU1WRVIgwrcgREVQUkVDQVRJT04gUE9MSUNZCgojIyBDb250cmlidXRpb24gUHJvY2VzcwoKQWxsIG5ldyBjb21wb25lbnRzIGFuZCB0b2tlbnMgZm9sbG93IHRoaXMgZm91ci1zdGVwIHByb2Nlc3MuIE5vdGhpbmcgc2hpcHMgd2l0aG91dCBjb21wbGV0aW5nIGVhY2ggZ2F0ZS4KCiMjIyBSRkMgdGVtcGxhdGUKCiMjIFZlcnNpb25pbmcKClRoZSBETFMgZm9sbG93cyBzZW12ZXIuIEV2ZXJ5IHJlbGVhc2UgbXVzdCBpbmNsdWRlIGEgY2hhbmdlbG9nIGVudHJ5LiBCcmVha2luZyBjaGFuZ2VzIHJlcXVpcmUgYSBtaWdyYXRpb24gZ3VpZGUgaW4gdGhlIGNoYW5nZWxvZy4KCnwgVmVyc2lvbiBidW1wIHwgVHJpZ2dlcnMgfCBFeGFtcGxlIHwKfC0tLXwtLS18LS0tfAp8IE1BSk9SIHwgVG9rZW4gb3IgY29tcG9uZW50IEFQSSBicmVha2luZyBjaGFuZ2Ug4oCUIHJlbmFtZSwgcmVtb3ZhbCwgc2VtYW50aWMgbWVhbmluZyBjaGFuZ2UgfCBgLS1jdHJsLWhgIHJlbmFtZWQgdG8gYC0tYnRuLWgtbGdgIHwKfCBNSU5PUiB8IE5ldyBjb21wb25lbnQgYWRkZWQsIG5ldyB0b2tlbiBhZGRlZCwgbmV3IHBsYXRmb3JtIHZhcmlhbnQgfCBBZGRpbmcgYC0tY2FyZC1jb250aW51ZS1wcm9ncmVzc2AgfAp8IFBBVENIIHwgQnVnIGZpeCwgZG9jIHVwZGF0ZSwgY29ycmVjdGluZyBhIHdyb25nIHRva2VuIHZhbHVlIHwgRml4aW5nIGAtLXI1YCBmcm9tIDE0cHggdG8gMTZweCB8CgojIyMgRGVwcmVjYXRpb24gcG9saWN5CgotIERlcHJlY2F0ZWQgdG9rZW5zIGFuZCBjb21wb25lbnRzIGFyZSBrZXB0IGZvciAqKjIgbWlub3IgdmVyc2lvbnMqKiBhZnRlciBkZXByZWNhdGlvbiwgd2l0aCBhIGBjb25zb2xlLndhcm5gIGluIEpTIHRvb2xpbmcgcG9pbnRpbmcgdG8gdGhlIHJlcGxhY2VtZW50LgotIE9uIHJlbW92YWwgKE1BSk9SIHZlcnNpb24pLCB0aGUgb2xkIG5hbWUgaXMga2VwdCBhcyBhIENTUyBhbGlhcyBmb3IgKioxIGZ1bGwgbWFqb3IgdmVyc2lvbioqIHBvaW50aW5nIHRvIHRoZSBuZXcgdG9rZW46IGAtLW9sZC10b2tlbjogdmFyKC0tbmV3LXRva2VuKTtgCi0gRXZlcnkgZGVwcmVjYXRlZCBpdGVtIGdldHMgYSBkZXByZWNhdGlvbiBub3RpY2UgaW4gaXRzIERMUyBwYWdlIOKAlCB5ZWxsb3cgYmFubmVyIHdpdGggdGhlIHZlcnNpb24gaXQgd2FzIGRlcHJlY2F0ZWQgaW4gYW5kIHRoZSByZXBsYWNlbWVudCBuYW1lLgotIFJlbW92aW5nIGEgdG9rZW4gb3IgY29tcG9uZW50IHdpdGhvdXQgYSBtaWdyYXRpb24gZ3VpZGUgaW4gdGhlIGNoYW5nZWxvZy4KCiMjIENvbXBvbmVudCBNYXR1cml0eQoKRXZlcnkgY29tcG9uZW50IGhhcyBhIG1hdHVyaXR5IHN0YXR1cy4gU3RhdHVzIGdhdGVzIHdoYXQgdGVhbXMgY2FuIGRvIHdpdGggaXQg4oCUIEV4cGVyaW1lbnRhbCBjb21wb25lbnRzIG1heSBjaGFuZ2Ugd2l0aG91dCBub3RpY2UuCgojIyMgTWF0dXJpdHkgbGV2ZWxzCgp8IFN0YXR1cyB8IENoaXAgfCBNZWFuaW5nIHwgQ2FuIHRlYW1zIGFkb3B0PyB8CnwtLS18LS0tfC0tLXwtLS18CnwgRXhwZXJpbWVudGFsIHwgRXhwZXJpbWVudGFsIHwgVW5kZXIgYWN0aXZlIGRlc2lnbi9kZXZlbG9wbWVudC4gQVBJIGFuZCB0b2tlbnMgbWF5IGNoYW5nZSB3aXRob3V0IG5vdGljZS4gTm8gbWlncmF0aW9uIGd1YXJhbnRlZS4gfCBPcHQtaW4gb25seSDigJQgZXhwZWN0IGNodXJuIHwKfCBSZWFkeSB8IFJlYWR5IHwgU3RhYmxlIGNvbnRyYWN0LCBkb2N1bWVudGVkIHN0YXRlcywgV0NBRyBjaGVja2VkLCBUViB2YXJpYW50IHNwZWNpZmllZC4gU2FmZSB0byBhZG9wdC4gfCBZZXMg4oCUIHN0YWJsZSBBUEkgfAp8IERlcHJlY2F0ZWQgfCBEZXByZWNhdGVkIHwgU2NoZWR1bGVkIGZvciByZW1vdmFsLiBSZXBsYWNlbWVudCBkb2N1bWVudGVkLiBEbyBub3QgYWRvcHQgaW4gbmV3IHdvcmsuIHwgTWlncmF0ZSBhd2F5IOKAlCByZW1vdmFsIHNjaGVkdWxlZCB8CgojIyMgSG93IG1hdHVyaXR5IGFwcGVhcnMgaW4gbmF2CgojIyBUb2tlbiBHb3Zlcm5hbmNlCgpUb2tlbnMgZm9sbG93IGEgc3RyaWN0IHRocmVlLXRpZXIgaGllcmFyY2h5LiBDb21wb25lbnQgQ1NTIG11c3QgbmV2ZXIgcmVmZXJlbmNlIHByaW1pdGl2ZSB0b2tlbnMgZGlyZWN0bHkuCgojIyMgVGhyZWUtdGllciBtb2RlbAoKIyMjIFJ1bGVzIGZvciBuZXcgdG9rZW5zCgotIEEgdmFsdWUgd2FycmFudHMgYSB0b2tlbiBvbmx5IHdoZW4gaXQgaXMgdXNlZCBpbiAqKjMgb3IgbW9yZSoqIGRpc3RpbmN0IHBsYWNlcyDigJQgb3RoZXJ3aXNlIGhhcmQtY29kZSB0aGUgc2VtYW50aWMgdG9rZW4gZGlyZWN0bHkuCi0gQ29tcG9uZW50IENTUyBtdXN0IHJlZmVyZW5jZSBUaWVyIDIgKHNlbWFudGljKSBvciBUaWVyIDMgKGNvbXBvbmVudCkgdG9rZW5zIG9ubHkg4oCUIG5ldmVyIHJhdyBUaWVyIDEgcHJpbWl0aXZlcy4KLSBSYXcgaGV4IHZhbHVlcyBpbiBjb21wb25lbnQgQ1NTIOKAlCBhbHdheXMgZ28gdGhyb3VnaCBhIHNlbWFudGljIHRva2VuLgotIFJhdyBgcHhgIHZhbHVlcyBmb3IgY29udHJvbGxlZCBkaW1lbnNpb25zIChyYWRpdXMsIHNwYWNpbmcsIGljb24gc2l6ZXMpIOKAlCB1c2UgYSBzcGFjaW5nIG9yIHJhZGl1cyB0b2tlbi4KLSBGb250IGZhbWlseSBzdHJpbmdzIG90aGVyIHRoYW4gYEppb1R5cGVgIOKAlCBuZXZlciByZWZlcmVuY2UgYE91dGZpdGAsIGBJbnRlcmAsIG9yIGFueSBvdGhlciBmb250IG5hbWUgaW4gY29tcG9uZW50IENTUy4KCiMjIFJlbGVhc2UgQ2hlY2tsaXN0CgpFdmVyeSBjb21wb25lbnQgb3IgdG9rZW4gcmVsZWFzZSBtdXN0IGNsZWFyIGFsbCBpdGVtcyBiZWZvcmUgdGhlIHZlcnNpb24gaXMgdGFnZ2VkLiBUaGlzIGlzIHRoZSBtaW5pbXVtIGJhciDigJQgbm90IGEgc3VnZ2VzdGVkIHNob3J0Y3V0IGxpc3QuCgojIyBUb2tlbiBOYW1pbmcKCkZvcm1hdDogYC0tW2NhdGVnb3J5XS1bcHJvcGVydHldLVttb2RpZmllcl1gLiBDYXRlZ29yaWVzIGtlZXAgdG9rZW5zIGdyb3VwZWQgYW5kIGRpc2NvdmVyYWJsZS4KCiMjIFZlcnNpb25pbmcKClRoZSBETFMgZm9sbG93cyBzZW12ZXIuIEJyZWFraW5nIGNoYW5nZXMgcmVxdWlyZSBhIG1ham9yIGJ1bXAgYW5kIG1pZ3JhdGlvbiBndWlkZS4KCnwgVHlwZSB8IFdoYXQgY2hhbmdlcyB8IEV4YW1wbGUgfAp8LS0tfC0tLXwtLS18CnwgUEFUQ0ggfCBCdWcgZml4LCBkb2N1bWVudGF0aW9uIHVwZGF0ZSB8IEZpeGluZyB3cm9uZyB2YWx1ZSBzdG9yZWQgaW4gYSB0b2tlbiB8CnwgTUlOT1IgfCBOZXcgY29tcG9uZW50LCBuZXcgdG9rZW4gYWRkZWQgfCBBZGRpbmcgYC0tY2FyZC1jb250aW51ZS1wcm9ncmVzc2AgfAp8IE1BSk9SIHwgQnJlYWtpbmc6IHRva2VuIHJlbmFtZSBvciByZW1vdmFsIHwgYC0tY3RybC1oYCDihpIgYC0tYnRuLWgtbGdgIHwKCiMjIEFkZGluZyBhIE5ldyBUb2tlbgoKRm9sbG93IHRoaXMgcHJvY2VzcyB0byBhdm9pZCB0b2tlbiBzcHJhd2wuCgoxLiAqKkNoZWNrIHByaW1pdGl2ZXMqKiDigJQgZG9lcyBhbiBleGlzdGluZyBwcmltaXRpdmUgYWxyZWFkeSBjb3ZlciB0aGlzPyBJZiB5ZXMsIGNyZWF0ZSBhIHNlbWFudGljIGFsaWFzIHBvaW50aW5nIHRvIGl0LgoyLiAqKkNoZWNrIHNlbWFudGljcyoqIOKAlCBkb2VzIGEgc2VtYW50aWMgdG9rZW4gYWxyZWFkeSBleGlzdD8gSWYgeWVzLCB1c2UgaXQgZGlyZWN0bHkg4oCUIGRvIG5vdCBjcmVhdGUgYSBkdXBsaWNhdGUuCjMuICoqUkZDKiog4oCUIGlmIGEgbmV3IHByaW1pdGl2ZSBpcyBnZW51aW5lbHkgbmVlZGVkLCBvcGVuIGFuIFJGQyBhbmQgZ2V0IHJldmlldyBmcm9tIGF0IGxlYXN0IG9uZSBvdGhlciBwbGF0Zm9ybSBlbmdpbmVlci4KNC4gKipEb2N1bWVudCoqIOKAlCByZWNvcmQgbmFtZSwgdmFsdWUsIHB1cnBvc2UsIGFuZCB3aGljaCBwbGF0Zm9ybXMgaXQgYXBwbGllcyB0by4KNS4gKipTaGlwKiog4oCUIGFkZCB0byBgdG9rZW5zLmNzc2AsIHVwZGF0ZSBDSEFOR0VMT0cgd2l0aCB2ZXJzaW9uIGJ1bXAuCgojIyBDb21wb25lbnQgQ29udHJhY3QKCkV2ZXJ5IHNoaXBwZWQgY29tcG9uZW50IG11c3QgaGF2ZSBhIGZpbGxlZCBjb250cmFjdC4gVGhpcyBpcyB0aGUgbWluaW11bSByZXF1aXJlZCBkb2N1bWVudGF0aW9uLgoKfCAgIHwgICB8CnwtLS18LS0tfAp8IENvbXBvbmVudCB8IFRvZ2dsZSB8CnwgU3RhdHVzIHwgUmVhZHkgfAp8IFBsYXRmb3JtcyB8IE1vYmlsZSwgV2ViIHwKfCBUb3VjaCB0YXJnZXQgfCA1MsOXNDRweCAodmlzdWFsIDUyw5czMHB4ICsgcGFkZGluZykgfAp8IFRva2VucyB8IC0tamlvLCAtLXN1cmZhY2UtMywgLS10ZXh0LWludiB8CnwgU3RhdGVzIHwgZGVmYXVsdC1vZmYsIGRlZmF1bHQtb24sIGhvdmVyLCBmb2N1cywgZGlzYWJsZWQgfAp8IEFSSUEgfCByb2xlPSJzd2l0Y2giIGFyaWEtY2hlY2tlZD0idHJ1ZXxmYWxzZSIgfAp8IFRWIHwgTm90IHJlY29tbWVuZGVkIOKAlCB1c2Ugc2VnbWVudGVkIGNvbnRyb2wgfAoKIyMgRGVwcmVjYXRpb24gTm90aWNlCgpVc2UgdGhpcyBiYW5uZXIgcGF0dGVybiB3aGVuIGEgdG9rZW4gb3IgY29tcG9uZW50IGlzIGRlcHJlY2F0ZWQgYnV0IG5vdCB5ZXQgcmVtb3ZlZC4KCiMjIFJldmlldyBDaGVja2xpc3QKCkV2ZXJ5IGNvbXBvbmVudCBtdXN0IHBhc3MgdGhpcyBjaGVja2xpc3QgYmVmb3JlIHN0YXR1cyBpcyBzZXQgdG8gUmVhZHkuCgotLS0KCiMjIFRva2VucyByZWZlcmVuY2VkIG9uIHRoaXMgcGFnZQoKVXNlIHRoZXNlIGV4YWN0IHRva2VucyDigJQgZGVmaW5lZCBpbiBgdG9rZW5zL3Rva2Vucy5jc3NgLiBEbyBub3Qgc3Vic3RpdHV0ZSByYXcgdmFsdWVzLgoKLSBgLS1hbWJlcmAKLSBgLS1iZ2AKLSBgLS1ib3JkZXJgCi0gYC0tYm9yZGVyLXN1YnRsZWAKLSBgLS1lcnJvci10ZXh0YAotIGAtLWppb2AKLSBgLS1qaW8tbGlnaHRgCi0gYC0tamlvLXNvZnRgCi0gYC0tbmV3LXRva2VuYAotIGAtLXBpbGxgCi0gYC0tcjNgCi0gYC0tcjRgCi0gYC0tcjVgCi0gYC0tc3VjY2Vzcy10ZXh0YAotIGAtLXN1cmZhY2UtMWAKLSBgLS1zdXJmYWNlLTJgCi0gYC0tc3VyZmFjZS0zYAotIGAtLXRleHRgCi0gYC0tdGV4dDJgCi0gYC0tdGV4dDNgCi0gYC0tdGV4dDRgCi0gYC0td2FybmluZy10ZXh0YAoKLS0tCgojIyBCdWlsZCBydWxlcyAoYmluZGluZykKCjEuIFVzZSAqKm9ubHkqKiB0aGUgdG9rZW5zIGxpc3RlZCBhYm92ZS4gSWYgYSB2YWx1ZSB5b3UgbmVlZCBpcyBub3QgbGlzdGVkLCBzdG9wIGFuZCBhc2sg4oCUIGRvIG5vdCBpbnRyb2R1Y2UgYSByYXcgdmFsdWUuCjIuIEZvbnQgaXMgKipKaW9UeXBlKiogb25seS4gV2VpZ2h0czogMzAwLCA1MDAsIDcwMCwgOTAwLgozLiBSZXVzZSB0aGUgY29tcG9uZW50IENTUyBwYXR0ZXJucyBzaG93biBvbiB0aGUgc291cmNlIHBhZ2U7IGRvIG5vdCByZWRlc2lnbi4KNC4gTWF0Y2ggZXZlcnkgc3RhdGUgKGRlZmF1bHQsIGhvdmVyLCBmb2N1cywgYWN0aXZlLCBkaXNhYmxlZCwgbG9hZGluZykgc2hvd24gb24gdGhlIHBhZ2UuCjUuIEFjY2Vzc2liaWxpdHkgcmVxdWlyZW1lbnRzIG9uIHRoZSBwYWdlIGFyZSBtYW5kYXRvcnksIG5vdCBvcHRpb25hbC4K" download="governance-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
+    </div>
     </header>
 
     <!-- HERO -->
@@ -76,27 +76,27 @@
 
       <div class="ds-doc-card-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:16px">
         <div style="background:var(--surface-1);border-radius:var(--r4);padding:20px;border:1px solid var(--border-subtle);position:relative">
-          <div style="font-size:28px;font-weight:800;color:var(--jio);opacity:.3;position:absolute;top:12px;right:16px;line-height:1">01</div>
+          <div style="font-size:28px;font-weight:900;color:var(--jio);opacity:.3;position:absolute;top:12px;right:16px;line-height:1">01</div>
           <div style="font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--jio);margin-bottom:8px">Proposal RFC</div>
-          <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">Write an RFC</div>
+          <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">Write an RFC</div>
           <div style="font-size:13px;color:var(--text2);line-height:1.5">Document the component name, rationale, target platforms, tokens needed, and reference examples. Post to the DLS channel.</div>
         </div>
         <div style="background:var(--surface-1);border-radius:var(--r4);padding:20px;border:1px solid var(--border-subtle);position:relative">
-          <div style="font-size:28px;font-weight:800;color:var(--jio);opacity:.3;position:absolute;top:12px;right:16px;line-height:1">02</div>
+          <div style="font-size:28px;font-weight:900;color:var(--jio);opacity:.3;position:absolute;top:12px;right:16px;line-height:1">02</div>
           <div style="font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--jio);margin-bottom:8px">Review</div>
-          <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">2 engineers + 1 designer</div>
+          <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">2 engineers + 1 designer</div>
           <div style="font-size:13px;color:var(--text2);line-height:1.5">Reviewers check: token hierarchy, naming conventions, WCAG compliance, TV applicability. Min. 2 approvals to proceed.</div>
         </div>
         <div style="background:var(--surface-1);border-radius:var(--r4);padding:20px;border:1px solid var(--border-subtle);position:relative">
-          <div style="font-size:28px;font-weight:800;color:var(--jio);opacity:.3;position:absolute;top:12px;right:16px;line-height:1">03</div>
+          <div style="font-size:28px;font-weight:900;color:var(--jio);opacity:.3;position:absolute;top:12px;right:16px;line-height:1">03</div>
           <div style="font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--jio);margin-bottom:8px">Implementation</div>
-          <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">Build + document</div>
+          <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">Build + document</div>
           <div style="font-size:13px;color:var(--text2);line-height:1.5">Add tokens to <code>tokens.css</code>, component to <code>components.css</code>, states to <code>states.css</code>. Write the DLS page with all required sections.</div>
         </div>
         <div style="background:var(--surface-1);border-radius:var(--r4);padding:20px;border:1px solid var(--border-subtle);position:relative">
-          <div style="font-size:28px;font-weight:800;color:var(--jio);opacity:.3;position:absolute;top:12px;right:16px;line-height:1">04</div>
+          <div style="font-size:28px;font-weight:900;color:var(--jio);opacity:.3;position:absolute;top:12px;right:16px;line-height:1">04</div>
           <div style="font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--jio);margin-bottom:8px">Release</div>
-          <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">Bump version + changelog</div>
+          <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">Bump version + changelog</div>
           <div style="font-size:13px;color:var(--text2);line-height:1.5">Update semver, write changelog entry, set component status to <span style="background:var(--jio-soft);color:var(--jio);font-size:11px;padding:1px 6px;border-radius:var(--pill);font-weight:700">Ready</span>.</div>
         </div>
       </div>
@@ -167,19 +167,19 @@
             <td style="padding:10px 14px;font-size:13px;color:var(--text)">Experimental</td>
             <td style="padding:10px 14px"><span class="ds-status ds-status--experimental">Experimental</span></td>
             <td style="padding:10px 14px;font-size:13px;color:var(--text2)">Under active design/development. API and tokens may change without notice. No migration guarantee.</td>
-            <td style="padding:10px 14px;font-size:13px;color:var(--warning-text);font-weight:600">Opt-in only — expect churn</td>
+            <td style="padding:10px 14px;font-size:13px;color:var(--warning-text);font-weight:700">Opt-in only — expect churn</td>
           </tr>
           <tr style="border-bottom:1px solid var(--border-subtle)">
             <td style="padding:10px 14px;font-size:13px;color:var(--text)">Ready</td>
             <td style="padding:10px 14px"><span class="ds-status ds-status--ready">Ready</span></td>
             <td style="padding:10px 14px;font-size:13px;color:var(--text2)">Stable contract, documented states, WCAG checked, TV variant specified. Safe to adopt.</td>
-            <td style="padding:10px 14px;font-size:13px;color:var(--success-text);font-weight:600">Yes — stable API</td>
+            <td style="padding:10px 14px;font-size:13px;color:var(--success-text);font-weight:700">Yes — stable API</td>
           </tr>
           <tr>
             <td style="padding:10px 14px;font-size:13px;color:var(--text)">Deprecated</td>
             <td style="padding:10px 14px"><span class="ds-status ds-status--deprecated">Deprecated</span></td>
             <td style="padding:10px 14px;font-size:13px;color:var(--text2)">Scheduled for removal. Replacement documented. Do not adopt in new work.</td>
-            <td style="padding:10px 14px;font-size:13px;color:var(--error-text);font-weight:600">Migrate away — removal scheduled</td>
+            <td style="padding:10px 14px;font-size:13px;color:var(--error-text);font-weight:700">Migrate away — removal scheduled</td>
           </tr>
         </tbody>
       </table>
@@ -363,6 +363,6 @@
 
   </main>
   <script src="../sprite-loader.js"></script>
-<script src="../shell.js"></script>
+<script src="../shell.js?v=2"></script>
 </body>
 </html>

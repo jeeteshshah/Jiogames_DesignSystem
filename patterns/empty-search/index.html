@@ -1,0 +1,152 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Empty Search — JioGames DLS Patterns</title>
+  <link rel="stylesheet" href="../../tokens/tokens.css">
+  <link rel="stylesheet" href="../../components.css">
+  <link rel="stylesheet" href="../../states.css">
+  <link rel="stylesheet" href="../../shell.css?v=3">
+</head>
+<body>
+<main class="ds-main">
+
+  <header class="component-page-header">
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <a href="../../" class="component-breadcrumb-link">JioGames DLS</a>
+      <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+      <a href="../" class="component-breadcrumb-link">Patterns</a>
+      <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="component-breadcrumb-current">Empty Search</span>
+    </nav>
+    <h1 class="component-page-title">Empty Search</h1>
+    <p class="component-page-def">No-results state for the game search experience. Includes query echo, spelling suggestion, filter reset, and fallback popular content.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+      <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+      <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+      <span class="component-maturity component-maturity--beta"><span class="component-maturity--dot"></span>Beta</span>
+    </div>
+  </header>
+
+  <!-- ANATOMY -->
+  <section class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <p style="font-size:13px;color:var(--text2);line-height:1.6;margin-top:12px">The empty search state has 5 layers, each optional depending on context:</p>
+    <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;margin-top:16px">
+      <div style="display:grid;grid-template-columns:32px 180px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">1</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Query echo</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Always present. "No results for "<strong>[query]</strong>"". Query in bold. Max 40 chars shown — truncate with ellipsis.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 180px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">2</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Spelling suggestion</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Conditional. "Did you mean <u>[correction]</u>?" — tappable. Only shown when fuzzy-match confidence ≥ 0.75.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 180px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">3</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Filter reset</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Conditional. Show only if filters are active. "Try removing filters" chip. Tapping clears all active filters and re-runs search.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 180px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">4</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Search suggestions</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Horizontal chip row. 4–6 popular genre/category chips. "Try: Action · Racing · Puzzle". Tap replaces current query.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 180px 1fr;gap:16px;padding:14px 20px;align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">5</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Popular fallback rail</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Always present. "Popular right now" horizontal card rail (standard game cards, 4–6 items). Personalised if user logged in.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRIGGER CONDITIONS -->
+  <section class="ds-section" id="triggers">
+    <h2 class="ds-section-title">Trigger conditions</h2>
+    <table class="ds-api-table" style="margin-top:16px">
+      <thead><tr><th>Condition</th><th>Show</th><th>Hide</th></tr></thead>
+      <tbody>
+        <tr><td>Zero results, no filters</td><td>Layers 1, 2 (if confident), 4, 5</td><td>Layer 3</td></tr>
+        <tr><td>Zero results, filters active</td><td>Layers 1, 3, 4, 5</td><td>Layer 2</td></tr>
+        <tr><td>Zero results, filters + confident fuzzy</td><td>Layers 1, 2, 3, 4, 5</td><td>–</td></tr>
+        <tr><td>Search cleared (empty query)</td><td>Default search state (recent + trending)</td><td>All empty-search layers</td></tr>
+        <tr><td>Network error</td><td>Error state (not empty state)</td><td>All empty-search layers</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- COPY RULES -->
+  <section class="ds-section" id="copy">
+    <h2 class="ds-section-title">Copy rules</h2>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:16px">
+      <div style="padding:16px 20px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">Echo the query, don't apologise</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">Use: "No results for "clash of—"". Avoid: "Sorry, we couldn't find anything. Please try a different search." (passive, wastes space)</div>
+      </div>
+      <div style="padding:16px 20px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">Suggestions are action-labelled</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">Use: "Try:". Not "Similar searches:" or "You might also like:". One word before the chips.</div>
+      </div>
+      <div style="padding:16px 20px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">Fallback rail header</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">Always "Popular right now". Not "Recommended for you" (that implies personalisation when context may be unrelated).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM DIFFERENCES -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform differences</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:16px">
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--jio);border-radius:var(--r4);padding:20px;background:var(--surface-1)">
+        <p style="font-size:12px;font-weight:700;color:var(--jio);margin:0 0 12px">Mobile</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Full-screen empty state below search bar</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Keyboard stays open (user can retype)</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Fallback rail horizontally scrollable</li>
+        </ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--gold);border-radius:var(--r4);padding:20px;background:var(--surface-1)">
+        <p style="font-size:12px;font-weight:700;color:var(--gold);margin:0 0 12px">Web</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Empty state in results column (right of filters)</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Filter panel stays visible on left</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Fallback rail shows as grid (not horizontal scroll)</li>
+        </ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--amber);border-radius:var(--r4);padding:20px;background:var(--surface-1)">
+        <p style="font-size:12px;font-weight:700;color:var(--amber);margin:0 0 12px">TV</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Query echo + suggestions in 48px+ text (TV sizing)</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Chips focusable via D-pad</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Fallback rail: initial focus on first card</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;margin-top:16px">
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Query echo: <code class="ds-code">aria-live="polite"</code> region — announced when results count changes to zero</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Suggestion chips: <code class="ds-code">role="list"</code> + <code class="ds-code">role="listitem"</code>. Each chip is a button, not a link.</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Spelling correction: underline style (not colour-only) so visible in forced-colours mode</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Filter reset chip: button with <code class="ds-code">aria-label="Remove all filters and search again"</code></li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Fallback rail: labelled with <code class="ds-code">aria-label="Popular right now"</code> so screen reader announces section</li>
+    </ul>
+  </section>
+
+  <section class="ds-section" id="components">
+    <h2 class="ds-section-title">Components used</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px">
+      <a href="../../search/" class="ds-chip ds-chip--default">Search input</a>
+      <a href="../../chips/" class="ds-chip ds-chip--default">Chips</a>
+      <a href="../../cards/" class="ds-chip ds-chip--default">Cards</a>
+      <a href="../../typography/" class="ds-chip ds-chip--default">Typography</a>
+    </div>
+  </section>
+
+</main>
+<script src="../../shell.js?v=2"></script>
+</body></html>

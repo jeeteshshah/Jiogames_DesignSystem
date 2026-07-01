@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     /* ── Page-specific: Spacing ── */
 
@@ -416,18 +416,18 @@
 
     <header class="component-page-header">
       <nav class="component-breadcrumb" aria-label="Breadcrumb">
-        <a href="../" class="component-breadcrumb-link">JioGames DLS</a>
-        <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+        <span class="component-breadcrumb-link">JioGames DLS</span>
+        <span class="component-breadcrumb-sep">›</span>
         <span class="component-breadcrumb-current">Spacing</span>
       </nav>
-      <h1 class="component-page-title">Spacing</h1>
-      <p class="component-page-def">8px-base spacing scale with semantic aliases for gutters, gaps, padding, and section rhythm across Mobile, Web, and TV.</p>
+      <h1 class="component-page-title">Spacing</h1><p class="component-page-def">8px-base spacing scale with semantic aliases for gutters, gaps, padding, and section rhythm across Mobile, Web, and TV.</p>
       <div class="component-platforms">
         <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
         <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
         <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
         <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
-      </div>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBTcGFjaW5nIOKAlCBKaW9HYW1lcyBETFMgc3BlYwoKPiBTb3VyY2U6IGBzcGFjaW5nL2luZGV4Lmh0bWxgIGluIHRoZSBKaW9HYW1lcyBEZXNpZ24gU3lzdGVtLgo+IFRoaXMgc3BlYyBpcyBnZW5lcmF0ZWQgdmVyYmF0aW0gZnJvbSB0aGUgcGFnZSDigJQgZG8gbm90IGludmVudCB2YWx1ZXMgbm90IGxpc3RlZCBoZXJlLgoKKipQYXRoOioqIEppb0dhbWVzIERMUyDigLogU3BhY2luZwoKLS0tCgo4cHgtYmFzZSBzcGFjaW5nIHNjYWxlIHdpdGggc2VtYW50aWMgYWxpYXNlcyBmb3IgZ3V0dGVycywgZ2FwcywgcGFkZGluZywgYW5kIHNlY3Rpb24gcmh5dGhtIGFjcm9zcyBNb2JpbGUsIFdlYiwgYW5kIFRWLgoKOFBYIEJBU0UgR1JJRCDCtyAxMyBTVEVQUyDCtyBTRU1BTlRJQyBBTElBU0VTCgojIyBTcGFjaW5nIHNjYWxlCgoxMiB0b2tlbnMgYnVpbHQgb24gYW4gOHB4IGJhc2UgdW5pdC4gQmFyIHdpZHRoIGVxdWFscyB0aGUgYWN0dWFsIHBpeGVsIHZhbHVlIOKAlCB0aGUgdmlzdWFsIHJlbGF0aW9uc2hpcCBiZXR3ZWVuIHZhbHVlcyBpcyByZWFsLgoKIyMgU2VtYW50aWMgc3BhY2luZyB0b2tlbnMKClNlbWFudGljIGFsaWFzZXMgcmVzb2x2ZSB0byB0aGUgY29ycmVjdCB2YWx1ZSBwZXIgcGxhdGZvcm0gdmlhIG1lZGlhIHF1ZXJpZXMuIFVzZSB0aGUgYWxpYXMg4oCUIG5ldmVyIHRoZSBzY2FsZSBzdGVwIGRpcmVjdGx5IOKAlCBmb3IgYWxsIGxheW91dCByb2xlcyBsaXN0ZWQgaGVyZS4KCnwgVG9rZW4gfCBNb2JpbGUgfCBXZWIg4omlNzY4cHggfCBUViDiiaUxMjgwcHggfCBVc2FnZSB8CnwtLS18LS0tfC0tLXwtLS18LS0tfAp8IC0tZ3V0dGVyIHwgMTZweCB8IDQwcHggfCA4MHB4IHwgU2lkZSBtYXJnaW5zIGZvciBhbGwgY29udGVudCB8CnwgLS1zZWN0aW9uLWdhcCB8IDMycHggfCA0OHB4IHwgNjRweCB8IEdhcCBiZXR3ZWVuIHBhZ2Ugc2VjdGlvbnMgLyByYWlscyB8CnwgLS1yYWlsLWdhcCB8IDMycHggfCA0OHB4IHwgNjRweCB8IEdhcCBiZXR3ZWVuIHJhaWwgcm93cyB8CnwgLS1jYXJkLWdhcCB8IDEycHggfCAyNHB4IHwgMjRweCB8IEdhcCBiZXR3ZWVuIGNhcmRzIGluIGEgcmFpbCB8CnwgLS1jb21wb25lbnQtcGFkZGluZyB8IDE2cHggfCAyNHB4IHwgMzJweCB8IEludGVybmFsIHBhZGRpbmcgZm9yIG1vc3QgY29tcG9uZW50cyB8CnwgLS1jYXJkLXBhZGRpbmcgfCAxNnB4IHwgMjRweCB8IDMycHggfCBDYXJkIGludGVybmFsIHBhZGRpbmcgfAp8IC0tc2hlZXQtcGFkZGluZyB8IDI0cHggfCAzMnB4IHwg4oCUIHwgQm90dG9tIHNoZWV0IC8gZHJhd2VyIGludGVybmFsIHBhZGRpbmcgfAp8IC0taGVyby1nYXAgfCAzMnB4IHwgNjRweCB8IDk2cHggfCBHYXAgYmVsb3cgaGVybyBzZWN0aW9ucyB8CgojIyA4cHggYmFzZSBncmlkCgpFdmVyeSBzcGFjaW5nIHZhbHVlIGlzIGEgbXVsdGlwbGUgb2YgOHB4LCBvciBhIGhhbGYtc3RlcCBhdCA0cHguIFRoaXMgY3JlYXRlcyBjb25zaXN0ZW50IHZlcnRpY2FsIHJoeXRobSBhbmQgYWxpZ25zIGVsZW1lbnRzIGFjcm9zcyBkaWZmZXJlbnQgc2NyZWVuIGRlbnNpdGllcy4KCiMjIENvbHVtbiBncmlkICYgYnJlYWtwb2ludHMKCkppb0dhbWVzIHVzZXMgYSA0LWNvbHVtbiBncmlkIG9uIG1vYmlsZSwgMTItY29sdW1uIG9uIHdlYiBhbmQgVFYuIEd1dHRlcnMgYW5kIGNvbHVtbiBnYXBzIGFyZSB0b2tlbi1kcml2ZW4uIEJyZWFrcG9pbnRzIGFyZSBtaW4td2lkdGggYmFzZWQg4oCUIG1vYmlsZSBpcyB0aGUgYmFzZTsgd2ViIGFuZCBUViBsYXllcnMgb3ZlcnJpZGUuCgojIyMgQnJlYWtwb2ludHMKCnwgTmFtZSB8IFRva2VuIHwgVmFsdWUgfCBUYXJnZXQgc3VyZmFjZSB8CnwtLS18LS0tfC0tLXwtLS18CnwgTW9iaWxlIChiYXNlKSB8IGDigJRgIHwgMHB4KyB8IFBob25lIHBvcnRyYWl0LCBzbWFsbCBzY3JlZW5zIHwKfCBXZWIgfCBgLS1icC13ZWJgIHwgNzY4cHgrIHwgVGFibGV0LCBkZXNrdG9wIGJyb3dzZXIgfAp8IFRWIHwgYC0tYnAtdHZgIHwgMTI4MHB4KyAoYW5kIG1pbi1oZWlnaHQgNzIwcHgpIHwgU21hcnQgVFYsIHNldC10b3AgYm94IHwKCiMjIyBDb2x1bW4gY291bnRzICYgZ2FwcwoKfCBQbGF0Zm9ybSB8IENvbHVtbnMgfCBDb2x1bW4gZ2FwIHRva2VuIHwgR2FwIHZhbHVlIHwgR3V0dGVyIChlZGdlKSB8CnwtLS18LS0tfC0tLXwtLS18LS0tfAp8IE1vYmlsZSB8IDQgfCBgLS1jb2wtZ2FwLW1vYmlsZWAgfCAxMnB4IHwgYC0tZ3V0dGVyYCAoMjBweCkgfAp8IFdlYiB8IDEyIHwgYC0tY29sLWdhcC13ZWJgIHwgMjRweCB8IGAtLWNvbnRhaW5lci13ZWJgIGNlbnRyZWQsIDQ4cHggc2lkZSBwYWRkaW5nIHwKfCBUViB8IDEyIHwgYC0tY29sLWdhcC10dmAgfCAzMnB4IHwgYC0tdHYtc2FmZWAgKDgwcHgpIHNhZmUtem9uZSBvbiBhbGwgZWRnZXMgfAoKIyMjIFotaW5kZXggc2NhbGUKClVzZSBgdmFyKC0tei0qKWAgdG9rZW5zIOKAlCBuZXZlciByYXcgaW50ZWdlcnMuIERldmlhdGluZyBmcm9tIHRoZSBzY2FsZSBjYXVzZXMgc3RhY2tpbmcgY29uZmxpY3RzIGJldHdlZW4gbmF2LCBtb2RhbHMsIHRvYXN0cywgYW5kIG92ZXJsYXlzLgoKfCBUb2tlbiB8IFZhbHVlIHwgVXNlZCBieSB8CnwtLS18LS0tfC0tLXwKfCBgLS16LWJhc2VgIHwgMCB8IERlZmF1bHQgaW4tZmxvdyBlbGVtZW50cyB8CnwgYC0tei1yYWlzZWRgIHwgMTAgfCBDYXJkcyBvbiBob3ZlciwgbGlmdGVkIHN1cmZhY2VzIHwKfCBgLS16LWRyb3Bkb3duYCB8IDEwMCB8IFNlbGVjdCBkcm9wZG93bnMsIENvbWJvYm94LCBQb3BvdmVyIHwKfCBgLS16LXN0aWNreWAgfCAyMDAgfCBTdGlja3kgdGFibGUgaGVhZGVycywgcGlubmVkIHJhaWxzIHwKfCBgLS16LWFwcGJhcmAgfCAzMDAgfCBBcHBCYXIgKGFsd2F5cyBhYm92ZSBwYWdlIGNvbnRlbnQpIHwKfCBgLS16LWRyYXdlcmAgfCA0MDAgfCBEcmF3ZXIgLyBzaWRlIHBhbmVsIHwKfCBgLS16LW1vZGFsYCB8IDUwMCB8IERpYWxvZywgQm90dG9tIFNoZWV0LCBDb21tYW5kIHBhbGV0dGUgfAp8IGAtLXotdG9hc3RgIHwgNjAwIHwgVG9hc3Qgbm90aWZpY2F0aW9ucyAoYWJvdmUgbW9kYWxzKSB8CnwgYC0tei10b29sdGlwYCB8IDcwMCB8IFRvb2x0aXAsIEhvdmVyIENhcmQgKGFsd2F5cyB0b3Btb3N0KSB8CnwgYC0tei10dkZvY3VzYCB8IDgwMCB8IFRWIGZvY3VzIHJpbmcgb3ZlcmxheSB8CgojIyBVc2FnZSBydWxlcwoKRW5mb3JjZWQgYnkgYHRva2Vucy92YWxpZGF0ZS5zaGAuIEVSUnMgYmxvY2sgc2hpcHBpbmcuIFdBUk5zIG11c3QgYmUganVzdGlmaWVkIGluIHRoZSBRQSByZXBvcnQuCgojIyBRdWljayByZWZlcmVuY2UKCkFsbCAxMiBzY2FsZSB0b2tlbnMgYXQgYSBnbGFuY2UuIEJvb2ttYXJrIHRoaXMgZm9yIGRheS10by1kYXkgdXNlLgoKfCBDbGFzcyB8IEdhcCB0b2tlbiB8IFdoZW4gdG8gdXNlIHwKfC0tLXwtLS18LS0tfAp8IC5wYWdlLXN0YWNrIHwgLS1zZWN0aW9uLWdhcCB8IE1ham9yIHBhZ2Ugc2VjdGlvbnMsIHJhaWxzIG9uIHRoZSBob21lIHNjcmVlbiB8CnwgLmhlcm8tc3RhY2sgfCAtLWhlcm8tZ2FwIHwgSGVybyByZWdpb24gdG8gZmlyc3QgY29udGVudCBzZWN0aW9uIHwKfCAuY29tcG9uZW50LXN0YWNrIHwgLS1jb21wb25lbnQtcGFkZGluZyB8IENvbXBvbmVudHMgc3RhY2tlZCBpbnNpZGUgYSBzZWN0aW9uIHwKfCAuY29udGVudC1zdGFjayB8IC0tc3BhY2UtMS01ICgxMnB4KSB8IFJlbGF0ZWQgZWxlbWVudHMg4oCUIHRpdGxlICsgYm9keSwgbGFiZWwgKyB2YWx1ZSB8CnwgLnRpZ2h0LXN0YWNrIHwgLS1zcGFjZS0xICg4cHgpIHwgVGlnaHQgZ3JvdXAg4oCUIGljb24gKyBsYWJlbCwgYmFkZ2UgKyB0ZXh0IHwKCi0tLQoKIyMgVG9rZW5zIHJlZmVyZW5jZWQgb24gdGhpcyBwYWdlCgpVc2UgdGhlc2UgZXhhY3QgdG9rZW5zIOKAlCBkZWZpbmVkIGluIGB0b2tlbnMvdG9rZW5zLmNzc2AuIERvIG5vdCBzdWJzdGl0dXRlIHJhdyB2YWx1ZXMuCgotIGAtLWFtYmVyYAotIGAtLWJnYAotIGAtLWJvcmRlci1zdWJ0bGVgCi0gYC0tY2FyZC1iZ2AKLSBgLS1kaXZpZGVyYAotIGAtLWdsYXNzLTFgCi0gYC0tZ3V0dGVyYAotIGAtLWppb2AKLSBgLS1qaW8tZm9udGAKLSBgLS1qaW8tc29mdGAKLSBgLS1uZWdhdGl2ZWAKLSBgLS1waWxsYAotIGAtLXIxYAotIGAtLXIyYAotIGAtLXIzYAotIGAtLXI0YAotIGAtLXNwYWNlLTAtNWAKLSBgLS1zcGFjZS0xYAotIGAtLXNwYWNlLTEtNWAKLSBgLS1zcGFjZS0yYAotIGAtLXNwYWNlLTNgCi0gYC0tc3BhY2UtNGAKLSBgLS1zdXJmYWNlLTFgCi0gYC0tc3VyZmFjZS0yYAotIGAtLXN1cmZhY2UtM2AKLSBgLS10ZXh0YAotIGAtLXRleHQyYAotIGAtLXRleHQzYAotIGAtLXRleHQ0YAotIGAtLXotYAoKLS0tCgojIyBCdWlsZCBydWxlcyAoYmluZGluZykKCjEuIFVzZSAqKm9ubHkqKiB0aGUgdG9rZW5zIGxpc3RlZCBhYm92ZS4gSWYgYSB2YWx1ZSB5b3UgbmVlZCBpcyBub3QgbGlzdGVkLCBzdG9wIGFuZCBhc2sg4oCUIGRvIG5vdCBpbnRyb2R1Y2UgYSByYXcgdmFsdWUuCjIuIEZvbnQgaXMgKipKaW9UeXBlKiogb25seS4gV2VpZ2h0czogMzAwLCA1MDAsIDcwMCwgOTAwLgozLiBSZXVzZSB0aGUgY29tcG9uZW50IENTUyBwYXR0ZXJucyBzaG93biBvbiB0aGUgc291cmNlIHBhZ2U7IGRvIG5vdCByZWRlc2lnbi4KNC4gTWF0Y2ggZXZlcnkgc3RhdGUgKGRlZmF1bHQsIGhvdmVyLCBmb2N1cywgYWN0aXZlLCBkaXNhYmxlZCwgbG9hZGluZykgc2hvd24gb24gdGhlIHBhZ2UuCjUuIEFjY2Vzc2liaWxpdHkgcmVxdWlyZW1lbnRzIG9uIHRoZSBwYWdlIGFyZSBtYW5kYXRvcnksIG5vdCBvcHRpb25hbC4K" download="spacing-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
+    </div>
     </header>
 
     <!-- HERO -->
@@ -808,7 +808,58 @@
     </section>
 
     <!-- ═══════════════════════════════════════════════════════
-         SECTION 4 — USAGE RULES
+         SECTION 4 — COLUMN GRID & BREAKPOINTS
+    ═══════════════════════════════════════════════════════ -->
+    <section class="ds-section" id="column-grid">
+      <div class="ds-section-eyebrow">Section 04</div>
+      <h2 class="ds-section-title">Column grid &amp; breakpoints</h2>
+      <p class="ds-section-desc">JioGames uses a 4-column grid on mobile, 12-column on web and TV. Gutters and column gaps are token-driven. Breakpoints are min-width based — mobile is the base; web and TV layers override.</p>
+
+      <h3 style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 12px">Breakpoints</h3>
+      <table class="ds-api-table">
+        <thead><tr><th>Name</th><th>Token</th><th>Value</th><th>Target surface</th></tr></thead>
+        <tbody>
+          <tr><td>Mobile (base)</td><td><code>—</code></td><td>0px+</td><td>Phone portrait, small screens</td></tr>
+          <tr><td>Web</td><td><code>--bp-web</code></td><td>768px+</td><td>Tablet, desktop browser</td></tr>
+          <tr><td>TV</td><td><code>--bp-tv</code></td><td>1280px+ (and min-height 720px)</td><td>Smart TV, set-top box</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 12px">Column counts &amp; gaps</h3>
+      <table class="ds-api-table">
+        <thead><tr><th>Platform</th><th>Columns</th><th>Column gap token</th><th>Gap value</th><th>Gutter (edge)</th></tr></thead>
+        <tbody>
+          <tr><td>Mobile</td><td>4</td><td><code>--col-gap-mobile</code></td><td>12px</td><td><code>--gutter</code> (20px)</td></tr>
+          <tr><td>Web</td><td>12</td><td><code>--col-gap-web</code></td><td>24px</td><td><code>--container-web</code> centred, 48px side padding</td></tr>
+          <tr><td>TV</td><td>12</td><td><code>--col-gap-tv</code></td><td>32px</td><td><code>--tv-safe</code> (80px) safe-zone on all edges</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 12px">Z-index scale</h3>
+      <p style="font-size:14px;color:var(--text2);margin:0 0 16px;line-height:1.6">Use <code style="background:rgba(0,168,89,.1);color:var(--jio);padding:2px 6px;border-radius:3px;font-size:12px">var(--z-*)</code> tokens — never raw integers. Deviating from the scale causes stacking conflicts between nav, modals, toasts, and overlays.</p>
+      <table class="ds-api-table">
+        <thead><tr><th>Token</th><th>Value</th><th>Used by</th></tr></thead>
+        <tbody>
+          <tr><td><code>--z-base</code></td><td>0</td><td>Default in-flow elements</td></tr>
+          <tr><td><code>--z-raised</code></td><td>10</td><td>Cards on hover, lifted surfaces</td></tr>
+          <tr><td><code>--z-dropdown</code></td><td>100</td><td>Select dropdowns, Combobox, Popover</td></tr>
+          <tr><td><code>--z-sticky</code></td><td>200</td><td>Sticky table headers, pinned rails</td></tr>
+          <tr><td><code>--z-appbar</code></td><td>300</td><td>AppBar (always above page content)</td></tr>
+          <tr><td><code>--z-drawer</code></td><td>400</td><td>Drawer / side panel</td></tr>
+          <tr><td><code>--z-modal</code></td><td>500</td><td>Dialog, Bottom Sheet, Command palette</td></tr>
+          <tr><td><code>--z-toast</code></td><td>600</td><td>Toast notifications (above modals)</td></tr>
+          <tr><td><code>--z-tooltip</code></td><td>700</td><td>Tooltip, Hover Card (always topmost)</td></tr>
+          <tr><td><code>--z-tvFocus</code></td><td>800</td><td>TV focus ring overlay</td></tr>
+        </tbody>
+      </table>
+
+      <div style="background:rgba(0,168,89,.07);border:1px solid rgba(0,168,89,.2);border-radius:var(--r3);padding:14px 16px;margin-top:20px;font-size:13px;color:var(--text2);line-height:1.6">
+        <strong style="color:var(--jio)">Rule:</strong> Toast must sit above modals so subscription confirmation toasts are visible after an in-app purchase dialog closes. Never use <code style="font-size:11px;color:var(--jio)">z-index: 9999</code> — it breaks the scale for every layer above it.
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 5 — USAGE RULES
     ═══════════════════════════════════════════════════════ -->
     <section class="ds-section" id="usage-rules">
       <div class="ds-section-eyebrow">Section 04</div>
@@ -932,11 +983,8 @@
       </div>
     </section>
 
-
-    <!-- CHANGELOG -->
-
   </main>
   <script src="../sprite-loader.js"></script>
-<script src="../shell.js"></script>
+<script src="../shell.js?v=2"></script>
 </body>
 </html>

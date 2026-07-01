@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     /* ── Page-specific styles ── */
     body { background: var(--bg); color: var(--text); font-family: var(--jio-font); margin: 0; }
@@ -15,285 +15,68 @@
     /* Component page header */
 
     /* Hero */
-    .component-hero {
-      border-radius: 20px;
-      overflow: hidden;
-      margin-bottom: 48px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      min-height: 280px;
-      padding: 48px 32px 32px;
-    }
-    .component-hero--dark { background: #060810; }
-    .component-hero--grid {
-      background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-      background-size: 32px 32px;
-      background-color: #060810;
-      border: 1px solid var(--border-subtle);
-    }
-    .component-hero-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 28px;
-      position: relative;
-      z-index: 2;
-    }
-    .component-hero-caption {
-      display: block;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .6px;
-      text-transform: uppercase;
-      color: var(--text4);
-      margin-top: 24px;
-      position: relative;
-      z-index: 2;
-    }
-    .hero-glow {
-      position: absolute;
-      width: 320px;
-      height: 180px;
-      border-radius: var(--pill);
-      background: radial-gradient(ellipse, rgba(0,168,89,.2) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 1;
-    }
+    
+    
+    
+    
+    
+    
 
     /* Intro */
-    .component-intro {
-      margin-bottom: 48px;
-    }
-    .component-intro p {
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.65;
-      margin-bottom: 20px;
-      max-width: 640px;
-    }
-    .component-summary-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border: 1px solid var(--border-subtle);
-      border-radius: 14px;
-      overflow: hidden;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .component-summary-list li {
-      padding: 14px 20px;
-      border-bottom: 1px solid var(--border-subtle);
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.55;
-    }
-    .component-summary-list li:last-child { border-bottom: none; }
-    .component-summary-list li strong {
-      color: var(--text);
-      font-weight: 700;
-    }
+    
+    
+    
+    
+    
+    
 
     /* Best practices */
-    .component-best-practices {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 24px;
-    }
-    .component-bp-card {
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1.5px solid;
-    }
-    .component-bp-card--do   { border-color: rgba(0,168,89,.3); }
-    .component-bp-card--dont { border-color: rgba(255,71,87,.3); }
-    .component-bp-label {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 10px 16px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .6px;
-      text-transform: uppercase;
-    }
-    .component-bp-label--do   { background: rgba(0,168,89,.07);  color: var(--jio); }
-    .component-bp-label--dont { background: rgba(255,71,87,.07); color: var(--negative); }
-    .component-bp-label--do::before   { content: '\2713'; font-size: 11px; }
-    .component-bp-label--dont::before { content: '\2715'; font-size: 11px; }
-    .component-bp-list {
-      padding: 16px 20px 20px;
-      background: var(--surface-1);
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      list-style: none;
-    }
-    .component-bp-list li {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.5;
-      padding-left: 14px;
-      position: relative;
-    }
-    .component-bp-list li::before {
-      content: '\00B7';
-      position: absolute;
-      left: 3px;
-      color: var(--text4);
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /* Content grid */
-    .component-content-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-top: 24px;
-    }
-    .component-content-card {
-      background: var(--surface-1);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--r4);
-      padding: 20px;
-    }
-    .component-content-title {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text);
-      text-transform: uppercase;
-      letter-spacing: .5px;
-      margin-bottom: 12px;
-    }
-    .component-content-card ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-    .component-content-card li {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.5;
-      padding-left: 14px;
-      position: relative;
-    }
-    .component-content-card li::before {
-      content: '\00B7';
-      position: absolute;
-      left: 3px;
-      color: var(--text4);
-    }
+    
+    
+    
+    
+    
+    
 
     /* Platform cards */
-    .component-platform-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 24px;
-    }
-    .component-platform-card {
-      background: var(--surface-1);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--r4);
-      padding: 20px;
-    }
-    .component-platform-card--mobile { border-top: 2px solid rgba(110,231,183,.4); }
-    .component-platform-card--web    { border-top: 2px solid rgba(147,197,253,.4); }
-    .component-platform-card--tv     { border-top: 2px solid rgba(251,191,36,.4); }
-    .component-platform-card-title {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .6px;
-      text-transform: uppercase;
-      color: var(--text3);
-      margin-bottom: 12px;
-    }
-    .component-platform-card--mobile .component-platform-card-title { color: #6ee7b7; }
-    .component-platform-card--web    .component-platform-card-title { color: #93c5fd; }
-    .component-platform-card--tv     .component-platform-card-title { color: #fbbf24; }
-    .component-platform-card ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-    .component-platform-card li {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.5;
-      padding-left: 14px;
-      position: relative;
-    }
-    .component-platform-card li::before {
-      content: '\00B7';
-      position: absolute;
-      left: 3px;
-      color: var(--text4);
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /* Changelog */
-    .component-changelog {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--r4);
-      overflow: hidden;
-    }
-    .component-changelog-entry {
-      display: grid;
-      grid-template-columns: 56px 80px 1fr;
-      gap: 16px;
-      align-items: start;
-      padding: 14px 20px;
-      border-bottom: 1px solid var(--border-subtle);
-      font-size: 12px;
-    }
-    .component-changelog-entry:last-child { border-bottom: none; }
-    .component-changelog-version {
-      font-family: monospace;
-      font-weight: 700;
-      color: var(--jio);
-      font-size: 11px;
-    }
-    .component-changelog-date {
-      color: var(--text3);
-      font-weight: 500;
-    }
-    .component-changelog-desc {
-      color: var(--text2);
-      line-height: 1.5;
-    }
+    
+    
+    
+    
+    
+    
 
     /* Note box */
-    .ds-note {
-      background: rgba(0,168,89,.06);
-      border: 1px solid rgba(0,168,89,.2);
-      border-radius: var(--r3);
-      padding: 14px 18px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.55;
-    }
-    .ds-note strong { color: var(--jio); }
+    
+    
 
     /* Sizes section */
     .btn-size-matrix {
@@ -340,7 +123,7 @@
     .btn-size-matrix-class {
       font-family: monospace;
       font-size: 10px;
-      color: #a8e6c5;
+      color: var(--jio-3);
     }
     .btn-size-matrix-cell {
       padding: 16px;
@@ -386,7 +169,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 40px;
+      min-height: var(--ctrl-h-ghost);
       text-align: center;
     }
     .btn-state-matrix-row-label {
@@ -446,60 +229,14 @@
     }
 
     /* Accessibility */
-    .a11y-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--r4);
-      overflow: hidden;
-      margin-top: 24px;
-    }
-    .a11y-row {
-      display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 0;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-    .a11y-row:last-child { border-bottom: none; }
-    .a11y-label {
-      padding: 14px 16px;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text3);
-      letter-spacing: .3px;
-      background: var(--surface-2);
-      text-transform: uppercase;
-      display: flex;
-      align-items: flex-start;
-      padding-top: 16px;
-    }
-    .a11y-content {
-      padding: 14px 20px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.6;
-      background: var(--surface-1);
-    }
-    .a11y-content ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-    .a11y-content li {
-      padding-left: 14px;
-      position: relative;
-    }
-    .a11y-content li::before {
-      content: '\00B7';
-      position: absolute;
-      left: 3px;
-      color: var(--text4);
-    }
+    
+    
+    
+    
+    
+    
+    
+    
 
     kbd {
       display: inline-block;
@@ -513,9 +250,7 @@
     }
 
     @media (max-width: 760px) {
-      .component-best-practices,
-      .component-content-grid,
-      .component-platform-grid { grid-template-columns: 1fr; }
+      
       .icon-demo-grid { grid-template-columns: 1fr 1fr; }
       .btn-size-matrix { overflow-x: auto; }
       .btn-size-matrix-head,
@@ -530,20 +265,20 @@
        1. PAGE HEADER
   =================================================== -->
   <div class="component-page-header">
-    <div class="component-breadcrumb">
-      <a href="../index.html">JioGames DLS</a>
-      <span class="component-breadcrumb-sep">&#x203A;</span>
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <span class="component-breadcrumb-link">JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
       <span>Components</span>
-      <span class="component-breadcrumb-sep">&#x203A;</span>
-      <span>Buttons</span>
-    </div>
-    <h1 class="component-page-title">Buttons</h1>
-    <p class="component-page-def">A button initiates an immediate action.</p>
+      <span class="component-breadcrumb-sep">›</span>
+      <span class="component-breadcrumb-current">Buttons</span>
+    </nav>
+    <h1 class="component-page-title">Buttons</h1><p class="component-page-def">A button initiates an immediate action.</p>
     <div class="component-platforms">
       <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
       <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
       <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
       <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBCdXR0b25zIOKAlCBKaW9HYW1lcyBETFMgc3BlYwoKPiBTb3VyY2U6IGBidXR0b25zL2luZGV4Lmh0bWxgIGluIHRoZSBKaW9HYW1lcyBEZXNpZ24gU3lzdGVtLgo+IFRoaXMgc3BlYyBpcyBnZW5lcmF0ZWQgdmVyYmF0aW0gZnJvbSB0aGUgcGFnZSDigJQgZG8gbm90IGludmVudCB2YWx1ZXMgbm90IGxpc3RlZCBoZXJlLgoKKipQYXRoOioqIEppb0dhbWVzIERMUyDigLogQ29tcG9uZW50cyDigLogQnV0dG9ucwoKLS0tCgpBIGJ1dHRvbiBpbml0aWF0ZXMgYW4gaW1tZWRpYXRlIGFjdGlvbi4KCkJ1dHRvbnMgZ2l2ZSBwbGF5ZXJzIGEgY2xlYXIsIGZhbWlsaWFyIHdheSB0byB0YWtlIGFjdGlvbiBhY3Jvc3MgSmlvR2FtZXMuIEEgYnV0dG9uIGNvbWJpbmVzIGhpZXJhcmNoeSwgc2l6ZSwgc3RhdGUsIGFuZCBjb250ZW50IHRvIGNvbW11bmljYXRlIHdoYXQgd2lsbCBoYXBwZW4gbmV4dCDigJQgZnJvbSBwbGF5aW5nIGEgZ2FtZSB0byB1bmxvY2tpbmcgYSBwYXNzLgoKLSAqKkhpZXJhcmNoeS4qKiBTZXZlbiB2YXJpYW50cyBmcm9tIFByaW1hcnkgdG8gRGVzdHJ1Y3RpdmUgZXN0YWJsaXNoIHZpc3VhbCBwcmlvcml0eS4gT25seSBvbmUgUHJpbWFyeSBidXR0b24gcGVyIHNlY3Rpb24uCi0gKipTaXplLioqIEZpdmUgY2Fub25pY2FsIHNpemVzIOKAlCBYUyB0aHJvdWdoIFhMIOKAlCBlYWNoIHJlc29sdmluZyB0byBkaWZmZXJlbnQgcGl4ZWwgdmFsdWVzIG9uIE1vYmlsZSwgV2ViLCBhbmQgVFYuCi0gKipTdGF0ZS4qKiBFdmVyeSBidXR0b24gaGFuZGxlcyBob3ZlciwgcHJlc3NlZCwgZm9jdXMsIGRpc2FibGVkLCBsb2FkaW5nLCBzdWNjZXNzLCBlcnJvciwgYW5kIFRWIGZvY3VzLgotICoqUGxhdGZvcm0uKiogU2l6ZSBjbGFzcyBzdGF5cyBjb25zdGFudC4gUGxhdGZvcm0gY29udGV4dCAobW9iaWxlIHRvdWNoLCB3ZWIgcG9pbnRlciwgVFYgcmVtb3RlKSByZXNvbHZlcyB0aGUgdG9rZW4gYWxpYXMuCgojIyBXaGVuIHRvIHVzZQoKQnV0dG9ucyBhcmUgZm9yIGFjdGlvbnMuIElmIHlvdSdyZSBuYXZpZ2F0aW5nLCB1c2UgYSBsaW5rLiBJZiB5b3UncmUgc2VsZWN0aW5nIGZyb20gYSBzZXQgb2Ygb3B0aW9ucywgdXNlIGEgY2hpcCBvciB0b2dnbGUuCgotIFRoZSB1c2VyIG5lZWRzIHRvIHRyaWdnZXIgYW4gYWN0aW9uOiBQbGF5LCBEb3dubG9hZCwgU3Vic2NyaWJlLCBDb250aW51ZQotIFN1Ym1pdHRpbmcgYSBmb3JtIG9yIGNvbmZpcm1pbmcgYSBkZXN0cnVjdGl2ZSBhY3Rpb24KLSBUaGUgcHJpbWFyeSBDVEEgb24gYSBzY3JlZW4gbmVlZHMgbWF4aW11bSB2aXN1YWwgd2VpZ2h0Ci0gQW4gYXN5bmNocm9ub3VzIGFjdGlvbiBuZWVkcyBhIGxvYWRpbmcgKyBmZWVkYmFjayBzdGF0ZQotIFRoZSBhY3Rpb24gaXMgaW1tZWRpYXRlIGFuZCByZXZlcnNpYmxlIChvciBleHBsaWNpdGx5IGlycmV2ZXJzaWJsZSkKCi0gWW91J3JlIG5hdmlnYXRpbmcgdG8gYW5vdGhlciBwYWdlIOKAlCB1c2UgYSBsaW5rIG9yIG5hdiBlbGVtZW50IGluc3RlYWQKLSBZb3UgbmVlZCBiaW5hcnkgb24vb2ZmIOKAlCB1c2UgYSBUb2dnbGUKLSBZb3UncmUgc2VsZWN0aW5nIG9uZSBmcm9tIGEgc2V0IG9mIG9wdGlvbnMg4oCUIHVzZSBDaGlwcyBvciBhIFJhZGlvIGdyb3VwCi0gVGhlIGFjdGlvbiBpcyBwdXJlbHkgZGVjb3JhdGl2ZSBvciBpbmZvcm1hdGlvbmFsIOKAlCByZW1vdmUgdGhlIGJ1dHRvbgotIFlvdSBuZWVkIG1vcmUgdGhhbiAzIENUQXMgaW4gYSBzaW5nbGUgdmlldyDigJQgY29uc29saWRhdGUgaGllcmFyY2h5IGZpcnN0CgojIyBCZXN0IHByYWN0aWNlcwoKRm9sbG93IHRoZXNlIHJ1bGVzIHRvIGtlZXAgYnV0dG9uIHVzYWdlIGNvbnNpc3RlbnQgYWNyb3NzIHRoZSBKaW9HYW1lcyBwcm9kdWN0IHN1cmZhY2UuCgotIFVzZSBvbmUgUHJpbWFyeSBidXR0b24gcGVyIHNlY3Rpb24gb3Igc2NyZWVuIHJlZ2lvbgotIFVzZSBjbGVhciBhY3Rpb24gdmVyYnM6IFBsYXksIFN0YXJ0LCBDb250aW51ZSwgVW5sb2NrLCBUcnkgYWdhaW4KLSBLZWVwIHRoZSBQcmltYXJ5IENUQSBhbmNob3JlZCBhdCB0aGUgYm90dG9tIG9uIG1vYmlsZQotIFVzZSBpY29uICsgbGFiZWwgd2hlbiB0aGUgaWNvbiBtZWFuaW5nZnVsbHkgcmVpbmZvcmNlcyB0aGUgYWN0aW9uCi0gTWFpbnRhaW4gc3RhYmxlIGJ1dHRvbiB3aWR0aCBkdXJpbmcgbG9hZGluZyBzdGF0ZQotIFVzZSBEZXN0cnVjdGl2ZSBvbmx5IGZvciB0cnVseSBpcnJldmVyc2libGUgYWN0aW9ucwotIE9uIFRWLCB1c2UgTCBvciBYTCBzaXplIOKAlCBuZXZlciBYUyBvciBTCgotIERvbid0IHVzZSBtdWx0aXBsZSBQcmltYXJ5IGJ1dHRvbnMgaW4gdGhlIHNhbWUgdmlldwotIERvbid0IHVzZSB2YWd1ZSBsYWJlbHMgbGlrZSAiU3VibWl0IiBvciAiT0siIHdoZW4gYWN0aW9uIGNhbiBiZSBjbGVhcmVyCi0gRG9uJ3QgdXNlIGljb24tb25seSBidXR0b25zIHdpdGhvdXQgYW4gYWNjZXNzaWJsZSBhcmlhLWxhYmVsCi0gRG9uJ3QgcmVseSBvbiBjb2xvciBhbG9uZSB0byBzaWduYWwgZGVzdHJ1Y3RpdmUgYWN0aW9ucwotIERvbid0IHBsYWNlIHRpbnkgWFMvUyBidXR0b25zIGFzIHRoZSBtYWluIFRWIENUQQotIERvbid0IGNoYW5nZSBidXR0b24gd2lkdGggYmV0d2VlbiBkZWZhdWx0IGFuZCBsb2FkaW5nIHN0YXRlcwotIERvbid0IHVzZSBgLmJ0bi0tdHZgIOKAlCB1c2UgYC5idG4tLWxgIGluc2lkZSBgLnBsYXRmb3JtLXR2YAoKIyMgQW5hdG9teQoKRXZlcnkgYnV0dG9uIGlzIGNvbXBvc2VkIG9mIHRoZSBzYW1lIGZvdXIgc2xvdHMuIFRoZSBDb250YWluZXIgaXMgdGhlIG9ubHkgcmVxdWlyZWQgZWxlbWVudCDigJQgYWxsIG90aGVyIHNsb3RzIGFyZSBvcHRpb25hbCBidXQgbXVzdCBiZSB1c2VkIGludGVudGlvbmFsbHkuCgojIyBWYXJpYW50cwoKU2V2ZW4gdmFyaWFudHMgY292ZXIgZXZlcnkgaW50ZXJhY3Rpb24gdGllci4gVXNlIHRoZSBsb3dlc3Qtd2VpZ2h0IHZhcmlhbnQgdGhhdCBzdGlsbCBjb21tdW5pY2F0ZXMgdGhlIGFjdGlvbidzIGltcG9ydGFuY2UuIE5ldmVyIHBsYWNlIHR3byBQcmltYXJ5IGJ1dHRvbnMgaW4gdGhlIHNhbWUgdmlldy4KCiMjIFNpemVzCgpGaXZlIGNhbm9uaWNhbCBzaXplIG5hbWVzIGRlc2NyaWJlIHZpc3VhbCBoaWVyYXJjaHkuIFBsYXRmb3JtIGNvbnRleHQgZGV0ZXJtaW5lcyBhY3R1YWwgcGl4ZWwgdmFsdWVzIHZpYSBDU1MgdG9rZW4gYWxpYXNlcy4gVGhlIHNhbWUgY2xhc3MgcHJvZHVjZXMgZGlmZmVyZW50IHNpemVzIG9uIE1vYmlsZSwgV2ViLCBhbmQgVFYuCgojIyBTdGF0ZXMKCkV2ZXJ5IGJ1dHRvbiB2YXJpYW50IHJlc3BvbmRzIHRvIHRoZSBzYW1lIHNpeCBpbnRlcmFjdGlvbiBzdGF0ZXMuIFVzZSB0aGUgYC5pcy0qYCBoZWxwZXIgY2xhc3NlcyBmcm9tIGBzdGF0ZXMuY3NzYCB0byBzaW11bGF0ZSBzdGF0ZXMgaW4gZG9jdW1lbnRhdGlvbiBvciBwcm90b3R5cGVzLgoKIyMgSWNvbiB1c2FnZQoKSWNvbnMgcmVpbmZvcmNlIG1lYW5pbmcgYW5kIGFpZCBzY2FubmFiaWxpdHkuIFVzZSB0aGUgaWNvbiBzbG90IGludGVudGlvbmFsbHkg4oCUIG5ldmVyIGFkZCBkZWNvcmF0aW9uIGZvciBpdHMgb3duIHNha2UuIEljb24tb25seSBidXR0b25zIGFsd2F5cyBuZWVkIGFuIGFjY2Vzc2libGUgbGFiZWwuCgojIyBMb2FkaW5nIGJlaGF2aW9yCgpUaGUgbG9hZGluZyBzdGF0ZSBjb21tdW5pY2F0ZXMgdGhhdCBhbiBhY3Rpb24gaGFzIGJlZW4gcmVjZWl2ZWQgYW5kIGlzIHByb2Nlc3NpbmcuIEl0IHByZXZlbnRzIHJlLXN1Ym1pc3Npb24gYW5kIHJlbW92ZXMgdGhlIGxhYmVsIHZpc3VhbGx5IHdoaWxlIGtlZXBpbmcgbGF5b3V0IHN0YWJsZS4KCi0gwrdLZWVwIGB3aWR0aGAgc3RhYmxlIOKAlCBzZXQgZml4ZWQgb3IgYG1pbi13aWR0aGAKLSDCt1NwaW5uZXIgYXV0by1pbmplY3RlZCB2aWEgYDo6YWZ0ZXJgIOKAlCBubyBleHRyYSBIVE1MCi0gwrdMYWJlbCB0ZXh0IGdvZXMgdHJhbnNwYXJlbnQsIHN0YXlzIGluIERPTSBmb3IgbGF5b3V0Ci0gwrdBZGQgYGFyaWEtYnVzeT0idHJ1ZSJgIG9uIHRoZSBidXR0b24gZWxlbWVudAotIMK3VHJhbnNpdGlvbiB0byBgLmlzLXN1Y2Nlc3NgIG9yIGAuaXMtZXJyb3JgIGFmdGVyCgotIMK3RG9uJ3QgY2hhbmdlIHRoZSBsYWJlbCB0ZXh0IHRvICJMb2FkaW5n4oCmIgotIMK3RG9uJ3QgYWxsb3cgd2lkdGggdG8gY29sbGFwc2Ug4oCUIGNhdXNlcyBsYXlvdXQgc2hpZnQKLSDCt0Rvbid0IGFkZCBhIHNlcGFyYXRlIHNwaW5uZXIgZWxlbWVudCBpbiB0aGUgSFRNTAotIMK3RG9uJ3QgbGVhdmUgdGhlIGJ1dHRvbiBsb2FkaW5nIGluZGVmaW5pdGVseQotIMK3RG9uJ3QgdXNlIGxvYWRpbmcgb24gYC5idG4tLXRleHRgIGJ1dHRvbnMKCiMjIENvbnRlbnQKCkJ1dHRvbiBsYWJlbHMgYXJlIHRoZSBtb3N0IGRpcmVjdCBjb21tdW5pY2F0aW9uIGJldHdlZW4gdGhlIHByb2R1Y3QgYW5kIHRoZSBwbGF5ZXIuIEV2ZXJ5IHdvcmQgY2FycmllcyB3ZWlnaHQuCgotIFVzZSBhY3Rpb24gdmVyYnM6IFBsYXksIFN0YXJ0LCBDb250aW51ZSwgVW5sb2NrLCBUcnkgYWdhaW4KLSBLZWVwIHRvIDHigJMzIHdvcmRzIHdoZXJlIHBvc3NpYmxlCi0gQXZvaWQgIlN1Ym1pdCIsICJPSyIsICJZZXMiIHdpdGhvdXQgY2xlYXIgY29udGV4dAotIEljb24gKyBsYWJlbDogaWNvbiBzaG91bGQgcmVpbmZvcmNlLCBub3QgcmVwbGFjZSwgdGhlIGxhYmVsCi0gTWF0Y2ggdGhlIHZlcmIgdG8gdGhlIG91dGNvbWU6ICJQbGF5IiBub3QgIkxhdW5jaCIKCi0gRG8gbm90IGNoYW5nZSB0aGUgbGFiZWwgdGV4dCBkdXJpbmcgbG9hZGluZwotIE1haW50YWluIGJ1dHRvbiB3aWR0aCDigJQgYWRkIGBtaW4td2lkdGhgIGlmIG5lZWRlZAotIFNwaW5uZXIgYXBwZWFycyBhdXRvbWF0aWNhbGx5IHZpYSBDU1MgYDo6YWZ0ZXJgCi0gU3VjY2VzcyBzdGF0ZTogc2hvdyBjb25maXJtYXRpb24sIHRoZW4gcmV0dXJuIHRvIGRlZmF1bHQKLSBFcnJvciBzdGF0ZTogc2hvdyBmZWVkYmFjayBhbmQgYWxsb3cgcmV0cnkKCi0gTmFtZSB0aGUgY29uc2VxdWVuY2U6ICJEZWxldGUgc2F2ZSBmaWxlIiwgbm90ICJEZWxldGUiCi0gQ29uZmlybSBiZWZvcmUgdHJpZ2dlcmluZyDigJQgdXNlIGEgZGlhbG9nCi0gTmV2ZXIgdXNlIERlc3RydWN0aXZlIGFzIHRoZSBwcmltYXJ5IENUQQotIEFsd2F5cyBwYWlyIHdpdGggYSBjYW5jZWwgb3B0aW9uCgotIEFsd2F5cyByZXF1aXJlIGBhcmlhLWxhYmVsYCBvbiB0aGUgYnV0dG9uIGVsZW1lbnQKLSBVc2UgYSB0b29sdGlwIHRvIHN1cmZhY2UgdGhlIGxhYmVsIG9uIGhvdmVyCi0gTWluaW11bSA0NHB4IHRvdWNoIHRhcmdldCBvbiBtb2JpbGUKLSBQcmVmZXIgaWNvbiArIGxhYmVsIGlmIHRoZXJlJ3Mgc3VmZmljaWVudCBzcGFjZQoKIyMgUGxhdGZvcm0gY29uc2lkZXJhdGlvbnMKCkVhY2ggcGxhdGZvcm0gaGFzIGEgZGlmZmVyZW50IGludGVyYWN0aW9uIG1vZGVsLiBUaGUgc2FtZSBidXR0b24gY2xhc3NlcyBhZGFwdCB0aGVpciB0b2tlbiB2YWx1ZXMg4oCUIGJ1dCB1c2FnZSBwYXR0ZXJucyBhbHNvIGRpZmZlciBmdW5kYW1lbnRhbGx5LgoKLSA0NHB4IG1pbmltdW0gdG91Y2ggdGFyZ2V0IOKAlCB1c2UgTSBvciBMCi0gRnVsbC13aWR0aCBQcmltYXJ5IENUQSBhdCBib3R0b20gb2Ygc2NyZWVuCi0gQXZvaWQgWFMvUyBhcyBwcmltYXJ5IGFjdGlvbiB0YXJnZXRzCi0gQm90dG9tIHNoZWV0IENUQXMgdXNlIGZ1bGwtd2lkdGggUHJpbWFyeQotIExvYWRpbmcga2VlcHMgc3RhYmxlIHdpZHRoIHRvIGF2b2lkIGxheW91dCBzaGlmdAotIFRhcCBoaWdobGlnaHQgc3VwcHJlc3NlZCB2aWEgYC13ZWJraXQtdGFwLWhpZ2hsaWdodC1jb2xvcmAKCi0gSG92ZXIgc3RhdGUgdmlhIGA6aG92ZXJgIHBzZXVkby1jbGFzcwotIEtleWJvYXJkIGZvY3VzIHZpYSBgOmZvY3VzLXZpc2libGVgCi0gSHVnLWNvbnRlbnQgd2lkdGggZm9yIG1vc3QgYWN0aW9ucwotIERlbnNlIGxheW91dHMgY2FuIHVzZSBTIHNpemUKLSBGdWxsLXdpZHRoIG9ubHkgaW5zaWRlIGNhcmRzIG9yIG1vZGFsIGZvb3RlcnMKLSBDdXJzb3I6IHBvaW50ZXIgb24gYWxsIGJ1dHRvbiBlbGVtZW50cwoKLSBSZW1vdGUgZC1wYWQgbmF2aWdhdGlvbiDigJQgbm8gaG92ZXIKLSBMIG9yIFhMIHNpemUgb25seSDigJQgbmV2ZXIgWFMvUyBvbiBUVgotIFRWIGZvY3VzOiBzY2FsZSgxLjA1KSArIGB2YXIoLS10di1mb2N1cy1zaGFkb3cpYAotIDEwLWZvb3QgcmVhZGFiaWxpdHkg4oCUIG1pbiAxNnB4IGZvbnQgYXQgVFYgc2l6ZXMKLSBVc2UgYC5pcy10di1mb2N1c2VkYCBpbiBwcm90b3R5cGVzCi0gTmV2ZXIgdXNlIGAuYnRuLS10dmAg4oCUIGRlcHJlY2F0ZWQKCiMjIE1vdGlvbgoKQnV0dG9uIHRyYW5zaXRpb25zIGFyZSBmYXN0IGFuZCBjb25maXJtYXRvcnkuIFRoZXkgYWNrbm93bGVkZ2UgaW5wdXQgaW1tZWRpYXRlbHkgd2l0aG91dCBkcmF3aW5nIGF0dGVudGlvbiBhd2F5IGZyb20gdGhlIGFjdGlvbidzIG91dGNvbWUuCgp8IEludGVyYWN0aW9uIHwgUHJvcGVydHkgfCBEdXJhdGlvbiB8IEVhc2luZyB8IE5vdGVzIHwKfC0tLXwtLS18LS0tfC0tLXwtLS18CnwgUHJlc3MgLyB0YXAgfCBgdHJhbnNmb3JtOiBzY2FsZSgwLjk24oCTMC45NylgIHwgYC0tZHVyLWZhc3RgICgxMjBtcykgfCBgLS1zcHJpbmdgIHwgU2NhbGVzIGRvd24gb24gcHJlc3MsIHNwcmluZ3MgYmFjayBvbiByZWxlYXNlIHwKfCBIb3ZlciAod2ViKSB8IGBiYWNrZ3JvdW5kLWNvbG9yYCB8IGAtLWR1ci1mYXN0YCAoMTIwbXMpIHwgYC0tc3ByaW5nYCB8IFN1YnRsZSBmaWxsIHNoaWZ0LiBObyBzY2FsZSBvbiBob3Zlci4gfAp8IEZvY3VzIHJpbmcgYXBwZWFyIHwgYGJveC1zaGFkb3dgIHwgYC0tZHVyLWluc3RhbnRgICg5MG1zKSB8IGAtLWVhc2Utb3V0YCB8IEZvY3VzIHJpbmcgbXVzdCBuZXZlciBiZSBkZWxheWVkIG9yIHN1cHByZXNzZWQgfAp8IExvYWRpbmcgc3RhdGUgZW50ZXIgfCBgb3BhY2l0eWAgfCBgLS1kdXItZGVmYXVsdGAgKDIwMG1zKSB8IGAtLWVhc2Utb3V0YCB8IFNwaW5uZXIgZmFkZXMgaW47IGxhYmVsIGZhZGVzIG91dC4gV2lkdGggc3RheXMgZml4ZWQuIHwKfCBEaXNhYmxlZCBzdGF0ZSB8IGBvcGFjaXR5YCB8IGluc3RhbnQgfCBub25lIHwgTm8gYW5pbWF0aW9uIG9uIGRpc2FibGUg4oCUIGl0J3MgYSBzdGF0ZSwgbm90IGEgdHJhbnNpdGlvbiB8CnwgVFYgZm9jdXMgKEQtcGFkKSB8IGBib3gtc2hhZG93LCB0cmFuc2Zvcm1gIHwgYC0tZHVyLWZhc3RgICgxMjBtcykgfCBgLS1zcHJpbmdgIHwgR2xvdyByaW5nICsgYHNjYWxlKDEuMDUpYCBvbiBmb2N1cy4gTm8gcHJlc3Mgc2NhbGUgb24gVFYuIHwKClJlZHVjZWQgbW90aW9uOiBhbGwgdHJhbnNpdGlvbnMgY29sbGFwc2UgdmlhIGBAbWVkaWEgKHByZWZlcnMtcmVkdWNlZC1tb3Rpb246IHJlZHVjZSlgLiBEdXJhdGlvbiB0b2tlbnMgaGFuZGxlIHRoaXMgYXV0b21hdGljYWxseSDigJQgbmV2ZXIgaGFyZGNvZGUgYG1zYCB2YWx1ZXMgaW4gYnV0dG9uIENTUy4gTmV2ZXIgdXNlIGB0cmFuc2l0aW9uOiBhbGxgIOKAlCBsaXN0IGV4cGxpY2l0IHByb3BlcnRpZXMgb25seS4KCiMjIFBsYXRmb3JtIHJ1bGVzCgpNb2JpbGUKCi0gTWluaW11bSB0b3VjaCB0YXJnZXQgNDTDlzQ0cHgg4oCUIHVzZSB2YXIoLS1jdHJsLWgpIDQ4cHggZGVmYXVsdCBoZWlnaHQKLSBGdWxsLXdpZHRoIENUQXMgaW4gc2hlZXRzIGFuZCBib3R0b20gcGFuZWxzICh3aWR0aDoxMDAlKQotIEF2b2lkIG1vcmUgdGhhbiAyIGJ1dHRvbnMgc3RhY2tlZCB2ZXJ0aWNhbGx5IOKAlCB1c2UgYm90dG9tLXNoZWV0IGFjdGlvbnMKLSBMb2FkaW5nIHN0YXRlIHNob3dzIHNwaW5uZXIgaW5zaWRlIGJ1dHRvbiDigJQgZG8gbm90IGRpc2FibGUgd2l0aG91dCBmZWVkYmFjawoKV2ViCgotIEhvdmVyIHN0YXRlIHJlcXVpcmVkIOKAlCBzY2FsZSgxLjAyKSBvciBiZyBzaGlmdCBvbiBwcmltYXJ5L3NlY29uZGFyeQotIEZvY3VzIHJpbmcgdmlhIDpmb2N1cy12aXNpYmxlIOKAlCAycHggamlvLWdyZWVuIG91dGxpbmUsIDJweCBvZmZzZXQKLSBJY29uLW9ubHkgYnV0dG9ucyBtdXN0IGhhdmUgdG9vbHRpcCBvciBhcmlhLWxhYmVsCi0gTWluIHdpZHRoIDEyMHB4IHRvIGF2b2lkIHZlcnkgbmFycm93IHBpbGwgYnV0dG9ucwoKVFYKCi0gSGVpZ2h0IHVzZXMgdmFyKC0tY3RybC1oLXR2KSDigJQgdGFsbGVyIGZvciBELXBhZCBuYXZpZ2F0aW9uIGNvbWZvcnQKLSBGb2N1cyByaW5nIHVzZXMgamlvLWdsb3cgYm94LXNoYWRvdyDigJQgdmlzaWJsZSBhdCAxMC1mb290IGRpc3RhbmNlCi0gT25seSBQcmltYXJ5IGFuZCBHaG9zdCB2YXJpYW50cyB1c2VkIG9uIFRWIOKAlCBhdm9pZCBzdWJ0bGUgZGlmZmVyZW5jZXMKLSBQcmVzc2VkIHN0YXRlIG9uIE9LIGJ1dHRvbjogc2NhbGUoMC45NSkgZmxhc2ggdGhlbiByZXR1cm4KCiMjIEFjY2Vzc2liaWxpdHkKCkJ1dHRvbnMgYXJlIGludGVyYWN0aXZlIGNvbnRyb2xzLiBFdmVyeSBidXR0b24gbXVzdCBiZSBvcGVyYWJsZSB3aXRoIGtleWJvYXJkLCBzY3JlZW4gcmVhZGVyLCBhbmQgcG9pbnRlciBpbnB1dC4KCi0gVGFiIOKAlCBtb3ZlcyBmb2N1cyB0byB0aGUgbmV4dCBpbnRlcmFjdGl2ZSBlbGVtZW50Ci0gRW50ZXIgb3IgU3BhY2Ug4oCUIGFjdGl2YXRlcyB0aGUgYnV0dG9uCi0gRXNjYXBlIOKAlCBkaXNtaXNzZXMgZGlhbG9ncyB0cmlnZ2VyZWQgYnkgdGhlIGJ1dHRvbgotIEZvY3VzIHJpbmcgdmlzaWJsZSBvbiBgOmZvY3VzLXZpc2libGVgLCBub3QgYDpmb2N1c2AKCi0gUHJpbWFyeTogYmxhY2sgdGV4dCBvbiBgIzAwQTg1OWAg4oCUIDUuMToxIGNvbnRyYXN0IHJhdGlvCi0gU2Vjb25kYXJ5IC8gR2hvc3Q6IHdoaXRlIHRleHQgb24gZGFyayBiZyDigJQgbWVldHMgNC41OjEKLSBEZXN0cnVjdGl2ZTogYHZhcigtLW5lZ2F0aXZlKWAgcmVkIOKAlCBlbnN1cmUgNC41OjEgb24gYW55IGJnCi0gRGlzYWJsZWQ6IDAuMzIgb3BhY2l0eSDigJQgZGVjb3JhdGl2ZSwgbm90IHJlcXVpcmVkIHRvIG1lZXQgY29udHJhc3QKCi0gSWNvbi1vbmx5OiBhbHdheXMgYWRkIGBhcmlhLWxhYmVsPSJbYWN0aW9uXSJgIHRvIHRoZSBidXR0b24gZWxlbWVudAotIEFkZCBgYXJpYS1oaWRkZW49InRydWUiYCB0byBhbGwgZGVjb3JhdGl2ZSBTVkcgaWNvbnMKLSBMb2FkaW5nOiBhZGQgYGFyaWEtYnVzeT0idHJ1ZSJgIHRvIHRoZSBidXR0b24gd2hpbGUgbG9hZGluZwotIERpc2FibGVkOiB1c2UgbmF0aXZlIGBkaXNhYmxlZGAgYXR0cmlidXRlLCBub3QgQ1NTIG9wYWNpdHkgYWxvbmUKLSBTdWNjZXNzL2Vycm9yOiB1c2UgYGFyaWEtbGl2ZT0icG9saXRlImAgcmVnaW9uIGZvciBmZWVkYmFjayBhbm5vdW5jZW1lbnRzCgojIyBSZWxhdGVkIHRva2VucwoKQWxsIGJ1dHRvbiB2YWx1ZXMgYXJlIGRlZmluZWQgaW4gYHRva2Vucy90b2tlbnMuY3NzYC4gQ2hhbmdlIGEgdG9rZW4gb25jZSBhbmQgYWxsIGJ1dHRvbiBpbnN0YW5jZXMgdXBkYXRlIGF1dG9tYXRpY2FsbHkuCgp8IFRva2VuIHwgVmFsdWUgfCBTd2F0Y2ggfCBVc2FnZSB8CnwtLS18LS0tfC0tLXwtLS18CnwgYC0tYnRuLXByaW1hcnktYmdgIHwgYHZhcigtLWppbylgIOKGkiAjMDBBODU5IHwgICB8IFByaW1hcnkgYnV0dG9uIGJhY2tncm91bmQgfAp8IGAtLWJ0bi1wcmltYXJ5LXRleHRgIHwgYHZhcigtLXRleHQtaW52KWAg4oaSICMwMDAwMDAgfCAgIHwgUHJpbWFyeSBidXR0b24gbGFiZWwgY29sb3IgfAp8IGAtLWJ0bi1wcmltYXJ5LWhvdmVyLWJnYCB8ICMwMGJlNjUgfCAgIHwgUHJpbWFyeSBob3ZlciBzdGF0ZSBiYWNrZ3JvdW5kIHwKfCBgLS1idG4tc2Vjb25kYXJ5LWJvcmRlcmAgfCBgdmFyKC0tYm9yZGVyLXN0cm9uZylgIHwgICB8IFNlY29uZGFyeSBib3JkZXIgY29sb3IgfAp8IGAtLWJ0bi1naG9zdC1ib3JkZXJgIHwgYHZhcigtLWJvcmRlcilgIHwgICB8IEdob3N0IGJ1dHRvbiBib3JkZXIgfAp8IGAtLWJ0bi1kZXN0cnVjdGl2ZS1iZ2AgfCByZ2JhKDI1NSw3MSw4NywuMTIpIHwgICB8IERlc3RydWN0aXZlIGZpbGwgfAp8IGAtLWJ0bi1kZXN0cnVjdGl2ZS10ZXh0YCB8IGB2YXIoLS1uZWdhdGl2ZSlgIOKGkiAjRkY0NzU3IHwgICB8IERlc3RydWN0aXZlIGxhYmVsIGNvbG9yIHwKfCBgLS1idG4tdWx0aW1hdGUtYmdgIHwgbGluZWFyLWdyYWRpZW50KDEzNWRlZywgIzAwY2M2NSwgIzAwRTg3MCkgfCAgIHwgVWx0aW1hdGUgcGFzcyBncmFkaWVudCB8CnwgYC0tYnRuLWRpc2FibGVkLW9wYWNpdHlgIHwgMC4zMiB8IOKAlCB8IERpc2FibGVkIHN0YXRlIG9wYWNpdHkgfAoKfCBUb2tlbiB8IE1vYmlsZSB8IFdlYiB8IFRWIHwgUHJvcGVydHkgfAp8LS0tfC0tLXwtLS18LS0tfC0tLXwKfCBgLS1idG4teHMtaGAgfCAyOHB4IHwgMzBweCB8IDQ4cHggfCBoZWlnaHQgfAp8IGAtLWJ0bi1zLWhgIHwgMzZweCB8IDM4cHggfCA1NnB4IHwgaGVpZ2h0IHwKfCBgLS1idG4tbS1oYCB8IDQ0cHggfCA0NHB4IHwgNjRweCB8IGhlaWdodCB8CnwgYC0tYnRuLWwtaGAgfCA1NHB4IHwgNTRweCB8IDcycHggfCBoZWlnaHQgfAp8IGAtLWJ0bi14bC1oYCB8IDY0cHggfCA2NHB4IHwgODBweCB8IGhlaWdodCB8CnwgYC0tYnRuLXhzLXB4YCB8IDEwcHggfCAxMnB4IHwgMjBweCB8IHBhZGRpbmctaW5saW5lIHwKfCBgLS1idG4tcy1weGAgfCAxNnB4IHwgMThweCB8IDI4cHggfCBwYWRkaW5nLWlubGluZSB8CnwgYC0tYnRuLW0tcHhgIHwgMjBweCB8IDIycHggfCAzNnB4IHwgcGFkZGluZy1pbmxpbmUgfAp8IGAtLWJ0bi1sLXB4YCB8IDI0cHggfCAyOHB4IHwgNDRweCB8IHBhZGRpbmctaW5saW5lIHwKfCBgLS1idG4teGwtcHhgIHwgMzJweCB8IDM2cHggfCA1NnB4IHwgcGFkZGluZy1pbmxpbmUgfAp8IGAtLWJ0bi14cy1mc2AgfCAxMXB4IHwgMTJweCB8IDE0cHggfCBmb250LXNpemUgfAp8IGAtLWJ0bi1zLWZzYCB8IDEzcHggfCAxM3B4IHwgMTZweCB8IGZvbnQtc2l6ZSB8CnwgYC0tYnRuLW0tZnNgIHwgMTRweCB8IDE0cHggfCAxOHB4IHwgZm9udC1zaXplIHwKfCBgLS1idG4tbC1mc2AgfCAxNXB4IHwgMTZweCB8IDIwcHggfCBmb250LXNpemUgfAp8IGAtLWJ0bi14bC1mc2AgfCAxN3B4IHwgMThweCB8IDIycHggfCBmb250LXNpemUgfAoKfCBUb2tlbiB8IFZhbHVlIHwgVXNhZ2UgfAp8LS0tfC0tLXwtLS18CnwgYC0tZm9jdXMtcmluZy1jb2xvcmAgfCBgdmFyKC0tamlvKWAg4oaSICMwMEE4NTkgfCBGb2N1cyBvdXRsaW5lIGNvbG9yIHwKfCBgLS1mb2N1cy1yaW5nLXdpZHRoYCB8IDJweCAobW9iaWxlL3dlYikgwrcgM3B4IChUVikgfCBGb2N1cyByaW5nIHN0cm9rZSB8CnwgYC0tZm9jdXMtcmluZy1vZmZzZXRgIHwgM3B4IChtb2JpbGUvd2ViKSDCtyA0cHggKFRWKSB8IE91dGxpbmUgb2Zmc2V0IGZyb20gZWRnZSB8CnwgYC0tc3RhdGUtcHJlc3NlZC1zY2FsZWAgfCAwLjk3IHwgU2NhbGUgdHJhbnNmb3JtIG9uIDphY3RpdmUgfAp8IGAtLXN0YXRlLWRpc2FibGVkLW9wYWNpdHlgIHwgMC4zMiB8IERpc2FibGVkIHN0YXRlIG9wYWNpdHkgfAp8IGAtLXR2LWZvY3VzLXNoYWRvd2AgfCAwIDAgMCAzcHggdmFyKC0tamlvKSwgMCAwIDI0cHggdmFyKC0tamlvLWdsb3cpLCAwIDAgNDhweCByZ2JhKDAsMjAwLDEwMCwuMikgfCBUViBkLXBhZCBnbG93IHwKfCBgLS10di1mb2N1cy1zY2FsZWAgfCAxLjA1IHwgVFYgZm9jdXMgc2NhbGUgdHJhbnNmb3JtIHwKfCBgLS1zcGlubmVyLXNpemUtbWRgIHwgMjBweCB8IERlZmF1bHQgc3Bpbm5lciBkaWFtZXRlciB8CnwgYC0tc3Bpbm5lci1zdHJva2VgIHwgMnB4IHwgU3Bpbm5lciBib3JkZXIgd2lkdGggfAoKIyMgQ1NTIGNsYXNzIC8gUmVhY3QgQVBJCgpBbGwgY2xhc3NlcyB0aGlzIGNvbXBvbmVudCBleHBvc2VzLiBVc2UgdGhlc2Ug4oCUIG5ldmVyIHdyaXRlIG9uZS1vZmYgb3ZlcnJpZGVzIGluIHNjcmVlbiBDU1MuCgp8IENsYXNzIHwgRGVzY3JpcHRpb24gfAp8LS0tfC0tLXwKfCBgLmJ0bmAgfCBCYXNlIGVsZW1lbnQuIFJlcXVpcmVkIG9uIGV2ZXJ5IGJ1dHRvbi5TZXRzIGRpc3BsYXksIGZvbnQsIGJvcmRlci1yYWRpdXMgKHBpbGwpLCB0cmFuc2l0aW9uLCBjdXJzb3IuIHwKfCBgLmJ0bi0tcHJpbWFyeWAgfCBIaWdoZXN0LXdlaWdodCBDVEEuIEdyZWVuIGZpbGwsIGRhcmsgbGFiZWwuT25lIHBlciBzY3JlZW4gc2VjdGlvbi4gVXNlIGZvciBQbGF5IE5vdywgU3Vic2NyaWJlLCBDb250aW51ZS4gfAp8IGAuYnRuLS1zZWNvbmRhcnlgIHwgQm9yZGVyZWQsIHRyYW5zcGFyZW50IGZpbGwuU2Vjb25kIGFjdGlvbiBhbG9uZ3NpZGUgUHJpbWFyeS4gVXNlIGZvciBBZGQgdG8gTGlicmFyeSwgU2F2ZS4gfAp8IGAuYnRuLS1naG9zdGAgfCBTdWJ0bGUgZ2xhc3MgZmlsbCwgbXV0ZWQgYm9yZGVyLlRlcnRpYXJ5IG9yIGlubGluZSBhY3Rpb25zLiBVc2UgZm9yIFNraXAsIENhbmNlbCwgU2hhcmUuIHwKfCBgLmJ0bi0tdGV4dGAgfCBObyBiYWNrZ3JvdW5kIG9yIGJvcmRlci4gR3JlZW4gdGV4dC5Mb3dlc3QgZW1waGFzaXMuIFVzZSBmb3IgTGVhcm4gbW9yZSwgVmlldyBhbGwuIHwKfCBgLmJ0bi0tZGVzdHJ1Y3RpdmVgIHwgUmVkIHRpbnQuIFNpZ25hbHMgaXJyZXZlcnNpYmxlIGFjdGlvbnMuVXNlIG9ubHkgZm9yIERlbGV0ZSwgUmVtb3ZlLCBVbnN1YnNjcmliZS4gfAp8IGAuYnRuLS11bHRpbWF0ZWAgfCBHcmFkaWVudCBncmVlbi4gUHJlbWl1bSB1cHNlbGwgb25seS5SZXNlcnZlIGZvciBVbHRpbWF0ZSBQYXNzIENUQXMuIHwKfCBgLmJ0bi0teHMgLyAtLXMgLyAtLW0gLyAtLWwgLyAtLXhsYCB8IFNpemUgbW9kaWZpZXJzLiBQbGF0Zm9ybS1hd2FyZSB2aWEgdG9rZW4gYWxpYXNlcy5MICg1NHB4IG1vYmlsZSkgaXMgdGhlIGRlZmF1bHQgQ1RBIHNpemUuIHwKfCBgLmJ0bi0taHVnYCB8IFdpZHRoIGh1Z3MgY29udGVudC4gTm8gbWluLXdpZHRoLkRlZmF1bHQuIE9taXQgZm9yIGZ1bGwtd2lkdGggYnV0dG9ucy4gfAp8IGAuYnRuLS1mdWxsYCB8IHdpZHRoOiAxMDAlLiBGaWxscyBjb250YWluZXIuVXNlIGZvciBwcmltYXJ5IENUQXMgcGlubmVkIHRvIGJvdHRvbSBvZiBtb2JpbGUgc2NyZWVucy4gfAp8IGAuYnRuLS1pY29uLW9ubHlgIHwgU3F1YXJlIGFzcGVjdCByYXRpby4gTm8gbGFiZWwuUmVxdWlyZXMgYXJpYS1sYWJlbCBvbiB0aGUgZWxlbWVudC4gfAp8IGAuaXMtbG9hZGluZ2AgfCBMb2FkaW5nIHN0YXRlLiBTaG93cyBzcGlubmVyLCBoaWRlcyBsYWJlbC5LZWVwIGVsZW1lbnQgd2lkdGggc3RhYmxlLiBQcmV2ZW50cyByZS1zdWJtaXNzaW9uLiB8CnwgYC5pcy1kaXNhYmxlZGAgfCBEaXNhYmxlZCBzdGF0ZS4gb3BhY2l0eTogMC4zMiwgbm8gcG9pbnRlciBldmVudHMuQWxzbyBzZXQgZGlzYWJsZWQgYXR0cmlidXRlIG9uIDxidXR0b24+IGVsZW1lbnRzLiB8CnwgYC5pcy1mb2N1c2VkYCB8IEZvcmNlLXNob3cgZm9jdXMgcmluZy4gRm9yIGRlbW9zIG9ubHkuTmV2ZXIgdXNlIGluIHByb2R1Y3Rpb24g4oCUIHJlYWwgZm9jdXMgaGFuZGxlZCBieSA6Zm9jdXMtdmlzaWJsZS4gfAoKfCBQcm9wIHwgVHlwZSB8IERlZmF1bHQgfCBEZXNjcmlwdGlvbiB8CnwtLS18LS0tfC0tLXwtLS18CnwgYHZhcmlhbnRgIHwgJ3ByaW1hcnknIHwgJ3NlY29uZGFyeScgfCAnZ2hvc3QnIHwgJ3RleHQnIHwgJ2Rlc3RydWN0aXZlJyB8ICd1bHRpbWF0ZScgfCAncHJpbWFyeScgfCBWaXN1YWwgdmFyaWFudC4gTWFwcyB0byAuYnRuLS0qIG1vZGlmaWVyLiB8CnwgYHNpemVgIHwgJ3hzJyB8ICdzJyB8ICdtJyB8ICdsJyB8ICd4bCcgfCAnbCcgfCBTaXplIGhpZXJhcmNoeSBuYW1lLiBSZXNvbHZlcyB0byBwbGF0Zm9ybS1hd2FyZSBweCB2aWEgdG9rZW5zLiB8CnwgYGZ1bGxXaWR0aGAgfCBib29sZWFuIHwgZmFsc2UgfCBBcHBsaWVzIC5idG4tLWZ1bGwuIFVzZSBmb3IgcGlubmVkIG1vYmlsZSBDVEFzLiB8CnwgYGljb25Pbmx5YCB8IGJvb2xlYW4gfCBmYWxzZSB8IFNxdWFyZSByYXRpby4gYXJpYS1sYWJlbCByZXF1aXJlZCB3aGVuIHRydWUuIHwKfCBgbG9hZGluZ2AgfCBib29sZWFuIHwgZmFsc2UgfCBTaG93cyBzcGlubmVyLCBwcmV2ZW50cyByZS1zdWJtaXNzaW9uLCBzdGFibGUgd2lkdGguIHwKfCBgZGlzYWJsZWRgIHwgYm9vbGVhbiB8IGZhbHNlIHwgU2V0cyBkaXNhYmxlZCBhdHRyICsgLmlzLWRpc2FibGVkIGNsYXNzICsgYXJpYS1kaXNhYmxlZC4gfAp8IGBhc0NoaWxkYCB8IGJvb2xlYW4gfCBmYWxzZSB8IFJlbmRlciBhcyBjaGlsZCBlbGVtZW50IOKAlCB1c2UgdG8gd3JhcCA8YT4gb3IgPExpbms+LiB8CnwgYGxlYWRpbmdJY29uYCB8IFJlYWN0Tm9kZSB8IHVuZGVmaW5lZCB8IEljb24gYmVmb3JlIGxhYmVsLiBQYXNzIHNwcml0ZSB1c2Ugb3IgU1ZHLiB8CnwgYHRyYWlsaW5nSWNvbmAgfCBSZWFjdE5vZGUgfCB1bmRlZmluZWQgfCBJY29uIGFmdGVyIGxhYmVsLiB8CgojIyBDb2RlIGV4YW1wbGVzCgpDb3B5LXBhc3RlYWJsZSBwYXR0ZXJucyBmb3IgZXZlcnkgY29tbW9uIGJ1dHRvbiB1c2UgY2FzZS4KCmBgYGBodG1sCjxidXR0b24gY2xhc3M9ImJ0biBidG4tLXByaW1hcnkgYnRuLS1sIGJ0bi0taHVnIj4KICBQbGF5IE5vdwo8L2J1dHRvbj4KCjwhLS0gRnVsbC13aWR0aCAobW9iaWxlIGJvdHRvbSBDVEEpIC0tPgo8YnV0dG9uIGNsYXNzPSJidG4gYnRuLS1wcmltYXJ5IGJ0bi0tbCBidG4tLWZ1bGwiPgogIFBsYXkgTm93CjwvYnV0dG9uPgpgYGBgCgpgYGBgaHRtbAo8YnV0dG9uIGNsYXNzPSJidG4gYnRuLS1zZWNvbmRhcnkgYnRuLS1sIGJ0bi0taHVnIj5BZGQgdG8gTGlicmFyeTwvYnV0dG9uPgo8YnV0dG9uIGNsYXNzPSJidG4gYnRuLS1naG9zdCBidG4tLWwgYnRuLS1odWciPlNraXAgZm9yIG5vdzwvYnV0dG9uPgpgYGBgCgpgYGBgaHRtbAo8YnV0dG9uIGNsYXNzPSJidG4gYnRuLS1wcmltYXJ5IGJ0bi0tbCBidG4tLWh1ZyI+CiAgPHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGNsYXNzPSJpY29uIGljb24tLXMiIGFyaWEtaGlkZGVuPSJ0cnVlIj4KICAgIDx1c2UgaHJlZj0iLi4vc3ByaXRlLnN2ZyNpY19wbGF5Ij48L3VzZT4KICA8L3N2Zz4KICBQbGF5IEdhbWUKPC9idXR0b24+CmBgYGAKCmBgYGAKPCEtLSBBZGQgLmlzLWxvYWRpbmcgdmlhIEpTIHdoZW4gYWN0aW9uIGZpcmVzIC0tPgo8YnV0dG9uCiAgY2xhc3M9ImJ0biBidG4tLXByaW1hcnkgYnRuLS1sIGJ0bi0taHVnIGlzLWxvYWRpbmciCiAgYXJpYS1idXN5PSJ0cnVlIgogIHN0eWxlPSJtaW4td2lkdGg6MTQwcHgiCj4KICBQbGF5IE5vdwo8L2J1dHRvbj4KYGBgYAoKYGBgYAo8IS0tIC5wbGF0Zm9ybS10diByZXNvbHZlcyBhbGwgLS1idG4tKi1oIHRva2VucyB0byBUViB2YWx1ZXMgLS0+CjxkaXYgY2xhc3M9InBsYXRmb3JtLXR2Ij4KICA8YnV0dG9uIGNsYXNzPSJidG4gYnRuLS1wcmltYXJ5IGJ0bi0tbCBidG4tLWh1ZyI+CiAgICBQbGF5IE5vdwogIDwvYnV0dG9uPgo8L2Rpdj4KCjwhLS0gU2ltdWxhdGUgVFYgZm9jdXMgaW4gcHJvdG90eXBlcyAtLT4KPGJ1dHRvbiBjbGFzcz0iYnRuIGJ0bi0tcHJpbWFyeSBidG4tLWwgYnRuLS1odWcgaXMtdHYtZm9jdXNlZCI+CiAgUGxheSBOb3cKPC9idXR0b24+CmBgYGAKCmBgYGAKPCEtLSBUcmFuc3BhcmVudCBiZywgNDRweCB0b3VjaCB0YXJnZXQgLS0+CjxidXR0b24gY2xhc3M9ImJ0biBidG4tLWljb24iIGFyaWEtbGFiZWw9IlBsYXkgZ2FtZSI+CiAgPHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGNsYXNzPSJpY29uIGljb24tLW0iIGFyaWEtaGlkZGVuPSJ0cnVlIj4KICAgIDx1c2UgaHJlZj0iLi4vc3ByaXRlLnN2ZyNpY19wbGF5Ij48L3VzZT4KICA8L3N2Zz4KPC9idXR0b24+Cgo8IS0tIEdsYXNzIGJnIHdpdGggYm9yZGVyIC0tPgo8YnV0dG9uIGNsYXNzPSJidG4gYnRuLS1pY29uLWNpcmNsZSIgYXJpYS1sYWJlbD0iU2hhcmUiPgogIDxzdmcgdmlld0JveD0iMCAwIDI0IDI0IiBjbGFzcz0iaWNvbiBpY29uLS1zIiBhcmlhLWhpZGRlbj0idHJ1ZSI+CiAgICA8dXNlIGhyZWY9Ii4uL3Nwcml0ZS5zdmcjaWNfc2hhcmUiPjwvdXNlPgogIDwvc3ZnPgo8L2J1dHRvbj4KYGBgYAoKYGBgYAo8IS0tIEFsd2F5cyBwYWlyIHdpdGggYSBjYW5jZWwgYWN0aW9uIC0tPgo8ZGl2IHN0eWxlPSJkaXNwbGF5OmZsZXg7Z2FwOjEycHgiPgogIDxidXR0b24gY2xhc3M9ImJ0biBidG4tLWdob3N0IGJ0bi0tbCBidG4tLWh1ZyI+CiAgICBDYW5jZWwKICA8L2J1dHRvbj4KICA8YnV0dG9uIGNsYXNzPSJidG4gYnRuLS1kZXN0cnVjdGl2ZSBidG4tLWwgYnRuLS1odWciPgogICAgRGVsZXRlIHNhdmUgZmlsZQogIDwvYnV0dG9uPgo8L2Rpdj4KYGBgYAoKLS0tCgojIyBUb2tlbnMgcmVmZXJlbmNlZCBvbiB0aGlzIHBhZ2UKClVzZSB0aGVzZSBleGFjdCB0b2tlbnMg4oCUIGRlZmluZWQgaW4gYHRva2Vucy90b2tlbnMuY3NzYC4gRG8gbm90IHN1YnN0aXR1dGUgcmF3IHZhbHVlcy4KCi0gYC0tYW1iZXJgCi0gYC0tYmdgCi0gYC0tYm9yZGVyYAotIGAtLWJvcmRlci1zdHJvbmdgCi0gYC0tYm9yZGVyLXN1YnRsZWAKLSBgLS1idG4tbC1mcy1tb2JpbGVgCi0gYC0tYnRuLWwtZnMtdHZgCi0gYC0tYnRuLWwtZnMtd2ViYAotIGAtLWJ0bi1sLWhgCi0gYC0tYnRuLWwtaC1tb2JpbGVgCi0gYC0tYnRuLWwtaC10dmAKLSBgLS1idG4tbC1oLXdlYmAKLSBgLS1idG4tbC1weC1tb2JpbGVgCi0gYC0tYnRuLWwtcHgtdHZgCi0gYC0tYnRuLWwtcHgtd2ViYAotIGAtLWJ0bi1tLWZzLW1vYmlsZWAKLSBgLS1idG4tbS1mcy10dmAKLSBgLS1idG4tbS1mcy13ZWJgCi0gYC0tYnRuLW0taC1tb2JpbGVgCi0gYC0tYnRuLW0taC10dmAKLSBgLS1idG4tbS1oLXdlYmAKLSBgLS1idG4tbS1weC1tb2JpbGVgCi0gYC0tYnRuLW0tcHgtdHZgCi0gYC0tYnRuLW0tcHgtd2ViYAotIGAtLWJ0bi1zLWZzLW1vYmlsZWAKLSBgLS1idG4tcy1mcy10dmAKLSBgLS1idG4tcy1mcy13ZWJgCi0gYC0tYnRuLXMtaC1tb2JpbGVgCi0gYC0tYnRuLXMtaC10dmAKLSBgLS1idG4tcy1oLXdlYmAKLSBgLS1idG4tcy1weC1tb2JpbGVgCi0gYC0tYnRuLXMtcHgtdHZgCi0gYC0tYnRuLXMtcHgtd2ViYAotIGAtLWJ0bi14bC1mcy1tb2JpbGVgCi0gYC0tYnRuLXhsLWZzLXR2YAotIGAtLWJ0bi14bC1mcy13ZWJgCi0gYC0tYnRuLXhsLWgtbW9iaWxlYAotIGAtLWJ0bi14bC1oLXR2YAotIGAtLWJ0bi14bC1oLXdlYmAKLSBgLS1idG4teGwtcHgtbW9iaWxlYAotIGAtLWJ0bi14bC1weC10dmAKLSBgLS1idG4teGwtcHgtd2ViYAotIGAtLWJ0bi14cy1mcy1tb2JpbGVgCi0gYC0tYnRuLXhzLWZzLXR2YAotIGAtLWJ0bi14cy1mcy13ZWJgCi0gYC0tYnRuLXhzLWgtbW9iaWxlYAotIGAtLWJ0bi14cy1oLXR2YAotIGAtLWJ0bi14cy1oLXdlYmAKLSBgLS1idG4teHMtcHgtbW9iaWxlYAotIGAtLWJ0bi14cy1weC10dmAKLSBgLS1idG4teHMtcHgtd2ViYAotIGAtLWN0cmwtaGAKLSBgLS1jdHJsLWgtZ2hvc3RgCi0gYC0tY3RybC1oLXR2YAotIGAtLWZvY3VzLXJpbmctY29sb3JgCi0gYC0tZ2xhc3MtMWAKLSBgLS1nb2xkYAotIGAtLWppb2AKLSBgLS1qaW8tM2AKLSBgLS1qaW8tZm9udGAKLSBgLS1qaW8tZ2xvd2AKLSBgLS1uZWdhdGl2ZWAKLSBgLS1waWxsYAotIGAtLXI0YAotIGAtLXN0YXRlLWhvdmVyLWJnYAotIGAtLXN0YXRlLWhvdmVyLWJvcmRlcmAKLSBgLS1zdGF0dXMtcG9zaXRpdmVgCi0gYC0tc3VyZmFjZS0xYAotIGAtLXN1cmZhY2UtMmAKLSBgLS1zdXJmYWNlLTNgCi0gYC0tdGV4dGAKLSBgLS10ZXh0LWludmAKLSBgLS10ZXh0MmAKLSBgLS10ZXh0M2AKLSBgLS10ZXh0NGAKLSBgLS10di1mb2N1cy1zaGFkb3dgCgotLS0KCiMjIEJ1aWxkIHJ1bGVzIChiaW5kaW5nKQoKMS4gVXNlICoqb25seSoqIHRoZSB0b2tlbnMgbGlzdGVkIGFib3ZlLiBJZiBhIHZhbHVlIHlvdSBuZWVkIGlzIG5vdCBsaXN0ZWQsIHN0b3AgYW5kIGFzayDigJQgZG8gbm90IGludHJvZHVjZSBhIHJhdyB2YWx1ZS4KMi4gRm9udCBpcyAqKkppb1R5cGUqKiBvbmx5LiBXZWlnaHRzOiAzMDAsIDUwMCwgNzAwLCA5MDAuCjMuIFJldXNlIHRoZSBjb21wb25lbnQgQ1NTIHBhdHRlcm5zIHNob3duIG9uIHRoZSBzb3VyY2UgcGFnZTsgZG8gbm90IHJlZGVzaWduLgo0LiBNYXRjaCBldmVyeSBzdGF0ZSAoZGVmYXVsdCwgaG92ZXIsIGZvY3VzLCBhY3RpdmUsIGRpc2FibGVkLCBsb2FkaW5nKSBzaG93biBvbiB0aGUgcGFnZS4KNS4gQWNjZXNzaWJpbGl0eSByZXF1aXJlbWVudHMgb24gdGhlIHBhZ2UgYXJlIG1hbmRhdG9yeSwgbm90IG9wdGlvbmFsLgo=" download="buttons-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
     </div>
   </div>
 
@@ -598,7 +333,37 @@
   </section>
 
   <!-- ===================================================
-       4. BEST PRACTICES
+       4. WHEN TO USE / WHEN NOT TO USE
+  =================================================== -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use</h2>
+    <p class="ds-section-desc">Buttons are for actions. If you're navigating, use a link. If you're selecting from a set of options, use a chip or toggle.</p>
+    <div class="ds-usage-grid">
+      <div class="ds-usage-card ds-usage-card--do">
+        <div class="ds-usage-label ds-usage-label--do">Use when</div>
+        <ul class="ds-usage-list">
+          <li>The user needs to trigger an action: Play, Download, Subscribe, Continue</li>
+          <li>Submitting a form or confirming a destructive action</li>
+          <li>The primary CTA on a screen needs maximum visual weight</li>
+          <li>An asynchronous action needs a loading + feedback state</li>
+          <li>The action is immediate and reversible (or explicitly irreversible)</li>
+        </ul>
+      </div>
+      <div class="ds-usage-card ds-usage-card--dont">
+        <div class="ds-usage-label ds-usage-label--dont">Don't use when</div>
+        <ul class="ds-usage-list">
+          <li>You're navigating to another page — use a link or nav element instead</li>
+          <li>You need binary on/off — use a Toggle</li>
+          <li>You're selecting one from a set of options — use Chips or a Radio group</li>
+          <li>The action is purely decorative or informational — remove the button</li>
+          <li>You need more than 3 CTAs in a single view — consolidate hierarchy first</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       5. BEST PRACTICES
   =================================================== -->
   <section class="ds-section" id="best-practices">
     <h2 class="ds-section-title">Best practices</h2>
@@ -813,9 +578,9 @@
     <div class="btn-size-matrix">
       <div class="btn-size-matrix-head">
         <div>Size</div>
-        <div style="color:#6ee7b7">Mobile</div>
-        <div style="color:#93c5fd">Web</div>
-        <div style="color:#fbbf24">TV</div>
+        <div style="color:var(--jio)">Mobile</div>
+        <div style="color:var(--gold)">Web</div>
+        <div style="color:var(--amber)">TV</div>
       </div>
       <div class="btn-size-matrix-row">
         <div class="btn-size-matrix-label">
@@ -1104,7 +869,7 @@
         </div>
         <div style="color:var(--text4);font-size:20px">&#x2192;</div>
         <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start">
-          <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#6ee7b7">Success</div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--status-positive)">Success</div>
           <button class="btn btn--primary btn--l is-success" style="width:160px">Done!</button>
         </div>
       </div>
@@ -1229,17 +994,17 @@
       <div class="ds-demo ds-demo--dark">
         <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end">
           <div class="platform-preview platform-preview--mobile">
-            <div style="font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#6ee7b7;margin-bottom:8px">Mobile</div>
+            <div style="font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--jio);margin-bottom:8px">Mobile</div>
             <button class="btn btn--primary btn--l btn--hug" style="height:var(--btn-l-h-mobile);padding:0 var(--btn-l-px-mobile);font-size:var(--btn-l-fs-mobile)">Play Now</button>
             <div style="font-size:10px;color:var(--text4);margin-top:6px">h: 54px &#xB7; fs: 15px</div>
           </div>
           <div class="platform-preview platform-preview--web">
-            <div style="font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#93c5fd;margin-bottom:8px">Web</div>
+            <div style="font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Web</div>
             <button class="btn btn--primary btn--l btn--hug" style="height:var(--btn-l-h-web);padding:0 var(--btn-l-px-web);font-size:var(--btn-l-fs-web)">Play Now</button>
             <div style="font-size:10px;color:var(--text4);margin-top:6px">h: 54px &#xB7; fs: 16px</div>
           </div>
           <div class="platform-preview platform-preview--tv">
-            <div style="font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:#fbbf24;margin-bottom:8px">TV</div>
+            <div style="font-size:9px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--amber);margin-bottom:8px">TV</div>
             <button class="btn btn--primary btn--l btn--hug" style="height:var(--btn-l-h-tv);padding:0 var(--btn-l-px-tv);font-size:var(--btn-l-fs-tv)">Play Now</button>
             <div style="font-size:10px;color:var(--text4);margin-top:6px">h: 72px &#xB7; fs: 20px</div>
           </div>
@@ -1249,8 +1014,96 @@
   </section>
 
   <!-- ===================================================
-       13. ACCESSIBILITY
+       13. MOTION
   =================================================== -->
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <p class="ds-section-desc">Button transitions are fast and confirmatory. They acknowledge input immediately without drawing attention away from the action's outcome.</p>
+
+    <table class="ds-motion-table">
+      <thead>
+        <tr>
+          <th>Interaction</th>
+          <th>Property</th>
+          <th>Duration</th>
+          <th>Easing</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Press / tap</td>
+          <td><code>transform: scale(0.96–0.97)</code></td>
+          <td><code>--dur-fast</code> (120ms)</td>
+          <td><code>--spring</code></td>
+          <td>Scales down on press, springs back on release</td>
+        </tr>
+        <tr>
+          <td>Hover (web)</td>
+          <td><code>background-color</code></td>
+          <td><code>--dur-fast</code> (120ms)</td>
+          <td><code>--spring</code></td>
+          <td>Subtle fill shift. No scale on hover.</td>
+        </tr>
+        <tr>
+          <td>Focus ring appear</td>
+          <td><code>box-shadow</code></td>
+          <td><code>--dur-instant</code> (90ms)</td>
+          <td><code>--ease-out</code></td>
+          <td>Focus ring must never be delayed or suppressed</td>
+        </tr>
+        <tr>
+          <td>Loading state enter</td>
+          <td><code>opacity</code></td>
+          <td><code>--dur-default</code> (200ms)</td>
+          <td><code>--ease-out</code></td>
+          <td>Spinner fades in; label fades out. Width stays fixed.</td>
+        </tr>
+        <tr>
+          <td>Disabled state</td>
+          <td><code>opacity</code></td>
+          <td>instant</td>
+          <td>none</td>
+          <td>No animation on disable — it's a state, not a transition</td>
+        </tr>
+        <tr>
+          <td>TV focus (D-pad)</td>
+          <td><code>box-shadow, transform</code></td>
+          <td><code>--dur-fast</code> (120ms)</td>
+          <td><code>--spring</code></td>
+          <td>Glow ring + <code>scale(1.05)</code> on focus. No press scale on TV.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="margin-top:12px;font-size:12px;font-weight:500;color:var(--text3);line-height:1.5">
+      Reduced motion: all transitions collapse via <code class="ds-code">@media (prefers-reduced-motion: reduce)</code>.
+      Duration tokens handle this automatically — never hardcode <code class="ds-code">ms</code> values in button CSS.
+      <br>Never use <code class="ds-code">transition&#58; all</code> — list explicit properties only.
+    </p>
+  </section>
+
+  <!-- ===================================================
+       14. ACCESSIBILITY
+  =================================================== -->
+  <!-- PLATFORM -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform rules</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:16px;">
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--jio);border-radius:var(--r4);padding:20px;background:var(--surface-1);">
+        <p style="font-size:12px;font-weight:700;color:var(--jio);text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px;">Mobile</p>
+        <ul style="list-style:none;padding:0;margin:0;"><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Minimum touch target 44×44px — use var(--ctrl-h) 48px default height</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Full-width CTAs in sheets and bottom panels (width:100%)</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Avoid more than 2 buttons stacked vertically — use bottom-sheet actions</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Loading state shows spinner inside button — do not disable without feedback</li></ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--gold);border-radius:var(--r4);padding:20px;background:var(--surface-1);">
+        <p style="font-size:12px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px;">Web</p>
+        <ul style="list-style:none;padding:0;margin:0;"><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Hover state required — scale(1.02) or bg shift on primary/secondary</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Focus ring via :focus-visible — 2px jio-green outline, 2px offset</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Icon-only buttons must have tooltip or aria-label</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Min width 120px to avoid very narrow pill buttons</li></ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--amber);border-radius:var(--r4);padding:20px;background:var(--surface-1);">
+        <p style="font-size:12px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px;">TV</p>
+        <ul style="list-style:none;padding:0;margin:0;"><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Height uses var(--ctrl-h-tv) — taller for D-pad navigation comfort</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Focus ring uses jio-glow box-shadow — visible at 10-foot distance</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Only Primary and Ghost variants used on TV — avoid subtle differences</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Pressed state on OK button: scale(0.95) flash then return</li></ul>
+      </div>
+    </div>
+  </section>
+
   <section class="ds-section" id="accessibility">
     <h2 class="ds-section-title">Accessibility</h2>
     <p class="ds-section-desc">Buttons are interactive controls. Every button must be operable with keyboard, screen reader, and pointer input.</p>
@@ -1335,7 +1188,7 @@
         <tr>
           <td><code class="ds-code">--btn-primary-text</code></td>
           <td><code class="ds-code">var(--text-inv)</code> &#x2192; #000000</td>
-          <td><span class="ds-token-swatch" style="background:#000"></span></td>
+          <td><span class="ds-token-swatch" style="background:var(--text-inv);outline:1px solid var(--border-subtle)"></span></td>
           <td>Primary button label color</td>
         </tr>
         <tr>
@@ -1475,7 +1328,155 @@
   </section>
 
   <!-- ===================================================
-       15. CODE EXAMPLES
+       15. CSS CLASS / REACT API
+  =================================================== -->
+  <section class="ds-section" id="api">
+    <h2 class="ds-section-title">CSS class / React API</h2>
+    <p class="ds-section-desc">All classes this component exposes. Use these — never write one-off overrides in screen CSS.</p>
+
+    <div style="margin-top:24px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-bottom:12px">CSS Classes</div>
+      <table class="ds-api-table">
+        <thead>
+          <tr>
+            <th style="width:220px">Class</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>.btn</code></td>
+            <td>Base element. Required on every button.<span class="api-desc">Sets display, font, border-radius (pill), transition, cursor.</span></td>
+          </tr>
+          <tr>
+            <td><code>.btn--primary</code></td>
+            <td>Highest-weight CTA. Green fill, dark label.<span class="api-desc">One per screen section. Use for Play Now, Subscribe, Continue.</span></td>
+          </tr>
+          <tr>
+            <td><code>.btn--secondary</code></td>
+            <td>Bordered, transparent fill.<span class="api-desc">Second action alongside Primary. Use for Add to Library, Save.</span></td>
+          </tr>
+          <tr>
+            <td><code>.btn--ghost</code></td>
+            <td>Subtle glass fill, muted border.<span class="api-desc">Tertiary or inline actions. Use for Skip, Cancel, Share.</span></td>
+          </tr>
+          <tr>
+            <td><code>.btn--text</code></td>
+            <td>No background or border. Green text.<span class="api-desc">Lowest emphasis. Use for Learn more, View all.</span></td>
+          </tr>
+          <tr>
+            <td><code>.btn--destructive</code></td>
+            <td>Red tint. Signals irreversible actions.<span class="api-desc">Use only for Delete, Remove, Unsubscribe.</span></td>
+          </tr>
+          <tr>
+            <td><code>.btn--ultimate</code></td>
+            <td>Gradient green. Premium upsell only.<span class="api-desc">Reserve for Ultimate Pass CTAs.</span></td>
+          </tr>
+          <tr>
+            <td><code>.btn--xs / --s / --m / --l / --xl</code></td>
+            <td>Size modifiers. Platform-aware via token aliases.<span class="api-desc">L (54px mobile) is the default CTA size.</span></td>
+          </tr>
+          <tr>
+            <td><code>.btn--hug</code></td>
+            <td>Width hugs content. No min-width.<span class="api-desc">Default. Omit for full-width buttons.</span></td>
+          </tr>
+          <tr>
+            <td><code>.btn--full</code></td>
+            <td>width: 100%. Fills container.<span class="api-desc">Use for primary CTAs pinned to bottom of mobile screens.</span></td>
+          </tr>
+          <tr>
+            <td><code>.btn--icon-only</code></td>
+            <td>Square aspect ratio. No label.<span class="api-desc">Requires aria-label on the element.</span></td>
+          </tr>
+          <tr>
+            <td><code>.is-loading</code></td>
+            <td>Loading state. Shows spinner, hides label.<span class="api-desc">Keep element width stable. Prevents re-submission.</span></td>
+          </tr>
+          <tr>
+            <td><code>.is-disabled</code></td>
+            <td>Disabled state. opacity: 0.32, no pointer events.<span class="api-desc">Also set disabled attribute on &lt;button&gt; elements.</span></td>
+          </tr>
+          <tr>
+            <td><code>.is-focused</code></td>
+            <td>Force-show focus ring. For demos only.<span class="api-desc">Never use in production — real focus handled by :focus-visible.</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:32px">
+      <div style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin-bottom:12px">React Props</div>
+      <table class="ds-api-table">
+        <thead>
+          <tr>
+            <th style="width:160px">Prop</th>
+            <th style="width:180px">Type</th>
+            <th style="width:100px">Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>variant</code></td>
+            <td><span class="api-type">'primary' | 'secondary' | 'ghost' | 'text' | 'destructive' | 'ultimate'</span></td>
+            <td><span class="api-default">'primary'</span></td>
+            <td>Visual variant. Maps to .btn--* modifier.</td>
+          </tr>
+          <tr>
+            <td><code>size</code></td>
+            <td><span class="api-type">'xs' | 's' | 'm' | 'l' | 'xl'</span></td>
+            <td><span class="api-default">'l'</span></td>
+            <td>Size hierarchy name. Resolves to platform-aware px via tokens.</td>
+          </tr>
+          <tr>
+            <td><code>fullWidth</code></td>
+            <td><span class="api-type">boolean</span></td>
+            <td><span class="api-default">false</span></td>
+            <td>Applies .btn--full. Use for pinned mobile CTAs.</td>
+          </tr>
+          <tr>
+            <td><code>iconOnly</code></td>
+            <td><span class="api-type">boolean</span></td>
+            <td><span class="api-default">false</span></td>
+            <td>Square ratio. aria-label required when true.</td>
+          </tr>
+          <tr>
+            <td><code>loading</code></td>
+            <td><span class="api-type">boolean</span></td>
+            <td><span class="api-default">false</span></td>
+            <td>Shows spinner, prevents re-submission, stable width.</td>
+          </tr>
+          <tr>
+            <td><code>disabled</code></td>
+            <td><span class="api-type">boolean</span></td>
+            <td><span class="api-default">false</span></td>
+            <td>Sets disabled attr + .is-disabled class + aria-disabled.</td>
+          </tr>
+          <tr>
+            <td><code>asChild</code></td>
+            <td><span class="api-type">boolean</span></td>
+            <td><span class="api-default">false</span></td>
+            <td>Render as child element — use to wrap &lt;a&gt; or &lt;Link&gt;.</td>
+          </tr>
+          <tr>
+            <td><code>leadingIcon</code></td>
+            <td><span class="api-type">ReactNode</span></td>
+            <td><span class="api-default">undefined</span></td>
+            <td>Icon before label. Pass sprite use or SVG.</td>
+          </tr>
+          <tr>
+            <td><code>trailingIcon</code></td>
+            <td><span class="api-type">ReactNode</span></td>
+            <td><span class="api-default">undefined</span></td>
+            <td>Icon after label.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       16. CODE EXAMPLES
   =================================================== -->
   <section class="ds-section" id="code">
     <h2 class="ds-section-title">Code examples</h2>
@@ -1571,12 +1572,8 @@
     </div>
   </section>
 
-  <!-- ===================================================
-       16. CHANGELOG
-  =================================================== -->
-
 </main>
 <script src="../sprite-loader.js"></script>
-<script src="../shell.js"></script>
+<script src="../shell.js?v=2"></script>
 </body>
 </html>

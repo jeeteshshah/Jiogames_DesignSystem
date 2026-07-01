@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     .date-picker-wrap { position: relative; width: 100%; }
     .date-picker-input-wrap { position: relative; }
@@ -22,7 +22,7 @@
     .calendar-days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
     .calendar-day { aspect-ratio: 1; display: flex; align-items: center; justify-content: center; border-radius: var(--pill); font-size: 13px; font-weight: 500; color: var(--text); cursor: pointer; border: none; background: transparent; font-family: var(--jio-font); }
     .calendar-day.is-today { font-weight: 900; color: var(--jio); }
-    .calendar-day.is-selected { background: var(--jio); color: #000; font-weight: 700; }
+    .calendar-day.is-selected { background: var(--jio); color: var(--text-inv); font-weight: 700; }
     .calendar-day.is-outside { color: var(--text4); }
     .calendar-day.is-disabled { opacity: 0.3; pointer-events: none; }
     /* Input field for demo */
@@ -36,15 +36,14 @@
 </head><body><main class="ds-content">
 
   <header class="component-page-header">
-    <nav class="component-breadcrumb">
-      <span>JioGames DLS</span>
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <span class="component-breadcrumb-link">JioGames DLS</span>
       <span class="component-breadcrumb-sep">›</span>
       <span>Components</span>
       <span class="component-breadcrumb-sep">›</span>
-      <span>Date Picker</span>
+      <span class="component-breadcrumb-current">Date Picker</span>
     </nav>
-    <h1 class="component-page-title">Date Picker</h1>
-    <p class="component-page-def">Input + calendar popover combination for selecting a specific date. Used for subscription end dates, event RSVPs, and release date filters.</p>
+    <h1 class="component-page-title">Date Picker</h1><p class="component-page-def">Input + calendar popover combination for selecting a specific date. Used for subscription end dates, event RSVPs, and release date filters.</p>
     <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
       <div class="component-platforms">
         <span class="component-platform component-platform--mobile">
@@ -53,7 +52,8 @@
         <span class="component-platform component-platform--web">
           <span class="component-platform-dot"></span>Web
         </span>
-      </div>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBEYXRlIFBpY2tlciDigJQgSmlvR2FtZXMgRExTIHNwZWMKCj4gU291cmNlOiBgZGF0ZS1waWNrZXIvaW5kZXguaHRtbGAgaW4gdGhlIEppb0dhbWVzIERlc2lnbiBTeXN0ZW0uCj4gVGhpcyBzcGVjIGlzIGdlbmVyYXRlZCB2ZXJiYXRpbSBmcm9tIHRoZSBwYWdlIOKAlCBkbyBub3QgaW52ZW50IHZhbHVlcyBub3QgbGlzdGVkIGhlcmUuCgoqKlBhdGg6KiogSmlvR2FtZXMgRExTIOKAuiBDb21wb25lbnRzIOKAuiBEYXRlIFBpY2tlcgoKLS0tCgpJbnB1dCArIGNhbGVuZGFyIHBvcG92ZXIgY29tYmluYXRpb24gZm9yIHNlbGVjdGluZyBhIHNwZWNpZmljIGRhdGUuIFVzZWQgZm9yIHN1YnNjcmlwdGlvbiBlbmQgZGF0ZXMsIGV2ZW50IFJTVlBzLCBhbmQgcmVsZWFzZSBkYXRlIGZpbHRlcnMuCgpEYXRlIFBpY2tlciDCtyBpbnB1dCBvcGVuIMK3IEp1bmUgMjAyNiDCtyAxNXRoIHNlbGVjdGVkIMK3IENsZWFyICsgRG9uZSBhY3Rpb25zCgpUaGUgRGF0ZSBQaWNrZXIgY29tcG9zZXMgdGhlIElucHV0IEZpZWxkIGFuZCBDYWxlbmRhciBjb21wb25lbnRzIGludG8gYSBzaW5nbGUgZGF0ZS1zZWxlY3Rpb24gY29udHJvbC4gVGhlIHRleHQgaW5wdXQgZGlzcGxheXMgdGhlIGNob3NlbiBkYXRlIGluICJERCBNTU0gWVlZWSIgZm9ybWF0IOKAlCBJbmRpYS1maXJzdCwgbmV2ZXIgTU0vREQvWVlZWS4gQ2xpY2tpbmcgb3IgdGFwcGluZyB0aGUgaW5wdXQgb3BlbnMgYSBjYWxlbmRhciBwb3BvdmVyIG9uIHdlYi4gT24gbW9iaWxlLCB0aGUgc2FtZSB0YXAgZGVsZWdhdGVzIHRvIHRoZSBuYXRpdmUgT1MgZGF0ZSBwaWNrZXIgZm9yIHRodW1iLWZyaWVuZGx5IHNlbGVjdGlvbi4KCi0gKipTaW5nbGUgZGF0ZSoqIOKAlCBvbmUgaW5wdXQsIG9uZSBjYWxlbmRhciBwb3BvdmVyLCBvbmUgc2VsZWN0ZWQgZGF0ZQotICoqRGF0ZSByYW5nZSoqIOKAlCB0d28gYWRqYWNlbnQgaW5wdXRzIChGcm9tIC8gVG8pIHNoYXJpbmcgb25lIGNhbGVuZGFyIHBvcG92ZXIgd2l0aCByYW5nZSBzZWxlY3Rpb24KLSAqKlJlYWQtb25seSBkaXNwbGF5Kiog4oCUIGZvcm1hdHRlZCBkYXRlIHRleHQsIG5vIGludGVyYWN0aW9uLCB1c2VkIGluIGNvbmZpcm1hdGlvbiBzY3JlZW5zCgotIEZvcm1hdCBkYXRlcyBhcyAiREQgTU1NIFlZWVkiIOKAlCAiMTUgSnVuIDIwMjYiIOKAlCBldmVyeXdoZXJlIGluIEppb0dhbWVzCi0gU2hvdyBhIGNsZWFyICjDlykgYnV0dG9uIGluc2lkZSB0aGUgaW5wdXQgd2hlbmV2ZXIgYSBkYXRlIGlzIHNlbGVjdGVkCi0gUHJvdmlkZSBEb25lIGFuZCBDbGVhciBhY3Rpb24gYnV0dG9ucyBpbiB0aGUgY2FsZW5kYXIgZm9vdGVyIHNvIHVzZXJzIGNhbiBjb25maXJtIG9yIHJlc2V0Ci0gT24gbW9iaWxlLCBvcGVuIHRoZSBuYXRpdmUgZGF0ZSBwaWNrZXIg4oCUIGRvIG5vdCBmb3JjZSB0aGUgY3VzdG9tIGNhbGVuZGFyIG9uIHRvdWNoIGRldmljZXMKLSBMYWJlbCBldmVyeSBkYXRlIHBpY2tlciDigJQgIlN1YnNjcmlwdGlvbiBlbmQgZGF0ZSIsICJGcm9tIiwgIlRvIiDigJQgbmV2ZXIgdW5sYWJlbGxlZAoKLSBVc2UgTU0vREQvWVlZWSBvciBERC9NTS9ZWVlZIGZvcm1hdCDigJQgSmlvR2FtZXMgaXMgSW5kaWEtZmlyc3QgYW5kIHVzZXMgIjE1IEp1biAyMDI2IgotIEFsbG93IGZyZWUgdGV4dCBlbnRyeSBpbnRvIHRoZSBkYXRlIGlucHV0IOKAlCB2YWxpZGF0ZSBvbmx5IG9uIGJsdXIgaWYgeW91IG11c3QgYWxsb3cgdHlwaW5nCi0gT3BlbiB0aGUgY2FsZW5kYXIgcG9wb3ZlciBvbiBpbnB1dCBmb2N1cyB2aWEga2V5Ym9hcmQg4oCUIG9wZW4gb25seSBvbiBleHBsaWNpdCBjbGljayBvciBFbnRlcgotIENsb3NlIHRoZSBwb3BvdmVyIHdoZW4gYSBkYXRlIGlzIHRhcHBlZCDigJQgd2FpdCBmb3IgRG9uZSBidXR0b24gc28gdXNlcnMgY2FuIGNvcnJlY3QgdGhlaXIgY2hvaWNlCi0gUGxhY2UgdGhlIHBvcG92ZXIgc28gaXQgb3ZlcmZsb3dzIHRoZSB2aWV3cG9ydCDigJQgZmxpcCB0byBhYm92ZS1pbnB1dCB3aGVuIHNjcmVlbiBzcGFjZSBpcyB0aWdodAoKMS4gMSBEYXRlIGlucHV0IFJlcXVpcmVkIFRleHQgZmllbGQgc2hvd2luZyBzZWxlY3RlZCBkYXRlIGluICJERCBNTU0gWVlZWSIuIFBsYWNlaG9sZGVyICJERCBNTU0gWVlZWSIuIEdyZWVuIHJpbmcgd2hlbiBwb3BvdmVyIGlzIG9wZW4uIENhbGVuZGFyIGljb24gcmlnaHQtYWxpZ25lZC4gYGFyaWEtaGFzcG9wdXA9ImRpYWxvZyI7IGFyaWEtZXhwYW5kZWRgCjIuIDIgQ2xlYXIgYnV0dG9uIE9wdGlvbmFsIMOXIGJ1dHRvbiBpbnNpZGUgaW5wdXQsIHJpZ2h0IG9mIHZhbHVlIHRleHQuIFZpc2libGUgb25seSB3aGVuIGEgZGF0ZSBpcyBzZWxlY3RlZC4gQ2xlYXJzIHNlbGVjdGlvbiBhbmQgcmVzZXRzIHRvIHBsYWNlaG9sZGVyLiBgYXJpYS1sYWJlbD0iQ2xlYXIgZGF0ZSJgCjMuIDMgQ2FsZW5kYXIgcG9wb3ZlciBSZXF1aXJlZCBDYWxlbmRhciBjb21wb25lbnQgcmVuZGVyZWQgaW4gYSBmbG9hdGluZyBzdXJmYWNlLiBBcHBlYXJzIGJlbG93IGlucHV0IChmbGlwcyBhYm92ZSBpZiB2aWV3cG9ydCBzcGFjZSBpcyBpbnN1ZmZpY2llbnQpLiBIYXMgZWxldmF0aW9uIHNoYWRvdy4gYHJvbGU9ImRpYWxvZyI7IGJveC1zaGFkb3c6IDAgOHB4IDMycHggcmdiYSgwLDAsMCwuNSlgCjQuIDQgQWN0aW9uIGZvb3RlciBSZXF1aXJlZCBDbGVhciAoZ2hvc3QpIGFuZCBEb25lIChwcmltYXJ5KSBidXR0b25zLiBEb25lIGNvbW1pdHMgc2VsZWN0aW9uIGFuZCBjbG9zZXMgcG9wb3Zlci4gQ2xlYXIgcmVzZXRzIHRvIG5vIHNlbGVjdGlvbi4gYGJvcmRlci10b3A6IDFweCBzb2xpZCB2YXIoLS1ib3JkZXItc3VidGxlKWAKCiMjIFZhcmlhbnRzCgpUaHJlZSBjb21wb3NpdGlvbiBwYXR0ZXJucyDigJQgc2luZ2xlIGRhdGUsIHJhbmdlICh0d28gaW5wdXRzKSwgYW5kIHJlYWQtb25seSBkaXNwbGF5LgoKIyMgU2l6ZXMKClRoZSBpbnB1dCBmaWVsZCBoZWlnaHQgZm9sbG93cyB0aGUgc3RhbmRhcmQgSW5wdXQgRmllbGQgc2l6ZSB0b2tlbnMuIFRoZSBjYWxlbmRhciBwb3BvdmVyIHNpemUgaXMgYWx3YXlzIERlZmF1bHQgKDI4MHB4KS4KCiMjIFN0YXRlcwoKU2l4IHN0YXRlcyBjb3ZlcmluZyB0aGUgZnVsbCBkYXRlIHBpY2tlciBsaWZlY3ljbGUg4oCUIGZyb20gY2xvc2VkIHRvIGVycm9yLgoKIyMgQ29udGVudCBndWlkYW5jZQoKLSBBbHdheXMgdXNlICJERCBNTU0gWVlZWSIg4oCUICIxNSBKdW4gMjAyNiIgbm90ICIxNS8wNi8yMDI2IiBvciAiSnVuZSAxNSwgMjAyNiIKLSBQbGFjZWhvbGRlciB0ZXh0OiAiREQgTU1NIFlZWVkiIGluIG11dGVkIGNvbG9yIOKAlCBuZXZlciAiU2VsZWN0IGEgZGF0ZSIKLSBNb250aCBhYmJyZXZpYXRpb25zOiBKYW4gRmViIE1hciBBcHIgTWF5IEp1biBKdWwgQXVnIFNlcCBPY3QgTm92IERlYwotIFJhbmdlIGRpc3BsYXk6ICIxMCBKdW4gMjAyNiDigJMgMTUgSnVuIDIwMjYiIHdpdGggZW4gZGFzaCwgbm90IGh5cGhlbgoKLSBMYWJlbCBldmVyeSBwaWNrZXIg4oCUICJTdWJzY3JpcHRpb24gZW5kIGRhdGUiLCAiRXZlbnQgZGF0ZSIsICJGcm9tIiwgIlRvIgotIEVycm9yIG1lc3NhZ2UgYmVsb3cgaW5wdXQ6ICJFbnRlciBhIHZhbGlkIGRhdGUiIG9yICJEYXRlIG11c3QgYmUgaW4gdGhlIGZ1dHVyZSIKLSBOZXZlciB1c2UgcmVkIGJvcmRlciBhbG9uZSDigJQgYWx3YXlzIHBhaXIgd2l0aCBlcnJvciBtZXNzYWdlIHRleHQKLSBGb3IgZGF0ZSByYW5nZXM6IHZhbGlkYXRlIHRoYXQgVG8gZGF0ZSBpcyBhZnRlciBGcm9tIGRhdGUsIGVycm9yIG9uIHRoZSBUbyBmaWVsZAoKIyMgUGxhdGZvcm0gY29uc2lkZXJhdGlvbnMKCi0gVGFwcGluZyB0aGUgaW5wdXQgb3BlbnMgdGhlICoqbmF0aXZlIE9TIGRhdGUgcGlja2VyKiog4oCUIG5vdCB0aGUgY3VzdG9tIGNhbGVuZGFyCi0gVXNlIGBgIGhpZGRlbiBiZWhpbmQgdGhlIHN0eWxlZCBpbnB1dCBkaXYKLSBGb3JtYXQgdGhlIG5hdGl2ZSBwaWNrZXIncyB2YWx1ZSBiYWNrIHRvICJERCBNTU0gWVlZWSIgZm9yIGRpc3BsYXkKLSBNaW5pbXVtIHRhcCBhcmVhIGZvciBpbnB1dDogNDhweCBoZWlnaHQg4oCUIGRvIG5vdCB1c2UgdGhlIGNvbXBhY3QgTSBzaXplIG9uIG1vYmlsZQoKLSBDdXN0b20gY2FsZW5kYXIgcG9wb3ZlciDigJQgb3BlbnMgYmVsb3cgaW5wdXQsIGZsaXBzIGFib3ZlIGlmIHZpZXdwb3J0IGlzIHRpZ2h0Ci0gRXNjYXBlIGNsb3NlcyBwb3BvdmVyIHdpdGhvdXQgY29tbWl0dGluZyBzZWxlY3Rpb24KLSBUYWIgZnJvbSBpbnB1dCDihpIgY2FsZW5kYXIg4oaSIERvbmUgYnV0dG9uIOKGkiBuZXh0IGZvY3VzYWJsZSBlbGVtZW50Ci0gUG9wb3ZlciBjbG9zZXMgb24gb3V0c2lkZSBjbGljayBvbmx5IGFmdGVyIERvbmUgb3IgQ2xlYXIgaXMgcHJlc3NlZAoKLSBOb3QgYXBwbGljYWJsZSDigJQgdXNlIHByZS1maWxsZWQgZGF0ZSBjaGlwcyBvciByZWFkLW9ubHkgZGF0ZSB0ZXh0IGluc3RlYWQKLSBJZiB1c2VyIG11c3QgZW50ZXIgYSBkYXRlLCB1c2UgdGhyZWUgc2VwYXJhdGUgc3Bpbm5lciBjb250cm9scyAoZGF5IC8gbW9udGggLyB5ZWFyKQoKIyMgQWNjZXNzaWJpbGl0eQoKfCBFbGVtZW50IHwgUm9sZSAvIGF0dHJpYnV0ZSB8IEd1aWRhbmNlIHwKfC0tLXwtLS18LS0tfAp8IERhdGUgaW5wdXQgfCBgYXJpYS1oYXNwb3B1cD0iZGlhbG9nImAgfCBgYXJpYS1leHBhbmRlZD0idHJ1ZS9mYWxzZSJgIHJlZmxlY3RzIHBvcG92ZXIgb3BlbiBzdGF0ZS4gYGFyaWEtbGFiZWxgIG9yIGFzc29jaWF0ZWQgYGAgcmVxdWlyZWQuIHwKfCBDYWxlbmRhciBwb3BvdmVyIHwgYHJvbGU9ImRpYWxvZyJgIHwgYGFyaWEtbW9kYWw9InRydWUiYCwgYGFyaWEtbGFiZWw9IkNob29zZSBkYXRlImAuIEZvY3VzIG1vdmVzIGludG8gY2FsZW5kYXIgb24gb3Blbi4gfAp8IENsZWFyIGJ1dHRvbiB8IGBhcmlhLWxhYmVsPSJDbGVhciBkYXRlImAgfCBOZXZlciBqdXN0ICLDlyIg4oCUIHNjcmVlbiByZWFkZXJzIHdvdWxkIGFubm91bmNlICJ0aW1lcyIgb3Igbm90aGluZyBtZWFuaW5nZnVsLiB8CnwgRXJyb3IgbWVzc2FnZSB8IGByb2xlPSJhbGVydCJgIHwgSW5qZWN0ZWQgYmVsb3cgaW5wdXQgb24gdmFsaWRhdGlvbiBmYWlsdXJlLiBgYXJpYS1kZXNjcmliZWRieWAgb24gaW5wdXQgcG9pbnRpbmcgdG8gZXJyb3IgbWVzc2FnZSBJRC4gfAp8IE5hdGl2ZSBmYWxsYmFjayB8IGBgIHwgT24gbW9iaWxlIG9yIHdoZW4gY3VzdG9tIGNhbGVuZGFyIGlzIHVuYXZhaWxhYmxlLCBuYXRpdmUgaW5wdXQgcHJvdmlkZXMgZnVsbCBhMTF5IHdpdGhvdXQgZXh0cmEgQVJJQSB3b3JrLiB8CnwgRG9uZSBidXR0b24gfCBOYXRpdmUgYnV0dG9uIHwgYGFyaWEtbGFiZWw9IkNvbmZpcm0gZGF0ZSBzZWxlY3Rpb24iYCBmb3IgY2xhcml0eSBiZXlvbmQgdGhlIHNpbmdsZS13b3JkIGxhYmVsLiB8CgojIyBSZWxhdGVkIHRva2VucwoKfCBUb2tlbiB8IFZhbHVlIHwgVXNhZ2UgfAp8LS0tfC0tLXwtLS18CnwgYC0tc3VyZmFjZS0yYCB8IOKAlCB8IElucHV0IGJhY2tncm91bmQsIGNhbGVuZGFyIHBvcG92ZXIgYmFja2dyb3VuZCB8CnwgYC0tYm9yZGVyLXN1YnRsZWAgfCBgcmdiYSgyNTUsMjU1LDI1NSwuMDgpYCB8IElucHV0IGRlZmF1bHQgYm9yZGVyLCBjYWxlbmRhciBkaXZpZGVycyB8CnwgYC0tamlvYCB8IGAjMDBBODU5YCB8IElucHV0IGZvY3VzIHJpbmcsIG9wZW4gY2FsZW5kYXIgaWNvbiBjb2xvciwgRG9uZSBidXR0b24gYmFja2dyb3VuZCB8CnwgYC0tbmVnYXRpdmVgIHwgYCNGRjQ3NTdgIHwgRXJyb3Igc3RhdGUgYm9yZGVyIGFuZCBlcnJvciBtZXNzYWdlIHRleHQgY29sb3IgfAp8IGAtLXI0YCB8IOKAlCB8IElucHV0IGJvcmRlci1yYWRpdXMgfAp8IGAtLXI1YCB8IOKAlCB8IENhbGVuZGFyIHBvcG92ZXIgYm9yZGVyLXJhZGl1cyB8CnwgYC0tdGV4dDNgIHwgYHJnYmEoMjQ0LDI0MiwyMzgsLjMyKWAgfCBQbGFjZWhvbGRlciB0ZXh0LCBjYWxlbmRhciBpY29uIGRlZmF1bHQgY29sb3IsIENsZWFyIGJ1dHRvbiBjb2xvciB8CgojIyBXaGVuIHRvIHVzZQoKVXNlIHdoZW4KCi0gU3Vic2NyaXB0aW9uIHN0YXJ0L2VuZCBkYXRlIHNlbGVjdGlvbiBpbiBzZXR0aW5ncwotIEV2ZW50IHNjaGVkdWxpbmcgZm9ybXMKLSBGaWx0ZXIgcGFuZWxzIHdpdGggZGF0ZSByYW5nZSBpbnB1dHMKLSBCaXJ0aGRheSBvciBhY2NvdW50IGNyZWF0aW9uIGRhdGUgZmllbGRzCgpEb24ndCB1c2Ugd2hlbgoKLSBSZWxhdGl2ZSB0aW1lIGlucHV0cyAoImluIDMgZGF5cyIpIOKAlCB1c2UgYSBkaWZmZXJlbnQgY29udHJvbAotIERhdGUtb25seSBkaXNwbGF5IHdpdGhvdXQgdXNlciBpbnRlcmFjdGlvbiDigJQgdXNlIGEgZm9ybWF0dGVkIGxhYmVsCi0gSW5saW5lIGRhdGUgc2VsZWN0aW9uIGluIGNvbXBhY3QgVUkg4oCUIHVzZSBDYWxlbmRhciBjb21wb25lbnQgZGlyZWN0bHkKCiMjIE1vdGlvbgoKfCBJbnRlcmFjdGlvbiB8IEVhc2luZyB8IER1cmF0aW9uIHwgUHJvcGVydHkgfAp8LS0tfC0tLXwtLS18LS0tfAp8IFBvcG92ZXIgb3BlbiB8IGAtLWVhc2Utb3V0YCB8IGAtLWR1ci1mYXN0YCB8IG9wYWNpdHksIHRyYW5zZm9ybSB0cmFuc2xhdGVZKC00cHgg4oaSIDApIHwKfCBQb3BvdmVyIGNsb3NlIHwgYC0tZWFzZS1pbmAgfCBgLS1kdXItZmFzdGAgfCBvcGFjaXR5IHwKfCBNb250aCBuYXZpZ2F0ZSB8IGAtLWVhc2Utb3V0YCB8IGAtLWR1ci1mYXN0YCB8IHRyYW5zZm9ybSB0cmFuc2xhdGVYLCBvcGFjaXR5IHwKfCBEYXkgc2VsZWN0IHwgYC0tZWFzZS1vdXRgIHwgYDgwbXNgIHwgYmFja2dyb3VuZCBzY2FsZSB8CgojIyBBUEkKCiMjIyBDU1MgY2xhc3NlcwoKfCBDbGFzcyB8IERlc2NyaXB0aW9uIHwKfC0tLXwtLS18CnwgYC5kcy1kYXRlLXBpY2tlcmAgfCBSb290IOKAlCBpbnB1dCArIGNhbGVuZGFyIHBvcG92ZXIgfAp8IGAuZHMtZGF0ZS1waWNrZXJfX2lucHV0YCB8IFRyaWdnZXIgaW5wdXQgZmllbGQgc2hvd2luZyBmb3JtYXR0ZWQgZGF0ZSB8CnwgYC5kcy1kYXRlLXBpY2tlcl9fcG9wb3ZlcmAgfCBGbG9hdGluZyBjYWxlbmRhciBwYW5lbCDigJQgc3VyZmFjZS0yLCByNCB8CnwgYC5kcy1kYXRlLXBpY2tlcl9fY2FsZW5kYXJgIHwgRW1iZWRkZWQgQ2FsZW5kYXIgY29tcG9uZW50IHwKCiMjIyBSZWFjdCBwcm9wcwoKfCBQcm9wIHwgVHlwZSB8IERlZmF1bHQgfCBEZXNjcmlwdGlvbiB8CnwtLS18LS0tfC0tLXwtLS18CnwgYHZhbHVlYCB8IERhdGUgfCB1bmRlZmluZWQgfCB1bmRlZmluZWQgfCBDb250cm9sbGVkIHNlbGVjdGVkIGRhdGUgfAp8IGBvbkNoYW5nZWAgfCAoZGF0ZTogRGF0ZSB8IHVuZGVmaW5lZCkgPT4gdm9pZCB8IHVuZGVmaW5lZCB8IENoYW5nZSBoYW5kbGVyIHwKfCBgcGxhY2Vob2xkZXJgIHwgc3RyaW5nIHwgIlBpY2sgYSBkYXRlIiB8IFRyaWdnZXIgaW5wdXQgcGxhY2Vob2xkZXIgfAp8IGBmb3JtYXRgIHwgc3RyaW5nIHwgImRkIE1NTSB5eXl5IiB8IERpc3BsYXkgZm9ybWF0IHN0cmluZyB8CnwgYGRpc2FibGVkYCB8IChkYXRlOiBEYXRlKSA9PiBib29sZWFuIHwgdW5kZWZpbmVkIHwgRGlzYWJsZSBzcGVjaWZpYyBkYXRlcyB8CnwgYGZyb21EYXRlYCB8IERhdGUgfCB1bmRlZmluZWQgfCBNaW5pbXVtIHNlbGVjdGFibGUgZGF0ZSB8CnwgYHRvRGF0ZWAgfCBEYXRlIHwgdW5kZWZpbmVkIHwgTWF4aW11bSBzZWxlY3RhYmxlIGRhdGUgfAoKIyMgQ29kZSBleGFtcGxlcwoKYGBgYGh0bWwKPGRpdiBjbGFzcz0iZGF0ZS1waWNrZXItd3JhcCI+CiAgPGxhYmVsIGZvcj0iZHAtcmVuZXdhbCIgY2xhc3M9ImlucHV0LWxhYmVsIj5SZW5ld2FsIGRhdGU8L2xhYmVsPgogIDxkaXYgY2xhc3M9ImRhdGUtcGlja2VyLWlucHV0LXdyYXAiPgogICAgPGlucHV0CiAgICAgIGlkPSJkcC1yZW5ld2FsIgogICAgICBjbGFzcz0iaW5wdXQtZmllbGQiCiAgICAgIHR5cGU9InRleHQiCiAgICAgIHBsYWNlaG9sZGVyPSJERCBNTU0gWVlZWSIKICAgICAgcmVhZG9ubHkKICAgICAgYXJpYS1oYXNwb3B1cD0iZGlhbG9nIgogICAgICBhcmlhLWV4cGFuZGVkPSJmYWxzZSIKICAgICAgYXJpYS1jb250cm9scz0iZHAtY2FsZW5kYXIiCiAgICAgIHZhbHVlPSIxNSBKdW4gMjAyNiIKICAgIC8+CiAgICA8YnV0dG9uIGNsYXNzPSJkcC1jbGVhci1idG4iIGFyaWEtbGFiZWw9IkNsZWFyIGRhdGUiPsOXPC9idXR0b24+CiAgICA8c3ZnIGNsYXNzPSJkYXRlLXBpY2tlci1pY29uIiBhcmlhLWhpZGRlbj0idHJ1ZSI+Li4uY2FsZW5kYXIgaWNvbi4uLjwvc3ZnPgogIDwvZGl2PgogIDxkaXYKICAgIGlkPSJkcC1jYWxlbmRhciIKICAgIGNsYXNzPSJkYXRlLXBpY2tlci1wb3BvdmVyIgogICAgcm9sZT0iZGlhbG9nIgogICAgYXJpYS1tb2RhbD0idHJ1ZSIKICAgIGFyaWEtbGFiZWw9IkNob29zZSByZW5ld2FsIGRhdGUiCiAgICBoaWRkZW4KICA+CiAgICA8IS0tIENhbGVuZGFyIGNvbXBvbmVudCAtLT4KICAgIDxkaXYgY2xhc3M9ImNhbGVuZGFyIj4uLi48L2Rpdj4KICAgIDxkaXYgY2xhc3M9ImRhdGUtcGlja2VyLWFjdGlvbnMiPgogICAgICA8YnV0dG9uIGNsYXNzPSJidG4gYnRuLS1naG9zdCBidG4tLXMiPkNsZWFyPC9idXR0b24+CiAgICAgIDxidXR0b24gY2xhc3M9ImJ0biBidG4tLXByaW1hcnkgYnRuLS1zIiBhcmlhLWxhYmVsPSJDb25maXJtIGRhdGUgc2VsZWN0aW9uIj5Eb25lPC9idXR0b24+CiAgICA8L2Rpdj4KICA8L2Rpdj4KPC9kaXY+CmBgYGAKCmBgYGAKPGZpZWxkc2V0IHN0eWxlPSJib3JkZXI6bm9uZTsgcGFkZGluZzowOyBtYXJnaW46MDsiPgogIDxsZWdlbmQgY2xhc3M9ImlucHV0LWxhYmVsIj5GaWx0ZXIgYnkgcmVsZWFzZSBkYXRlPC9sZWdlbmQ+CiAgPGRpdiBzdHlsZT0iZGlzcGxheTpmbGV4OyBnYXA6MTJweDsiPgoKICAgIDxkaXYgY2xhc3M9ImRhdGUtcGlja2VyLXdyYXAiPgogICAgICA8bGFiZWwgZm9yPSJkcC1mcm9tIiBjbGFzcz0iaW5wdXQtbGFiZWwiPkZyb208L2xhYmVsPgogICAgICA8ZGl2IGNsYXNzPSJkYXRlLXBpY2tlci1pbnB1dC13cmFwIj4KICAgICAgICA8aW5wdXQgaWQ9ImRwLWZyb20iIGNsYXNzPSJpbnB1dC1maWVsZCIgdHlwZT0idGV4dCIgcGxhY2Vob2xkZXI9IkREIE1NTSBZWVlZIgogICAgICAgICAgcmVhZG9ubHkgYXJpYS1oYXNwb3B1cD0iZGlhbG9nIiBhcmlhLWV4cGFuZGVkPSJ0cnVlIiBhcmlhLWNvbnRyb2xzPSJkcC1yYW5nZS1jYWwiCiAgICAgICAgICB2YWx1ZT0iMTAgSnVuIDIwMjYiIC8+CiAgICAgICAgPGJ1dHRvbiBjbGFzcz0iZHAtY2xlYXItYnRuIiBhcmlhLWxhYmVsPSJDbGVhciBmcm9tIGRhdGUiPsOXPC9idXR0b24+CiAgICAgICAgPHN2ZyBjbGFzcz0iZGF0ZS1waWNrZXItaWNvbiIgYXJpYS1oaWRkZW49InRydWUiPi4uLjwvc3ZnPgogICAgICA8L2Rpdj4KICAgIDwvZGl2PgoKICAgIDxkaXYgY2xhc3M9ImRhdGUtcGlja2VyLXdyYXAiPgogICAgICA8bGFiZWwgZm9yPSJkcC10byIgY2xhc3M9ImlucHV0LWxhYmVsIj5UbzwvbGFiZWw+CiAgICAgIDxkaXYgY2xhc3M9ImRhdGUtcGlja2VyLWlucHV0LXdyYXAiPgogICAgICAgIDxpbnB1dCBpZD0iZHAtdG8iIGNsYXNzPSJpbnB1dC1maWVsZCIgdHlwZT0idGV4dCIgcGxhY2Vob2xkZXI9IkREIE1NTSBZWVlZIgogICAgICAgICAgcmVhZG9ubHkgYXJpYS1oYXNwb3B1cD0iZGlhbG9nIiBhcmlhLWV4cGFuZGVkPSJmYWxzZSIgYXJpYS1jb250cm9scz0iZHAtcmFuZ2UtY2FsIiAvPgogICAgICAgIDxzdmcgY2xhc3M9ImRhdGUtcGlja2VyLWljb24iIGFyaWEtaGlkZGVuPSJ0cnVlIj4uLi48L3N2Zz4KICAgICAgPC9kaXY+CiAgICA8L2Rpdj4KCiAgPC9kaXY+CiAgPCEtLSBTaGFyZWQgY2FsZW5kYXIgcG9wb3ZlciBmb3IgcmFuZ2UgLS0+CiAgPGRpdiBpZD0iZHAtcmFuZ2UtY2FsIiBjbGFzcz0iZGF0ZS1waWNrZXItcG9wb3ZlciIgcm9sZT0iZGlhbG9nIiBhcmlhLW1vZGFsPSJ0cnVlIgogICAgYXJpYS1sYWJlbD0iQ2hvb3NlIGRhdGUgcmFuZ2UiPgogICAgPGRpdiBjbGFzcz0iY2FsZW5kYXIiPi4uLnJhbmdlLWVuYWJsZWQgY2FsZW5kYXIuLi48L2Rpdj4KICAgIDxkaXYgY2xhc3M9ImRhdGUtcGlja2VyLWFjdGlvbnMiPgogICAgICA8YnV0dG9uIGNsYXNzPSJidG4gYnRuLS1naG9zdCBidG4tLXMiPkNsZWFyPC9idXR0b24+CiAgICAgIDxidXR0b24gY2xhc3M9ImJ0biBidG4tLXByaW1hcnkgYnRuLS1zIj5Eb25lPC9idXR0b24+CiAgICA8L2Rpdj4KICA8L2Rpdj4KPC9maWVsZHNldD4KYGBgYAoKYGBgYAo8IS0tIFdpdGggYSBzZWxlY3RlZCBkYXRlIOKAlCBzaG93cyBjbGVhciBidXR0b24gLS0+CjxkaXYgY2xhc3M9ImRhdGUtcGlja2VyLWlucHV0LXdyYXAiPgogIDxpbnB1dCBjbGFzcz0iaW5wdXQtZmllbGQiIHR5cGU9InRleHQiIHZhbHVlPSIxNSBKdW4gMjAyNiIKICAgIGFyaWEtaGFzcG9wdXA9ImRpYWxvZyIgYXJpYS1leHBhbmRlZD0iZmFsc2UiIHJlYWRvbmx5IC8+CiAgPGJ1dHRvbgogICAgY2xhc3M9ImRwLWNsZWFyLWJ0biIKICAgIGFyaWEtbGFiZWw9IkNsZWFyIGRhdGUiCiAgICBvbmNsaWNrPSJ0aGlzLmNsb3Nlc3QoJy5kYXRlLXBpY2tlci13cmFwJykucXVlcnlTZWxlY3RvcignaW5wdXQnKS52YWx1ZT0nJzsKICAgICAgICAgICAgIHRoaXMuc3R5bGUuZGlzcGxheT0nbm9uZSc7IgogID7DlzwvYnV0dG9uPgogIDxzdmcgY2xhc3M9ImRhdGUtcGlja2VyLWljb24iIGFyaWEtaGlkZGVuPSJ0cnVlIj4uLi48L3N2Zz4KPC9kaXY+Cgo8IS0tIEVycm9yIHN0YXRlIC0tPgo8ZGl2IGNsYXNzPSJkYXRlLXBpY2tlci1pbnB1dC13cmFwIj4KICA8aW5wdXQgY2xhc3M9ImlucHV0LWZpZWxkIGlucHV0LWZpZWxkLS1lcnJvciIgdHlwZT0idGV4dCIgdmFsdWU9IjMyIEp1biAyMDI2IgogICAgYXJpYS1oYXNwb3B1cD0iZGlhbG9nIiBhcmlhLWV4cGFuZGVkPSJmYWxzZSIgYXJpYS1kZXNjcmliZWRieT0iZHAtZXJyb3IiIHJlYWRvbmx5IC8+CiAgPHN2ZyBjbGFzcz0iZGF0ZS1waWNrZXItaWNvbiIgYXJpYS1oaWRkZW49InRydWUiIHN0eWxlPSJjb2xvcjp2YXIoLS1uZWdhdGl2ZSk7Ij4uLi48L3N2Zz4KPC9kaXY+CjxzcGFuIGlkPSJkcC1lcnJvciIgY2xhc3M9ImlucHV0LWVycm9yIiByb2xlPSJhbGVydCI+RW50ZXIgYSB2YWxpZCBkYXRlPC9zcGFuPgpgYGBgCgojIyBDaGFuZ2Vsb2cKCkluaXRpYWwgZHJhZnQuIFNpbmdsZSBkYXRlLCBkYXRlIHJhbmdlLCBhbmQgcmVhZC1vbmx5IHZhcmlhbnRzLiBNIGFuZCBMIGlucHV0IHNpemVzLiBTaXggc3RhdGVzIGRvY3VtZW50ZWQuIEluZGlhLWZpcnN0IGRhdGUgZm9ybWF0IHJ1bGUgKEREIE1NTSBZWVlZKSBlc3RhYmxpc2hlZC4gTW9iaWxlIG5hdGl2ZSBwaWNrZXIgZ3VpZGFuY2UgaW5jbHVkZWQuCgotLS0KCiMjIFRva2VucyByZWZlcmVuY2VkIG9uIHRoaXMgcGFnZQoKVXNlIHRoZXNlIGV4YWN0IHRva2VucyDigJQgZGVmaW5lZCBpbiBgdG9rZW5zL3Rva2Vucy5jc3NgLiBEbyBub3Qgc3Vic3RpdHV0ZSByYXcgdmFsdWVzLgoKLSBgLS1ib3JkZXItc3VidGxlYAotIGAtLWppb2AKLSBgLS1qaW8tZm9udGAKLSBgLS1uZWdhdGl2ZWAKLSBgLS1waWxsYAotIGAtLXIzYAotIGAtLXI0YAotIGAtLXI1YAotIGAtLXN1cmZhY2UtMmAKLSBgLS10ZXh0YAotIGAtLXRleHQtaW52YAotIGAtLXRleHQyYAotIGAtLXRleHQzYAotIGAtLXRleHQ0YAoKLS0tCgojIyBCdWlsZCBydWxlcyAoYmluZGluZykKCjEuIFVzZSAqKm9ubHkqKiB0aGUgdG9rZW5zIGxpc3RlZCBhYm92ZS4gSWYgYSB2YWx1ZSB5b3UgbmVlZCBpcyBub3QgbGlzdGVkLCBzdG9wIGFuZCBhc2sg4oCUIGRvIG5vdCBpbnRyb2R1Y2UgYSByYXcgdmFsdWUuCjIuIEZvbnQgaXMgKipKaW9UeXBlKiogb25seS4gV2VpZ2h0czogMzAwLCA1MDAsIDcwMCwgOTAwLgozLiBSZXVzZSB0aGUgY29tcG9uZW50IENTUyBwYXR0ZXJucyBzaG93biBvbiB0aGUgc291cmNlIHBhZ2U7IGRvIG5vdCByZWRlc2lnbi4KNC4gTWF0Y2ggZXZlcnkgc3RhdGUgKGRlZmF1bHQsIGhvdmVyLCBmb2N1cywgYWN0aXZlLCBkaXNhYmxlZCwgbG9hZGluZykgc2hvd24gb24gdGhlIHBhZ2UuCjUuIEFjY2Vzc2liaWxpdHkgcmVxdWlyZW1lbnRzIG9uIHRoZSBwYWdlIGFyZSBtYW5kYXRvcnksIG5vdCBvcHRpb25hbC4K" download="date-picker-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
+    </div>
       <span class="component-maturity component-maturity--draft">
         <span class="component-maturity--dot"></span>Draft
       </span>
@@ -154,7 +154,7 @@
           <div style="padding:4px 8px 8px; font-size:11px; color:var(--text2); text-align:center;">…days grid…</div>
           <div style="display:flex; justify-content:flex-end; gap:6px; padding:8px 10px; border-top:1px solid var(--border-subtle);">
             <span style="font-size:11px; color:var(--text3);">Clear</span>
-            <span style="font-size:11px; font-weight:700; color:#000; background:var(--jio); padding:3px 8px; border-radius:4px;">Done</span>
+            <span style="font-size:11px; font-weight:700; color:var(--text-inv); background:var(--jio); padding:3px 8px; border-radius:4px;">Done</span>
           </div>
         </div>
         <span class="ds-anatomy-callout-dot" style="position:absolute; top:12px; left:-20px;"><span class="ds-anatomy-callout-num">1</span></span>
@@ -405,6 +405,93 @@
     </table>
   </section>
 
+  <!-- WHEN TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use</h2>
+    <div class="ds-usage-grid">
+      <div class="ds-usage-card ds-usage-card--do">
+        <p class="ds-usage-label ds-usage-label--do">Use when</p>
+        <ul class="ds-usage-list">
+              <li>Subscription start/end date selection in settings</li>
+              <li>Event scheduling forms</li>
+              <li>Filter panels with date range inputs</li>
+              <li>Birthday or account creation date fields</li>
+        </ul>
+      </div>
+      <div class="ds-usage-card ds-usage-card--dont">
+        <p class="ds-usage-label ds-usage-label--dont">Don't use when</p>
+        <ul class="ds-usage-list">
+              <li>Relative time inputs ("in 3 days") — use a different control</li>
+              <li>Date-only display without user interaction — use a formatted label</li>
+              <li>Inline date selection in compact UI — use Calendar component directly</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOTION -->
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-motion-table">
+      <thead><tr><th>Interaction</th><th>Easing</th><th>Duration</th><th>Property</th></tr></thead>
+      <tbody>
+        <tr><td>Popover open</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>opacity, transform translateY(-4px → 0)</td></tr>
+        <tr><td>Popover close</td><td><code>--ease-in</code></td><td><code>--dur-fast</code></td><td>opacity</td></tr>
+        <tr><td>Month navigate</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>transform translateX, opacity</td></tr>
+        <tr><td>Day select</td><td><code>--ease-out</code></td><td><code>80ms</code></td><td>background scale</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- API -->
+  <section class="ds-section" id="api">
+    <h2 class="ds-section-title">API</h2>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:0 0 12px;">CSS classes</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>.ds-date-picker</code></td><td>Root — input + calendar popover</td></tr>
+        <tr><td><code>.ds-date-picker__input</code></td><td>Trigger input field showing formatted date</td></tr>
+        <tr><td><code>.ds-date-picker__popover</code></td><td>Floating calendar panel — surface-2, r4</td></tr>
+        <tr><td><code>.ds-date-picker__calendar</code></td><td>Embedded Calendar component</td></tr>
+      </tbody>
+    </table>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 12px;">React props</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>value</code></td><td><span class="api-type">Date | undefined</span></td><td><span class="api-default">undefined</span></td><td>Controlled selected date</td></tr>
+        <tr><td><code>onChange</code></td><td><span class="api-type">(date: Date | undefined) => void</span></td><td><span class="api-default">undefined</span></td><td>Change handler</td></tr>
+        <tr><td><code>placeholder</code></td><td><span class="api-type">string</span></td><td><span class="api-default">"Pick a date"</span></td><td>Trigger input placeholder</td></tr>
+        <tr><td><code>format</code></td><td><span class="api-type">string</span></td><td><span class="api-default">"dd MMM yyyy"</span></td><td>Display format string</td></tr>
+        <tr><td><code>disabled</code></td><td><span class="api-type">(date: Date) => boolean</span></td><td><span class="api-default">undefined</span></td><td>Disable specific dates</td></tr>
+        <tr><td><code>fromDate</code></td><td><span class="api-type">Date</span></td><td><span class="api-default">undefined</span></td><td>Minimum selectable date</td></tr>
+        <tr><td><code>toDate</code></td><td><span class="api-type">Date</span></td><td><span class="api-default">undefined</span></td><td>Maximum selectable date</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  
+
+  
+
+  
+
+  
+
   <section class="component-section" id="code-examples">
     <h2 class="ds-section-title">Code examples</h2>
 
@@ -521,4 +608,4 @@
   </section>
 
 </main><script src="../sprite-loader.js"></script>
-<script src="../shell.js"></script></body></html>
+<script src="../shell.js?v=2"></script></body></html>

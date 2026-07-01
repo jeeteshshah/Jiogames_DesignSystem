@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     /* ── Page-specific styles ── */
     body { background: var(--bg); color: var(--text); font-family: var(--jio-font); margin: 0; }
@@ -12,276 +12,67 @@
     /* Component page header */
 
     /* Hero */
-    .component-hero {
-      border-radius: 20px;
-      overflow: hidden;
-      margin-bottom: 48px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      min-height: 280px;
-      padding: 48px 32px 32px;
-    }
-    .component-hero--dark { background: #060810; }
-    .component-hero--grid {
-      background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-      background-size: 32px 32px;
-      background-color: #060810;
-      border: 1px solid var(--border-subtle);
-    }
-    .component-hero-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 28px;
-      position: relative;
-      z-index: 2;
-    }
-    .component-hero-caption {
-      display: block;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .6px;
-      text-transform: uppercase;
-      color: var(--text4);
-      margin-top: 24px;
-      position: relative;
-      z-index: 2;
-    }
+    
+    
+    
+    
+    
 
     /* Intro */
-    .component-intro {
-      margin-bottom: 48px;
-    }
-    .component-intro p {
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.65;
-      margin-bottom: 20px;
-      max-width: 640px;
-    }
-    .component-summary-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border: 1px solid var(--border-subtle);
-      border-radius: 14px;
-      overflow: hidden;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .component-summary-list li {
-      padding: 14px 20px;
-      border-bottom: 1px solid var(--border-subtle);
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.55;
-    }
-    .component-summary-list li:last-child { border-bottom: none; }
-    .component-summary-list li strong {
-      color: var(--text);
-      font-weight: 700;
-    }
+    
+    
+    
+    
+    
+    
 
     /* Best practices */
-    .component-best-practices {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 24px;
-    }
-    .component-bp-card {
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1.5px solid;
-    }
-    .component-bp-card--do   { border-color: rgba(0,168,89,.3); }
-    .component-bp-card--dont { border-color: rgba(255,71,87,.3); }
-    .component-bp-label {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 10px 16px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .6px;
-      text-transform: uppercase;
-    }
-    .component-bp-label--do   { background: rgba(0,168,89,.07);  color: var(--jio); }
-    .component-bp-label--dont { background: rgba(255,71,87,.07); color: var(--negative); }
-    .component-bp-label--do::before   { content: '\2713'; font-size: 11px; }
-    .component-bp-label--dont::before { content: '\2715'; font-size: 11px; }
-    .component-bp-list {
-      padding: 16px 20px 20px;
-      background: var(--surface-1);
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      list-style: none;
-    }
-    .component-bp-list li {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.5;
-      padding-left: 14px;
-      position: relative;
-    }
-    .component-bp-list li::before {
-      content: '\00B7';
-      position: absolute;
-      left: 3px;
-      color: var(--text4);
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /* Content grid */
-    .component-content-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-top: 24px;
-    }
-    .component-content-card {
-      background: var(--surface-1);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--r4);
-      padding: 20px;
-    }
-    .component-content-title {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text);
-      text-transform: uppercase;
-      letter-spacing: .5px;
-      margin-bottom: 12px;
-    }
-    .component-content-card ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-    .component-content-card li {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.5;
-      padding-left: 14px;
-      position: relative;
-    }
-    .component-content-card li::before {
-      content: '\00B7';
-      position: absolute;
-      left: 3px;
-      color: var(--text4);
-    }
+    
+    
+    
+    
+    
+    
 
     /* Platform cards */
-    .component-platform-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 24px;
-    }
-    .component-platform-card {
-      background: var(--surface-1);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--r4);
-      padding: 20px;
-    }
-    .component-platform-card--mobile { border-top: 2px solid rgba(110,231,183,.4); }
-    .component-platform-card--web    { border-top: 2px solid rgba(147,197,253,.4); }
-    .component-platform-card--tv     { border-top: 2px solid rgba(251,191,36,.4); }
-    .component-platform-card-title {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .6px;
-      text-transform: uppercase;
-      color: var(--text3);
-      margin-bottom: 12px;
-    }
-    .component-platform-card--mobile .component-platform-card-title { color: #6ee7b7; }
-    .component-platform-card--web    .component-platform-card-title { color: #93c5fd; }
-    .component-platform-card--tv     .component-platform-card-title { color: #fbbf24; }
-    .component-platform-card ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-    .component-platform-card li {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.5;
-      padding-left: 14px;
-      position: relative;
-    }
-    .component-platform-card li::before {
-      content: '\00B7';
-      position: absolute;
-      left: 3px;
-      color: var(--text4);
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /* Changelog */
-    .component-changelog {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--r4);
-      overflow: hidden;
-    }
-    .component-changelog-entry {
-      display: grid;
-      grid-template-columns: 56px 80px 1fr;
-      gap: 16px;
-      align-items: start;
-      padding: 14px 20px;
-      border-bottom: 1px solid var(--border-subtle);
-      font-size: 12px;
-    }
-    .component-changelog-entry:last-child { border-bottom: none; }
-    .component-changelog-version {
-      font-family: monospace;
-      font-weight: 700;
-      color: var(--jio);
-      font-size: 11px;
-    }
-    .component-changelog-date {
-      color: var(--text3);
-      font-weight: 500;
-    }
-    .component-changelog-desc {
-      color: var(--text2);
-      line-height: 1.5;
-    }
+    
+    
+    
+    
+    
+    
 
     /* Note box */
-    .ds-note {
-      background: rgba(0,168,89,.06);
-      border: 1px solid rgba(0,168,89,.2);
-      border-radius: var(--r3);
-      padding: 14px 18px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.55;
-    }
-    .ds-note strong { color: var(--jio); }
+    
+    
 
     /* Size matrix */
     .tile-size-matrix {
@@ -410,60 +201,14 @@
     }
 
     /* Accessibility */
-    .a11y-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--r4);
-      overflow: hidden;
-      margin-top: 24px;
-    }
-    .a11y-row {
-      display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: 0;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-    .a11y-row:last-child { border-bottom: none; }
-    .a11y-label {
-      padding: 14px 16px;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text3);
-      letter-spacing: .3px;
-      background: var(--surface-2);
-      text-transform: uppercase;
-      display: flex;
-      align-items: flex-start;
-      padding-top: 16px;
-    }
-    .a11y-content {
-      padding: 14px 20px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.6;
-      background: var(--surface-1);
-    }
-    .a11y-content ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-    .a11y-content li {
-      padding-left: 14px;
-      position: relative;
-    }
-    .a11y-content li::before {
-      content: '\00B7';
-      position: absolute;
-      left: 3px;
-      color: var(--text4);
-    }
+    
+    
+    
+    
+    
+    
+    
+    
 
     /* Related tokens table */
     .related-tokens-table {
@@ -566,9 +311,7 @@
     }
 
     @media (max-width: 760px) {
-      .component-best-practices,
-      .component-content-grid,
-      .component-platform-grid { grid-template-columns: 1fr; }
+      
       .tile-size-matrix { overflow-x: auto; }
       .tile-size-matrix-head,
       .tile-size-matrix-row { min-width: 520px; }
@@ -584,20 +327,20 @@
        1. PAGE HEADER
   =================================================== -->
   <div class="component-page-header" id="page-header">
-    <div class="component-breadcrumb">
-      <a href="../index.html">JioGames DLS</a>
-      <span class="component-breadcrumb-sep">&#x203A;</span>
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <span class="component-breadcrumb-link">JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
       <span>Components</span>
-      <span class="component-breadcrumb-sep">&#x203A;</span>
-      <span>Genre Tiles</span>
-    </div>
-    <h1 class="component-page-title">Genre Tiles</h1>
-    <p class="component-page-def">Genre tiles are square, art-forward tiles that let players browse and select game categories across JioGames.</p>
+      <span class="component-breadcrumb-sep">›</span>
+      <span class="component-breadcrumb-current">Genre Tiles</span>
+    </nav>
+    <h1 class="component-page-title">Genre Tiles</h1><p class="component-page-def">Genre tiles are square, art-forward tiles that let players browse and select game categories across JioGames.</p>
     <div class="component-platforms">
       <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
       <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
       <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
       <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBHZW5yZSBUaWxlcyDigJQgSmlvR2FtZXMgRExTIHNwZWMKCj4gU291cmNlOiBgZ2VucmUtdGlsZXMvaW5kZXguaHRtbGAgaW4gdGhlIEppb0dhbWVzIERlc2lnbiBTeXN0ZW0uCj4gVGhpcyBzcGVjIGlzIGdlbmVyYXRlZCB2ZXJiYXRpbSBmcm9tIHRoZSBwYWdlIOKAlCBkbyBub3QgaW52ZW50IHZhbHVlcyBub3QgbGlzdGVkIGhlcmUuCgoqKlBhdGg6KiogSmlvR2FtZXMgRExTIOKAuiBDb21wb25lbnRzIOKAuiBHZW5yZSBUaWxlcwoKLS0tCgpHZW5yZSB0aWxlcyBhcmUgc3F1YXJlLCBhcnQtZm9yd2FyZCB0aWxlcyB0aGF0IGxldCBwbGF5ZXJzIGJyb3dzZSBhbmQgc2VsZWN0IGdhbWUgY2F0ZWdvcmllcyBhY3Jvc3MgSmlvR2FtZXMuCgpHZW5yZSB0aWxlcyBnaXZlIHBsYXllcnMgYW4gYXJ0LWZvcndhcmQgd2F5IHRvIGV4cGxvcmUgSmlvR2FtZXMgY29udGVudCBieSBjYXRlZ29yeS4gVGhleSBhcHBlYXIgaW4gdGhlIGhvbWUgcGFnZSBicm93c2UgcmFpbCwgb25ib2FyZGluZyBnZW5yZSBwcmVmZXJlbmNlIGZsb3dzLCBhbmQgc2VhcmNoIGZpbHRlciBzdXJmYWNlcy4gRWFjaCB0aWxlIHBhaXJzIGEgcmljaCBncmFkaWVudCBiYWNrZ3JvdW5kIHdpdGggYSBib2xkIHdoaXRlIGxhYmVsIGZvciBpbnN0YW50IHNjYW5uYWJpbGl0eSBhdCBhbnkgc2l6ZS4KCi0gKipBcnQtZm9yd2FyZC4qKiBFYWNoIHRpbGUgdXNlcyBhIHVuaXF1ZSBDU1MgZ3JhZGllbnQga2V5ZWQgdG8gaXRzIGdlbnJlIOKAlCBubyB0d28gdGlsZXMgc2hhcmUgdGhlIHNhbWUgcGFsZXR0ZSBpbiB0aGUgc2FtZSB2aWV3LgotICoqU2VsZWN0aW9uLioqIEEgMS41cHggZ3JlZW4gYm9yZGVyIHBsdXMgYSBzdWJ0bGUgZ3JlZW4tdGludGVkIGJhY2tncm91bmQgY29tbXVuaWNhdGVzIHRoZSBzZWxlY3RlZCBzdGF0ZSB3aXRob3V0IHJlbHlpbmcgb24gY29sb3IgYWxvbmUuIExhYmVsIGNvbG9yIGFsc28gc2hpZnRzIHRvIGdyZWVuLgotICoqUGxhdGZvcm0tYWRhcHRpdmUuKiogU3F1YXJlIDk2cHggb24gbW9iaWxlLCB3aWRlIDE2MMOXODBweCBvbiB3ZWIsIDEyMHB4KyBzcXVhcmUgb24gVFYuIFNhbWUgY29tcG9uZW50LCBkaWZmZXJlbnQgc2l6ZSB0b2tlbiBwZXIgcGxhdGZvcm0uCi0gKipQcmVtaXVtIGdhdGluZy4qKiBMb2NrZWQgZ2VucmVzIGRpc3BsYXkgYSBzZW1pLXRyYW5zcGFyZW50IHNjcmltIG92ZXJsYXkgd2l0aCBhIGxvY2sgaWNvbiwgY29tbXVuaWNhdGluZyB0aGF0IHRoZSBQYXNzIGlzIHJlcXVpcmVkIGJlZm9yZSB0aGUgY2F0ZWdvcnkgYmVjb21lcyBicm93c2FibGUuCgojIyBXaGVuIHRvIHVzZQoKVXNlIHdoZW4KCi0gR2VucmUgc2VsZWN0aW9uIGluIG9uYm9hcmRpbmcgcHJlZmVyZW5jZSBzY3JlZW5zCi0gR2VucmUgbmF2aWdhdGlvbiBvbiB0aGUgZGlzY292ZXJ5L2Jyb3dzZSBob21lIHNjcmVlbgotIFBsYXRmb3JtIHNlbGVjdGlvbiAoTW9iaWxlLCBXZWIsIFRWKSBpbiBvbmJvYXJkaW5nCi0gQ2F0ZWdvcnkgcXVpY2stbGlua3MgaW4gcmFpbCBoZWFkZXJzCgpEb24ndCB1c2Ugd2hlbgoKLSBGaWx0ZXIgY2hpcHMgKGZvciBmaWx0ZXJpbmcgY29udGVudCwgbm90IG5hdmlnYXRpb24pIOKAlCB1c2UgQ2hpcCBpbnN0ZWFkCi0gTW9yZSB0aGFuIDEyIHRpbGVzIGluIGEgc2luZ2xlIHNjcmVlbiB3aXRob3V0IHNjcm9sbGluZwotIFRleHQtb25seSB3aXRob3V0IGljb24vaWxsdXN0cmF0aW9uIOKAlCB0aWxlcyBuZWVkIGEgdmlzdWFsIGFuY2hvcgoKIyMgQmVzdCBwcmFjdGljZXMKCkZvbGxvdyB0aGVzZSBydWxlcyB0byBrZWVwIGdlbnJlIHRpbGUgdXNhZ2UgY29uc2lzdGVudCBhY3Jvc3MgSmlvR2FtZXMgc3VyZmFjZXMuCgotIFVzZSB1bmlxdWUgZ3JhZGllbnQgcGFsZXR0ZSBwZXIgZ2VucmUg4oCUIG5ldmVyIHJlcGVhdCBpbiB0aGUgc2FtZSBncmlkCi0gS2VlcCBnZW5yZSBuYW1lcyB0byAx4oCTMiB3b3JkcyBpbiB0aXRsZSBjYXNlOiAiQWN0aW9uIiwgIk9wZW4gV29ybGQiCi0gU2hvdyB0aGUgZnVsbCBzZWxlY3RlZCBzdGF0ZTogZ3JlZW4gYm9yZGVyICsgZ3JlZW4gYmcgKyBncmVlbiBsYWJlbAotIEVuc3VyZSBnZW5yZSBsYWJlbCB0ZXh0IGFsd2F5cyByZW5kZXJzIG92ZXIgdGhlIGdyYWRpZW50IHdpdGggc3VmZmljaWVudCBjb250cmFzdAotIE1pbmltdW0gdGlsZSBzaXplIDk2cHggb24gbW9iaWxlIOKAlCBtZWV0cyB0b3VjaC1taW4gNDRweCB0b3VjaCB0YXJnZXQKLSBPbiBUViwgaW5jcmVhc2UgdGlsZSB0byAxMjBweCsgYW5kIHVzZSB0di1mb2N1cy1zaGFkb3cgb24gZm9jdXNlZCBzdGF0ZQotIFVzZSBgYXJpYS1wcmVzc2VkYCBmb3Igc2VsZWN0aW9uIHN0YXRlLCBub3QgYGFyaWEtY2hlY2tlZGAKCi0gRG9uJ3QgdXNlIHRoZSBzYW1lIGdyYWRpZW50IGh1ZSBmb3IgdHdvIGRpZmZlcmVudCBnZW5yZXMgaW4gb25lIHZpZXcKLSBEb24ndCB3cml0ZSBnZW5yZSBuYW1lcyBsb25nZXIgdGhhbiAyIHdvcmRzIOKAlCB0aWxlcyBjYW5ub3QgdHJ1bmNhdGUKLSBEb24ndCByZWx5IG9uIGNvbG9yIGFsb25lIHRvIHNob3cgc2VsZWN0aW9uIOKAlCBncmVlbiBsYWJlbCB0ZXh0IGlzIHJlcXVpcmVkCi0gRG9uJ3QgdXNlIHNvbGlkIHNhdHVyYXRlZCBmaWxscyDigJQgdGhleSBvdmVycG93ZXIgdGhlIGRhcmsgc3VyZmFjZQotIERvbid0IG9taXQgdGhlIGxvY2sgaWNvbiBvbiBwcmVtaXVtIHRpbGVzIOKAlCBncmF5ZWQtb3V0IGFsb25lIGlzIGluc3VmZmljaWVudAotIERvbid0IGRpc2FibGUgbG9ja2VkIHRpbGVzIHdpdGggSFRNTCBgZGlzYWJsZWRgIOKAlCB1c2UgYGFyaWEtZGlzYWJsZWRgIHNvIHRoZXkgcmVtYWluIGZvY3VzYWJsZQotIERvbid0IHBsYWNlIHRpbGVzIHNtYWxsZXIgdGhhbiA3MnB4IOKAlCByZWFkYWJpbGl0eSBhbmQgdGFwIHRhcmdldCBib3RoIHN1ZmZlcgoKIyMgQW5hdG9teQoKRXZlcnkgZ2VucmUgdGlsZSBpcyBidWlsdCBmcm9tIGZpdmUgc2xvdHMuIFRoZSBjb250YWluZXIsIGJhY2tncm91bmQsIGFuZCBsYWJlbCBhcmUgYWx3YXlzIHJlcXVpcmVkLiBUaGUgc2VsZWN0aW9uIGluZGljYXRvciBhbmQgbG9jayBvdmVybGF5IGFyZSBjb25kaXRpb25hbC4KCiMjIFZhcmlhbnRzCgpGaXZlIHZhcmlhbnRzIGNvdmVyIGV2ZXJ5IHVzZSBjb250ZXh0IGFjcm9zcyBzdXJmYWNlcyBhbmQgc2VsZWN0aW9uIHN0YXRlcy4KCiMjIFNpemVzCgpUaWxlIHNpemUgaXMgZGV0ZXJtaW5lZCBieSBwbGF0Zm9ybSBjb250ZXh0LiBUaGUgc2FtZSBjb21wb25lbnQgcmVuZGVycyBhdCBkaWZmZXJlbnQgcGl4ZWwgZGltZW5zaW9ucyBvbiBNb2JpbGUsIFdlYiwgYW5kIFRWIHZpYSB0aGUgc2l6ZSB0b2tlbiBzeXN0ZW0uCgojIyBTdGF0ZXMKCkdlbnJlIHRpbGVzIHJlc3BvbmQgdG8gc2V2ZW4gaW50ZXJhY3Rpb24gc3RhdGVzLiBVc2UgdGhlIGAuaXMtKmAgaGVscGVycyBmcm9tIGBzdGF0ZXMuY3NzYCB0byBzaW11bGF0ZSBzdGF0ZXMgaW4gcHJvdG90eXBlcyBhbmQgZG9jcy4KCiMjIENvbnRlbnQgZ3VpZGFuY2UKCkdlbnJlIGxhYmVsIGNvcHkgbXVzdCBiZSBzaG9ydCwgY2xlYXIsIGFuZCBzY2FubmFibGUgYXQgYSBnbGFuY2UuIEVhY2ggdGlsZSBjb21tdW5pY2F0ZXMgYSBzaW5nbGUgY2F0ZWdvcnkuCgotIDHigJMyIHdvcmRzIG1heGltdW0sIHRpdGxlIGNhc2U6ICJBY3Rpb24iLCAiT3BlbiBXb3JsZCIsICJUb3dlciBEZWZlbnNlIgotIFVzZSB0aGUgcGxheWVyLWZhY2luZyBnZW5yZSBuYW1lLCBub3QgaW50ZXJuYWwgdGF4b25vbXkKLSBQcmVmZXIgIlNwb3J0cyIgb3ZlciAiU3BvcnQgR2FtZXMiIOKAlCBzaG9ydGVyIGlzIG1vcmUgc2Nhbm5hYmxlCi0gQXZvaWQgYWJicmV2aWF0aW9ucyB1bmxlc3MgdW5pdmVyc2FsbHkgdW5kZXJzdG9vZDogIlJQRyIgaXMgYWNjZXB0YWJsZQotIERvIG5vdCBudW1iZXIgZ2VucmVzOiAiQWN0aW9uIDEiIGlzIG5ldmVyIGNvcnJlY3QKCi0gTGFiZWwgaXMgYWx3YXlzIHdoaXRlIG9uIGdyYWRpZW50IOKAlCBuZXZlciBjb2xvcmVkIHRvIG1hdGNoIHRoZSBncmFkaWVudAotIFdoZW4gc2VsZWN0ZWQsIGxhYmVsIHN0YXlzIHdoaXRlIG9uIGFydCBiYWNrZ3JvdW5kIOKAlCBncmVlbiBib3JkZXIgY2FycmllcyB0aGUgc3RhdGUKLSBHcmFkaWVudCBtdXN0IHByb3ZpZGUgYXQgbGVhc3QgNC41OjEgY29udHJhc3QgcmF0aW8gYmVuZWF0aCB0aGUgbGFiZWwKLSBBdm9pZCBsYWJlbCB0ZXh0IHRoYXQgdmlzdWFsbHkgYmxlbmRzIHdpdGggZ3JhZGllbnQgaGlnaGxpZ2h0IGNvbG9ycwotIExvY2sgb3ZlcmxheSB0ZXh0OiB1c2UgYGFyaWEtbGFiZWxgIG9ubHkg4oCUIG5vIHZpc2libGUgZXh0cmEgdGV4dCBvbiB0aWxlIGZhY2UKCi0gU2hvdyBsb2NrIGljb24gb25seSDigJQgbm8gIlByZW1pdW0iIHRleHQgbGFiZWwgb24gdGhlIHRpbGUgZmFjZQotIFRvb2x0aXAgb3IgbW9kYWwgb24gdGFwIHNob3VsZCBleHBsYWluIHdoaWNoIFBhc3MgdW5sb2NrcyB0aGUgZ2VucmUKLSBEbyBub3Qgc2F5ICJMb2NrZWQiIGluIHRoZSBhcmlhLWxhYmVsIOKAlCBzYXkgIltHZW5yZV0g4oCUIHJlcXVpcmVzIEppb0dhbWVzIFBhc3MiCgotIE9wdGlvbmFsIHRvcC1yaWdodCBiYWRnZSBzaG93aW5nIG51bWJlciBvZiB0aXRsZXMgaW4gdGhhdCBnZW5yZQotIEZvcm1hdDogcGxhaW4gbnVtYmVyLCBlLmcuICI0OCIg4oCUIG5vICJnYW1lcyIgc3VmZml4IGF0IHNtYWxsIHNpemVzCi0gSGlkZSBiYWRnZSBpZiBjb3VudCBpcyAwIG9yIHVua25vd24g4oCUIGRvIG5vdCBzaG93ICIwIgotIE1heCBkaXNwbGF5IHZhbHVlOiAiOTkrIiBmb3IgY291bnRzIGFib3ZlIDk5CgojIyBQbGF0Zm9ybSBjb25zaWRlcmF0aW9ucwoKR2VucmUgdGlsZXMgYWRhcHQgYWNyb3NzIE1vYmlsZSwgV2ViLCBhbmQgVFYgY29udGV4dHMuIFNpemUsIGludGVyYWN0aW9uIG1vZGVsLCBhbmQgZm9jdXMgdHJlYXRtZW50IGVhY2ggZGlmZmVyIHBlciBwbGF0Zm9ybS4KCi0gRGVmYXVsdDogOTbDlzk2cHggc3F1YXJlIChgLS1jYXJkLXNxYCksIDQtY29sdW1uIGdyaWQKLSBOYXJyb3cgcGhvbmVzICg8MzYwcHgpOiBmYWxsIGJhY2sgdG8gMy1jb2x1bW4gZ3JpZAotIFRhcCB0byB0b2dnbGUgc2VsZWN0aW9uOyB0YXAgYWdhaW4gdG8gZGVzZWxlY3QKLSBNdWx0aS1zZWxlY3Qgc3VwcG9ydGVkIGluIG9uYm9hcmRpbmcgcHJlZmVyZW5jZSBmbG93cwotIE1pbmltdW0gdGlsZSBtdXN0IG1lZXQgYC0tdG91Y2gtbWluYCAoNDRweCkgaW4gYm90aCBheGVzIOKAlCA5NnB4IGZhciBleGNlZWRzIHRoaXMKLSBHcmlkIGdhcDogMTBweCBtaW5pbXVtIOKAlCBsYXJnZXIgZ2FwcyBjYXVzZSBhY2NpZGVudGFsIGRlc2VsZWN0aW9uIG9uIHN3aXBlCgotIFdpZGUgMTYww5c4MHB4IHRpbGUgcHJlZmVycmVkIOKAlCBpY29uICsgbGFiZWwgaG9yaXpvbnRhbCBsYXlvdXQKLSBIb3ZlciBzdGF0ZTogYGJyaWdodG5lc3MoMS4wOClgICsgc3VidGxlIGBzY2FsZSgxLjAyKWAKLSBDbGljayB0byB0b2dnbGUgc2VsZWN0aW9uOyBTcGFjZSBvciBFbnRlciB2aWEga2V5Ym9hcmQKLSBGb2N1cyByaW5nOiBgdmFyKC0tZm9jdXMtc2hhZG93KWAgb24gYDpmb2N1cy12aXNpYmxlYAotIEdyaWQgYWRhcHRzIHRvIGNvbnRhaW5lciB3aWR0aCDigJQgYXZvaWQgZml4ZWQgY29sdW1uIGNvdW50cwotIFRvb2x0aXAgb24gbG9ja2VkIHRpbGUgd2l0aCBQYXNzIHVwZ3JhZGUgQ1RBCgotIDEyMMOXMTIwcHgrIHNxdWFyZSBmb3IgMTAtZm9vdCBsZWdpYmlsaXR5IOKAlCBsYWJlbCBidW1wZWQgdG8gMTRweCBtaW4KLSBELXBhZCBuYXZpZ2F0aW9uIOKAlCBmb2N1cyBtZW1vcnkgcGVyc2lzdHMgcGVyIHJvdyB3aGVuIHJldHVybmluZyBmcm9tIGFub3RoZXIgc2VjdGlvbgotIEZvY3VzZWQgdGlsZTogYHZhcigtLXR2LWZvY3VzLXNoYWRvdylgICsgYHNjYWxlKDEuMDYpYAotIE9LIC8gU2VsZWN0IGJ1dHRvbiB0b2dnbGVzIHNlbGVjdGlvbiBzdGF0ZQotIE5vIGhvdmVyIHN0YXRlIG9uIFRWIOKAlCBmb2N1cyBpcyB0aGUgcHJpbWFyeSBpbnRlcmFjdGl2ZSBzaWduYWwKLSBNaW5pbXVtIDhweCBnYXAgYmV0d2VlbiB0aWxlcyDigJQgRC1wYWQgbmF2aWdhdGlvbiBuZWVkcyBjbGVhciBib3VuZGFyaWVzCi0gTmV2ZXIgdXNlIG1pbmkgLyBjb21wYWN0IHZhcmlhbnQgb24gVFYg4oCUIGluc3VmZmljaWVudCBsZWdpYmlsaXR5IGF0IGRpc3RhbmNlCgojIyBNb3Rpb24KCnwgSW50ZXJhY3Rpb24gfCBFYXNpbmcgfCBEdXJhdGlvbiB8IFByb3BlcnR5IHwKfC0tLXwtLS18LS0tfC0tLXwKfCBTZWxlY3QgdG9nZ2xlIHwgYC0tZWFzZS1vdXRgIHwgYC0tZHVyLWZhc3RgIHwgYm9yZGVyLWNvbG9yLCBiYWNrZ3JvdW5kLCB0cmFuc2Zvcm0gc2NhbGUoMS4wNCkgfAp8IERlc2VsZWN0IHwgYC0tZWFzZS1vdXRgIHwgYC0tZHVyLWZhc3RgIHwgYm9yZGVyLWNvbG9yLCBiYWNrZ3JvdW5kIHwKfCBQcmVzcyB8IGAtLWVhc2Utb3V0YCB8IGA4MG1zYCB8IHRyYW5zZm9ybSBzY2FsZSgwLjk1KSB8CnwgVFYgZm9jdXMgfCBgLS1lYXNlLW91dGAgfCBgLS1kdXItZmFzdGAgfCB0cmFuc2Zvcm0gc2NhbGUoMS4xKSwgYm94LXNoYWRvdyB8CnwgQXBwZWFyIChzdGFnZ2VyZWQpIHwgYC0tZWFzZS1vdXRgIHwgYC0tZHVyLWZhc3RgIHwgb3BhY2l0eSwgdHJhbnNmb3JtIHRyYW5zbGF0ZVkoOHB4IOKGkiAwKSB8CgojIyBBY2Nlc3NpYmlsaXR5CgpHZW5yZSB0aWxlcyBhcmUgaW50ZXJhY3RpdmUgc2VsZWN0aW9uIGNvbnRyb2xzLiBFdmVyeSB0aWxlIG5lZWRzIGEgcm9sZSwgc3RhdGUsIGFuZCBsYWJlbCB0aGF0IHdvcmtzIHdpdGhvdXQgdmlzdWFsIGNvbnRleHQuCgotIGBhcmlhLWxhYmVsPSJbR2VucmVdIGdlbnJlImAg4oCUIGUuZy4gIkFjdGlvbiBnZW5yZSIKLSBXaXRoIGNvdW50IGJhZGdlOiBgYXJpYS1sYWJlbD0iQWN0aW9uIGdlbnJlLCA0OCBnYW1lcyJgCi0gTG9ja2VkIHRpbGU6IGBhcmlhLWxhYmVsPSJBY3Rpb24g4oCUIHJlcXVpcmVzIEppb0dhbWVzIFBhc3MiYAoKIyMgUmVsYXRlZCB0b2tlbnMKCkFsbCBkZXNpZ24gdG9rZW5zIHVzZWQgYnkgZ2VucmUgdGlsZXMuIFNlbWFudGljIGFsaWFzZXMgc2hvdWxkIGJlIHByZWZlcnJlZCBpbiBjb21wb25lbnQgY29kZSBvdmVyIHJhdyBwcmltaXRpdmVzLgoKIyMgQVBJCgojIyMgQ1NTIGNsYXNzZXMKCnwgQ2xhc3MgfCBEZXNjcmlwdGlvbiB8CnwtLS18LS0tfAp8IGAuZHMtZ2VucmUtdGlsZWAgfCBSb290IOKAlCBzcXVhcmUgdGlsZSwgc3VyZmFjZS0xLCBib3JkZXItc3VidGxlLCByNCB8CnwgYC5kcy1nZW5yZS10aWxlLS1zZWxlY3RlZGAgfCBHcmVlbiBib3JkZXIsIGppby1zb2Z0IGJnLCBncmVlbiBpY29uIHwKfCBgLmRzLWdlbnJlLXRpbGVfX2ljb25gIHwgMzJweCBpY29uIG9yIGlsbHVzdHJhdGlvbiB8CnwgYC5kcy1nZW5yZS10aWxlX19sYWJlbGAgfCAxMnB4IDcwMCB0ZXh0LCBjZW50ZXJlZCBiZWxvdyBpY29uIHwKfCBgLmRzLWdlbnJlLXRpbGUtLXNtYCB8IFNtYWxsIHZhcmlhbnQg4oCUIDcyw5c3MnB4IHwKfCBgLmRzLWdlbnJlLXRpbGUtLW1kYCB8IERlZmF1bHQg4oCUIDk2w5c5NnB4IHwKfCBgLmRzLWdlbnJlLXRpbGUtLWxnYCB8IExhcmdlIOKAlCAxMjDDlzEyMHB4IHwKCiMjIyBSZWFjdCBwcm9wcwoKfCBQcm9wIHwgVHlwZSB8IERlZmF1bHQgfCBEZXNjcmlwdGlvbiB8CnwtLS18LS0tfC0tLXwtLS18CnwgYGxhYmVsYCB8IHN0cmluZyB8IHJlcXVpcmVkIHwgR2VucmUgbmFtZSBkaXNwbGF5ZWQgYmVsb3cgaWNvbiB8CnwgYGljb25gIHwgUmVhY3ROb2RlIHwgcmVxdWlyZWQgfCBJY29uIG9yIGlsbHVzdHJhdGlvbiB8CnwgYHNlbGVjdGVkYCB8IGJvb2xlYW4gfCBmYWxzZSB8IEFjdGl2ZS9zZWxlY3RlZCBzdGF0ZSB8CnwgYG9uU2VsZWN0YCB8ICgpID0+IHZvaWQgfCB1bmRlZmluZWQgfCBUb2dnbGUgaGFuZGxlciB8CnwgYHNpemVgIHwgInNtIiB8ICJtZCIgfCAibGciIHwgIm1kIiB8IFRpbGUgc2l6ZSBwcmVzZXQgfAp8IGBkaXNhYmxlZGAgfCBib29sZWFuIHwgZmFsc2UgfCBEaXNhYmxlIGludGVyYWN0aW9uIHwKCiMjIENvZGUgZXhhbXBsZXMKCkNvcHkgdGhlc2Ugc25pcHBldHMgYXMgc3RhcnRpbmcgcG9pbnRzLiBBbHdheXMgbGluayBgdG9rZW5zL3Rva2Vucy5jc3NgLCBgY29tcG9uZW50cy5jc3NgLCBhbmQgYHN0YXRlcy5jc3NgIGJlZm9yZSB1c2luZyBjb21wb25lbnQgY2xhc3Nlcy4KCmBgYGBodG1sCjxkaXYKICByb2xlPSJncm91cCIKICBhcmlhLWxhYmVsPSJTZWxlY3QgZ2VucmVzIgogIHN0eWxlPSJkaXNwbGF5OmdyaWQ7Z3JpZC10ZW1wbGF0ZS1jb2x1bW5zOnJlcGVhdCgzLDFmcik7Z2FwOjEwcHgiCj4KICA8YnV0dG9uIGNsYXNzPSJnZW5yZS10aWxlIGlzLXNlbGVjdGVkIiB0eXBlPSJidXR0b24iIGFyaWEtcHJlc3NlZD0idHJ1ZSI+CiAgICA8c3BhbiBjbGFzcz0iZ2VucmUtdGlsZV9fZW1vamkiIGFyaWEtaGlkZGVuPSJ0cnVlIj7impTvuI88L3NwYW4+CiAgICA8c3BhbiBjbGFzcz0iZ2VucmUtdGlsZV9fbGFiZWwiPkFjdGlvbjwvc3Bhbj4KICA8L2J1dHRvbj4KICA8YnV0dG9uIGNsYXNzPSJnZW5yZS10aWxlIiB0eXBlPSJidXR0b24iIGFyaWEtcHJlc3NlZD0iZmFsc2UiPgogICAgPHNwYW4gY2xhc3M9ImdlbnJlLXRpbGVfX2Vtb2ppIiBhcmlhLWhpZGRlbj0idHJ1ZSI+8J+Pju+4jzwvc3Bhbj4KICAgIDxzcGFuIGNsYXNzPSJnZW5yZS10aWxlX19sYWJlbCI+UmFjaW5nPC9zcGFuPgogIDwvYnV0dG9uPgogIDxidXR0b24gY2xhc3M9ImdlbnJlLXRpbGUiIHR5cGU9ImJ1dHRvbiIgYXJpYS1wcmVzc2VkPSJmYWxzZSI+CiAgICA8c3BhbiBjbGFzcz0iZ2VucmUtdGlsZV9fZW1vamkiIGFyaWEtaGlkZGVuPSJ0cnVlIj7wn46vPC9zcGFuPgogICAgPHNwYW4gY2xhc3M9ImdlbnJlLXRpbGVfX2xhYmVsIj5TaG9vdGVyPC9zcGFuPgogIDwvYnV0dG9uPgo8L2Rpdj4KYGBgYAoKYGBgYApkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCcuZ2VucmUtdGlsZScpLmZvckVhY2godGlsZSA9PiB7CiAgdGlsZS5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsICgpID0+IHsKICAgIGNvbnN0IHNlbGVjdGVkID0gdGlsZS5nZXRBdHRyaWJ1dGUoJ2FyaWEtcHJlc3NlZCcpID09PSAndHJ1ZSc7CiAgICB0aWxlLnNldEF0dHJpYnV0ZSgnYXJpYS1wcmVzc2VkJywgU3RyaW5nKCFzZWxlY3RlZCkpOwogICAgdGlsZS5jbGFzc0xpc3QudG9nZ2xlKCdpcy1zZWxlY3RlZCcsICFzZWxlY3RlZCk7CiAgfSk7Cn0pOwpgYGBgCgotLS0KCiMjIFRva2VucyByZWZlcmVuY2VkIG9uIHRoaXMgcGFnZQoKVXNlIHRoZXNlIGV4YWN0IHRva2VucyDigJQgZGVmaW5lZCBpbiBgdG9rZW5zL3Rva2Vucy5jc3NgLiBEbyBub3Qgc3Vic3RpdHV0ZSByYXcgdmFsdWVzLgoKLSBgLS1iZ2AKLSBgLS1ib3JkZXJgCi0gYC0tYm9yZGVyLXN1YnRsZWAKLSBgLS1jYXJkLXNxYAotIGAtLWZvY3VzLXNoYWRvd2AKLSBgLS1nbGFzcy0xYAotIGAtLWppb2AKLSBgLS1qaW8tZm9udGAKLSBgLS1qaW8tZ2xvd2AKLSBgLS1qaW8tc29mdGAKLSBgLS1vdmVybGF5LWxvY2tlZGAKLSBgLS1waWxsYAotIGAtLXIyYAotIGAtLXIzYAotIGAtLXI0YAotIGAtLXNrZWxldG9uLWJnYAotIGAtLXN0YXRlLWRpc2FibGVkLW9wYWNpdHlgCi0gYC0tc3VyZmFjZS0xYAotIGAtLXN1cmZhY2UtMmAKLSBgLS1zdXJmYWNlLTNgCi0gYC0tdGV4dGAKLSBgLS10ZXh0MmAKLSBgLS10ZXh0M2AKLSBgLS10ZXh0NGAKLSBgLS10di1mb2N1cy1zaGFkb3dgCgotLS0KCiMjIEJ1aWxkIHJ1bGVzIChiaW5kaW5nKQoKMS4gVXNlICoqb25seSoqIHRoZSB0b2tlbnMgbGlzdGVkIGFib3ZlLiBJZiBhIHZhbHVlIHlvdSBuZWVkIGlzIG5vdCBsaXN0ZWQsIHN0b3AgYW5kIGFzayDigJQgZG8gbm90IGludHJvZHVjZSBhIHJhdyB2YWx1ZS4KMi4gRm9udCBpcyAqKkppb1R5cGUqKiBvbmx5LiBXZWlnaHRzOiAzMDAsIDUwMCwgNzAwLCA5MDAuCjMuIFJldXNlIHRoZSBjb21wb25lbnQgQ1NTIHBhdHRlcm5zIHNob3duIG9uIHRoZSBzb3VyY2UgcGFnZTsgZG8gbm90IHJlZGVzaWduLgo0LiBNYXRjaCBldmVyeSBzdGF0ZSAoZGVmYXVsdCwgaG92ZXIsIGZvY3VzLCBhY3RpdmUsIGRpc2FibGVkLCBsb2FkaW5nKSBzaG93biBvbiB0aGUgcGFnZS4KNS4gQWNjZXNzaWJpbGl0eSByZXF1aXJlbWVudHMgb24gdGhlIHBhZ2UgYXJlIG1hbmRhdG9yeSwgbm90IG9wdGlvbmFsLgo=" download="genre-tiles-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
     </div>
   </div>
 
@@ -609,27 +352,27 @@
       <div style="display:grid;grid-template-columns:repeat(3,96px);gap:8px">
         <!-- Action — selected -->
         <div style="width:96px;height:96px;border-radius:var(--r4);background:linear-gradient(135deg,#c0392b,#e74c3c);position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:8px;border:1.5px solid var(--jio)">
-          <span style="font-size:11px;font-weight:800;color:#fff;letter-spacing:.3px">Action</span>
+          <span style="font-size:11px;font-weight:900;color:#fff;letter-spacing:.3px">Action</span>
         </div>
         <!-- Racing -->
         <div style="width:96px;height:96px;border-radius:var(--r4);background:linear-gradient(135deg,#1a78c2,#3498db);position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:8px">
-          <span style="font-size:11px;font-weight:800;color:#fff;letter-spacing:.3px">Racing</span>
+          <span style="font-size:11px;font-weight:900;color:#fff;letter-spacing:.3px">Racing</span>
         </div>
         <!-- Adventure -->
         <div style="width:96px;height:96px;border-radius:var(--r4);background:linear-gradient(135deg,#00A859,#00d876);position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:8px">
-          <span style="font-size:11px;font-weight:800;color:#fff;letter-spacing:.3px">Adventure</span>
+          <span style="font-size:11px;font-weight:900;color:#fff;letter-spacing:.3px">Adventure</span>
         </div>
         <!-- Sports -->
         <div style="width:96px;height:96px;border-radius:var(--r4);background:linear-gradient(135deg,#16a085,#1abc9c);position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:8px">
-          <span style="font-size:11px;font-weight:800;color:#fff;letter-spacing:.3px">Sports</span>
+          <span style="font-size:11px;font-weight:900;color:#fff;letter-spacing:.3px">Sports</span>
         </div>
         <!-- Puzzle -->
         <div style="width:96px;height:96px;border-radius:var(--r4);background:linear-gradient(135deg,#6c3483,#9b59b6);position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:8px">
-          <span style="font-size:11px;font-weight:800;color:#fff;letter-spacing:.3px">Puzzle</span>
+          <span style="font-size:11px;font-weight:900;color:#fff;letter-spacing:.3px">Puzzle</span>
         </div>
         <!-- Casual -->
         <div style="width:96px;height:96px;border-radius:var(--r4);background:linear-gradient(135deg,#c0392b,#ff6b9d);position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:8px">
-          <span style="font-size:11px;font-weight:800;color:#fff;letter-spacing:.3px">Casual</span>
+          <span style="font-size:11px;font-weight:900;color:#fff;letter-spacing:.3px">Casual</span>
         </div>
       </div>
     </div>
@@ -652,6 +395,30 @@
   <!-- ===================================================
        4. BEST PRACTICES
   =================================================== -->
+  <!-- WHEN TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use</h2>
+    <div class="ds-usage-grid">
+      <div class="ds-usage-card ds-usage-card--do">
+        <p class="ds-usage-label ds-usage-label--do">Use when</p>
+        <ul class="ds-usage-list">
+              <li>Genre selection in onboarding preference screens</li>
+              <li>Genre navigation on the discovery/browse home screen</li>
+              <li>Platform selection (Mobile, Web, TV) in onboarding</li>
+              <li>Category quick-links in rail headers</li>
+        </ul>
+      </div>
+      <div class="ds-usage-card ds-usage-card--dont">
+        <p class="ds-usage-label ds-usage-label--dont">Don't use when</p>
+        <ul class="ds-usage-list">
+              <li>Filter chips (for filtering content, not navigation) — use Chip instead</li>
+              <li>More than 12 tiles in a single screen without scrolling</li>
+              <li>Text-only without icon/illustration — tiles need a visual anchor</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <section class="ds-section" id="best-practices">
     <h2 class="ds-section-title">Best practices</h2>
     <p class="ds-section-desc">Follow these rules to keep genre tile usage consistent across JioGames surfaces.</p>
@@ -694,7 +461,7 @@
         <div class="ds-anatomy-component" style="position:relative;display:inline-flex;padding:52px 60px">
           <!-- Tile -->
           <div style="position:relative;width:96px;height:96px;border-radius:var(--r4);background:linear-gradient(135deg,#c0392b,#e74c3c);overflow:hidden;display:flex;align-items:flex-end;padding:8px;border:1.5px solid var(--jio);pointer-events:none">
-            <span style="font-size:11px;font-weight:800;color:#fff;letter-spacing:.3px;position:relative;z-index:2">Action</span>
+            <span style="font-size:11px;font-weight:900;color:#fff;letter-spacing:.3px;position:relative;z-index:2">Action</span>
             <!-- Lock overlay (partial, demo) -->
             <div style="position:absolute;top:0;right:0;width:32px;height:32px;background:rgba(6,8,15,.7);display:flex;align-items:center;justify-content:center;border-bottom-left-radius:var(--r3)">
               <svg viewBox="0 0 24 24" width="14" height="14" fill="rgba(255,255,255,.5)" aria-hidden="true"><use href="../sprite.svg#ic_lock"></use></svg>
@@ -793,13 +560,13 @@
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             <div style="width:80px;height:80px;border-radius:var(--r4);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:7px;border:1px solid var(--border-subtle)">
-              <span style="font-size:10px;font-weight:800;color:#fff">Action</span>
+              <span style="font-size:10px;font-weight:900;color:#fff">Action</span>
             </div>
             <div style="width:80px;height:80px;border-radius:var(--r4);background:linear-gradient(135deg,#1a78c2,#3498db);display:flex;align-items:flex-end;padding:7px;border:1px solid var(--border-subtle)">
-              <span style="font-size:10px;font-weight:800;color:#fff">Racing</span>
+              <span style="font-size:10px;font-weight:900;color:#fff">Racing</span>
             </div>
             <div style="width:80px;height:80px;border-radius:var(--r4);background:linear-gradient(135deg,#6c3483,#9b59b6);display:flex;align-items:flex-end;padding:7px;border:1px solid var(--border-subtle)">
-              <span style="font-size:10px;font-weight:800;color:#fff">Puzzle</span>
+              <span style="font-size:10px;font-weight:900;color:#fff">Puzzle</span>
             </div>
           </div>
           <div class="variant-desc">Default home-page browse grid tile. 96&#xD7;96px on mobile, each tile has a unique genre gradient.</div>
@@ -812,10 +579,10 @@
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             <div style="width:160px;height:80px;border-radius:var(--r4);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:10px;border:1px solid var(--border-subtle)">
-              <span style="font-size:12px;font-weight:800;color:#fff">Action</span>
+              <span style="font-size:12px;font-weight:900;color:#fff">Action</span>
             </div>
             <div style="width:160px;height:80px;border-radius:var(--r4);background:linear-gradient(135deg,#16a085,#1abc9c);display:flex;align-items:flex-end;padding:10px;border:1px solid var(--border-subtle)">
-              <span style="font-size:12px;font-weight:800;color:#fff">Sports</span>
+              <span style="font-size:12px;font-weight:900;color:#fff">Sports</span>
             </div>
           </div>
           <div class="variant-desc">Wide horizontal tile for web sidebar filters or TV horizontal rail. Icon + label sit left-aligned.</div>
@@ -828,16 +595,16 @@
           </div>
           <div style="display:flex;gap:6px;flex-wrap:wrap">
             <div style="width:64px;height:64px;border-radius:var(--r3);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:5px;border:1px solid var(--border-subtle)">
-              <span style="font-size:8px;font-weight:800;color:#fff">Action</span>
+              <span style="font-size:8px;font-weight:900;color:#fff">Action</span>
             </div>
             <div style="width:64px;height:64px;border-radius:var(--r3);background:linear-gradient(135deg,#1a78c2,#3498db);display:flex;align-items:flex-end;padding:5px;border:1px solid var(--border-subtle)">
-              <span style="font-size:8px;font-weight:800;color:#fff">Racing</span>
+              <span style="font-size:8px;font-weight:900;color:#fff">Racing</span>
             </div>
             <div style="width:64px;height:64px;border-radius:var(--r3);background:linear-gradient(135deg,#6c3483,#9b59b6);display:flex;align-items:flex-end;padding:5px;border:1px solid var(--border-subtle)">
-              <span style="font-size:8px;font-weight:800;color:#fff">Puzzle</span>
+              <span style="font-size:8px;font-weight:900;color:#fff">Puzzle</span>
             </div>
             <div style="width:64px;height:64px;border-radius:var(--r3);background:linear-gradient(135deg,#16a085,#1abc9c);display:flex;align-items:flex-end;padding:5px;border:1px solid var(--border-subtle)">
-              <span style="font-size:8px;font-weight:800;color:#fff">Sports</span>
+              <span style="font-size:8px;font-weight:900;color:#fff">Sports</span>
             </div>
           </div>
           <div class="variant-desc">64&#xD7;64px mini tile used inside horizontal filter rails, search chips, or compact preference pickers.</div>
@@ -850,10 +617,10 @@
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             <div style="width:80px;height:80px;border-radius:var(--r4);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:7px;border:1.5px solid var(--jio);box-shadow:inset 0 0 0 1px rgba(0,168,89,.15)">
-              <span style="font-size:10px;font-weight:800;color:#fff">Action</span>
+              <span style="font-size:10px;font-weight:900;color:#fff">Action</span>
             </div>
             <div style="width:80px;height:80px;border-radius:var(--r4);background:linear-gradient(135deg,#16a085,#1abc9c);display:flex;align-items:flex-end;padding:7px;border:1.5px solid var(--jio);box-shadow:inset 0 0 0 1px rgba(0,168,89,.15)">
-              <span style="font-size:10px;font-weight:800;color:#fff">Sports</span>
+              <span style="font-size:10px;font-weight:900;color:#fff">Sports</span>
             </div>
           </div>
           <div class="variant-desc">1.5px green border + inner green glow communicates active selection. Multiple tiles can be selected simultaneously in preference flows.</div>
@@ -866,13 +633,13 @@
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             <div style="position:relative;width:80px;height:80px;border-radius:var(--r4);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:7px;border:1px solid var(--border-subtle);overflow:hidden">
-              <span style="font-size:10px;font-weight:800;color:rgba(255,255,255,.4)">Action</span>
+              <span style="font-size:10px;font-weight:900;color:rgba(255,255,255,.4)">Action</span>
               <div style="position:absolute;inset:0;background:var(--overlay-locked);display:flex;align-items:center;justify-content:center">
                 <svg viewBox="0 0 24 24" width="22" height="22" fill="rgba(255,255,255,.7)" aria-hidden="true"><use href="../sprite.svg#ic_lock"></use></svg>
               </div>
             </div>
             <div style="position:relative;width:80px;height:80px;border-radius:var(--r4);background:linear-gradient(135deg,#6c3483,#9b59b6);display:flex;align-items:flex-end;padding:7px;border:1px solid var(--border-subtle);overflow:hidden">
-              <span style="font-size:10px;font-weight:800;color:rgba(255,255,255,.4)">Exclusive</span>
+              <span style="font-size:10px;font-weight:900;color:rgba(255,255,255,.4)">Exclusive</span>
               <div style="position:absolute;inset:0;background:var(--overlay-locked);display:flex;align-items:center;justify-content:center">
                 <svg viewBox="0 0 24 24" width="22" height="22" fill="rgba(255,255,255,.7)" aria-hidden="true"><use href="../sprite.svg#ic_lock"></use></svg>
               </div>
@@ -911,19 +678,19 @@
         </div>
         <div class="tile-size-matrix-cell">
           <div style="width:64px;height:64px;border-radius:var(--r3);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:5px">
-            <span style="font-size:8px;font-weight:800;color:#fff">Action</span>
+            <span style="font-size:8px;font-weight:900;color:#fff">Action</span>
           </div>
           <span class="tile-size-matrix-px">96&#xD7;96px &#xB7; r4 &#xB7; label 11px</span>
         </div>
         <div class="tile-size-matrix-cell">
           <div style="width:64px;height:64px;border-radius:var(--r3);background:linear-gradient(135deg,#1a78c2,#3498db);display:flex;align-items:flex-end;padding:5px">
-            <span style="font-size:8px;font-weight:800;color:#fff">Racing</span>
+            <span style="font-size:8px;font-weight:900;color:#fff">Racing</span>
           </div>
           <span class="tile-size-matrix-px">96&#xD7;96px &#xB7; r4 &#xB7; label 12px</span>
         </div>
         <div class="tile-size-matrix-cell">
           <div style="width:64px;height:64px;border-radius:var(--r3);background:linear-gradient(135deg,#6c3483,#9b59b6);display:flex;align-items:flex-end;padding:5px">
-            <span style="font-size:8px;font-weight:800;color:#fff">Puzzle</span>
+            <span style="font-size:8px;font-weight:900;color:#fff">Puzzle</span>
           </div>
           <span class="tile-size-matrix-px">120&#xD7;120px &#xB7; r5 &#xB7; label 14px</span>
         </div>
@@ -936,19 +703,19 @@
         </div>
         <div class="tile-size-matrix-cell">
           <div style="width:100px;height:50px;border-radius:var(--r3);background:linear-gradient(135deg,#16a085,#1abc9c);display:flex;align-items:flex-end;padding:5px">
-            <span style="font-size:8px;font-weight:800;color:#fff">Sports</span>
+            <span style="font-size:8px;font-weight:900;color:#fff">Sports</span>
           </div>
           <span class="tile-size-matrix-px">N/A — square preferred on mobile</span>
         </div>
         <div class="tile-size-matrix-cell">
           <div style="width:100px;height:50px;border-radius:var(--r3);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:5px">
-            <span style="font-size:8px;font-weight:800;color:#fff">Action</span>
+            <span style="font-size:8px;font-weight:900;color:#fff">Action</span>
           </div>
           <span class="tile-size-matrix-px">160&#xD7;80px &#xB7; r4 &#xB7; label 13px</span>
         </div>
         <div class="tile-size-matrix-cell">
           <div style="width:100px;height:50px;border-radius:var(--r3);background:linear-gradient(135deg,#1a78c2,#3498db);display:flex;align-items:flex-end;padding:5px">
-            <span style="font-size:8px;font-weight:800;color:#fff">Racing</span>
+            <span style="font-size:8px;font-weight:900;color:#fff">Racing</span>
           </div>
           <span class="tile-size-matrix-px">200&#xD7;100px &#xB7; r5 &#xB7; label 16px</span>
         </div>
@@ -961,13 +728,13 @@
         </div>
         <div class="tile-size-matrix-cell">
           <div style="width:48px;height:48px;border-radius:var(--r2);background:linear-gradient(135deg,#c0392b,#ff6b9d);display:flex;align-items:flex-end;padding:4px">
-            <span style="font-size:7px;font-weight:800;color:#fff">Casual</span>
+            <span style="font-size:7px;font-weight:900;color:#fff">Casual</span>
           </div>
           <span class="tile-size-matrix-px">64&#xD7;64px &#xB7; r3 &#xB7; label 8px</span>
         </div>
         <div class="tile-size-matrix-cell">
           <div style="width:48px;height:48px;border-radius:var(--r2);background:linear-gradient(135deg,#00A859,#00d876);display:flex;align-items:flex-end;padding:4px">
-            <span style="font-size:7px;font-weight:800;color:#fff">Adventure</span>
+            <span style="font-size:7px;font-weight:900;color:#fff">Adventure</span>
           </div>
           <span class="tile-size-matrix-px">72&#xD7;72px &#xB7; r3 &#xB7; label 9px</span>
         </div>
@@ -1004,14 +771,14 @@
           <!-- Default -->
           <div class="tile-state-matrix-cell tile-state-matrix-cell--dark">
             <div style="width:68px;height:68px;border-radius:var(--r3);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:6px;border:1px solid var(--border-subtle);overflow:hidden">
-              <span style="font-size:9px;font-weight:800;color:#fff">Action</span>
+              <span style="font-size:9px;font-weight:900;color:#fff">Action</span>
             </div>
           </div>
 
           <!-- Hover -->
           <div class="tile-state-matrix-cell tile-state-matrix-cell--dark">
             <div style="width:68px;height:68px;border-radius:var(--r3);background:linear-gradient(135deg,#d44236,#f05547);display:flex;align-items:flex-end;padding:6px;border:1px solid var(--border);overflow:hidden;filter:brightness(1.08)">
-              <span style="font-size:9px;font-weight:800;color:#fff">Action</span>
+              <span style="font-size:9px;font-weight:900;color:#fff">Action</span>
             </div>
             <span class="tile-state-label">scale+brightness</span>
           </div>
@@ -1019,7 +786,7 @@
           <!-- Pressed -->
           <div class="tile-state-matrix-cell tile-state-matrix-cell--dark">
             <div style="width:68px;height:68px;border-radius:var(--r3);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:6px;border:1px solid var(--border-subtle);overflow:hidden;transform:scale(.95);opacity:.9">
-              <span style="font-size:9px;font-weight:800;color:#fff">Action</span>
+              <span style="font-size:9px;font-weight:900;color:#fff">Action</span>
             </div>
             <span class="tile-state-label">scale(.95)</span>
           </div>
@@ -1027,7 +794,7 @@
           <!-- Selected -->
           <div class="tile-state-matrix-cell tile-state-matrix-cell--dark">
             <div style="width:68px;height:68px;border-radius:var(--r3);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:6px;border:1.5px solid var(--jio);box-shadow:inset 0 0 0 1px rgba(0,168,89,.15);overflow:hidden">
-              <span style="font-size:9px;font-weight:800;color:#fff">Action</span>
+              <span style="font-size:9px;font-weight:900;color:#fff">Action</span>
             </div>
             <span class="tile-state-label" style="color:var(--jio)">1.5px jio border</span>
           </div>
@@ -1035,7 +802,7 @@
           <!-- Disabled -->
           <div class="tile-state-matrix-cell tile-state-matrix-cell--dark">
             <div style="width:68px;height:68px;border-radius:var(--r3);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:6px;border:1px solid var(--border-subtle);overflow:hidden;opacity:var(--state-disabled-opacity);cursor:not-allowed">
-              <span style="font-size:9px;font-weight:800;color:#fff">Action</span>
+              <span style="font-size:9px;font-weight:900;color:#fff">Action</span>
             </div>
             <span class="tile-state-label">opacity:.32</span>
           </div>
@@ -1043,7 +810,7 @@
           <!-- Locked -->
           <div class="tile-state-matrix-cell tile-state-matrix-cell--dark">
             <div style="position:relative;width:68px;height:68px;border-radius:var(--r3);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:6px;border:1px solid var(--border-subtle);overflow:hidden">
-              <span style="font-size:9px;font-weight:800;color:rgba(255,255,255,.3)">Action</span>
+              <span style="font-size:9px;font-weight:900;color:rgba(255,255,255,.3)">Action</span>
               <div style="position:absolute;inset:0;background:var(--overlay-locked);display:flex;align-items:center;justify-content:center">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="rgba(255,255,255,.7)" aria-hidden="true"><use href="../sprite.svg#ic_lock"></use></svg>
               </div>
@@ -1054,7 +821,7 @@
           <!-- TV Focus -->
           <div class="tile-state-matrix-cell tile-state-matrix-cell--dark">
             <div style="width:68px;height:68px;border-radius:var(--r3);background:linear-gradient(135deg,#c0392b,#e74c3c);display:flex;align-items:flex-end;padding:6px;border:1px solid var(--jio);overflow:hidden;box-shadow:var(--tv-focus-shadow);transform:scale(1.06)">
-              <span style="font-size:9px;font-weight:800;color:#fff">Action</span>
+              <span style="font-size:9px;font-weight:900;color:#fff">Action</span>
             </div>
             <span class="tile-state-label" style="color:var(--jio)">tv-focus-shadow</span>
           </div>
@@ -1164,6 +931,21 @@
   <!-- ===================================================
        11. ACCESSIBILITY
   =================================================== -->
+  <!-- MOTION -->
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-motion-table">
+      <thead><tr><th>Interaction</th><th>Easing</th><th>Duration</th><th>Property</th></tr></thead>
+      <tbody>
+        <tr><td>Select toggle</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>border-color, background, transform scale(1.04)</td></tr>
+        <tr><td>Deselect</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>border-color, background</td></tr>
+        <tr><td>Press</td><td><code>--ease-out</code></td><td><code>80ms</code></td><td>transform scale(0.95)</td></tr>
+        <tr><td>TV focus</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>transform scale(1.1), box-shadow</td></tr>
+        <tr><td>Appear (staggered)</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>opacity, transform translateY(8px → 0)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
   <section class="ds-section" id="accessibility">
     <h2 class="ds-section-title">Accessibility</h2>
     <p class="ds-section-desc">Genre tiles are interactive selection controls. Every tile needs a role, state, and label that works without visual context.</p>
@@ -1313,6 +1095,36 @@
   <!-- ===================================================
        13. CODE EXAMPLES
   =================================================== -->
+  <!-- API -->
+  <section class="ds-section" id="api">
+    <h2 class="ds-section-title">API</h2>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:0 0 12px;">CSS classes</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>.ds-genre-tile</code></td><td>Root — square tile, surface-1, border-subtle, r4</td></tr>
+        <tr><td><code>.ds-genre-tile--selected</code></td><td>Green border, jio-soft bg, green icon</td></tr>
+        <tr><td><code>.ds-genre-tile__icon</code></td><td>32px icon or illustration</td></tr>
+        <tr><td><code>.ds-genre-tile__label</code></td><td>12px 700 text, centered below icon</td></tr>
+        <tr><td><code>.ds-genre-tile--sm</code></td><td>Small variant — 72×72px</td></tr>
+        <tr><td><code>.ds-genre-tile--md</code></td><td>Default — 96×96px</td></tr>
+        <tr><td><code>.ds-genre-tile--lg</code></td><td>Large — 120×120px</td></tr>
+      </tbody>
+    </table>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 12px;">React props</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>label</code></td><td><span class="api-type">string</span></td><td><span class="api-default">required</span></td><td>Genre name displayed below icon</td></tr>
+        <tr><td><code>icon</code></td><td><span class="api-type">ReactNode</span></td><td><span class="api-default">required</span></td><td>Icon or illustration</td></tr>
+        <tr><td><code>selected</code></td><td><span class="api-type">boolean</span></td><td><span class="api-default">false</span></td><td>Active/selected state</td></tr>
+        <tr><td><code>onSelect</code></td><td><span class="api-type">() => void</span></td><td><span class="api-default">undefined</span></td><td>Toggle handler</td></tr>
+        <tr><td><code>size</code></td><td><span class="api-type">"sm" | "md" | "lg"</span></td><td><span class="api-default">"md"</span></td><td>Tile size preset</td></tr>
+        <tr><td><code>disabled</code></td><td><span class="api-type">boolean</span></td><td><span class="api-default">false</span></td><td>Disable interaction</td></tr>
+      </tbody>
+    </table>
+  </section>
+
   <section class="component-section" id="code-examples">
     <h2 class="ds-section-title">Code examples</h2>
     <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
@@ -1355,6 +1167,6 @@
 
 </main>
 <script src="../sprite-loader.js"></script>
-<script src="../shell.js"></script>
+<script src="../shell.js?v=2"></script>
 </body>
 </html>

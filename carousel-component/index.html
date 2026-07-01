@@ -4,18 +4,18 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     .carousel { position: relative; overflow: hidden; border-radius: var(--r5); }
-    .carousel-track { display: flex; transition: transform 320ms cubic-bezier(0.25,0.46,0.45,0.94); }
+    .carousel-track { display: flex; transition: transform var(--dur-slow) var(--ease-emphasized); }
     .carousel-slide { min-width: 100%; }
     .carousel-slide img,
     .carousel-slide .carousel-slide-inner { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; background: var(--surface-2); }
     .carousel-controls { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; align-items: center; }
-    .carousel-dot { width: 6px; height: 6px; border-radius: var(--pill); background: rgba(255,255,255,.35); border: none; cursor: pointer; padding: 0; transition: all 200ms cubic-bezier(0.25,0.46,0.45,0.94); flex-shrink: 0; }
+    .carousel-dot { width: 6px; height: 6px; border-radius: var(--pill); background: rgba(255,255,255,.35); border: none; cursor: pointer; padding: 0; transition: background var(--dur-default) var(--ease-out), width var(--dur-default) var(--ease-out); flex-shrink: 0; }
     .carousel-dot.is-active { width: 20px; background: var(--text); }
     .carousel-prev,
-    .carousel-next { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: var(--pill); background: rgba(0,0,0,.5); border: 1px solid var(--border-subtle); color: var(--text); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 150ms ease; font-size: 16px; line-height: 1; }
+    .carousel-next { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: var(--pill); background: rgba(0,0,0,.5); border: 1px solid var(--border-subtle); color: var(--text); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background var(--dur-fast) var(--ease-out); font-size: 16px; line-height: 1; }
     .carousel-prev { left: 12px; }
     .carousel-next { right: 12px; }
     .carousel-prev:hover, .carousel-next:hover { background: rgba(0,0,0,.75); }
@@ -33,13 +33,13 @@
     /* Thumbnail strip variant */
     .carousel-thumbs { display: flex; gap: 6px; margin-top: 8px; overflow-x: auto; scrollbar-width: none; }
     .carousel-thumbs::-webkit-scrollbar { display: none; }
-    .carousel-thumb { width: 64px; height: 40px; border-radius: 6px; background: var(--surface-2); flex-shrink: 0; cursor: pointer; border: 2px solid transparent; transition: border-color 150ms ease; overflow: hidden; position: relative; }
+    .carousel-thumb { width: 64px; height: 40px; border-radius: 6px; background: var(--surface-2); flex-shrink: 0; cursor: pointer; border: 2px solid transparent; transition: border-color var(--dur-fast) var(--ease-out); overflow: hidden; position: relative; }
     .carousel-thumb.is-active { border-color: var(--jio); }
     .carousel-thumb-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
 
     /* Fade transition variant */
     .carousel--fade .carousel-track { transition: none; }
-    .carousel--fade .carousel-slide { position: absolute; top: 0; left: 0; width: 100%; opacity: 0; transition: opacity 400ms ease; pointer-events: none; }
+    .carousel--fade .carousel-slide { position: absolute; top: 0; left: 0; width: 100%; opacity: 0; transition: opacity var(--dur-sheet) var(--ease-out); pointer-events: none; }
     .carousel--fade .carousel-slide.is-active { opacity: 1; position: relative; pointer-events: auto; }
 
     /* Slide color backgrounds (placeholder art) */
@@ -59,15 +59,14 @@
 
   <!-- 1. PAGE HEADER -->
   <header class="component-page-header">
-    <nav class="component-breadcrumb">
-      <span>JioGames DLS</span>
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <span class="component-breadcrumb-link">JioGames DLS</span>
       <span class="component-breadcrumb-sep">›</span>
       <span>Components</span>
       <span class="component-breadcrumb-sep">›</span>
-      <span>Carousel</span>
+      <span class="component-breadcrumb-current">Carousel</span>
     </nav>
-    <h1 class="component-page-title">Carousel</h1>
-    <p class="component-page-def">Standalone auto-advancing or manually controlled slide container for featured content, screenshots, and promotional banners. Different from game rails, which are scroll areas.</p>
+    <h1 class="component-page-title">Carousel</h1><p class="component-page-def">Standalone auto-advancing or manually controlled slide container for featured content, screenshots, and promotional banners. Different from game rails, which are scroll areas.</p>
     <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
       <div class="component-platforms">
         <span class="component-platform component-platform--mobile">
@@ -79,7 +78,8 @@
         <span class="component-platform component-platform--tv">
           <span class="component-platform-dot"></span>TV
         </span>
-      </div>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBDYXJvdXNlbCDigJQgSmlvR2FtZXMgRExTIHNwZWMKCj4gU291cmNlOiBgY2Fyb3VzZWwtY29tcG9uZW50L2luZGV4Lmh0bWxgIGluIHRoZSBKaW9HYW1lcyBEZXNpZ24gU3lzdGVtLgo+IFRoaXMgc3BlYyBpcyBnZW5lcmF0ZWQgdmVyYmF0aW0gZnJvbSB0aGUgcGFnZSDigJQgZG8gbm90IGludmVudCB2YWx1ZXMgbm90IGxpc3RlZCBoZXJlLgoKKipQYXRoOioqIEppb0dhbWVzIERMUyDigLogQ29tcG9uZW50cyDigLogQ2Fyb3VzZWwKCi0tLQoKU3RhbmRhbG9uZSBhdXRvLWFkdmFuY2luZyBvciBtYW51YWxseSBjb250cm9sbGVkIHNsaWRlIGNvbnRhaW5lciBmb3IgZmVhdHVyZWQgY29udGVudCwgc2NyZWVuc2hvdHMsIGFuZCBwcm9tb3Rpb25hbCBiYW5uZXJzLiBEaWZmZXJlbnQgZnJvbSBnYW1lIHJhaWxzLCB3aGljaCBhcmUgc2Nyb2xsIGFyZWFzLgoKQ2Fyb3VzZWwgwrcgc2xpZGUgMiBvZiA0IMK3IGRvdCBpbmRpY2F0b3IgwrcgcHJldi9uZXh0IGFycm93cwoKQ2Fyb3VzZWwgaXMgYSBzdHJ1Y3R1cmVkIHNsaWRlIGNvbnRhaW5lciB3aXRoIGV4cGxpY2l0IG5hdmlnYXRpb24gY29udHJvbHMuIEl0IGRpZmZlcnMgZnJvbSBhIGdhbWUgcmFpbCAod2hpY2ggaXMgYSBob3Jpem9udGFsbHkgc2Nyb2xsaW5nIGxpc3Qgb2YgY2FyZHMpIGluIHRoYXQgQ2Fyb3VzZWwgcHJlc2VudHMgb25lIGZ1bGwtd2lkdGggc2xpZGUgYXQgYSB0aW1lIGFuZCBpcyBkZXNpZ25lZCBmb3IgZmVhdHVyZWQgb3IgcHJvbW90aW9uYWwgY29udGVudC4gRWFjaCBzbGlkZSBoYXMgYSBkZWZpbmVkIGlkZW50aXR5IOKAlCBzY3JlZW5zaG90LCBiYW5uZXIsIG9yIGZlYXR1cmUgYW5ub3VuY2VtZW50IOKAlCBhbmQgdGhlIHVzZXIgbmF2aWdhdGVzIGJldHdlZW4gdGhlbSBkZWxpYmVyYXRlbHkgb3IgdGhyb3VnaCBhdXRvLWFkdmFuY2UuCgotICoqQXV0by1hZHZhbmNlKiog4oCUIGN5Y2xlcyBzbGlkZXMgb24gYSAzcyBpbnRlcnZhbDsgcGF1c2VzIG9uIGhvdmVyIG9yIGZvY3VzCi0gKipNYW51YWwqKiDigJQgcHJldi9uZXh0IGFycm93cyBwbHVzIGRvdCBpbmRpY2F0b3JzOyBubyBhdXRvLWFkdmFuY2UKLSAqKlNjcmVlbnNob3QgZ2FsbGVyeSoqIOKAlCB0aHVtYm5haWwgc3RyaXAgYmVsb3cgZm9yIGRpcmVjdCBzbGlkZSBzZWxlY3Rpb24KLSAqKkZ1bGwtYmxlZWQqKiDigJQgbm8gYm9yZGVyLXJhZGl1cywgdXNlZCBpbnNpZGUgYSBjYXJkIG9yIHBhbmVsIHRoYXQgcHJvdmlkZXMgaXRzIG93biBmcmFtZQoKLSBBbHdheXMgc2hvdyBkb3RzIG9yIGEgc2xpZGUgY291bnRlciDigJQgbmV2ZXIgdW5saW1pdGVkIHNsaWRlcyB3aXRoIG5vIHBvc2l0aW9uIGluZGljYXRvcgotIFBhdXNlIGF1dG8tYWR2YW5jZSBvbiBob3ZlciwgZm9jdXMsIGFuZCB3aGVuIHRoZSBwYWdlIGlzIG5vdCB2aXNpYmxlIChQYWdlIFZpc2liaWxpdHkgQVBJKQotIENhcCBhdCA4IHNsaWRlcyBtYXhpbXVtIOKAlCBtb3JlIHRoYW4gOCBtYWtlcyB0aGUgZG90IHJvdyBjb2duaXRpdmVseSBjb3N0bHkKLSBTaG93IHRodW1ibmFpbCBzdHJpcCBiZWxvdyBmb3Igc2NyZWVuc2hvdCBnYWxsZXJpZXMgc28gdXNlcnMgY2FuIGp1bXAgdG8gYW55IHNsaWRlCi0gSGlkZSBwcmV2IGJ1dHRvbiBvbiBmaXJzdCBzbGlkZTsgaGlkZSBuZXh0IGJ1dHRvbiBvbiBsYXN0IHNsaWRlCgotIFVzZSBDYXJvdXNlbCBmb3IgYSBzY3JvbGxhYmxlIGxpc3Qgb2YgZ2FtZSBjYXJkcyDigJQgdXNlIGEgU2Nyb2xsIEFyZWEgcmFpbCBpbnN0ZWFkCi0gTG9vcCBpbmZpbml0ZWx5IHdpdGhvdXQgbWFraW5nIHRoYXQgYmVoYXZpb3VyIGV4cGxpY2l0IHRvIHRoZSB1c2VyCi0gQXV0by1hZHZhbmNlIGZhc3RlciB0aGFuIDNzIOKAlCBjYXVzZXMgbW90aW9uIHNpY2tuZXNzIGFuZCBwcmV2ZW50cyByZWFkaW5nIGNvbnRlbnQKLSBQbGFjZSBDYXJvdXNlbCBpbnNpZGUgYW5vdGhlciBDYXJvdXNlbCDigJQgbmVzdGVkIHNsaWRlIGNvbnRhaW5lcnMgY3JlYXRlIGludGVyYWN0aW9uIGNvbmZsaWN0Ci0gU2hvdyBtb3JlIHRoYW4gOCBkb3RzIOKAlCBhdCB0aGF0IGNvdW50IHVzZSBhIHNsaWRlIGNvdW50ZXIgKDIgLyA0KSBpbnN0ZWFkCgoxLiAxIENhcm91c2VsIHRyYWNrIFJlcXVpcmVkIEZsZXggcm93IG9mIHNsaWRlcy4gdHJhbnNmb3JtOiB0cmFuc2xhdGVYKCkgZHJpdmVzIHRoZSBzbGlkZSB0cmFuc2l0aW9uLiBvdmVyZmxvdzpoaWRkZW4gb24gdGhlIG91dGVyIC5jYXJvdXNlbCBjbGlwcyBub24tYWN0aXZlIHNsaWRlcy4gYGRpc3BsYXk6ZmxleDsgdHJhbnNpdGlvbjp0cmFuc2Zvcm0gMzIwbXMgZWFzZS1vdXRgCjIuIDIgRG90IGluZGljYXRvcnMgUmVxdWlyZWQgQWN0aXZlIGRvdCBzdHJldGNoZXMgdG8gMjBweCB3aWR0aCAocGlsbCBwaWxsIHNoYXBlKSB0byBjb21tdW5pY2F0ZSBjdXJyZW50IHBvc2l0aW9uLiBJbmFjdGl2ZSBkb3RzIGFyZSA2w5c2cHggY2lyY2xlcyBhdCAzNSUgb3BhY2l0eS4gTWF4IDggZG90cy4gYHdpZHRoOjZweCDihpIgMjBweCBvbiBhY3RpdmU7IGJhY2tncm91bmQ6cmdiYSgyNTUsMjU1LDI1NSwuMzUpIOKGkiB2YXIoLS10ZXh0KWAKMy4gMyBTbGlkZSBjb3VudGVyIE9wdGlvbmFsIFRleHQgbGFiZWwgIjIgLyA0IiBpbiB0b3AtcmlnaHQgY29ybmVyLiBSZXF1aXJlZCB3aGVuIHNsaWRlIGNvdW50IGV4Y2VlZHMgOC4gVXBkYXRlcyB3aXRoIGFyaWEtbGl2ZT0icG9saXRlIiBzbyBzY3JlZW4gcmVhZGVycyBhbm5vdW5jZSBwb3NpdGlvbiBjaGFuZ2VzLiBgYXJpYS1saXZlPSJwb2xpdGUiIGFyaWEtYXRvbWljPSJ0cnVlImAKNC4gNCBTbGlkZSBjb250ZW50IG92ZXJsYXkgT3B0aW9uYWwgR3JhZGllbnQgc2NyaW0gZnJvbSBib3R0b20gY292ZXJzIHRoZSBsb3dlciA0MCUgb2YgdGhlIHNsaWRlLiBDb250ZW50IChsYWJlbCArIHRpdGxlKSBzaXRzIGluc2lkZSB0aGlzIHpvbmUuIE5ldmVyIG92ZXJsYXkgdGV4dCBvbiB0aGUgdXBwZXIgNjAlIOKAlCB0aGF0IGFyZWEgaXMgcHVyZSBhcnQuIGBiYWNrZ3JvdW5kOiBsaW5lYXItZ3JhZGllbnQodG8gdG9wLCByZ2JhKDAsMCwwLC43KSwgdHJhbnNwYXJlbnQgNjAlKWAKNS4gNSBQcmV2IC8gTmV4dCBidXR0b25zIE9wdGlvbmFsIFNlbWktdHJhbnNwYXJlbnQgcGlsbCBidXR0b25zIG9uIGVhY2ggc2lkZS4gSGlkZGVuIChvcGFjaXR5OjApIG9uIGZpcnN0L2xhc3Qgc2xpZGUuIFdlYiBvbmx5IOKAlCBtb2JpbGUgdXNlcyBzd2lwZTsgVFYgdXNlcyBELXBhZCBsZWZ0L3JpZ2h0LiBgYmFja2dyb3VuZDpyZ2JhKDAsMCwwLC41KTsgd2lkdGg6NDBweDsgaGVpZ2h0OjQwcHg7IGJvcmRlci1yYWRpdXM6dmFyKC0tcGlsbClgCgojIyBWYXJpYW50cwoKQWxsIHZhcmlhbnRzIHNoYXJlIHRoZSBzYW1lIC5jYXJvdXNlbCBiYXNlLiBCZWhhdmlvdXIgYW5kIGFkZGl0aW9uYWwgZWxlbWVudHMgKHRodW1icywgYXV0by1hZHZhbmNlKSBhcmUgbGF5ZXJlZCBvbiB0b3AuCgojIyBTaXplcwoKQ2Fyb3VzZWwgd2lkdGggaXMgYWx3YXlzIDEwMCUgb2YgaXRzIGNvbnRhaW5lci4gQXNwZWN0IHJhdGlvIGNvbnRyb2xzIHRoZSBoZWlnaHQuIENvbnRyb2xzIHNjYWxlIGF1dG9tYXRpY2FsbHkuCgp8IEFzcGVjdCByYXRpbyB8IENsYXNzIG1vZGlmaWVyIHwgVXNlIGNhc2UgfAp8LS0tfC0tLXwtLS18CnwgMTY6OSAoZGVmYXVsdCkgfCBub25lIG5lZWRlZCB8IEhlcm8gYmFubmVycywgZ2FtZSBzY3JlZW5zaG90cywgcHJvbW90aW9uYWwgc2xpZGVzIHwKfCA0OjMgfCBgLmNhcm91c2VsLS00LTNgIHwgT2xkZXIgZ2FtZSBzY3JlZW5zaG90cywgc3F1YXJlLWlzaCBwcm9tbyBhcnQgfAp8IDIxOjkgKGNpbmVtYSkgfCBgLmNhcm91c2VsLS0yMS05YCB8IFdpZGUgY2luZW1hdGljIGJhbm5lcnMsIGltbWVyc2l2ZSBmZWF0dXJlIHNob3djYXNlcyB8CgojIyBTdGF0ZXMKCkNhcm91c2VsIHN0YXRlIGFmZmVjdHMgYXV0by1hZHZhbmNlIGJlaGF2aW91ciBhbmQgYnV0dG9uIHZpc2liaWxpdHkuCgp8IFN0YXRlIHwgVHJpZ2dlciB8IEJlaGF2aW91ciB8CnwtLS18LS0tfC0tLXwKfCBBdXRvLXBsYXlpbmcgfCBEZWZhdWx0IG9uIG1vdW50IChhdXRvLWFkdmFuY2UgdmFyaWFudCkgfCBBZHZhbmNlcyBldmVyeSAzcy4gUHJldi9uZXh0IGJ1dHRvbnMgdmlzaWJsZS4gRG90cyB1cGRhdGUuIENvdW50ZXIgdXBkYXRlcyB3aXRoIGFyaWEtbGl2ZS4gfAp8IFBhdXNlZCB8IFVzZXIgaG92ZXJzIG9yIGZvY3VzZXMgYW55IGVsZW1lbnQgaW5zaWRlIGNhcm91c2VsIHwgQXV0by1hZHZhbmNlIHRpbWVyIHN1c3BlbmRlZC4gUmVzdW1lcyBvbiBtb3VzZWxlYXZlIC8gYmx1ciBvdXRzaWRlIGNhcm91c2VsLiB8CnwgTWFudWFsIG5hdmlnYXRpb24gfCBVc2VyIGNsaWNrcyBwcmV2L25leHQgb3IgYSBkb3QgfCBUcmFuc2l0aW9ucyB0byB0YXJnZXQgc2xpZGUgaW5zdGFudGx5LiBBdXRvLWFkdmFuY2UgcmVzZXRzIGl0cyAzcyB0aW1lciBhZnRlciBpbnRlcmFjdGlvbi4gfAp8IEZpcnN0IHNsaWRlIHwgQ3VycmVudCBpbmRleCA9IDAgfCBQcmV2IGJ1dHRvbiBvcGFjaXR5OjAsIHBvaW50ZXItZXZlbnRzOm5vbmUuIE5vdCByZW1vdmVkIGZyb20gRE9NIOKAlCBzY3JlZW4gcmVhZGVycyBza2lwIGl0IHZpYSBkaXNhYmxlZC4gfAp8IExhc3Qgc2xpZGUgfCBDdXJyZW50IGluZGV4ID0gdG90YWwg4oiSIDEgfCBOZXh0IGJ1dHRvbiBvcGFjaXR5OjAsIHBvaW50ZXItZXZlbnRzOm5vbmUuIFNhbWUgcGF0dGVybiBhcyBmaXJzdCBzbGlkZS4gfAoKIyMgQ29udGVudCBndWlkYW5jZQoKLSAz4oCTNSBzbGlkZXMgaXMgdGhlIHN3ZWV0IHNwb3Qg4oCUIGVub3VnaCB2YXJpZXR5IHdpdGhvdXQgb3ZlcndoZWxtaW5nIHRoZSBkb3Qgcm93Ci0gTWF4aW11bSA4IHNsaWRlcyBiZWZvcmUgdGhlIGRvdCByb3cgYmVjb21lcyBjb2duaXRpdmVseSBjb3N0bHkKLSBBYm92ZSA4IHNsaWRlcywgcmVwbGFjZSBkb3RzIHdpdGggYSBudW1lcmljIGNvdW50ZXIgKCIyIC8gMTIiKQotIE5ldmVyIHNob3cgYSBjYXJvdXNlbCB3aXRoIG9ubHkgMSBzbGlkZSDigJQgdXNlIGEgc3RhdGljIGhlcm8gaW1hZ2UgaW5zdGVhZAoKLSBLZWVwIHNsaWRlIHRpdGxlcyB0byAzIHdvcmRzIG1heGltdW0g4oCUIHRoZXkgYXBwZWFyIG92ZXIgYXJ0d29yayBpbiBhIGZpeGVkIGJhbmQKLSBMYWJlbCBsaW5lIChnZW5yZSwgdGFnKSBtYXhpbXVtIDIwIGNoYXJhY3RlcnMKLSBFbnN1cmUgdGV4dCBjb250cmFzdCBhZ2FpbnN0IHRoZSBncmFkaWVudCBzY3JpbSDigJQgYWx3YXlzIHdoaXRlIG9yIC0tdGV4dCBvbiBkYXJrIG92ZXJsYXkKLSBEbyBub3QgcGxhY2UgaW50ZXJhY3RpdmUgZWxlbWVudHMgKGJ1dHRvbnMpIGluc2lkZSBhIHNsaWRlIOKAlCB0aGUgd2hvbGUgc2xpZGUgY2FuIGJlIGEgdGFwIHRhcmdldAoKIyMgUGxhdGZvcm0gY29uc2lkZXJhdGlvbnMKCi0gU3dpcGUgbGVmdC9yaWdodCB0byBuYXZpZ2F0ZSDigJQgbm8gcHJldi9uZXh0IGJ1dHRvbnMgbmVlZGVkCi0gU2hvdyBkb3RzIG9ubHkgKG5vIGFycm93IGJ1dHRvbnMpIOKAlCB0aGV5IGFyZSB0b28gc21hbGwgdG8gdGFwIHJlbGlhYmx5Ci0gQXV0by1hZHZhbmNlIGlzIGFjY2VwdGFibGUgYnV0IHBhdXNlIG9uIGFueSB0b3VjaCBpbnRlcmFjdGlvbgotIFVzZSBgdG91Y2gtYWN0aW9uOiBwYW4teWAgb24gdGhlIGNhcm91c2VsIHNvIHZlcnRpY2FsIHNjcm9sbCBzdGlsbCB3b3JrcwotIEVuc3VyZSBlYWNoIHNsaWRlIGlzIGEgbWluaW11bSA0NHB4IHRhcCB0YXJnZXQgaWYgdGhlIHdob2xlIHNsaWRlIGlzIGludGVyYWN0aXZlCgotIFNob3cgcHJldi9uZXh0IGJ1dHRvbnMgKyBkb3RzICsgb3B0aW9uYWwgYXV0by1hZHZhbmNlCi0gUGF1c2UgYXV0by1hZHZhbmNlIG9uIGhvdmVyIGFuZCB3aGVuIGRvY3VtZW50LmhpZGRlbiBpcyB0cnVlCi0gU3VwcG9ydCBrZXlib2FyZDogbGVmdC9yaWdodCBhcnJvdyBrZXlzIG5hdmlnYXRlIHNsaWRlcyB3aGVuIGNhcm91c2VsIGlzIGZvY3VzZWQKLSBUaHVtYm5haWwgc3RyaXAgaXMgd2ViLXByaW1hcnkg4oCUIGVub3VnaCBzY3JlZW4gcmVhbCBlc3RhdGUgZm9yIHRoZSBleHRyYSByb3cKLSBBbGwgc2xpZGUgYW5kIGNvbnRyb2wgZWxlbWVudHMgbXVzdCBiZSByZWFjaGFibGUgdmlhIFRhYiBrZXkKCi0gRC1wYWQgbGVmdC9yaWdodCBuYXZpZ2F0ZXMgYmV0d2VlbiBzbGlkZXMKLSBEb3RzIG11c3QgYmUgbGFyZ2Ug4oCUIG1pbmltdW0gMTJweCBkaWFtZXRlciBmb3IgM20gbGVnaWJpbGl0eQotIEFjdGl2ZSBkb3Qgc2hvdWxkIGJlIGNsZWFybHkgZGlzdGluY3Qg4oCUIHVzZSBhIGxvbmdlciBwaWxsICgzMnB4KSBub3QganVzdCBjb2xvciBjaGFuZ2UKLSBObyBhdXRvLWFkdmFuY2Ugb24gVFYg4oCUIHRoZSByZW1vdGUgaXMgc2xvdzsgdXNlcnMgbmVlZCBjb250cm9sCi0gTm8gdGh1bWJuYWlsIHN0cmlwIOKAlCBpdCBpcyB0b28gc21hbGwgYXQgVFYgc2NhbGU7IHVzZSBsYXJnZSBsYWJlbGVkIGRvdHMKCiMjIEFjY2Vzc2liaWxpdHkKCnwgRWxlbWVudCB8IEF0dHJpYnV0ZSB8IEd1aWRhbmNlIHwKfC0tLXwtLS18LS0tfAp8IENhcm91c2VsIHdyYXBwZXIgfCBgcm9sZT0icmVnaW9uIiBhcmlhLXJvbGVkZXNjcmlwdGlvbj0iY2Fyb3VzZWwiIGFyaWEtbGFiZWxgIHwgQW5ub3VuY2VzIHRvIHNjcmVlbiByZWFkZXJzIHRoYXQgdGhpcyBpcyBhIGNhcm91c2VsIG5hbWVkIGJ5IGFyaWEtbGFiZWwgKGUuZy4gIkdhbWUgc2NyZWVuc2hvdHMiKS4gfAp8IEVhY2ggc2xpZGUgfCBgcm9sZT0iZ3JvdXAiIGFyaWEtbGFiZWw9IlNsaWRlIDEgb2YgNCJgIHwgR3JvdXBzIHNsaWRlIGNvbnRlbnQuIE5vbi1hY3RpdmUgc2xpZGVzIGdldCBhcmlhLWhpZGRlbj0idHJ1ZSIgc28gdGhlaXIgY29udGVudCBpcyBza2lwcGVkLiB8CnwgUHJldiAvIE5leHQgYnV0dG9ucyB8IGBhcmlhLWxhYmVsPSJQcmV2aW91cyBzbGlkZSJgIHwgSWNvbi1vbmx5IGJ1dHRvbnMgbXVzdCBoYXZlIGRlc2NyaXB0aXZlIGFyaWEtbGFiZWwuIE5ldmVyIHJlbHkgb24gdGhlIGFycm93IGNoYXJhY3RlciBhbG9uZS4gfAp8IERvdCBidXR0b25zIHwgYHJvbGU9InRhYiIgYXJpYS1sYWJlbD0iU2xpZGUgMiIgYXJpYS1zZWxlY3RlZGAgfCBUcmVhdCBkb3RzIGFzIGEgdGFibGlzdC4gQWN0aXZlIGRvdDogYXJpYS1zZWxlY3RlZD0idHJ1ZSIuIEluYWN0aXZlOiBhcmlhLXNlbGVjdGVkPSJmYWxzZSIuIHwKfCBTbGlkZSBjb3VudGVyIHwgYGFyaWEtbGl2ZT0icG9saXRlIiBhcmlhLWF0b21pYz0idHJ1ZSJgIHwgU2NyZWVuIHJlYWRlcnMgYW5ub3VuY2UgcG9zaXRpb24gdXBkYXRlcyB3aXRob3V0IGludGVycnVwdGluZyBvbmdvaW5nIHNwZWVjaC4gfAp8IEF1dG8tYWR2YW5jZSB8IFBhdXNlIG9uIGZvY3VzIHwgQW5pbWF0aW9uIG11c3QgcGF1c2Ugd2hlbiBhbnkgZWxlbWVudCBpbnNpZGUgdGhlIGNhcm91c2VsIHJlY2VpdmVzIGtleWJvYXJkIGZvY3VzIChXQ0FHIDIuMSAyLjIuMikuIHwKCiMjIFJlbGF0ZWQgdG9rZW5zCgp8IFRva2VuIHwgVmFsdWUgfCBVc2FnZSB8CnwtLS18LS0tfC0tLXwKfCBgLS1yNWAgfCBg4oCUYCB8IENhcm91c2VsIGNvbnRhaW5lciBib3JkZXItcmFkaXVzIChkZWZhdWx0KSB8CnwgYC0tcGlsbGAgfCBgMTAwcHhgIHwgRG90IGJvcmRlci1yYWRpdXMgYW5kIHByZXYvbmV4dCBidXR0b24gc2hhcGUgfAp8IGAtLXRleHRgIHwgYCNmNGYyZWVgIHwgQWN0aXZlIGRvdCBmaWxsIGNvbG9yIHwKfCBgLS1ib3JkZXItc3VidGxlYCB8IGByZ2JhKDI1NSwyNTUsMjU1LC4wOClgIHwgUHJldi9uZXh0IGJ1dHRvbiBib3JkZXIgfAp8IGAtLXN1cmZhY2UtMmAgfCBg4oCUYCB8IFNsaWRlIHBsYWNlaG9sZGVyIGJhY2tncm91bmQgd2hlbiBubyBpbWFnZSBpcyBsb2FkZWQgfAp8IGAtLWR1ci1zbG93YCB8IGAzMjBtc2AgfCBTbGlkZSB0cmFuc2l0aW9uIGR1cmF0aW9uIHwKfCBgLS1kdXItZmFzdGAgfCBg4oCUYCB8IERvdCBleHBhbnNpb24gYW5kIGJ1dHRvbiBiYWNrZ3JvdW5kIHRyYW5zaXRpb24gfAoKIyMgV2hlbiB0byB1c2UKClVzZSB3aGVuCgotIEZlYXR1cmVkIGdhbWUgaGlnaGxpZ2h0cyBvbiB0aGUgaG9tZSBzY3JlZW4gaGVybyBhcmVhCi0gT25ib2FyZGluZyBzdGVwcyBvciBmZWF0dXJlIGludHJvZHVjdGlvbiBzbGlkZXMKLSBJbWFnZSBnYWxsZXJpZXMgb24gZ2FtZSBkZXRhaWwgcGFnZXMKLSBIb3Jpem9udGFsIHNjcm9sbGluZyB3aGVuIGl0ZW1zIG92ZXJmbG93IHRoZSB2aWV3cG9ydAoKRG9uJ3QgdXNlIHdoZW4KCi0gUHJpbWFyeSBuYXZpZ2F0aW9uIOKAlCBjYXJvdXNlbHMgaGlkZSBjb250ZW50IGZyb20gdXNlcnMKLSBNb3JlIHRoYW4gNy04IHNsaWRlcyB3aXRob3V0IGNsZWFyIG5hdmlnYXRpb24gYWZmb3JkYW5jZQotIEF1dG8tYWR2YW5jaW5nIGNhcm91c2VscyB3aXRoIGNvbnRlbnQgdXNlcnMgbmVlZCB0byByZWFkCi0gTmVzdGVkIGNhcm91c2VscwoKIyMgTW90aW9uCgp8IEludGVyYWN0aW9uIHwgRWFzaW5nIHwgRHVyYXRpb24gfCBQcm9wZXJ0eSB8CnwtLS18LS0tfC0tLXwtLS18CnwgU3dpcGUgc2xpZGUgfCBgLS1lYXNlLW91dGAgfCBgLS1kdXItYmFzZWAgfCB0cmFuc2Zvcm0gdHJhbnNsYXRlWCB8CnwgQXV0by1hZHZhbmNlIHwgYC0tZWFzZS1pbi1vdXRgIHwgYC0tZHVyLXNsb3dgIHwgdHJhbnNmb3JtIHRyYW5zbGF0ZVggfAp8IERvdCBpbmRpY2F0b3IgfCBgLS1lYXNlLW91dGAgfCBgLS1kdXItZmFzdGAgfCB3aWR0aCAoYWN0aXZlIGRvdCBleHBhbmRzKSB8CnwgQXJyb3cgYnV0dG9uIHByZXNzIHwgYC0tZWFzZS1vdXRgIHwgYDgwbXNgIHwgdHJhbnNmb3JtIHNjYWxlKDAuOTIpIHwKfCBGYWRlIHRyYW5zaXRpb24gKGFsdCkgfCBgLS1lYXNlLW91dGAgfCBgLS1kdXItYmFzZWAgfCBvcGFjaXR5IHwKCiMjIEFQSQoKIyMjIENTUyBjbGFzc2VzCgp8IENsYXNzIHwgRGVzY3JpcHRpb24gfAp8LS0tfC0tLXwKfCBgLmRzLWNhcm91c2VsYCB8IFJvb3Qg4oCUIG92ZXJmbG93IGhpZGRlbiB3cmFwcGVyIHwKfCBgLmRzLWNhcm91c2VsX190cmFja2AgfCBGbGV4IHJvdyBvZiBzbGlkZXMg4oCUIHRyYW5zZm9ybSBkcml2ZW4gfAp8IGAuZHMtY2Fyb3VzZWxfX3NsaWRlYCB8IFNpbmdsZSBzbGlkZSDigJQgZmxleC1zaHJpbms6MCwgZnVsbCB3aWR0aCB8CnwgYC5kcy1jYXJvdXNlbF9fZG90c2AgfCBEb3QgaW5kaWNhdG9yIHJvdyDigJQgY2VudGVyZWQgYmVsb3cgfAp8IGAuZHMtY2Fyb3VzZWxfX2RvdGAgfCBJbmRpdmlkdWFsIGRvdCDigJQgNnB4IGNpcmNsZSB8CnwgYC5kcy1jYXJvdXNlbF9fZG90LS1hY3RpdmVgIHwgQWN0aXZlIGRvdCDigJQgZXhwYW5kcyB0byAxOHB4IHdpZHRoIHwKfCBgLmRzLWNhcm91c2VsX19hcnJvd2AgfCBQcmV2aW91cy9uZXh0IGJ1dHRvbiB8CgojIyMgUmVhY3QgcHJvcHMKCnwgUHJvcCB8IFR5cGUgfCBEZWZhdWx0IHwgRGVzY3JpcHRpb24gfAp8LS0tfC0tLXwtLS18LS0tfAp8IGBhdXRvUGxheWAgfCBib29sZWFuIHwgZmFsc2UgfCBFbmFibGUgYXV0by1hZHZhbmNlIHwKfCBgaW50ZXJ2YWxgIHwgbnVtYmVyIHwgNDAwMCB8IEF1dG8tYWR2YW5jZSBkZWxheSBpbiBtcyB8CnwgYGxvb3BgIHwgYm9vbGVhbiB8IHRydWUgfCBXcmFwIGFyb3VuZCBhdCBzdGFydC9lbmQgfAp8IGBzaG93RG90c2AgfCBib29sZWFuIHwgdHJ1ZSB8IFNob3cgZG90IGluZGljYXRvcnMgfAp8IGBzaG93QXJyb3dzYCB8IGJvb2xlYW4gfCBmYWxzZSB8IFNob3cgcHJldi9uZXh0IGFycm93IGJ1dHRvbnMgfAp8IGBpbmRleGAgfCBudW1iZXIgfCB1bmRlZmluZWQgfCBDb250cm9sbGVkIGN1cnJlbnQgc2xpZGUgaW5kZXggfAp8IGBvbkluZGV4Q2hhbmdlYCB8IChpOiBudW1iZXIpID0+IHZvaWQgfCB1bmRlZmluZWQgfCBGaXJlZCBvbiBzbGlkZSBjaGFuZ2UgfAoKIyMgQ29kZSBleGFtcGxlcwoKYGBgYGh0bWwKPGRpdiBjbGFzcz0iY2Fyb3VzZWwiCiAgICAgcm9sZT0icmVnaW9uIgogICAgIGFyaWEtbGFiZWw9IkdhbWUgc2NyZWVuc2hvdHMiCiAgICAgYXJpYS1yb2xlZGVzY3JpcHRpb249ImNhcm91c2VsIj4KCiAgPGRpdiBjbGFzcz0iY2Fyb3VzZWwtdHJhY2siIGlkPSJ0cmFjayI+CiAgICA8ZGl2IGNsYXNzPSJjYXJvdXNlbC1zbGlkZSIgcm9sZT0iZ3JvdXAiIGFyaWEtbGFiZWw9IlNsaWRlIDEgb2YgMyI+CiAgICAgIDxkaXYgY2xhc3M9ImNhcm91c2VsLXNsaWRlLWlubmVyIj4KICAgICAgICA8IS0tIHNsaWRlIGNvbnRlbnQgLS0+CiAgICAgIDwvZGl2PgogICAgPC9kaXY+CiAgICA8IS0tIG1vcmUgc2xpZGVzIC0tPgogIDwvZGl2PgoKICA8c3BhbiBjbGFzcz0iY2Fyb3VzZWwtY291bnQiCiAgICAgICAgYXJpYS1saXZlPSJwb2xpdGUiCiAgICAgICAgYXJpYS1hdG9taWM9InRydWUiPjEgLyAzPC9zcGFuPgoKICA8YnV0dG9uIGNsYXNzPSJjYXJvdXNlbC1wcmV2IiBhcmlhLWxhYmVsPSJQcmV2aW91cyBzbGlkZSIgZGlzYWJsZWQ+JiM4NTkyOzwvYnV0dG9uPgogIDxidXR0b24gY2xhc3M9ImNhcm91c2VsLW5leHQiIGFyaWEtbGFiZWw9Ik5leHQgc2xpZGUiPiYjODU5NDs8L2J1dHRvbj4KCiAgPGRpdiBjbGFzcz0iY2Fyb3VzZWwtY29udHJvbHMiIHJvbGU9InRhYmxpc3QiIGFyaWEtbGFiZWw9IlNsaWRlcyI+CiAgICA8YnV0dG9uIGNsYXNzPSJjYXJvdXNlbC1kb3QgaXMtYWN0aXZlIgogICAgICAgICAgICByb2xlPSJ0YWIiCiAgICAgICAgICAgIGFyaWEtbGFiZWw9IlNsaWRlIDEiCiAgICAgICAgICAgIGFyaWEtc2VsZWN0ZWQ9InRydWUiPjwvYnV0dG9uPgogICAgPGJ1dHRvbiBjbGFzcz0iY2Fyb3VzZWwtZG90IgogICAgICAgICAgICByb2xlPSJ0YWIiCiAgICAgICAgICAgIGFyaWEtbGFiZWw9IlNsaWRlIDIiCiAgICAgICAgICAgIGFyaWEtc2VsZWN0ZWQ9ImZhbHNlIj48L2J1dHRvbj4KICAgIDxidXR0b24gY2xhc3M9ImNhcm91c2VsLWRvdCIKICAgICAgICAgICAgcm9sZT0idGFiIgogICAgICAgICAgICBhcmlhLWxhYmVsPSJTbGlkZSAzIgogICAgICAgICAgICBhcmlhLXNlbGVjdGVkPSJmYWxzZSI+PC9idXR0b24+CiAgPC9kaXY+CjwvZGl2PgpgYGBgCgpgYGBgCnZhciBjYXJvdXNlbCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJy5jYXJvdXNlbCcpOwp2YXIgdHJhY2sgICAgPSBjYXJvdXNlbC5xdWVyeVNlbGVjdG9yKCcuY2Fyb3VzZWwtdHJhY2snKTsKdmFyIGRvdHMgICAgID0gY2Fyb3VzZWwucXVlcnlTZWxlY3RvckFsbCgnLmNhcm91c2VsLWRvdCcpOwp2YXIgY3VycmVudCAgPSAwOwp2YXIgdG90YWwgICAgPSBkb3RzLmxlbmd0aDsKdmFyIHRpbWVyICAgID0gbnVsbDsKCmZ1bmN0aW9uIGdvVG8oaSkgewogIGN1cnJlbnQgPSAoaSArIHRvdGFsKSAlIHRvdGFsOwogIHRyYWNrLnN0eWxlLnRyYW5zZm9ybSA9ICd0cmFuc2xhdGVYKC0nICsgKGN1cnJlbnQgKiAxMDApICsgJyUpJzsKICBkb3RzLmZvckVhY2goZnVuY3Rpb24oZCwgaWR4KSB7CiAgICBkLmNsYXNzTGlzdC50b2dnbGUoJ2lzLWFjdGl2ZScsIGlkeCA9PT0gY3VycmVudCk7CiAgICBkLnNldEF0dHJpYnV0ZSgnYXJpYS1zZWxlY3RlZCcsIGlkeCA9PT0gY3VycmVudCA/ICd0cnVlJyA6ICdmYWxzZScpOwogIH0pOwp9CgpmdW5jdGlvbiBzdGFydCgpIHsKICB0aW1lciA9IHNldEludGVydmFsKGZ1bmN0aW9uKCkgeyBnb1RvKGN1cnJlbnQgKyAxKTsgfSwgMzAwMCk7Cn0KCmZ1bmN0aW9uIHN0b3AoKSB7IGNsZWFySW50ZXJ2YWwodGltZXIpOyB9CgpjYXJvdXNlbC5hZGRFdmVudExpc3RlbmVyKCdtb3VzZWVudGVyJywgc3RvcCk7CmNhcm91c2VsLmFkZEV2ZW50TGlzdGVuZXIoJ21vdXNlbGVhdmUnLCBzdGFydCk7CmNhcm91c2VsLmFkZEV2ZW50TGlzdGVuZXIoJ2ZvY3VzaW4nLCAgICBzdG9wKTsKY2Fyb3VzZWwuYWRkRXZlbnRMaXN0ZW5lcignZm9jdXNvdXQnLCAgIHN0YXJ0KTsKCmRvY3VtZW50LmFkZEV2ZW50TGlzdGVuZXIoJ3Zpc2liaWxpdHljaGFuZ2UnLCBmdW5jdGlvbigpIHsKICBkb2N1bWVudC5oaWRkZW4gPyBzdG9wKCkgOiBzdGFydCgpOwp9KTsKCnN0YXJ0KCk7CmBgYGAKCmBgYGBodG1sCjxkaXYgY2xhc3M9ImNhcm91c2VsIiByb2xlPSJyZWdpb24iIGFyaWEtbGFiZWw9IkdhbWUgc2NyZWVuc2hvdHMiPgogIDxkaXYgY2xhc3M9ImNhcm91c2VsLXRyYWNrIiBpZD0ic3MtdHJhY2siPgogICAgPGRpdiBjbGFzcz0iY2Fyb3VzZWwtc2xpZGUiIHJvbGU9Imdyb3VwIiBhcmlhLWxhYmVsPSJTbGlkZSAxIG9mIDQiPgogICAgICA8aW1nIGNsYXNzPSJjYXJvdXNlbC1zbGlkZS1pbm5lciIgc3JjPSJzY3JlZW5zaG90LTEuanBnIiBhbHQ9IkdhbWVwbGF5IHNob3dpbmcuLi4iPgogICAgPC9kaXY+CiAgICA8IS0tIG1vcmUgc2xpZGVzIC0tPgogIDwvZGl2PgogIDxzcGFuIGNsYXNzPSJjYXJvdXNlbC1jb3VudCIgYXJpYS1saXZlPSJwb2xpdGUiIGFyaWEtYXRvbWljPSJ0cnVlIj4xIC8gNDwvc3Bhbj4KPC9kaXY+Cgo8ZGl2IGNsYXNzPSJjYXJvdXNlbC10aHVtYnMiPgogIDxkaXYgY2xhc3M9ImNhcm91c2VsLXRodW1iIGlzLWFjdGl2ZSIKICAgICAgIHRhYmluZGV4PSIwIiByb2xlPSJidXR0b24iCiAgICAgICBhcmlhLWxhYmVsPSJWaWV3IHNjcmVlbnNob3QgMSI+CiAgICA8aW1nIHNyYz0ic2NyZWVuc2hvdC0xLXRodW1iLmpwZyIgYWx0PSIiPgogIDwvZGl2PgogIDwhLS0gbW9yZSB0aHVtYnMgLS0+CjwvZGl2PgpgYGBgCgojIyBDaGFuZ2Vsb2cKCkluaXRpYWwgZHJhZnQuIENvdmVycyBtYW51YWwsIGF1dG8tYWR2YW5jZSwgc2NyZWVuc2hvdCBnYWxsZXJ5ICh0aHVtYm5haWwgc3RyaXApLCBmdWxsLWJsZWVkLCBhbmQgZmFkZS10cmFuc2l0aW9uIHZhcmlhbnRzLiBBc3BlY3QgcmF0aW8gc2l6ZXMgZG9jdW1lbnRlZC4gRnVsbCBXQ0FHIGNhcm91c2VsIHBhdHRlcm4gaW1wbGVtZW50ZWQuCgotLS0KCiMjIFRva2VucyByZWZlcmVuY2VkIG9uIHRoaXMgcGFnZQoKVXNlIHRoZXNlIGV4YWN0IHRva2VucyDigJQgZGVmaW5lZCBpbiBgdG9rZW5zL3Rva2Vucy5jc3NgLiBEbyBub3Qgc3Vic3RpdHV0ZSByYXcgdmFsdWVzLgoKLSBgLS1ib3JkZXItc3VidGxlYAotIGAtLWR1ci1kZWZhdWx0YAotIGAtLWR1ci1mYXN0YAotIGAtLWR1ci1zaGVldGAKLSBgLS1kdXItc2xvd2AKLSBgLS1lYXNlLWVtcGhhc2l6ZWRgCi0gYC0tZWFzZS1vdXRgCi0gYC0tamlvYAotIGAtLXBpbGxgCi0gYC0tcjRgCi0gYC0tcjVgCi0gYC0tc3VyZmFjZS0yYAotIGAtLXRleHRgCi0gYC0tdGV4dDNgCgotLS0KCiMjIEJ1aWxkIHJ1bGVzIChiaW5kaW5nKQoKMS4gVXNlICoqb25seSoqIHRoZSB0b2tlbnMgbGlzdGVkIGFib3ZlLiBJZiBhIHZhbHVlIHlvdSBuZWVkIGlzIG5vdCBsaXN0ZWQsIHN0b3AgYW5kIGFzayDigJQgZG8gbm90IGludHJvZHVjZSBhIHJhdyB2YWx1ZS4KMi4gRm9udCBpcyAqKkppb1R5cGUqKiBvbmx5LiBXZWlnaHRzOiAzMDAsIDUwMCwgNzAwLCA5MDAuCjMuIFJldXNlIHRoZSBjb21wb25lbnQgQ1NTIHBhdHRlcm5zIHNob3duIG9uIHRoZSBzb3VyY2UgcGFnZTsgZG8gbm90IHJlZGVzaWduLgo0LiBNYXRjaCBldmVyeSBzdGF0ZSAoZGVmYXVsdCwgaG92ZXIsIGZvY3VzLCBhY3RpdmUsIGRpc2FibGVkLCBsb2FkaW5nKSBzaG93biBvbiB0aGUgcGFnZS4KNS4gQWNjZXNzaWJpbGl0eSByZXF1aXJlbWVudHMgb24gdGhlIHBhZ2UgYXJlIG1hbmRhdG9yeSwgbm90IG9wdGlvbmFsLgo=" download="carousel-component-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
+    </div>
       <span class="component-maturity component-maturity--draft">
         <span class="component-maturity--dot"></span>Draft
       </span>
@@ -537,6 +537,98 @@
   </section>
 
   <!-- CODE EXAMPLES -->
+  <!-- WHEN TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use</h2>
+    <div class="ds-usage-grid">
+      <div class="ds-usage-card ds-usage-card--do">
+        <p class="ds-usage-label ds-usage-label--do">Use when</p>
+        <ul class="ds-usage-list">
+              <li>Featured game highlights on the home screen hero area</li>
+              <li>Onboarding steps or feature introduction slides</li>
+              <li>Image galleries on game detail pages</li>
+              <li>Horizontal scrolling when items overflow the viewport</li>
+        </ul>
+      </div>
+      <div class="ds-usage-card ds-usage-card--dont">
+        <p class="ds-usage-label ds-usage-label--dont">Don't use when</p>
+        <ul class="ds-usage-list">
+              <li>Primary navigation — carousels hide content from users</li>
+              <li>More than 7-8 slides without clear navigation affordance</li>
+              <li>Auto-advancing carousels with content users need to read</li>
+              <li>Nested carousels</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOTION -->
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-motion-table">
+      <thead><tr><th>Interaction</th><th>Easing</th><th>Duration</th><th>Property</th></tr></thead>
+      <tbody>
+        <tr><td>Swipe slide</td><td><code>--ease-out</code></td><td><code>--dur-base</code></td><td>transform translateX</td></tr>
+        <tr><td>Auto-advance</td><td><code>--ease-in-out</code></td><td><code>--dur-slow</code></td><td>transform translateX</td></tr>
+        <tr><td>Dot indicator</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>width (active dot expands)</td></tr>
+        <tr><td>Arrow button press</td><td><code>--ease-out</code></td><td><code>80ms</code></td><td>transform scale(0.92)</td></tr>
+        <tr><td>Fade transition (alt)</td><td><code>--ease-out</code></td><td><code>--dur-base</code></td><td>opacity</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- API -->
+  <section class="ds-section" id="api">
+    <h2 class="ds-section-title">API</h2>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:0 0 12px;">CSS classes</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>.ds-carousel</code></td><td>Root — overflow hidden wrapper</td></tr>
+        <tr><td><code>.ds-carousel__track</code></td><td>Flex row of slides — transform driven</td></tr>
+        <tr><td><code>.ds-carousel__slide</code></td><td>Single slide — flex-shrink:0, full width</td></tr>
+        <tr><td><code>.ds-carousel__dots</code></td><td>Dot indicator row — centered below</td></tr>
+        <tr><td><code>.ds-carousel__dot</code></td><td>Individual dot — 6px circle</td></tr>
+        <tr><td><code>.ds-carousel__dot--active</code></td><td>Active dot — expands to 18px width</td></tr>
+        <tr><td><code>.ds-carousel__arrow</code></td><td>Previous/next button</td></tr>
+      </tbody>
+    </table>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 12px;">React props</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>autoPlay</code></td><td><span class="api-type">boolean</span></td><td><span class="api-default">false</span></td><td>Enable auto-advance</td></tr>
+        <tr><td><code>interval</code></td><td><span class="api-type">number</span></td><td><span class="api-default">4000</span></td><td>Auto-advance delay in ms</td></tr>
+        <tr><td><code>loop</code></td><td><span class="api-type">boolean</span></td><td><span class="api-default">true</span></td><td>Wrap around at start/end</td></tr>
+        <tr><td><code>showDots</code></td><td><span class="api-type">boolean</span></td><td><span class="api-default">true</span></td><td>Show dot indicators</td></tr>
+        <tr><td><code>showArrows</code></td><td><span class="api-type">boolean</span></td><td><span class="api-default">false</span></td><td>Show prev/next arrow buttons</td></tr>
+        <tr><td><code>index</code></td><td><span class="api-type">number</span></td><td><span class="api-default">undefined</span></td><td>Controlled current slide index</td></tr>
+        <tr><td><code>onIndexChange</code></td><td><span class="api-type">(i: number) => void</span></td><td><span class="api-default">undefined</span></td><td>Fired on slide change</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  
+
+  
+
+  
+
+  
+
   <section class="component-section" id="code-examples">
     <h2 class="ds-section-title">Code examples</h2>
 
@@ -652,4 +744,4 @@ start();</code></pre>
   </section>
 
 </main><script src="../sprite-loader.js"></script>
-<script src="../shell.js"></script></body></html>
+<script src="../shell.js?v=2"></script></body></html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tooling — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=6">
+</head>
+<body>
+<main class="ds-main">
+
+  <header class="component-page-header">
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <span class="component-breadcrumb-link">JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span class="component-breadcrumb-current">Tooling</span>
+    </nav>
+    <h1 class="component-page-title">Tooling</h1><p class="component-page-def">Scripts and validators that keep DLS implementations consistent and production-safe.</p>
+    <div class="component-platforms">
+      <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBUb29saW5nIOKAlCBKaW9HYW1lcyBETFMgc3BlYwoKPiBTb3VyY2U6IGB0b29saW5nL2luZGV4Lmh0bWxgIGluIHRoZSBKaW9HYW1lcyBEZXNpZ24gU3lzdGVtLgo+IFRoaXMgc3BlYyBpcyBnZW5lcmF0ZWQgdmVyYmF0aW0gZnJvbSB0aGUgcGFnZSDigJQgZG8gbm90IGludmVudCB2YWx1ZXMgbm90IGxpc3RlZCBoZXJlLgoKKipQYXRoOioqIEppb0dhbWVzIERMUyDigLogVG9vbGluZwoKLS0tCgpTY3JpcHRzIGFuZCB2YWxpZGF0b3JzIHRoYXQga2VlcCBETFMgaW1wbGVtZW50YXRpb25zIGNvbnNpc3RlbnQgYW5kIHByb2R1Y3Rpb24tc2FmZS4KCiMjIHZhbGlkYXRlLnNoIOKAlCBkcmlmdCB2YWxpZGF0b3IKCkEgemVyby1kZXBlbmRlbmN5IHNoZWxsIHNjcmlwdCB0aGF0IGdyZXBzIHlvdXIgQ1NTIGFuZCBIVE1MIGZvciBETFMgdmlvbGF0aW9ucy4gUnVuIGl0IGJlZm9yZSBldmVyeSBzaGlwLiBFeGl0IDAgPSBjbGVhbi4gRXhpdCAxID0gYmxvY2tpbmcgdmlvbGF0aW9ucy4KCiMjIyBVc2FnZQoKYGBgYAojIENoZWNrIGEgc2luZ2xlIGZpbGUKYmFzaCB0b2tlbnMvdmFsaWRhdGUuc2ggcGF0aC90by9zY3JlZW4uaHRtbAoKIyBDaGVjayBhIGRpcmVjdG9yeSAocmVjdXJzaXZlKQpiYXNoIHRva2Vucy92YWxpZGF0ZS5zaCBjb21wb25lbnRzLwoKIyBTdHJpY3QgbW9kZSDigJQgV0FSTnMgYmVjb21lIEVSUnMgKHVzZSBiZWZvcmUgZXh0ZXJuYWwgc2hpcCkKYmFzaCB0b2tlbnMvdmFsaWRhdGUuc2ggLS1zdHJpY3QgcGF0aC90by9zY3JlZW4uaHRtbAoKIyBDaGVjayBjdXJyZW50IGRpcmVjdG9yeQpiYXNoIHRva2Vucy92YWxpZGF0ZS5zaCAuCmBgYGAKCiMjIyAxNCBjaGVja3MKCiMjIyBTdHJpY3QgbW9kZSAoYWRkaXRpb25hbCBjaGVja3MpCgpBY3RpdmF0ZWQgd2l0aCBgLS1zdHJpY3RgLiBVcGdyYWRlcyBhbGwgV0FSTnMgdG8gRVJScyBhbmQgYWRkczoKCi0gwrdIVE1MIGZpbGVzIG1pc3NpbmcgYHRva2Vucy90b2tlbnMuY3NzYCBpbXBvcnQKLSDCt0RpcmVjdG9yaWVzIHdpdGggYGluZGV4Lmh0bWxgIG1pc3NpbmcgYHFhLXJlcG9ydC5tZGAKLSDCt0RpcmVjdG9yaWVzIHdpdGggYGluZGV4Lmh0bWxgIG1pc3NpbmcgYFJFQURNRS5tZGAKCiMjIyBFeHBlY3RlZCBvdXRwdXQKCmBgYGAKSmlvR2FtZXMgRExTIOKAlCB2YWxpZGF0aW5nIGRyaWZ04oCmCuKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgArinJcgRVJST1IgIGJhY2tncm91bmQ6IzAwMCDigJQgcGFnZSBiZyBtdXN0IGJlIC0tYmcgKCMwNjA4MEYpLCBuZXZlciBwdXJlIGJsYWNrCiAgICBzY3JlZW5zL2hvbWUuaHRtbDo0MjogYmFja2dyb3VuZDogIzAwMDAwMDsK4pqgIFdBUk4gICBSYXcgaGV4IGxpdGVyYWwg4oCUIHByZWZlciB2YXIoLS10b2tlbikgZnJvbSB0b2tlbnMuY3NzCiAgICBzY3JlZW5zL2hvbWUuaHRtbDo4NzogY29sb3I6ICNBOEFEQkE7CuKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgOKUgArinJcgQmxvY2tpbmcgdmlvbGF0aW9ucyBmb3VuZCDigJQgZml4IGJlZm9yZSBzaGlwcGluZy4KYGBgYAoKIyMgYnVpbGQucHkg4oCUIHRva2VuIGdlbmVyYXRvcgoKUmVhZHMgYHRva2Vucy90b2tlbnMuanNvbmAgYW5kIGdlbmVyYXRlcyBgdG9rZW5zL3Rva2Vucy5jc3NgLiBSdW4gYWZ0ZXIgYW55IGNoYW5nZSB0byBgdG9rZW5zLmpzb25gLgoKYGBgYAojIFJlZ2VuZXJhdGUgdG9rZW5zLmNzcwpweXRob24zIHRva2Vucy9idWlsZC5weQoKIyBXYXRjaCBtb2RlIChyZXF1aXJlcyB3YXRjaGRvZzogcGlwIGluc3RhbGwgd2F0Y2hkb2cpCnB5dGhvbjMgdG9rZW5zL2J1aWxkLnB5IC0td2F0Y2gKYGBgYAoKVGhlIGdlbmVyYXRlZCBmaWxlIGluY2x1ZGVzOiBDU1MgY3VzdG9tIHByb3BlcnRpZXMsIHdlYiBwbGF0Zm9ybSBvdmVycmlkZXMgKGBAbWVkaWEgbWluLXdpZHRoOjc2OHB4YCksIFRWIG92ZXJyaWRlcyAoYEBtZWRpYSBtaW4td2lkdGg6MTI4MHB4ICsgbWluLWhlaWdodDo3MjBweGApLCByZWR1Y2VkLW1vdGlvbiBvdmVycmlkZXMsIGFuZCBzdGFjayB1dGlsaXR5IGNsYXNzZXMuCgojIyB2ZXJzaW9uLnNoIOKAlCBzbmFwc2hvdCB2ZXJzaW9uaW5nCgpTYXZlcyBuYW1lZCBzbmFwc2hvdHMgb2YgZ2VuZXJhdGVkIHNjcmVlbnMuIFVzZWZ1bCBmb3IgdmlzdWFsIHJlZ3Jlc3Npb24gY2hlY2tzIGJldHdlZW4gRExTIHZlcnNpb25zLgoKYGBgYAojIFNhdmUgYSBzbmFwc2hvdCBvZiBhIHNjcmVlbgpiYXNoIHRvb2xzL3ZlcnNpb24uc2ggc2F2ZSBob21lLXNjcmVlbiAidjEuMSByYWlsIHNwYWNpbmcgdXBkYXRlIgoKIyBMaXN0IHNhdmVkIHNuYXBzaG90cwpiYXNoIHRvb2xzL3ZlcnNpb24uc2ggbGlzdApgYGBgCgojIyBjaS5zaCDigJQgQ0kgaW50ZWdyYXRpb24KCldyYXBzIGB2YWxpZGF0ZS5zaGAgZm9yIENJIHBpcGVsaW5lcy4gUmV0dXJucyBub24temVybyBvbiBhbnkgRVJSLCBwcmludHMgc3RydWN0dXJlZCBvdXRwdXQgZm9yIGxvZyBwYXJzaW5nLgoKYGBgYAojIEluIENJIChHaXRIdWIgQWN0aW9ucywgZXRjLikKYmFzaCB0b29scy9jaS5zaCBwYXRoL3RvL3NjcmVlbnMvCmBgYGAKClRvIGFkZCBETFMgdmFsaWRhdGlvbiB0byBhIEdpdEh1YiBBY3Rpb25zIHdvcmtmbG93OgoKYGBgYAotIG5hbWU6IERMUyBsaW50CiAgcnVuOiBiYXNoIHRva2Vucy92YWxpZGF0ZS5zaCAtLXN0cmljdCBzY3JlZW5zLwpgYGBgCgojIyB3aWxsLWNoYW5nZSBndWlkYW5jZQoKYHdpbGwtY2hhbmdlYCBwcm9tb3RlcyBlbGVtZW50cyB0byB0aGVpciBvd24gY29tcG9zaXRvciBsYXllci4gVXNlZCBjb3JyZWN0bHkgaXQgZWxpbWluYXRlcyBqYW5rIG9uIGFuaW1hdGlvbnMuIFVzZWQgaW5jb3JyZWN0bHkgaXQgd2FzdGVzIEdQVSBtZW1vcnkgYW5kIGNhbiBtYWtlIHBlcmZvcm1hbmNlIHdvcnNlLgoKIyMjIFdoZW4gdG8gdXNlCgp8IEVsZW1lbnQgfCBQcm9wZXJ0eSB8IFJlYXNvbiB8CnwtLS18LS0tfC0tLXwKfCBCb3R0b20gc2hlZXQgfCBgd2lsbC1jaGFuZ2U6IHRyYW5zZm9ybWAgfCBTbGlkZXMgdXAgb24gb3BlbiDigJQgY29tcG9zaXRvci1kcml2ZW4uIHwKfCBQYXNzIGNhcmQgaGVybyB8IGB3aWxsLWNoYW5nZTogdHJhbnNmb3JtYCB8IFNjYWxlIG9uIHByZXNzLCBwYXJhbGxheCBvbiBzY3JvbGwuIHwKfCBMb2FkaW5nIHNwaW5uZXIgfCBgd2lsbC1jaGFuZ2U6IHRyYW5zZm9ybWAgfCBDb250aW51b3VzIHJvdGF0aW9uLiB8CnwgVG9hc3QgfCBgd2lsbC1jaGFuZ2U6IHRyYW5zZm9ybSwgb3BhY2l0eWAgfCBTbGlkZSArIGZhZGUgaW4vb3V0LiB8CnwgU2tlbGV0b24gc2hpbW1lciB8IGB3aWxsLWNoYW5nZTogYmFja2dyb3VuZC1wb3NpdGlvbmAgfCBDb250aW51b3VzIHNoaW1tZXIgbG9vcC4gfAoKIyMjIFdoZW4gTk9UIHRvIHVzZQoKIyMjIENvcnJlY3QgcGF0dGVybgoKYGBgYAovLyBBZGQgYmVmb3JlIGFuaW1hdGlvbgplbGVtZW50LnN0eWxlLndpbGxDaGFuZ2UgPSAndHJhbnNmb3JtJzsKZWxlbWVudC5hbmltYXRlKFt7dHJhbnNmb3JtOid0cmFuc2xhdGVZKDEwMCUpJ30se3RyYW5zZm9ybTondHJhbnNsYXRlWSgwKSd9XSwgewogIGR1cmF0aW9uOiA0MjAsIGVhc2luZzogJ2N1YmljLWJlemllciguMjIsMSwuMzYsMSknCn0pLm9uZmluaXNoID0gKCkgPT4gewogIGVsZW1lbnQuc3R5bGUud2lsbENoYW5nZSA9ICdhdXRvJzsgLy8gUmVtb3ZlIGFmdGVyCn07CmBgYGAKCnZhbGlkYXRlLnNoIGRvZXMgbm90IGNoZWNrIGB3aWxsLWNoYW5nZWAgdXNhZ2Ug4oCUIHRoaXMgaXMgYSBjb2RlLXJldmlldyBjb25jZXJuLCBub3QgYSBsaW50IGNvbmNlcm4uCgojIyBQcmUtY29tbWl0IGhvb2sKCkluc3RhbGwgdGhlIHByZS1jb21taXQgaG9vayB0byBydW4gdmFsaWRhdGlvbiBiZWZvcmUgZXZlcnkgZ2l0IGNvbW1pdCBvbiBgLmNzc2AgYW5kIGAuaHRtbGAgZmlsZXMuCgpgYGBgCiMgSW5zdGFsbCBob29rCmJhc2ggdG9vbHMvaW5zdGFsbC1ob29rcy5zaAoKIyBUaGUgaG9vayBydW5zIHZhbGlkYXRlLnNoIG9uIHN0YWdlZCBDU1MvSFRNTCBmaWxlcwojIENvbW1pdCBpcyBibG9ja2VkIGlmIEVSUnMgYXJlIGZvdW5kCmBgYGAKCi0tLQoKIyMgVG9rZW5zIHJlZmVyZW5jZWQgb24gdGhpcyBwYWdlCgpVc2UgdGhlc2UgZXhhY3QgdG9rZW5zIOKAlCBkZWZpbmVkIGluIGB0b2tlbnMvdG9rZW5zLmNzc2AuIERvIG5vdCBzdWJzdGl0dXRlIHJhdyB2YWx1ZXMuCgotIGAtLWJvcmRlci1zdWJ0bGVgCi0gYC0tY2FyZC1zcWAKLSBgLS1jdHJsLWhgCi0gYC0tamlvYAotIGAtLWppby1mb250YAotIGAtLXIzYAotIGAtLXI0YAotIGAtLXN0YXR1cy1uZWdhdGl2ZWAKLSBgLS1zdGF0dXMtd2FybmluZ2AKLSBgLS1zdXJmYWNlLTFgCi0gYC0tdGV4dGAKLSBgLS10ZXh0MmAKLSBgLS10b2tlbmAKCi0tLQoKIyMgQnVpbGQgcnVsZXMgKGJpbmRpbmcpCgoxLiBVc2UgKipvbmx5KiogdGhlIHRva2VucyBsaXN0ZWQgYWJvdmUuIElmIGEgdmFsdWUgeW91IG5lZWQgaXMgbm90IGxpc3RlZCwgc3RvcCBhbmQgYXNrIOKAlCBkbyBub3QgaW50cm9kdWNlIGEgcmF3IHZhbHVlLgoyLiBGb250IGlzICoqSmlvVHlwZSoqIG9ubHkuIFdlaWdodHM6IDMwMCwgNTAwLCA3MDAsIDkwMC4KMy4gUmV1c2UgdGhlIGNvbXBvbmVudCBDU1MgcGF0dGVybnMgc2hvd24gb24gdGhlIHNvdXJjZSBwYWdlOyBkbyBub3QgcmVkZXNpZ24uCjQuIE1hdGNoIGV2ZXJ5IHN0YXRlIChkZWZhdWx0LCBob3ZlciwgZm9jdXMsIGFjdGl2ZSwgZGlzYWJsZWQsIGxvYWRpbmcpIHNob3duIG9uIHRoZSBwYWdlLgo1LiBBY2Nlc3NpYmlsaXR5IHJlcXVpcmVtZW50cyBvbiB0aGUgcGFnZSBhcmUgbWFuZGF0b3J5LCBub3Qgb3B0aW9uYWwuCg==" download="tooling-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
+    </div>
+  </header>
+
+  <!-- VALIDATE.SH -->
+  <section class="ds-section" id="validate">
+    <h2 class="ds-section-title">validate.sh — drift validator</h2>
+    <p class="ds-body">A zero-dependency shell script that greps your CSS and HTML for DLS violations. Run it before every ship. Exit 0 = clean. Exit 1 = blocking violations.</p>
+
+    <h3 style="font-size:14px;font-weight:700;color:var(--text);margin:24px 0 12px">Usage</h3>
+    <pre class="ds-code-block"><code># Check a single file
+bash tokens/validate.sh path/to/screen.html
+
+# Check a directory (recursive)
+bash tokens/validate.sh components/
+
+# Strict mode — WARNs become ERRs (use before external ship)
+bash tokens/validate.sh --strict path/to/screen.html
+
+# Check current directory
+bash tokens/validate.sh .</code></pre>
+
+    <h3 style="font-size:14px;font-weight:700;color:var(--text);margin:24px 0 12px">14 checks</h3>
+    <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;margin-top:8px">
+
+      <div style="display:grid;grid-template-columns:60px auto 1fr;gap:16px;padding:12px 16px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <span style="font-size:11px;font-weight:700;color:var(--status-negative);padding-top:2px">ERR</span>
+        <code class="ds-code" style="font-size:11px;white-space:nowrap">background:#000</code>
+        <span style="font-size:12px;color:var(--text2)">Page background must use <code class="ds-code">--bg</code> (#06080F). Pure black is never correct.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:60px auto 1fr;gap:16px;padding:12px 16px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <span style="font-size:11px;font-weight:700;color:var(--status-warning);padding-top:2px">WARN</span>
+        <code class="ds-code" style="font-size:11px;white-space:nowrap">#fff / #000</code>
+        <span style="font-size:12px;color:var(--text2)">Pure white/black literals. Use <code class="ds-code">--text-inv</code> for CTA text; #fff over images is allowed.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:60px auto 1fr;gap:16px;padding:12px 16px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <span style="font-size:11px;font-weight:700;color:var(--status-negative);padding-top:2px">ERR</span>
+        <code class="ds-code" style="font-size:11px;white-space:nowrap">blue/purple hex</code>
+        <span style="font-size:12px;color:var(--text2)">JioGames is green end-to-end. Blue and purple accents are banned. Checks: #6366f1, #8b5cf6, #3b82f6, #7c3aed.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:60px auto 1fr;gap:16px;padding:12px 16px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <span style="font-size:11px;font-weight:700;color:var(--status-negative);padding-top:2px">ERR</span>
+        <code class="ds-code" style="font-size:11px;white-space:nowrap">transition: all</code>
+        <span style="font-size:12px;color:var(--text2)">Must list explicit properties (e.g. <code class="ds-code">transition: color 120ms, background 120ms</code>). Caught in CSS only, not doc text.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:60px auto 1fr;gap:16px;padding:12px 16px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <span style="font-size:11px;font-weight:700;color:var(--status-negative);padding-top:2px">ERR</span>
+        <code class="ds-code" style="font-size:11px;white-space:nowrap">non-JioType font</code>
+        <span style="font-size:12px;color:var(--text2)">Inter, Outfit, Roboto, Helvetica are banned. Only <code class="ds-code">JioType</code> via <code class="ds-code">var(--jio-font)</code>.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:60px auto 1fr;gap:16px;padding:12px 16px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <span style="font-size:11px;font-weight:700;color:var(--status-warning);padding-top:2px">WARN</span>
+        <code class="ds-code" style="font-size:11px;white-space:nowrap">grey box-shadow</code>
+        <span style="font-size:12px;color:var(--text2)">Soft grey drop-shadows look SaaS-generic. Use coloured glow (<code class="ds-code">--jio-glow</code>) for state; deep shadow for lift.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:60px auto 1fr;gap:16px;padding:12px 16px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <span style="font-size:11px;font-weight:700;color:var(--status-warning);padding-top:2px">WARN</span>
+        <code class="ds-code" style="font-size:11px;white-space:nowrap">raw hex literal</code>
+        <span style="font-size:12px;color:var(--text2)">Any hex outside <code class="ds-code">tokens.css</code> should be a <code class="ds-code">var(--token)</code>. Skips SVG <code class="ds-code">fill=</code> brand logos.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:60px auto 1fr;gap:16px;padding:12px 16px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <span style="font-size:11px;font-weight:700;color:var(--status-negative);padding-top:2px">ERR</span>
+        <code class="ds-code" style="font-size:11px;white-space:nowrap">font-weight bad</code>
+        <span style="font-size:12px;color:var(--text2)">JioType only has 300/500/700/900. Using 100/200/400/600/800 renders as nearest fallback, breaking typographic intent.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:60px auto 1fr;gap:16px;padding:12px 16px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <span style="font-size:11px;font-weight:700;color:var(--status-warning);padding-top:2px">WARN</span>
+        <code class="ds-code" style="font-size:11px;white-space:nowrap">font-weight:300</code>
+        <span style="font-size:12px;color:var(--text2)">300 (Light) is illegible at small sizes on dark backgrounds. Prefer 500 for body text below 14px.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:60px auto 1fr;gap:16px;padding:12px 16px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <span style="font-size:11px;font-weight:700;color:var(--status-warning);padding-top:2px">WARN</span>
+        <code class="ds-code" style="font-size:11px;white-space:nowrap">off-scale spacing</code>
+        <span style="font-size:12px;color:var(--text2)">Padding/margin/gap must use 8px scale tokens. Flags values like 5px, 6px, 7px, 9px, 10px, 14px, 20px.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:60px auto 1fr;gap:16px;padding:12px 16px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <span style="font-size:11px;font-weight:700;color:var(--status-negative);padding-top:2px">ERR</span>
+        <code class="ds-code" style="font-size:11px;white-space:nowrap">raw control size</code>
+        <span style="font-size:12px;color:var(--text2)">Raw px in height/width for known control sizes (54, 44, 40, 36, 72, 64, 96px). Use <code class="ds-code">var(--ctrl-h)</code>, <code class="ds-code">var(--card-sq)</code>, etc.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:60px auto 1fr;gap:16px;padding:12px 16px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <span style="font-size:11px;font-weight:700;color:var(--status-negative);padding-top:2px">ERR</span>
+        <code class="ds-code" style="font-size:11px;white-space:nowrap">stroke-width in CSS</code>
+        <span style="font-size:12px;color:var(--text2)">DLS icons are solid glyphs (<code class="ds-code">fill:currentColor</code>). Stroke width in CSS means a stroke icon was used — replace with sprite.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:60px auto 1fr;gap:16px;padding:12px 16px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <span style="font-size:11px;font-weight:700;color:var(--status-warning);padding-top:2px">WARN</span>
+        <code class="ds-code" style="font-size:11px;white-space:nowrap">fill:none in CSS</code>
+        <span style="font-size:12px;color:var(--text2)">Likely a stroke icon. Decorative SVGs with <code class="ds-code">aria-hidden</code> are exempt.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:60px auto 1fr;gap:16px;padding:12px 16px;align-items:start">
+        <span style="font-size:11px;font-weight:700;color:var(--status-negative);padding-top:2px">ERR</span>
+        <code class="ds-code" style="font-size:11px;white-space:nowrap">outline:none</code>
+        <span style="font-size:12px;color:var(--text2)">Must be paired with a <code class="ds-code">box-shadow</code> focus glow in the same rule. Bare focus removal is an accessibility violation.</span>
+      </div>
+    </div>
+
+    <h3 style="font-size:14px;font-weight:700;color:var(--text);margin:24px 0 12px">Strict mode (additional checks)</h3>
+    <p class="ds-body" style="margin-bottom:12px">Activated with <code class="ds-code">--strict</code>. Upgrades all WARNs to ERRs and adds:</p>
+    <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+      <li style="font-size:13px;color:var(--text2);padding-left:16px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>HTML files missing <code class="ds-code">tokens/tokens.css</code> import</li>
+      <li style="font-size:13px;color:var(--text2);padding-left:16px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Directories with <code class="ds-code">index.html</code> missing <code class="ds-code">qa-report.md</code></li>
+      <li style="font-size:13px;color:var(--text2);padding-left:16px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Directories with <code class="ds-code">index.html</code> missing <code class="ds-code">README.md</code></li>
+    </ul>
+
+    <h3 style="font-size:14px;font-weight:700;color:var(--text);margin:24px 0 12px">Expected output</h3>
+    <pre class="ds-code-block"><code>JioGames DLS — validating drift…
+────────────────────────────────
+✗ ERROR  background:#000 — page bg must be --bg (#06080F), never pure black
+    screens/home.html:42: background: #000000;
+⚠ WARN   Raw hex literal — prefer var(--token) from tokens.css
+    screens/home.html:87: color: #A8ADBA;
+────────────────────────────────
+✗ Blocking violations found — fix before shipping.</code></pre>
+
+    <div class="ds-note" style="margin-top:20px">
+      <strong>Known false positive:</strong> <code class="ds-code">transition&#58; all</code> inside <code class="ds-code">&lt;code&gt;</code> elements in documentation HTML will be flagged. Escape the colon with <code class="ds-code">&amp;#58;</code> in doc text to suppress.
+    </div>
+  </section>
+
+  <!-- BUILD.PY -->
+  <section class="ds-section" id="build">
+    <h2 class="ds-section-title">build.py — token generator</h2>
+    <p class="ds-body">Reads <code class="ds-code">tokens/tokens.json</code> and generates <code class="ds-code">tokens/tokens.css</code>. Run after any change to <code class="ds-code">tokens.json</code>.</p>
+    <pre class="ds-code-block"><code># Regenerate tokens.css
+python3 tokens/build.py
+
+# Watch mode (requires watchdog: pip install watchdog)
+python3 tokens/build.py --watch</code></pre>
+    <p class="ds-body">The generated file includes: CSS custom properties, web platform overrides (<code class="ds-code">@media min-width:768px</code>), TV overrides (<code class="ds-code">@media min-width:1280px + min-height:720px</code>), reduced-motion overrides, and stack utility classes.</p>
+    <div class="ds-note" style="margin-top:16px">
+      <strong>Never edit tokens.css directly.</strong> It is generated and will be overwritten. All token changes must go through <code class="ds-code">tokens.json</code> → <code class="ds-code">build.py</code>.
+    </div>
+  </section>
+
+  <!-- VERSION.SH -->
+  <section class="ds-section" id="version">
+    <h2 class="ds-section-title">version.sh — snapshot versioning</h2>
+    <p class="ds-body">Saves named snapshots of generated screens. Useful for visual regression checks between DLS versions.</p>
+    <pre class="ds-code-block"><code># Save a snapshot of a screen
+bash tools/version.sh save home-screen "v1.1 rail spacing update"
+
+# List saved snapshots
+bash tools/version.sh list</code></pre>
+  </section>
+
+  <!-- CI.SH -->
+  <section class="ds-section" id="ci">
+    <h2 class="ds-section-title">ci.sh — CI integration</h2>
+    <p class="ds-body">Wraps <code class="ds-code">validate.sh</code> for CI pipelines. Returns non-zero on any ERR, prints structured output for log parsing.</p>
+    <pre class="ds-code-block"><code># In CI (GitHub Actions, etc.)
+bash tools/ci.sh path/to/screens/</code></pre>
+    <p class="ds-body">To add DLS validation to a GitHub Actions workflow:</p>
+    <pre class="ds-code-block"><code>- name: DLS lint
+  run: bash tokens/validate.sh --strict screens/</code></pre>
+  </section>
+
+  <!-- WILL-CHANGE -->
+  <section class="ds-section" id="will-change">
+    <h2 class="ds-section-title">will-change guidance</h2>
+    <p class="ds-body"><code class="ds-code">will-change</code> promotes elements to their own compositor layer. Used correctly it eliminates jank on animations. Used incorrectly it wastes GPU memory and can make performance worse.</p>
+
+    <h3 style="font-size:14px;font-weight:700;color:var(--text);margin:24px 0 12px">When to use</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Element</th><th>Property</th><th>Reason</th></tr></thead>
+      <tbody>
+        <tr><td>Bottom sheet</td><td><code class="ds-code">will-change: transform</code></td><td>Slides up on open — compositor-driven.</td></tr>
+        <tr><td>Pass card hero</td><td><code class="ds-code">will-change: transform</code></td><td>Scale on press, parallax on scroll.</td></tr>
+        <tr><td>Loading spinner</td><td><code class="ds-code">will-change: transform</code></td><td>Continuous rotation.</td></tr>
+        <tr><td>Toast</td><td><code class="ds-code">will-change: transform, opacity</code></td><td>Slide + fade in/out.</td></tr>
+        <tr><td>Skeleton shimmer</td><td><code class="ds-code">will-change: background-position</code></td><td>Continuous shimmer loop.</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:14px;font-weight:700;color:var(--text);margin:24px 0 12px">When NOT to use</h3>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="padding:12px 16px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);border-left:3px solid var(--status-negative)">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px">Static elements</div>
+        <div style="font-size:12px;color:var(--text2)">Cards, text, icons that don't animate. <code class="ds-code">will-change</code> on static content wastes GPU memory for zero benefit.</div>
+      </div>
+      <div style="padding:12px 16px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);border-left:3px solid var(--status-negative)">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px">Entire rails / lists</div>
+        <div style="font-size:12px;color:var(--text2)">Never apply <code class="ds-code">will-change</code> to a parent that contains many children. Each child becomes its own layer — VRAM exhausted on low-end devices.</div>
+      </div>
+      <div style="padding:12px 16px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);border-left:3px solid var(--status-negative)">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px">Apply-and-forget in CSS</div>
+        <div style="font-size:12px;color:var(--text2)">Add <code class="ds-code">will-change</code> via JS just before animation starts, remove it after. Persistent CSS-only <code class="ds-code">will-change</code> keeps the layer promoted forever.</div>
+      </div>
+    </div>
+
+    <h3 style="font-size:14px;font-weight:700;color:var(--text);margin:24px 0 12px">Correct pattern</h3>
+    <pre class="ds-code-block"><code>// Add before animation
+element.style.willChange = 'transform';
+element.animate([{transform:'translateY(100%)'},{transform:'translateY(0)'}], {
+  duration: 420, easing: 'cubic-bezier(.22,1,.36,1)'
+}).onfinish = () => {
+  element.style.willChange = 'auto'; // Remove after
+};</code></pre>
+
+    <p class="ds-body" style="margin-top:16px">validate.sh does not check <code class="ds-code">will-change</code> usage — this is a code-review concern, not a lint concern.</p>
+  </section>
+
+  <!-- PRE-COMMIT -->
+  <section class="ds-section" id="pre-commit">
+    <h2 class="ds-section-title">Pre-commit hook</h2>
+    <p class="ds-body">Install the pre-commit hook to run validation before every git commit on <code class="ds-code">.css</code> and <code class="ds-code">.html</code> files.</p>
+    <pre class="ds-code-block"><code># Install hook
+bash tools/install-hooks.sh
+
+# The hook runs validate.sh on staged CSS/HTML files
+# Commit is blocked if ERRs are found</code></pre>
+  </section>
+
+</main>
+<script src="../shell.js?v=2"></script>
+</body></html>

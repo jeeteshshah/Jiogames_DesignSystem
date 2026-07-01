@@ -1,0 +1,516 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Token Reference — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=6">
+  <style>
+    .tr-search {
+      width: 100%;
+      padding: 10px 14px;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      border-radius: var(--r3);
+      color: var(--text);
+      font-size: 13px;
+      font-family: var(--jio-font);
+      margin-bottom: 24px;
+      box-sizing: border-box;
+    }
+    .tr-search:focus {
+      outline: none;
+      border-color: var(--input-border-focus);
+    }
+    .tr-search::placeholder { color: var(--text-placeholder); }
+    .tr-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 12px; }
+    .tr-table th { padding: 8px 12px; text-align: left; font-size: 11px; font-weight: 700; color: var(--text3); border-bottom: 1px solid var(--border-subtle); }
+    .tr-table td { padding: 8px 12px; border-bottom: 1px solid var(--divider); vertical-align: middle; }
+    .tr-table tr:last-child td { border-bottom: none; }
+    .tr-table tbody tr:hover td { background: var(--surface-1); }
+    .tr-name { font-family: monospace; font-size: 11px; color: var(--text); user-select: all; }
+    .tr-value { font-family: monospace; font-size: 11px; color: var(--text2); }
+    .tr-swatch { width: 20px; height: 20px; border-radius: 4px; border: 1px solid var(--border-subtle); display: inline-block; vertical-align: middle; flex-shrink: 0; }
+    .tr-desc { color: var(--text2); line-height: 1.4; font-size: 11px; }
+    .tr-section { margin-top: 40px; }
+    .tr-section-title { font-size: 14px; font-weight: 700; color: var(--text); margin: 0 0 4px; }
+    .tr-section-desc { font-size: 12px; color: var(--text2); margin: 0 0 0; }
+    .tr-row { display: none; }
+    .tr-row.visible { display: table-row; }
+    .tr-count { font-size: 11px; color: var(--text3); margin-bottom: 8px; }
+    .tr-cat-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--surface-2);
+      color: var(--text3);
+    }
+  </style>
+</head>
+<body>
+<main class="ds-main">
+
+  <header class="component-page-header">
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <span class="component-breadcrumb-link">JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span class="component-breadcrumb-current">Token Reference</span>
+    </nav>
+    <h1 class="component-page-title">Token Reference</h1><p class="component-page-def">All 444 design tokens, categorized and searchable. These are the single source of truth — generated from <code class="ds-code">tokens/tokens.json</code> via <code class="ds-code">tokens/build.py</code>. Never hard-code values — use the token.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+      <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+      <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+      <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBUb2tlbiBSZWZlcmVuY2Ug4oCUIEppb0dhbWVzIERMUyBzcGVjCgo+IFNvdXJjZTogYHRva2VuLXJlZmVyZW5jZS9pbmRleC5odG1sYCBpbiB0aGUgSmlvR2FtZXMgRGVzaWduIFN5c3RlbS4KPiBUaGlzIHNwZWMgaXMgZ2VuZXJhdGVkIHZlcmJhdGltIGZyb20gdGhlIHBhZ2Ug4oCUIGRvIG5vdCBpbnZlbnQgdmFsdWVzIG5vdCBsaXN0ZWQgaGVyZS4KCioqUGF0aDoqKiBKaW9HYW1lcyBETFMg4oC6IFRva2VuIFJlZmVyZW5jZQoKLS0tCgpBbGwgNDQ0IGRlc2lnbiB0b2tlbnMsIGNhdGVnb3JpemVkIGFuZCBzZWFyY2hhYmxlLiBUaGVzZSBhcmUgdGhlIHNpbmdsZSBzb3VyY2Ugb2YgdHJ1dGgg4oCUIGdlbmVyYXRlZCBmcm9tIGB0b2tlbnMvdG9rZW5zLmpzb25gIHZpYSBgdG9rZW5zL2J1aWxkLnB5YC4gTmV2ZXIgaGFyZC1jb2RlIHZhbHVlcyDigJQgdXNlIHRoZSB0b2tlbi4KCiMjIEJyYW5kIGNvbG91cnMKCkppb0dhbWVzIGdyZWVuIGZhbWlseSwgZ2xvdywgc29mdCBmaWxscy4gTmV2ZXIgdXNlIHJhdyBoZXgg4oCUIGFsd2F5cyByZWZlcmVuY2UgdGhlc2UuCgp8IFRva2VuIHwgVmFsdWUgfCBTd2F0Y2ggfCBVc2FnZSB8CnwtLS18LS0tfC0tLXwtLS18CgojIyBQbGF0Zm9ybSAmIHNlbWFudGljIGNvbG91cnMKCkdvbGQgKHdlYiksIGFtYmVyIChUViksIHJlZC9waW5rL2luZm8uIFVzZWQgaW4gcGxhdGZvcm0gbGFiZWxzIGFuZCBzdGF0dXMgaW5kaWNhdG9ycy4KCnwgVG9rZW4gfCBWYWx1ZSB8IFN3YXRjaCB8IFVzYWdlIHwKfC0tLXwtLS18LS0tfC0tLXwKCiMjIFN1cmZhY2VzICYgYmFja2dyb3VuZHMKCkJhY2tncm91bmQsIGNhcmQsIHNoZWV0LCBnbGFzcyBzdXJmYWNlcy4gRGFyayBwYWxldHRlIG9ubHkg4oCUIG5vIGxpZ2h0IHN1cmZhY2VzLgoKfCBUb2tlbiB8IFZhbHVlIHwgU3dhdGNoIHwgVXNhZ2UgfAp8LS0tfC0tLXwtLS18LS0tfAoKIyMgVGV4dCAmIGJvcmRlcgoKVGV4dCBoaWVyYXJjaHkgKC0tdGV4dCDihpIgLS10ZXh0NCksIGJvcmRlcnMsIGRpdmlkZXJzLCBoYWlybGluZXMuCgp8IFRva2VuIHwgVmFsdWUgfCBTd2F0Y2ggfCBVc2FnZSB8CnwtLS18LS0tfC0tLXwtLS18CgojIyBTZW1hbnRpYyB0b2tlbnMKClB1cnBvc2UtbmFtZWQgYWxpYXNlcyBvdmVyIHByaW1pdGl2ZXMuIENvbXBvbmVudHMgc2hvdWxkIHJlZmVyZW5jZSBzZW1hbnRpYyB0b2tlbnMsIG5vdCBwcmltaXRpdmVzLgoKfCBUb2tlbiB8IFZhbHVlIHwgU3dhdGNoIHwgVXNhZ2UgfAp8LS0tfC0tLXwtLS18LS0tfAoKIyMgU3BhY2luZwoKOHB4IGJhc2Ugc2NhbGUgKC0tc3BhY2UtKiksIGd1dHRlcnMsIGdhcHMsIHJhaWwgc3BhY2luZy4KCnwgVG9rZW4gfCBWYWx1ZSB8IFVzYWdlIHwKfC0tLXwtLS18LS0tfAoKIyMgUmFkaXVzCgotLXIxICg4cHgpIHRocm91Z2ggLS1yOSAoMjhweCkgKyAtLXBpbGwuIE1hcCB0byBjb21wb25lbnQgdHlwZSB2aWEgcmFkaXVzLWdvdmVybmFuY2UuCgp8IFRva2VuIHwgVmFsdWUgfCBVc2FnZSB8CnwtLS18LS0tfC0tLXwKCiMjIFNpemluZyAmIGNvbnRyb2wgaGVpZ2h0cwoKQ29udHJvbCBoZWlnaHRzICgtLWN0cmwtaCwgLS1jdHJsLWgtc20sIC0tY3RybC1oLWdob3N0KSwgdG91Y2ggdGFyZ2V0cywgT1RQIGJveGVzLCBjYXJkIGRpbWVuc2lvbnMuCgp8IFRva2VuIHwgVmFsdWUgfCBVc2FnZSB8CnwtLS18LS0tfC0tLXwKCiMjIFotaW5kZXggc2NhbGUKCkxheWVyaW5nIHN5c3RlbSBmcm9tIC0tei1iYXNlIHRvIC0tei10dkZvY3VzLiBOZXZlciB1c2UgcmF3IHotaW5kZXggaW50ZWdlcnMuCgp8IFRva2VuIHwgVmFsdWUgfCBVc2FnZSB8CnwtLS18LS0tfC0tLXwKCiMjIE1vdGlvbgoKRWFzaW5nIGN1cnZlcyAoLS1zcHJpbmcsIC0tZWFzZS0qKSBhbmQgZHVyYXRpb24gdG9rZW5zICgtLWR1ci0qKS4gVXNlIGluIGFsbCB0cmFuc2l0aW9ucy4KCnwgVG9rZW4gfCBWYWx1ZSB8IFVzYWdlIHwKfC0tLXwtLS18LS0tfAoKIyMgRm9jdXMgJiBUVgoKRm9jdXMgcmluZyB0b2tlbnMgZm9yIHdlYiBhY2Nlc3NpYmlsaXR5IGFuZCBUViBELXBhZCBuYXZpZ2F0aW9uLgoKfCBUb2tlbiB8IFZhbHVlIHwgU3dhdGNoIHwgVXNhZ2UgfAp8LS0tfC0tLXwtLS18LS0tfAoKIyMgQ29tcG9uZW50IHRva2VucwoKQ29tcG9uZW50LXNjb3BlZCB0b2tlbnMgKGJ0bi0qLCBjYXJkLSosIGlucHV0LSosIHN1cmZhY2UtKikuIFVzZSBpbiBjb21wb25lbnQgaW1wbGVtZW50YXRpb25zIG9ubHkuCgp8IFRva2VuIHwgVmFsdWUgfCBTd2F0Y2ggfCBVc2FnZSB8CnwtLS18LS0tfC0tLXwtLS18CgotLS0KCiMjIFRva2VucyByZWZlcmVuY2VkIG9uIHRoaXMgcGFnZQoKVXNlIHRoZXNlIGV4YWN0IHRva2VucyDigJQgZGVmaW5lZCBpbiBgdG9rZW5zL3Rva2Vucy5jc3NgLiBEbyBub3Qgc3Vic3RpdHV0ZSByYXcgdmFsdWVzLgoKLSBgLS1hbWJlcmAKLSBgLS1iZ2AKLSBgLS1ib3JkZXJgCi0gYC0tYm9yZGVyLXN0cm9uZ2AKLSBgLS1ib3JkZXItc3VidGxlYAotIGAtLWN0cmwtaGAKLSBgLS1jdHJsLWgtZ2hvc3RgCi0gYC0tZGl2aWRlcmAKLSBgLS1pbmZvYAotIGAtLWlucHV0LWJnYAotIGAtLWlucHV0LWJvcmRlcmAKLSBgLS1pbnB1dC1ib3JkZXItZm9jdXNgCi0gYC0tamlvYAotIGAtLWppby0yYAotIGAtLWppby1icmlnaHRgCi0gYC0tamlvLWZvbnRgCi0gYC0tbmVnYXRpdmVgCi0gYC0tcG9zaXRpdmVgCi0gYC0tcjNgCi0gYC0tcjRgCi0gYC0tcjlgCi0gYC0tc2VjdGlvbi1nYXBgCi0gYC0tc2hlZXQtYmdgCi0gYC0tc3VyZmFjZS0xYAotIGAtLXN1cmZhY2UtMmAKLSBgLS10ZXh0YAotIGAtLXRleHQtaW52YAotIGAtLXRleHQtcGxhY2Vob2xkZXJgCi0gYC0tdGV4dDJgCi0gYC0tdGV4dDNgCi0gYC0tdWx0aW1hdGVgCgotLS0KCiMjIEJ1aWxkIHJ1bGVzIChiaW5kaW5nKQoKMS4gVXNlICoqb25seSoqIHRoZSB0b2tlbnMgbGlzdGVkIGFib3ZlLiBJZiBhIHZhbHVlIHlvdSBuZWVkIGlzIG5vdCBsaXN0ZWQsIHN0b3AgYW5kIGFzayDigJQgZG8gbm90IGludHJvZHVjZSBhIHJhdyB2YWx1ZS4KMi4gRm9udCBpcyAqKkppb1R5cGUqKiBvbmx5LiBXZWlnaHRzOiAzMDAsIDUwMCwgNzAwLCA5MDAuCjMuIFJldXNlIHRoZSBjb21wb25lbnQgQ1NTIHBhdHRlcm5zIHNob3duIG9uIHRoZSBzb3VyY2UgcGFnZTsgZG8gbm90IHJlZGVzaWduLgo0LiBNYXRjaCBldmVyeSBzdGF0ZSAoZGVmYXVsdCwgaG92ZXIsIGZvY3VzLCBhY3RpdmUsIGRpc2FibGVkLCBsb2FkaW5nKSBzaG93biBvbiB0aGUgcGFnZS4KNS4gQWNjZXNzaWJpbGl0eSByZXF1aXJlbWVudHMgb24gdGhlIHBhZ2UgYXJlIG1hbmRhdG9yeSwgbm90IG9wdGlvbmFsLgo=" download="token-reference-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
+    </div>
+  </header>
+
+  <!-- SEARCH -->
+  <section class="ds-section" id="search">
+    <input class="tr-search" id="tokenSearch" type="search" placeholder="Search tokens… e.g. btn-primary, space-4, jio" aria-label="Search tokens">
+    <div class="tr-count" id="tokenCount"></div>
+  </section>
+
+  <!-- COLOUR: BRAND -->
+  <section class="ds-section tr-section" id="colour-brand" data-section>
+    <h2 class="tr-section-title">Brand colours</h2>
+    <p class="tr-section-desc">JioGames green family, glow, soft fills. Never use raw hex — always reference these.</p>
+    <table class="tr-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Swatch</th><th>Usage</th></tr></thead>
+      <tbody id="tbody-brand"></tbody>
+    </table>
+  </section>
+
+  <!-- COLOUR: PLATFORM -->
+  <section class="ds-section tr-section" id="colour-platform" data-section>
+    <h2 class="tr-section-title">Platform &amp; semantic colours</h2>
+    <p class="tr-section-desc">Gold (web), amber (TV), red/pink/info. Used in platform labels and status indicators.</p>
+    <table class="tr-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Swatch</th><th>Usage</th></tr></thead>
+      <tbody id="tbody-platform"></tbody>
+    </table>
+  </section>
+
+  <!-- COLOUR: SURFACE -->
+  <section class="ds-section tr-section" id="colour-surface" data-section>
+    <h2 class="tr-section-title">Surfaces &amp; backgrounds</h2>
+    <p class="tr-section-desc">Background, card, sheet, glass surfaces. Dark palette only — no light surfaces.</p>
+    <table class="tr-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Swatch</th><th>Usage</th></tr></thead>
+      <tbody id="tbody-surface"></tbody>
+    </table>
+  </section>
+
+  <!-- COLOUR: TEXT -->
+  <section class="ds-section tr-section" id="colour-text" data-section>
+    <h2 class="tr-section-title">Text &amp; border</h2>
+    <p class="tr-section-desc">Text hierarchy (--text → --text4), borders, dividers, hairlines.</p>
+    <table class="tr-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Swatch</th><th>Usage</th></tr></thead>
+      <tbody id="tbody-text"></tbody>
+    </table>
+  </section>
+
+  <!-- SEMANTIC -->
+  <section class="ds-section tr-section" id="semantic" data-section>
+    <h2 class="tr-section-title">Semantic tokens</h2>
+    <p class="tr-section-desc">Purpose-named aliases over primitives. Components should reference semantic tokens, not primitives.</p>
+    <table class="tr-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Swatch</th><th>Usage</th></tr></thead>
+      <tbody id="tbody-semantic"></tbody>
+    </table>
+  </section>
+
+  <!-- SPACING -->
+  <section class="ds-section tr-section" id="spacing" data-section>
+    <h2 class="tr-section-title">Spacing</h2>
+    <p class="tr-section-desc">8px base scale (--space-*), gutters, gaps, rail spacing.</p>
+    <table class="tr-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody id="tbody-spacing"></tbody>
+    </table>
+  </section>
+
+  <!-- RADIUS -->
+  <section class="ds-section tr-section" id="radius" data-section>
+    <h2 class="tr-section-title">Radius</h2>
+    <p class="tr-section-desc">--r1 (8px) through --r9 (28px) + --pill. Map to component type via radius-governance.</p>
+    <table class="tr-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody id="tbody-radius"></tbody>
+    </table>
+  </section>
+
+  <!-- SIZING -->
+  <section class="ds-section tr-section" id="sizing" data-section>
+    <h2 class="tr-section-title">Sizing &amp; control heights</h2>
+    <p class="tr-section-desc">Control heights (--ctrl-h, --ctrl-h-sm, --ctrl-h-ghost), touch targets, OTP boxes, card dimensions.</p>
+    <table class="tr-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody id="tbody-sizing"></tbody>
+    </table>
+  </section>
+
+  <!-- Z-INDEX -->
+  <section class="ds-section tr-section" id="zindex" data-section>
+    <h2 class="tr-section-title">Z-index scale</h2>
+    <p class="tr-section-desc">Layering system from --z-base to --z-tvFocus. Never use raw z-index integers.</p>
+    <table class="tr-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody id="tbody-zindex"></tbody>
+    </table>
+  </section>
+
+  <!-- MOTION -->
+  <section class="ds-section tr-section" id="motion" data-section>
+    <h2 class="tr-section-title">Motion</h2>
+    <p class="tr-section-desc">Easing curves (--spring, --ease-*) and duration tokens (--dur-*). Use in all transitions.</p>
+    <table class="tr-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+      <tbody id="tbody-motion"></tbody>
+    </table>
+  </section>
+
+  <!-- FOCUS -->
+  <section class="ds-section tr-section" id="focus" data-section>
+    <h2 class="tr-section-title">Focus &amp; TV</h2>
+    <p class="tr-section-desc">Focus ring tokens for web accessibility and TV D-pad navigation.</p>
+    <table class="tr-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Swatch</th><th>Usage</th></tr></thead>
+      <tbody id="tbody-focus"></tbody>
+    </table>
+  </section>
+
+  <!-- COMPONENT -->
+  <section class="ds-section tr-section" id="component" data-section>
+    <h2 class="tr-section-title">Component tokens</h2>
+    <p class="tr-section-desc">Component-scoped tokens (btn-*, card-*, input-*, surface-*). Use in component implementations only.</p>
+    <table class="tr-table">
+      <thead><tr><th>Token</th><th>Value</th><th>Swatch</th><th>Usage</th></tr></thead>
+      <tbody id="tbody-component"></tbody>
+    </table>
+  </section>
+
+</main>
+<script src="../shell.js?v=2"></script>
+<script>
+(function(){
+  /* Token data — name, value, category, usage hint */
+  var TOKENS = [
+    /* brand */
+    ['jio','#00A859','brand','brand','Primary JioGames green. Use --action-primary in components.'],
+    ['jio-2','#22C16C','brand','brand','Lighter green for gradients and hover.'],
+    ['jio-3','#88E5AB','brand','brand','Pale green. Matrix labels, decorative highlights.'],
+    ['jio-bright','#00E870','brand','brand','Electric green. Hero accents, glow overlays.'],
+    ['jio-glow','rgba(0,200,100,.35)','brand','brand','Green glow for box-shadow on active states.'],
+    ['jio-soft','rgba(0,168,89,.12)','brand','brand','Translucent green fill. Badge backgrounds, selected states.'],
+    ['ultimate','#00cc65','brand','brand','JioGames Pass Ultimate green.'],
+    ['ultimate-glow','rgba(0,200,100,.35)','brand','brand','Glow for Ultimate pass UI.'],
+    /* platform */
+    ['popular-gold','#F7AB20','platform','platform','Popular/trending label colour.'],
+    ['popular-gold-2','#FFCF5C','platform','platform','Lighter gold for gradients.'],
+    ['pass-mobile-bg','#061A10','platform','platform','Pass Mobile card background.'],
+    ['pass-ultimate-bg-start','#051F12','platform','platform','Pass Ultimate gradient start.'],
+    ['pass-ultimate-bg-end','#071A1A','platform','platform','Pass Ultimate gradient end.'],
+    ['gold','#FFC23D','platform','platform','Web platform label colour. Not for brand or decoration.'],
+    ['gold-laurel','#c9a84c','platform','platform','Muted gold for trophy/laurel icons.'],
+    ['amber','#F59E0B','platform','platform','TV platform label colour. Also warning status.'],
+    ['amber-soft','rgba(245,158,11,.15)','platform','platform','Soft amber fill for warning banners.'],
+    ['red','#FF4757','platform','platform','Alias for --negative. Danger actions.'],
+    ['pink','#FF3D7F','platform','platform','Decorative only. Not for status.'],
+    ['negative','#FF4757','platform','platform','Error/destructive semantic. Use --status-negative in components.'],
+    ['positive','#00A859','platform','platform','Success semantic. Use --status-positive in components.'],
+    ['info','#3B8BEB','platform','platform','Info semantic. 5.84:1 on --bg. Use --status-info in components.'],
+    /* surface */
+    ['bg','#06080F','surface','surface','Page background. Root dark surface.'],
+    ['card-bg','#111115','surface','surface','Game card background.'],
+    ['sheet-bg','#0e1118','surface','surface','Bottom sheet and drawer background.'],
+    ['sheet-top','#131720','surface','surface','Sheet handle area, slightly lighter.'],
+    ['surface-1','#0E1119','surface','surface','First elevation surface. Cards, panels.'],
+    ['surface-2','#161A24','surface','surface','Second elevation. Dropdowns, tooltips.'],
+    ['surface-3','#1F2432','surface','surface','Third elevation. Modals.'],
+    ['surface-4','#2A3142','surface','surface','Fourth elevation. Toasts on dark.'],
+    ['glass-1','rgba(255,255,255,.055)','surface','surface','Glass layer 1. Frosted panels.'],
+    ['glass-2','rgba(255,255,255,.03)','surface','surface','Glass layer 2. Subtle overlays.'],
+    ['chip-bg','#0c0f14','surface','surface','Chip and tag background.'],
+    /* text */
+    ['text','#F4F2EE','text','text','Primary text. Headings and body.'],
+    ['text2','#A8ADBA','text','text','Secondary text. Captions, metadata.'],
+    ['text3','#6B7280','text','text','Muted text. Disabled, placeholders (WARN: 2.9:1 contrast — use --text-placeholder instead for inputs).'],
+    ['text4','#454A57','text','text','Ultra-muted. Decorative labels only.'],
+    ['text-inv','#000000','text','text','Inverse text. On green/light backgrounds.'],
+    ['border','rgba(255,255,255,.1)','text','text','Default border.'],
+    ['border-strong','rgba(255,255,255,.14)','text','text','Stronger border for focused/selected elements.'],
+    ['border-subtle','rgba(255,255,255,.08)','text','text','Subtle border. Table rows, dividers.'],
+    ['border-ultimate','rgba(0,204,101,.3)','text','text','Ultimate pass card border.'],
+    ['divider','rgba(255,255,255,.07)','text','text','Section divider line.'],
+    ['hairline','rgba(255,255,255,.08)','text','text','1px hairline separator.'],
+    ['hairline-2','rgba(255,255,255,.16)','text','text','Stronger hairline for contrast areas.'],
+    ['overlay-scrim','rgba(0,0,0,.55)','text','text','Modal/drawer backdrop scrim.'],
+    /* semantic */
+    ['text-placeholder','#8B92A5','semantic','semantic','Placeholder text. 6.4:1 on --bg — WCAG AA pass.'],
+    ['action-primary','var(--jio)','semantic','semantic','Primary interactive colour. Use in buttons, links, CTAs — not --jio directly.'],
+    ['action-primary-hover','#00be65','semantic','semantic','Hover state for primary action.'],
+    ['status-positive','var(--positive)','semantic','semantic','Success / positive status.'],
+    ['status-positive-soft','rgba(0,168,89,.12)','semantic','semantic','Soft fill for success banners.'],
+    ['status-positive-border','rgba(0,168,89,.3)','semantic','semantic','Border for success containers.'],
+    ['status-negative','var(--negative)','semantic','semantic','Error / destructive status.'],
+    ['status-negative-soft','rgba(255,71,87,.12)','semantic','semantic','Soft fill for error banners.'],
+    ['status-negative-border','rgba(255,71,87,.3)','semantic','semantic','Border for error containers.'],
+    ['status-warning','var(--amber)','semantic','semantic','Warning status.'],
+    ['status-warning-soft','rgba(245,158,11,.12)','semantic','semantic','Soft fill for warning banners.'],
+    ['status-warning-border','rgba(245,158,11,.3)','semantic','semantic','Border for warning containers.'],
+    ['status-info','var(--info)','semantic','semantic','Informational status.'],
+    ['status-info-soft','rgba(59,139,235,.12)','semantic','semantic','Soft fill for info banners.'],
+    ['status-info-border','rgba(59,139,235,.3)','semantic','semantic','Border for info containers.'],
+    ['input-bg','var(--surface-1)','semantic','semantic','Input field background.'],
+    ['input-border','var(--border)','semantic','semantic','Input default border.'],
+    ['input-border-focus','var(--jio)','semantic','semantic','Input focused border.'],
+    ['input-border-error','var(--negative)','semantic','semantic','Input error state border.'],
+    ['input-text','var(--text)','semantic','semantic','Input text colour.'],
+    ['input-placeholder','var(--text-placeholder)','semantic','semantic','Input placeholder — resolves to #8B92A5, WCAG AA.'],
+    ['input-h','54px','semantic','semantic','Input control height. Use instead of --ctrl-h (canonical for inputs).'],
+    ['input-radius','var(--r4)','semantic','semantic','Input border radius.'],
+    ['surface-page','var(--bg)','semantic','semantic','Page-level background surface.'],
+    ['surface-card','var(--surface-1)','semantic','semantic','Card background surface.'],
+    ['surface-sheet','var(--sheet-bg)','semantic','semantic','Sheet/drawer background surface.'],
+    ['surface-overlay','rgba(0,0,0,.7)','semantic','semantic','Overlay/modal backdrop.'],
+    /* spacing */
+    ['space-0','0px','spacing','spacing','Zero spacing.'],
+    ['space-0-25','2px','spacing','spacing','Hairline spacing. Icon-to-text micro gaps.'],
+    ['space-0-5','4px','spacing','spacing','Extra-tight spacing. Badge padding.'],
+    ['space-1','8px','spacing','spacing','Base unit. Most intra-component gaps.'],
+    ['space-1-5','12px','spacing','spacing','Tight spacing. Icon padding, chip padding.'],
+    ['space-2','16px','spacing','spacing','Standard spacing. Card padding, list items.'],
+    ['space-3','24px','spacing','spacing','Section sub-gap. Sheet handle margin.'],
+    ['space-4','32px','spacing','spacing','Section gap. Rail-to-rail spacing.'],
+    ['space-5','40px','spacing','spacing','Large spacing. Modal padding.'],
+    ['space-6','48px','spacing','spacing','Extra-large spacing. Page section top padding.'],
+    ['space-8','64px','spacing','spacing','Hero-level spacing.'],
+    ['space-10','80px','spacing','spacing','Very large. App-bar offsets.'],
+    ['space-12','96px','spacing','spacing','Largest spacing unit. Hero areas.'],
+    ['gutter','16px','spacing','spacing','Default horizontal page gutter.'],
+    ['section-gap','32px','spacing','spacing','Vertical gap between page sections.'],
+    ['rail-gap','var(--section-gap)','spacing','spacing','Gap between home rails.'],
+    ['card-gap','12px','spacing','spacing','Gap between cards in a rail.'],
+    ['component-padding','16px','spacing','spacing','Default internal component padding.'],
+    ['card-padding','16px','spacing','spacing','Internal card padding.'],
+    ['sheet-padding','24px','spacing','spacing','Internal sheet/drawer padding.'],
+    ['hero-gap','32px','spacing','spacing','Gap below hero section.'],
+    /* radius */
+    ['r1','8px','radius','radius','Chip, tag, small button.'],
+    ['r2','10px','radius','radius','Input, small card variant.'],
+    ['r3','12px','radius','radius','Card default. Most common.'],
+    ['r4','14px','radius','radius','Sheet, dialog, large card.'],
+    ['r5','16px','radius','radius','Hero card, large modal.'],
+    ['r6','18px','radius','radius','Full-bleed card overlay.'],
+    ['r7','20px','radius','radius','Pass card.'],
+    ['r8','22px','radius','radius','Large decorative panel.'],
+    ['r9','28px','radius','radius','Portrait game card.'],
+    ['pill','100px','radius','radius','Pill-shaped chips and badges.'],
+    /* sizing */
+    ['frame-mobile-w','393px','sizing','sizing','Mobile phone frame width.'],
+    ['frame-mobile-h','852px','sizing','sizing','Mobile phone frame height.'],
+    ['container-web','1280px','sizing','sizing','Max content width on web.'],
+    ['tv-safe','48px','sizing','sizing','TV safe-area inset.'],
+    ['web-grid-gap','24px','sizing','sizing','Web grid column gap.'],
+    ['hero-text-max','680px','sizing','sizing','Hero text block max-width on web.'],
+    ['grid-cols-mobile','2','sizing','sizing','Grid columns on mobile.'],
+    ['grid-cols-web','4','sizing','sizing','Grid columns on web.'],
+    ['grid-cols-tv','5','sizing','sizing','Grid columns on TV.'],
+    ['col-gap-mobile','12px','sizing','sizing','Grid column gap on mobile.'],
+    ['col-gap-web','20px','sizing','sizing','Grid column gap on web.'],
+    ['col-gap-tv','24px','sizing','sizing','Grid column gap on TV.'],
+    ['bp-web','768px','sizing','sizing','Web breakpoint.'],
+    ['bp-tv','1280px','sizing','sizing','TV breakpoint width.'],
+    ['bp-tv-height','720px','sizing','sizing','TV breakpoint height.'],
+    ['safe-top','env(safe-area-inset-top, 44px)','sizing','sizing','iOS safe area top.'],
+    ['safe-bot','env(safe-area-inset-bottom, 34px)','sizing','sizing','iOS safe area bottom.'],
+    ['ctrl-h','54px','sizing','sizing','Primary control height (button, input).'],
+    ['ctrl-h-sm','40px','sizing','sizing','Small control height.'],
+    ['ctrl-h-ghost','40px','sizing','sizing','Ghost/tertiary button height.'],
+    ['touch-min','44px','sizing','sizing','Minimum touch target size (WCAG 2.5.5).'],
+    ['otp-box-w','50px','sizing','sizing','OTP input box width.'],
+    ['otp-box-h','64px','sizing','sizing','OTP input box height.'],
+    ['card-wide-w','160px','sizing','sizing','Landscape card width in rail.'],
+    ['card-sq','120px','sizing','sizing','Square card size.'],
+    ['genre-tile-h','104px','sizing','sizing','Genre tile height.'],
+    ['tab-bar-h','64px','sizing','sizing','Tab bar height.'],
+    ['app-bar-h','56px','sizing','sizing','App bar height.'],
+    ['status-bar-h','44px','sizing','sizing','iOS status bar height.'],
+    ['icon-size-xs','12px','sizing','sizing','Extra-small icon.'],
+    ['icon-size-sm','16px','sizing','sizing','Small icon.'],
+    ['icon-size-md','20px','sizing','sizing','Medium icon (most common).'],
+    ['icon-size-base','24px','sizing','sizing','Base icon (default).'],
+    ['icon-size-lg','28px','sizing','sizing','Large icon.'],
+    ['icon-size-xl','32px','sizing','sizing','Extra-large icon.'],
+    ['icon-color-default','var(--text2)','sizing','sizing','Default icon colour.'],
+    ['icon-color-active','var(--text)','sizing','sizing','Active/selected icon colour.'],
+    ['icon-color-muted','var(--text3)','sizing','sizing','Muted icon colour.'],
+    ['icon-wrapper-sm','32px','sizing','sizing','Small icon wrapper size.'],
+    ['icon-wrapper-md','40px','sizing','sizing','Medium icon wrapper size.'],
+    /* z-index */
+    ['z-base','0','zindex','z-index','Default stacking context.'],
+    ['z-raised','10','zindex','z-index','Raised elements (sticky headers, floating labels).'],
+    ['z-dropdown','100','zindex','z-index','Dropdowns and select menus.'],
+    ['z-sticky','200','zindex','z-index','Sticky nav bars and position:sticky elements.'],
+    ['z-appbar','300','zindex','z-index','App bar. Above sticky content.'],
+    ['z-drawer','400','zindex','z-index','Side drawers and off-canvas panels.'],
+    ['z-modal','500','zindex','z-index','Modals, dialogs, and bottom sheets.'],
+    ['z-toast','600','zindex','z-index','Toast notifications. Above modals.'],
+    ['z-tooltip','700','zindex','z-index','Tooltips and popovers.'],
+    ['z-tvFocus','800','zindex','z-index','TV focus ring. Must always be on top of everything.'],
+    /* motion */
+    ['spring','cubic-bezier(.34,1.56,.64,1)','motion','motion','Spring easing. Bouncy entry animations.'],
+    ['spring-bounce','cubic-bezier(.175,.885,.32,1.275)','motion','motion','High-bounce spring. Playful micro-animations.'],
+    ['ease-screen','cubic-bezier(.22,1,.36,1)','motion','motion','Screen transition easing (decelerate).'],
+    ['ease-out','cubic-bezier(0,0,.2,1)','motion','motion','Standard ease-out for exits.'],
+    ['ease-error','cubic-bezier(.36,.07,.19,.97)','motion','motion','Error shake easing.'],
+    ['dur-instant','90ms','motion','motion','Instant feedback (hover, press). Below perceptible motion threshold.'],
+    ['dur-fast','120ms','motion','motion','Fast interactions (chip select, toggle, tap feedback).'],
+    ['dur-default','200ms','motion','motion','Default animation duration. Balanced for most transitions.'],
+    ['dur-pop','280ms','motion','motion','Pop-in animations (badge appear, count update).'],
+    ['dur-error','380ms','motion','motion','Error shake animation.'],
+    ['dur-sheet','400ms','motion','motion','Bottom sheet slide-up/down.'],
+    ['dur-enter','420ms','motion','motion','Component/surface entry (hero card open, modal open). Intentionally same value as --dur-screen but semantically distinct — may diverge in future.'],
+    ['dur-screen','420ms','motion','motion','Page/screen-level transition. Intentionally same value as --dur-enter but semantically distinct — describes full-screen change, not component entry.'],
+    ['dur-tv-enter','560ms','motion','motion','TV screen enter. Longer than mobile — TV transitions need more time to read comfortably at distance.'],
+    ['dur-shimmer','1600ms','motion','motion','Skeleton shimmer loop (1.6s). Overridden to 0 under prefers-reduced-motion.'],
+    ['dur-icon-spin','1000ms','motion','motion','Icon spin for loading indicators. Full rotation in 1s.'],
+    ['dur-reduced-fade','100ms','motion','motion','Reduced-motion replacement: quick fade instead of slide/spring.'],
+    ['dur-reduced-instant','1ms','motion','motion','Near-zero duration for prefers-reduced-motion. 1ms not 0ms — avoids browser snap/flash on some engines.'],
+    ['stagger-start','0ms','motion','motion','List animation stagger start delay.'],
+    ['stagger-step','40ms','motion','motion','Delay increment per list item.'],
+    /* focus */
+    ['focus-ring-color','var(--jio)','focus','focus','Web focus ring colour.'],
+    ['focus-ring-width','2px','focus','focus','Web focus ring width.'],
+    ['focus-ring-offset','3px','focus','focus','Web focus ring offset.'],
+    ['focus-ring-tv','4px solid var(--jio)','focus','focus','TV D-pad focus ring (shorthand).'],
+    ['focus-glow-tv','0 0 0 2px rgba(0,168,89,.4)','focus','focus','TV focus glow box-shadow.'],
+    /* component: btn */
+    ['btn-primary-bg','var(--jio)','component','btn','Primary button background.'],
+    ['btn-primary-text','var(--text-inv)','component','btn','Primary button text colour.'],
+    ['btn-primary-hover-bg','var(--jio-2)','component','btn','Primary button hover background.'],
+    ['btn-secondary-bg','transparent','component','btn','Secondary button background.'],
+    ['btn-secondary-border','var(--border-strong)','component','btn','Secondary button border.'],
+    ['btn-secondary-text','var(--text)','component','btn','Secondary button text.'],
+    ['btn-tertiary-bg','var(--surface-2)','component','btn','Tertiary button background.'],
+    ['btn-tertiary-border','var(--border-subtle)','component','btn','Tertiary button border.'],
+    ['btn-ghost-bg','transparent','component','btn','Ghost button background.'],
+    ['btn-ghost-border','transparent','component','btn','Ghost button border (none).'],
+    ['btn-ghost-text','var(--text)','component','btn','Ghost button text.'],
+    ['btn-destructive-bg','rgba(255,71,87,.12)','component','btn','Destructive button fill.'],
+    ['btn-destructive-border','var(--negative)','component','btn','Destructive button border.'],
+    ['btn-destructive-text','var(--negative)','component','btn','Destructive button text.'],
+    ['btn-ultimate-bg','linear-gradient(135deg, var(--ultimate), var(--jio-bright))','component','btn','Ultimate pass button gradient.'],
+    ['btn-ultimate-text','var(--text-inv)','component','btn','Ultimate button text.'],
+    ['btn-disabled-opacity','0.4','component','btn','Disabled state opacity for all button types.'],
+    ['btn-loading-opacity','0.7','component','btn','Loading state opacity.'],
+    ['btn-h-xs','28px','component','btn','Extra-small button height.'],
+    ['btn-h-sm','36px','component','btn','Small button height.'],
+    ['btn-h-md','var(--ctrl-h-ghost)','component','btn','Medium button height (40px).'],
+    ['btn-h-lg','var(--ctrl-h)','component','btn','Large/default button height (54px).'],
+    ['btn-h-xl','60px','component','btn','Extra-large button.'],
+    ['btn-h-tv','64px','component','btn','TV button height (finger-agnostic sizing).'],
+    /* component: card */
+    ['card-radius-landscape','var(--r3)','component','card','Landscape card border radius.'],
+    ['card-radius-portrait','var(--r9)','component','card','Portrait card border radius.'],
+    ['card-radius-square','var(--r4)','component','card','Square card border radius.'],
+    ['card-overlay','linear-gradient(0deg, rgba(6,8,15,.85) 0%, transparent 55%)','component','card','Card bottom gradient overlay. Uses --bg base colour not pure black.'],
+    ['card-overlay-heavy','linear-gradient(0deg, rgba(6,8,15,.95) 0%, transparent 70%)','component','card','Heavy card gradient for text legibility over busy art.'],
+    ['card-shimmer-bg','var(--surface-2)','component','card','Skeleton card background.'],
+    ['card-shimmer-shine','rgba(255,255,255,.06)','component','card','Skeleton shimmer highlight.'],
+    ['card-active-scale','0.96','component','card','Card press scale transform.'],
+  ];
+
+  var isHex = function(v){ return /^#[0-9a-fA-F]{3,8}$/.test(v); };
+  var isRgba = function(v){ return v.startsWith('rgba'); };
+  var canSwatch = function(v){ return isHex(v) || isRgba(v); };
+
+  function swatchHtml(value, cat) {
+    if (cat === 'spacing' || cat === 'radius' || cat === 'sizing' || cat === 'zindex' || cat === 'motion') return '<td>—</td>';
+    var v = value;
+    /* resolve simple var() references */
+    if (v === 'var(--jio)') v = '#00A859';
+    else if (v === 'var(--jio-2)') v = '#22C16C';
+    else if (v === 'var(--text-inv)') v = '#000000';
+    else if (v === 'var(--negative)') v = '#FF4757';
+    else if (v === 'var(--positive)') v = '#00A859';
+    else if (v === 'var(--amber)') v = '#F59E0B';
+    else if (v === 'var(--info)') v = '#3B8BEB';
+    else if (v === 'var(--text)') v = '#F4F2EE';
+    else if (v === 'var(--text2)') v = '#A8ADBA';
+    else if (v === 'var(--text3)') v = '#6B7280';
+    else if (v === 'var(--text-placeholder)') v = '#8B92A5';
+    if (canSwatch(v)) {
+      return '<td><span class="tr-swatch" style="background:'+v+'"></span></td>';
+    }
+    return '<td><span style="font-size:10px;color:var(--text3)">—</span></td>';
+  }
+
+  var SECTIONS = {
+    brand: {tbody: 'tbody-brand'},
+    platform: {tbody: 'tbody-platform'},
+    surface: {tbody: 'tbody-surface'},
+    text: {tbody: 'tbody-text'},
+    semantic: {tbody: 'tbody-semantic'},
+    spacing: {tbody: 'tbody-spacing'},
+    radius: {tbody: 'tbody-radius'},
+    sizing: {tbody: 'tbody-sizing'},
+    zindex: {tbody: 'tbody-zindex'},
+    motion: {tbody: 'tbody-motion'},
+    focus: {tbody: 'tbody-focus'},
+    component: {tbody: 'tbody-component'},
+  };
+
+  var noSwatchCats = {spacing:1, radius:1, sizing:1, zindex:1, motion:1};
+
+  function buildRow(tok, cat) {
+    var name = tok[0], value = tok[1], sec = tok[2], subcatIgnored = tok[3], desc = tok[4];
+    var hasSwatchCol = !noSwatchCats[cat];
+    var swatchCell = hasSwatchCol ? swatchHtml(value, cat) : '';
+    return '<tr class="tr-row visible" data-name="--'+name+'" data-value="'+value+'" data-desc="'+desc+'">'+
+      '<td><span class="tr-name">--'+name+'</span></td>'+
+      '<td><span class="tr-value">'+value+'</span></td>'+
+      swatchCell+
+      '<td class="tr-desc">'+desc+'</td>'+
+      '</tr>';
+  }
+
+  /* Populate tables */
+  Object.keys(SECTIONS).forEach(function(cat){
+    var tbody = document.getElementById(SECTIONS[cat].tbody);
+    if (!tbody) return;
+    TOKENS.filter(function(t){ return t[2] === cat; }).forEach(function(tok){
+      tbody.insertAdjacentHTML('beforeend', buildRow(tok, cat));
+    });
+  });
+
+  /* Search */
+  var searchInput = document.getElementById('tokenSearch');
+  var countEl = document.getElementById('tokenCount');
+  var allRows = document.querySelectorAll('.tr-row');
+
+  function updateCount(){
+    var vis = document.querySelectorAll('.tr-row.visible').length;
+    countEl.textContent = vis + ' of ' + TOKENS.length + ' tokens';
+  }
+
+  updateCount();
+
+  searchInput.addEventListener('input', function(){
+    var q = this.value.toLowerCase().trim();
+    allRows.forEach(function(row){
+      var name = (row.dataset.name||'').toLowerCase();
+      var value = (row.dataset.value||'').toLowerCase();
+      var desc = (row.dataset.desc||'').toLowerCase();
+      var match = !q || name.includes(q) || value.includes(q) || desc.includes(q);
+      row.classList.toggle('visible', match);
+    });
+    updateCount();
+  });
+})();
+</script>
+</body></html>

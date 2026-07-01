@@ -1,0 +1,157 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Launch — JioGames DLS Patterns</title>
+  <link rel="stylesheet" href="../../tokens/tokens.css">
+  <link rel="stylesheet" href="../../components.css">
+  <link rel="stylesheet" href="../../states.css">
+  <link rel="stylesheet" href="../../shell.css?v=3">
+</head>
+<body>
+<main class="ds-main">
+
+  <header class="component-page-header">
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <a href="../../" class="component-breadcrumb-link">JioGames DLS</a>
+      <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+      <a href="../" class="component-breadcrumb-link">Patterns</a>
+      <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="component-breadcrumb-current">Game Launch</span>
+    </nav>
+    <h1 class="component-page-title">Game Launch</h1>
+    <p class="component-page-def">The sequence from tapping Play through loading, launch, and error handling. Covers free, pass-required, and unauthenticated flows.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+      <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+      <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+      <span class="component-maturity component-maturity--beta"><span class="component-maturity--dot"></span>Beta</span>
+    </div>
+  </header>
+
+  <!-- DECISION TREE -->
+  <section class="ds-section" id="decision">
+    <h2 class="ds-section-title">Decision tree on "Play" tap</h2>
+    <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;margin-top:20px">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid var(--border-subtle)">
+        <div style="padding:12px 20px;border-right:1px solid var(--border-subtle);font-size:12px;font-weight:700;color:var(--text2)">Condition</div>
+        <div style="padding:12px 20px;font-size:12px;font-weight:700;color:var(--text2)">Result</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid var(--border-subtle)">
+        <div style="padding:12px 20px;border-right:1px solid var(--border-subtle);font-size:12px;color:var(--text2)">Not logged in</div>
+        <div style="padding:12px 20px;font-size:12px;color:var(--text2)">OTP login sheet. On success: check pass. <code class="ds-code">_pendingGamePlay = true</code> preserved.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid var(--border-subtle)">
+        <div style="padding:12px 20px;border-right:1px solid var(--border-subtle);font-size:12px;color:var(--text2)">Logged in, free game</div>
+        <div style="padding:12px 20px;font-size:12px;color:var(--text2)">Go directly to launch loading state.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid var(--border-subtle)">
+        <div style="padding:12px 20px;border-right:1px solid var(--border-subtle);font-size:12px;color:var(--text2)">Logged in, pass game, has pass</div>
+        <div style="padding:12px 20px;font-size:12px;color:var(--text2)">Go directly to launch loading state.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid var(--border-subtle)">
+        <div style="padding:12px 20px;border-right:1px solid var(--border-subtle);font-size:12px;color:var(--text2)">Logged in, pass game, no pass</div>
+        <div style="padding:12px 20px;font-size:12px;color:var(--text2)">Upgrade sheet (Pass Found popup or plan selection).</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0">
+        <div style="padding:12px 20px;border-right:1px solid var(--border-subtle);font-size:12px;color:var(--text2)">Post-login, <code class="ds-code">_pendingGamePlay</code> true</div>
+        <div style="padding:12px 20px;font-size:12px;color:var(--text2)">Skip pass-found screen. Show Pass Found popup on game detail, then launch.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAUNCH FLOW -->
+  <section class="ds-section" id="flow">
+    <h2 class="ds-section-title">Launch sequence</h2>
+    <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;margin-top:20px">
+      <div style="display:grid;grid-template-columns:32px 160px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">1</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Button loading</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Play button enters loading state immediately on tap (spinner replaces label). Page remains visible.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 160px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">2</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Full-screen loader</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">After 800ms: transition to full-screen loading overlay. Shows game cover art + title + progress bar. "Preparing game…" sub-copy.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 160px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">3a</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Launch success</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Game takes over full screen. OS navigation hidden. Back gesture / back button returns to game detail (not home).</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 160px 1fr;gap:16px;padding:14px 20px;align-items:start">
+        <div style="width:24px;height:24px;background:rgba(255,71,87,.12);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--status-negative)">3b</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Launch failure</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Error dialog over full-screen loader. Primary: Retry. Secondary: Go back. Timeout error after 30s: specific "Taking too long" message.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMEOUT HANDLING -->
+  <section class="ds-section" id="timeouts">
+    <h2 class="ds-section-title">Timeout handling</h2>
+    <table class="ds-api-table" style="margin-top:16px">
+      <thead><tr><th>Duration</th><th>Trigger</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td>0–800ms</td><td>Normal</td><td>Button spinner only. No overlay.</td></tr>
+        <tr><td>800ms</td><td>Still loading</td><td>Transition to full-screen loading overlay.</td></tr>
+        <tr><td>10s</td><td>Still loading</td><td>Sub-copy changes to "Still loading…". Retry option appears.</td></tr>
+        <tr><td>30s</td><td>Timeout</td><td>Error dialog: "Game is taking too long to start." Retry + Go back.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PLATFORM DIFFERENCES -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform differences</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:16px">
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--jio);border-radius:var(--r4);padding:20px;background:var(--surface-1)">
+        <p style="font-size:12px;font-weight:700;color:var(--jio);margin:0 0 12px">Mobile</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Game launches in WebView or native wrapper</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Back swipe → game detail page</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Status bar hidden during play</li>
+        </ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--gold);border-radius:var(--r4);padding:20px;background:var(--surface-1)">
+        <p style="font-size:12px;font-weight:700;color:var(--gold);margin:0 0 12px">Web</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Game iframe or new tab (game-dependent)</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Full-screen loader in overlay before iframe shows</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Browser back = game detail (pushState managed)</li>
+        </ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--amber);border-radius:var(--r4);padding:20px;background:var(--surface-1)">
+        <p style="font-size:12px;font-weight:700;color:var(--amber);margin:0 0 12px">TV</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Loading screen uses TV focus ring on cancel button</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Remote Back cancels launch at any point</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Error dialog: D-pad navigable, OK = retry</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;margin-top:16px">
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Button loading: <code class="ds-code">aria-busy="true"</code> on button + visible spinner</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Full-screen overlay: <code class="ds-code">role="status"</code> with live region for loading text updates</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Error dialog: focus trap. Escape + explicit close. Announce error via <code class="ds-code">role="alertdialog"</code></li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Progress bar on loader: <code class="ds-code">role="progressbar"</code> with indeterminate state (<code class="ds-code">aria-valuenow</code> omitted)</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span>Reduced motion: skip animated progress bar; show static loading indicator instead</li>
+    </ul>
+  </section>
+
+  <section class="ds-section" id="components">
+    <h2 class="ds-section-title">Components used</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px">
+      <a href="../../buttons/" class="ds-chip ds-chip--default">Buttons</a>
+      <a href="../../dialogs/" class="ds-chip ds-chip--default">Dialog</a>
+      <a href="../../progress/" class="ds-chip ds-chip--default">Progress</a>
+      <a href="../../skeleton/" class="ds-chip ds-chip--default">Skeleton</a>
+    </div>
+  </section>
+
+</main>
+<script src="../../shell.js?v=2"></script>
+</body></html>

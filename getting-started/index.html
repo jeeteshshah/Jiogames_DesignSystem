@@ -1,0 +1,379 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting Started — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=6">
+</head>
+<body>
+<main class="ds-main">
+
+  <header class="component-page-header">
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <span class="component-breadcrumb-link">JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
+      <span class="component-breadcrumb-current">Getting Started</span>
+    </nav>
+    <h1 class="component-page-title">Getting Started</h1><p class="component-page-def">Everything an engineer or designer needs to adopt the JioGames DLS in a new project.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+      <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+      <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+      <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBHZXR0aW5nIFN0YXJ0ZWQg4oCUIEppb0dhbWVzIERMUyBzcGVjCgo+IFNvdXJjZTogYGdldHRpbmctc3RhcnRlZC9pbmRleC5odG1sYCBpbiB0aGUgSmlvR2FtZXMgRGVzaWduIFN5c3RlbS4KPiBUaGlzIHNwZWMgaXMgZ2VuZXJhdGVkIHZlcmJhdGltIGZyb20gdGhlIHBhZ2Ug4oCUIGRvIG5vdCBpbnZlbnQgdmFsdWVzIG5vdCBsaXN0ZWQgaGVyZS4KCioqUGF0aDoqKiBKaW9HYW1lcyBETFMg4oC6IEdldHRpbmcgU3RhcnRlZAoKLS0tCgpFdmVyeXRoaW5nIGFuIGVuZ2luZWVyIG9yIGRlc2lnbmVyIG5lZWRzIHRvIGFkb3B0IHRoZSBKaW9HYW1lcyBETFMgaW4gYSBuZXcgcHJvamVjdC4KCiMjIFdoYXQgaXMgSmlvR2FtZXMgRExTPwoKVGhlIEppb0dhbWVzIERlc2lnbiBMYW5ndWFnZSBTeXN0ZW0gaXMgdGhlIHNpbmdsZSBzb3VyY2Ugb2YgdHJ1dGggZm9yIFVJIGFjcm9zcyBNb2JpbGUsIFdlYiwgYW5kIFRWLiBJdCBkZWZpbmVzIHRva2VucywgY29tcG9uZW50cywgcGF0dGVybnMsIGFuZCBndWlkZWxpbmVzIHNvIGV2ZXJ5IHRlYW0gc2hpcHMgY29uc2lzdGVudCwgYWNjZXNzaWJsZSwgcHJlbWl1bSBleHBlcmllbmNlcyB3aXRob3V0IHJlaW52ZW50aW5nIGRlY2lzaW9ucy4KCiMjIEluc3RhbGxhdGlvbgoKVGhlIERMUyBzaGlwcyBhcyBhIHN0YXRpYyBDU1MgZmlsZS4gTm8gYnVpbGQgc3RlcCwgbm8gbnBtIHBhY2thZ2UgcmVxdWlyZWQgZm9yIGFkb3B0aW9uLgoKIyMjIDEuIEltcG9ydCB0b2tlbnMuY3NzCgpBZGQgdGhpcyBhcyB0aGUgZmlyc3Qgc3R5bGVzaGVldCBvbiBldmVyeSBwYWdlLiBBbGwgQ1NTIGN1c3RvbSBwcm9wZXJ0aWVzIGFyZSBkZWNsYXJlZCBvbiBgOnJvb3RgLgoKYGBgYAo8bGluayByZWw9InN0eWxlc2hlZXQiIGhyZWY9Ii90b2tlbnMvdG9rZW5zLmNzcyI+CmBgYGAKCiMjIyAyLiBJbXBvcnQgY29tcG9uZW50cy5jc3MKCkNvbXBvbmVudCBjbGFzc2VzIGxpdmUgaGVyZS4gT25seSBpbXBvcnQgd2hhdCB5b3UgbmVlZCDigJQgb3IgaW1wb3J0IHRoZSBmdWxsIGZpbGUgYW5kIHJlbHkgb24gYnJvd3NlciBDU1Mgb3B0LWluLgoKYGBgYAo8bGluayByZWw9InN0eWxlc2hlZXQiIGhyZWY9Ii9jb21wb25lbnRzLmNzcyI+CmBgYGAKCiMjIyAzLiBTZXQgcm9vdCBzdHlsZXMKCmBgYGAKaHRtbCwgYm9keSB7CiAgYmFja2dyb3VuZDogdmFyKC0tYmcpOyAgICAgICAvKiAjMDYwODBGIGRhcmsgYmFzZSAqLwogIGNvbG9yOiB2YXIoLS10ZXh0KTsgICAgICAgICAgLyogI0Y0RjJFRSBvZmYtd2hpdGUgKi8KICBmb250LWZhbWlseTogdmFyKC0tamlvLWZvbnQpOyAvKiBKaW9UeXBlLCBzeXN0ZW0gZmFsbGJhY2sgKi8KICBtYXJnaW46IDA7Cn0KYGBgYAoKIyMjIDQuIFBsYXRmb3JtIGNsYXNzIChUViBvbmx5KQoKT24gVFYgc3VyZmFjZXMsIGFkZCBgLnBsYXRmb3JtLXR2YCB0byBgYCBvciBgYC4gVGhpcyBhY3RpdmF0ZXMgVFYtc3BlY2lmaWMgdG9rZW4gb3ZlcnJpZGVzIGZvciBzaXppbmcgYW5kIHNwYWNpbmcuCgpgYGBgCjxodG1sIGNsYXNzPSJwbGF0Zm9ybS10diI+CmBgYGAKCiMjIFRocmVlLXRpZXIgdG9rZW4gbW9kZWwKCk5ldmVyIHVzZSByYXcgaGV4IG9yIHB4IHZhbHVlcyBpbiBjb21wb25lbnQgY29kZS4gRXZlcnkgdmFsdWUgbXVzdCBjb21lIGZyb20gYSB0b2tlbi4KCiMjIEZpcnN0IDUgY29tcG9uZW50cyB0byBsZWFybgoKU3RhcnQgaGVyZSBiZWZvcmUgYnVpbGRpbmcgYW55IHNjcmVlbi4gVGhlc2UgNSBjb3ZlciA4MCUgb2YgSmlvR2FtZXMgc3VyZmFjZXMuCgojIyBQbGF0Zm9ybSBydWxlcyBvdmVydmlldwoKVGhlIERMUyB1c2VzIHRoZSBzYW1lIGNsYXNzIG5hbWVzIGFuZCB0b2tlbiBuYW1lcyBvbiBhbGwgdGhyZWUgcGxhdGZvcm1zLiBQbGF0Zm9ybSBkaWZmZXJlbmNlcyBhcmUgZXhwcmVzc2VkIHRocm91Z2ggdG9rZW4gb3ZlcnJpZGVzLCBub3Qgc2VwYXJhdGUgY29kZWJhc2VzLgoKTW9iaWxlCgotIFRvdWNoIHRhcmdldHM6IG1pbiA0NMOXNDRweCAoYC0tdG91Y2gtbWluYCkKLSBHdXR0ZXI6IDE2cHggKGAtLWd1dHRlcmApCi0gQm90dG9tIHRhYiBiYXIgYWx3YXlzIHByZXNlbnQKLSBTYWZlIGFyZWEgaW5zZXRzIHZpYSBgLS1zYWZlLWJvdGAKLSBObyBob3ZlciBzdGF0ZXMg4oCUIHVzZSBhY3RpdmUvcHJlc3NlZCBvbmx5CgpXZWIKCi0gR3V0dGVyOiA0MHB4IChgLS1ndXR0ZXJgIG92ZXJyaWRkZW4gYXQgNzY4cHgpCi0gTWF4IGNvbnRhaW5lcjogMTI4MHB4IChgLS1jb250YWluZXItd2ViYCkKLSBIb3ZlciBzdGF0ZXMgcmVxdWlyZWQgKGAtLXN0YXRlLWhvdmVyLWJnYCkKLSBGb2N1cyByaW5nOiAycHggamlvLWdyZWVuLCAycHggb2Zmc2V0Ci0gU2lkZWJhciBuYXZpZ2F0aW9uIGluc3RlYWQgb2YgdGFiIGJhcgoKVFYKCi0gQWRkIGAucGxhdGZvcm0tdHZgIHRvIGBgCi0gVFYgc2FmZSB6b25lOiA4MHB4IChgLS10di1zYWZlYCkKLSBGb2N1cyByaW5nOiAzcHggKyBnbG93IChgLS10di1mb2N1cy1zaGFkb3dgKQotIEFsbCBpbnRlcmFjdGl2ZSBlbGVtZW50cyBtdXN0IGJlIEQtcGFkIHJlYWNoYWJsZQotIDEwLWZvb3QgdGVzdDogdGV4dCBtdXN0IGJlIHJlYWRhYmxlIGF0IGRpc3RhbmNlCgojIyBUViBmb2N1cyBnb3RjaGFzCgpUViBpcyB0aGUgaGFyZGVzdCBwbGF0Zm9ybSB0byBnZXQgcmlnaHQuIFRoZXNlIGFyZSB0aGUgbW9zdCBjb21tb24gbWlzdGFrZXMuCgojIyBDb3B5aW5nIGNvZGUgY29ycmVjdGx5CgpDb2RlIGV4YW1wbGVzIGluIHRoaXMgRExTIHNob3cgdGhlIGNvcnJlY3QgSFRNTCBzdHJ1Y3R1cmUgYW5kIGNsYXNzIG5hbWVzLiBBIGZldyBydWxlcyB3aGVuIGNvcHlpbmc6CgojIyBSZXF1ZXN0aW5nIGNvbXBvbmVudHMgYW5kIHRva2VucwoKQmVmb3JlIHJlcXVlc3RpbmcgYW55dGhpbmcgbmV3LCBjaGVjayB0aGF0IGl0IGRvZXMgbm90IGFscmVhZHkgZXhpc3QgdW5kZXIgYSBkaWZmZXJlbnQgbmFtZS4KCiMjIFByZS1zaGlwIGNoZWNrbGlzdAoKUnVuIHRocm91Z2ggdGhpcyBiZWZvcmUgZXZlcnkgZmVhdHVyZSBzaGlwLiBUaGUgZnVsbCByZWxlYXNlIGNoZWNrbGlzdCBsaXZlcyBpbiBbR292ZXJuYW5jZV0oLi4vZ292ZXJuYW5jZS8pLgoKIyMgRm9udCBsb2FkaW5nCgpKaW9HYW1lcyBETFMgdXNlcyAqKkppb1R5cGUqKiBleGNsdXNpdmVseS4gQ29ycmVjdCBsb2FkaW5nIHByZXZlbnRzIEZPVVQgKGZsYXNoIG9mIHVuc3R5bGVkIHRleHQpIGFuZCBsYXlvdXQgc2hpZnQuCgojIyMgUmVxdWlyZWQgd2VpZ2h0cwoKfCBXZWlnaHQgfCBOYW1lIHwgVXNhZ2UgfAp8LS0tfC0tLXwtLS18CnwgMzAwIHwgTGlnaHQgfCBMYXJnZSBoZXJvIHN1Yi1jb3B5LCBsZWdhbCB0ZXh0LiB8CnwgNTAwIHwgTWVkaXVtIHwgQm9keSB0ZXh0LCBjYXB0aW9ucywgc2Vjb25kYXJ5IGxhYmVscy4gfAp8IDcwMCB8IEJvbGQgfCBIZWFkaW5ncywgc2VjdGlvbiB0aXRsZXMsIENUQXMuIHwKfCA5MDAgfCBCbGFjayB8IEhlcm8gdGl0bGVzLCBzdGF0IG51bWJlcnMsIGRpc3BsYXkgdGV4dC4gfAoKRG8gbm90IGxvYWQgNDAwIChSZWd1bGFyKSBvciA2MDAgKFNlbWlCb2xkKSDigJQgRExTIGRvZXMgbm90IHVzZSB0aGVtLiBMb2FkaW5nIHVudXNlZCB3ZWlnaHRzIHdhc3RlcyB+NjBLQiBwZXIgdmFyaWFudC4KCiMjIyBSZWNvbW1lbmRlZCBAZm9udC1mYWNlCgpgYGBgCkBmb250LWZhY2UgewogIGZvbnQtZmFtaWx5OiAnSmlvVHlwZSc7CiAgc3JjOiB1cmwoJy9mb250cy9KaW9UeXBlLUxpZ2h0LndvZmYyJykgZm9ybWF0KCd3b2ZmMicpOwogIGZvbnQtd2VpZ2h0OiAzMDA7CiAgZm9udC1zdHlsZTogbm9ybWFsOwogIGZvbnQtZGlzcGxheTogc3dhcDsKfQpAZm9udC1mYWNlIHsKICBmb250LWZhbWlseTogJ0ppb1R5cGUnOwogIHNyYzogdXJsKCcvZm9udHMvSmlvVHlwZS1NZWRpdW0ud29mZjInKSBmb3JtYXQoJ3dvZmYyJyk7CiAgZm9udC13ZWlnaHQ6IDUwMDsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC1kaXNwbGF5OiBzd2FwOwp9CkBmb250LWZhY2UgewogIGZvbnQtZmFtaWx5OiAnSmlvVHlwZSc7CiAgc3JjOiB1cmwoJy9mb250cy9KaW9UeXBlLUJvbGQud29mZjInKSBmb3JtYXQoJ3dvZmYyJyk7CiAgZm9udC13ZWlnaHQ6IDcwMDsKICBmb250LXN0eWxlOiBub3JtYWw7CiAgZm9udC1kaXNwbGF5OiBzd2FwOwp9CkBmb250LWZhY2UgewogIGZvbnQtZmFtaWx5OiAnSmlvVHlwZSc7CiAgc3JjOiB1cmwoJy9mb250cy9KaW9UeXBlLUJsYWNrLndvZmYyJykgZm9ybWF0KCd3b2ZmMicpOwogIGZvbnQtd2VpZ2h0OiA5MDA7CiAgZm9udC1zdHlsZTogbm9ybWFsOwogIGZvbnQtZGlzcGxheTogc3dhcDsKfQpgYGBgCgojIyMgUHJlbG9hZCBjcml0aWNhbCB3ZWlnaHRzCgpQcmVsb2FkIEJvbGQgYW5kIEJsYWNrIOKAlCB0aGV5IHJlbmRlciBhYm92ZS10aGUtZm9sZCBoZXJvIHRleHQuIExpZ2h0IGFuZCBNZWRpdW0gY2FuIGxvYWQgbm9ybWFsbHkuCgpgYGBgCjxsaW5rIHJlbD0icHJlbG9hZCIgaHJlZj0iL2ZvbnRzL0ppb1R5cGUtQm9sZC53b2ZmMiIKICAgICAgYXM9ImZvbnQiIHR5cGU9ImZvbnQvd29mZjIiIGNyb3Nzb3JpZ2luPgo8bGluayByZWw9InByZWxvYWQiIGhyZWY9Ii9mb250cy9KaW9UeXBlLUJsYWNrLndvZmYyIgogICAgICBhcz0iZm9udCIgdHlwZT0iZm9udC93b2ZmMiIgY3Jvc3NvcmlnaW4+CmBgYGAKCiMjIyBGYWxsYmFjayBzdGFjawoKYGBgYAovKiBBbHJlYWR5IGluIHRva2Vucy5jc3MgKi8KLS1qaW8tZm9udDogJ0ppb1R5cGUnLCAnT3V0Zml0JywgLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCBzYW5zLXNlcmlmOwpgYGBgCgpPdXRmaXQgaXMgdGhlIGNsb3Nlc3QgcHVibGljIGZhbGxiYWNrIOKAlCBzaW1pbGFyIHByb3BvcnRpb25zLiBEbyBub3Qgc3Vic3RpdHV0ZSBJbnRlciBvciBSb2JvdG8uCgotLS0KCiMjIFRva2VucyByZWZlcmVuY2VkIG9uIHRoaXMgcGFnZQoKVXNlIHRoZXNlIGV4YWN0IHRva2VucyDigJQgZGVmaW5lZCBpbiBgdG9rZW5zL3Rva2Vucy5jc3NgLiBEbyBub3Qgc3Vic3RpdHV0ZSByYXcgdmFsdWVzLgoKLSBgLS1hY3Rpb24tcHJpbWFyeWAKLSBgLS1hbWJlcmAKLSBgLS1iZ2AKLSBgLS1iZzJgCi0gYC0tYm9yZGVyYAotIGAtLWJvcmRlci1zdWJ0bGVgCi0gYC0tYnRuLXByaW1hcnktYmdgCi0gYC0tZ29sZGAKLSBgLS1qaW9gCi0gYC0tamlvLWZvbnRgCi0gYC0tamlvLXNvZnRgCi0gYC0tcG9zaXRpdmVgCi0gYC0tcjJgCi0gYC0tcjNgCi0gYC0tcjRgCi0gYC0tcjVgCi0gYC0tc3RhdHVzLW5lZ2F0aXZlYAotIGAtLXN0YXR1cy1wb3NpdGl2ZWAKLSBgLS1zdGF0dXMtd2FybmluZ2AKLSBgLS1zdXJmYWNlLTFgCi0gYC0tdGV4dGAKLSBgLS10ZXh0LXBsYWNlaG9sZGVyYAotIGAtLXRleHQyYAotIGAtLXRleHQzYAotIGAtLXRva2VuYAotIGAtLXR2LWZvY3VzLXNoYWRvd2AKCi0tLQoKIyMgQnVpbGQgcnVsZXMgKGJpbmRpbmcpCgoxLiBVc2UgKipvbmx5KiogdGhlIHRva2VucyBsaXN0ZWQgYWJvdmUuIElmIGEgdmFsdWUgeW91IG5lZWQgaXMgbm90IGxpc3RlZCwgc3RvcCBhbmQgYXNrIOKAlCBkbyBub3QgaW50cm9kdWNlIGEgcmF3IHZhbHVlLgoyLiBGb250IGlzICoqSmlvVHlwZSoqIG9ubHkuIFdlaWdodHM6IDMwMCwgNTAwLCA3MDAsIDkwMC4KMy4gUmV1c2UgdGhlIGNvbXBvbmVudCBDU1MgcGF0dGVybnMgc2hvd24gb24gdGhlIHNvdXJjZSBwYWdlOyBkbyBub3QgcmVkZXNpZ24uCjQuIE1hdGNoIGV2ZXJ5IHN0YXRlIChkZWZhdWx0LCBob3ZlciwgZm9jdXMsIGFjdGl2ZSwgZGlzYWJsZWQsIGxvYWRpbmcpIHNob3duIG9uIHRoZSBwYWdlLgo1LiBBY2Nlc3NpYmlsaXR5IHJlcXVpcmVtZW50cyBvbiB0aGUgcGFnZSBhcmUgbWFuZGF0b3J5LCBub3Qgb3B0aW9uYWwuCg==" download="getting-started-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
+    </div>
+  </header>
+
+  <!-- WHAT IS THE DLS -->
+  <section class="ds-section" id="what-is-dls">
+    <h2 class="ds-section-title">What is JioGames DLS?</h2>
+    <p class="ds-body">The JioGames Design Language System is the single source of truth for UI across Mobile, Web, and TV. It defines tokens, components, patterns, and guidelines so every team ships consistent, accessible, premium experiences without reinventing decisions.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:24px">
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:20px">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px">475 tokens</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">Colour, spacing, radius, motion, z-index — all in one CSS file.</div>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:20px">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px">53 components</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">From buttons to rail cards — documented with variants, states, and accessibility.</div>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:20px">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px">3 platforms</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">Mobile, Web, and TV each have their own sizing, spacing, and interaction rules.</div>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:20px">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px">Dark-first</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">Every surface is dark. JioGames green is the sole brand accent — never blue or purple.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTALLATION -->
+  <section class="ds-section" id="installation">
+    <h2 class="ds-section-title">Installation</h2>
+    <p class="ds-body">The DLS ships as a static CSS file. No build step, no npm package required for adoption.</p>
+
+    <h3 class="ds-sub-section-title" style="font-size:14px;font-weight:700;color:var(--text);margin:24px 0 12px">1. Import tokens.css</h3>
+    <p class="ds-body" style="margin-bottom:12px">Add this as the first stylesheet on every page. All CSS custom properties are declared on <code class="ds-code">:root</code>.</p>
+    <pre class="ds-code-block"><code>&lt;link rel="stylesheet" href="/tokens/tokens.css"&gt;</code></pre>
+
+    <h3 class="ds-sub-section-title" style="font-size:14px;font-weight:700;color:var(--text);margin:24px 0 12px">2. Import components.css</h3>
+    <p class="ds-body" style="margin-bottom:12px">Component classes live here. Only import what you need — or import the full file and rely on browser CSS opt-in.</p>
+    <pre class="ds-code-block"><code>&lt;link rel="stylesheet" href="/components.css"&gt;</code></pre>
+
+    <h3 class="ds-sub-section-title" style="font-size:14px;font-weight:700;color:var(--text);margin:24px 0 12px">3. Set root styles</h3>
+    <pre class="ds-code-block"><code>html, body {
+  background: var(--bg);       /* #06080F dark base */
+  color: var(--text);          /* #F4F2EE off-white */
+  font-family: var(--jio-font); /* JioType, system fallback */
+  margin: 0;
+}</code></pre>
+
+    <h3 class="ds-sub-section-title" style="font-size:14px;font-weight:700;color:var(--text);margin:24px 0 12px">4. Platform class (TV only)</h3>
+    <p class="ds-body" style="margin-bottom:12px">On TV surfaces, add <code class="ds-code">.platform-tv</code> to <code class="ds-code">&lt;html&gt;</code> or <code class="ds-code">&lt;body&gt;</code>. This activates TV-specific token overrides for sizing and spacing.</p>
+    <pre class="ds-code-block"><code>&lt;html class="platform-tv"&gt;</code></pre>
+
+    <div class="ds-note" style="margin-top:20px">
+      <strong>JioType font:</strong> Font files are served from <code class="ds-code">/Assets/font/</code>. Ensure your project serves these files or configure <code class="ds-code">@font-face</code> to point to your own font CDN. The <code class="ds-code">tokens.css</code> file includes <code class="ds-code">font-display: swap</code> on all weights to prevent FOIT.
+    </div>
+  </section>
+
+  <!-- THREE-TIER TOKEN MODEL -->
+  <section class="ds-section" id="token-model">
+    <h2 class="ds-section-title">Three-tier token model</h2>
+    <p class="ds-body">Never use raw hex or px values in component code. Every value must come from a token.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1px;background:var(--border-subtle);border-radius:var(--r4);overflow:hidden;margin-top:20px">
+      <div style="background:var(--surface-1);padding:20px">
+        <div style="font-size:11px;font-weight:700;color:var(--jio);margin-bottom:8px">Tier 1 — Primitive</div>
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px">Raw values</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5;margin-bottom:12px">The atomic palette. Never use directly in component code.</div>
+        <code class="ds-code" style="font-size:11px">--jio: #00A859<br>--space-2: 16px<br>--r4: 14px</code>
+      </div>
+      <div style="background:var(--surface-1);padding:20px">
+        <div style="font-size:11px;font-weight:700;color:var(--jio);margin-bottom:8px">Tier 2 — Semantic</div>
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px">Purpose-named</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5;margin-bottom:12px">Maps a purpose to a primitive. Change the semantic layer; all components update.</div>
+        <code class="ds-code" style="font-size:11px">--action-primary: var(--jio)<br>--text-placeholder: #8B92A5<br>--status-positive: var(--positive)</code>
+      </div>
+      <div style="background:var(--surface-1);padding:20px">
+        <div style="font-size:11px;font-weight:700;color:var(--jio);margin-bottom:8px">Tier 3 — Component</div>
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px">Component-scoped</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5;margin-bottom:12px">Scoped to one component. Enables component-level theming without touching primitives.</div>
+        <code class="ds-code" style="font-size:11px">--btn-primary-bg: var(--action-primary)<br>--input-placeholder: var(--text-placeholder)<br>--card-radius-landscape: var(--r5)</code>
+      </div>
+    </div>
+
+    <div style="margin-top:20px;padding:16px 20px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+      <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px">Rule: always use the most specific tier available</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;align-items:flex-start;gap:10px">
+          <span style="color:var(--status-positive);font-weight:700;font-size:13px;flex-shrink:0">Do</span>
+          <code class="ds-code" style="font-size:12px">background: var(--btn-primary-bg)</code>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:10px">
+          <span style="color:var(--status-negative);font-weight:700;font-size:13px;flex-shrink:0">Don't</span>
+          <code class="ds-code" style="font-size:12px">background: #00A859</code>
+        </div>
+      </div>
+    </div>
+    <div style="padding:14px 16px;background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.25);border-radius:var(--r3);margin-top:16px">
+  <div style="font-size:11px;font-weight:700;color:#F59E0B;letter-spacing:.4px;text-transform:uppercase;margin-bottom:6px">Deprecated token</div>
+  <div style="font-size:13px;color:var(--text);font-weight:700;margin-bottom:4px"><code style="background:var(--bg2);padding:2px 6px;border-radius:4px;font-size:12px">--ctrl-h</code> → use <code style="background:var(--bg2);padding:2px 6px;border-radius:4px;font-size:12px">--input-h</code></div>
+  <div style="font-size:12px;color:var(--text2);line-height:1.6"><code style="background:var(--bg2);padding:2px 6px;border-radius:4px;font-size:11px">--ctrl-h</code> is deprecated. Canonical input/control height is now <code style="background:var(--bg2);padding:2px 6px;border-radius:4px;font-size:11px">--input-h</code>. Exception: <code style="background:var(--bg2);padding:2px 6px;border-radius:4px;font-size:11px">--ctrl-h-sm</code> and <code style="background:var(--bg2);padding:2px 6px;border-radius:4px;font-size:11px">--ctrl-h-ghost</code> remain valid — they have no <code style="background:var(--bg2);padding:2px 6px;border-radius:4px;font-size:11px">--input-h</code> equivalent.</div>
+</div>
+  </section>
+
+  <!-- FIRST 5 COMPONENTS -->
+  <section class="ds-section" id="first-components">
+    <h2 class="ds-section-title">First 5 components to learn</h2>
+    <p class="ds-body">Start here before building any screen. These 5 cover 80% of JioGames surfaces.</p>
+    <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;margin-top:20px">
+      <a href="../buttons/" style="display:grid;grid-template-columns:32px 1fr auto;gap:16px;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border-subtle);text-decoration:none;transition:background 150ms" onmouseover="this.style.background='rgba(255,255,255,.03)'" onmouseout="this.style.background=''">
+        <div style="width:32px;height:32px;background:var(--jio-soft);border-radius:var(--r2);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:var(--jio)">1</div>
+        <div><div style="font-size:14px;font-weight:700;color:var(--text)">Buttons</div><div style="font-size:12px;color:var(--text2);margin-top:2px">7 variants, 5 sizes, loading/disabled states. Used in every CTA.</div></div>
+        <span style="color:var(--text3);font-size:12px">→</span>
+      </a>
+      <a href="../cards/" style="display:grid;grid-template-columns:32px 1fr auto;gap:16px;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border-subtle);text-decoration:none;transition:background 150ms" onmouseover="this.style.background='rgba(255,255,255,.03)'" onmouseout="this.style.background=''">
+        <div style="width:32px;height:32px;background:var(--jio-soft);border-radius:var(--r2);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:var(--jio)">2</div>
+        <div><div style="font-size:14px;font-weight:700;color:var(--text)">Cards</div><div style="font-size:12px;color:var(--text2);margin-top:2px">Wide, portrait, square, and continue-playing variants. Rail staple.</div></div>
+        <span style="color:var(--text3);font-size:12px">→</span>
+      </a>
+      <a href="../rails/" style="display:grid;grid-template-columns:32px 1fr auto;gap:16px;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border-subtle);text-decoration:none;transition:background 150ms" onmouseover="this.style.background='rgba(255,255,255,.03)'" onmouseout="this.style.background=''">
+        <div style="width:32px;height:32px;background:var(--jio-soft);border-radius:var(--r2);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:var(--jio)">3</div>
+        <div><div style="font-size:14px;font-weight:700;color:var(--text)">Rails</div><div style="font-size:12px;color:var(--text2);margin-top:2px">Horizontal scrolling rows. Home screen is a stack of rails.</div></div>
+        <span style="color:var(--text3);font-size:12px">→</span>
+      </a>
+      <a href="../inputs/" style="display:grid;grid-template-columns:32px 1fr auto;gap:16px;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border-subtle);text-decoration:none;transition:background 150ms" onmouseover="this.style.background='rgba(255,255,255,.03)'" onmouseout="this.style.background=''">
+        <div style="width:32px;height:32px;background:var(--jio-soft);border-radius:var(--r2);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:var(--jio)">4</div>
+        <div><div style="font-size:14px;font-weight:700;color:var(--text)">Inputs</div><div style="font-size:12px;color:var(--text2);margin-top:2px">Text input, OTP, search. Focus states, error states, placeholder contrast.</div></div>
+        <span style="color:var(--text3);font-size:12px">→</span>
+      </a>
+      <a href="../navigation/" style="display:grid;grid-template-columns:32px 1fr auto;gap:16px;align-items:center;padding:16px 20px;text-decoration:none;transition:background 150ms" onmouseover="this.style.background='rgba(255,255,255,.03)'" onmouseout="this.style.background=''">
+        <div style="width:32px;height:32px;background:var(--jio-soft);border-radius:var(--r2);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:var(--jio)">5</div>
+        <div><div style="font-size:14px;font-weight:700;color:var(--text)">Navigation / AppBar</div><div style="font-size:12px;color:var(--text2);margin-top:2px">Tab bar, app bar, scroll behavior. Every screen needs one.</div></div>
+        <span style="color:var(--text3);font-size:12px">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- PLATFORM RULES -->
+  <section class="ds-section" id="platform-rules">
+    <h2 class="ds-section-title">Platform rules overview</h2>
+    <p class="ds-body">The DLS uses the same class names and token names on all three platforms. Platform differences are expressed through token overrides, not separate codebases.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:20px">
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--jio);border-radius:var(--r4);padding:20px;background:var(--surface-1)">
+        <p style="font-size:12px;font-weight:700;color:var(--jio);margin:0 0 12px">Mobile</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Touch targets: min 44×44px (<code class="ds-code">--touch-min</code>)</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Gutter: 16px (<code class="ds-code">--gutter</code>)</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Bottom tab bar always present</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Safe area insets via <code class="ds-code">--safe-bot</code></li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">No hover states — use active/pressed only</li>
+        </ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--gold);border-radius:var(--r4);padding:20px;background:var(--surface-1)">
+        <p style="font-size:12px;font-weight:700;color:var(--gold);margin:0 0 12px">Web</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Gutter: 40px (<code class="ds-code">--gutter</code> overridden at 768px)</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Max container: 1280px (<code class="ds-code">--container-web</code>)</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Hover states required (<code class="ds-code">--state-hover-bg</code>)</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Focus ring: 2px jio-green, 2px offset</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Sidebar navigation instead of tab bar</li>
+        </ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--amber);border-radius:var(--r4);padding:20px;background:var(--surface-1)">
+        <p style="font-size:12px;font-weight:700;color:var(--amber);margin:0 0 12px">TV</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Add <code class="ds-code">.platform-tv</code> to <code class="ds-code">&lt;html&gt;</code></li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">TV safe zone: 80px (<code class="ds-code">--tv-safe</code>)</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Focus ring: 3px + glow (<code class="ds-code">--tv-focus-shadow</code>)</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">All interactive elements must be D-pad reachable</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">10-foot test: text must be readable at distance</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TV GOTCHAS -->
+  <section class="ds-section" id="tv-gotchas">
+    <h2 class="ds-section-title">TV focus gotchas</h2>
+    <p class="ds-body">TV is the hardest platform to get right. These are the most common mistakes.</p>
+    <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;margin-top:20px">
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:16px;padding:16px 20px;border-bottom:1px solid var(--border-subtle);align-items:flex-start">
+        <span style="color:var(--status-negative);font-weight:700;font-size:13px;padding-top:1px">✕</span>
+        <div><div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px">Rail overflow clips the focus ring</div><div style="font-size:12px;color:var(--text2);line-height:1.5">Set <code class="ds-code">overflow: visible</code> on rail containers and use <code class="ds-code">clip-path</code> for visual overflow only.</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:16px;padding:16px 20px;border-bottom:1px solid var(--border-subtle);align-items:flex-start">
+        <span style="color:var(--status-negative);font-weight:700;font-size:13px;padding-top:1px">✕</span>
+        <div><div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px">Focus gets trapped inside a rail</div><div style="font-size:12px;color:var(--text2);line-height:1.5">Up/Down arrows must escape the rail. Use <code class="ds-code">tabindex</code> and D-pad navigation management.</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:16px;padding:16px 20px;border-bottom:1px solid var(--border-subtle);align-items:flex-start">
+        <span style="color:var(--status-negative);font-weight:700;font-size:13px;padding-top:1px">✕</span>
+        <div><div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px">Using <code class="ds-code">outline: none</code> without a replacement</div><div style="font-size:12px;color:var(--text2);line-height:1.5">Always pair with <code class="ds-code">box-shadow: var(--tv-focus-shadow)</code>. Never remove focus visibility. validate.sh catches this.</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:16px;padding:16px 20px;border-bottom:1px solid var(--border-subtle);align-items:flex-start">
+        <span style="color:var(--status-negative);font-weight:700;font-size:13px;padding-top:1px">✕</span>
+        <div><div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px">Forgetting <code class="ds-code">.platform-tv</code></div><div style="font-size:12px;color:var(--text2);line-height:1.5">Without it, TV gets mobile token values. Buttons are too small, focus rings too thin, gutters too tight.</div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:16px;padding:16px 20px;align-items:flex-start">
+        <span style="color:var(--status-negative);font-weight:700;font-size:13px;padding-top:1px">✕</span>
+        <div><div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px">Modal focus trap breaks D-pad exit</div><div style="font-size:12px;color:var(--text2);line-height:1.5">Implement Back button / Escape handler explicitly. See <a href="../dialogs/" style="color:var(--jio)">Dialogs</a> for the pattern.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW TO COPY CODE -->
+  <section class="ds-section" id="copying-code">
+    <h2 class="ds-section-title">Copying code correctly</h2>
+    <p class="ds-body">Code examples in this DLS show the correct HTML structure and class names. A few rules when copying:</p>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:16px">
+      <div style="padding:16px 20px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">Always link tokens.css first</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">Component classes depend on CSS custom properties. Without <code class="ds-code">tokens.css</code>, nothing renders correctly.</div>
+      </div>
+      <div style="padding:16px 20px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">Never hardcode hex values</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">If an example shows a raw hex, it is a documentation bug — report it. Use the corresponding <code class="ds-code">var(--token)</code> instead. Run <code class="ds-code">bash tokens/validate.sh</code> to catch violations.</div>
+      </div>
+      <div style="padding:16px 20px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">Run validate.sh before shipping</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">The linter catches raw hex, banned colours, unauthorized font weights, missing focus rings, and off-scale spacing. See <a href="../tooling/" style="color:var(--jio)">Tooling</a> for full docs.</div>
+      </div>
+      <div style="padding:16px 20px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">Respect status badges</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5"><span class="ds-status ds-status--stable" style="font-size:10px">Stable</span> = production-ready. <span class="ds-status ds-status--beta" style="font-size:10px">Beta</span> = API may change. <span class="ds-status ds-status--draft" style="font-size:10px">Draft</span> = do not use in production.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REQUESTING COMPONENTS -->
+  <section class="ds-section" id="contributions">
+    <h2 class="ds-section-title">Requesting components and tokens</h2>
+    <p class="ds-body">Before requesting anything new, check that it does not already exist under a different name.</p>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:16px">
+      <div style="display:flex;align-items:flex-start;gap:12px;padding:16px 20px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--jio);flex-shrink:0;margin-top:1px">1</div>
+        <div><div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px">Check existing components and token reference</div><div style="font-size:12px;color:var(--text2);line-height:1.5">Browse the <a href="../" style="color:var(--jio)">component index</a> and <a href="../token-reference/" style="color:var(--jio)">token reference</a>. The need may already be served.</div></div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:12px;padding:16px 20px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--jio);flex-shrink:0;margin-top:1px">2</div>
+        <div><div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px">File an RFC</div><div style="font-size:12px;color:var(--text2);line-height:1.5">Use the RFC template in <a href="../governance/" style="color:var(--jio)">Governance</a>. Include: problem, existing pattern check, token impact, a11y impact, TV impact.</div></div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:12px;padding:16px 20px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--jio);flex-shrink:0;margin-top:1px">3</div>
+        <div><div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px">DLS owner reviews</div><div style="font-size:12px;color:var(--text2);line-height:1.5">Reviewed against: is this truly shared? Does it justify the token count increase? Does it work on all 3 platforms?</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALIDATION CHECKLIST -->
+  <section class="ds-section" id="checklist">
+    <h2 class="ds-section-title">Pre-ship checklist</h2>
+    <p class="ds-body">Run through this before every feature ship. The full release checklist lives in <a href="../governance/" style="color:var(--jio)">Governance</a>.</p>
+    <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;margin-top:20px">
+      <div style="padding:12px 16px;border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;gap:12px">
+        <span style="width:18px;height:18px;border:1.5px solid var(--border);border-radius:4px;display:inline-block;flex-shrink:0"></span>
+        <span style="font-size:13px;color:var(--text2)"><code class="ds-code">bash tokens/validate.sh path/to/screen.html</code> exits 0</span>
+      </div>
+      <div style="padding:12px 16px;border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;gap:12px">
+        <span style="width:18px;height:18px;border:1.5px solid var(--border);border-radius:4px;display:inline-block;flex-shrink:0"></span>
+        <span style="font-size:13px;color:var(--text2)">Focus ring visible on keyboard navigation (all interactive elements)</span>
+      </div>
+      <div style="padding:12px 16px;border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;gap:12px">
+        <span style="width:18px;height:18px;border:1.5px solid var(--border);border-radius:4px;display:inline-block;flex-shrink:0"></span>
+        <span style="font-size:13px;color:var(--text2)">TV: tested with keyboard D-pad simulation (Tab, Arrow keys, Enter, Escape)</span>
+      </div>
+      <div style="padding:12px 16px;border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;gap:12px">
+        <span style="width:18px;height:18px;border:1.5px solid var(--border);border-radius:4px;display:inline-block;flex-shrink:0"></span>
+        <span style="font-size:13px;color:var(--text2)">No raw hex values outside of <code class="ds-code">tokens.css</code></span>
+      </div>
+      <div style="padding:12px 16px;border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;gap:12px">
+        <span style="width:18px;height:18px;border:1.5px solid var(--border);border-radius:4px;display:inline-block;flex-shrink:0"></span>
+        <span style="font-size:13px;color:var(--text2)">Reduced-motion tested: no looping animations at rest</span>
+      </div>
+      <div style="padding:12px 16px;border-bottom:1px solid var(--border-subtle);display:flex;align-items:center;gap:12px">
+        <span style="width:18px;height:18px;border:1.5px solid var(--border);border-radius:4px;display:inline-block;flex-shrink:0"></span>
+        <span style="font-size:13px;color:var(--text2)">Placeholder/helper text uses <code class="ds-code">--input-placeholder</code>, not <code class="ds-code">--text3</code></span>
+      </div>
+      <div style="padding:12px 16px;display:flex;align-items:center;gap:12px">
+        <span style="width:18px;height:18px;border:1.5px solid var(--border);border-radius:4px;display:inline-block;flex-shrink:0"></span>
+        <span style="font-size:13px;color:var(--text2)">No blue or purple used as accent colour (JioGames is green-only)</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FONT LOADING -->
+  <section class="ds-section" id="font-loading">
+    <h2 class="ds-section-title">Font loading</h2>
+    <p class="ds-body">JioGames DLS uses <strong>JioType</strong> exclusively. Correct loading prevents FOUT (flash of unstyled text) and layout shift.</p>
+
+    <h3 style="font-size:14px;font-weight:700;color:var(--text);margin:24px 0 12px">Required weights</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Weight</th><th>Name</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td>300</td><td>Light</td><td>Large hero sub-copy, legal text.</td></tr>
+        <tr><td>500</td><td>Medium</td><td>Body text, captions, secondary labels.</td></tr>
+        <tr><td>700</td><td>Bold</td><td>Headings, section titles, CTAs.</td></tr>
+        <tr><td>900</td><td>Black</td><td>Hero titles, stat numbers, display text.</td></tr>
+      </tbody>
+    </table>
+    <p class="ds-body" style="margin-top:12px">Do not load 400 (Regular) or 600 (SemiBold) — DLS does not use them. Loading unused weights wastes ~60KB per variant.</p>
+
+    <h3 style="font-size:14px;font-weight:700;color:var(--text);margin:24px 0 12px">Recommended @font-face</h3>
+    <pre class="ds-code-block"><code>@font-face {
+  font-family: 'JioType';
+  src: url('/fonts/JioType-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JioType';
+  src: url('/fonts/JioType-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JioType';
+  src: url('/fonts/JioType-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JioType';
+  src: url('/fonts/JioType-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}</code></pre>
+
+    <h3 style="font-size:14px;font-weight:700;color:var(--text);margin:24px 0 12px">Preload critical weights</h3>
+    <p class="ds-body">Preload Bold and Black — they render above-the-fold hero text. Light and Medium can load normally.</p>
+    <pre class="ds-code-block"><code>&lt;link rel="preload" href="/fonts/JioType-Bold.woff2"
+      as="font" type="font/woff2" crossorigin&gt;
+&lt;link rel="preload" href="/fonts/JioType-Black.woff2"
+      as="font" type="font/woff2" crossorigin&gt;</code></pre>
+
+    <h3 style="font-size:14px;font-weight:700;color:var(--text);margin:24px 0 12px">Fallback stack</h3>
+    <pre class="ds-code-block"><code>/* Already in tokens.css */
+--jio-font: 'JioType', 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;</code></pre>
+    <p class="ds-body" style="margin-top:12px">Outfit is the closest public fallback — similar proportions. Do not substitute Inter or Roboto.</p>
+
+    <div style="display:flex;flex-direction:column;gap:8px;margin-top:20px">
+      <div style="padding:12px 16px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);border-left:3px solid var(--status-warning)">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px">font-display: block — never use</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5"><code class="ds-code">block</code> hides text for up to 3s on slow connections. JioGames targets low-end Android — use <code class="ds-code">swap</code> always.</div>
+      </div>
+      <div style="padding:12px 16px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);border-left:3px solid var(--status-warning)">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px">Hosting JioType externally</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">JioType is proprietary. Do not self-host on public CDNs or open-source repos. Serve from your own domain or Jio CDN only.</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+<script src="../shell.js?v=2"></script>
+</body></html>

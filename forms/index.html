@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
 </head>
 <body>
   <main class="ds-main">
@@ -15,19 +15,19 @@
     <!-- PAGE HEADER -->
     <header class="component-page-header">
       <nav class="component-breadcrumb" aria-label="Breadcrumb">
-        <a href="../">JioGames DLS</a>
-        <span class="component-breadcrumb-sep" aria-hidden="true">›</span>
-        <a href="../">Components</a>
-        <span class="component-breadcrumb-sep" aria-hidden="true">›</span>
-        <span>Forms</span>
+        <span class="component-breadcrumb-link">JioGames DLS</span>
+        <span class="component-breadcrumb-sep">›</span>
+        <span>Components</span>
+        <span class="component-breadcrumb-sep">›</span>
+        <span class="component-breadcrumb-current">Forms</span>
       </nav>
-      <h1 class="component-page-title">Forms</h1>
-      <p class="component-page-def">Form patterns for collecting user input across login, payment, preferences, and settings flows.</p>
+      <h1 class="component-page-title">Forms</h1><p class="component-page-def">Form patterns for collecting user input across login, payment, preferences, and settings flows.</p>
       <div class="component-platforms">
         <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
         <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
         <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
-      </div>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBGb3JtcyDigJQgSmlvR2FtZXMgRExTIHNwZWMKCj4gU291cmNlOiBgZm9ybXMvaW5kZXguaHRtbGAgaW4gdGhlIEppb0dhbWVzIERlc2lnbiBTeXN0ZW0uCj4gVGhpcyBzcGVjIGlzIGdlbmVyYXRlZCB2ZXJiYXRpbSBmcm9tIHRoZSBwYWdlIOKAlCBkbyBub3QgaW52ZW50IHZhbHVlcyBub3QgbGlzdGVkIGhlcmUuCgoqKlBhdGg6KiogSmlvR2FtZXMgRExTIOKAuiBDb21wb25lbnRzIOKAuiBGb3JtcwoKLS0tCgpGb3JtIHBhdHRlcm5zIGZvciBjb2xsZWN0aW5nIHVzZXIgaW5wdXQgYWNyb3NzIGxvZ2luLCBwYXltZW50LCBwcmVmZXJlbmNlcywgYW5kIHNldHRpbmdzIGZsb3dzLgoKRk9STVMgwrcgTE9HSU4sIE9UUCwgVkFMSURBVElPTiBTVEFURVMKCiMjIE92ZXJ2aWV3CgpKaW9HYW1lcyBmb3JtcyBhcmUgZGFyay1maXJzdCwgbWluaW1hbC1jaHJvbWUgaW5wdXQgY29sbGVjdGlvbnMuIEV2ZXJ5IGZpZWxkIGZvbGxvd3MgdGhlIGxhYmVsIOKGkiBpbnB1dCDihpIgaGVscGVyL2Vycm9yIHN0YWNrLiBVc2UgYC5pbnB1dC1maWVsZGAgaW5zaWRlIGAuaW5wdXQtd3JhcGAgZm9yIGNvbnNpc3RlbnQgZm9jdXMgcmluZ3MgYW5kIHN1cmZhY2UgdHJlYXRtZW50LiBOZXZlciByYXcgYGAgd2l0aG91dCBhIHdyYXBwZXIuCgojIyBBbmF0b215CgpBIHNpbmdsZSBmaWVsZCBpcyBjb21wb3NlZCBvZiB1cCB0byA3IGxheWVycy4gT25seSBMYWJlbCBhbmQgSW5wdXQgYXJlIHJlcXVpcmVkLgoKMS4gRmllbGQgbGFiZWwgYGZvbnQtc2l6ZToxM3B4IGZvbnQtd2VpZ2h0OjcwMGAg4oCUIHByaW1hcnkgdGV4dCBjb2xvdXIgUmVxdWlyZWQKMi4gUmVxdWlyZWQgbWFya2VyIGAqYCBpbiBgdmFyKC0tbmVnYXRpdmUpYCwgcGxhY2VkIGFmdGVyIGxhYmVsIHRleHQgT3B0aW9uYWwKMy4gSW5wdXQgYC5pbnB1dC1maWVsZGAgaW5zaWRlIGAuaW5wdXQtd3JhcGAgUmVxdWlyZWQKNC4gUGxhY2Vob2xkZXIgRGVzY3JpcHRpdmUgZXhhbXBsZSB0ZXh0IOKAlCBuZXZlciBhIGxhYmVsIHN1YnN0aXR1dGUgT3B0aW9uYWwKNS4gSGVscGVyIHRleHQgMTFweCBndWlkYW5jZSB0ZXh0LCBgdmFyKC0tdGV4dDMpYCBPcHRpb25hbAo2LiBFcnJvciBtZXNzYWdlIDExcHgsIGB2YXIoLS1lcnJvci10ZXh0KWAg4oCUIHNob3duIHdoZW4gYC5pcy1lcnJvcmAgQ29uZGl0aW9uYWwKNy4gU3VjY2VzcyBtZXNzYWdlIDExcHgsIGB2YXIoLS1zdWNjZXNzLXRleHQpYCDigJQgc2hvd24gd2hlbiBgLmlzLXN1Y2Nlc3NgIENvbmRpdGlvbmFsCgojIyBGaWVsZCB0eXBlcwoKQWxsIHN1cHBvcnRlZCBpbnB1dCB2YXJpYW50cy4gVXNlIG5hdGl2ZSBlbGVtZW50cyB3aXRoIGAuaW5wdXQtZmllbGRgIHN0eWxpbmcg4oCUIG5ldmVyIGN1c3RvbSByZXBsYWNlbWVudHMuCgojIyBWYWxpZGF0aW9uIHN0YXRlcwoKVmFsaWRhdGUgb24gYmx1ci4gU3VyZmFjZSBlcnJvcnMgaW5saW5lIGJlbG93IHRoZSBpbnB1dC4gVXNlIGNvbG91ciArIG1lc3NhZ2Ug4oCUIG5ldmVyIGljb24tb25seS4KCiMjIEZpZWxkIGdyb3VwcwoKR3JvdXAgcmVsYXRlZCBmaWVsZHMgdW5kZXIgYSBzZWN0aW9uIGxhYmVsIHNlcGFyYXRlZCBieSBhIHN1YnRsZSBkaXZpZGVyLiBVc2UgYSAyLWNvbHVtbiBncmlkIG9ubHkgd2hlbiBmaWVsZHMgYXJlIHNob3J0IChmaXJzdC9sYXN0IG5hbWUsIGRheS9tb250aCkuCgojIyBDb21wbGV0ZSBmb3JtIOKAlCBMb2dpbgoKVGhlIE9UUCBsb2dpbiBmb3JtIHVzZWQgYWNyb3NzIG1vYmlsZSBhbmQgd2ViLiBPVFAgYm94ZXMgYXJlIGxhcmdlLCBzcXVhcmUsIGNlbnRyZWQgaW5wdXRzIOKAlCBlYWNoIGFjY2VwdHMgb25lIGRpZ2l0LgoKIyMgRXJyb3Igc3VtbWFyeQoKV2hlbiBhIGZvcm0gaGFzIG11bHRpcGxlIGVycm9ycyBvbiBzdWJtaXQsIGxpc3QgdGhlbSBhbGwgYXQgdGhlIHRvcCBvZiB0aGUgZm9ybSBpbiBhIHN1bW1hcnkgYmxvY2suIFVzZSBgcm9sZT0iYWxlcnQiYCBzbyBzY3JlZW4gcmVhZGVycyBhbm5vdW5jZSBpbW1lZGlhdGVseS4KCi0g4oCiIEVtYWlsIGFkZHJlc3MgaXMgcmVxdWlyZWQKLSDigKIgUGFzc3dvcmQgbXVzdCBiZSBhdCBsZWFzdCA4IGNoYXJhY3RlcnMKCiMjIFN0YXRlIG1hdHJpeAoKQWxsIGZpZWxkIHR5cGVzIGFjcm9zcyBhbGwgaW50ZXJhY3RpdmUgc3RhdGVzLiBBcHBseSBzdGF0ZXMgdmlhIGNsYXNzIG9uIGAuaW5wdXQtZmllbGRgLgoKIyMgUGxhdGZvcm0gYmVoYXZpb3IKCi0gRnVsbC13aWR0aCBpbnB1dHMg4oCUIG5vIG1heC13aWR0aCBjb25zdHJhaW50IHdpdGhpbiB0aGUgZm9ybQotIEtleWJvYXJkIHB1c2hlcyBjb250ZW50IHVwIOKAlCB1c2UgYHZpZXdwb3J0LWZpdD1jb3ZlcmAgYW5kIGBwYWRkaW5nLWJvdHRvbTogZW52KHNhZmUtYXJlYS1pbnNldC1ib3R0b20pYAotIE9UUCBpbnB1dHMgYXV0by1hZHZhbmNlIGZvY3VzIG9uIGVhY2gga2V5c3Ryb2tlCi0gU3VibWl0IENUQSBwaW5uZWQgdG8gYm90dG9tIGFib3ZlIHNhZmUgYXJlYQotIFVzZSBgaW5wdXRtb2RlPSJudW1lcmljImAgb24gT1RQIGZpZWxkcyB0byBzaG93IG51bWVyaWMga2V5Ym9hcmQKCi0gTWF4LXdpZHRoIDQ4MHB4IG9uIGZvcm0gY29udGFpbmVycwotIFRhYiBrZXkgbmF2aWdhdGVzIHRocm91Z2ggZmllbGRzIGluIERPTSBvcmRlcgotIEVudGVyIGtleSBzdWJtaXRzIGlmIGZvY3VzIGlzIGluc2lkZSB0aGUgZm9ybQotIFZhbGlkYXRlIG9uIGJsdXIg4oCUIG5ldmVyIG9uIGV2ZXJ5IGtleXN0cm9rZQotIFNob3cgZXJyb3IgaW1tZWRpYXRlbHkgYWZ0ZXIgYmx1ciwgbm90IG9ubHkgb24gc3VibWl0CgojIyBBY2Nlc3NpYmlsaXR5CgpGb3JtcyBhcmUgaGlnaC1yaXNrIGZvciBhY2Nlc3NpYmlsaXR5IGZhaWx1cmVzLiBGb2xsb3cgZXZlcnkgcnVsZSBiZWxvdyDigJQgbm8gZXhjZXB0aW9ucy4KCiMjIENvbnRlbnQgZ3VpZGFuY2UKCiMjIyBMYWJlbHMKClVzZSBzZW50ZW5jZSBjYXNlLiBCZSBzcGVjaWZpYzogIk1vYmlsZSBudW1iZXIiIG5vdCAiUGhvbmUiLiBOZXZlciB1c2UgdGVjaG5pY2FsIGtleXM6ICJ1c2VyX2lkIiBvciAiZW1haWxBZGRyZXNzIi4gTGFiZWxzIHNpdCBhYm92ZSB0aGUgZmllbGQg4oCUIG5ldmVyIGluc2lkZSBpdC4KCiMjIyBQbGFjZWhvbGRlciB0ZXh0CgpQbGFjZWhvbGRlciBpcyBhbiBleGFtcGxlIOKAlCBub3QgYSBsYWJlbCwgbm90IGluc3RydWN0aW9ucy4gVXNlIHJlYWxpc3RpYyBleGFtcGxlczogIis5MSA5ODc2NSA0MzIxMCIsICJ5b3VAZXhhbXBsZS5jb20iLiBEaXNhcHBlYXJzIG9uIHR5cGUsIHNvIG5ldmVyIHB1dCByZXF1aXJlZCBpbmZvIGhlcmUuCgojIyMgSGVscGVyIHRleHQKClNob3J0IGZhY3R1YWwgZ3VpZGFuY2UgYmVsb3cgdGhlIGZpZWxkOiAiV2UnbGwgdXNlIHRoaXMgZm9yIGFjY291bnQgcmVjb3ZlcnkiLiBXcml0ZSBpbiBwcmVzZW50IHRlbnNlLiBEaXNhcHBlYXJzIHdoZW4gYW4gZXJyb3Igb3Igc3VjY2VzcyBtZXNzYWdlIGFwcGVhcnMuCgojIyMgRXJyb3IgbWVzc2FnZXMKCkJlIHNwZWNpZmljIGFuZCBhY3Rpb25hYmxlOiAiUGFzc3dvcmQgbXVzdCBiZSBhdCBsZWFzdCA4IGNoYXJhY3RlcnMiIG5vdCAiSW52YWxpZCIuIFN0YXRlIHdoYXQgd2VudCB3cm9uZyBhbmQgd2hhdCB0byBkby4gTmV2ZXIgdXNlICJFcnJvciIgYWxvbmUuCgojIyMgUmVxdWlyZWQgbWFya2VycwoKTWFyayByZXF1aXJlZCBmaWVsZHMgd2l0aCAqIChhc3RlcmlzaykgaW4gdmFyKC0tbmVnYXRpdmUpLiBBZGQgYSBsZWdlbmQgYWJvdmUgdGhlIGZvcm06ICIqIFJlcXVpcmVkIGZpZWxkcyIuIERvIG5vdCBtYXJrIG9wdGlvbmFsIGZpZWxkcyDigJQgbWFyayByZXF1aXJlZCBvbmVzIG9ubHkuCgojIyMgQ1RBIGNvcHkKClVzZSBzcGVjaWZpYyBhY3Rpb24gdmVyYnMgdGhhdCBkZXNjcmliZSB3aGF0IGhhcHBlbnMgbmV4dDogIkNvbnRpbnVlIiwgIlNlbmQgT1RQIiwgIlZlcmlmeSIsICJTYXZlIGNoYW5nZXMiLiBBdm9pZCAiU3VibWl0IiBvciAiT0siLgoKIyMgRG8gLyBEb24ndAoKIyMgRm9ybSBsYXlvdXQgdmFyaWFudHMKCkNob29zZSBhIGxheW91dCBiYXNlZCBvbiBwbGF0Zm9ybSBhbmQgZmllbGQgZGVuc2l0eS4gTmV2ZXIgdXNlIHR3by1jb2x1bW4gb24gbW9iaWxlIOKAlCBpbnB1dHMgYmVjb21lIHRvbyBuYXJyb3cgZm9yIGNvbWZvcnRhYmxlIHRvdWNoLgoKIyMgVmFsaWRhdGlvbiBsaWZlY3ljbGUKCkZpZWxkcyBwcm9ncmVzcyB0aHJvdWdoIGRpc2NyZXRlIHN0YXRlcy4gVHJpZ2dlciB2YWxpZGF0aW9uIG9uIGJsdXIg4oCUIG5ldmVyIG9uIGV2ZXJ5IGtleXN0cm9rZS4gQXBwbHkgc3RhdGUgY2xhc3NlcyB0byBgLmlucHV0LWZpZWxkYC4KCnwgU3RhdGUgfCBDbGFzcyB8IEJvcmRlciB8IE1lc3NhZ2UgfCBUcmlnZ2VyIHwKfC0tLXwtLS18LS0tfC0tLXwtLS18CnwgKipJZGxlKiogfCBg4oCUYCB8IGB2YXIoLS1ib3JkZXIpYCB8IEhlbHBlciB0ZXh0IGlmIGFueSB8IFBhZ2UgbG9hZCAvIHVudG91Y2hlZCB8CnwgKipUb3VjaGVkKiogfCBg4oCUYCB8IGB2YXIoLS1ib3JkZXIpYCB8IEhlbHBlciB0ZXh0IHBlcnNpc3RzIHwgVXNlciBmb2N1c2VzIHRoZSBmaWVsZCB8CnwgKipWYWxpZCoqIHwgYC5pcy1zdWNjZXNzYCB8IGB2YXIoLS1zdWNjZXNzLXRleHQpYCB8IENvbmZpcm1hdGlvbiBtZXNzYWdlIHwgT24gYmx1ciwgcGFzc2VzIHZhbGlkYXRpb24gfAp8ICoqRXJyb3IqKiB8IGAuaXMtZXJyb3JgIHwgYHZhcigtLW5lZ2F0aXZlKWAgfCBTcGVjaWZpYyBlcnJvciBtZXNzYWdlIHwgT24gYmx1ciwgZmFpbHMgdmFsaWRhdGlvbiB8CnwgKipTdWJtaXR0aW5nKiogfCBgLmlzLWxvYWRpbmdgIHwgYHZhcigtLWJvcmRlcilgIHwgTm9uZSDigJQgaW5wdXRzIGRpc2FibGVkIHwgRm9ybSBzdWJtaXQgaW4gZmxpZ2h0IHwKfCAqKlN1Y2Nlc3MqKiB8IGAuaXMtc3VjY2Vzc2Agb24gZm9ybSB8IOKAlCB8IFN1Y2Nlc3MgdG9hc3QgLyByZWRpcmVjdCB8IFNlcnZlciBjb25maXJtcyBzdWJtaXNzaW9uIHwKCiMjIFJlbGF0ZWQgdG9rZW5zCgpDb3JlIHRva2VucyB0aGF0IGNvbnRyb2wgaW5wdXQgZmllbGQgYXBwZWFyYW5jZS4gTmV2ZXIgaGFyZC1jb2RlIHZhbHVlcyDigJQgcmVmZXJlbmNlIHRoZXNlIHZhcmlhYmxlcyBldmVyeXdoZXJlLgoKfCBUb2tlbiB8IFJvbGUgfAp8LS0tfC0tLXwKfCBgLS1zdXJmYWNlLTJgIHwgSW5wdXQgYmFja2dyb3VuZCAoYC0taW5wdXQtYmdgIGFsaWFzKSB8CnwgYC0tYm9yZGVyYCB8IERlZmF1bHQgaW5wdXQgYm9yZGVyIChgLS1pbnB1dC1ib3JkZXJgIGFsaWFzKSB8CnwgYC0tbmVnYXRpdmVgIHwgRXJyb3IgYm9yZGVyIHJpbmcgKGAtLWVycm9yLWJvcmRlcmAgYWxpYXMpIHwKfCBgLS1zdWNjZXNzLXRleHRgIHwgU3VjY2VzcyBib3JkZXIgcmluZyAoYC0tc3VjY2Vzcy1ib3JkZXJgIGFsaWFzKSB8CnwgYC0tcjNgIHwgU3RhbmRhcmQgaW5wdXQgY29ybmVyIHJhZGl1cyAoYC0taW5wdXQtcmFkaXVzYCBhbGlhcywgMTJweCkgfAp8IGAtLXI0YCB8IE9UUCBib3ggY29ybmVyIHJhZGl1cyAoMTRweCkgfAp8IGAtLWN0cmwtaGAgfCBTdGFuZGFyZCBpbnB1dCBoZWlnaHQgKDU0cHgpIHwKfCBgLS1mb2N1cy1zaGFkb3dgIHwgRm9jdXMgcmluZzogYDAgMCAwIDJweCB2YXIoLS1qaW8pYCB8CgojIyBUb2tlbnMKCnwgVG9rZW4gfCBWYWx1ZSB8IFVzYWdlIHwKfC0tLXwtLS18LS0tfAp8IGAtLXN1cmZhY2UtMmAgfCAjMTYxQTI0IHwgSW5wdXQgYmFja2dyb3VuZCB8CnwgYC0tYm9yZGVyYCB8IHJnYmEoMjU1LDI1NSwyNTUsLjEpIHwgRGVmYXVsdCBpbnB1dCBib3JkZXIgfAp8IGAtLWJvcmRlci1zdWJ0bGVgIHwgcmdiYSgyNTUsMjU1LDI1NSwuMDgpIHwgRGl2aWRlciBsaW5lcyBpbiBmaWVsZCBncm91cHMgfAp8IGAtLWppb2AgfCAjMDBBODU5IHwgRm9jdXMgcmluZywgYWNjZW50LCBjaGVja2JveC9yYWRpbyB8CnwgYC0tZm9jdXMtc2hhZG93YCB8IDAgMCAwIDJweCB2YXIoLS1qaW8pIHwgRm9jdXNlZCBpbnB1dCByaW5nIHwKfCBgLS1uZWdhdGl2ZWAgfCAjRkY0NzU3IHwgUmVxdWlyZWQgbWFya2VyLCBlcnJvciBib3JkZXIgfAp8IGAtLWVycm9yLXRleHRgIHwgI0ZGNDc1NyB8IEVycm9yIG1lc3NhZ2UgdGV4dCB8CnwgYC0tc3VjY2Vzcy10ZXh0YCB8ICMwMEE4NTkgfCBTdWNjZXNzIG1lc3NhZ2UgdGV4dCB8CnwgYC0td2FybmluZy10ZXh0YCB8ICNGNTlFMEIgfCBXYXJuaW5nIG1lc3NhZ2UgdGV4dCB8CnwgYC0tdGV4dDNgIHwgIzZCNzI4MCB8IEhlbHBlci9wbGFjZWhvbGRlciB0ZXh0IHwKfCBgLS1yM2AgfCAxMnB4IHwgU3RhbmRhcmQgaW5wdXQgYm9yZGVyLXJhZGl1cyB8CnwgYC0tcjRgIHwgMTRweCB8IE9UUCBpbnB1dCBib3JkZXItcmFkaXVzIHwKfCBgLS1jdHJsLWhgIHwgNTRweCB8IFN0YW5kYXJkIGlucHV0IGhlaWdodCB8CnwgYC0tdG91Y2gtbWluYCB8IDQ0cHggfCBNaW5pbXVtIHRvdWNoIHRhcmdldCB8CnwgYC0tc3RhdGUtZGlzYWJsZWQtb3BhY2l0eWAgfCAwLjMyIHwgRGlzYWJsZWQgZmllbGQgb3BhY2l0eSB8CgojIyBGaWdtYSBjb21wb25lbnQgbmFtZXMKCiMjIENTUyBjbGFzc2VzCgpgYGBgY3NzCi5pbnB1dC1maWVsZCAgICAgICAgIOKAlCBiYXNlIGlucHV0IHN0eWxlcyAodGV4dCwgZW1haWwsIHBhc3N3b3JkLCB0ZWwsIHNlbGVjdCkKLmlucHV0LXdyYXAgICAgICAgICAg4oCUIHdyYXBwZXIgdGhhdCBhcHBsaWVzIGJvcmRlciArIGZvY3VzIHJpbmcgdHJlYXRtZW50Ci5pbnB1dC1maWVsZC5pcy1ob3ZlciAgICAg4oCUIGhvdmVyIHN0YXRlICh3ZWIgb25seSkKLmlucHV0LWZpZWxkLmlzLWZvY3VzZWQgICDigJQgZm9jdXNlZCBzdGF0ZSDigJQgc2hvd3MgLS1mb2N1cy1zaGFkb3cgcmluZwouaW5wdXQtZmllbGQuaXMtZXJyb3IgICAgIOKAlCBlcnJvciBib3JkZXIgKyByZWQgcmluZwouaW5wdXQtZmllbGQuaXMtc3VjY2VzcyAgIOKAlCBzdWNjZXNzIGJvcmRlciArIGdyZWVuIHJpbmcKLmlucHV0LWZpZWxkLmlzLXdhcm5pbmcgICDigJQgd2FybmluZyBib3JkZXIgKyBhbWJlciByaW5nCi5pbnB1dC1maWVsZC5pcy1kaXNhYmxlZCAg4oCUIDAuMzIgb3BhY2l0eSwgcG9pbnRlci1ldmVudHM6bm9uZQouaW5wdXQtZmllbGQuaXMtbG9hZGluZyAgIOKAlCBsb2FkaW5nIHN0YXRlLCB0eXBpY2FsbHkgYSBzcGlubmVyIGluIHdyYXBwZXIKYGBgYAoKIyMgUnVsZXMKCiMjIFdoZW4gdG8gdXNlCgpVc2Ugd2hlbgoKLSBNdWx0aS1maWVsZCBkYXRhIGNvbGxlY3Rpb246IHJlZ2lzdHJhdGlvbiwgcHJvZmlsZSBlZGl0LCBwYXltZW50Ci0gU3RydWN0dXJlZCBzZXR0aW5ncyBwYWdlcyB3aXRoIGxhYmVsbGVkIGNvbnRyb2xzCi0gRmVlZGJhY2sgYW5kIHN1cHBvcnQgcmVxdWVzdCBmbG93cwotIFNlYXJjaCBmaWx0ZXIgcGFuZWxzIHdpdGggbXVsdGlwbGUgaW5wdXQgdHlwZXMKCkRvbid0IHVzZSB3aGVuCgotIFNpbmdsZS1maWVsZCBpbnRlcmFjdGlvbnMg4oCUIHVzZSB0aGUgSW5wdXQgY29tcG9uZW50IGRpcmVjdGx5Ci0gV2l6YXJkLXN0eWxlIGZsb3dzIHdpdGggbW9yZSB0aGFuIDUgc3RlcHMg4oCUIHNwbGl0IGludG8gc2VwYXJhdGUgc2NyZWVucwotIFJlYWQtb25seSBkYXRhIGRpc3BsYXkg4oCUIHVzZSBhIERlc2NyaXB0aW9uIExpc3QgaW5zdGVhZAoKIyMgVmFyaWFudHMKCiMjIFNpemVzCgp8IFNpemUgfCBUb2tlbiAvIEhlaWdodCB8IFVzZSBjYXNlIHwgUGxhdGZvcm0gfAp8LS0tfC0tLXwtLS18LS0tfAp8IERlZmF1bHQgfCA0ODBweCBtYXgtd2lkdGggfCBTdGFuZGFyZCBmb3JtcyB8IE1vYmlsZSAvIFdlYiB8CnwgTmFycm93IHwgMzIwcHggbWF4LXdpZHRoIHwgU2hvcnQgZm9ybXMgKGxvZ2luLCBPVFApIHwgTW9iaWxlIHwKfCBXaWRlIHwgNjgwcHggbWF4LXdpZHRoIHwgQ29tcGxleCBzZXR0aW5ncyB8IFdlYiB8CgojIyBTdGF0ZXMKCklkbGUKCkFsbCBmaWVsZHMgaW4gZGVmYXVsdCBzdGF0ZTsgbm8gdmFsaWRhdGlvbiBzaG93bgoKQWN0aXZlCgpBIGZpZWxkIGlzIGZvY3VzZWQ7IGl0cyBsYWJlbCBhbmQgYm9yZGVyIGFyZSBoaWdobGlnaHRlZAoKVmFsaWRhdGlvbiBlcnJvcgoKSW52YWxpZCBmaWVsZCBzaG93cyByZWQgYm9yZGVyICsgZXJyb3IgbWVzc2FnZSBiZWxvdwoKVmFsaWRhdGlvbiBzdWNjZXNzCgpWYWxpZCBmaWVsZCBzaG93cyBncmVlbiBib3JkZXIgKyBjaGVja21hcmsgKG9wdGlvbmFsKQoKU3VibWl0dGluZwoKU3VibWl0IGJ1dHRvbiBzaG93cyBzcGlubmVyOyBhbGwgZmllbGRzIGRpc2FibGVkCgpTdWJtaXR0ZWQKClN1Y2Nlc3Mgc3RhdGUg4oCUIGZpZWxkcyBjbGVhcmVkIG9yIHJlcGxhY2VkIHdpdGggY29uZmlybWF0aW9uCgpEaXNhYmxlZAoKQWxsIGZpZWxkcyBhdCAzOCUgb3BhY2l0eTsgbm8gaW50ZXJhY3Rpb24gcG9zc2libGUKCiMjIE1vdGlvbgoKfCBJbnRlcmFjdGlvbiB8IEVhc2luZyB8IER1cmF0aW9uIHwgUHJvcGVydHkgfAp8LS0tfC0tLXwtLS18LS0tfAp8IFZhbGlkYXRpb24gZXJyb3Igc2hha2UgfCBgLS1lYXNlLW91dGAgfCBgNDAwbXNgIHwgdHJhbnNmb3JtIHRyYW5zbGF0ZVggKGtleWZyYW1lcykgfAp8IEVycm9yIG1lc3NhZ2UgYXBwZWFyIHwgYC0tZWFzZS1vdXRgIHwgYC0tZHVyLWZhc3RgIHwgb3BhY2l0eSwgdHJhbnNmb3JtIHRyYW5zbGF0ZVkoLTRweCDihpIgMCkgfAp8IFN1Y2Nlc3MgY2hlY2ttYXJrIHwgYC0tZWFzZS1vdXRgIHwgYC0tZHVyLWZhc3RgIHwgc3Ryb2tlLWRhc2hvZmZzZXQsIG9wYWNpdHkgfAp8IFN1Ym1pdCBzcGlubmVyIHwgYGxpbmVhcmAgfCBgNjAwbXMgaW5maW5pdGVgIHwgdHJhbnNmb3JtIHJvdGF0ZSB8CgojIyBBUEkKCiMjIyBDU1MgY2xhc3NlcwoKfCBDbGFzcyB8IERlc2NyaXB0aW9uIHwKfC0tLXwtLS18CnwgYC5kcy1mb3JtYCB8IFJvb3QgZm9ybSBjb250YWluZXIg4oCUIGZsZXggY29sdW1uLCBnYXAgMjRweCB8CnwgYC5kcy1mb3JtLWZpZWxkYCB8IFNpbmdsZSBmaWVsZCB3cmFwcGVyIOKAlCBmbGV4IGNvbHVtbiwgZ2FwIDZweCB8CnwgYC5kcy1mb3JtLWxhYmVsYCB8IEZpZWxkIGxhYmVsIOKAlCAxM3B4IDYwMCB8CnwgYC5kcy1mb3JtLWhpbnRgIHwgSGVscGVyIHRleHQgYmVsb3cgaW5wdXQg4oCUIDEycHggdGV4dDMgfAp8IGAuZHMtZm9ybS1lcnJvcmAgfCBWYWxpZGF0aW9uIGVycm9yIOKAlCAxMnB4IG5lZ2F0aXZlIGNvbG9yIHwKfCBgLmRzLWZvcm0tc2VjdGlvbmAgfCBHcm91cGVkIGZpZWxkcyB3aXRoIGEgc2VjdGlvbiB0aXRsZSB8CnwgYC5kcy1mb3JtLWFjdGlvbnNgIHwgU3VibWl0L2NhbmNlbCBidXR0b24gcm93IHwKCiMjIyBSZWFjdCBwcm9wcwoKfCBQcm9wIHwgVHlwZSB8IERlZmF1bHQgfCBEZXNjcmlwdGlvbiB8CnwtLS18LS0tfC0tLXwtLS18CnwgYG9uU3VibWl0YCB8IChkYXRhOiBGb3JtRGF0YSkgPT4gdm9pZCB8IHJlcXVpcmVkIHwgU3VibWl0IGhhbmRsZXIgfAp8IGBkZWZhdWx0VmFsdWVzYCB8IFJlY29yZCB8IHVuZGVmaW5lZCB8IEluaXRpYWwgZmllbGQgdmFsdWVzIHwKfCBgcmVzb2x2ZXJgIHwgUmVzb2x2ZXIgfCB1bmRlZmluZWQgfCBWYWxpZGF0aW9uIHNjaGVtYSAoem9kLCB5dXApIHwKfCBgZGlzYWJsZWRgIHwgYm9vbGVhbiB8IGZhbHNlIHwgRGlzYWJsZSBhbGwgZmllbGRzIHwKfCBgY2hpbGRyZW5gIHwgUmVhY3ROb2RlIHwgcmVxdWlyZWQgfCBGb3JtIGZpZWxkcyBhbmQgYWN0aW9ucyB8CgotLS0KCiMjIFRva2VucyByZWZlcmVuY2VkIG9uIHRoaXMgcGFnZQoKVXNlIHRoZXNlIGV4YWN0IHRva2VucyDigJQgZGVmaW5lZCBpbiBgdG9rZW5zL3Rva2Vucy5jc3NgLiBEbyBub3Qgc3Vic3RpdHV0ZSByYXcgdmFsdWVzLgoKLSBgLS1ib3JkZXJgCi0gYC0tYm9yZGVyLXN1YnRsZWAKLSBgLS1jdHJsLWhgCi0gYC0tZXJyb3ItdGV4dGAKLSBgLS1qaW9gCi0gYC0tbmVnYXRpdmVgCi0gYC0tcGlsbGAKLSBgLS1yM2AKLSBgLS1yNGAKLSBgLS1yN2AKLSBgLS1zdGF0ZS1kaXNhYmxlZC1vcGFjaXR5YAotIGAtLXN1Y2Nlc3MtdGV4dGAKLSBgLS1zdXJmYWNlLTFgCi0gYC0tdGV4dGAKLSBgLS10ZXh0MmAKLSBgLS10ZXh0M2AKLSBgLS10b3VjaC1taW5gCi0gYC0td2FybmluZy10ZXh0YAoKLS0tCgojIyBCdWlsZCBydWxlcyAoYmluZGluZykKCjEuIFVzZSAqKm9ubHkqKiB0aGUgdG9rZW5zIGxpc3RlZCBhYm92ZS4gSWYgYSB2YWx1ZSB5b3UgbmVlZCBpcyBub3QgbGlzdGVkLCBzdG9wIGFuZCBhc2sg4oCUIGRvIG5vdCBpbnRyb2R1Y2UgYSByYXcgdmFsdWUuCjIuIEZvbnQgaXMgKipKaW9UeXBlKiogb25seS4gV2VpZ2h0czogMzAwLCA1MDAsIDcwMCwgOTAwLgozLiBSZXVzZSB0aGUgY29tcG9uZW50IENTUyBwYXR0ZXJucyBzaG93biBvbiB0aGUgc291cmNlIHBhZ2U7IGRvIG5vdCByZWRlc2lnbi4KNC4gTWF0Y2ggZXZlcnkgc3RhdGUgKGRlZmF1bHQsIGhvdmVyLCBmb2N1cywgYWN0aXZlLCBkaXNhYmxlZCwgbG9hZGluZykgc2hvd24gb24gdGhlIHBhZ2UuCjUuIEFjY2Vzc2liaWxpdHkgcmVxdWlyZW1lbnRzIG9uIHRoZSBwYWdlIGFyZSBtYW5kYXRvcnksIG5vdCBvcHRpb25hbC4K" download="forms-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
+    </div>
     </header>
 
     <!-- HERO -->
@@ -503,7 +503,7 @@
       <p class="ds-section-desc">Choose a layout based on platform and field density. Never use two-column on mobile — inputs become too narrow for comfortable touch.</p>
       <div class="ds-platform-grid">
         <div class="ds-platform-card">
-          <div class="ds-platform-card-title">Single column <span style="font-size:10px;font-weight:400;color:var(--text3);margin-left:6px">Mobile default</span></div>
+          <div class="ds-platform-card-title">Single column <span style="font-size:10px;font-weight:500;color:var(--text3);margin-left:6px">Mobile default</span></div>
           <div style="display:flex;flex-direction:column;gap:12px;margin-top:12px">
             <div style="display:flex;flex-direction:column;gap:6px">
               <label style="font-size:13px;font-weight:700;color:var(--text)">Mobile number <span style="color:var(--negative)">*</span></label>
@@ -518,7 +518,7 @@
           <div style="font-size:11px;color:var(--text3);margin-top:10px">Full-width inputs stacked vertically. Used on all mobile forms. Max content width follows phone frame gutter.</div>
         </div>
         <div class="ds-platform-card">
-          <div class="ds-platform-card-title">Two column <span style="font-size:10px;font-weight:400;color:var(--text3);margin-left:6px">Web only</span></div>
+          <div class="ds-platform-card-title">Two column <span style="font-size:10px;font-weight:500;color:var(--text3);margin-left:6px">Web only</span></div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
             <div style="display:flex;flex-direction:column;gap:6px">
               <label style="font-size:13px;font-weight:700;color:var(--text)">First name</label>
@@ -536,7 +536,7 @@
           <div style="font-size:11px;color:var(--text3);margin-top:10px">Only for short paired fields (first/last name, day/month). Never split semantically unrelated fields into a row.</div>
         </div>
         <div class="ds-platform-card">
-          <div class="ds-platform-card-title">Inline <span style="font-size:10px;font-weight:400;color:var(--text3);margin-left:6px">Compact horizontal</span></div>
+          <div class="ds-platform-card-title">Inline <span style="font-size:10px;font-weight:500;color:var(--text3);margin-left:6px">Compact horizontal</span></div>
           <div style="display:flex;gap:8px;align-items:flex-end;margin-top:12px">
             <div style="display:flex;flex-direction:column;gap:6px;flex:1">
               <label style="font-size:13px;font-weight:700;color:var(--text)">Promo code</label>
@@ -694,8 +694,139 @@
 
     <!-- CHANGELOG -->
 
-  </main>
+  
+  <!-- WHEN TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use</h2>
+    <div class="ds-usage-grid">
+      <div class="ds-usage-card ds-usage-card--do">
+        <p class="ds-usage-label ds-usage-label--do">Use when</p>
+        <ul class="ds-usage-list">
+              <li>Multi-field data collection: registration, profile edit, payment</li>
+              <li>Structured settings pages with labelled controls</li>
+              <li>Feedback and support request flows</li>
+              <li>Search filter panels with multiple input types</li>
+        </ul>
+      </div>
+      <div class="ds-usage-card ds-usage-card--dont">
+        <p class="ds-usage-label ds-usage-label--dont">Don't use when</p>
+        <ul class="ds-usage-list">
+              <li>Single-field interactions — use the Input component directly</li>
+              <li>Wizard-style flows with more than 5 steps — split into separate screens</li>
+              <li>Read-only data display — use a Description List instead</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOTION -->
+  <!-- VARIANTS -->
+  <section class="ds-section" id="variants">
+    <h2 class="ds-section-title">Variants</h2>
+    <div style="margin-top:16px;"><span class="ds-variant-chip" style="display:inline-flex;align-items:center;gap:6px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--pill);padding:4px 12px;font-size:12px;font-weight:700;color:var(--text2);margin:4px 4px 0 0;">Vertical (default)</span><span class="ds-variant-chip" style="display:inline-flex;align-items:center;gap:6px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--pill);padding:4px 12px;font-size:12px;font-weight:700;color:var(--text2);margin:4px 4px 0 0;">Horizontal (label left)</span><span class="ds-variant-chip" style="display:inline-flex;align-items:center;gap:6px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--pill);padding:4px 12px;font-size:12px;font-weight:700;color:var(--text2);margin:4px 4px 0 0;">Inline (compact row)</span><span class="ds-variant-chip" style="display:inline-flex;align-items:center;gap:6px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--pill);padding:4px 12px;font-size:12px;font-weight:700;color:var(--text2);margin:4px 4px 0 0;">Multi-section</span><span class="ds-variant-chip" style="display:inline-flex;align-items:center;gap:6px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--pill);padding:4px 12px;font-size:12px;font-weight:700;color:var(--text2);margin:4px 4px 0 0;">Wizard (multi-step)</span></div>
+  </section>
+
+  <!-- SIZES -->
+  <section class="ds-section" id="sizes">
+    <h2 class="ds-section-title">Sizes</h2>
+    <table class="ds-api-table" style="margin-top:16px;">
+      <thead><tr><th>Size</th><th>Token / Height</th><th>Use case</th><th>Platform</th></tr></thead>
+      <tbody>
+        <tr><td>Default</td><td>480px max-width</td><td>Standard forms</td><td>Mobile / Web</td></tr>
+        <tr><td>Narrow</td><td>320px max-width</td><td>Short forms (login, OTP)</td><td>Mobile</td></tr>
+        <tr><td>Wide</td><td>680px max-width</td><td>Complex settings</td><td>Web</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- STATES -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:16px;">
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px;">
+        <p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 6px;">Idle</p>
+        <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5;">All fields in default state; no validation shown</p>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px;">
+        <p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 6px;">Active</p>
+        <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5;">A field is focused; its label and border are highlighted</p>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px;">
+        <p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 6px;">Validation error</p>
+        <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5;">Invalid field shows red border + error message below</p>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px;">
+        <p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 6px;">Validation success</p>
+        <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5;">Valid field shows green border + checkmark (optional)</p>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px;">
+        <p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 6px;">Submitting</p>
+        <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5;">Submit button shows spinner; all fields disabled</p>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px;">
+        <p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 6px;">Submitted</p>
+        <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5;">Success state — fields cleared or replaced with confirmation</p>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px;">
+        <p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 6px;">Disabled</p>
+        <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5;">All fields at 38% opacity; no interaction possible</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-motion-table">
+      <thead><tr><th>Interaction</th><th>Easing</th><th>Duration</th><th>Property</th></tr></thead>
+      <tbody>
+        <tr><td>Validation error shake</td><td><code>--ease-out</code></td><td><code>400ms</code></td><td>transform translateX (keyframes)</td></tr>
+        <tr><td>Error message appear</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>opacity, transform translateY(-4px → 0)</td></tr>
+        <tr><td>Success checkmark</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>stroke-dashoffset, opacity</td></tr>
+        <tr><td>Submit spinner</td><td><code>linear</code></td><td><code>600ms infinite</code></td><td>transform rotate</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- API -->
+
+  
+
+  
+
+  
+
+  
+
+  <section class="ds-section" id="api">
+    <h2 class="ds-section-title">API</h2>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:0 0 12px;">CSS classes</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>.ds-form</code></td><td>Root form container — flex column, gap 24px</td></tr>
+        <tr><td><code>.ds-form-field</code></td><td>Single field wrapper — flex column, gap 6px</td></tr>
+        <tr><td><code>.ds-form-label</code></td><td>Field label — 13px 600</td></tr>
+        <tr><td><code>.ds-form-hint</code></td><td>Helper text below input — 12px text3</td></tr>
+        <tr><td><code>.ds-form-error</code></td><td>Validation error — 12px negative color</td></tr>
+        <tr><td><code>.ds-form-section</code></td><td>Grouped fields with a section title</td></tr>
+        <tr><td><code>.ds-form-actions</code></td><td>Submit/cancel button row</td></tr>
+      </tbody>
+    </table>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 12px;">React props</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>onSubmit</code></td><td><span class="api-type">(data: FormData) => void</span></td><td><span class="api-default">required</span></td><td>Submit handler</td></tr>
+        <tr><td><code>defaultValues</code></td><td><span class="api-type">Record<string, unknown></span></td><td><span class="api-default">undefined</span></td><td>Initial field values</td></tr>
+        <tr><td><code>resolver</code></td><td><span class="api-type">Resolver</span></td><td><span class="api-default">undefined</span></td><td>Validation schema (zod, yup)</td></tr>
+        <tr><td><code>disabled</code></td><td><span class="api-type">boolean</span></td><td><span class="api-default">false</span></td><td>Disable all fields</td></tr>
+        <tr><td><code>children</code></td><td><span class="api-type">ReactNode</span></td><td><span class="api-default">required</span></td><td>Form fields and actions</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</main>
   <script src="../sprite-loader.js"></script>
-  <script src="../shell.js"></script>
+  <script src="../shell.js?v=2"></script>
 </body>
 </html>

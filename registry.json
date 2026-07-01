@@ -1,0 +1,870 @@
+{
+  "$schema": "./registry.schema.json",
+  "version": "1.0.0",
+  "updated": "2026-06-27",
+  "owner": "Jeetesh Shah",
+
+  "statusDefinitions": {
+    "stable": "Contracted. Complete anatomy, all states, all platforms. Safe to ship.",
+    "beta":   "Usable and documented but not fully contracted. API may change.",
+    "draft":  "Scaffolded page only. Do not use in production."
+  },
+
+  "namingConvention": {
+    "folders":   "kebab-case. Plural for collections (buttons, cards, chips). Singular for unique/layout (tab-bar, app-bar, search, bottom-sheet).",
+    "cssClass":  ".ds-[component]-[element]--[modifier]. Always ds- prefix. Never .component- prefix.",
+    "tokenName": "--[category]-[modifier]. Primitive first, semantic aliases second.",
+    "iconId":    "ic_[name]_[variant] in snake_case. Always ic_ prefix.",
+    "jsEvent":   "camelCase. ds:[component]:[event] for custom events."
+  },
+
+  "categories": {
+    "foundation": "Design decisions — colour, type, space, radius, motion, elevation",
+    "core":       "Contracted systems — used everywhere, own the hardest constraints",
+    "component":  "UI building blocks — composed from core, platform-specific variants",
+    "feedback":   "State communication — loading, empty, error, progress",
+    "form":       "Data entry — inputs, controls, validation",
+    "overlay":    "Layered UI — floats above page content",
+    "navigation": "Structural navigation — tabs, accordions, menus",
+    "data":       "Data display — tables, charts, calendars",
+    "layout":     "Spatial primitives — separators, aspect ratio, scroll areas"
+  },
+
+  "components": [
+
+    {
+      "id":          "colours",
+      "name":        "Colours",
+      "path":        "/colours/",
+      "folder":      "colours",
+      "category":    "foundation",
+      "status":      "stable",
+      "platforms":   ["mobile", "web", "tv"],
+      "contracted":  true,
+      "description": "Brand green system, semantic palette, functional accents. Dark-only.",
+      "tokens":      ["--jio", "--jio-2", "--jio-3", "--jio-bright", "--jio-glow", "--jio-soft",
+                      "--bg", "--card-bg", "--sheet-bg", "--surface-1..4",
+                      "--text", "--text2", "--text3", "--text4",
+                      "--border", "--border-strong", "--border-subtle"]
+    },
+
+    {
+      "id":          "typography",
+      "name":        "Typography",
+      "path":        "/typography/",
+      "folder":      "typography",
+      "category":    "foundation",
+      "status":      "stable",
+      "platforms":   ["mobile", "web", "tv"],
+      "contracted":  true,
+      "description": "JioType only. Weights 300/500/700/900. Type scale + rail title italic accent pattern.",
+      "tokens":      ["--jio-font"],
+      "cssClasses":  [".text-display", ".text-headline", ".text-title", ".text-body", ".text-caption",
+                      ".text-label", ".text-rail-title", ".text-rail-title em"]
+    },
+
+    {
+      "id":          "spacing",
+      "name":        "Spacing",
+      "path":        "/spacing/",
+      "folder":      "spacing",
+      "category":    "foundation",
+      "status":      "stable",
+      "platforms":   ["mobile", "web", "tv"],
+      "contracted":  true,
+      "description": "8px base scale. Semantic aliases per platform.",
+      "tokens":      ["--space-0..12", "--gutter", "--section-gap", "--card-gap",
+                      "--component-padding", "--card-padding", "--sheet-padding", "--hero-gap"]
+    },
+
+    {
+      "id":          "radius",
+      "name":        "Radius",
+      "path":        "/radius/",
+      "folder":      "radius",
+      "category":    "foundation",
+      "status":      "stable",
+      "platforms":   ["mobile", "web", "tv"],
+      "contracted":  true,
+      "description": "r1–r9 + pill. Canonical map: cards=r5, inputs=r4, chips=pill, square-cards=r3.",
+      "tokens":      ["--r1", "--r2", "--r3", "--r4", "--r5", "--r6", "--r7", "--r8", "--r9", "--pill"]
+    },
+
+    {
+      "id":          "motion",
+      "name":        "Motion",
+      "path":        "/motion/",
+      "folder":      "motion",
+      "category":    "foundation",
+      "status":      "stable",
+      "platforms":   ["mobile", "web", "tv"],
+      "contracted":  true,
+      "description": "Easing + duration tokens. Reduced-motion support. No transition:all.",
+      "tokens":      ["--spring", "--spring-bounce", "--ease-screen", "--ease-out", "--ease-error",
+                      "--dur-instant", "--dur-fast", "--dur-default", "--dur-pop",
+                      "--dur-sheet", "--dur-enter", "--dur-screen", "--dur-tv-enter"]
+    },
+
+    {
+      "id":          "elevation",
+      "name":        "Elevation",
+      "path":        "/elevation/",
+      "folder":      "elevation",
+      "category":    "foundation",
+      "status":      "stable",
+      "platforms":   ["mobile", "web", "tv"],
+      "contracted":  true,
+      "description": "4-stop shadow scale + glow. Dark surfaces only.",
+      "tokens":      ["--shadow-1", "--shadow-2", "--shadow-3", "--shadow-4",
+                      "--shadow-glow", "--shadow-tv-card"]
+    },
+
+    {
+      "id":          "buttons",
+      "name":        "Button",
+      "path":        "/buttons/",
+      "folder":      "buttons",
+      "category":    "core",
+      "status":      "stable",
+      "platforms":   ["mobile", "web", "tv"],
+      "contracted":  true,
+      "description": "5 variants × 5 sizes × 7 states. Platform-aware height tokens.",
+      "variants":    ["primary", "secondary", "ghost", "destructive", "ultimate"],
+      "sizes":       ["xs", "s", "m", "l", "xl"],
+      "states":      ["default", "hover", "pressed", "focus", "disabled", "loading"],
+      "anatomy":     ["container", "label", "icon-leading", "icon-trailing", "spinner"],
+      "tokens":      ["--btn-primary-bg", "--btn-primary-text", "--btn-primary-hover-bg",
+                      "--btn-secondary-bg", "--btn-secondary-border", "--btn-ghost-bg",
+                      "--btn-destructive-bg", "--btn-ultimate-bg",
+                      "--btn-l-h", "--btn-l-px", "--btn-l-fs",
+                      "--btn-disabled-opacity", "--btn-loading-opacity"],
+      "cssClasses":  [".ds-btn", ".ds-btn--primary", ".ds-btn--secondary",
+                      ".ds-btn--ghost", ".ds-btn--destructive", ".ds-btn--ultimate",
+                      ".ds-btn--xs", ".ds-btn--s", ".ds-btn--m", ".ds-btn--l", ".ds-btn--xl",
+                      ".ds-btn--icon-only", ".ds-btn--loading"],
+      "radius":      "--pill (default), --r4 (squared variant)"
+    },
+
+    {
+      "id":          "icons",
+      "name":        "Icons",
+      "path":        "/icons/",
+      "folder":      "icons",
+      "category":    "core",
+      "status":      "stable",
+      "platforms":   ["mobile", "web", "tv"],
+      "contracted":  true,
+      "description": "SVG sprite. fill:currentColor, no stroke. ic_ prefix. 5 platform-aware sizes.",
+      "sizes":       ["xs", "s", "m", "l", "xl"],
+      "tokens":      ["--icon-xs", "--icon-s", "--icon-m", "--icon-l", "--icon-xl",
+                      "--icon-wrap-m", "--icon-wrap-l",
+                      "--icon-color-default", "--icon-color-active", "--icon-color-muted"],
+      "cssClasses":  [".ds-icon", ".ds-icon--xs", ".ds-icon--s", ".ds-icon--m",
+                      ".ds-icon--l", ".ds-icon--xl", ".ds-icon-btn"],
+      "naming":      "ic_[name]_[variant] in snake_case"
+    },
+
+    {
+      "id":          "appbar",
+      "name":        "AppBar",
+      "path":        "/appbar/",
+      "folder":      "appbar",
+      "category":    "core",
+      "status":      "beta",
+      "platforms":   ["mobile"],
+      "contracted":  true,
+      "description": "Mobile-only. 3 scroll states: default / scrolled (frosted) / hidden. 3 variants.",
+      "variants":    ["home", "detail", "inner"],
+      "states":      ["default", "scrolled", "hidden"],
+      "tokens":      ["--app-bar-h", "--glass-1", "--border-subtle"],
+      "cssClasses":  [".app-bar", ".app-bar.header-scrolled", ".app-bar.header-hidden",
+                      ".app-bar--detail", ".app-bar--inner"],
+      "behavior":    "80px scroll threshold, 8px jitter guard"
+    },
+
+    {
+      "id":          "tv-focus",
+      "name":        "TV Focus",
+      "path":        "/tv-focus/",
+      "folder":      "tv-focus",
+      "category":    "core",
+      "status":      "beta",
+      "platforms":   ["tv"],
+      "contracted":  false,
+      "description": "D-pad navigation pattern. Focus ring + glow + scale(1.05). No hover.",
+      "tokens":      ["--tv-focus-shadow", "--tv-focus-scale", "--focus-ring-tv",
+                      "--dur-tv-enter", "--spring"]
+    },
+
+    {
+      "id":          "accessibility",
+      "name":        "Accessibility",
+      "path":        "/accessibility/",
+      "folder":      "accessibility",
+      "category":    "core",
+      "status":      "stable",
+      "platforms":   ["mobile", "web", "tv"],
+      "contracted":  true,
+      "description": "WCAG 2.1 AA. Focus contract, ARIA patterns, reduced motion, min target sizes."
+    },
+
+    {
+      "id":          "cards",
+      "name":        "Card",
+      "path":        "/cards/",
+      "folder":      "cards",
+      "category":    "component",
+      "status":      "stable",
+      "platforms":   ["mobile", "web", "tv"],
+      "contracted":  true,
+      "description": "4 types: landscape, portrait, square, wide. Overlay gradient. Shimmer skeleton.",
+      "variants":    ["landscape", "portrait", "square", "wide"],
+      "states":      ["default", "pressed", "focus", "locked", "unavailable", "loading"],
+      "anatomy":     ["container", "art", "overlay", "title", "meta", "badge", "lock-icon"],
+      "tokens":      ["--card-radius-landscape", "--card-radius-portrait", "--card-radius-square",
+                      "--card-overlay", "--card-overlay-heavy", "--card-shimmer-bg",
+                      "--card-wide-w", "--card-active-scale"],
+      "cssClasses":  [".ds-card", ".ds-card--landscape", ".ds-card--portrait",
+                      ".ds-card--square", ".ds-card--wide",
+                      ".ds-card__art", ".ds-card__overlay", ".ds-card__title",
+                      ".ds-card--locked", ".ds-card--unavailable"]
+    },
+
+    {
+      "id":          "inputs",
+      "name":        "Input",
+      "path":        "/inputs/",
+      "folder":      "inputs",
+      "category":    "component",
+      "status":      "beta",
+      "platforms":   ["mobile", "web"],
+      "contracted":  true,
+      "description": "Text input. 3 sizes. Leading/trailing icon slots. Error/success states.",
+      "sizes":       ["s", "m", "l"],
+      "states":      ["default", "focus", "error", "success", "disabled"],
+      "tokens":      ["--input-bg", "--input-border", "--input-border-focus", "--input-border-error",
+                      "--input-h", "--input-radius", "--input-text", "--input-placeholder"]
+    },
+
+    {
+      "id":          "chips",
+      "name":        "Chip",
+      "path":        "/chips/",
+      "folder":      "chips",
+      "category":    "component",
+      "status":      "beta",
+      "platforms":   ["mobile", "web"],
+      "contracted":  true,
+      "description": "Filter / selection chip. 4 sizes. Icon + label. Pill radius.",
+      "sizes":       ["xs", "s", "m", "l"],
+      "states":      ["default", "selected", "disabled"],
+      "tokens":      ["--chip-m-h", "--chip-bg", "--pill", "--jio-soft", "--border"]
+    },
+
+    {
+      "id":          "rails",
+      "name":        "Rail",
+      "path":        "/rails/",
+      "folder":      "rails",
+      "category":    "component",
+      "status":      "beta",
+      "platforms":   ["mobile", "web", "tv"],
+      "contracted":  false,
+      "description": "Horizontal scroll container. Rail title with italic em accent + chevron.",
+      "tokens":      ["--section-gap", "--gutter", "--card-gap"]
+    },
+
+    {
+      "id":          "genre-tiles",
+      "name":        "Genre Tile",
+      "path":        "/genre-tiles/",
+      "folder":      "genre-tiles",
+      "category":    "component",
+      "status":      "beta",
+      "platforms":   ["mobile", "web"],
+      "contracted":  false,
+      "description": "Genre selection tile. Fixed 156px height.",
+      "tokens":      ["--genre-tile-h", "--r5"]
+    },
+
+    {
+      "id":          "pass-cards",
+      "name":        "Pass Card",
+      "path":        "/pass-cards/",
+      "folder":      "pass-cards",
+      "category":    "component",
+      "status":      "beta",
+      "platforms":   ["mobile"],
+      "contracted":  true,
+      "description": "JioGames Pass subscription card. Mobile & Ultimate variants.",
+      "variants":    ["mobile", "ultimate"],
+      "tokens":      ["--ultimate", "--ultimate-glow", "--pass-mobile-bg",
+                      "--pass-ultimate-bg-start", "--pass-ultimate-bg-end", "--border-ultimate"]
+    },
+
+    {
+      "id":          "tab-bar",
+      "name":        "Tab Bar",
+      "path":        "/tab-bar/",
+      "folder":      "tab-bar",
+      "category":    "component",
+      "status":      "beta",
+      "platforms":   ["mobile"],
+      "contracted":  true,
+      "description": "Bottom navigation. 64px fixed height. 4–5 tabs.",
+      "tokens":      ["--tab-bar-h", "--icon-color-default", "--icon-color-active", "--jio"]
+    },
+
+    {
+      "id":          "navigation",
+      "name":        "Navigation",
+      "path":        "/navigation/",
+      "folder":      "navigation",
+      "category":    "component",
+      "status":      "beta",
+      "platforms":   ["mobile", "web", "tv"],
+      "contracted":  false,
+      "description": "Top-level navigation patterns per platform."
+    },
+
+    {
+      "id":          "bottom-sheet",
+      "name":        "Bottom Sheet",
+      "path":        "/bottom-sheet/",
+      "folder":      "bottom-sheet",
+      "category":    "component",
+      "status":      "beta",
+      "platforms":   ["mobile"],
+      "contracted":  true,
+      "description": "Modal sheet from bottom. Handle, padding, backdrop scrim.",
+      "tokens":      ["--sheet-bg", "--sheet-padding", "--dur-sheet", "--spring",
+                      "--overlay-scrim", "--r9"]
+    },
+
+    {
+      "id":          "dialogs",
+      "name":        "Dialog",
+      "path":        "/dialogs/",
+      "folder":      "dialogs",
+      "category":    "component",
+      "status":      "beta",
+      "platforms":   ["mobile", "web"],
+      "contracted":  false,
+      "description": "Modal dialog. Focus trap required.",
+      "tokens":      ["--sheet-bg", "--r7", "--overlay-scrim", "--dur-pop"]
+    },
+
+    {
+      "id":          "toast",
+      "name":        "Toast",
+      "path":        "/toast/",
+      "folder":      "toast",
+      "category":    "feedback",
+      "status":      "beta",
+      "platforms":   ["mobile", "web"],
+      "contracted":  true,
+      "description": "Non-blocking notification. Auto-dismiss. 4 severity variants.",
+      "variants":    ["default", "success", "warning", "error"],
+      "tokens":      ["--surface-2", "--r5", "--dur-pop", "--spring"]
+    },
+
+    {
+      "id":          "banners",
+      "name":        "Banner",
+      "path":        "/banners/",
+      "folder":      "banners",
+      "category":    "feedback",
+      "status":      "beta",
+      "platforms":   ["mobile", "web"],
+      "contracted":  false,
+      "description": "Persistent inline notification. Dismissible variant.",
+      "variants":    ["info", "success", "warning", "error"]
+    },
+
+    {
+      "id":          "badges",
+      "name":        "Badge",
+      "path":        "/badges/",
+      "folder":      "badges",
+      "category":    "feedback",
+      "status":      "beta",
+      "platforms":   ["mobile", "web", "tv"],
+      "contracted":  false,
+      "description": "Label / count badge. Pill shape. Overlays icon or card."
+    },
+
+    {
+      "id":          "skeleton",
+      "name":        "Skeleton",
+      "path":        "/skeleton/",
+      "folder":      "skeleton",
+      "category":    "feedback",
+      "status":      "beta",
+      "platforms":   ["mobile", "web", "tv"],
+      "contracted":  false,
+      "description": "Loading placeholder. Shimmer animation. Mirrors content shape.",
+      "tokens":      ["--skeleton-bg", "--skeleton-highlight", "--skeleton-radius",
+                      "--dur-shimmer"]
+    },
+
+    {
+      "id":          "progress-bar",
+      "name":        "Progress Bar",
+      "path":        "/progress-bar/",
+      "folder":      "progress-bar",
+      "category":    "feedback",
+      "status":      "beta",
+      "platforms":   ["mobile", "web"],
+      "contracted":  false,
+      "description": "Determinate + indeterminate. Height 2–4px or labeled."
+    },
+
+    {
+      "id":          "avatar",
+      "name":        "Avatar",
+      "path":        "/avatar/",
+      "folder":      "avatar",
+      "category":    "component",
+      "status":      "beta",
+      "platforms":   ["mobile", "web"],
+      "contracted":  false,
+      "description": "User image or initials fallback. 5 sizes."
+    },
+
+    {
+      "id":          "search",
+      "name":        "Search",
+      "path":        "/search/",
+      "folder":      "search",
+      "category":    "component",
+      "status":      "beta",
+      "platforms":   ["mobile", "web"],
+      "contracted":  false,
+      "description": "Search bar with results overlay.",
+      "tokens":      ["--input-bg", "--input-border-focus", "--r4"]
+    },
+
+    {
+      "id":          "page-dots",
+      "name":        "Page Dots",
+      "path":        "/page-dots/",
+      "folder":      "page-dots",
+      "category":    "component",
+      "status":      "beta",
+      "platforms":   ["mobile"],
+      "contracted":  false,
+      "description": "Carousel position indicator. Expanding active dot."
+    },
+
+    {
+      "id":          "lists",
+      "name":        "List",
+      "path":        "/lists/",
+      "folder":      "lists",
+      "category":    "component",
+      "status":      "beta",
+      "platforms":   ["mobile", "web"],
+      "contracted":  false,
+      "description": "Settings / menu list row. Leading icon, trailing chevron/value."
+    },
+
+    {
+      "id":          "toggle",
+      "name":        "Toggle",
+      "path":        "/toggle/",
+      "folder":      "toggle",
+      "category":    "form",
+      "status":      "beta",
+      "platforms":   ["mobile", "web"],
+      "contracted":  false,
+      "description": "On/off switch. Animated thumb. Green active state."
+    },
+
+    {
+      "id":          "forms",
+      "name":        "Forms",
+      "path":        "/forms/",
+      "folder":      "forms",
+      "category":    "form",
+      "status":      "beta",
+      "platforms":   ["mobile", "web"],
+      "contracted":  false,
+      "description": "Form layout patterns. Label + input + error + helper text."
+    },
+
+    {
+      "id":          "drawer",
+      "name":        "Drawer",
+      "path":        "/drawer/",
+      "folder":      "drawer",
+      "category":    "overlay",
+      "status":      "draft",
+      "platforms":   ["web"],
+      "contracted":  false,
+      "description": "Side-panel overlay. Left or right."
+    },
+
+    {
+      "id":          "checkbox",
+      "name":        "Checkbox",
+      "path":        "/checkbox/",
+      "folder":      "checkbox",
+      "category":    "form",
+      "status":      "draft",
+      "platforms":   ["mobile", "web"],
+      "contracted":  false,
+      "description": "Checked / indeterminate / unchecked states."
+    },
+
+    {
+      "id":          "radio",
+      "name":        "Radio",
+      "path":        "/radio/",
+      "folder":      "radio",
+      "category":    "form",
+      "status":      "draft",
+      "platforms":   ["mobile", "web"],
+      "contracted":  false,
+      "description": "Single selection within a group."
+    },
+
+    {
+      "id":          "label",
+      "name":        "Label",
+      "path":        "/label/",
+      "folder":      "label",
+      "category":    "form",
+      "status":      "draft",
+      "platforms":   ["mobile", "web"],
+      "contracted":  false,
+      "description": "Form field label. Required marker."
+    },
+
+    {
+      "id":          "textarea",
+      "name":        "Textarea",
+      "path":        "/textarea/",
+      "folder":      "textarea",
+      "category":    "form",
+      "status":      "draft",
+      "platforms":   ["mobile", "web"],
+      "contracted":  false,
+      "description": "Multi-line text input. Auto-grow."
+    },
+
+    {
+      "id":          "slider",
+      "name":        "Slider",
+      "path":        "/slider/",
+      "folder":      "slider",
+      "category":    "form",
+      "status":      "draft",
+      "platforms":   ["mobile", "web", "tv"],
+      "contracted":  false,
+      "description": "Range input. Green track fill. TV D-pad compatible."
+    },
+
+    {
+      "id":          "select",
+      "name":        "Select",
+      "path":        "/select/",
+      "folder":      "select",
+      "category":    "form",
+      "status":      "draft",
+      "platforms":   ["mobile", "web"],
+      "contracted":  false,
+      "description": "Native select styled to DLS."
+    },
+
+    {
+      "id":          "combobox",
+      "name":        "Combobox",
+      "path":        "/combobox/",
+      "folder":      "combobox",
+      "category":    "form",
+      "status":      "draft",
+      "platforms":   ["web"],
+      "contracted":  false,
+      "description": "Searchable dropdown."
+    },
+
+    {
+      "id":          "tabs",
+      "name":        "Tabs",
+      "path":        "/tabs/",
+      "folder":      "tabs",
+      "category":    "navigation",
+      "status":      "draft",
+      "platforms":   ["mobile", "web"],
+      "contracted":  false,
+      "description": "Horizontal tab switcher. Scrollable on mobile."
+    },
+
+    {
+      "id":          "accordion",
+      "name":        "Accordion",
+      "path":        "/accordion/",
+      "folder":      "accordion",
+      "category":    "navigation",
+      "status":      "draft",
+      "platforms":   ["mobile", "web"],
+      "contracted":  false,
+      "description": "Expand/collapse sections."
+    },
+
+    {
+      "id":          "collapsible",
+      "name":        "Collapsible",
+      "path":        "/collapsible/",
+      "folder":      "collapsible",
+      "category":    "navigation",
+      "status":      "draft",
+      "platforms":   ["mobile", "web"],
+      "contracted":  false,
+      "description": "Single section toggle."
+    },
+
+    {
+      "id":          "toggle-group",
+      "name":        "Toggle Group",
+      "path":        "/toggle-group/",
+      "folder":      "toggle-group",
+      "category":    "navigation",
+      "status":      "draft",
+      "platforms":   ["mobile", "web"],
+      "contracted":  false,
+      "description": "Segmented control / button group."
+    },
+
+    {
+      "id":          "navigation-menu",
+      "name":        "Navigation Menu",
+      "path":        "/navigation-menu/",
+      "folder":      "navigation-menu",
+      "category":    "navigation",
+      "status":      "draft",
+      "platforms":   ["web"],
+      "contracted":  false,
+      "description": "Mega-menu / dropdown navigation for web."
+    },
+
+    {
+      "id":          "tooltip",
+      "name":        "Tooltip",
+      "path":        "/tooltip/",
+      "folder":      "tooltip",
+      "category":    "overlay",
+      "status":      "draft",
+      "platforms":   ["web", "tv"],
+      "contracted":  false,
+      "description": "Hover label. 300ms delay. 4 positions."
+    },
+
+    {
+      "id":          "popover",
+      "name":        "Popover",
+      "path":        "/popover/",
+      "folder":      "popover",
+      "category":    "overlay",
+      "status":      "draft",
+      "platforms":   ["web"],
+      "contracted":  false,
+      "description": "Anchored floating panel. Focus trap."
+    },
+
+    {
+      "id":          "hover-card",
+      "name":        "Hover Card",
+      "path":        "/hover-card/",
+      "folder":      "hover-card",
+      "category":    "overlay",
+      "status":      "draft",
+      "platforms":   ["web"],
+      "contracted":  false,
+      "description": "Rich preview card on hover."
+    },
+
+    {
+      "id":          "context-menu",
+      "name":        "Context Menu",
+      "path":        "/context-menu/",
+      "folder":      "context-menu",
+      "category":    "overlay",
+      "status":      "draft",
+      "platforms":   ["web"],
+      "contracted":  false,
+      "description": "Right-click menu."
+    },
+
+    {
+      "id":          "dropdown-menu",
+      "name":        "Dropdown Menu",
+      "path":        "/dropdown-menu/",
+      "folder":      "dropdown-menu",
+      "category":    "overlay",
+      "status":      "draft",
+      "platforms":   ["mobile", "web"],
+      "contracted":  false,
+      "description": "Action list anchored to a trigger."
+    },
+
+    {
+      "id":          "data-table",
+      "name":        "Data Table",
+      "path":        "/data-table/",
+      "folder":      "data-table",
+      "category":    "data",
+      "status":      "draft",
+      "platforms":   ["web"],
+      "contracted":  false,
+      "description": "Sortable, filterable table."
+    },
+
+    {
+      "id":          "chart",
+      "name":        "Chart",
+      "path":        "/chart/",
+      "folder":      "chart",
+      "category":    "data",
+      "status":      "draft",
+      "platforms":   ["web"],
+      "contracted":  false,
+      "description": "Data visualization. Bar, line, doughnut."
+    },
+
+    {
+      "id":          "calendar",
+      "name":        "Calendar",
+      "path":        "/calendar/",
+      "folder":      "calendar",
+      "category":    "data",
+      "status":      "draft",
+      "platforms":   ["mobile", "web"],
+      "contracted":  false,
+      "description": "Month view picker."
+    },
+
+    {
+      "id":          "date-picker",
+      "name":        "Date Picker",
+      "path":        "/date-picker/",
+      "folder":      "date-picker",
+      "category":    "data",
+      "status":      "draft",
+      "platforms":   ["mobile", "web"],
+      "contracted":  false,
+      "description": "Input + calendar overlay."
+    },
+
+    {
+      "id":          "scroll-area",
+      "name":        "Scroll Area",
+      "path":        "/scroll-area/",
+      "folder":      "scroll-area",
+      "category":    "layout",
+      "status":      "draft",
+      "platforms":   ["web"],
+      "contracted":  false,
+      "description": "Custom scrollbar styling."
+    },
+
+    {
+      "id":          "carousel",
+      "name":        "Carousel",
+      "path":        "/carousel-component/",
+      "folder":      "carousel-component",
+      "category":    "layout",
+      "status":      "draft",
+      "platforms":   ["mobile", "web"],
+      "contracted":  false,
+      "description": "Auto-advancing hero carousel.",
+      "note":        "Folder is carousel-component (legacy). Will rename to carousel when breaking-change window opens."
+    },
+
+    {
+      "id":          "separator",
+      "name":        "Separator",
+      "path":        "/separator/",
+      "folder":      "separator",
+      "category":    "layout",
+      "status":      "draft",
+      "platforms":   ["mobile", "web"],
+      "contracted":  false,
+      "description": "Horizontal/vertical divider line.",
+      "tokens":      ["--divider", "--hairline"]
+    },
+
+    {
+      "id":          "aspect-ratio",
+      "name":        "Aspect Ratio",
+      "path":        "/aspect-ratio/",
+      "folder":      "aspect-ratio",
+      "category":    "layout",
+      "status":      "draft",
+      "platforms":   ["mobile", "web", "tv"],
+      "contracted":  false,
+      "description": "Forced aspect ratio container."
+    },
+
+    {
+      "id":          "command",
+      "name":        "Command",
+      "path":        "/command/",
+      "folder":      "command",
+      "category":    "overlay",
+      "status":      "draft",
+      "platforms":   ["web"],
+      "contracted":  false,
+      "description": "Command palette / global search. ⌘K trigger."
+    },
+
+    {
+      "id":          "menubar",
+      "name":        "Menubar",
+      "path":        "/menubar/",
+      "folder":      "menubar",
+      "category":    "navigation",
+      "status":      "draft",
+      "platforms":   ["web"],
+      "contracted":  false,
+      "description": "Horizontal application menu."
+    },
+
+    {
+      "id":          "resizable",
+      "name":        "Resizable",
+      "path":        "/resizable/",
+      "folder":      "resizable",
+      "category":    "layout",
+      "status":      "draft",
+      "platforms":   ["web"],
+      "contracted":  false,
+      "description": "Drag-to-resize panel splits."
+    },
+
+    {
+      "id":          "governance",
+      "name":        "Governance",
+      "path":        "/governance/",
+      "folder":      "governance",
+      "category":    "core",
+      "status":      "stable",
+      "platforms":   [],
+      "contracted":  false,
+      "description": "RFC process, semver, deprecation, release checklist."
+    },
+
+    {
+      "id":          "templates",
+      "name":        "Templates",
+      "path":        "/templates/",
+      "folder":      "templates",
+      "category":    "core",
+      "status":      "beta",
+      "platforms":   ["mobile", "web", "tv"],
+      "contracted":  false,
+      "description": "Starter screen templates."
+    }
+
+  ]
+}

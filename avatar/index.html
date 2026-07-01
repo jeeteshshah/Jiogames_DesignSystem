@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     /* ── Avatar component CSS ── */
     .avatar {
@@ -27,7 +27,7 @@
     }
     .avatar--initials { background: var(--surface-3); }
     .avatar--initials-accent { background: var(--jio); }
-    .avatar--initials-accent .avatar__initials { color: #000; }
+    .avatar--initials-accent .avatar__initials { color: var(--text-inv); }
 
     /* Sizes */
     .avatar--xs { width: 24px; height: 24px; }
@@ -83,12 +83,11 @@
   <!-- PAGE HEADER -->
   <header class="component-page-header">
     <nav class="component-breadcrumb" aria-label="Breadcrumb">
-      <a href="../" class="component-breadcrumb-link">JioGames DLS</a>
-      <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="component-breadcrumb-link">JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
       <span class="component-breadcrumb-current">Avatar</span>
     </nav>
-    <h1 class="component-page-title">Avatar</h1>
-    <p class="component-page-def">User representation through profile images, initials fallback, and online presence indicators. Used in profiles, friend lists, comments, and leaderboards.</p>
+    <h1 class="component-page-title">Avatar</h1><p class="component-page-def">User representation through profile images, initials fallback, and online presence indicators. Used in profiles, friend lists, comments, and leaderboards.</p>
     <div class="component-platforms">
       <span class="component-platform component-platform--mobile">
         <span class="component-platform-dot"></span>Mobile
@@ -102,6 +101,7 @@
       <span class="component-maturity component-maturity--draft">
         <span class="component-maturity--dot"></span>Draft
       </span>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBBdmF0YXIg4oCUIEppb0dhbWVzIERMUyBzcGVjCgo+IFNvdXJjZTogYGF2YXRhci9pbmRleC5odG1sYCBpbiB0aGUgSmlvR2FtZXMgRGVzaWduIFN5c3RlbS4KPiBUaGlzIHNwZWMgaXMgZ2VuZXJhdGVkIHZlcmJhdGltIGZyb20gdGhlIHBhZ2Ug4oCUIGRvIG5vdCBpbnZlbnQgdmFsdWVzIG5vdCBsaXN0ZWQgaGVyZS4KCioqUGF0aDoqKiBKaW9HYW1lcyBETFMg4oC6IEF2YXRhcgoKLS0tCgpVc2VyIHJlcHJlc2VudGF0aW9uIHRocm91Z2ggcHJvZmlsZSBpbWFnZXMsIGluaXRpYWxzIGZhbGxiYWNrLCBhbmQgb25saW5lIHByZXNlbmNlIGluZGljYXRvcnMuIFVzZWQgaW4gcHJvZmlsZXMsIGZyaWVuZCBsaXN0cywgY29tbWVudHMsIGFuZCBsZWFkZXJib2FyZHMuCgpYUyDihpIgWEwgwrcgSU1BR0UgwrcgSU5JVElBTFMgwrcgUFJFU0VOQ0UgSU5ESUNBVE9SCgojIyBJbnRyb2R1Y3Rpb24KCkF2YXRhciByZXByZXNlbnRzIGEgdXNlciBvciBlbnRpdHkgYWNyb3NzIHRoZSBKaW9HYW1lcyBwbGF0Zm9ybS4gVGhyZWUgZGlzcGxheSBtb2RlcyBvcGVyYXRlIGluIHN0cmljdCBwcmlvcml0eSBvcmRlcjoKCjEuICoqUHJvZmlsZSBpbWFnZSoqIOKAlCByZW5kZXJzIGlmIGEgVVJMIGlzIGF2YWlsYWJsZSBhbmQgbG9hZHMgc3VjY2Vzc2Z1bGx5CjIuICoqSW5pdGlhbHMqKiDigJQgMeKAkzIgY2hhcmFjdGVycyBkZXJpdmVkIGZyb20gdGhlIGRpc3BsYXkgbmFtZSwgcmVuZGVyZWQgb24gYSBzdXJmYWNlLTMgYmFja2dyb3VuZAozLiAqKkljb24gZmFsbGJhY2sqKiDigJQgZ2VuZXJpYyBwZXJzb24gaWNvbiB3aGVuIG5vIG5hbWUgaXMgYXZhaWxhYmxlCgotICoqUHJvZmlsZSBoZWFkZXJzKiog4oCUIFhMIG9yIEwgc2l6ZSBmb3IgdGhlIHByaW1hcnkgdXNlciBpZGVudGl0eSBzdXJmYWNlCi0gKipGcmllbmQgbGlzdHMqKiDigJQgTSBzaXplLCBvZnRlbiBwYWlyZWQgd2l0aCBhbiBvbmxpbmUgcHJlc2VuY2UgZG90Ci0gKipDb21tZW50cyAmIGNoYXQqKiDigJQgUyBzaXplIGFsb25nc2lkZSBtZXNzYWdlIGNvbnRlbnQKLSAqKkxlYWRlcmJvYXJkcyoqIOKAlCBNIHNpemUgd2l0aCByYW5rIGNvbnRleHQKLSAqKk5vdGlmaWNhdGlvbiBpdGVtcyoqIOKAlCBTIHNpemUgZm9yIGNvbXBhY3QgbGlzdCByb3dzCgpEbyBOT1QgdXNlIGF2YXRhcnMgZm9yIGdhbWUgY292ZXIgYXJ0ICh1c2UgdGhlIGdhbWUgY2FyZCB0aHVtYm5haWwgaW5zdGVhZCkgb3IgYnJhbmQgbG9nb3MgKHVzZSB0aGUgbG9nbyBjb21wb25lbnQpLgoKIyMgV2hlbiB0byB1c2UKClVzZSB3aGVuCgotIFVzZXIgaWRlbnRpdHkgaW4gY29tbWVudHMsIHJldmlld3MsIGxlYWRlcmJvYXJkcywgYW5kIGNoYXQKLSBQcm9maWxlIGhlYWRlcnMgYW5kIGFjY291bnQgc2V0dGluZ3Mgc2NyZWVucwotIE11bHRpcGxheWVyIGxvYmJ5IHBhcnRpY2lwYW50IHNsb3RzCi0gQWN0aXZpdHkgZmVlZHMgc2hvd2luZyB3aG8gZGlkIHdoYXQKCkRvbid0IHVzZSB3aGVuCgotIERlY29yYXRpdmUgaWxsdXN0cmF0aW9ucyDigJQgdXNlIGFuIGltYWdlIGNvbXBvbmVudCBpbnN0ZWFkCi0gTW9yZSB0aGFuIDUgc3RhY2tlZCBhdmF0YXJzIHdpdGhvdXQgYSArTiBvdmVyZmxvdyBpbmRpY2F0b3IKLSBTaXplcyBzbWFsbGVyIHRoYW4gMjRweCDigJQgdGhlIGZhbGxiYWNrIGluaXRpYWxzIGJlY29tZSB1bnJlYWRhYmxlCi0gQXMgYSBidXR0b24gb24gaXRzIG93biB3aXRob3V0IGFuIGFjY2Vzc2libGUgbGFiZWwKCiMjIEJlc3QgcHJhY3RpY2VzCgpSdWxlcyB0aGF0IGtlZXAgQXZhdGFyIGNvbnNpc3RlbnQsIGFjY2Vzc2libGUsIGFuZCB2aXN1YWxseSBjb2hlcmVudCBhY3Jvc3MgZXZlcnkgY29udGV4dC4KCi0gQWx3YXlzIHByb3ZpZGUgYWx0IHRleHQgZm9yIGltYWdlIGF2YXRhcnMgdGhhdCBkZXNjcmliZXMgdGhlIHBlcnNvbiDigJQgIlByb2ZpbGUgcGljdHVyZSBvZiBBcmp1biIgbm90ICJhdmF0YXIgaW1hZ2UiCi0gVXNlIGEgdG9rZW4gZm9yIGluaXRpYWxzIGJhY2tncm91bmQg4oCUIG5ldmVyIGhhcmRjb2RlIGEgdXNlci1zcGVjaWZpYyBjb2xvcgotIFRyZWF0IHRoZSBvbmxpbmUgaW5kaWNhdG9yIGFzIGFkZGl0aXZlIOKAlCBuZXZlciByZXBsYWNlIHRoZSBhdmF0YXIgd2l0aCBhIHByZXNlbmNlLW9ubHkgaWNvbgotIFN0YWNrIG11bHRpcGxlIGF2YXRhcnMgd2l0aCDiiJI4cHggb3ZlcmxhcCBhbmQgYSBzdXJmYWNlLTEgcmluZyBib3JkZXIgdG8gc2VwYXJhdGUgdGhlbSB2aXN1YWxseQotIFVzZSBtaW5pbXVtIE0gKDQwcHgpIG9uIFRWIOKAlCBzbWFsbGVyIGF2YXRhcnMgYXJlIGluZGlzY2VybmlibGUgZnJvbSAxMCBmZWV0IGF3YXkKCi0gVXNlIGF2YXRhcnMgZm9yIGdhbWUgY292ZXIgYXJ0IG9yIGJyYW5kIGxvZ29zIOKAlCBkaWZmZXJlbnQgY29tcG9uZW50cyBleGlzdCBmb3IgdGhvc2UgcHVycG9zZXMKLSBTaG93IFhTIG9yIFMgc2l6ZSBvbiBUViDigJQgdG9vIHNtYWxsIHRvIHJlYWQgYXQgdmlld2luZyBkaXN0YW5jZQotIFJlbHkgb24gcHJlc2VuY2UgY29sb3IgYWxvbmUg4oCUIGFsd2F5cyBwYWlyIGEgZG90IHdpdGggYSBsYWJlbCBpbiBsaXN0IHJvd3MKLSBEaXNwbGF5IGEgc3F1YXJlIG9yIG5vbi1jaXJjdWxhciBhdmF0YXIg4oCUIGFsd2F5cyB1c2UgYm9yZGVyLXJhZGl1czogdmFyKC0tcGlsbCkKLSBIYXJkY29kZSBoZXggdmFsdWVzIGZvciBiYWNrZ3JvdW5kcyDigJQgdXNlIGRlc2lnbiB0b2tlbnMgdG8gc3RheSBpbiBzeW5jIHdpdGggdGhlbWUgdXBkYXRlcwoKIyMgQW5hdG9teQoKRXZlcnkgcGFydCBvZiB0aGUgQXZhdGFyIGNvbXBvbmVudCBhbmQgaXRzIGFzc29jaWF0ZWQgdG9rZW4uCgoxLiAxIENvbnRhaW5lciBSZXF1aXJlZCBDaXJjdWxhciB3cmFwcGVyIHRoYXQgY2xpcHMgaW1hZ2Ugb3IgaW5pdGlhbHMuIEFsd2F5cyBwaWxsIHJhZGl1cyBhbmQgaGlkZGVuIG92ZXJmbG93LiBgYm9yZGVyLXJhZGl1czogdmFyKC0tcGlsbCk7IG92ZXJmbG93OiBoaWRkZW5gCjIuIDIgSW5pdGlhbHMgLyBJbWFnZSBSZXF1aXJlZCBFaXRoZXIgYW4gaW1nIHRhZyAob2JqZWN0LWZpdDogY292ZXIpIG9yIGEgY2VudGVyZWQgaW5pdGlhbHMgc3Bhbi4gRXhhY3RseSBvbmUgaXMgcmVuZGVyZWQgYXQgYSB0aW1lLiBgY29sb3I6IHZhcigtLXRleHQpOyBmb250LXdlaWdodDogNzAwYAozLiAzIEluaXRpYWxzIGJhY2tncm91bmQgQ29uZGl0aW9uYWwgU3VyZmFjZS0zIGZvciBuZXV0cmFsLCAtLWppbyBmb3IgYWNjZW50LiBBcHBsaWVkIG9uIGNvbnRhaW5lciwgbm90IHRoZSBzcGFuLiBgYmFja2dyb3VuZDogdmFyKC0tc3VyZmFjZS0zKSB8IHZhcigtLWppbylgCjQuIDQgUHJlc2VuY2UgZG90IE9wdGlvbmFsIEFic29sdXRlLXBvc2l0aW9uZWQgZG90IGF0IGJvdHRvbS1yaWdodC4gR3JlZW4gZm9yIG9ubGluZSwgdGV4dDQgZm9yIG9mZmxpbmUuIEJvcmRlciBwdW5jaGVzIG91dCBmcm9tIHRoZSBhdmF0YXIgZWRnZS4gYGJhY2tncm91bmQ6IHZhcigtLWppbyk7IGJvcmRlcjogMnB4IHNvbGlkIHZhcigtLWJnKWAKCnwgUGFydCB8IEVsZW1lbnQgfCBUb2tlbiB8CnwtLS18LS0tfC0tLXwKfCBDb250YWluZXIgfCBgZGl2LmF2YXRhcmAgfCBgYm9yZGVyLXJhZGl1czogdmFyKC0tcGlsbCksIG92ZXJmbG93OiBoaWRkZW5gIHwKfCBJbWFnZSB8IGBpbWcuYXZhdGFyX19pbWdgIHwgYHdpZHRoOiAxMDAlOyBoZWlnaHQ6IDEwMCU7IG9iamVjdC1maXQ6IGNvdmVyYCB8CnwgSW5pdGlhbHMgfCBgc3Bhbi5hdmF0YXJfX2luaXRpYWxzYCB8IGBjb2xvcjogdmFyKC0tdGV4dCksIGZvbnQtd2VpZ2h0OiA3MDBgIHwKfCBJbml0aWFscyBiZyB8IGAuYXZhdGFyLS1pbml0aWFsc2AgfCBgYmFja2dyb3VuZDogdmFyKC0tc3VyZmFjZS0zKWAgfAp8IFByZXNlbmNlIGRvdCB8IGBzcGFuLmF2YXRhcl9fcHJlc2VuY2VgIHwgYGJhY2tncm91bmQ6IHZhcigtLWppbyksIGJvcmRlcjogMnB4IHNvbGlkIHZhcigtLWJnKWAgfAp8IFByZXNlbmNlIG9mZmxpbmUgfCBgLmF2YXRhcl9fcHJlc2VuY2UtLW9mZmxpbmVgIHwgYGJhY2tncm91bmQ6IHZhcigtLXRleHQ0KWAgfAp8IFJpbmcgKHN0YWNrZWQpIHwgYC5hdmF0YXItLXJpbmdgIHwgYGJveC1zaGFkb3c6IDAgMCAwIDJweCB2YXIoLS1zdXJmYWNlLTEpYCB8CgojIyBWYXJpYW50cwoKRm91ciBkaXNwbGF5IG1vZGVzIGluIHByaW9yaXR5IG9yZGVyLiBBbGwgc2hhcmUgdGhlIHNhbWUgY2lyY3VsYXIgY29udGFpbmVyIGFuZCBzaXplIHN5c3RlbS4KCiMjIFNpemVzCgpGaXZlIHNpemVzIGNvdmVyIGV2ZXJ5IGNvbnRleHQgZnJvbSBkZW5zZSBub3RpZmljYXRpb24gcm93cyB0byBmdWxsIHByb2ZpbGUgcGFnZXMuIFByZXNlbmNlIGRvdCBzY2FsZXMgcHJvcG9ydGlvbmFsbHkuCgp8IE5hbWUgfCBTaXplIHwgRm9udCB8IFByZXNlbmNlIGRvdCB8IFVzYWdlIHwKfC0tLXwtLS18LS0tfC0tLXwtLS18CnwgWFMgfCAyNHB4IHwgOXB4IHwg4oCUIHwgRGVuc2UgbGlzdHMsIG5vdGlmaWNhdGlvbiBkb3RzIHwKfCBTIHwgMzJweCB8IDEycHggfCA2cHggfCBDb21tZW50cywgY2hhdCB8CnwgTSB8IDQwcHggfCAxNXB4IHwgOHB4IHwgRnJpZW5kIGxpc3RzLCBsZWFkZXJib2FyZHMgfAp8IEwgfCA0OHB4IHwgMThweCB8IDEwcHggfCBQcm9maWxlIGhlYWRlcnMgfAp8IFhMIHwgNjRweCB8IDIycHggfCAxMnB4IHwgRnVsbCBwcm9maWxlIHBhZ2UgfAoKIyMgU3RhdGVzCgpBdmF0YXIgc3VwcG9ydHMgZml2ZSBzdGF0ZXMuIFByZXNlbmNlIHN0YXRlcyBhcmUgYWRkaXRpdmUg4oCUIHRoZXkgbGF5ZXIgb24gdG9wIG9mIHRoZSBiYXNlIGF2YXRhciB3aXRob3V0IHJlcGxhY2luZyBpdC4KCiMjIENvbnRlbnQgZ3VpZGFuY2UKClJ1bGVzIGZvciBkZXJpdmluZyBpbml0aWFscyBmcm9tIGRpc3BsYXkgbmFtZXMgYWNyb3NzIHNjcmlwdHMgYW5kIG5hbWluZyBwYXR0ZXJucy4KCi0gVXNlIHRoZSBmaXJzdCBsZXR0ZXIgb2YgdGhlIGZpcnN0IG5hbWUgKyBmaXJzdCBsZXR0ZXIgb2YgdGhlIGxhc3QgbmFtZSDigJQgIkFyanVuIFNoYXJtYSIg4oaSICJBUyIKLSBTaW5nbGUtbmFtZSB1c2VyczogdXNlIHRoZSBmaXJzdCB0d28gbGV0dGVycyDigJQgIlByaXlhIiDihpIgIlBSIgotIE5vbi1MYXRpbiBzY3JpcHRzOiB1c2UgMSBjaGFyYWN0ZXIgb25seQotIE5ldmVyIHRydW5jYXRlIGluaXRpYWxzIHRvIG5vdGhpbmcg4oCUIGZhbGwgYmFjayB0byB0aGUgaWNvbiBpZiBubyBjaGFyYWN0ZXJzIGFyZSBhdmFpbGFibGUKLSBNYXggMiBjaGFyYWN0ZXJzIGFsd2F5cyDigJQgbmV2ZXIgc2hvdyAzIG9yIG1vcmUKCi0gSW1hZ2UgYXZhdGFyczogZGVzY3JpYmUgdGhlIHBlcnNvbiDigJQgIlByb2ZpbGUgcGljdHVyZSBvZiBBcmp1biIgbm90ICJhdmF0YXIgaW1hZ2UiCi0gSW5pdGlhbHMgYXZhdGFyczogcHV0IHRoZSBmdWxsIG5hbWUgb24gdGhlIGNvbnRhaW5lciBgYXJpYS1sYWJlbGAKLSBJY29uIGZhbGxiYWNrOiB1c2UgYGFyaWEtbGFiZWw9IlVua25vd24gdXNlciJgCi0gUHJlc2VuY2UgZG90OiBgYXJpYS1sYWJlbD0iT25saW5lImAgb3IgYGFyaWEtbGFiZWw9Ik9mZmxpbmUiYAotIFN0YWNrZWQgb3ZlcmZsb3c6IGBhcmlhLWxhYmVsPSJOIG1vcmUgdXNlcnMiYCBvbiB0aGUgb3ZlcmZsb3cgYnViYmxlCgojIyBQbGF0Zm9ybSBjb25zaWRlcmF0aW9ucwoKQXZhdGFyIGFkYXB0cyBpdHMgbWluaW11bSBzaXplIGFuZCBpbnRlcmFjdGlvbiBhZmZvcmRhbmNlcyBwZXIgcGxhdGZvcm0uIENvcmUgc3RydWN0dXJlIGFuZCB0b2tlbnMgc3RheSBmaXhlZC4KCi0gWFPigJNYTCBhbGwgdmFsaWQgc2l6ZXM7IE0gaXMgdGhlIG1vc3QgY29tbW9uCi0gUHJlc2VuY2UgZG90IGFsd2F5cyA4cHggYXQgTSBzaXplCi0gVGFwIHRhcmdldCBmb3IgYXZhdGFyIGxpbmtzIG11c3QgYmUgbWluaW11bSA0NMOXNDRweAotIFN0YWNrZWQgZ3JvdXBzOiBtYXggNCB2aXNpYmxlIGF2YXRhcnMgKyBvdmVyZmxvdyBjaGlwCi0gTm8gdG9vbHRpcCBuZWVkZWQg4oCUIGZ1bGwgbmFtZSBzaG93biBpbiBhZGphY2VudCB0ZXh0CgotIFNhbWUgc2l6ZSByYW5nZSBhcyBtb2JpbGU7IE0gbW9zdCBjb21tb24gaW4gcmFpbHMKLSBIb3ZlciBzaG93cyBhIHRvb2x0aXAgd2l0aCB0aGUgZnVsbCBkaXNwbGF5IG5hbWUKLSBQcmVzZW5jZSBkb3QgOHB4IGJ5IGRlZmF1bHQ7IHNjYWxlIHdpdGggYXZhdGFyIHNpemUKLSBDdXJzb3I6IGRlZmF1bHQg4oCUIGF2YXRhciBpcyBub3QgaW5oZXJlbnRseSBpbnRlcmFjdGl2ZQotIEZvY3VzIHJpbmcgb24gaW50ZXJhY3RpdmUgYXZhdGFycyAobGlua3MvYnV0dG9ucyk6IDJweCBqaW8gb3V0bGluZQoKLSBNaW5pbXVtIE0gKDQwcHgpIOKAlCBubyBYUyBvciBTIHBlcm1pdHRlZAotIFByZXNlbmNlIGRvdCAxMHB4IG1pbmltdW0gZm9yIGxlZ2liaWxpdHkgYXQgMTAgZmVldAotIEZvY3VzL2hvdmVyIHJpbmc6IHZhcigtLWppbykgZ2xvdyDigJQgYGJveC1zaGFkb3c6IDAgMCAwIDNweCB2YXIoLS1qaW8pLCAwIDAgMjBweCByZ2JhKDAsMjAwLDEwMCwuNClgCi0gVG9vbHRpcCBub3QgYXBwbGljYWJsZSDigJQgc2hvdyBuYW1lIGFzIG9uLXNjcmVlbiB0ZXh0IGxhYmVsCi0gWEwgcHJlZmVycmVkIGZvciBwcm9maWxlIGhlYWRlciBvbiBUViBkZXRhaWwgcGFnZXMKCiMjIE1vdGlvbgoKfCBJbnRlcmFjdGlvbiB8IEVhc2luZyB8IER1cmF0aW9uIHwgUHJvcGVydHkgfAp8LS0tfC0tLXwtLS18LS0tfAp8IEltYWdlIGxvYWQgZmFkZSB8IGAtLWVhc2Utb3V0YCB8IGAtLWR1ci1iYXNlYCB8IG9wYWNpdHkgfAp8IFByZXNlbmNlIHJpbmcgcHVsc2UgfCBgZWFzZS1pbi1vdXRgIHwgYDJzIGluZmluaXRlYCB8IGJveC1zaGFkb3cgc2NhbGUgfAp8IEhvdmVyIHNjYWxlIHwgYC0tZWFzZS1vdXRgIHwgYC0tZHVyLWZhc3RgIHwgdHJhbnNmb3JtIHNjYWxlKDEuMDUpIHwKfCBGb2N1cyByaW5nIHwgYGluc3RhbnRgIHwgYDBtc2AgfCBvdXRsaW5lIHwKCiMjIEFjY2Vzc2liaWxpdHkKCkF2YXRhciBtdXN0IGNvbnZleSBpZGVudGl0eSBhbmQgcHJlc2VuY2UgdG8gc2NyZWVuIHJlYWRlcnMgd2l0aG91dCByZWx5aW5nIG9uIGNvbG9yIG9yIHZpc3VhbCBzaGFwZSBhbG9uZS4KCnwgVmFyaWFudCB8IFJvbGUgLyBhdHRyaWJ1dGUgfCBHdWlkYW5jZSB8CnwtLS18LS0tfC0tLXwKfCBJbWFnZSBhdmF0YXIgfCBgYWx0YCBvbiBpbWcgfCBEZXNjcmliZSB0aGUgcGVyc29uOiBgYWx0PSJQcm9maWxlIHBpY3R1cmUgb2YgQXJqdW4gU2hhcm1hImAgfAp8IEluaXRpYWxzIGF2YXRhciB8IGBhcmlhLWxhYmVsYCBvbiBjb250YWluZXIgfCBQdXQgZnVsbCBuYW1lIG9uIHRoZSBjb250YWluZXIgZGl2OyBhZGQgYGFyaWEtaGlkZGVuPSJ0cnVlImAgdG8gdGhlIGluaXRpYWxzIHNwYW4gfAp8IEljb24gZmFsbGJhY2sgfCBgYXJpYS1sYWJlbGAgb24gY29udGFpbmVyIHwgVXNlIGBhcmlhLWxhYmVsPSJVbmtub3duIHVzZXIiYDsgU1ZHIGljb24gZ2V0cyBgYXJpYS1oaWRkZW49InRydWUiYCB8CnwgUHJlc2VuY2UgaW5kaWNhdG9yIHwgYGFyaWEtbGFiZWxgIG9uIGRvdCBzcGFuIHwgYGFyaWEtbGFiZWw9Ik9ubGluZSJgIG9yIGBhcmlhLWxhYmVsPSJPZmZsaW5lImAg4oCUIG5ldmVyIHJlbHkgb24gY29sb3IgYWxvbmUgfAp8IFN0YWNrZWQgZ3JvdXAgfCBgYXJpYS1sYWJlbGAgb24gb3ZlcmZsb3cgY2hpcCB8IFVzZSBgYXJpYS1sYWJlbD0iNCBtb3JlIHVzZXJzImA7IGdyb3VwIHdyYXBwZXIgY2FuIHVzZSBgcm9sZT0iZ3JvdXAiYCB8CnwgQWxsIHZhcmlhbnRzIHwgQ29sb3IgY29udHJhc3QgfCBJbml0aWFscyB0ZXh0IG11c3QgbWVldCBXQ0FHIEFBIDQuNToxIGFnYWluc3QgaXRzIGJhY2tncm91bmQuIEdyZWVuLW9uLWJsYWNrIHBhc3Nlczsgd2hpdGUtb24tc3VyZmFjZS0zIHBhc3Nlcy4gfAoKIyMgUmVsYXRlZCB0b2tlbnMKCkFsd2F5cyB1c2UgdGhlc2UgdG9rZW5zIOKAlCBuZXZlciBoYXJkY29kZSBoZXggdmFsdWVzLgoKfCBUb2tlbiB8IFVzYWdlIHwKfC0tLXwtLS18CnwgYC0tc3VyZmFjZS0zYCB8IEluaXRpYWxzIGJhY2tncm91bmQgKG5ldXRyYWwpIHwKfCBgLS1qaW9gIHwgSW5pdGlhbHMgYmFja2dyb3VuZCAoYWNjZW50KSAvIG9ubGluZSBwcmVzZW5jZSBkb3QgfAp8IGAtLXRleHQ0YCB8IE9mZmxpbmUgLyBhd2F5IHByZXNlbmNlIGRvdCB8CnwgYC0tdGV4dGAgfCBJbml0aWFscyB0ZXh0IGNvbG9yIG9uIG5ldXRyYWwgYmFja2dyb3VuZCB8CnwgYC0tcGlsbGAgfCBBdmF0YXIgYm9yZGVyLXJhZGl1cyAoYWx3YXlzIGNpcmN1bGFyKSB8CnwgYC0tYmdgIHwgUHJlc2VuY2UgZG90IGJvcmRlciBjb2xvciDigJQgcHVuY2hlcyBkb3Qgb3V0IGZyb20gYXZhdGFyIGVkZ2UgfAp8IGAtLXN1cmZhY2UtMWAgfCBSaW5nIGJvcmRlciBmb3Igc3RhY2tlZCBhdmF0YXIgb3ZlcmxhcCBzZXBhcmF0aW9uIHwKCiMjIEFQSQoKIyMjIENTUyBjbGFzc2VzCgp8IENsYXNzIHwgRGVzY3JpcHRpb24gfAp8LS0tfC0tLXwKfCBgLmRzLWF2YXRhcmAgfCBSb290IOKAlCBjaXJjdWxhciBjb250YWluZXIgd2l0aCBvdmVyZmxvdyBoaWRkZW4gfAp8IGAuZHMtYXZhdGFyLS1zbWAgfCAyNMOXMjRweCB8CnwgYC5kcy1hdmF0YXItLW1kYCB8IDM2w5czNnB4IChkZWZhdWx0KSB8CnwgYC5kcy1hdmF0YXItLWxnYCB8IDQ4w5c0OHB4IHwKfCBgLmRzLWF2YXRhci0teGxgIHwgNjTDlzY0cHggfAp8IGAuZHMtYXZhdGFyX19mYWxsYmFja2AgfCBJbml0aWFscyBvciBpY29uIHNob3duIHdoZW4gaW1hZ2UgZmFpbHMgfAp8IGAuZHMtYXZhdGFyLS1vbmxpbmVgIHwgR3JlZW4gcHJlc2VuY2UgcmluZyB8CnwgYC5kcy1hdmF0YXItLW9mZmxpbmVgIHwgR3JleSBwcmVzZW5jZSByaW5nIHwKCiMjIyBSZWFjdCBwcm9wcwoKfCBQcm9wIHwgVHlwZSB8IERlZmF1bHQgfCBEZXNjcmlwdGlvbiB8CnwtLS18LS0tfC0tLXwtLS18CnwgYHNyY2AgfCBzdHJpbmcgfCB1bmRlZmluZWQgfCBJbWFnZSBVUkwgfAp8IGBhbHRgIHwgc3RyaW5nIHwgcmVxdWlyZWQgfCBBY2Nlc3NpYmxlIGRlc2NyaXB0aW9uIG9mIHRoZSB1c2VyIHwKfCBgZmFsbGJhY2tgIHwgc3RyaW5nIHwgUmVhY3ROb2RlIHwgdW5kZWZpbmVkIHwgU2hvd24gd2hlbiBpbWFnZSBmYWlscyB0byBsb2FkIHwKfCBgc2l6ZWAgfCAic20iIHwgIm1kIiB8ICJsZyIgfCAieGwiIHwgIm1kIiB8IERpYW1ldGVyIHByZXNldCB8CnwgYHByZXNlbmNlYCB8ICJvbmxpbmUiIHwgIm9mZmxpbmUiIHwgIm5vbmUiIHwgIm5vbmUiIHwgUHJlc2VuY2UgcmluZyBjb2xvciB8CgojIyBDb2RlIGV4YW1wbGVzCgpDb3B5IHRoZXNlIHNuaXBwZXRzIGFzIHN0YXJ0aW5nIHBvaW50cy4gQWx3YXlzIGxpbmsgYHRva2Vucy90b2tlbnMuY3NzYCwgYGNvbXBvbmVudHMuY3NzYCwgYW5kIGBzdGF0ZXMuY3NzYC4KCmBgYGAKPCEtLSBJbWFnZSBhdmF0YXIgd2l0aCBhbHQgLS0+CjxkaXYgY2xhc3M9ImF2YXRhciBhdmF0YXItLW0iPgogIDxpbWcgY2xhc3M9ImF2YXRhcl9faW1nIiBzcmM9InByb2ZpbGUuanBnIiBhbHQ9IlByb2ZpbGUgcGljdHVyZSBvZiBBcmp1biBTaGFybWEiPgo8L2Rpdj4KYGBgYAoKYGBgYAo8IS0tIEluaXRpYWxzIGF2YXRhciArIG9ubGluZSBpbmRpY2F0b3IgLS0+CjxkaXYgY2xhc3M9ImF2YXRhciBhdmF0YXItLW0gYXZhdGFyLS1pbml0aWFscyIgYXJpYS1sYWJlbD0iUHJpeWEgTmFpciI+CiAgPHNwYW4gY2xhc3M9ImF2YXRhcl9faW5pdGlhbHMiIGFyaWEtaGlkZGVuPSJ0cnVlIj5QTjwvc3Bhbj4KICA8c3BhbiBjbGFzcz0iYXZhdGFyX19wcmVzZW5jZSIgYXJpYS1sYWJlbD0iT25saW5lIj48L3NwYW4+CjwvZGl2PgpgYGBgCgpgYGBgCjwhLS0gU3RhY2tlZCBhdmF0YXIgZ3JvdXAgKDMgdXNlcnMgKyBvdmVyZmxvdykgLS0+CjxkaXYgY2xhc3M9ImF2YXRhci1ncm91cCI+CiAgPGRpdiBjbGFzcz0iYXZhdGFyIGF2YXRhci0tcyBhdmF0YXItLWluaXRpYWxzIGF2YXRhci0tcmluZyIgYXJpYS1sYWJlbD0iVXNlciBBIj4KICAgIDxzcGFuIGNsYXNzPSJhdmF0YXJfX2luaXRpYWxzIiBhcmlhLWhpZGRlbj0idHJ1ZSI+QTwvc3Bhbj4KICA8L2Rpdj4KICA8ZGl2IGNsYXNzPSJhdmF0YXIgYXZhdGFyLS1zIGF2YXRhci0taW5pdGlhbHMgYXZhdGFyLS1yaW5nIiBhcmlhLWxhYmVsPSJVc2VyIEIiPgogICAgPHNwYW4gY2xhc3M9ImF2YXRhcl9faW5pdGlhbHMiIGFyaWEtaGlkZGVuPSJ0cnVlIj5CPC9zcGFuPgogIDwvZGl2PgogIDxkaXYgY2xhc3M9ImF2YXRhciBhdmF0YXItLXMgYXZhdGFyLS1pbml0aWFscyBhdmF0YXItLXJpbmcgYXZhdGFyLS1vdmVyZmxvdyIgYXJpYS1sYWJlbD0iNCBtb3JlIHVzZXJzIj4KICAgIDxzcGFuIGNsYXNzPSJhdmF0YXJfX2luaXRpYWxzIiBhcmlhLWhpZGRlbj0idHJ1ZSI+KzQ8L3NwYW4+CiAgPC9kaXY+CjwvZGl2PgpgYGBgCgotLS0KCiMjIFRva2VucyByZWZlcmVuY2VkIG9uIHRoaXMgcGFnZQoKVXNlIHRoZXNlIGV4YWN0IHRva2VucyDigJQgZGVmaW5lZCBpbiBgdG9rZW5zL3Rva2Vucy5jc3NgLiBEbyBub3Qgc3Vic3RpdHV0ZSByYXcgdmFsdWVzLgoKLSBgLS1iZ2AKLSBgLS1qaW9gCi0gYC0tamlvLWZvbnRgCi0gYC0tcGlsbGAKLSBgLS1zdXJmYWNlLTFgCi0gYC0tc3VyZmFjZS0yYAotIGAtLXN1cmZhY2UtM2AKLSBgLS10ZXh0YAotIGAtLXRleHQtaW52YAotIGAtLXRleHQyYAotIGAtLXRleHQzYAotIGAtLXRleHQ0YAoKLS0tCgojIyBCdWlsZCBydWxlcyAoYmluZGluZykKCjEuIFVzZSAqKm9ubHkqKiB0aGUgdG9rZW5zIGxpc3RlZCBhYm92ZS4gSWYgYSB2YWx1ZSB5b3UgbmVlZCBpcyBub3QgbGlzdGVkLCBzdG9wIGFuZCBhc2sg4oCUIGRvIG5vdCBpbnRyb2R1Y2UgYSByYXcgdmFsdWUuCjIuIEZvbnQgaXMgKipKaW9UeXBlKiogb25seS4gV2VpZ2h0czogMzAwLCA1MDAsIDcwMCwgOTAwLgozLiBSZXVzZSB0aGUgY29tcG9uZW50IENTUyBwYXR0ZXJucyBzaG93biBvbiB0aGUgc291cmNlIHBhZ2U7IGRvIG5vdCByZWRlc2lnbi4KNC4gTWF0Y2ggZXZlcnkgc3RhdGUgKGRlZmF1bHQsIGhvdmVyLCBmb2N1cywgYWN0aXZlLCBkaXNhYmxlZCwgbG9hZGluZykgc2hvd24gb24gdGhlIHBhZ2UuCjUuIEFjY2Vzc2liaWxpdHkgcmVxdWlyZW1lbnRzIG9uIHRoZSBwYWdlIGFyZSBtYW5kYXRvcnksIG5vdCBvcHRpb25hbC4K" download="avatar-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
     </div>
   </header>
 
@@ -175,6 +175,31 @@
   </section>
 
   <!-- 2. BEST PRACTICES -->
+  <!-- WHEN TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use</h2>
+    <div class="ds-usage-grid">
+      <div class="ds-usage-card ds-usage-card--do">
+        <p class="ds-usage-label ds-usage-label--do">Use when</p>
+        <ul class="ds-usage-list">
+              <li>User identity in comments, reviews, leaderboards, and chat</li>
+              <li>Profile headers and account settings screens</li>
+              <li>Multiplayer lobby participant slots</li>
+              <li>Activity feeds showing who did what</li>
+        </ul>
+      </div>
+      <div class="ds-usage-card ds-usage-card--dont">
+        <p class="ds-usage-label ds-usage-label--dont">Don't use when</p>
+        <ul class="ds-usage-list">
+              <li>Decorative illustrations — use an image component instead</li>
+              <li>More than 5 stacked avatars without a +N overflow indicator</li>
+              <li>Sizes smaller than 24px — the fallback initials become unreadable</li>
+              <li>As a button on its own without an accessible label</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <section class="ds-section" id="best-practices">
     <h2 class="ds-section-title">Best practices</h2>
     <p class="ds-section-desc">Rules that keep Avatar consistent, accessible, and visually coherent across every context.</p>
@@ -211,7 +236,7 @@
             <span class="avatar__presence" aria-label="Online"></span>
           </div>
           <div>
-            <div style="font-size:14px; font-weight:600; color:var(--text);">Arjun Bose</div>
+            <div style="font-size:14px; font-weight:700; color:var(--text);">Arjun Bose</div>
             <div style="font-size:12px; color:var(--jio); display:flex; align-items:center; gap:4px; margin-top:2px;">
               <span style="width:6px;height:6px;border-radius:50%;background:var(--jio);display:inline-block;"></span> Online
             </div>
@@ -243,7 +268,7 @@
           <!-- Avatar M with presence -->
           <div style="position:relative; display:inline-flex; width:80px; height:80px; border-radius:50%; background:var(--surface-3); align-items:center; justify-content:center; overflow:visible;">
             <div style="width:80px; height:80px; border-radius:50%; background:var(--jio); display:flex; align-items:center; justify-content:center; overflow:hidden; position:relative;">
-              <span style="font-family:var(--jio-font); font-weight:700; font-size:28px; color:#000; line-height:1;">JG</span>
+              <span style="font-family:var(--jio-font); font-weight:700; font-size:28px; color:var(--text-inv); line-height:1;">JG</span>
             </div>
             <span style="position:absolute; bottom:2px; right:2px; width:16px; height:16px; border-radius:50%; background:var(--jio); border:3px solid var(--bg);"></span>
           </div>
@@ -625,6 +650,20 @@
   </section>
 
   <!-- 9. ACCESSIBILITY -->
+  <!-- MOTION -->
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-motion-table">
+      <thead><tr><th>Interaction</th><th>Easing</th><th>Duration</th><th>Property</th></tr></thead>
+      <tbody>
+        <tr><td>Image load fade</td><td><code>--ease-out</code></td><td><code>--dur-base</code></td><td>opacity</td></tr>
+        <tr><td>Presence ring pulse</td><td><code>ease-in-out</code></td><td><code>2s infinite</code></td><td>box-shadow scale</td></tr>
+        <tr><td>Hover scale</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>transform scale(1.05)</td></tr>
+        <tr><td>Focus ring</td><td><code>instant</code></td><td><code>0ms</code></td><td>outline</td></tr>
+      </tbody>
+    </table>
+  </section>
+
   <section class="ds-section" id="accessibility">
     <h2 class="ds-section-title">Accessibility</h2>
     <p class="ds-section-desc">Avatar must convey identity and presence to screen readers without relying on color or visual shape alone.</p>
@@ -718,6 +757,36 @@
   </section>
 
   <!-- 11. CODE EXAMPLES -->
+  <!-- API -->
+  <section class="ds-section" id="api">
+    <h2 class="ds-section-title">API</h2>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:0 0 12px;">CSS classes</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>.ds-avatar</code></td><td>Root — circular container with overflow hidden</td></tr>
+        <tr><td><code>.ds-avatar--sm</code></td><td>24×24px</td></tr>
+        <tr><td><code>.ds-avatar--md</code></td><td>36×36px (default)</td></tr>
+        <tr><td><code>.ds-avatar--lg</code></td><td>48×48px</td></tr>
+        <tr><td><code>.ds-avatar--xl</code></td><td>64×64px</td></tr>
+        <tr><td><code>.ds-avatar__fallback</code></td><td>Initials or icon shown when image fails</td></tr>
+        <tr><td><code>.ds-avatar--online</code></td><td>Green presence ring</td></tr>
+        <tr><td><code>.ds-avatar--offline</code></td><td>Grey presence ring</td></tr>
+      </tbody>
+    </table>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 12px;">React props</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>src</code></td><td><span class="api-type">string</span></td><td><span class="api-default">undefined</span></td><td>Image URL</td></tr>
+        <tr><td><code>alt</code></td><td><span class="api-type">string</span></td><td><span class="api-default">required</span></td><td>Accessible description of the user</td></tr>
+        <tr><td><code>fallback</code></td><td><span class="api-type">string | ReactNode</span></td><td><span class="api-default">undefined</span></td><td>Shown when image fails to load</td></tr>
+        <tr><td><code>size</code></td><td><span class="api-type">"sm" | "md" | "lg" | "xl"</span></td><td><span class="api-default">"md"</span></td><td>Diameter preset</td></tr>
+        <tr><td><code>presence</code></td><td><span class="api-type">"online" | "offline" | "none"</span></td><td><span class="api-default">"none"</span></td><td>Presence ring color</td></tr>
+      </tbody>
+    </table>
+  </section>
+
   <section class="component-section" id="code-examples">
     <h2 class="ds-section-title">Code examples</h2>
     <p class="ds-section-desc">Copy these snippets as starting points. Always link <code class="ds-code">tokens/tokens.css</code>, <code class="ds-code">components.css</code>, and <code class="ds-code">states.css</code>.</p>
@@ -759,4 +828,4 @@
   <!-- 12. CHANGELOG -->
 
 </main><script src="../sprite-loader.js"></script>
-<script src="../shell.js"></script></body></html>
+<script src="../shell.js?v=2"></script></body></html>

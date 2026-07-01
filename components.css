@@ -7,6 +7,45 @@
    §1 TYPOGRAPHY
    ============================================================ */
 
+/* ── Extended type scale — mobile-first, responsive ─────────── */
+/*    Format: font-size / line-height px. Weight fixed per role.  */
+
+/* Display — big campaign hero, launch screen, pass hero */
+.text-display-lg   { font-family:var(--jio-font); font-size:48px; line-height:56px; font-weight:900; letter-spacing:-1.5px; color:var(--text); text-wrap:balance; }
+.text-display-md   { font-family:var(--jio-font); font-size:40px; line-height:48px; font-weight:900; letter-spacing:-1.2px; color:var(--text); text-wrap:balance; }
+.text-display-sm   { font-family:var(--jio-font); font-size:32px; line-height:40px; font-weight:900; letter-spacing:-.8px;  color:var(--text); text-wrap:balance; }
+
+/* Headline — page / screen / sheet titles */
+.text-headline-lg  { font-family:var(--jio-font); font-size:28px; line-height:36px; font-weight:900; letter-spacing:-.6px;  color:var(--text); }
+.text-headline-md  { font-family:var(--jio-font); font-size:24px; line-height:32px; font-weight:900; letter-spacing:-.4px;  color:var(--text); }
+.text-headline-sm  { font-family:var(--jio-font); font-size:22px; line-height:28px; font-weight:700; letter-spacing:-.3px;  color:var(--text); }
+
+/* Title — rail / card / dialog titles */
+.text-title-lg     { font-family:var(--jio-font); font-size:20px; line-height:28px; font-weight:700; letter-spacing:-.2px;  color:var(--text); }
+.text-title-md     { font-family:var(--jio-font); font-size:18px; line-height:26px; font-weight:700; letter-spacing:0;      color:var(--text); }
+.text-title-sm     { font-family:var(--jio-font); font-size:16px; line-height:24px; font-weight:700; letter-spacing:0;      color:var(--text); }
+.text-title-xs     { font-family:var(--jio-font); font-size:15px; line-height:22px; font-weight:700; letter-spacing:0;      color:var(--text); }
+
+/* Body — readable prose, descriptions */
+.text-body-lg      { font-family:var(--jio-font); font-size:17px; line-height:26px; font-weight:500; letter-spacing:0;      color:var(--text2); }
+.text-body-md      { font-family:var(--jio-font); font-size:15px; line-height:24px; font-weight:500; letter-spacing:0;      color:var(--text2); }
+.text-body-sm      { font-family:var(--jio-font); font-size:14px; line-height:22px; font-weight:500; letter-spacing:0;      color:var(--text2); }
+.text-body-xs      { font-family:var(--jio-font); font-size:12px; line-height:18px; font-weight:500; letter-spacing:0;      color:var(--text2); }
+
+/* Label — CTA, buttons, tabs, badges */
+.text-label-lg     { font-family:var(--jio-font); font-size:15px; line-height:20px; font-weight:700; letter-spacing:.02em;  color:var(--text); }
+.text-label-md     { font-family:var(--jio-font); font-size:14px; line-height:18px; font-weight:700; letter-spacing:.02em;  color:var(--text); }
+.text-label-sm     { font-family:var(--jio-font); font-size:12px; line-height:16px; font-weight:700; letter-spacing:.02em;  color:var(--text); }
+.text-label-xs     { font-family:var(--jio-font); font-size:10px; line-height:13px; font-weight:700; letter-spacing:.02em;  color:var(--text); }
+
+/* Caption — timestamps, metadata, fine info */
+.text-caption-md   { font-family:var(--jio-font); font-size:12px; line-height:16px; font-weight:500; letter-spacing:0;      color:var(--text2); }
+.text-caption-sm   { font-family:var(--jio-font); font-size:11px; line-height:14px; font-weight:500; letter-spacing:0;      color:var(--text3); }
+
+/* Legal — terms, disclaimers */
+.text-legal        { font-family:var(--jio-font); font-size:10px; line-height:14px; font-weight:500; letter-spacing:0;      color:var(--text3); }
+
+/* ── Legacy aliases (kept for backward compat) ──────────────── */
 /* Exact spec from typography.md §4 */
 .text-hero         { font-family:var(--jio-font); font-size:36px;  font-weight:900; line-height:1.08; letter-spacing:-.02em;  color:var(--text);  text-wrap:balance; }
 .text-screen-title { font-family:var(--jio-font); font-size:28px;  font-weight:900; line-height:1.15; letter-spacing:-.6px;   color:var(--text);  text-wrap:balance; }
@@ -23,6 +62,27 @@
 .text-body-strong    { font-family:var(--jio-font); font-size:14px; font-weight:700; line-height:1.55; letter-spacing:0; color:var(--text); }
 
 @media (min-width: 768px) {
+  .text-display-lg{font-size:64px;line-height:72px;}
+  .text-display-md{font-size:56px;line-height:64px;}
+  .text-display-sm{font-size:48px;line-height:56px;}
+  .text-headline-lg{font-size:40px;line-height:48px;}
+  .text-headline-md{font-size:32px;line-height:40px;}
+  .text-headline-sm{font-size:28px;line-height:36px;}
+  .text-title-lg{font-size:24px;line-height:32px;}
+  .text-title-md{font-size:22px;line-height:30px;}
+  .text-title-sm{font-size:18px;line-height:26px;}
+  .text-title-xs{font-size:16px;line-height:24px;}
+  .text-body-lg{font-size:18px;line-height:28px;}
+  .text-body-md{font-size:16px;line-height:26px;}
+  .text-body-sm{font-size:14px;line-height:22px;}
+  .text-body-xs{font-size:13px;line-height:20px;}
+  .text-label-lg{font-size:16px;line-height:22px;}
+  .text-label-md{font-size:14px;line-height:20px;}
+  .text-label-sm{font-size:12px;line-height:16px;}
+  .text-label-xs{font-size:10px;line-height:13px;}
+  .text-caption-md{font-size:12px;line-height:18px;}
+  .text-caption-sm{font-size:11px;line-height:16px;}
+  .text-legal{font-size:11px;line-height:16px;}
   .text-hero{font-size:64px;letter-spacing:-1.5px;line-height:1.05;}
   .text-screen-title{font-size:48px;letter-spacing:-1px;}
   .text-sheet-title{font-size:32px;letter-spacing:-.6px;}
@@ -37,6 +97,27 @@
 }
 
 @media (min-width: 1280px) and (min-height: 720px) {
+  .text-display-lg{font-size:72px;line-height:80px;}
+  .text-display-md{font-size:64px;line-height:72px;}
+  .text-display-sm{font-size:56px;line-height:64px;}
+  .text-headline-lg{font-size:48px;line-height:56px;}
+  .text-headline-md{font-size:40px;line-height:48px;}
+  .text-headline-sm{font-size:32px;line-height:40px;}
+  .text-title-lg{font-size:30px;line-height:38px;}
+  .text-title-md{font-size:26px;line-height:34px;}
+  .text-title-sm{font-size:22px;line-height:30px;}
+  .text-title-xs{font-size:20px;line-height:28px;}
+  .text-body-lg{font-size:24px;line-height:34px;}
+  .text-body-md{font-size:22px;line-height:32px;}
+  .text-body-sm{font-size:20px;line-height:28px;}
+  .text-body-xs{font-size:18px;line-height:26px;}
+  .text-label-lg{font-size:20px;line-height:26px;}
+  .text-label-md{font-size:18px;line-height:24px;}
+  .text-label-sm{font-size:16px;line-height:22px;}
+  /* label-xs stays 10px on desktop viewport — TV upsize applied via .platform-tv scope, not viewport width */
+  .text-caption-md{font-size:16px;line-height:22px;}
+  .text-caption-sm{font-size:14px;line-height:20px;}
+  .text-legal{font-size:14px;line-height:20px;}
   .text-hero{font-size:80px;letter-spacing:-2px;line-height:1.05;}
   .text-screen-title{font-size:48px;letter-spacing:-1px;}
   .text-sheet-title{font-size:40px;letter-spacing:-.8px;}
@@ -50,6 +131,9 @@
   .text-price{font-size:36px;letter-spacing:-.6px;}
   .text-cta{font-size:22px;}
 }
+
+/* TV context scope — enlarges label-xs for 10-foot legibility inside .platform-tv only */
+.platform-tv .text-label-xs { font-size:14px; line-height:20px; }
 
 /* ============================================================
    §2 LAYOUT UTILITIES
@@ -1065,7 +1149,7 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--space-0-25);
 }
 .list-item-title {
   font-size: 15px;
@@ -1298,7 +1382,7 @@
   color: var(--text3);
   cursor: pointer;
   font-size: 18px;
-  padding: 0 0 0 8px;
+  padding: 0 0 0 var(--space-1);
   line-height: 1;
   flex-shrink: 0;
 }
@@ -1633,8 +1717,8 @@
 
 .btn--icon-pill {
   height: var(--ctrl-h-sm);
-  padding: 0 14px;
-  gap: 6px;
+  padding: 0 var(--space-1-5);
+  gap: var(--space-0-5);
   border-radius: var(--pill);
   background: var(--glass-1);
   border-color: var(--border-subtle);
@@ -1725,4 +1809,36 @@
   box-shadow: var(--tv-focus-shadow);
   transform: scale(var(--tv-focus-scale));
   outline: none;
+}
+
+/* ============================================================
+   Forced Colors / Windows High Contrast Mode
+   box-shadow focus rings disappear in forced-colors mode.
+   This block restores visible focus using system colors.
+   Does NOT affect normal JioGames mode — block only activates
+   when OS forces high contrast (Windows HCM, etc.).
+   ============================================================ */
+@media (forced-colors: active) {
+  :focus-visible {
+    outline: 3px solid ButtonText;
+    outline-offset: 3px;
+    box-shadow: none !important;
+  }
+
+  /* TV focus — use Highlight (system selection/focus color) for TV ring */
+  .is-tv-focused,
+  [data-tv-focused],
+  :focus-visible.is-tv-focused {
+    outline: 4px solid Highlight;
+    outline-offset: 4px;
+    box-shadow: none !important;
+  }
+
+  /* Ensure interactive surfaces retain visible borders */
+  .ds-btn,
+  .ds-input,
+  .ds-chip,
+  .ds-card {
+    forced-color-adjust: none;
+  }
 }

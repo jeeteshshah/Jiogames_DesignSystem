@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     .tooltip-wrap { position: relative; display: inline-block; }
     .tooltip {
@@ -16,7 +16,7 @@
       color: var(--text);
       font-family: var(--jio-font);
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 700;
       padding: 5px 10px;
       border-radius: var(--r3);
       white-space: nowrap;
@@ -46,7 +46,7 @@
     .tooltip--s { font-size: 10px; padding: 4px 8px; }
     .tooltip--l { font-size: 14px; padding: 7px 13px; }
     .demo-icon-btn {
-      width: 44px; height: 44px;
+      width: var(--touch-min); height: var(--touch-min);
       border-radius: var(--r3);
       background: var(--surface-2);
       border: 1px solid var(--border-subtle);
@@ -61,15 +61,14 @@
 
   <!-- 1. PAGE HEADER -->
   <header class="component-page-header">
-    <nav class="component-breadcrumb">
-      <span>JioGames DLS</span>
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <span class="component-breadcrumb-link">JioGames DLS</span>
       <span class="component-breadcrumb-sep">›</span>
       <span>Components</span>
       <span class="component-breadcrumb-sep">›</span>
-      <span>Tooltip</span>
+      <span class="component-breadcrumb-current">Tooltip</span>
     </nav>
-    <h1 class="component-page-title">Tooltip</h1>
-    <p class="component-page-def">Short label that appears on hover or focus near an icon or truncated text. Confirms what a control does without adding persistent UI.</p>
+    <h1 class="component-page-title">Tooltip</h1><p class="component-page-def">Short label that appears on hover or focus near an icon or truncated text. Confirms what a control does without adding persistent UI.</p>
     <div style="display:flex; align-items:center; gap:8px; margin-top:12px; flex-wrap:wrap;">
       <div class="component-platforms">
         <span class="component-platform component-platform--mobile">
@@ -81,7 +80,8 @@
         <span class="component-platform component-platform--tv">
           <span class="component-platform-dot"></span>TV
         </span>
-      </div>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBUb29sdGlwIOKAlCBKaW9HYW1lcyBETFMgc3BlYwoKPiBTb3VyY2U6IGB0b29sdGlwL2luZGV4Lmh0bWxgIGluIHRoZSBKaW9HYW1lcyBEZXNpZ24gU3lzdGVtLgo+IFRoaXMgc3BlYyBpcyBnZW5lcmF0ZWQgdmVyYmF0aW0gZnJvbSB0aGUgcGFnZSDigJQgZG8gbm90IGludmVudCB2YWx1ZXMgbm90IGxpc3RlZCBoZXJlLgoKKipQYXRoOioqIEppb0dhbWVzIERMUyDigLogQ29tcG9uZW50cyDigLogVG9vbHRpcAoKLS0tCgpTaG9ydCBsYWJlbCB0aGF0IGFwcGVhcnMgb24gaG92ZXIgb3IgZm9jdXMgbmVhciBhbiBpY29uIG9yIHRydW5jYXRlZCB0ZXh0LiBDb25maXJtcyB3aGF0IGEgY29udHJvbCBkb2VzIHdpdGhvdXQgYWRkaW5nIHBlcnNpc3RlbnQgVUkuCgpUb29sdGlwIGRpcmVjdGlvbnMgwrcgVG9wLCBCb3R0b20sIExlZnQsIFJpZ2h0CgpUb29sdGlwcyBhcmUgdHJhbnNpZW50LCBub24taW50ZXJhY3RpdmUgbGFiZWxzIHRoYXQgYXBwZWFyIG9uIGhvdmVyIG9yIGtleWJvYXJkIGZvY3VzLiBUaGV5IG5hbWUgaWNvbi1vbmx5IGNvbnRyb2xzLCBleHBhbmQgdHJ1bmNhdGVkIGxhYmVscywgYW5kIGNsYXJpZnkgYW1iaWd1b3VzIGFjdGlvbnMg4oCUIHdpdGhvdXQgcGVybWFuZW50bHkgb2NjdXB5aW5nIGxheW91dCBzcGFjZS4gQmVjYXVzZSB0b29sdGlwcyBkaXNhcHBlYXIgb24gaW50ZXJhY3Rpb24sIHRoZXkgbXVzdCBuZXZlciBiZSB0aGUgc29sZSBzb3VyY2Ugb2YgZXNzZW50aWFsIGluZm9ybWF0aW9uLgoKLSAqKkljb24gbGFiZWxzKiog4oCUIG5hbWVzIGEgY29udHJvbCB3aG9zZSBpY29uIGlzIG5vdCBzZWxmLWV4cGxhbmF0b3J5Ci0gKipUcnVuY2F0aW9uIHJldmVhbCoqIOKAlCBzaG93cyBmdWxsIHRleHQgd2hlbiBhIGxhYmVsIGlzIGNsaXBwZWQKLSAqKlNob3J0Y3V0IGhpbnQqKiDigJQgc3VyZmFjZXMga2V5Ym9hcmQgc2hvcnRjdXQgYWxvbmdzaWRlIHRoZSBhY3Rpb24gbmFtZQotICoqQ2xhcmlmeWluZyBtZXRhZGF0YSoqIOKAlCBlLmcuIHJhdGluZyBtZWFuaW5nLCB0aW1lc3RhbXAgZGV0YWlscwoKLSBLZWVwIGNvcHkgdW5kZXIgNDAgY2hhcmFjdGVycyDigJQgb25lIHNob3J0IGNsYXVzZSwgbm8gZnVsbCBzdG9wCi0gRGVzY3JpYmUgdGhlIGFjdGlvbjogIkFkZCB0byB3aXNobGlzdCIsIG5vdCAiV2lzaGxpc3QgYnV0dG9uIgotIFVzZSBgcm9sZT0idG9vbHRpcCJgIGFuZCBgYXJpYS1kZXNjcmliZWRieWAgb24gdGhlIHRyaWdnZXIKLSBTaG93IG9uIGJvdGggaG92ZXIgYW5kIGtleWJvYXJkIGZvY3VzIHNvIGtleWJvYXJkIHVzZXJzIGJlbmVmaXQgZXF1YWxseQotIE9uIFRWLCBzaG93IHRvb2x0aXAgb24gRC1wYWQgZm9jdXM7IGRpc21pc3Mgd2hlbiBmb2N1cyBtb3ZlcyBhd2F5CgotIFB1dCBpbnRlcmFjdGl2ZSBjb250ZW50IChsaW5rcywgYnV0dG9ucykgaW5zaWRlIGEgdG9vbHRpcAotIFVzZSBhIHRvb2x0aXAgYXMgdGhlIG9ubHkgbGFiZWwg4oCUIHZpc2libGUgbGFiZWxzIGFyZSBhbHdheXMgcHJlZmVycmVkCi0gU2hvdyB0b29sdGlwcyBvbiBtb2JpbGUg4oCUIHRvdWNoIGhhcyBubyBob3ZlcjsgdXNlIHBlcnNpc3RlbnQgbGFiZWxzIGluc3RlYWQKLSBFeGNlZWQgNDAgY2hhcmFjdGVycyDigJQgdXNlIGEgcG9wb3ZlciBmb3IgcmljaGVyIGV4cGxhbmF0aW9ucwotIFRyaWdnZXIgdG9vbHRpcCBvbiBjbGljayDigJQgY2xpY2sgc2hvdWxkIGV4ZWN1dGUgdGhlIGFjdGlvbiwgbm90IGRlc2NyaWJlIGl0CgoxLiAxIENvbnRhaW5lciBSZXF1aXJlZCBEYXJrIHN1cmZhY2UgcGlsbCB3aXRoIGJvcmRlci4gVXNlcyBgLS1zdXJmYWNlLTRgIHNvIGl0IGNvbnRyYXN0cyBvbiBib3RoIGRhcmsgYW5kIG1pZC10b25lIGJhY2tncm91bmRzLiBgYmFja2dyb3VuZDogdmFyKC0tc3VyZmFjZS00KTsgYm9yZGVyLXJhZGl1czogdmFyKC0tcjMpYAoyLiAyIExhYmVsIHRleHQgUmVxdWlyZWQgMTJweCBzZW1pYm9sZCwgc2VudGVuY2UgY2FzZSwgbWF4IDQwIGNoYXJzLiBObyBwdW5jdHVhdGlvbiBhdCBlbmQuIERlc2NyaWJlcyB0aGUgY29udHJvbCBhY3Rpb24uIGBmb250LXNpemU6IDEycHg7IGZvbnQtd2VpZ2h0OiA3MDBgCjMuIDMgQ2FyZXQgYXJyb3cgUmVxdWlyZWQgQ1NTIGJvcmRlci10cmlhbmdsZSBwb2ludGluZyBhdCB0aGUgdHJpZ2dlci4gRGlyZWN0aW9uIGZsaXBzIHdpdGggYC50b29sdGlwLS1ib3R0b21gLCBgLS1sZWZ0YCwgYC0tcmlnaHRgLiBgOjphZnRlciB7IGJvcmRlcjogNXB4IHNvbGlkIHRyYW5zcGFyZW50IH1gCjQuIDQgVHJpZ2dlciBlbGVtZW50IE9wdGlvbmFsIFRoZSBpY29uIGJ1dHRvbiwgbGluaywgb3IgdHJ1bmNhdGVkIGxhYmVsIHRoYXQgb3ducyB0aGUgdG9vbHRpcC4gTXVzdCBoYXZlIGBhcmlhLWRlc2NyaWJlZGJ5YCBwb2ludGluZyB0byB0aGUgdG9vbHRpcCBpZC4gYGFyaWEtZGVzY3JpYmVkYnk9InRvb2x0aXAtaWQiYAoKIyMgVmFyaWFudHMKCkRpcmVjdGlvbiB2YXJpYW50cyBjb250cm9sIHdoaWNoIHNpZGUgb2YgdGhlIHRyaWdnZXIgdGhlIHRvb2x0aXAgYXBwZWFycy4gQ2hvb3NlIHRoZSBkaXJlY3Rpb24gdGhhdCBrZWVwcyB0aGUgdG9vbHRpcCBmdWxseSB2aXNpYmxlIHdpdGhpbiBpdHMgc2Nyb2xsIGNvbnRhaW5lci4KCiMjIFNpemVzCgpUaHJlZSBzaXplIHRpZXJzLiBEZWZhdWx0IGNvdmVycyBtb3N0IHVzZSBjYXNlcy4gUyBmaXRzIGRlbnNlIGljb24gdG9vbGJhcnMuIEwgaW1wcm92ZXMgbGVnaWJpbGl0eSBmb3IgYWNjZXNzaWJpbGl0eS1mb2N1c2VkIHN1cmZhY2VzIGFuZCBUVi4KCiMjIFN0YXRlcwoKVG9vbHRpcHMgaGF2ZSB0d28gdmlzdWFsIHN0YXRlczogaGlkZGVuIChvcGFjaXR5IDApIGFuZCB2aXNpYmxlIChvcGFjaXR5IDEpLiBUcmFuc2l0aW9uIGlzIGZhc3Qg4oCUIDEwMOKAkzE1MG1zIOKAlCBzbyBpdCBkb2VzIG5vdCBmZWVsIGxhZ2d5IG9uIHJhcGlkIGhvdmVyLgoKIyMgQ29udGVudCBndWlkYW5jZQoKVG9vbHRpcCBjb3B5IG11c3QgYmUgdGhlIHNob3J0ZXN0IHBvc3NpYmxlIGxhYmVsIHRoYXQgY29tcGxldGVzIHRoZSB1c2VyJ3MgdW5kZXJzdGFuZGluZyBvZiB0aGUgY29udHJvbC4KCi0gTWF4IDQwIGNoYXJhY3RlcnMg4oCUIG5vIHB1bmN0dWF0aW9uIGF0IGVuZAotIFNlbnRlbmNlIGNhc2U6ICJBZGQgdG8gd2lzaGxpc3QiIG5vdCAiQWRkIFRvIFdpc2hsaXN0IgotIERlc2NyaWJlIHRoZSBhY3Rpb246ICJBZGQgdG8gd2lzaGxpc3QiLCBub3QgIldpc2hsaXN0IGJ1dHRvbiIKLSBGb3IgZGVzdHJ1Y3RpdmUgYWN0aW9ucyBhZGQgdGhlIHdvcmQ6ICJSZW1vdmUgZnJvbSBsaWJyYXJ5IgotIEtleWJvYXJkIHNob3J0Y3V0IGZvcm1hdDogIlBsYXkgZ2FtZSDijJhQIiAodHdvIHNwYWNlcyBiZWZvcmUgc2hvcnRjdXQpCi0gTmV2ZXIgcHV0IGZ1bGwgc2VudGVuY2VzIG9yIGV4cGxhbmF0aW9ucyBpbiBhIHRvb2x0aXAg4oCUIHVzZSBhIHBvcG92ZXIKCi0gSWNvbi1vbmx5IGJ1dHRvbiDihpIgdG9vbHRpcCAobmFtZXMgdGhlIGNvbnRyb2wpCi0gVHJ1bmNhdGVkIHRleHQg4oaSIHRvb2x0aXAgKHJldmVhbHMgZnVsbCB2YWx1ZSkKLSBSaWNoIGV4cGxhbmF0aW9uIG5lZWRlZCDihpIgdXNlIFBvcG92ZXIgaW5zdGVhZAotIFBlcnNpc3RlbnQgaW5mbyBuZWVkZWQg4oaSIHVzZSBpbmxpbmUgbGFiZWwgb3IgY2FwdGlvbgotIE1vYmlsZSBzdXJmYWNlIOKGkiBwZXJzaXN0ZW50IGxhYmVsIG9yIGJvdHRvbSBzaGVldCwgbmV2ZXIgdG9vbHRpcAotIEVycm9yIG1lc3NhZ2Ug4oaSIHVzZSBmb3JtIHZhbGlkYXRpb24gY29tcG9uZW50LCBub3QgdG9vbHRpcAoKIyMgUGxhdGZvcm0gY29uc2lkZXJhdGlvbnMKClRvb2x0aXAgaW50ZXJhY3Rpb24gbW9kZWwgdmFyaWVzIHNpZ25pZmljYW50bHkgYWNyb3NzIHBsYXRmb3Jtcy4gRG8gbm90IHNoaXAgYSBzaW5nbGUgaW1wbGVtZW50YXRpb24gYWNyb3NzIGFsbCB0aHJlZSB3aXRob3V0IHBsYXRmb3JtLXNwZWNpZmljIGhhbmRsaW5nLgoKLSBUb3VjaCBoYXMgbm8gaG92ZXIg4oCUICoqZG8gbm90IHVzZSB0b29sdGlwcyBvbiBtb2JpbGUqKgotIFVzZSBhIHBlcnNpc3RlbnQgbGFiZWwgYmVuZWF0aCBpY29uIGJ1dHRvbnMgaW5zdGVhZAotIEZvciBvdmVyZmxvdy10cnVuY2F0ZWQgdGV4dCwgdGFwIGV4cGFuZHMgb3Igb3BlbnMgZGV0YWlsIHNoZWV0Ci0gTG9uZy1wcmVzcyB0b29sdGlwcyBhcmUgbm9uLXN0YW5kYXJkIOKAlCBhdm9pZAotIElmIHRoZSBvbmx5IGF2YWlsYWJsZSBwYXR0ZXJuLCB1c2UgYSBib3R0b20gc2hlZXQgd2l0aCB0aGUgZnVsbCBsYWJlbAoKLSBUcmlnZ2VyIG9uIGBtb3VzZWVudGVyYCBhbmQgYGZvY3VzYAotIERpc21pc3Mgb24gYG1vdXNlbGVhdmVgLCBgYmx1cmAsIGFuZCBgRXNjYXBlYAotIE5vIGRlbGF5IG9uIHNob3cg4oCUIGluc3RhbnQgYXBwZWFyYW5jZSBmZWVscyByZXNwb25zaXZlCi0gUG9zaXRpb24gd2l0aCBgcG9zaXRpb246YWJzb2x1dGVgIGluc2lkZSBhIHJlbGF0aXZlIHdyYXBwZXIKLSBFbnN1cmUgdG9vbHRpcCBzdGF5cyB3aXRoaW4gdmlld3BvcnQg4oCUIGZsaXAgZGlyZWN0aW9uIGlmIGNsaXBwZWQKCi0gU2hvdyBvbiBELXBhZCBmb2N1cywgZGlzbWlzcyB3aGVuIGZvY3VzIG1vdmVzIHRvIGFub3RoZXIgZWxlbWVudAotIEFsd2F5cyB1c2UgTCBzaXplICgxNHB4KSDigJQgZGVmYXVsdCBpcyB1bnJlYWRhYmxlIGF0IDNtCi0gUG9zaXRpb24gYmVsb3cgZm9jdXNlZCBlbGVtZW50IOKAlCB0b3AgaXMgb2JzY3VyZWQgYnkgZm9jdXMgcmluZyBnbG93Ci0gTm8gaG92ZXIgdHJpZ2dlciDigJQgcmVtb3RlIGNvbnRyb2wgb25seSBuYXZpZ2F0ZXMgdmlhIGZvY3VzCi0gVG9vbHRpcCBtdXN0IGNsZWFyIHRoZSBmb2N1c2VkIGVsZW1lbnQncyBnbG93IHNoYWRvdyAoMjBweCBjbGVhcmFuY2UpCgojIyBBY2Nlc3NpYmlsaXR5CgpUb29sdGlwcyBtdXN0IGJlIHJlYWNoYWJsZSBieSBrZXlib2FyZCBhbmQgcmVhZGFibGUgYnkgc2NyZWVuIHJlYWRlcnMuIE5ldmVyIHJlbHkgb24gdG9vbHRpcCBhbG9uZSB0byBjb21tdW5pY2F0ZSBjcml0aWNhbCBpbmZvcm1hdGlvbi4KCnwgUmVxdWlyZW1lbnQgfCBJbXBsZW1lbnRhdGlvbiB8IE5vdGVzIHwKfC0tLXwtLS18LS0tfAp8IEFSSUEgcm9sZSB8IGByb2xlPSJ0b29sdGlwImAgfCBBcHBsaWVkIHRvIHRoZSB0b29sdGlwIGVsZW1lbnQsIG5vdCB0aGUgdHJpZ2dlci4gfAp8IFRyaWdnZXIgbGlua2FnZSB8IGBhcmlhLWRlc2NyaWJlZGJ5PSJ0b29sdGlwLWlkImAgfCBUcmlnZ2VyIGVsZW1lbnQgcG9pbnRzIHRvIHRvb2x0aXAgaWQuIFNjcmVlbiByZWFkZXIgYW5ub3VuY2VzIHRvb2x0aXAgY29udGVudCBhZnRlciB0aGUgY29udHJvbCBsYWJlbC4gfAp8IEtleWJvYXJkIHRyaWdnZXIgfCBGb2N1cyAoYDpmb2N1cy13aXRoaW5gKSB8IFRvb2x0aXAgYXBwZWFycyB3aGVuIHRyaWdnZXIgcmVjZWl2ZXMga2V5Ym9hcmQgZm9jdXMuIEtleWJvYXJkIHVzZXJzIG11c3Qgbm90IG1pc3MgdG9vbHRpcHMuIHwKfCBFc2NhcGUgdG8gZGlzbWlzcyB8IEpTIGBrZXlkb3duIEVzY2FwZWAgfCBXQ0FHIDEuNC4xMyDigJQgY29udGVudCB0cmlnZ2VyZWQgYnkgaG92ZXIgbXVzdCBiZSBkaXNtaXNzaWJsZSB3aXRob3V0IG1vdmluZyBwb2ludGVyL2ZvY3VzLiB8CnwgUG9pbnRlciBob3ZlcmFibGUgfCBUb29sdGlwIHBlcnNpc3RzIHdoaWxlIHBvaW50ZXIgaXMgb3ZlciBpdCB8IFdDQUcgMS40LjEzIOKAlCB1c2VyIG11c3QgYmUgYWJsZSB0byBtb3ZlIHBvaW50ZXIgb250byB0b29sdGlwIHdpdGhvdXQgaXQgZGlzbWlzc2luZy4gfAp8IENvbG9yIGNvbnRyYXN0IHwgTWluIDQuNToxIHRleHQgb24gYmFja2dyb3VuZCB8IGAtLXRleHRgIG9uIGAtLXN1cmZhY2UtNGAgcGFzc2VzIGF0IDcuMjoxLiB8CnwgTm90IHNvbGUgaW5mbyBzb3VyY2UgfCBMYWJlbCBvciB2aXNpYmxlIHRleHQgcmVxdWlyZWQgfCBJZiB0b29sdGlwIGlzIHRoZSBvbmx5IGxhYmVsIGZvciBhIGNvbnRyb2wsIGFkZCBhIHZpc3VhbGx5IGhpZGRlbiBgYXJpYS1sYWJlbGAgdG8gdGhlIHRyaWdnZXIgYXMgZmFsbGJhY2suIHwKCiMjIFJlbGF0ZWQgdG9rZW5zCgpVc2UgdGhlc2UgdG9rZW5zIGV4Y2x1c2l2ZWx5IOKAlCBuZXZlciBoYXJkY29kZSBoZXggdmFsdWVzIGZvciB0b29sdGlwIHN0eWxlcy4KCnwgVG9rZW4gfCBWYWx1ZSB8IFVzYWdlIHwKfC0tLXwtLS18LS0tfAp8IGAtLXN1cmZhY2UtNGAgfCBgIzJBMzE0MmAgfCBUb29sdGlwIGJhY2tncm91bmQgZmlsbCB8CnwgYC0tYm9yZGVyLXN1YnRsZWAgfCBgcmdiYSgyNTUsMjU1LDI1NSwuMDgpYCB8IFRvb2x0aXAgYm9yZGVyIHN0cm9rZSB8CnwgYC0tdGV4dGAgfCBgI2Y0ZjJlZWAgfCBUb29sdGlwIGxhYmVsIHRleHQgY29sb3IgfAp8IGAtLXIzYCB8IGA4cHhgIHwgVG9vbHRpcCBjb250YWluZXIgYm9yZGVyLXJhZGl1cyB8CnwgYC0tZHVyLWZhc3RgIHwgYDEyMG1zYCB8IFRvb2x0aXAgZmFkZS1pbi9vdXQgdHJhbnNpdGlvbiBkdXJhdGlvbiB8CnwgYC0tZWFzZS1vdXRgIHwgYGN1YmljLWJlemllciguMiwwLDAsMSlgIHwgVG9vbHRpcCBvcGFjaXR5IHRyYW5zaXRpb24gZWFzaW5nIHwKCiMjIFdoZW4gdG8gdXNlCgpVc2Ugd2hlbgoKLSBFeHBsYWluaW5nIGljb24tb25seSBidXR0b25zIChubyBsYWJlbCkgaW4gdG9vbGJhcnMKLSBBYmJyZXZpYXRpb25zIG9yIGphcmdvbiB0aGF0IG5lZWQgY29udGV4dHVhbCBkZWZpbml0aW9uCi0gQWRkaXRpb25hbCBjb250ZXh0IGZvciB0cnVuY2F0ZWQgdGV4dAotIEtleWJvYXJkIHNob3J0Y3V0IGhpbnRzIG9uIGRlc2t0b3Agd2ViCgpEb24ndCB1c2Ugd2hlbgoKLSBDcml0aWNhbCBpbmZvcm1hdGlvbiDigJQgdG91Y2ggdXNlcnMgbWF5IG5ldmVyIHNlZSBpdAotIEludGVyYWN0aXZlIGNvbnRlbnQgaW5zaWRlIHRoZSB0b29sdGlwIOKAlCB1c2UgUG9wb3ZlciBpbnN0ZWFkCi0gTG9uZyBkZXNjcmlwdGlvbnMgKD4yIGxpbmVzKSDigJQgdXNlIFBvcG92ZXIgaW5zdGVhZAotIFRvb2x0aXBzIG9uIGRpc2FibGVkIGVsZW1lbnRzIOKAlCBleHBsYWluIHRoZSByZWFzb24gaW5saW5lIGluc3RlYWQKCiMjIE1vdGlvbgoKfCBJbnRlcmFjdGlvbiB8IEVhc2luZyB8IER1cmF0aW9uIHwgUHJvcGVydHkgfAp8LS0tfC0tLXwtLS18LS0tfAp8IE9wZW4gKDMwMG1zIGRlbGF5KSB8IGAtLWVhc2Utb3V0YCB8IGAtLWR1ci1mYXN0YCB8IG9wYWNpdHksIHRyYW5zZm9ybSBzY2FsZSgwLjkg4oaSIDEpIHwKfCBDbG9zZSB8IGAtLWVhc2UtaW5gIHwgYDEwMG1zYCB8IG9wYWNpdHkgfAoKIyMgQVBJCgojIyMgQ1NTIGNsYXNzZXMKCnwgQ2xhc3MgfCBEZXNjcmlwdGlvbiB8CnwtLS18LS0tfAp8IGAuZHMtdG9vbHRpcGAgfCBSb290IGZsb2F0aW5nIGxhYmVsIOKAlCBzdXJmYWNlLTIsIHIyLCBweCA4LCBweSA1IHwKfCBgLmRzLXRvb2x0aXBfX3RleHRgIHwgMTJweCA1MDAgdGV4dCDigJQgc2luZ2xlIGxpbmUgbWF4IHwKfCBgLmRzLXRvb2x0aXBfX2Fycm93YCB8IERpcmVjdGlvbmFsIHBvaW50ZXIgdHJpYW5nbGUgfAoKIyMjIFJlYWN0IHByb3BzCgp8IFByb3AgfCBUeXBlIHwgRGVmYXVsdCB8IERlc2NyaXB0aW9uIHwKfC0tLXwtLS18LS0tfC0tLXwKfCBgY29udGVudGAgfCBzdHJpbmcgfCBSZWFjdE5vZGUgfCByZXF1aXJlZCB8IFRvb2x0aXAgdGV4dCB8CnwgYHNpZGVgIHwgInRvcCIgfCAiYm90dG9tIiB8ICJsZWZ0IiB8ICJyaWdodCIgfCAidG9wIiB8IFByZWZlcnJlZCBwb3NpdGlvbiB8CnwgYHNpZGVPZmZzZXRgIHwgbnVtYmVyIHwgNiB8IEdhcCBmcm9tIHRyaWdnZXIgaW4gcHggfAp8IGBkZWxheUR1cmF0aW9uYCB8IG51bWJlciB8IDMwMCB8IG1zIGJlZm9yZSB0b29sdGlwIG9wZW5zIHwKfCBgYXNDaGlsZGAgfCBib29sZWFuIHwgZmFsc2UgfCBNZXJnZSB0cmlnZ2VyIHByb3BzIGludG8gY2hpbGQgZWxlbWVudCB8CnwgYGNoaWxkcmVuYCB8IFJlYWN0Tm9kZSB8IHJlcXVpcmVkIHwgVHJpZ2dlciBlbGVtZW50IHwKCiMjIENvZGUgZXhhbXBsZXMKCkNvcHkgdGhlc2Ugc25pcHBldHMgYXMgc3RhcnRpbmcgcG9pbnRzLiBUb29sdGlwIHZpc2liaWxpdHkgaXMgQ1NTLW9ubHkgdmlhIGA6aG92ZXJgIGFuZCBgOmZvY3VzLXdpdGhpbmAgb24gdGhlIHdyYXBwZXIuCgpgYGBgaHRtbAo8ZGl2IGNsYXNzPSJ0b29sdGlwLXdyYXAiPgogIDxidXR0b24gY2xhc3M9Imljb24tYnRuIiBhcmlhLWRlc2NyaWJlZGJ5PSJ0dC1wbGF5Ij4KICAgIDxzdmcgLi4uPjwvc3ZnPgogIDwvYnV0dG9uPgogIDxzcGFuIGNsYXNzPSJ0b29sdGlwIiBpZD0idHQtcGxheSIgcm9sZT0idG9vbHRpcCI+UGxheSBnYW1lPC9zcGFuPgo8L2Rpdj4KCjxzdHlsZT4KLnRvb2x0aXAtd3JhcCB7IHBvc2l0aW9uOiByZWxhdGl2ZTsgZGlzcGxheTogaW5saW5lLWJsb2NrOyB9Ci50b29sdGlwIHsKICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgYm90dG9tOiBjYWxjKDEwMCUgKyA4cHgpOwogIGxlZnQ6IDUwJTsKICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVgoLTUwJSk7CiAgYmFja2dyb3VuZDogdmFyKC0tc3VyZmFjZS00KTsKICBjb2xvcjogdmFyKC0tdGV4dCk7CiAgZm9udC1zaXplOiAxMnB4OwogIGZvbnQtd2VpZ2h0OiA3MDA7CiAgcGFkZGluZzogNXB4IDEwcHg7CiAgYm9yZGVyLXJhZGl1czogdmFyKC0tcjMpOwogIHdoaXRlLXNwYWNlOiBub3dyYXA7CiAgcG9pbnRlci1ldmVudHM6IG5vbmU7CiAgb3BhY2l0eTogMDsKICB0cmFuc2l0aW9uOiBvcGFjaXR5IHZhcigtLWR1ci1mYXN0KSB2YXIoLS1lYXNlLW91dCk7CiAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tYm9yZGVyLXN1YnRsZSk7Cn0KLnRvb2x0aXA6OmFmdGVyIHsKICBjb250ZW50OiAnJzsKICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgdG9wOiAxMDAlOyBsZWZ0OiA1MCU7CiAgdHJhbnNmb3JtOiB0cmFuc2xhdGVYKC01MCUpOwogIGJvcmRlcjogNXB4IHNvbGlkIHRyYW5zcGFyZW50OwogIGJvcmRlci10b3AtY29sb3I6IHZhcigtLXN1cmZhY2UtNCk7Cn0KLnRvb2x0aXAtd3JhcDpob3ZlciAudG9vbHRpcCwKLnRvb2x0aXAtd3JhcDpmb2N1cy13aXRoaW4gLnRvb2x0aXAgeyBvcGFjaXR5OiAxOyB9Cjwvc3R5bGU+CmBgYGAKCmBgYGAKPCEtLSBCb3R0b20gLS0+CjxzcGFuIGNsYXNzPSJ0b29sdGlwIHRvb2x0aXAtLWJvdHRvbSIgcm9sZT0idG9vbHRpcCI+U2hhcmU8L3NwYW4+Cgo8IS0tIExlZnQgLS0+CjxzcGFuIGNsYXNzPSJ0b29sdGlwIHRvb2x0aXAtLWxlZnQiIHJvbGU9InRvb2x0aXAiPkFkZCB0byB3aXNobGlzdDwvc3Bhbj4KCjwhLS0gUmlnaHQgLS0+CjxzcGFuIGNsYXNzPSJ0b29sdGlwIHRvb2x0aXAtLXJpZ2h0IiByb2xlPSJ0b29sdGlwIj5Nb3JlIG9wdGlvbnM8L3NwYW4+Cgo8c3R5bGU+Ci50b29sdGlwLS1ib3R0b20geyBib3R0b206IGF1dG87IHRvcDogY2FsYygxMDAlICsgOHB4KTsgfQoudG9vbHRpcC0tYm90dG9tOjphZnRlciB7IHRvcDogYXV0bzsgYm90dG9tOiAxMDAlOyBib3JkZXItdG9wLWNvbG9yOiB0cmFuc3BhcmVudDsgYm9yZGVyLWJvdHRvbS1jb2xvcjogdmFyKC0tc3VyZmFjZS00KTsgfQoKLnRvb2x0aXAtLWxlZnQgeyBib3R0b206IGF1dG87IGxlZnQ6IGF1dG87IHJpZ2h0OiBjYWxjKDEwMCUgKyA4cHgpOyB0b3A6IDUwJTsgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKC01MCUpOyB9Ci50b29sdGlwLS1sZWZ0OjphZnRlciB7IHRvcDogNTAlOyBsZWZ0OiAxMDAlOyB0cmFuc2Zvcm06IHRyYW5zbGF0ZVkoLTUwJSk7IGJvcmRlci10b3AtY29sb3I6IHRyYW5zcGFyZW50OyBib3JkZXItbGVmdC1jb2xvcjogdmFyKC0tc3VyZmFjZS00KTsgfQoKLnRvb2x0aXAtLXJpZ2h0IHsgYm90dG9tOiBhdXRvOyBsZWZ0OiBjYWxjKDEwMCUgKyA4cHgpOyB0b3A6IDUwJTsgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKC01MCUpOyB9Ci50b29sdGlwLS1yaWdodDo6YWZ0ZXIgeyB0b3A6IDUwJTsgcmlnaHQ6IDEwMCU7IGxlZnQ6IGF1dG87IHRyYW5zZm9ybTogdHJhbnNsYXRlWSgtNTAlKTsgYm9yZGVyLXRvcC1jb2xvcjogdHJhbnNwYXJlbnQ7IGJvcmRlci1yaWdodC1jb2xvcjogdmFyKC0tc3VyZmFjZS00KTsgfQo8L3N0eWxlPgpgYGBgCgpgYGBgCjwhLS0gSlM6IGRpc21pc3Mgb24gRXNjYXBlIGZvciBXQ0FHIDEuNC4xMyBjb21wbGlhbmNlIC0tPgo8c2NyaXB0Pgpkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCcudG9vbHRpcC13cmFwJykuZm9yRWFjaCh3cmFwID0+IHsKICB3cmFwLmFkZEV2ZW50TGlzdGVuZXIoJ2tleWRvd24nLCBlID0+IHsKICAgIGlmIChlLmtleSA9PT0gJ0VzY2FwZScpIHsKICAgICAgd3JhcC5xdWVyeVNlbGVjdG9yKCcudG9vbHRpcCcpLnN0eWxlLm9wYWNpdHkgPSAnMCc7CiAgICAgIHdyYXAucXVlcnlTZWxlY3RvcignW2FyaWEtZGVzY3JpYmVkYnldJykuYmx1cigpOwogICAgfQogIH0pOwp9KTsKPC9zY3JpcHQ+CmBgYGAKCiMjIENoYW5nZWxvZwoKSW5pdGlhbCBkcmFmdC4gQ1NTLW9ubHkgdG9vbHRpcCB3aXRoIGZvdXIgZGlyZWN0aW9uIHZhcmlhbnRzICh0b3AsIGJvdHRvbSwgbGVmdCwgcmlnaHQpLCB0aHJlZSBzaXplIHRpZXJzIChTL00vTCksIGFuZCBmdWxsIGFjY2Vzc2liaWxpdHkgdGFibGUuIE1vYmlsZTogbm8gdG9vbHRpcCBndWlkYW5jZSBkb2N1bWVudGVkLgoKLS0tCgojIyBUb2tlbnMgcmVmZXJlbmNlZCBvbiB0aGlzIHBhZ2UKClVzZSB0aGVzZSBleGFjdCB0b2tlbnMg4oCUIGRlZmluZWQgaW4gYHRva2Vucy90b2tlbnMuY3NzYC4gRG8gbm90IHN1YnN0aXR1dGUgcmF3IHZhbHVlcy4KCi0gYC0tYm9yZGVyLXN1YnRsZWAKLSBgLS1kdXItZmFzdGAKLSBgLS1lYXNlLW91dGAKLSBgLS1qaW9gCi0gYC0tamlvLWZvbnRgCi0gYC0tcjNgCi0gYC0tc3VyZmFjZS0yYAotIGAtLXN1cmZhY2UtNGAKLSBgLS10ZXh0YAotIGAtLXRvdWNoLW1pbmAKCi0tLQoKIyMgQnVpbGQgcnVsZXMgKGJpbmRpbmcpCgoxLiBVc2UgKipvbmx5KiogdGhlIHRva2VucyBsaXN0ZWQgYWJvdmUuIElmIGEgdmFsdWUgeW91IG5lZWQgaXMgbm90IGxpc3RlZCwgc3RvcCBhbmQgYXNrIOKAlCBkbyBub3QgaW50cm9kdWNlIGEgcmF3IHZhbHVlLgoyLiBGb250IGlzICoqSmlvVHlwZSoqIG9ubHkuIFdlaWdodHM6IDMwMCwgNTAwLCA3MDAsIDkwMC4KMy4gUmV1c2UgdGhlIGNvbXBvbmVudCBDU1MgcGF0dGVybnMgc2hvd24gb24gdGhlIHNvdXJjZSBwYWdlOyBkbyBub3QgcmVkZXNpZ24uCjQuIE1hdGNoIGV2ZXJ5IHN0YXRlIChkZWZhdWx0LCBob3ZlciwgZm9jdXMsIGFjdGl2ZSwgZGlzYWJsZWQsIGxvYWRpbmcpIHNob3duIG9uIHRoZSBwYWdlLgo1LiBBY2Nlc3NpYmlsaXR5IHJlcXVpcmVtZW50cyBvbiB0aGUgcGFnZSBhcmUgbWFuZGF0b3J5LCBub3Qgb3B0aW9uYWwuCg==" download="tooltip-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
+    </div>
       <span class="component-maturity component-maturity--draft">
         <span class="component-maturity--dot"></span>Draft
       </span>
@@ -173,7 +173,7 @@
     <div class="ds-anatomy-preview">
       <div class="ds-anatomy-component" style="position:relative; display:inline-flex; flex-direction:column; align-items:center; gap:8px; padding-top:48px;">
         <div style="position:relative;">
-          <span style="display:inline-block; background:var(--surface-4,#2A3142); color:var(--text); font-size:12px; font-weight:600; padding:5px 10px; border-radius:var(--r3); border:1px solid var(--border-subtle); white-space:nowrap; position:relative;">
+          <span style="display:inline-block; background:var(--surface-4,#2A3142); color:var(--text); font-size:12px; font-weight:700; padding:5px 10px; border-radius:var(--r3); border:1px solid var(--border-subtle); white-space:nowrap; position:relative;">
             Play game
             <span style="position:absolute; top:100%; left:50%; transform:translateX(-50%); border:5px solid transparent; border-top-color:var(--surface-4,#2A3142);"></span>
           </span>
@@ -199,7 +199,7 @@
         <div>
           <div class="ds-anatomy-label">Label text <span class="ds-anatomy-required">Required</span></div>
           <div class="ds-anatomy-desc">12px semibold, sentence case, max 40 chars. No punctuation at end. Describes the control action.</div>
-          <code class="ds-anatomy-token ds-code">font-size: 12px; font-weight: 600</code>
+          <code class="ds-anatomy-token ds-code">font-size: 12px; font-weight: 700</code>
         </div>
       </li>
       <li class="ds-anatomy-item">
@@ -500,6 +500,90 @@
   </section>
 
   <!-- CODE EXAMPLES -->
+  <!-- WHEN TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use</h2>
+    <div class="ds-usage-grid">
+      <div class="ds-usage-card ds-usage-card--do">
+        <p class="ds-usage-label ds-usage-label--do">Use when</p>
+        <ul class="ds-usage-list">
+              <li>Explaining icon-only buttons (no label) in toolbars</li>
+              <li>Abbreviations or jargon that need contextual definition</li>
+              <li>Additional context for truncated text</li>
+              <li>Keyboard shortcut hints on desktop web</li>
+        </ul>
+      </div>
+      <div class="ds-usage-card ds-usage-card--dont">
+        <p class="ds-usage-label ds-usage-label--dont">Don't use when</p>
+        <ul class="ds-usage-list">
+              <li>Critical information — touch users may never see it</li>
+              <li>Interactive content inside the tooltip — use Popover instead</li>
+              <li>Long descriptions (>2 lines) — use Popover instead</li>
+              <li>Tooltips on disabled elements — explain the reason inline instead</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOTION -->
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-motion-table">
+      <thead><tr><th>Interaction</th><th>Easing</th><th>Duration</th><th>Property</th></tr></thead>
+      <tbody>
+        <tr><td>Open (300ms delay)</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>opacity, transform scale(0.9 → 1)</td></tr>
+        <tr><td>Close</td><td><code>--ease-in</code></td><td><code>100ms</code></td><td>opacity</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- API -->
+  <section class="ds-section" id="api">
+    <h2 class="ds-section-title">API</h2>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:0 0 12px;">CSS classes</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>.ds-tooltip</code></td><td>Root floating label — surface-2, r2, px 8, py 5</td></tr>
+        <tr><td><code>.ds-tooltip__text</code></td><td>12px 500 text — single line max</td></tr>
+        <tr><td><code>.ds-tooltip__arrow</code></td><td>Directional pointer triangle</td></tr>
+      </tbody>
+    </table>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 12px;">React props</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>content</code></td><td><span class="api-type">string | ReactNode</span></td><td><span class="api-default">required</span></td><td>Tooltip text</td></tr>
+        <tr><td><code>side</code></td><td><span class="api-type">"top" | "bottom" | "left" | "right"</span></td><td><span class="api-default">"top"</span></td><td>Preferred position</td></tr>
+        <tr><td><code>sideOffset</code></td><td><span class="api-type">number</span></td><td><span class="api-default">6</span></td><td>Gap from trigger in px</td></tr>
+        <tr><td><code>delayDuration</code></td><td><span class="api-type">number</span></td><td><span class="api-default">300</span></td><td>ms before tooltip opens</td></tr>
+        <tr><td><code>asChild</code></td><td><span class="api-type">boolean</span></td><td><span class="api-default">false</span></td><td>Merge trigger props into child element</td></tr>
+        <tr><td><code>children</code></td><td><span class="api-type">ReactNode</span></td><td><span class="api-default">required</span></td><td>Trigger element</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  
+
+  
+
+  
+
+  
+
   <section class="component-section" id="code-examples">
     <h2 class="ds-section-title">Code examples</h2>
     <p class="ds-section-desc">Copy these snippets as starting points. Tooltip visibility is CSS-only via <code class="ds-code">:hover</code> and <code class="ds-code">:focus-within</code> on the wrapper.</p>
@@ -523,7 +607,7 @@
   background: var(--surface-4);
   color: var(--text);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   padding: 5px 10px;
   border-radius: var(--r3);
   white-space: nowrap;
@@ -597,4 +681,4 @@ document.querySelectorAll('.tooltip-wrap').forEach(wrap =&gt; {
   </section>
 
 </main><script src="../sprite-loader.js"></script>
-<script src="../shell.js"></script></body></html>
+<script src="../shell.js?v=2"></script></body></html>

@@ -7,135 +7,66 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     body { background: var(--bg); color: var(--text); font-family: var(--jio-font); margin: 0; }
 
-    .component-hero {
-      border-radius: 20px; overflow: hidden; margin-bottom: 48px;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      position: relative; min-height: 280px; padding: 48px 32px 32px;
-    }
-    .component-hero--dark { background: #060810; }
-    .component-hero--grid {
-      background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-      background-size: 32px 32px;
-      background-color: #060810;
-      border: 1px solid var(--border-subtle);
-    }
-    .component-hero-inner {
-      display: flex; flex-direction: column; align-items: center;
-      gap: 28px; position: relative; z-index: 2;
-    }
-    .component-hero-caption {
-      display: block; font-size: 10px; font-weight: 700; letter-spacing: .6px;
-      text-transform: uppercase; color: var(--text4); margin-top: 24px; position: relative; z-index: 2;
-    }
-    .hero-glow {
-      position: absolute; width: 320px; height: 180px; border-radius: var(--pill);
-      background: radial-gradient(ellipse, rgba(0,168,89,.2) 0%, transparent 70%);
-      pointer-events: none; z-index: 1;
-    }
+    
+    
+    
+    
+    
+    
 
-    .component-intro { margin-bottom: 48px; }
-    .component-intro p {
-      font-size: 15px; font-weight: 500; color: var(--text2);
-      line-height: 1.65; margin-bottom: 20px; max-width: 640px;
-    }
-    .component-summary-list {
-      display: flex; flex-direction: column; gap: 0;
-      border: 1px solid var(--border-subtle); border-radius: 14px;
-      overflow: hidden; list-style: none; padding: 0; margin: 0;
-    }
-    .component-summary-list li {
-      padding: 14px 20px; border-bottom: 1px solid var(--border-subtle);
-      font-size: 13px; font-weight: 500; color: var(--text2); line-height: 1.55;
-    }
-    .component-summary-list li:last-child { border-bottom: none; }
-    .component-summary-list li strong { color: var(--text); font-weight: 700; }
+    
+    
+    
+    
+    
+    
 
-    .component-best-practices { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
-    .component-bp-card { border-radius: 14px; overflow: hidden; border: 1.5px solid; }
-    .component-bp-card--do   { border-color: rgba(0,168,89,.3); }
-    .component-bp-card--dont { border-color: rgba(255,71,87,.3); }
-    .component-bp-label {
-      display: flex; align-items: center; gap: 6px; padding: 10px 16px;
-      font-size: 10px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase;
-    }
-    .component-bp-label--do   { background: rgba(0,168,89,.07);  color: var(--jio); }
-    .component-bp-label--dont { background: rgba(255,71,87,.07); color: var(--negative); }
-    .component-bp-label--do::before   { content: '\2713'; font-size: 11px; }
-    .component-bp-label--dont::before { content: '\2715'; font-size: 11px; }
-    .component-bp-list {
-      padding: 16px 20px 20px; background: var(--surface-1);
-      margin: 0; display: flex; flex-direction: column; gap: 8px; list-style: none;
-    }
-    .component-bp-list li {
-      font-size: 12px; font-weight: 500; color: var(--text2);
-      line-height: 1.5; padding-left: 14px; position: relative;
-    }
-    .component-bp-list li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
-    .component-content-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px; }
-    .component-content-card {
-      background: var(--surface-1); border: 1px solid var(--border-subtle);
-      border-radius: var(--r4); padding: 20px;
-    }
-    .component-content-title {
-      font-size: 12px; font-weight: 700; color: var(--text);
-      text-transform: uppercase; letter-spacing: .5px; margin-bottom: 12px;
-    }
-    .component-content-card ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
-    .component-content-card li {
-      font-size: 12px; font-weight: 500; color: var(--text2);
-      line-height: 1.5; padding-left: 14px; position: relative;
-    }
-    .component-content-card li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+    
+    
+    
+    
+    
+    
 
-    .component-platform-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
-    .component-platform-card {
-      background: var(--surface-1); border: 1px solid var(--border-subtle);
-      border-radius: var(--r4); padding: 20px;
-    }
-    .component-platform-card--mobile { border-top: 2px solid rgba(110,231,183,.4); }
-    .component-platform-card--web    { border-top: 2px solid rgba(147,197,253,.4); }
-    .component-platform-card--tv     { border-top: 2px solid rgba(251,191,36,.4); }
-    .component-platform-card-title {
-      font-size: 11px; font-weight: 700; letter-spacing: .6px;
-      text-transform: uppercase; color: var(--text3); margin-bottom: 12px;
-    }
-    .component-platform-card--mobile .component-platform-card-title { color: #6ee7b7; }
-    .component-platform-card--web    .component-platform-card-title { color: #93c5fd; }
-    .component-platform-card--tv     .component-platform-card-title { color: #fbbf24; }
-    .component-platform-card ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
-    .component-platform-card li {
-      font-size: 12px; font-weight: 500; color: var(--text2);
-      line-height: 1.5; padding-left: 14px; position: relative;
-    }
-    .component-platform-card li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
-    .component-changelog {
-      display: flex; flex-direction: column; gap: 0;
-      border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden;
-    }
-    .component-changelog-entry {
-      display: grid; grid-template-columns: 56px 80px 1fr;
-      gap: 16px; align-items: start; padding: 14px 20px;
-      border-bottom: 1px solid var(--border-subtle); font-size: 12px;
-    }
-    .component-changelog-entry:last-child { border-bottom: none; }
-    .component-changelog-version { font-family: monospace; font-weight: 700; color: var(--jio); font-size: 11px; }
-    .component-changelog-date { color: var(--text3); font-weight: 500; }
-    .component-changelog-desc { color: var(--text2); line-height: 1.5; }
+    
+    
+    
+    
+    
+    
 
-    .ds-note {
-      background: rgba(0,168,89,.06); border: 1px solid rgba(0,168,89,.2);
-      border-radius: var(--r3); padding: 14px 18px;
-      font-size: 13px; font-weight: 500; color: var(--text2); line-height: 1.55;
-    }
-    .ds-note strong { color: var(--jio); }
+    
+    
 
     /* Icon size matrix */
     .icon-size-matrix {
@@ -203,24 +134,14 @@
     .migration-cell--new { color: #a8e6c5; font-family: monospace; font-size: 11px; }
 
     /* Accessibility */
-    .a11y-grid {
-      display: flex; flex-direction: column; gap: 0;
-      border: 1px solid var(--border-subtle); border-radius: var(--r4); overflow: hidden; margin-top: 24px;
-    }
-    .a11y-row { display: grid; grid-template-columns: 140px 1fr; gap: 0; border-bottom: 1px solid var(--border-subtle); }
-    .a11y-row:last-child { border-bottom: none; }
-    .a11y-label {
-      padding: 14px 16px; font-size: 11px; font-weight: 700; color: var(--text3);
-      letter-spacing: .3px; background: var(--surface-2); text-transform: uppercase;
-      display: flex; align-items: flex-start; padding-top: 16px;
-    }
-    .a11y-content {
-      padding: 14px 20px; font-size: 12px; font-weight: 500; color: var(--text2);
-      line-height: 1.6; background: var(--surface-1);
-    }
-    .a11y-content ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 5px; }
-    .a11y-content li { padding-left: 14px; position: relative; }
-    .a11y-content li::before { content: '\00B7'; position: absolute; left: 3px; color: var(--text4); }
+    
+    
+    
+    
+    
+    
+    
+    
 
     kbd {
       display: inline-block; padding: 1px 6px;
@@ -229,13 +150,12 @@
     }
 
     @media (max-width: 760px) {
-      .component-best-practices,
-      .component-content-grid,
-      .component-platform-grid { grid-template-columns: 1fr; }
+      
       .icon-size-matrix { overflow-x: auto; }
       .icon-size-matrix-head,
       .icon-size-matrix-row { min-width: 480px; }
     }
+    #icon-search:focus-visible { outline: none; border-color: var(--jio); box-shadow: 0 0 0 3px rgba(0,168,89,.25); }
   </style>
 </head>
 <body>
@@ -245,20 +165,20 @@
        1. PAGE HEADER
   =================================================== -->
   <div class="component-page-header">
-    <div class="component-breadcrumb">
-      <a href="../index.html">JioGames DLS</a>
-      <span class="component-breadcrumb-sep">&#x203A;</span>
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <span class="component-breadcrumb-link">JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
       <span>Components</span>
-      <span class="component-breadcrumb-sep">&#x203A;</span>
-      <span>Icons</span>
-    </div>
-    <h1 class="component-page-title">Icons</h1>
-    <p class="component-page-def">Icons are visual symbols that communicate actions, objects, and states across the JioGames interface.</p>
+      <span class="component-breadcrumb-sep">›</span>
+      <span class="component-breadcrumb-current">Icons</span>
+    </nav>
+    <h1 class="component-page-title">Icons</h1><p class="component-page-def">Icons are visual symbols that communicate actions, objects, and states across the JioGames interface.</p>
     <div class="component-platforms">
       <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
       <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
       <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
       <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBJY29ucyDigJQgSmlvR2FtZXMgRExTIHNwZWMKCj4gU291cmNlOiBgaWNvbnMvaW5kZXguaHRtbGAgaW4gdGhlIEppb0dhbWVzIERlc2lnbiBTeXN0ZW0uCj4gVGhpcyBzcGVjIGlzIGdlbmVyYXRlZCB2ZXJiYXRpbSBmcm9tIHRoZSBwYWdlIOKAlCBkbyBub3QgaW52ZW50IHZhbHVlcyBub3QgbGlzdGVkIGhlcmUuCgoqKlBhdGg6KiogSmlvR2FtZXMgRExTIOKAuiBDb21wb25lbnRzIOKAuiBJY29ucwoKLS0tCgpJY29ucyBhcmUgdmlzdWFsIHN5bWJvbHMgdGhhdCBjb21tdW5pY2F0ZSBhY3Rpb25zLCBvYmplY3RzLCBhbmQgc3RhdGVzIGFjcm9zcyB0aGUgSmlvR2FtZXMgaW50ZXJmYWNlLgoKSWNvbnMgaW4gSmlvR2FtZXMgYXJlIGRlbGl2ZXJlZCBhcyBhIHNpbmdsZSBTVkcgc3ByaXRlLCByZWZlcmVuY2VkIHZpYSBgYC4gVGhpcyBrZWVwcyB0aGUgRE9NIGxpZ2h0d2VpZ2h0IGFuZCBhbGxvd3MgYSBzaW5nbGUgdG9rZW4gY2hhbmdlIHRvIHJlY29sb3IgZXZlcnkgaWNvbiBvbiBhIHNjcmVlbi4gVGhlIHN5c3RlbSBkZWZpbmVzIGZpdmUgZ2x5cGggc2l6ZXMgKFhT4oCTWEwpLCBlYWNoIHJlc29sdmluZyB0byBkaWZmZXJlbnQgcGl4ZWwgdmFsdWVzIG9uIE1vYmlsZSwgV2ViLCBhbmQgVFYuCgotICoqU3ByaXRlLWJhc2VkIGRlbGl2ZXJ5LioqIE9uZSBgc3ByaXRlLnN2Z2AgZmlsZS4gQWxsIGljb25zIHZpYSBgYC4gTm8gcGVyLWljb24gZmlsZXMsIG5vIGlubGluZSBibG9icywgbm8gZm9udCBpY29ucy4KLSAqKlBsYXRmb3JtLWF3YXJlIHNpemluZy4qKiBGaXZlIHNpemUgbmFtZXMgKFhTL1MvTS9ML1hMKSByZXNvbHZlIHRvIGRpZmZlcmVudCBwaXhlbCB2YWx1ZXMgcGVyIHBsYXRmb3JtLiBUaGUgc2FtZSBjbGFzcyB3b3JrcyBldmVyeXdoZXJlOyB0aGUgcGxhdGZvcm0gY29udGV4dCBzZXRzIHRoZSB0b2tlbiBhbGlhcy4KLSAqKlNlbWFudGljIGNvbG9yIHZpYSBjdXJyZW50Q29sb3IuKiogSWNvbnMgaW5oZXJpdCBmaWxsIGZyb20gdGhlaXIgY29udGFpbmVyLiBTd2FwIG9uZSBDU1MgY3VzdG9tIHByb3BlcnR5IHRvIHJlY29sb3IgZW50aXJlIGljb24gZmFtaWxpZXMgaW5zdGFudGx5LgotICoqVG91Y2ggdGFyZ2V0cyBhcmUgc2VwYXJhdGUgZnJvbSBnbHlwaCBzaXplLioqIEEgMjBweCBpY29uIGluc2lkZSBhIDQ0cHggd3JhcHBlciBwcm92aWRlcyB0aGUgV0NBRy1jb21wbGlhbnQgdG91Y2ggYXJlYSB3aXRob3V0IGluZmxhdGluZyB0aGUgdmlzdWFsIGdseXBoLgotICoqVFYgZm9jdXMgcmluZy4qKiBPbiBUViwgZm9jdXNlZCBpY29uIHdyYXBwZXJzIHJlY2VpdmUgdGhlIGAtLXR2LWZvY3VzLXNoYWRvd2AgZ2xvdyBhbmQgc2NhbGUoMS4wNSkgdHJhbnNmb3JtLCBub3QgYSAycHggb3V0bGluZS4KCiMjIFdoZW4gdG8gdXNlCgpVc2Ugd2hlbgoKLSBDb21tdW5pY2F0aW5nIGFjdGlvbnMgYW5kIHN0YXRlcyB3aXRob3V0IHJlbHlpbmcgc29sZWx5IG9uIHRleHQKLSBMZWFkaW5nIGljb25zIGluIGJ1dHRvbnMsIGlucHV0cywgYW5kIG5hdmlnYXRpb24gaXRlbXMKLSBTdGF0dXMgaW5kaWNhdG9ycyBpbiBsaXN0IGl0ZW1zIGFuZCB0b2FzdHMKLSBEZWNvcmF0aXZlIHN1cHBvcnRpbmcgdmlzdWFscyBhbG9uZ3NpZGUgdGV4dCBoZWFkaW5ncwoKRG9uJ3QgdXNlIHdoZW4KCi0gSWNvbnMgYWxvbmUgd2l0aG91dCBsYWJlbHMgZm9yIGFtYmlndW91cyBhY3Rpb25zIOKAlCBhbHdheXMgcGFpciB3aXRoIGFjY2Vzc2libGUgdGV4dAotIE1peGluZyBpY29uIHN0eWxlcyAob3V0bGluZSB2cyBmaWxsZWQpIHdpdGhpbiBvbmUgVUkgc3VyZmFjZQotIEN1c3RvbS1jb2xvdXJlZCBpY29ucyBvdXRzaWRlIHRoZSB0b2tlbiBzeXN0ZW0g4oCUIHVzZSBjdXJyZW50Q29sb3IKLSBJY29ucyBzbWFsbGVyIHRoYW4gMTZweCDigJQgcmVhZGFiaWxpdHkgYnJlYWtzIGJlbG93IHRoaXMgc2l6ZQoKIyMgQmVzdCBwcmFjdGljZXMKCkljb25zIHJlZHVjZSBjb2duaXRpdmUgbG9hZCB3aGVuIHVzZWQgY29uc2lzdGVudGx5LiBUaGVzZSBydWxlcyBrZWVwIGljb24gdXNhZ2UgY29oZXJlbnQgYWNyb3NzIGFsbCBzdXJmYWNlcy4KCi0gVXNlIGBhcmlhLWhpZGRlbj0idHJ1ZSJgIG9uIGFsbCBkZWNvcmF0aXZlIGljb25zCi0gUGFpciBpY29uLW9ubHkgY29udHJvbHMgd2l0aCBhbiBgYXJpYS1sYWJlbGAgb24gdGhlIGludGVyYWN0aXZlIGVsZW1lbnQKLSBVc2UgTCAoMjRweCkgYXMgdGhlIGRlZmF1bHQgZ2x5cGggc2l6ZSBpbiBuYXZpZ2F0aW9uIGFuZCBwcmltYXJ5IFVJCi0gV3JhcCBpbnRlcmFjdGl2ZSBpY29ucyBpbiBhIHRvdWNoIHRhcmdldCBkaXYgYXQgbGVhc3QgNDRweCDDlyA0NHB4IG9uIG1vYmlsZQotIFVzZSBgZmlsbDpjdXJyZW50Q29sb3JgIHNvIGljb25zIHJlc3BvbmQgdG8gdGhlbWUgY2hhbmdlcwotIE9uIFRWLCB1c2UgaWNvbi13cmFwLWwgKDc2cHgpIG1pbmltdW0gdG91Y2ggYXJlYQotIFVzZSBuYW1lZCBzcHJpdGUgSURzIOKAlCBuZXZlciBoYXJkY29kZSBwYXRoIGRhdGEgaW4gcHJvZHVjdCBIVE1MCgotIERvbid0IHJlc2l6ZSBpY29ucyBieSBjaGFuZ2luZyBgdmlld0JveGAg4oCUIHVzZSBgd2lkdGhgL2BoZWlnaHRgIGF0dHJpYnV0ZXMKLSBEb24ndCB1c2UgYGltZ2AgdGFncyBmb3IgaWNvbnMg4oCUIHRoZXkgY2FuJ3QgYmUgcmVjb2xvcmVkIHZpYSBDU1MKLSBEb24ndCB1c2UgWFMgKDEycHgpIGljb25zIGFzIHN0YW5kYWxvbmUgaW50ZXJhY3RpdmUgdGFyZ2V0cwotIERvbid0IHJlbHkgb24gaWNvbnMgYWxvbmUgdG8gY29tbXVuaWNhdGUgc3RhdGUg4oCUIGFsd2F5cyBhZGQgdGV4dCBvciBBUklBIGxhYmVsCi0gRG9uJ3QgdXNlIGAuaWNvbi0tdHZgIOKAlCBkZXByZWNhdGVkLCB1c2UgYC5pY29uLS14bGAgaW5zaWRlIGAucGxhdGZvcm0tdHZgCi0gRG9uJ3QgaGFyZGNvZGUgcGl4ZWwgc2l6ZXMg4oCUIHVzZSB0aGUgYC0taWNvbi0qYCB0b2tlbiBhbGlhc2VzCi0gRG9uJ3QgbWl4IGljb24gZmFtaWxpZXMgb3Igc3R5bGVzIHdpdGhpbiB0aGUgc2FtZSBVSSByZWdpb24KCiMjIEFuYXRvbXkKCkFuIGljb24gaGFzIHVwIHRvIGZpdmUgbGF5ZXJzLiBPbmx5IHRoZSBTVkcgZ2x5cGggYW5kIGl0cyB2aWV3Ym94IGFyZSByZXF1aXJlZC4gV3JhcHBlciwgdG91Y2ggdGFyZ2V0LCBhbmQgZm9jdXMgcmluZyBhcmUgY29udGV4dHVhbCBhZGRpdGlvbnMgZm9yIGludGVyYWN0aXZlIHVzZS4KCiMjIEljb24gbGlicmFyeSAxLDY0NiBpY29ucwoKQWxsIGljb25zIGZyb20gdGhlIEppb0dhbWVzIHNwcml0ZS4gQ2xpY2sgYW55IGljb24gdG8gY29weSBpdHMgSUQgdG8gY2xpcGJvYXJkLiBSZW5kZXJlZCBhdCBMICgyNHB4KS4KCiMjIFZhcmlhbnRzCgojIyBTaXplcwoKRml2ZSBjYW5vbmljYWwgc2l6ZSBuYW1lcyBjb3ZlciBhbGwgdXNlIGNhc2VzLiBPbiBUViwgYWxsIHNpemVzIHNoaWZ0IGxhcmdlciB0byBtYWludGFpbiAxMC1mb290IGxlZ2liaWxpdHkuIFRoZSBgLS1pY29uLSpgIHJ1bnRpbWUgYWxpYXNlcyByZXNvbHZlIGF1dG9tYXRpY2FsbHkgdmlhIG1lZGlhIHF1ZXJ5IGFuZCBgLnBsYXRmb3JtLXR2YCBjb250ZXh0LgoKIyMgU3RhdGVzCgpJY29ucyB0aGVtc2VsdmVzIGFyZSBzdGF0ZWxlc3MuIFN0YXRlIGlzIGFwcGxpZWQgdG8gdGhlIGludGVyYWN0aXZlIHdyYXBwZXIuIFVzZSBgLmlzLSpgIGhlbHBlciBjbGFzc2VzIGZyb20gYHN0YXRlcy5jc3NgIHRvIGRlbW9uc3RyYXRlIHN0YXRlcyBpbiBwcm90b3R5cGVzLgoKIyMgQ29udGVudCBndWlkYW5jZQoKSWNvbiBzZWxlY3Rpb24gYWZmZWN0cyBjb21wcmVoZW5zaW9uLiBDaG9vc2UgaWNvbnMgdGhhdCBtYXRjaCB0aGUgbWVudGFsIG1vZGVsIG9mIHRoZSBwbGF5ZXIsIG5vdCB0aGUgdGVjaG5pY2FsIGFjdGlvbiBvZiB0aGUgc3lzdGVtLgoKLSBVc2UgdW5pdmVyc2FsbHkgdW5kZXJzdG9vZCBzeW1ib2xzIGZvciBuYXZpZ2F0aW9uIChob3VzZSA9IGhvbWUsIG1hZ25pZmllciA9IHNlYXJjaCkKLSBQcmVmZXIgb3V0bGluZWQgaWNvbnMgZm9yIGluYWN0aXZlIHN0YXRlcywgZmlsbGVkIGZvciBhY3RpdmUKLSBBdm9pZCBpY29ucyB0aGF0IGNvdWxkIGJlIGludGVycHJldGVkIGRpZmZlcmVudGx5IGFjcm9zcyBjdWx0dXJlcwotIFdoZW4gaW4gZG91YnQsIHVzZSBpY29uICsgbGFiZWwg4oCUIGRvbid0IHJlbHkgb24gaWNvbiBhbG9uZSBmb3Igbm92ZWwgYWN0aW9ucwoKLSBEZWZhdWx0IGZpbGw6IGB2YXIoLS1pY29uLWNvbG9yLWRlZmF1bHQpYCDigJQgcmdiYSB3aGl0ZSBhdCA0NSUKLSBBY3RpdmUgLyBzZWxlY3RlZDogYHZhcigtLWljb24tY29sb3ItYWN0aXZlKWAg4oCUIEppb0dhbWVzIGdyZWVuCi0gTXV0ZWQgLyBkaXNhYmxlZDogYHZhcigtLWljb24tY29sb3ItbXV0ZWQpYCDigJQgIzZCNzI4MAotIE5ldmVyIHVzZSByZWQgaWNvbnMgaW4gbmF2aWdhdGlvbiDigJQgcmVkIGlzIHJlc2VydmVkIGZvciBkZXN0cnVjdGl2ZS9lcnJvciBzdGF0ZXMKCi0gQWx3YXlzIGFkZCBgYXJpYS1sYWJlbGAgdG8gdGhlIGludGVyYWN0aXZlIGVsZW1lbnQKLSBTdXJmYWNlIGEgdG9vbHRpcCBvbiBob3ZlciAod2ViKSBkZXNjcmliaW5nIHRoZSBhY3Rpb24KLSBVc2UgaWNvbiArIGxhYmVsIGlmIHRoZXJlIGlzIHN1ZmZpY2llbnQgc3BhY2Ug4oCUIGljb25zIGFsb25lIHJlZHVjZSBkaXNjb3ZlcmFiaWxpdHkgZm9yIG5ldyB1c2VycwotIEluIGJvdHRvbSBuYXYgYmFycywgYWx3YXlzIHNob3cgbGFiZWxzIGJlbG93IGljb25zCgotIE5ldyBpY29ucyBtdXN0IGJlIGRyYXduIG9uIDI0w5cyNCB2aWV3Ym94IHdpdGggMnB4IGNvbnNpc3RlbnQgc3Ryb2tlCi0gU3VibWl0IGFzIGEgc2luZ2xlLXBhdGggU1ZHIG9wdGltaXplZCB3aXRoIFNWR08KLSBJY29uIG11c3QgcGFzcyB2aXN1YWwgY29uc2lzdGVuY3kgcmV2aWV3IGFnYWluc3QgZXhpc3Rpbmcgc2V0Ci0gQWRkIHRvIGBzcHJpdGUuc3ZnYCB3aXRoIGFuIGBpY19gIHByZWZpeCBJRAoKIyMgUGxhdGZvcm0gY29uc2lkZXJhdGlvbnMKCkljb24gcmVuZGVyaW5nIGFuZCBpbnRlcmFjdGlvbiBkaWZmZXIgZnVuZGFtZW50YWxseSBhY3Jvc3MgTW9iaWxlLCBXZWIsIGFuZCBUVi4gR2x5cGggc2l6ZSB0b2tlbnMgYXV0by1yZXNvbHZlIHBlciBwbGF0Zm9ybTsgd3JhcHBlciBhbmQgZm9jdXMgYmVoYXZpb3IgcmVxdWlyZSBpbnRlbnRpb25hbCBkZWNpc2lvbnMuCgotIDQ0w5c0NHB4IG1pbmltdW0gdG91Y2ggdGFyZ2V0IGZvciBhbGwgaW50ZXJhY3RpdmUgaWNvbnMKLSBMICgyNHB4KSBnbHlwaCBpbiBuYXZpZ2F0aW9uOyBNICgyMHB4KSBpbiBkZW5zZSBVSQotIEFjdGl2ZSBjb2xvciBvbiBzZWxlY3RlZCB0YWIgYmFyIGljb24KLSBObyBob3ZlciBzdGF0ZSDigJQgcHJlc3NlZCBzdGF0ZSBvbmx5IG9uIHRvdWNoCi0gQm90dG9tIG5hdmlnYXRpb24gaWNvbnMgYWx3YXlzIGluY2x1ZGUgbGFiZWxzCi0gU3VwcHJlc3MgdGFwIGhpZ2hsaWdodDogYC13ZWJraXQtdGFwLWhpZ2hsaWdodC1jb2xvcjogdHJhbnNwYXJlbnRgCgotIEhvdmVyIHN0YXRlIG9uIHdyYXBwZXIgb24gY3Vyc29yIGVudHJ5Ci0gS2V5Ym9hcmQgZm9jdXMgdmlhIGA6Zm9jdXMtdmlzaWJsZWAg4oCUIDJweCBncmVlbiBvdXRsaW5lCi0gVG9vbHRpcHMgcmVxdWlyZWQgZm9yIGFsbCBpY29uLW9ubHkgaW50ZXJhY3RpdmUgZWxlbWVudHMKLSBJY29uIHdyYXAtbSAoNDBweCkg4oCUIHNsaWdodGx5IHNtYWxsZXIgdGhhbiBtb2JpbGUgdGFyZ2V0IGlzIGFjY2VwdGFibGUgZm9yIHdlYgotIEN1cnNvcjogcG9pbnRlciBvbiBhbGwgaW50ZXJhY3RpdmUgd3JhcHBlcnMKLSBYUyBpY29ucyAoMTJweCkgYWNjZXB0YWJsZSBpbiBkZW5zZSBkYXRhIHRhYmxlcyBvciBiYWRnZXMKCi0gRC1wYWQgbmF2aWdhdGlvbiDigJQgbm8gaG92ZXIsIG5vIHBvaW50ZXIKLSBJY29uLXdyYXAtbCAoNzZweCkgbWluaW11bSB0b3VjaCBhcmVhIGZvciBmb2N1cyB2aXNpYmlsaXR5Ci0gR3JlZW4gZ2xvdyArIHNjYWxlKDEuMDUpIG9uIGZvY3VzIHZpYSBgLS10di1mb2N1cy1zaGFkb3dgCi0gWEwgKDQ4cHgpIGluIGhlcm8gYXJlYXM7IEwgKDQwcHgpIGluIHJhaWxzIGFuZCBuYXZpZ2F0aW9uCi0gTmV2ZXIgdXNlIFhTIG9yIFMgaWNvbnMgYXMgc3RhbmRhbG9uZSBUViB0YXJnZXRzCi0gVXNlIGAuaXMtdHYtZm9jdXNlZGAgdG8gc2ltdWxhdGUgVFYgZm9jdXMgaW4gcHJvdG90eXBlcwoKIyMgTWlncmF0aW9uCgpUaGUgYC5pY29uLS10dmAgY2xhc3MgaXMgZGVwcmVjYXRlZCBhcyBvZiB2NC4wLiBNaWdyYXRlIHRvIHRoZSBwbGF0Zm9ybS1hd2FyZSBzaXplIHN5c3RlbSB1c2luZyBgLmljb24tLXhsYCBpbnNpZGUgYSBgLnBsYXRmb3JtLXR2YCB3cmFwcGVyLgoKIyMgTW90aW9uCgp8IEludGVyYWN0aW9uIHwgRWFzaW5nIHwgRHVyYXRpb24gfCBQcm9wZXJ0eSB8CnwtLS18LS0tfC0tLXwtLS18CnwgTG9hZGluZyBzcGlubmVyIHwgYGxpbmVhcmAgfCBgNjAwbXMgaW5maW5pdGVgIHwgdHJhbnNmb3JtIHJvdGF0ZSgzNjBkZWcpIHwKfCBBcHBlYXIgfCBgLS1lYXNlLW91dGAgfCBgLS1kdXItZmFzdGAgfCBvcGFjaXR5LCB0cmFuc2Zvcm0gc2NhbGUoMC44IOKGkiAxKSB8CnwgU3RhdGUgY2hhbmdlIChlLmcuIG11dGUgdG9nZ2xlKSB8IGAtLWVhc2Utb3V0YCB8IGAtLWR1ci1mYXN0YCB8IG9wYWNpdHkgY3Jvc3NmYWRlIHwKCiMjIFBsYXRmb3JtIHJ1bGVzCgpNb2JpbGUKCi0gTWluaW11bSAyNHB4IHJlbmRlciBzaXplIOKAlCBzbWFsbGVyIGljb25zIGFyZSBub3QgbGVnaWJsZSBvbiBwaG9uZSBzY3JlZW5zCi0gVG91Y2ggdGFyZ2V0cyBmb3IgaWNvbi1vbmx5IGJ1dHRvbnM6IDQ0w5c0NHB4IHdyYXBwZXIgYXJvdW5kIDIw4oCTMjRweCBpY29uCi0gVXNlIGZpbGwgdmFyaWFudHMgZm9yIHByaW1hcnkgYWN0aW9uczsgb3V0bGluZSBmb3Igc2Vjb25kYXJ5Ci0gaWNfIHNuYWtlX2Nhc2UgbmFtaW5nIOKAlCBhbHdheXMgdXNlIHNwcml0ZSByZWZlcmVuY2UsIG5ldmVyIGlubGluZSBTVkcgcGF0aHMKCldlYgoKLSAxNnB4IGljb25zIGFjY2VwdGFibGUgaW5saW5lIHdpdGggdGV4dCBsYWJlbHMgKGJyZWFkY3J1bWJzLCB0YWJsZSBjZWxscykKLSBIb3Zlci1zdGF0ZSBjb2xvciBpbmhlcml0cyBmcm9tIHBhcmVudCDigJQgbm8gc2VwYXJhdGUgaWNvbiBob3ZlciBDU1MgbmVlZGVkCi0gU1ZHIHNwcml0ZSBsb2FkZWQgb25jZSB2aWEgc3ByaXRlLWxvYWRlci5qcyDigJQgbm8gcGVyLWljb24gSFRUUCByZXF1ZXN0cwoKVFYKCi0gTWluaW11bSAzMnB4IGF0IDF4IOKAlCBzY2FsZXMgdG8gNDBweCsgZm9yIG5hdiBhbmQgaGVybyBpY29ucwotIEZpbGwgaWNvbnMgb25seSBvbiBUViDigJQgb3V0bGluZSBkZXRhaWwgZGlzYXBwZWFycyBhdCAxMC1mb290IHZpZXdpbmcgZGlzdGFuY2UKLSBIaWdoIGNvbnRyYXN0OiBhbHdheXMgdXNlIC0tdGV4dCBvciAtLWppbyBjb2xvciDigJQgYXZvaWQgdGV4dDMgb24gVFYKCiMjIEFjY2Vzc2liaWxpdHkKCkljb25zIGFyZSB2aXN1YWwgc2hvcnRoYW5kLiBFbnN1cmUgZXZlcnkgaWNvbiBpcyBlaXRoZXIgZGVzY3JpcHRpdmVseSBsYWJlbGxlZCBmb3IgYXNzaXN0aXZlIHRlY2hub2xvZ3kgb3IgZXhwbGljaXRseSBtYXJrZWQgYXMgZGVjb3JhdGl2ZS4KCi0gVGFiIOKAlCBtb3ZlcyBmb2N1cyB0byBpbnRlcmFjdGl2ZSBpY29uIHdyYXBwZXIKLSBFbnRlciBvciBTcGFjZSDigJQgYWN0aXZhdGVzIHRoZSBpY29uIGNvbnRyb2wKLSBGb2N1cyByaW5nIHZpc2libGUgb24gYDpmb2N1cy12aXNpYmxlYCwgaGlkZGVuIG9uIG1vdXNlIGNsaWNrCi0gVFY6IGQtcGFkIGRpcmVjdGlvbmFsIGZvY3VzIGhhbmRsZWQgYnkgdGhlIHNoZWxsIGZvY3VzIG1hbmFnZXIKCi0gRGVmYXVsdDogYHJnYmEoMjU1LDI1NSwyNTUsLjQ1KWAgb24gYCMwNjA4MEZgIOKAlCBwYXNzZXMgMy4xOjEgKFVJIGNvbXBvbmVudCB0aHJlc2hvbGQpCi0gQWN0aXZlOiBgIzAwQTg1OWAgb24gYCMwNjA4MEZgIOKAlCAzLjY6MSAobWVldHMgbm9uLXRleHQgdGhyZXNob2xkKQotIEZvciBpbmZvcm1hdGlvbmFsIGljb25zIHVzZWQgYWxvbmUgKHdpdGhvdXQgbGFiZWxzKSwgdGFyZ2V0IDQuNToxCgojIyBSZWxhdGVkIHRva2VucwoKQWxsIGljb24gdmFsdWVzIGFyZSBkZWZpbmVkIGluIGB0b2tlbnMvdG9rZW5zLmNzc2AuIENoYW5naW5nIGEgdG9rZW4gdXBkYXRlcyBldmVyeSBpY29uIGluc3RhbmNlIHVzaW5nIHRoYXQgYWxpYXMuCgp8IFRva2VuIHwgVmFsdWUgfCBTd2F0Y2ggfCBVc2FnZSB8CnwtLS18LS0tfC0tLXwtLS18CnwgYC0taWNvbi1jb2xvci1kZWZhdWx0YCB8IGByZ2JhKDI1NSwyNTUsMjU1LC40NSlgIHwgICB8IEluYWN0aXZlIGljb24gZmlsbCB8CnwgYC0taWNvbi1jb2xvci1hY3RpdmVgIHwgYCMwMEE4NTlgIHwgICB8IFNlbGVjdGVkIC8gYWN0aXZlIGljb24gZmlsbCB8CnwgYC0taWNvbi1jb2xvci1tdXRlZGAgfCBgIzZCNzI4MGAgfCAgIHwgRGlzYWJsZWQgLyBtdXRlZCBpY29uIGZpbGwgfAp8IGAtLWljb24tZmlsbC1kZWZhdWx0YCB8IGB2YXIoLS1pY29uLWNvbG9yLWRlZmF1bHQpYCB8ICAgfCBTZW1hbnRpYyBhbGlhcyBmb3IgZGVmYXVsdCBmaWxsIHwKfCBgLS1pY29uLWZpbGwtYWN0aXZlYCB8IGB2YXIoLS1pY29uLWNvbG9yLWFjdGl2ZSlgIHwgICB8IFNlbWFudGljIGFsaWFzIGZvciBhY3RpdmUgZmlsbCB8Cgp8IFRva2VuIHwgTW9iaWxlIHwgV2ViIHwgVFYgfAp8LS0tfC0tLXwtLS18LS0tfAp8IGAtLWljb24teHNgIHwgMTJweCB8IDEycHggfCAyMHB4IHwKfCBgLS1pY29uLXNgIHwgMTZweCB8IDE2cHggfCAyNHB4IHwKfCBgLS1pY29uLW1gIHwgMjBweCB8IDIwcHggfCAzMnB4IHwKfCBgLS1pY29uLWxgIHwgMjRweCB8IDI0cHggfCA0MHB4IHwKfCBgLS1pY29uLXhsYCB8IDMycHggfCAzMnB4IHwgNDhweCB8CnwgYC0taWNvbi13cmFwLXhzYCB8IDMycHggfCAzMnB4IHwgNTJweCB8CnwgYC0taWNvbi13cmFwLXNgIHwgMzZweCB8IDM2cHggfCA2MHB4IHwKfCBgLS1pY29uLXdyYXAtbWAgfCA0NHB4IHwgNDBweCB8IDY4cHggfAp8IGAtLWljb24td3JhcC1sYCB8IDQ4cHggfCA0OHB4IHwgNzZweCB8CnwgYC0taWNvbi13cmFwLXhsYCB8IDU2cHggfCA1NnB4IHwgODRweCB8CgojIyBBUEkKCiMjIyBDU1MgY2xhc3NlcwoKfCBDbGFzcyB8IERlc2NyaXB0aW9uIHwKfC0tLXwtLS18CnwgYC5kcy1pY29uYCB8IFdyYXBwZXIg4oCUIGlubGluZS1mbGV4LCBjdXJyZW50Q29sb3IgZmlsbCB8CnwgYC5kcy1pY29uLS0xNmAgfCAxNsOXMTZweCB8CnwgYC5kcy1pY29uLS0yMGAgfCAyMMOXMjBweCAoZGVmYXVsdCkgfAp8IGAuZHMtaWNvbi0tMjRgIHwgMjTDlzI0cHggfAp8IGAuZHMtaWNvbi0tMzJgIHwgMzLDlzMycHggfAp8IGAuZHMtaWNvbi0tc3BpbmAgfCBSb3RhdGlvbiBhbmltYXRpb24gZm9yIGxvYWRpbmcgc3RhdGVzIHwKCiMjIyBSZWFjdCBwcm9wcwoKfCBQcm9wIHwgVHlwZSB8IERlZmF1bHQgfCBEZXNjcmlwdGlvbiB8CnwtLS18LS0tfC0tLXwtLS18CnwgYG5hbWVgIHwgSWNvbk5hbWUgfCByZXF1aXJlZCB8IEljb24gaWRlbnRpZmllciBmcm9tIHRoZSBzcHJpdGUgKGUuZy4gImljX3BsYXlfZmlsbCIpIHwKfCBgc2l6ZWAgfCAxNiB8IDIwIHwgMjQgfCAzMiB8IDIwIHwgV2lkdGggYW5kIGhlaWdodCBpbiBweCB8CnwgYGNvbG9yYCB8IHN0cmluZyB8IGN1cnJlbnRDb2xvciB8IEZpbGwgY29sb3Ig4oCUIHVzZSBDU1MgdG9rZW4gb3IgImN1cnJlbnRDb2xvciIgfAp8IGBhcmlhLWxhYmVsYCB8IHN0cmluZyB8IHVuZGVmaW5lZCB8IEFjY2Vzc2libGUgbGFiZWwgZm9yIG5vbi1kZWNvcmF0aXZlIGljb25zIHwKfCBgYXJpYS1oaWRkZW5gIHwgYm9vbGVhbiB8IHRydWUgfCBIaWRlIGZyb20gc2NyZWVuIHJlYWRlcnMgd2hlbiBkZWNvcmF0aXZlIHwKCiMjIENvZGUgZXhhbXBsZXMKCkNvcHkgdGhlc2Ugc25pcHBldHMgYXMgc3RhcnRpbmcgcG9pbnRzLiBBbHdheXMgbGluayBgdG9rZW5zL3Rva2Vucy5jc3NgLCBgY29tcG9uZW50cy5jc3NgLCBhbmQgYHN0YXRlcy5jc3NgIGJlZm9yZSB1c2luZyBjb21wb25lbnQgY2xhc3Nlcy4KCmBgYGAKPCEtLSBJbmxpbmUgaWNvbiB2aWEgc3ByaXRlIChyZWNvbW1lbmRlZCkgLS0+CjxzdmcgY2xhc3M9Imljb24gaWNvbi0tbSIgYXJpYS1oaWRkZW49InRydWUiPgogIDx1c2UgaHJlZj0iL3Nwcml0ZS5zdmcjaWNfaG9tZSI+PC91c2U+Cjwvc3ZnPgoKPCEtLSBJY29uIHdpdGggYWNjZXNzaWJsZSBsYWJlbCAtLT4KPGJ1dHRvbiBjbGFzcz0iYnRuIGJ0bi0taWNvbiIgYXJpYS1sYWJlbD0iU2VhcmNoIj4KICA8c3ZnIGNsYXNzPSJpY29uIGljb24tLW0iIGFyaWEtaGlkZGVuPSJ0cnVlIj4KICAgIDx1c2UgaHJlZj0iL3Nwcml0ZS5zdmcjaWNfc2VhcmNoIj48L3VzZT4KICA8L3N2Zz4KPC9idXR0b24+CmBgYGAKCmBgYGAKPCEtLSBYUzogMTJweCAtLT4KPHN2ZyBjbGFzcz0iaWNvbiBpY29uLS14cyIgYXJpYS1oaWRkZW49InRydWUiPjx1c2UgaHJlZj0iL3Nwcml0ZS5zdmcjaWNfc3RhciI+PC91c2U+PC9zdmc+Cgo8IS0tIFM6IDE2cHggLS0+CjxzdmcgY2xhc3M9Imljb24gaWNvbi0tcyIgYXJpYS1oaWRkZW49InRydWUiPjx1c2UgaHJlZj0iL3Nwcml0ZS5zdmcjaWNfc3RhciI+PC91c2U+PC9zdmc+Cgo8IS0tIE06IDIwcHggKGRlZmF1bHQpIC0tPgo8c3ZnIGNsYXNzPSJpY29uIGljb24tLW0iIGFyaWEtaGlkZGVuPSJ0cnVlIj48dXNlIGhyZWY9Ii9zcHJpdGUuc3ZnI2ljX3N0YXIiPjwvdXNlPjwvc3ZnPgoKPCEtLSBMOiAyNHB4IC0tPgo8c3ZnIGNsYXNzPSJpY29uIGljb24tLWwiIGFyaWEtaGlkZGVuPSJ0cnVlIj48dXNlIGhyZWY9Ii9zcHJpdGUuc3ZnI2ljX3N0YXIiPjwvdXNlPjwvc3ZnPgoKPCEtLSBYTDogMzJweCAtLT4KPHN2ZyBjbGFzcz0iaWNvbiBpY29uLS14bCIgYXJpYS1oaWRkZW49InRydWUiPjx1c2UgaHJlZj0iL3Nwcml0ZS5zdmcjaWNfc3RhciI+PC91c2U+PC9zdmc+CmBgYGAKCi0tLQoKIyMgVG9rZW5zIHJlZmVyZW5jZWQgb24gdGhpcyBwYWdlCgpVc2UgdGhlc2UgZXhhY3QgdG9rZW5zIOKAlCBkZWZpbmVkIGluIGB0b2tlbnMvdG9rZW5zLmNzc2AuIERvIG5vdCBzdWJzdGl0dXRlIHJhdyB2YWx1ZXMuCgotIGAtLWFtYmVyYAotIGAtLWJnYAotIGAtLWJnMmAKLSBgLS1ib3JkZXJgCi0gYC0tYm9yZGVyLXN1YnRsZWAKLSBgLS1mb2N1cy1yaW5nLWNvbG9yYAotIGAtLWdsYXNzLTFgCi0gYC0tZ29sZGAKLSBgLS1pY29uLWNvbG9yLWFjdGl2ZWAKLSBgLS1pY29uLWNvbG9yLWRlZmF1bHRgCi0gYC0taWNvbi1jb2xvci1tdXRlZGAKLSBgLS1pY29uLWwtbW9iaWxlYAotIGAtLWljb24tbC10dmAKLSBgLS1pY29uLWwtd2ViYAotIGAtLWljb24tbS1tb2JpbGVgCi0gYC0taWNvbi1tLXR2YAotIGAtLWljb24tbS13ZWJgCi0gYC0taWNvbi1zLW1vYmlsZWAKLSBgLS1pY29uLXMtdHZgCi0gYC0taWNvbi1zLXdlYmAKLSBgLS1pY29uLXhsLW1vYmlsZWAKLSBgLS1pY29uLXhsLXR2YAotIGAtLWljb24teGwtd2ViYAotIGAtLWljb24teHMtbW9iaWxlYAotIGAtLWljb24teHMtdHZgCi0gYC0taWNvbi14cy13ZWJgCi0gYC0tamlvYAotIGAtLWppby1mb250YAotIGAtLWppby1nbG93YAotIGAtLW5lZ2F0aXZlYAotIGAtLXBpbGxgCi0gYC0tcjNgCi0gYC0tcjRgCi0gYC0tc3RhdGUtaG92ZXItYmdgCi0gYC0tc3RhdGUtc2VsZWN0ZWQtYmdgCi0gYC0tc3VyZmFjZS0xYAotIGAtLXN1cmZhY2UtMmAKLSBgLS1zdXJmYWNlLTNgCi0gYC0tdGV4dGAKLSBgLS10ZXh0MmAKLSBgLS10ZXh0M2AKLSBgLS10ZXh0NGAKLSBgLS10di1mb2N1cy1zaGFkb3dgCgotLS0KCiMjIEJ1aWxkIHJ1bGVzIChiaW5kaW5nKQoKMS4gVXNlICoqb25seSoqIHRoZSB0b2tlbnMgbGlzdGVkIGFib3ZlLiBJZiBhIHZhbHVlIHlvdSBuZWVkIGlzIG5vdCBsaXN0ZWQsIHN0b3AgYW5kIGFzayDigJQgZG8gbm90IGludHJvZHVjZSBhIHJhdyB2YWx1ZS4KMi4gRm9udCBpcyAqKkppb1R5cGUqKiBvbmx5LiBXZWlnaHRzOiAzMDAsIDUwMCwgNzAwLCA5MDAuCjMuIFJldXNlIHRoZSBjb21wb25lbnQgQ1NTIHBhdHRlcm5zIHNob3duIG9uIHRoZSBzb3VyY2UgcGFnZTsgZG8gbm90IHJlZGVzaWduLgo0LiBNYXRjaCBldmVyeSBzdGF0ZSAoZGVmYXVsdCwgaG92ZXIsIGZvY3VzLCBhY3RpdmUsIGRpc2FibGVkLCBsb2FkaW5nKSBzaG93biBvbiB0aGUgcGFnZS4KNS4gQWNjZXNzaWJpbGl0eSByZXF1aXJlbWVudHMgb24gdGhlIHBhZ2UgYXJlIG1hbmRhdG9yeSwgbm90IG9wdGlvbmFsLgo=" download="icons-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
     </div>
   </div>
 
@@ -342,6 +262,31 @@
   <!-- ===================================================
        4. BEST PRACTICES
   =================================================== -->
+  <!-- WHEN TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use</h2>
+    <div class="ds-usage-grid">
+      <div class="ds-usage-card ds-usage-card--do">
+        <p class="ds-usage-label ds-usage-label--do">Use when</p>
+        <ul class="ds-usage-list">
+              <li>Communicating actions and states without relying solely on text</li>
+              <li>Leading icons in buttons, inputs, and navigation items</li>
+              <li>Status indicators in list items and toasts</li>
+              <li>Decorative supporting visuals alongside text headings</li>
+        </ul>
+      </div>
+      <div class="ds-usage-card ds-usage-card--dont">
+        <p class="ds-usage-label ds-usage-label--dont">Don't use when</p>
+        <ul class="ds-usage-list">
+              <li>Icons alone without labels for ambiguous actions — always pair with accessible text</li>
+              <li>Mixing icon styles (outline vs filled) within one UI surface</li>
+              <li>Custom-coloured icons outside the token system — use currentColor</li>
+              <li>Icons smaller than 16px — readability breaks below this size</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <section class="ds-section" id="best-practices">
     <h2 class="ds-section-title">Best practices</h2>
     <p class="ds-section-desc">Icons reduce cognitive load when used consistently. These rules keep icon usage coherent across all surfaces.</p>
@@ -486,14 +431,14 @@
                  transition:border-color 120ms;"
           autocomplete="off" spellcheck="false">
       </div>
-      <div id="icon-count" style="font-size:12px;font-weight:600;color:var(--text3);white-space:nowrap">1,646 icons</div>
+      <div id="icon-count" style="font-size:12px;font-weight:700;color:var(--text3);white-space:nowrap">1,646 icons</div>
     </div>
 
     <!-- Copy toast -->
     <div id="copy-toast"
       style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(16px);
              background:var(--surface-3);border:1px solid var(--border);border-radius:10px;
-             padding:10px 18px;font-size:13px;font-weight:600;color:var(--text);
+             padding:10px 18px;font-size:13px;font-weight:700;color:var(--text);
              opacity:0;pointer-events:none;transition:opacity 200ms,transform 200ms;z-index:9999;
              white-space:nowrap">
       Copied!
@@ -600,6 +545,56 @@
   <!-- ===================================================
        7. SIZES — Mobile / Web / TV
   =================================================== -->
+  <!-- VARIANTS -->
+  <section class="ds-section" id="variants">
+    <h2 class="ds-section-title">Variants</h2>
+    <p class="ds-section-desc">JioGames uses a single visual style — <strong>solid fill, <code class="ds-code">currentColor</code></strong>. No outline or duotone variants exist. The only behavioural variant is <strong>animated</strong>, used for loading and progress.</p>
+
+    <div class="ds-demo ds-demo--dark" style="margin-top:20px">
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px">
+        <!-- SOLID -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:14px;padding:24px;border:1px solid var(--border-subtle);border-radius:var(--r3);background:var(--surface-1)">
+          <div style="display:flex;gap:16px;align-items:center;justify-content:center;min-height:48px">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor" style="color:var(--text)" aria-hidden="true"><use href="../sprite.svg#ic_play"></use></svg>
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor" style="color:var(--jio)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor" style="color:var(--text2)" aria-hidden="true"><use href="../sprite.svg#ic_search"></use></svg>
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor" style="color:var(--text)" aria-hidden="true"><use href="../sprite.svg#ic_library"></use></svg>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+            <span style="font-size:13px;font-weight:700;color:var(--text)">Solid (fill)</span>
+            <span style="font-size:11px;color:var(--text3);text-align:center">Default for all UI. <code class="ds-code">fill:currentColor</code>, no stroke.</span>
+          </div>
+        </div>
+
+        <!-- ANIMATED -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:14px;padding:24px;border:1px solid var(--border-subtle);border-radius:var(--r3);background:var(--surface-1)">
+          <div style="display:flex;gap:16px;align-items:center;justify-content:center;min-height:48px">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor" style="color:var(--jio);animation:icon-variant-spin 900ms linear infinite" aria-hidden="true"><use href="../sprite.svg#ic_refresh"></use></svg>
+            <svg viewBox="0 0 50 50" width="32" height="32" aria-hidden="true" style="color:var(--jio)">
+              <circle cx="25" cy="25" r="20" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-dasharray="90 60" style="transform-origin:50% 50%;animation:icon-variant-spin 1100ms linear infinite"></circle>
+            </svg>
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor" style="color:var(--text);animation:icon-variant-pulse 1400ms var(--ease-standard) infinite" aria-hidden="true"><use href="../sprite.svg#ic_download"></use></svg>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+            <span style="font-size:13px;font-weight:700;color:var(--text)">Animated</span>
+            <span style="font-size:11px;color:var(--text3);text-align:center">Spinner, ring, pulse. For loading and in-progress states only.</span>
+          </div>
+        </div>
+      </div>
+      <style>
+        @keyframes icon-variant-spin { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+        @keyframes icon-variant-pulse { 0%,100%{opacity:.4} 50%{opacity:1} }
+        @media (prefers-reduced-motion: reduce) {
+          [style*="icon-variant-spin"], [style*="icon-variant-pulse"] { animation: none !important; }
+        }
+      </style>
+    </div>
+
+    <div class="ds-note" style="margin-top:20px">
+      <strong>Why no outline/duotone?</strong> JioGames keeps icon language single-track for instant recognition across mobile, web, and TV. Use opacity (<code class="ds-code">--text2</code>, <code class="ds-code">--text3</code>) and color (<code class="ds-code">--jio</code>, <code class="ds-code">--text-inv</code>) to convey hierarchy &#x2014; never line weight.
+    </div>
+  </section>
+
   <section class="ds-section" id="sizes">
     <h2 class="ds-section-title">Sizes</h2>
     <p class="ds-section-desc">Five canonical size names cover all use cases. On TV, all sizes shift larger to maintain 10-foot legibility. The <code class="ds-code">--icon-*</code> runtime aliases resolve automatically via media query and <code class="ds-code">.platform-tv</code> context.</p>
@@ -759,37 +754,37 @@
     <div class="ds-demo ds-demo--dark">
       <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
         <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
-          <div style="width:44px;height:44px;border-radius:var(--r3);background:transparent;display:flex;align-items:center;justify-content:center">
+          <div style="width:44px;height:44px;border-radius:50%;background:transparent;display:flex;align-items:center;justify-content:center">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="var(--icon-color-default)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
           </div>
           <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--text3);text-transform:uppercase">Default</span>
         </div>
         <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
-          <div style="width:44px;height:44px;border-radius:var(--r3);background:var(--state-hover-bg);display:flex;align-items:center;justify-content:center">
+          <div style="width:44px;height:44px;border-radius:50%;background:var(--state-hover-bg);display:flex;align-items:center;justify-content:center">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="var(--text)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
           </div>
           <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--text3);text-transform:uppercase">Hover</span>
         </div>
         <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
-          <div style="width:44px;height:44px;border-radius:var(--r3);background:var(--state-selected-bg);display:flex;align-items:center;justify-content:center">
+          <div style="width:44px;height:44px;border-radius:50%;background:var(--state-selected-bg);display:flex;align-items:center;justify-content:center">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="var(--jio)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
           </div>
           <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--jio);text-transform:uppercase">Active / Selected</span>
         </div>
         <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
-          <div style="width:44px;height:44px;border-radius:var(--r3);outline:2px solid var(--jio);outline-offset:2px;display:flex;align-items:center;justify-content:center">
+          <div style="width:44px;height:44px;border-radius:50%;outline:2px solid var(--jio);outline-offset:2px;display:flex;align-items:center;justify-content:center">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="var(--text)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
           </div>
           <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--text3);text-transform:uppercase">Focus</span>
         </div>
         <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
-          <div style="width:44px;height:44px;border-radius:var(--r3);display:flex;align-items:center;justify-content:center;opacity:.32">
+          <div style="width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:.32">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="var(--text2)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
           </div>
           <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--text3);text-transform:uppercase">Disabled</span>
         </div>
         <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
-          <div style="width:72px;height:72px;border-radius:var(--r4);background:var(--surface-2);box-shadow:0 0 0 3px var(--jio),0 0 24px var(--jio-glow);display:flex;align-items:center;justify-content:center;transform:scale(1.05)">
+          <div style="width:72px;height:72px;border-radius:50%;background:var(--surface-2);box-shadow:0 0 0 3px var(--jio),0 0 24px var(--jio-glow);display:flex;align-items:center;justify-content:center;transform:scale(1.05)">
             <svg viewBox="0 0 24 24" width="32" height="32" fill="var(--jio)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
           </div>
           <span style="font-size:9px;font-weight:700;letter-spacing:.5px;color:var(--jio);text-transform:uppercase">TV Focus</span>
@@ -925,6 +920,38 @@
   <!-- ===================================================
        12. ACCESSIBILITY
   =================================================== -->
+  <!-- MOTION -->
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-motion-table">
+      <thead><tr><th>Interaction</th><th>Easing</th><th>Duration</th><th>Property</th></tr></thead>
+      <tbody>
+        <tr><td>Loading spinner</td><td><code>linear</code></td><td><code>600ms infinite</code></td><td>transform rotate(360deg)</td></tr>
+        <tr><td>Appear</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>opacity, transform scale(0.8 → 1)</td></tr>
+        <tr><td>State change (e.g. mute toggle)</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>opacity crossfade</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PLATFORM -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform rules</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:16px;">
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--gold);border-radius:var(--r4);padding:20px;background:var(--surface-1);">
+        <p style="font-size:12px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px;">Mobile</p>
+        <ul style="list-style:none;padding:0;margin:0;"><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Minimum 24px render size — smaller icons are not legible on phone screens</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Touch targets for icon-only buttons: 44×44px wrapper around 20–24px icon</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Use fill variants for primary actions; outline for secondary</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">ic_ snake_case naming — always use sprite reference, never inline SVG paths</li></ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--amber);border-radius:var(--r4);padding:20px;background:var(--surface-1);">
+        <p style="font-size:12px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px;">Web</p>
+        <ul style="list-style:none;padding:0;margin:0;"><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">16px icons acceptable inline with text labels (breadcrumbs, table cells)</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Hover-state color inherits from parent — no separate icon hover CSS needed</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">SVG sprite loaded once via sprite-loader.js — no per-icon HTTP requests</li></ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid #F59E0B;border-radius:var(--r4);padding:20px;background:var(--surface-1);">
+        <p style="font-size:12px;font-weight:700;color:#F59E0B;text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px;">TV</p>
+        <ul style="list-style:none;padding:0;margin:0;"><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Minimum 32px at 1x — scales to 40px+ for nav and hero icons</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Fill icons only on TV — outline detail disappears at 10-foot viewing distance</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">High contrast: always use --text or --jio color — avoid text3 on TV</li></ul>
+      </div>
+    </div>
+  </section>
+
   <section class="ds-section" id="accessibility">
     <h2 class="ds-section-title">Accessibility</h2>
     <p class="ds-section-desc">Icons are visual shorthand. Ensure every icon is either descriptively labelled for assistive technology or explicitly marked as decorative.</p>
@@ -1040,6 +1067,34 @@
   <!-- ===================================================
        14. CODE EXAMPLES
   =================================================== -->
+  <!-- API -->
+  <section class="ds-section" id="api">
+    <h2 class="ds-section-title">API</h2>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:0 0 12px;">CSS classes</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>.ds-icon</code></td><td>Wrapper — inline-flex, currentColor fill</td></tr>
+        <tr><td><code>.ds-icon--16</code></td><td>16×16px</td></tr>
+        <tr><td><code>.ds-icon--20</code></td><td>20×20px (default)</td></tr>
+        <tr><td><code>.ds-icon--24</code></td><td>24×24px</td></tr>
+        <tr><td><code>.ds-icon--32</code></td><td>32×32px</td></tr>
+        <tr><td><code>.ds-icon--spin</code></td><td>Rotation animation for loading states</td></tr>
+      </tbody>
+    </table>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 12px;">React props</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>name</code></td><td><span class="api-type">IconName</span></td><td><span class="api-default">required</span></td><td>Icon identifier from the sprite (e.g. "ic_play_fill")</td></tr>
+        <tr><td><code>size</code></td><td><span class="api-type">16 | 20 | 24 | 32</span></td><td><span class="api-default">20</span></td><td>Width and height in px</td></tr>
+        <tr><td><code>color</code></td><td><span class="api-type">string</span></td><td><span class="api-default">currentColor</span></td><td>Fill color — use CSS token or "currentColor"</td></tr>
+        <tr><td><code>aria-label</code></td><td><span class="api-type">string</span></td><td><span class="api-default">undefined</span></td><td>Accessible label for non-decorative icons</td></tr>
+        <tr><td><code>aria-hidden</code></td><td><span class="api-type">boolean</span></td><td><span class="api-default">true</span></td><td>Hide from screen readers when decorative</td></tr>
+      </tbody>
+    </table>
+  </section>
+
   <section class="component-section" id="code-examples">
     <h2 class="ds-section-title">Code examples</h2>
     <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
@@ -1076,12 +1131,8 @@
     </div>
   </section>
 
-  <!-- ===================================================
-       15. CHANGELOG
-  =================================================== -->
-
 </main>
 <script src="../sprite-loader.js"></script>
-<script src="../shell.js"></script>
+<script src="../shell.js?v=2"></script>
 </body>
 </html>

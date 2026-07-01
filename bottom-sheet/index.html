@@ -5,29 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bottom Sheet — JioGames DLS</title>
   <link rel="stylesheet" href="../tokens/tokens.css">
-  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../components.css?v=2">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     body { background: var(--bg); color: var(--text); font-family: var(--jio-font); margin: 0; }
 
     /* ── Hero ── */
-    .component-hero {
-      border-radius: 20px; overflow: hidden; margin-bottom: 48px;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      position: relative; padding: 48px 32px 40px;
-    }
-    .component-hero--dark { background: #060810; }
-    .component-hero--grid {
-      background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-      background-size: 32px 32px; background-color: #060810;
-      border: 1px solid var(--border-subtle);
-    }
-    .component-hero-inner { display:flex;flex-direction:column;align-items:center;gap:28px;position:relative;z-index:2;width:100%;max-width:700px; }
-    .component-hero-caption { display:block;font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text4);margin-top:24px;position:relative;z-index:2; }
-    .hero-glow { position:absolute;width:320px;height:180px;border-radius:var(--pill);background:radial-gradient(ellipse,rgba(0,168,89,.18) 0%,transparent 70%);pointer-events:none;z-index:1; }
+    
+    
+    
+    
+    
+    
 
     /* ── Variant demo sections ── */
     .variant-demo-section {
@@ -47,7 +37,7 @@
     .variant-demo-desc { font-size:14px;font-weight:500;color:var(--text2);line-height:1.6;max-width:560px;margin:0; }
 
     /* ── Phone frame ── */
-    .phone { position:relative;background:#0a0c12;border-radius:24px;border:1px solid var(--border-subtle);overflow:hidden;transition:transform 400ms cubic-bezier(.32,.72,0,1),border-radius 400ms cubic-bezier(.32,.72,0,1); }
+    .phone { position:relative;background:#0a0c12;border-radius:24px;border:1px solid var(--border-subtle);overflow:hidden;transition:transform var(--dur-sheet) var(--ease-emphasized),border-radius var(--dur-sheet) var(--ease-emphasized); }
     .phone.is-open { transform:scale(0.93) translateY(-6px);border-radius:32px; }
 
     /* ── Sheet inside phone ── */
@@ -56,15 +46,19 @@
       background:var(--surface-2);border-radius:16px 16px 0 0;
       border-top:1px solid var(--border);
       transform:translateY(100%);
-      transition:transform 420ms cubic-bezier(.32,.72,0,1);
+      transition:transform var(--dur-enter) var(--ease-emphasized);
       display:flex;flex-direction:column;
     }
     .phone-sheet.is-open { transform:translateY(0); }
-    .phone-sheet-handle { display:flex;justify-content:center;padding:10px 0 0;flex-shrink:0;cursor:grab; }
+    .phone-sheet-handle { display:flex;justify-content:center;padding:10px 0 var(--space-1);flex-shrink:0;cursor:grab; }
+    /* Mandatory: zero gap between sheet title and description */
+    .sheet-title { margin-bottom:0; }
+    /* Mandatory: sheet description always uses --space-2 bottom margin */
+    .sheet-desc { margin-bottom:var(--space-2); }
     .phone-sheet-handle-pill { width:36px;height:4px;border-radius:2px;background:rgba(255,255,255,.2); }
     .phone-scrim {
       position:absolute;inset:0;background:rgba(0,0,0,.5);
-      opacity:0;transition:opacity 350ms ease;pointer-events:none;
+      opacity:0;transition:opacity var(--dur-slow) ease;pointer-events:none;
     }
     .phone-scrim.is-open { opacity:1;pointer-events:auto; }
 
@@ -72,8 +66,8 @@
     .demo-trigger {
       height:36px;border-radius:10px;background:var(--surface-2);
       border:1px solid var(--border);color:var(--text);
-      font-size:12px;font-weight:600;padding:0 20px;cursor:pointer;
-      font-family:var(--jio-font);transition:background 150ms,border-color 150ms;
+      font-size:12px;font-weight:700;padding:0 20px;cursor:pointer;
+      font-family:var(--jio-font);transition:background var(--dur-fast) var(--ease-out),border-color var(--dur-fast) var(--ease-out);
     }
     .demo-trigger:hover { background:var(--surface-3);border-color:var(--border); }
     .demo-trigger-group { display:flex;flex-direction:column;align-items:center;gap:10px; }
@@ -88,24 +82,24 @@
       display:grid;grid-template-columns:280px 1fr;border-bottom:1px solid var(--border-subtle);
     }
     .anatomy-tree-row:last-child { border-bottom:none; }
-    .anatomy-tree-name { padding:12px 16px;background:var(--surface-2);color:var(--text);font-weight:600;display:flex;align-items:center;gap:6px;font-size:11px; }
+    .anatomy-tree-name { padding:12px 16px;background:var(--surface-2);color:var(--text);font-weight:700;display:flex;align-items:center;gap:6px;font-size:11px; }
     .anatomy-tree-name .indent { color:var(--border); }
     .anatomy-tree-desc { padding:12px 16px;background:var(--surface-1);font-size:11px;font-weight:500;color:var(--text2);line-height:1.55;font-family:var(--jio-font); }
     .anatomy-required { display:inline-block;font-size:9px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--jio);background:rgba(0,168,89,.1);border-radius:4px;padding:1px 5px;margin-left:4px;font-family:var(--jio-font); }
     .anatomy-optional { display:inline-block;font-size:9px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--text3);background:var(--surface-3);border-radius:4px;padding:1px 5px;margin-left:4px;font-family:var(--jio-font); }
 
     /* ── Code block ── */
-    .ds-code-block { border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;margin-top:12px; }
+    
     .ds-code-label { padding:10px 16px;background:var(--surface-2);font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border-subtle); }
     .ds-code-pre { margin:0;background:var(--surface-1);padding:20px;overflow-x:auto; }
     .ds-code-pre code { font-size:12px;line-height:1.7;color:var(--text2);font-family:monospace; }
 
     /* ── Token table ── */
-    .ds-token-table { width:100%;border-collapse:collapse;border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;font-size:12px; }
-    .ds-token-table th { background:var(--surface-2);padding:10px 16px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border-subtle); }
-    .ds-token-table td { padding:12px 16px;border-bottom:1px solid var(--border-subtle);color:var(--text2);vertical-align:top;background:var(--surface-1); }
-    .ds-token-table tr:last-child td { border-bottom:none; }
-    .ds-token-table code { font-family:monospace;font-size:11px;color:#a8e6c5;background:rgba(0,168,89,.08);padding:1px 5px;border-radius:3px; }
+    
+    
+    
+    
+    
 
     /* ── Do / Don't ── */
     .bp-grid { display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px; }
@@ -122,12 +116,12 @@
     .bp-list li::before { content:'\00B7';position:absolute;left:3px;color:var(--text4); }
 
     /* ── A11y ── */
-    .a11y-grid { display:flex;flex-direction:column;gap:0;border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;margin-top:20px; }
-    .a11y-row { display:grid;grid-template-columns:160px 1fr;gap:0;border-bottom:1px solid var(--border-subtle); }
-    .a11y-row:last-child { border-bottom:none; }
-    .a11y-label { padding:14px 16px;font-size:11px;font-weight:700;color:var(--text3);letter-spacing:.3px;background:var(--surface-2);text-transform:uppercase;display:flex;align-items:flex-start;padding-top:16px; }
-    .a11y-content { padding:14px 20px;font-size:12px;font-weight:500;color:var(--text2);line-height:1.6;background:var(--surface-1); }
-    .a11y-content code { font-family:monospace;font-size:11px;color:#a8e6c5;background:rgba(0,168,89,.08);padding:1px 5px;border-radius:3px; }
+    
+    
+    
+    
+    
+    
 
     /* ── Platform grid ── */
     .platform-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px; }
@@ -148,7 +142,7 @@
       display:flex;gap:4px;margin-top:6px;
     }
     .snap-dot {
-      width:6px;height:6px;border-radius:50%;background:var(--border);transition:background 300ms;
+      width:6px;height:6px;border-radius:50%;background:var(--border);transition:background var(--dur-pop) var(--ease-out);
     }
     .snap-dot.active { background:var(--jio); }
 
@@ -165,18 +159,18 @@
        PAGE HEADER
   ══════════════════════════════════════════ -->
   <div class="component-page-header">
-    <div class="component-breadcrumb">
-      <a href="../index.html">JioGames DLS</a>
-      <span class="component-breadcrumb-sep">&#x203A;</span>
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <span class="component-breadcrumb-link">JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
       <span>Components</span>
-      <span class="component-breadcrumb-sep">&#x203A;</span>
-      <span>Bottom Sheet</span>
-    </div>
-    <h1 class="component-page-title">Bottom Sheet</h1>
-    <p class="component-page-def">An extended overlay panel that slides up from the bottom of the screen. Supports drag-to-dismiss, snap points, scrollable content, and a sticky footer.</p>
+      <span class="component-breadcrumb-sep">›</span>
+      <span class="component-breadcrumb-current">Bottom Sheet</span>
+    </nav>
+    <h1 class="component-page-title">Bottom Sheet</h1><p class="component-page-def">An extended overlay panel that slides up from the bottom of the screen. Supports drag-to-dismiss, snap points, scrollable content, and a sticky footer.</p>
     <div class="component-platforms">
       <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
       <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBCb3R0b20gU2hlZXQg4oCUIEppb0dhbWVzIERMUyBzcGVjCgo+IFNvdXJjZTogYGJvdHRvbS1zaGVldC9pbmRleC5odG1sYCBpbiB0aGUgSmlvR2FtZXMgRGVzaWduIFN5c3RlbS4KPiBUaGlzIHNwZWMgaXMgZ2VuZXJhdGVkIHZlcmJhdGltIGZyb20gdGhlIHBhZ2Ug4oCUIGRvIG5vdCBpbnZlbnQgdmFsdWVzIG5vdCBsaXN0ZWQgaGVyZS4KCioqUGF0aDoqKiBKaW9HYW1lcyBETFMg4oC6IENvbXBvbmVudHMg4oC6IEJvdHRvbSBTaGVldAoKLS0tCgpBbiBleHRlbmRlZCBvdmVybGF5IHBhbmVsIHRoYXQgc2xpZGVzIHVwIGZyb20gdGhlIGJvdHRvbSBvZiB0aGUgc2NyZWVuLiBTdXBwb3J0cyBkcmFnLXRvLWRpc21pc3MsIHNuYXAgcG9pbnRzLCBzY3JvbGxhYmxlIGNvbnRlbnQsIGFuZCBhIHN0aWNreSBmb290ZXIuCgojIyBWYXJpYW50cwoKRm91ciBwYXR0ZXJucyBjb3ZlciB0aGUgZnVsbCByYW5nZSBvZiBjb250ZXh0dWFsIHVzZSBjYXNlcy4gRWFjaCBpcyBpbnRlcmFjdGl2ZSBiZWxvdy4KCiMjIyBCYXNpYwoKRml4ZWQtaGVpZ2h0IHNoZWV0IHdpdGggYSBsaXN0IG9mIGFjdGlvbnMuIFNpbmdsZSBzbmFwIHBvaW50LiBUaGUgbW9zdCBjb21tb24gdmFyaWFudCDigJQgdXNlZCBmb3Igc2hhcmluZywgbW9yZSBvcHRpb25zLCBhbmQgcXVpY2sgc2VsZWN0aW9ucy4KCkZpeGVkIGhlaWdodC4gQWN0aW9uIGxpc3Qgb2YgMuKAkzYgaXRlbXMuIEVhY2ggcm93IGhhcyBhbiBpY29uLCBsYWJlbCwgYW5kIG9wdGlvbmFsIGNoZXZyb24uIFRhcHBpbmcgdGhlIHNjcmltIG9yIHN3aXBpbmcgZG93biBkaXNtaXNzZXMuCgpgYGBgaHRtbAo8ZGl2IGNsYXNzPSJib3R0b20tc2hlZXQiIHJvbGU9ImRpYWxvZyIgYXJpYS1tb2RhbD0idHJ1ZSIgYXJpYS1sYWJlbGxlZGJ5PSJzaGVldC10aXRsZSI+CiAgPGRpdiBjbGFzcz0ic2hlZXQtaGFuZGxlIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PC9kaXY+CiAgPGRpdiBjbGFzcz0ic2hlZXQtaGVhZGVyIj4KICAgIDxoMiBpZD0ic2hlZXQtdGl0bGUiIGNsYXNzPSJzaGVldC10aXRsZSI+U2hhcmUgZ2FtZTwvaDI+CiAgPC9kaXY+CiAgPGRpdiBjbGFzcz0ic2hlZXQtYm9keSI+CiAgICA8YnV0dG9uIGNsYXNzPSJzaGVldC1hY3Rpb24tcm93Ij4KICAgICAgPGRpdiBjbGFzcz0ic2hlZXQtYWN0aW9uLWljb24iPjwhLS0gaWNvbiAtLT48L2Rpdj4KICAgICAgPHNwYW4gY2xhc3M9InNoZWV0LWFjdGlvbi1sYWJlbCI+U2hhcmUgd2l0aCBmcmllbmRzPC9zcGFuPgogICAgPC9idXR0b24+CiAgPC9kaXY+CjwvZGl2PgpgYGBgCgojIyMgU2Nyb2xsYWJsZSBjb250ZW50CgpCb2R5IHNjcm9sbHMgaW5kZXBlbmRlbnRseSB3aGlsZSB0aGUgaGVhZGVyIGFuZCBmb290ZXIgc3RheSBmaXhlZC4gVXNlIGZvciBzZXR0aW5ncywgZmlsdGVycywgb3IgYW55IGxpc3QgdGhhdCBjYW4gZXhjZWVkIHRoZSBzaGVldCBoZWlnaHQuCgpUaGUgaGVhZGVyIGFuZCBmb290ZXIgdXNlIGBmbGV4LXNocmluazowYC4gVGhlIGJvZHkgdGFrZXMgYGZsZXg6MTtvdmVyZmxvdy15OmF1dG87bWluLWhlaWdodDowYCB0byBlbmFibGUgaW5kZXBlbmRlbnQgc2Nyb2xsIHdoaWxlIGZvb3RlciBhY3Rpb25zIHN0YXkgcGlubmVkIGFuZCBhbHdheXMgcmVhY2hhYmxlLgoKYGBgYGNzcwouYm90dG9tLXNoZWV0IHsKICBkaXNwbGF5OiBmbGV4OwogIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47CiAgaGVpZ2h0OiB2YXIoLS1zaGVldC1oZWlnaHQsIDU1dmgpOyAvKiBvciBmaXhlZCBweCAqLwp9Ci5zaGVldC1oZWFkZXIgeyBmbGV4LXNocmluazogMDsgfQouc2hlZXQtYm9keSAgIHsgZmxleDogMTsgb3ZlcmZsb3cteTogYXV0bzsgbWluLWhlaWdodDogMDsgfQouc2hlZXQtZm9vdGVyIHsgZmxleC1zaHJpbms6IDA7IH0KYGBgYAoKIyMjIFNuYXAgcG9pbnRzCgpNdWx0aS1oZWlnaHQgc2hlZXQgdGhhdCBzbmFwcyBiZXR3ZWVuIGRlZmluZWQgaGVpZ2h0cyBvbiBkcmFnLiBTdXBwb3J0cyBwZWVrICgyNSUpLCBoYWxmICg1NSUpLCBhbmQgZnVsbCAoOTIlKS4gQ2xpY2sgdGhlIGJ1dHRvbnMgYmVsb3cgdG8gc25hcCBiZXR3ZWVuIGhlaWdodHMuCgpEZWZpbmUgc25hcCBoZWlnaHRzIGFzIHBlcmNlbnRhZ2VzIG9mIHRoZSBmcmFtZS4gT24gcmVsZWFzZSBhZnRlciBkcmFnLCBzbmFwIHRvIG5lYXJlc3QgcG9pbnQgYmFzZWQgb24gcG9zaXRpb24gYW5kIHZlbG9jaXR5LiBIaWdoZXIgdmVsb2NpdHkgc25hcHMgaW4gZGlyZWN0aW9uIG9mIHRyYXZlbCByZWdhcmRsZXNzIG9mIG1pZHBvaW50LgoKYGBgYApjb25zdCBzbmFwcyA9IFsnMjUlJywgJzU1JScsICc5MiUnXTsgLy8gb2Ygdmlld3BvcnQgaGVpZ2h0CmxldCBjdXJyZW50ID0gMDsKCmZ1bmN0aW9uIHNuYXBUbyhpbmRleCkgewogIGN1cnJlbnQgPSBpbmRleDsKICBzaGVldC5zdHlsZS5oZWlnaHQgPSBzbmFwc1tpbmRleF07CiAgdXBkYXRlSW5kaWNhdG9ycygpOwp9CgovLyBPbiBkcmFnIGVuZCDigJQgc25hcCBieSB2ZWxvY2l0eQpmdW5jdGlvbiBvbkRyYWdFbmQodmVsb2NpdHksIHBvc2l0aW9uKSB7CiAgaWYgKHZlbG9jaXR5ID4gMC41KSBzbmFwVG8oTWF0aC5tYXgoMCwgY3VycmVudCAtIDEpKTsgIC8vIGZhc3QgZG93biA9IGxvd2VyIHNuYXAKICBlbHNlIGlmICh2ZWxvY2l0eSA8IC0wLjUpIHNuYXBUbyhNYXRoLm1pbigyLCBjdXJyZW50ICsgMSkpOyAvLyBmYXN0IHVwID0gaGlnaGVyIHNuYXAKICBlbHNlIHNuYXBUbyhuZWFyZXN0U25hcChwb3NpdGlvbikpOwp9CmBgYGAKCiMjIyBSZXNwb25zaXZlIGRpYWxvZwoKUmVuZGVycyBhcyBhIGNlbnRlcmVkIGRpYWxvZyBvbiB3aWRlIHZpZXdwb3J0cyAo4omlNzY4cHgpIGFuZCBhcyBhIGJvdHRvbSBzaGVldCBvbiBtb2JpbGUuIE9uZSBjb21wb25lbnQsIHR3byBwcmVzZW50YXRpb25zLiBVc2VmdWwgZm9yIGZsb3dzIGxpa2UgcGxhbiBzZWxlY3Rpb24gb3IgY29uZmlybWF0aW9uLgoKU2FtZSBjb250ZW50LCB0d28gcHJlc2VudGF0aW9ucy4gT24gbW9iaWxlLCB0aGUgc2hlZXQgc2xpZGVzIHVwIGZyb20gdGhlIGJvdHRvbSB3aXRoIGEgZHJhZyBoYW5kbGUuIE9uIGRlc2t0b3AsIHRoZSBzYW1lIGNvbnRlbnQgcmVuZGVycyBhcyBhIGNlbnRlcmVkIGRpYWxvZyB3aXRoIGEgYmFja2Ryb3AuIEltcGxlbWVudCB3aXRoIGEgc2luZ2xlIGNvbXBvbmVudCwgc3dpdGNoaW5nIGNsYXNzIGF0IHRoZSA3NjhweCBicmVha3BvaW50LgoKYGBgYGNzcwouYm90dG9tLXNoZWV0IHsKICAvKiBNb2JpbGU6IGJvdHRvbSBzaGVldCAqLwogIHBvc2l0aW9uOiBmaXhlZDsgYm90dG9tOiAwOyBsZWZ0OiAwOyByaWdodDogMDsKICBib3JkZXItcmFkaXVzOiAyMHB4IDIwcHggMCAwOwogIHRyYW5zZm9ybTogdHJhbnNsYXRlWSgxMDAlKTsKfQoKQG1lZGlhIChtaW4td2lkdGg6IDc2OHB4KSB7CiAgLmJvdHRvbS1zaGVldCB7CiAgICAvKiBEZXNrdG9wOiBjZW50ZXJlZCBkaWFsb2cgKi8KICAgIHRvcDogNTAlOyBsZWZ0OiA1MCU7CiAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLCAtNTAlKTsKICAgIHdpZHRoOiA0ODBweDsgYm9yZGVyLXJhZGl1czogMTZweDsKICAgIGJvdHRvbTogYXV0bzsgcmlnaHQ6IGF1dG87CiAgfQp9CmBgYGAKCiMjIyBDb25maXJtYXRpb24g4oCUIGRlc3RydWN0aXZlIGFjdGlvbgoKVXNlZCBmb3IgaXJyZXZlcnNpYmxlIGFjdGlvbnM6IGRlbGV0ZSBzYXZlLCBjYW5jZWwgc3Vic2NyaXB0aW9uLCBjbGVhciBoaXN0b3J5LiBUd28gYWN0aW9ucyBvbmx5IOKAlCBnaG9zdCBDYW5jZWwgYW5kIHJlZCBDb25maXJtLiBObyBzY3JvbGxhYmxlIGJvZHkuIE5ldmVyIGF1dG8tb3Blbi4KCkljb24gYXQgdG9wIHNpZ25hbHMgc2V2ZXJpdHkgaW1tZWRpYXRlbHkuIFRpdGxlIGlzIGEgZGlyZWN0IHF1ZXN0aW9uICgz4oCTNSB3b3JkcykuIERlc2NyaXB0aW9uIGV4cGxhaW5zIGNvbnNlcXVlbmNlIGluIG9uZSBzZW50ZW5jZS4gR2hvc3QgQ2FuY2VsIG9uIGxlZnQsIGRlc3RydWN0aXZlIENvbmZpcm0gb24gcmlnaHQuIFVzZSBgcm9sZT0iYWxlcnRkaWFsb2ciYCDigJQgc2NyZWVuIHJlYWRlcnMgYW5ub3VuY2UgaXQgd2l0aCBoaWdoZXIgdXJnZW5jeS4gRm9jdXMgbXVzdCBsYW5kIG9uIENhbmNlbCAoc2FmZXN0IGFjdGlvbikgb24gb3Blbi4KCmBgYGBodG1sCjxkaXYgY2xhc3M9ImJvdHRvbS1zaGVldCIgcm9sZT0iYWxlcnRkaWFsb2ciCiAgYXJpYS1tb2RhbD0idHJ1ZSIKICBhcmlhLWxhYmVsbGVkYnk9ImNvbmZpcm0tdGl0bGUiCiAgYXJpYS1kZXNjcmliZWRieT0iY29uZmlybS1kZXNjIj4KCiAgPGRpdiBjbGFzcz0ic2hlZXQtaGFuZGxlIj48L2Rpdj4KCiAgPGRpdiBjbGFzcz0ic2hlZXQtYm9keSBzaGVldC1ib2R5LS1jZW50ZXJlZCI+CiAgICA8ZGl2IGNsYXNzPSJjb25maXJtLWljb24gY29uZmlybS1pY29uLS1kYW5nZXIiPjwhLS0gaWNvbiAtLT48L2Rpdj4KICAgIDxoMiBpZD0iY29uZmlybS10aXRsZSI+RGVsZXRlIHNhdmU/PC9oMj4KICAgIDxwIGlkPSJjb25maXJtLWRlc2MiPlRoaXMgY2FuJ3QgYmUgdW5kb25lLjwvcD4KICA8L2Rpdj4KCiAgPGRpdiBjbGFzcz0ic2hlZXQtZm9vdGVyIj4KICAgIDwhLS0gYXV0b2ZvY3VzIENhbmNlbCwgbm90IERlbGV0ZSAtLT4KICAgIDxidXR0b24gYXV0b2ZvY3VzIGNsYXNzPSJidG4gYnRuLS1naG9zdCBidG4tLW0iPkNhbmNlbDwvYnV0dG9uPgogICAgPGJ1dHRvbiBjbGFzcz0iYnRuIGJ0bi0tZGFuZ2VyIGJ0bi0tbSI+RGVsZXRlIHNhdmU8L2J1dHRvbj4KICA8L2Rpdj4KPC9kaXY+CmBgYGAKCiMjIyBSaWNoIG1lZGlhIOKAlCBnYW1lIGhlcm8KCkZ1bGwtYmxlZWQgaGVybyBhdCB0aGUgdG9wIG9mIHRoZSBzaGVldCwgdXNlZCBmb3IgZ2FtZSBwcmV2aWV3cyBhbmQgcHJvbW90aW9uYWwgZHJhd2Vycy4gSGVybyBpcyBmaXhlZC1oZWlnaHQ7IGNvbnRlbnQgc2Nyb2xscyBiZW5lYXRoIGl0LiBUaGUgZHJhZyBoYW5kbGUgb3ZlcmxheXMgdGhlIGhlcm8gYWJzb2x1dGVseS4KCkhlcm8gaXMgYGZsZXgtc2hyaW5rOjBgLiBBIGdyYWRpZW50IGZhZGUgYXQgaXRzIGJvdHRvbSBlZGdlIGJsZW5kcyBpbnRvIGAtLXN1cmZhY2UtMmAuIERyYWcgaGFuZGxlIG92ZXJsYXlzIHRoZSBoZXJvIHZpYSBgcG9zaXRpb246YWJzb2x1dGU7ei1pbmRleDoyYC4gU3RhdHMgcm93IHVzZXMgNC1jb2x1bW4gZmxleCBmb3IgaW5zdGFudCByZWZlcmVuY2Ugd2l0aG91dCBzY3JvbGwuCgpgYGBgY3NzCi5zaGVldC1oZXJvIHsKICBmbGV4LXNocmluazogMDsKICBoZWlnaHQ6IDIwMHB4OyAvKiB+NDB2dyBvbiAzNzVweCB2aWV3cG9ydCAqLwogIHBvc2l0aW9uOiByZWxhdGl2ZTsKICBvdmVyZmxvdzogaGlkZGVuOwp9Ci5zaGVldC1oZXJvIGltZyB7CiAgd2lkdGg6IDEwMCU7IGhlaWdodDogMTAwJTsKICBvYmplY3QtZml0OiBjb3ZlcjsKfQouc2hlZXQtaGVyby1mYWRlIHsKICAvKiBibGVuZHMgaGVybyBpbnRvIHNoZWV0IHN1cmZhY2UgKi8KICBwb3NpdGlvbjogYWJzb2x1dGU7IGJvdHRvbTogMDsgbGVmdDogMDsgcmlnaHQ6IDA7CiAgaGVpZ2h0OiA3MnB4OwogIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCh0cmFuc3BhcmVudCwgdmFyKC0tc3VyZmFjZS0yKSk7CiAgcG9pbnRlci1ldmVudHM6IG5vbmU7Cn0KLyogSGFuZGxlIHNpdHMgb24gdG9wIG9mIGhlcm8gKi8KLnNoZWV0LWhhbmRsZSB7IHBvc2l0aW9uOiBhYnNvbHV0ZTsgdG9wOiAwOyBsZWZ0OiAwOyByaWdodDogMDsgei1pbmRleDogMjsgfQpgYGBgCgojIyBBbmF0b215CgpUaGUgY29tcG9uZW50IGhpZXJhcmNoeS4gUmVxdWlyZWQgcGFydHMgbXVzdCBhbHdheXMgYmUgcHJlc2VudC4gT3B0aW9uYWwgcGFydHMgZW5oYW5jZSBzcGVjaWZpYyB1c2UgY2FzZXMuCgojIyBBUEkKCiMjIyBDU1MgY2xhc3NlcwoKfCBDbGFzcyB8IERlc2NyaXB0aW9uIHwKfC0tLXwtLS18CnwgYC5kcy1ib3R0b20tc2hlZXRgIHwgUm9vdCBzaGVldCDigJQgZml4ZWQgYm90dG9tLCBmdWxsIHdpZHRoIHwKfCBgLmRzLWJvdHRvbS1zaGVldF9faGFuZGxlYCB8IDQww5c0cHggZHJhZyBoYW5kbGUg4oCUIGNlbnRlcmVkIHRvcCB8CnwgYC5kcy1ib3R0b20tc2hlZXRfX2hlYWRlcmAgfCBPcHRpb25hbCB0aXRsZSByb3cgfAp8IGAuZHMtYm90dG9tLXNoZWV0X19ib2R5YCB8IFNjcm9sbGFibGUgY29udGVudCBhcmVhIHwKfCBgLmRzLWJvdHRvbS1zaGVldF9fc2NyaW1gIHwgRnVsbC1zY3JlZW4gYmFja2Ryb3AgfAp8IGAuZHMtYm90dG9tLXNoZWV0LS1vcGVuYCB8IFZpc2libGUgc3RhdGUg4oCUIHRyYW5zbGF0ZVkoMCkgfAoKIyMjIFJlYWN0IHByb3BzCgp8IFByb3AgfCBUeXBlIHwgRGVmYXVsdCB8IERlc2NyaXB0aW9uIHwKfC0tLXwtLS18LS0tfC0tLXwKfCBgb3BlbmAgfCBib29sZWFuIHwgcmVxdWlyZWQgfCBDb250cm9scyBzaGVldCB2aXNpYmlsaXR5IHwKfCBgb25DbG9zZWAgfCAoKSA9PiB2b2lkIHwgcmVxdWlyZWQgfCBGaXJlZCBvbiBzY3JpbSB0YXAgb3Igc3dpcGUgZG93biB8CnwgYHNuYXBQb2ludHNgIHwgbnVtYmVyW10gfCBbMC41LCAwLjldIHwgU25hcCBoZWlnaHRzIGFzIGZyYWN0aW9uIG9mIHZpZXdwb3J0IHwKfCBgZGVmYXVsdFNuYXBgIHwgbnVtYmVyIHwgMCB8IEluZGV4IGludG8gc25hcFBvaW50cyBmb3IgaW5pdGlhbCBvcGVuIGhlaWdodCB8CnwgYHRpdGxlYCB8IHN0cmluZyB8IHVuZGVmaW5lZCB8IE9wdGlvbmFsIGhlYWRlciB0aXRsZSB8CnwgYGNoaWxkcmVuYCB8IFJlYWN0Tm9kZSB8IHJlcXVpcmVkIHwgU2hlZXQgYm9keSBjb250ZW50IHwKCiMjIENvZGUgZXhhbXBsZXMKCkNvcHkgdGhlc2Ugc25pcHBldHMgYXMgc3RhcnRpbmcgcG9pbnRzLiBBbHdheXMgbGluayBgdG9rZW5zL3Rva2Vucy5jc3NgLCBgY29tcG9uZW50cy5jc3NgLCBhbmQgYHN0YXRlcy5jc3NgIGZpcnN0LgoKYGBgYAo8IS0tIE92ZXJsYXkgLS0+CjxkaXYgY2xhc3M9InNoZWV0LW92ZXJsYXkiIGFyaWEtaGlkZGVuPSJ0cnVlIj48L2Rpdj4KCjwhLS0gU2hlZXQgLS0+CjxkaXYKICBjbGFzcz0iYm90dG9tLXNoZWV0IgogIHJvbGU9ImRpYWxvZyIKICBhcmlhLW1vZGFsPSJ0cnVlIgogIGFyaWEtbGFiZWxsZWRieT0ic2hlZXQtdGl0bGUiCiAgYXJpYS1kZXNjcmliZWRieT0ic2hlZXQtZGVzYyIKPgogIDxkaXYgY2xhc3M9InNoZWV0LWhhbmRsZSIgdGFiaW5kZXg9IjAiIGFyaWEtbGFiZWw9IkRyYWcgdG8gcmVzaXplIiBhcmlhLWhpZGRlbj0iZmFsc2UiPjwvZGl2PgoKICA8ZGl2IGNsYXNzPSJzaGVldC1oZWFkZXIiPgogICAgPGgyIGlkPSJzaGVldC10aXRsZSIgY2xhc3M9InNoZWV0LXRpdGxlIj5GaWx0ZXIgYnkgZ2VucmU8L2gyPgogICAgPHAgaWQ9InNoZWV0LWRlc2MiIGNsYXNzPSJzaGVldC1kZXNjcmlwdGlvbiI+U2VsZWN0IG9uZSBvciBtb3JlIGdlbnJlczwvcD4KICA8L2Rpdj4KCiAgPGRpdiBjbGFzcz0ic2hlZXQtYm9keSI+CiAgICA8IS0tIFNjcm9sbGFibGUgY29udGVudCAtLT4KICA8L2Rpdj4KCiAgPGRpdiBjbGFzcz0ic2hlZXQtZm9vdGVyIj4KICAgIDxidXR0b24gY2xhc3M9ImJ0biBidG4tLWdob3N0IGJ0bi0tbSIgb25jbGljaz0iY2xvc2VTaGVldCgpIj5SZXNldDwvYnV0dG9uPgogICAgPGJ1dHRvbiBjbGFzcz0iYnRuIGJ0bi0tcHJpbWFyeSBidG4tLW0iIG9uY2xpY2s9ImFwcGx5RmlsdGVycygpIj5BcHBseTwvYnV0dG9uPgogIDwvZGl2Pgo8L2Rpdj4KYGBgYAoKYGBgYApjb25zdCBzaGVldCAgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcuYm90dG9tLXNoZWV0Jyk7CmNvbnN0IG92ZXJsYXkgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKCcuc2hlZXQtb3ZlcmxheScpOwoKZnVuY3Rpb24gb3BlblNoZWV0KCkgewogIHNoZWV0LmNsYXNzTGlzdC5hZGQoJ2lzLW9wZW4nKTsKICBvdmVybGF5LmNsYXNzTGlzdC5hZGQoJ2lzLXZpc2libGUnKTsKICBkb2N1bWVudC5ib2R5LnN0eWxlLm92ZXJmbG93ID0gJ2hpZGRlbic7CiAgc2hlZXQuZm9jdXMoKTsKfQoKZnVuY3Rpb24gY2xvc2VTaGVldCgpIHsKICBzaGVldC5jbGFzc0xpc3QucmVtb3ZlKCdpcy1vcGVuJyk7CiAgb3ZlcmxheS5jbGFzc0xpc3QucmVtb3ZlKCdpcy12aXNpYmxlJyk7CiAgZG9jdW1lbnQuYm9keS5zdHlsZS5vdmVyZmxvdyA9ICcnOwogIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJ1tkYXRhLXNoZWV0LXRyaWdnZXJdJyk/LmZvY3VzKCk7IC8vIHJlc3RvcmUgZm9jdXMKfQoKb3ZlcmxheS5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsIGNsb3NlU2hlZXQpOwpkb2N1bWVudC5hZGRFdmVudExpc3RlbmVyKCdrZXlkb3duJywgZSA9PiB7IGlmIChlLmtleSA9PT0gJ0VzY2FwZScpIGNsb3NlU2hlZXQoKTsgfSk7CnNoZWV0LnF1ZXJ5U2VsZWN0b3IoJy5zaGVldC1oYW5kbGUnKS5hZGRFdmVudExpc3RlbmVyKCdrZXlkb3duJywgZSA9PiB7CiAgaWYgKGUua2V5ID09PSAnRXNjYXBlJykgY2xvc2VTaGVldCgpOwp9KTsKYGBgYAoKYGBgYGNzcwouc2hlZXQtb3ZlcmxheSB7CiAgcG9zaXRpb246IGZpeGVkOyBpbnNldDogMDsKICBiYWNrZ3JvdW5kOiByZ2JhKDAsMCwwLC40NSk7CiAgb3BhY2l0eTogMDsgcG9pbnRlci1ldmVudHM6IG5vbmU7CiAgdHJhbnNpdGlvbjogb3BhY2l0eSB2YXIoLS1kdXItcG9wKSB2YXIoLS1lYXNlLW91dCk7CiAgei1pbmRleDogMTAwOwp9Ci5zaGVldC1vdmVybGF5LmlzLXZpc2libGUgeyBvcGFjaXR5OiAxOyBwb2ludGVyLWV2ZW50czogYXV0bzsgfQoKLmJvdHRvbS1zaGVldCB7CiAgcG9zaXRpb246IGZpeGVkOyBib3R0b206IDA7IGxlZnQ6IDA7IHJpZ2h0OiAwOwogIGJhY2tncm91bmQ6IHZhcigtLXN1cmZhY2UtMik7CiAgYm9yZGVyLXJhZGl1czogMjBweCAyMHB4IDAgMDsKICBib3JkZXItdG9wOiAxcHggc29saWQgdmFyKC0tYm9yZGVyKTsKICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVkoMTAwJSk7CiAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIHZhcigtLWR1ci1lbnRlcikgdmFyKC0tZWFzZS1lbXBoYXNpemVkKTsKICBkaXNwbGF5OiBmbGV4OyBmbGV4LWRpcmVjdGlvbjogY29sdW1uOwogIG1heC1oZWlnaHQ6IDkwdmg7CiAgei1pbmRleDogMTAxOwogIHBhZGRpbmctYm90dG9tOiBlbnYoc2FmZS1hcmVhLWluc2V0LWJvdHRvbSk7Cn0KLmJvdHRvbS1zaGVldC5pcy1vcGVuIHsgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKDApOyB9Cgouc2hlZXQtaGFuZGxlIHsKICB3aWR0aDogNDBweDsgaGVpZ2h0OiA0cHg7CiAgYm9yZGVyLXJhZGl1czogMnB4OwogIGJhY2tncm91bmQ6IHJnYmEoMjU1LDI1NSwyNTUsLjIpOwogIG1hcmdpbjogMTJweCBhdXRvIDRweDsKICBmbGV4LXNocmluazogMDsKfQouc2hlZXQtaGVhZGVyIHsgZmxleC1zaHJpbms6IDA7IHBhZGRpbmc6IDEycHggMjBweCA4cHg7IH0KLnNoZWV0LXRpdGxlICB7IGZvbnQtc2l6ZTogMTdweDsgZm9udC13ZWlnaHQ6IDcwMDsgY29sb3I6IHZhcigtLXRleHQpOyBtYXJnaW46IDA7IH0KLnNoZWV0LWRlc2NyaXB0aW9uIHsgZm9udC1zaXplOiAxM3B4OyBjb2xvcjogdmFyKC0tdGV4dDIpOyBtYXJnaW46IDRweCAwIDA7IH0KLnNoZWV0LWJvZHkgICB7IGZsZXg6IDE7IG92ZXJmbG93LXk6IGF1dG87IG1pbi1oZWlnaHQ6IDA7IHBhZGRpbmc6IDAgMjBweDsgfQouc2hlZXQtZm9vdGVyIHsKICBmbGV4LXNocmluazogMDsgZGlzcGxheTogZmxleDsgZ2FwOiAxMnB4OwogIHBhZGRpbmc6IDEycHggMjBweCAxNnB4OwogIGJvcmRlci10b3A6IDFweCBzb2xpZCB2YXIoLS1ib3JkZXItc3VidGxlKTsKfQpgYGBgCgojIyBUb2tlbnMKCkRlc2lnbiB0b2tlbnMgdGhhdCBjb250cm9sIGJvdHRvbSBzaGVldCBhcHBlYXJhbmNlLiBPdmVycmlkZSBhdCB0aGUgcGxhdGZvcm0tc3BlY2lmaWMgbGF5ZXIuCgp8IFRva2VuIHwgRGVmYXVsdCB8IFVzYWdlIHwKfC0tLXwtLS18LS0tfAp8IGAtLXN1cmZhY2UtMmAgfCAjMTYxODFmIHwgU2hlZXQgY29udGFpbmVyIGJhY2tncm91bmQgfAp8IGAtLWJvcmRlcmAgfCByZ2JhKDI1NSwyNTUsMjU1LC4xKSB8IFRvcCBib3JkZXIgb2Ygc2hlZXQgY29udGFpbmVyIHwKfCBgLS1yN2AgfCAyMHB4IHwgVG9wIGNvcm5lciByYWRpdXMgKGJvcmRlci1yYWRpdXM6IDIwcHggMjBweCAwIDApIHwKfCBgLS1vdmVybGF5LXNjcmltYCB8IHJnYmEoMCwwLDAsLjQ1KSB8IEJhY2tkcm9wIHNjcmltIGNvbG9yIHwKfCBgLS1lYXNlLW91dGAgfCBjdWJpYy1iZXppZXIoMC4zMiwwLjcyLDAsMSkgfCBFbnRyeSBhbmQgc25hcCBlYXNpbmcgKHZhdWwtc3R5bGUpIHwKfCBgLS1zcHJpbmdgIHwgY3ViaWMtYmV6aWVyKDAuMzQsMS41NiwwLjY0LDEpIHwgQm91bmNlIGVhc2luZyBmb3Igc25hcCB0byBoaWdoZXIgaGVpZ2h0IHwKfCBgLS1kdXItc2xvd2AgfCAzMjBtcyB8IE92ZXJsYXkgZmFkZSBkdXJhdGlvbiB8CnwgYC0tZHVyLXNoZWV0YCB8IDQyMG1zIHwgU2hlZXQgc2xpZGUtdXAgLyBzbmFwIGR1cmF0aW9uIHwKfCBgLS1kdXItZGVmYXVsdGAgfCAyMDBtcyB8IERpc21pc3MgKHN3aXBlLWRyaXZlbiwgZWFzZS1pbikgfAoKIyMgV2hlbiB0byB1c2UKClVzZSB3aGVuCgotIENvbnRleHR1YWwgYWN0aW9ucyBmb3IgYSBzZWxlY3RlZCBpdGVtIChzaGFyZSwgcmVwb3J0LCBzYXZlKQotIE11bHRpLXN0ZXAgZmxvd3MgdGhhdCBzaG91bGQgbm90IGJsb2NrIHRoZSBmdWxsIHNjcmVlbgotIEZpbHRlcnMgYW5kIHNvcnQgb3B0aW9ucyBvbiBsaXN0L2dyaWQgc2NyZWVucwotIFBhc3MgdXBzZWxsIHBhbmVscyB0aGF0IHNsaWRlIHVwIG92ZXIgY29udGVudAoKRG9uJ3QgdXNlIHdoZW4KCi0gRnVsbCBhcHAgZmxvd3Mgd2l0aCBtYW55IHN0ZXBzIOKAlCB1c2UgYSBkZWRpY2F0ZWQgc2NyZWVuCi0gQ29uZmlybWF0aW9uIGRpYWxvZ3Mg4oCUIHVzZSBEaWFsb2cgZm9yIGRlc3RydWN0aXZlIGFjdGlvbnMKLSBDb250ZW50IHRhbGxlciB0aGFuIDkwdmggd2l0aG91dCBpbnRlcm5hbCBzY3JvbGxpbmcKLSBOZXN0aW5nIG9uZSBib3R0b20gc2hlZXQgaW5zaWRlIGFub3RoZXIKCiMjIERvIC8gRG9uJ3QKCi0gVXNlIGZvciBhY3Rpb25zIHJlbGF0ZWQgdG8gdGhlIGN1cnJlbnQgY29udGV4dAotIEluY2x1ZGUgYSBkcmFnIGhhbmRsZSBvbiBldmVyeSBzaGVldCDigJQgYWx3YXlzCi0gVXNlIHNjcm9sbGFibGUgdmFyaWFudCB3aGVuIGNvbnRlbnQgbWF5IG92ZXJmbG93Ci0gUGluIGZvb3RlciBhY3Rpb25zIHNvIHRoZXkncmUgYWx3YXlzIHJlYWNoYWJsZQotIERpc21pc3Mgb24gc2NyaW0gdGFwLCBzd2lwZSBkb3duLCBvciBFc2NhcGUKLSBSZXR1cm4gZm9jdXMgdG8gdHJpZ2dlciBlbGVtZW50IG9uIGNsb3NlCi0gQWRkIGBlbnYoc2FmZS1hcmVhLWluc2V0LWJvdHRvbSlgIGF0IGJvdHRvbQotIFVzZSBzbmFwIHBvaW50cyBmb3IgdmFyaWFibGUtbGVuZ3RoIGNvbnRlbnQKCi0gTmVzdCBhIHNoZWV0IGluc2lkZSBhbm90aGVyIHNoZWV0Ci0gVXNlIG9uIFRWIOKAlCBib3R0b20gaXMgb3V0c2lkZSBzYWZlIHpvbmUKLSBVc2Ugb24gZGVza3RvcCB3ZWIg4oCUIHVzZSBzaWRlIHBhbmVsIG9yIGRpYWxvZwotIEF1dG8tb3BlbiB3aXRob3V0IGEgdXNlciB0cmlnZ2VyCi0gT21pdCB0aGUgZHJhZyBoYW5kbGUg4oCUIGl0IHNpZ25hbHMgZHJhZ2dhYmlsaXR5Ci0gVXNlIGZvciBwcmltYXJ5IG5hdmlnYXRpb24gb3Igd2F5ZmluZGluZwotIFB1dCBtb3JlIHRoYW4gNiBpdGVtcyB3aXRob3V0IHNjcm9sbCBvciBzbmFwCi0gVXNlIGdlbmVyaWMgdGl0bGVzIGxpa2UgIk9wdGlvbnMiIG9yICJNZW51IgoKIyMgUGxhdGZvcm0gZ3VpZGFuY2UKCi0gUHJpbWFyeSBwYXR0ZXJuIOKAlCB1c2UgZnJlZWx5Ci0gVG91Y2ggZHJhZyB3aXRoIHZlbG9jaXR5LWF3YXJlIHNuYXAKLSBTbmFwIGhlaWdodHM6IHBlZWsgLyBoYWxmIC8gZnVsbAotIENvcm5lciByYWRpdXMgMjBweCwgaGFuZGxlIDQww5c0cHgKLSBTYWZlIGFyZWEgYm90dG9tIHBhZGRpbmcgcmVxdWlyZWQKLSBCYWNrZ3JvdW5kIHNjYWxlcyB0byA5MyUgd2hlbiBzaGVldCBpcyBvcGVuCgotIEF2b2lkIG9uIGRlc2t0b3Agdmlld3BvcnRzIOKJpTc2OHB4Ci0gU3dpdGNoIHRvIGNlbnRlcmVkIGRpYWxvZyBhdCA3NjhweCsKLSBEcmFnLXRvLWRpc21pc3Mgbm90IGF2YWlsYWJsZSBvbiBwb2ludGVyCi0gRXNjYXBlIGtleSBtdXN0IGFsd2F5cyBkaXNtaXNzCi0gVGFiIGN5Y2xlcyBmb2N1cyB3aXRoaW4gc2hlZXQgKHRyYXApCi0gQ2xpY2sgb3V0c2lkZSBiYWNrZHJvcCBkaXNtaXNzZXMKCi0gRG8gbm90IHVzZSDigJQgcGF0dGVybiBub3Qgc3VwcG9ydGVkCi0gQm90dG9tIG9mIHNjcmVlbiBpcyBvdXRzaWRlIFRWIHNhZmUgem9uZQotIFVzZSBmdWxsLXNjcmVlbiBvdmVybGF5IGluc3RlYWQKLSBObyB0b3VjaCBnZXN0dXJlcyBvbiBUVgotIEQtcGFkIGNhbm5vdCBpbnRlcmFjdCB3aXRoIGJvdHRvbS1hbmNob3JlZCBkcmF3ZXJzCi0gVXNlIGZvY3VzZWQgcGFuZWwgb3IgZGlhbG9nIGZvciBjb25maXJtYXRpb25zCgojIyBTaXplcwoKfCBTaXplIHwgVG9rZW4gLyBIZWlnaHQgfCBVc2UgY2FzZSB8IFBsYXRmb3JtIHwKfC0tLXwtLS18LS0tfC0tLXwKfCBIYWxmIHwgNTB2aCBkZWZhdWx0IGhlaWdodCB8IENvbnRleHQgYWN0aW9ucywgZmlsdGVycyB8IE1vYmlsZSB8CnwgVGhyZWUtcXVhcnRlciB8IDc1dmggc25hcCBwb2ludCB8IFJpY2ggY29udGVudCBwYW5lbHMgfCBNb2JpbGUgfAp8IEZ1bGwgfCA5MHZoIHNuYXAgcG9pbnQgfCBGdWxsLXNjcmVlbiBvdmVybGF5cyB8IE1vYmlsZSB8CgojIyBTdGF0ZXMKCkNsb3NlZAoKVHJhbnNsYXRlZCAxMDAlIG9mZi1zY3JlZW47IHNjcmltIGhpZGRlbgoKT3BlbmluZwoKU2xpZGVzIHVwIHdpdGggZWFzZS1vdXQ7IHNjcmltIGZhZGVzIGluIHNpbXVsdGFuZW91c2x5CgpPcGVuCgpSZXN0aW5nIGF0IGRlZmF1bHQgc25hcCBwb2ludDsgZHJhZ2dhYmxlIGhhbmRsZSB2aXNpYmxlCgpEcmFnZ2luZwoKRm9sbG93cyBmaW5nZXIgcG9zaXRpb24gaW4gcmVhbCB0aW1lOyBubyBhbmltYXRpb24KClNuYXBwaW5nCgpSZWxlYXNlcyB0byBuZWFyZXN0IHNuYXAgcG9pbnQgd2l0aCBlYXNlLW91dCBzcHJpbmcKCkNsb3NpbmcKClNsaWRlcyBkb3duOyBzY3JpbSBmYWRlcyBvdXQKCiMjIE1vdGlvbgoKfCBJbnRlcmFjdGlvbiB8IEVhc2luZyB8IER1cmF0aW9uIHwgUHJvcGVydHkgfAp8LS0tfC0tLXwtLS18LS0tfAp8IE9wZW4gfCBgLS1lYXNlLW91dGAgfCBgLS1kdXItYmFzZWAgfCB0cmFuc2Zvcm0gdHJhbnNsYXRlWSgxMDAlIOKGkiAwKSB8CnwgQ2xvc2UgKHN3aXBlL2J1dHRvbikgfCBgLS1lYXNlLWluYCB8IGAtLWR1ci1mYXN0YCB8IHRyYW5zZm9ybSB0cmFuc2xhdGVZKDAg4oaSIDEwMCUpIHwKfCBTY3JpbSBmYWRlIGluIHwgYC0tZWFzZS1vdXRgIHwgYC0tZHVyLWJhc2VgIHwgb3BhY2l0eSB8CnwgU25hcCBleHBhbmQgfCBgLS1lYXNlLW91dGAgfCBgLS1kdXItYmFzZWAgfCBoZWlnaHQgfAp8IEhhbmRsZSBkcmFnIHwgYG5vbmVgIHwgYHJlYWx0aW1lYCB8IHRyYW5zZm9ybSB0cmFuc2xhdGVZIHwKCiMjIEdlc3R1cmUgYmVoYXZpb3IKClRvdWNoLWRyaXZlbiBpbnRlcmFjdGlvbiBtb2RlbC4gQWxsIHRocmVzaG9sZHMgYXJlIG1pbmltdW0gcmVjb21tZW5kYXRpb25zIOKAlCB0dW5lIGZvciB5b3VyIGNvbnRlbnQgZGVuc2l0eS4KCiMjIyBEcmFnIHRocmVzaG9sZHMKCnwgR2VzdHVyZSB8IFRocmVzaG9sZCB8IE91dGNvbWUgfAp8LS0tfC0tLXwtLS18CnwgU2xvdyBkcmFnIGRvd24sIHJlbGVhc2UgYmVsb3cgNDAlIGhlaWdodCB8IDwgMC4zIHB4L21zIHZlbG9jaXR5IHwgU25hcCB0byBsb3dlciBzbmFwIHBvaW50IG9yIGRpc21pc3MgfAp8IEZhc3QgZmxpY2sgZG93biB8IOKJpSAwLjUgcHgvbXMgdmVsb2NpdHkgfCBEaXNtaXNzIHJlZ2FyZGxlc3Mgb2YgcG9zaXRpb24gfAp8IEZhc3QgZmxpY2sgdXAgfCDiiaUgMC41IHB4L21zIHZlbG9jaXR5IHwgU25hcCB0byBuZXh0IGhpZ2hlciBzbmFwIHBvaW50IHwKfCBEcmFnIHVwIHBhc3QgbWF4IGhlaWdodCB8ID4gOTIgdmggfCBSdWJiZXItYmFuZCByZXNpc3Qg4oCUIHNwcmluZyBiYWNrIHRvIG1heCBvbiByZWxlYXNlIHwKfCBEcmFnIG9uIHNjcm9sbGFibGUgYm9keSBhdCB0b3AgfCBzY3JvbGxUb3AgPT09IDAgfCBQYXNzIGRyYWcgdG8gc2hlZXQgZHJhZyBoYW5kbGVyIHwKfCBEcmFnIG9uIHNjcm9sbGFibGUgYm9keSBtaWQtc2Nyb2xsIHwgc2Nyb2xsVG9wID4gMCB8IFNjcm9sbCB0aGUgYm9keTsgZG8gbm90IG1vdmUgdGhlIHNoZWV0IHwKCiMjIyBPdmVyc2Nyb2xsICYgcnViYmVyLWJhbmQKCk92ZXJzY3JvbGwgdXAgKHBhc3QgbWF4KQoKUmVzaXN0IHdpdGggYE1hdGgucG93KGRlbHRhLCAwLjcpYCAoZGFtcGVkIHNwcmluZykuIFNoZWV0IGZvbGxvd3MgZmluZ2VyIGF0IH4zNSUgcmF0aW8uIE9uIHJlbGVhc2UsIHNuYXAgYmFjayB0byBtYXggaGVpZ2h0IHdpdGggc3ByaW5nIGVhc2luZyBgY3ViaWMtYmV6aWVyKC4zNCwxLjU2LC42NCwxKWAuCgpPdmVyc2Nyb2xsIGRvd24gKGRpc21pc3Mgem9uZSkKClNoZWV0IGZvbGxvd3MgZmluZ2VyIDE6MS4gU2NyaW0gb3BhY2l0eSB0cmFja3MgbGluZWFybHk6IGBvcGFjaXR5ID0gMC40NSAqIChzaGVldFkgLyBkaXNtaXNzVGhyZXNob2xkKWAuIEZhc3QgZmxpY2sgYmVsb3cgNDAlIGhlaWdodCDihpIgZGlzbWlzcyB3aXRoIGBlYXNlLWluIDIwMG1zYC4KCiMjIyBTY3JvbGwgaGFuZG9mZgoKYGBgYApsZXQgc3RhcnRZID0gMDsKbGV0IGlzRHJhZ2dpbmdTaGVldCA9IGZhbHNlOwoKYm9keS5hZGRFdmVudExpc3RlbmVyKCd0b3VjaHN0YXJ0JywgKGUpID0+IHsKICBzdGFydFkgPSBlLnRvdWNoZXNbMF0uY2xpZW50WTsKICBpc0RyYWdnaW5nU2hlZXQgPSBib2R5LnNjcm9sbFRvcCA9PT0gMDsgLy8gb25seSBkcmFnIGlmIGF0IHRvcAp9KTsKCmJvZHkuYWRkRXZlbnRMaXN0ZW5lcigndG91Y2htb3ZlJywgKGUpID0+IHsKICBjb25zdCBkeSA9IGUudG91Y2hlc1swXS5jbGllbnRZIC0gc3RhcnRZOwogIGlmIChpc0RyYWdnaW5nU2hlZXQgJiYgZHkgPiAwKSB7CiAgICBlLnByZXZlbnREZWZhdWx0KCk7IC8vIHN0b3AgYm9keSBzY3JvbGwg4oCUIGhhbmQgb2ZmIHRvIHNoZWV0CiAgICBtb3ZlU2hlZXQoZHkpOyAgICAgIC8vIHRyYW5zbGF0ZSBzaGVldCB3aXRoIGZpbmdlcgogIH0KICAvLyBkeSAgewogIGlmIChpc0RyYWdnaW5nU2hlZXQpIHNuYXBPckRpc21pc3ModmVsb2NpdHkpOwp9KTsKYGBgYAoKIyMgQ29udGVudCBndWlkZWxpbmVzCgpSdWxlcyBmb3IgdGl0bGVzLCBhY3Rpb24gbGFiZWxzLCBpdGVtIGNvdW50LCBhbmQgY29weSBpbnNpZGUgYSBib3R0b20gc2hlZXQuCgpTaGVldCB0aXRsZQoK4pyTIERvCgotIDLigJM1IHdvcmRzLCBhY3Rpb24tbm91biAoIlNoYXJlIGdhbWUiLCAiRmlsdGVyIGJ5IGdlbnJlIikKLSBEZXN0cnVjdGl2ZTogZGlyZWN0IHF1ZXN0aW9uICgiRGVsZXRlIHNhdmU/IikKLSBTZW50ZW5jZSBjYXNlLCBubyB0cmFpbGluZyBwdW5jdHVhdGlvbgoK4pyVIERvbid0CgotIEdlbmVyaWMgbGFiZWxzOiAiT3B0aW9ucyIsICJNZW51IiwgIk1vcmUiCi0gTW9yZSB0aGFuIDYgd29yZHMg4oCUIHdyYXBzIGF3a3dhcmRseQotIFRpdGxlIENhc2UgRm9yIEV2ZXJ5IFdvcmQKCkFjdGlvbiBsYWJlbHMKCuKckyBEbwoKLSBWZXJiLWZpcnN0OiAiQXBwbHkgZmlsdGVycyIsICJTYXZlIHNldHRpbmdzIgotIERlc3RydWN0aXZlIENUQSBlY2hvZXMgdGhlIGFjdGlvbjogIkRlbGV0ZSBzYXZlIgotIDHigJMzIHdvcmRzIHBlciBidXR0b24gbGFiZWwKCuKclSBEb24ndAoKLSAiT0siIC8gIlllcyIgLyAiTm8iIOKAlCBhbWJpZ3VvdXMgYWZ0ZXIgdGltZSBwYXNzZXMKLSBNb3JlIHRoYW4gMiBmb290ZXIgYWN0aW9ucwotIFR3byBwcmltYXJ5IChncmVlbikgYnV0dG9ucyBzaWRlLWJ5LXNpZGUKCkFjdGlvbiBsaXN0IOKAlCBpdGVtIGNvdW50Cgp8IENvdW50IHwgR3VpZGFuY2UgfAp8LS0tfC0tLXwKfCAy4oCTNCB8IElkZWFsIOKAlCBmaXRzIGluIGhhbGYtaGVpZ2h0IHNoZWV0LCBubyBzY3JvbGwgfAp8IDXigJM2IHwgQWNjZXB0YWJsZSDigJQgdXNlIHNjcm9sbCBvciBleHBhbmQgdG8gNzV2aCB8CnwgNysgfCBSZWNvbnNpZGVyIOKAlCBhZGQgc2VhcmNoIG9yIG1vdmUgdG8gYSBmdWxsIHNjcmVlbiB8CnwgMSB8IFVzZSBhIFRvYXN0IG9yIGlubGluZSBhY3Rpb24gaW5zdGVhZCB8CgpEZXNjcmlwdGlvbnMgJiBoZWxwZXIgdGV4dAoK4pyTIERvCgotIE1heCAyIGxpbmVzIGJlbG93IHRoZSB0aXRsZSAo4omIIDgwIGNoYXJzKQotIFN0YXRlIHRoZSBjb25zZXF1ZW5jZSwgbm90IHRoZSBtZWNoYW5pYwotIE9taXQgaWYgdGhlIHRpdGxlIGlzIHNlbGYtZXZpZGVudAoK4pyVIERvbid0CgotIFJlcGVhdCB0aGUgc2hlZXQgdGl0bGUgdmVyYmF0aW0KLSBNYXJrZXRpbmcgY29weSAoIlVubG9jayBpbmNyZWRpYmxlIGZlYXR1cmVz4oCmIikKLSAzKyBzZW50ZW5jZXMg4oCUIG1vdmUgdG8gYSBkZWRpY2F0ZWQgc2NyZWVuCgojIyBKaW9HYW1lcyBhcHAgcGF0dGVybnMKCkZpdmUgcmVhbCBib3R0b20tc2hlZXQgcGF0dGVybnMgZnJvbSB0aGUgSmlvR2FtZXMgYXBwLCByZWJ1aWx0IGFnYWluc3QgdGhlIERMUyBmb3VuZGF0aW9uLgoKUGFzcyBwdXJjaGFzZQoKQXV0by1yZW5ld3MgYXV0b21hdGljYWxseSDCtyBDYW5jZWwgYW55dGltZQoKRHVyYXRpb24gcGlja2VyIMK3IGFjY29yZGlvbnMgwrcgc3RpY2t5IHBheQoKU3Vic2NyaXB0aW9uIHJlbmV3YWwKClJhZGlvIHBsYW4gc2VsZWN0b3IgwrcgVVBHUkFERSBiYWRnZSDCtyBoYWxmLWhlaWdodAoKQ29ubmVjdCBzdG9yZQoKR2FtZSBhcnQgYmcgwrcgZmVhdHVyZSBidWxsZXRzIMK3IHByaXZhY3kgbm90ZSDCtyBzdGVwIGNoaXAKClNldCByZW1pbmRlcgoKTWluaW1hbCDigJQgZGF0ZSBmaWVsZCDCtyB0d28gYWN0aW9ucyDCtyBzdGVwIGNoaXAKCjMwLWRheSBhY2Nlc3MgdW5sb2NrCgpEYXJrIGdyZWVuIHN1cmZhY2UgwrcgYW1iZXIgd2FybmluZyDCtyBzdGVwIGNoaXAKClBhdHRlcm4gbm90ZXMKClNoZWV0IHN1cmZhY2UgdmFyaWFudHMKClN0YW5kYXJkIHNoZWV0cyB1c2UgYC0tc3VyZmFjZS0yYC4gR2FtZS1jb250ZXh0IHNoZWV0cyAodW5sb2NrLCBjb25uZWN0KSB1c2UgYCMwZjFhMTJgIOKAlCBhIGRhcmsgZ3JlZW4gdGludCB0aGF0IHZpc3VhbGx5IGNvbm5lY3RzIHRvIHRoZSBKaW9HYW1lcyBicmFuZCB3aGlsZSBkaXN0aW5ndWlzaGluZyBnYW1lIGFjdGlvbnMgZnJvbSBzeXN0ZW0gVUkuCgpTdGVwIGNoaXAKClRoZSBncmVlbiBzdGVwIGNoaXAgKFM0LCBTNSwgUzfigKYpIHNpZ25hbHMgcG9zaXRpb24gaW4gYSBtdWx0aS1zdGVwIGZsb3cuIFRhcHBpbmcgaXQgY29sbGFwc2VzIGJhY2sgdG8gdGhlIHByZXZpb3VzIHN0ZXAuIEFsd2F5cyBkb2NrZWQgYmVsb3cgdGhlIGZvb3RlciBidXR0b25zLCBuZXZlciBpbnNpZGUgdGhlIHNoZWV0IHNjcm9sbCBhcmVhLiBVc2VzIGB2YXIoLS1qaW8pYCBiYWNrZ3JvdW5kIHdpdGggYmxhY2sgdGV4dCBmb3IgbWF4aW11bSBjb250cmFzdC4KCiMjIEFjY2Vzc2liaWxpdHkKCi0tLQoKIyMgVG9rZW5zIHJlZmVyZW5jZWQgb24gdGhpcyBwYWdlCgpVc2UgdGhlc2UgZXhhY3QgdG9rZW5zIOKAlCBkZWZpbmVkIGluIGB0b2tlbnMvdG9rZW5zLmNzc2AuIERvIG5vdCBzdWJzdGl0dXRlIHJhdyB2YWx1ZXMuCgotIGAtLWJnYAotIGAtLWJvcmRlcmAKLSBgLS1ib3JkZXItc3VidGxlYAotIGAtLWR1ci1kZWZhdWx0YAotIGAtLWR1ci1lbnRlcmAKLSBgLS1kdXItZmFzdGAKLSBgLS1kdXItcG9wYAotIGAtLWR1ci1zaGVldGAKLSBgLS1kdXItc2xvd2AKLSBgLS1lYXNlLWVtcGhhc2l6ZWRgCi0gYC0tZWFzZS1vdXRgCi0gYC0tamlvYAotIGAtLWppby1mb250YAotIGAtLW5lZ2F0aXZlYAotIGAtLXBpbGxgCi0gYC0tcjNgCi0gYC0tcjRgCi0gYC0tc2hlZXQtaGVpZ2h0YAotIGAtLXNwYWNlLTAtNWAKLSBgLS1zcGFjZS0xYAotIGAtLXNwYWNlLTEtNWAKLSBgLS1zcGFjZS0yYAotIGAtLXN1cmZhY2UtMWAKLSBgLS1zdXJmYWNlLTJgCi0gYC0tc3VyZmFjZS0zYAotIGAtLXRleHRgCi0gYC0tdGV4dC1pbnZgCi0gYC0tdGV4dDJgCi0gYC0tdGV4dDNgCi0gYC0tdGV4dDRgCgotLS0KCiMjIEJ1aWxkIHJ1bGVzIChiaW5kaW5nKQoKMS4gVXNlICoqb25seSoqIHRoZSB0b2tlbnMgbGlzdGVkIGFib3ZlLiBJZiBhIHZhbHVlIHlvdSBuZWVkIGlzIG5vdCBsaXN0ZWQsIHN0b3AgYW5kIGFzayDigJQgZG8gbm90IGludHJvZHVjZSBhIHJhdyB2YWx1ZS4KMi4gRm9udCBpcyAqKkppb1R5cGUqKiBvbmx5LiBXZWlnaHRzOiAzMDAsIDUwMCwgNzAwLCA5MDAuCjMuIFJldXNlIHRoZSBjb21wb25lbnQgQ1NTIHBhdHRlcm5zIHNob3duIG9uIHRoZSBzb3VyY2UgcGFnZTsgZG8gbm90IHJlZGVzaWduLgo0LiBNYXRjaCBldmVyeSBzdGF0ZSAoZGVmYXVsdCwgaG92ZXIsIGZvY3VzLCBhY3RpdmUsIGRpc2FibGVkLCBsb2FkaW5nKSBzaG93biBvbiB0aGUgcGFnZS4KNS4gQWNjZXNzaWJpbGl0eSByZXF1aXJlbWVudHMgb24gdGhlIHBhZ2UgYXJlIG1hbmRhdG9yeSwgbm90IG9wdGlvbmFsLgo=" download="bottom-sheet-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
     </div>
   </div>
 
@@ -212,15 +206,15 @@
                 <div style="display:flex;flex-direction:column">
                   <div style="display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--border-subtle)">
                     <div style="width:26px;height:26px;border-radius:50%;background:var(--surface-3);flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="12" height="12" fill="var(--text2)"><use href="../sprite.svg#ic_share"></use></svg></div>
-                    <span style="font-size:10px;font-weight:600;color:var(--text)">Share with friends</span>
+                    <span style="font-size:10px;font-weight:700;color:var(--text)">Share with friends</span>
                   </div>
                   <div style="display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--border-subtle)">
                     <div style="width:26px;height:26px;border-radius:50%;background:var(--surface-3);flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="12" height="12" fill="var(--text2)"><use href="../sprite.svg#ic_multiple_user"></use></svg></div>
-                    <span style="font-size:10px;font-weight:600;color:var(--text)">Invite to play</span>
+                    <span style="font-size:10px;font-weight:700;color:var(--text)">Invite to play</span>
                   </div>
                   <div style="display:flex;align-items:center;gap:9px;padding:7px 0">
                     <div style="width:26px;height:26px;border-radius:50%;background:var(--surface-3);flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="12" height="12" fill="var(--text2)"><use href="../sprite.svg#ic_copy"></use></svg></div>
-                    <span style="font-size:10px;font-weight:600;color:var(--text)">Copy link</span>
+                    <span style="font-size:10px;font-weight:700;color:var(--text)">Copy link</span>
                   </div>
                 </div>
               </div>
@@ -254,11 +248,11 @@
                 <div style="font-size:8px;color:var(--text3);margin-top:1px">Tomb Raider: Shadow</div>
               </div>
               <div style="flex:1;overflow-y:auto;padding:0 16px;min-height:0">
-                <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border-subtle)"><span style="font-size:9px;font-weight:600;color:var(--text)">Graphics quality</span><span style="font-size:8px;color:var(--jio);font-weight:700">High</span></div>
-                <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border-subtle)"><span style="font-size:9px;font-weight:600;color:var(--text)">Notifications</span><div style="width:22px;height:13px;background:var(--jio);border-radius:7px;position:relative"><div style="position:absolute;right:2px;top:1.5px;width:10px;height:10px;background:#fff;border-radius:50%"></div></div></div>
-                <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border-subtle)"><span style="font-size:9px;font-weight:600;color:var(--text)">Auto-save</span><div style="width:22px;height:13px;background:var(--surface-3);border-radius:7px;position:relative"><div style="position:absolute;left:2px;top:1.5px;width:10px;height:10px;background:var(--text3);border-radius:50%"></div></div></div>
-                <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border-subtle)"><span style="font-size:9px;font-weight:600;color:var(--text)">Sound effects</span><div style="width:22px;height:13px;background:var(--jio);border-radius:7px;position:relative"><div style="position:absolute;right:2px;top:1.5px;width:10px;height:10px;background:#fff;border-radius:50%"></div></div></div>
-                <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0"><span style="font-size:9px;font-weight:600;color:var(--negative)">Reset progress</span><span style="font-size:8px;color:var(--text4)">›</span></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border-subtle)"><span style="font-size:9px;font-weight:700;color:var(--text)">Graphics quality</span><span style="font-size:8px;color:var(--jio);font-weight:700">High</span></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border-subtle)"><span style="font-size:9px;font-weight:700;color:var(--text)">Notifications</span><div style="width:22px;height:13px;background:var(--jio);border-radius:7px;position:relative"><div style="position:absolute;right:2px;top:1.5px;width:10px;height:10px;background:#fff;border-radius:50%"></div></div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border-subtle)"><span style="font-size:9px;font-weight:700;color:var(--text)">Auto-save</span><div style="width:22px;height:13px;background:var(--surface-3);border-radius:7px;position:relative"><div style="position:absolute;left:2px;top:1.5px;width:10px;height:10px;background:var(--text3);border-radius:50%"></div></div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border-subtle)"><span style="font-size:9px;font-weight:700;color:var(--text)">Sound effects</span><div style="width:22px;height:13px;background:var(--jio);border-radius:7px;position:relative"><div style="position:absolute;right:2px;top:1.5px;width:10px;height:10px;background:#fff;border-radius:50%"></div></div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0"><span style="font-size:9px;font-weight:700;color:var(--negative)">Reset progress</span><span style="font-size:8px;color:var(--text4)">›</span></div>
               </div>
               <div style="flex-shrink:0;padding:8px 16px 12px;border-top:1px solid var(--border-subtle);display:flex;gap:7px">
                 <button onclick="dsClose('b')" class="btn btn--ghost btn--sm" style="flex:1">Cancel</button>
@@ -311,15 +305,15 @@
                 <div style="display:flex;flex-direction:column">
                   <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border-subtle)">
                     <div style="width:28px;height:28px;border-radius:50%;background:var(--surface-3);flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="13" height="13" fill="var(--text2)"><use href="../sprite.svg#ic_share"></use></svg></div>
-                    <span style="font-size:11px;font-weight:600;color:var(--text)">Share with friends</span>
+                    <span style="font-size:11px;font-weight:700;color:var(--text)">Share with friends</span>
                   </div>
                   <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border-subtle)">
                     <div style="width:28px;height:28px;border-radius:50%;background:var(--surface-3);flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="13" height="13" fill="var(--text2)"><use href="../sprite.svg#ic_multiple_user"></use></svg></div>
-                    <span style="font-size:11px;font-weight:600;color:var(--text)">Invite to play</span>
+                    <span style="font-size:11px;font-weight:700;color:var(--text)">Invite to play</span>
                   </div>
                   <div style="display:flex;align-items:center;gap:10px;padding:8px 0">
                     <div style="width:28px;height:28px;border-radius:50%;background:var(--surface-3);flex-shrink:0;display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="13" height="13" fill="var(--text2)"><use href="../sprite.svg#ic_copy"></use></svg></div>
-                    <span style="font-size:11px;font-weight:600;color:var(--text)">Copy link</span>
+                    <span style="font-size:11px;font-weight:700;color:var(--text)">Copy link</span>
                   </div>
                 </div>
               </div>
@@ -359,9 +353,9 @@
               <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:9px">Filter games</div>
               <div style="display:flex;gap:5px;flex-wrap:wrap">
                 <div style="height:22px;border-radius:var(--pill);background:rgba(0,168,89,.15);border:1px solid rgba(0,168,89,.3);padding:0 9px;display:flex;align-items:center"><span style="font-size:8px;font-weight:700;color:var(--jio)">Action</span></div>
-                <div style="height:22px;border-radius:var(--pill);background:var(--surface-3);border:1px solid var(--border-subtle);padding:0 9px;display:flex;align-items:center"><span style="font-size:8px;font-weight:600;color:var(--text2)">Racing</span></div>
-                <div style="height:22px;border-radius:var(--pill);background:var(--surface-3);border:1px solid var(--border-subtle);padding:0 9px;display:flex;align-items:center"><span style="font-size:8px;font-weight:600;color:var(--text2)">RPG</span></div>
-                <div style="height:22px;border-radius:var(--pill);background:var(--surface-3);border:1px solid var(--border-subtle);padding:0 9px;display:flex;align-items:center"><span style="font-size:8px;font-weight:600;color:var(--text2)">Sports</span></div>
+                <div style="height:22px;border-radius:var(--pill);background:var(--surface-3);border:1px solid var(--border-subtle);padding:0 9px;display:flex;align-items:center"><span style="font-size:8px;font-weight:700;color:var(--text2)">Racing</span></div>
+                <div style="height:22px;border-radius:var(--pill);background:var(--surface-3);border:1px solid var(--border-subtle);padding:0 9px;display:flex;align-items:center"><span style="font-size:8px;font-weight:700;color:var(--text2)">RPG</span></div>
+                <div style="height:22px;border-radius:var(--pill);background:var(--surface-3);border:1px solid var(--border-subtle);padding:0 9px;display:flex;align-items:center"><span style="font-size:8px;font-weight:700;color:var(--text2)">Sports</span></div>
               </div>
               <div style="margin-top:10px;display:flex;flex-direction:column;gap:5px">
                 <div style="height:5px;background:var(--surface-3);border-radius:3px;width:80%"></div>
@@ -376,12 +370,12 @@
               </div>
               <!-- Scrollable body -->
               <div style="flex:1;overflow-y:auto;min-height:0">
-                <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-bottom:1px solid var(--border-subtle)"><span style="font-size:10px;font-weight:600;color:var(--text)">Action</span><div style="width:14px;height:14px;border-radius:4px;background:var(--jio);display:flex;align-items:center;justify-content:center"><span style="font-size:9px;color:#fff">✓</span></div></div>
-                <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-bottom:1px solid var(--border-subtle)"><span style="font-size:10px;font-weight:600;color:var(--text)">Adventure</span><div style="width:14px;height:14px;border-radius:4px;background:var(--surface-3);border:1px solid var(--border)"></div></div>
-                <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-bottom:1px solid var(--border-subtle)"><span style="font-size:10px;font-weight:600;color:var(--text)">Racing</span><div style="width:14px;height:14px;border-radius:4px;background:var(--surface-3);border:1px solid var(--border)"></div></div>
-                <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-bottom:1px solid var(--border-subtle)"><span style="font-size:10px;font-weight:600;color:var(--text)">RPG</span><div style="width:14px;height:14px;border-radius:4px;background:var(--surface-3);border:1px solid var(--border)"></div></div>
-                <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-bottom:1px solid var(--border-subtle)"><span style="font-size:10px;font-weight:600;color:var(--text)">Sports</span><div style="width:14px;height:14px;border-radius:4px;background:var(--surface-3);border:1px solid var(--border)"></div></div>
-                <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px"><span style="font-size:10px;font-weight:600;color:var(--text)">Casual</span><div style="width:14px;height:14px;border-radius:4px;background:var(--surface-3);border:1px solid var(--border)"></div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-bottom:1px solid var(--border-subtle)"><span style="font-size:10px;font-weight:700;color:var(--text)">Action</span><div style="width:14px;height:14px;border-radius:4px;background:var(--jio);display:flex;align-items:center;justify-content:center"><span style="font-size:9px;color:#fff">✓</span></div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-bottom:1px solid var(--border-subtle)"><span style="font-size:10px;font-weight:700;color:var(--text)">Adventure</span><div style="width:14px;height:14px;border-radius:4px;background:var(--surface-3);border:1px solid var(--border)"></div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-bottom:1px solid var(--border-subtle)"><span style="font-size:10px;font-weight:700;color:var(--text)">Racing</span><div style="width:14px;height:14px;border-radius:4px;background:var(--surface-3);border:1px solid var(--border)"></div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-bottom:1px solid var(--border-subtle)"><span style="font-size:10px;font-weight:700;color:var(--text)">RPG</span><div style="width:14px;height:14px;border-radius:4px;background:var(--surface-3);border:1px solid var(--border)"></div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-bottom:1px solid var(--border-subtle)"><span style="font-size:10px;font-weight:700;color:var(--text)">Sports</span><div style="width:14px;height:14px;border-radius:4px;background:var(--surface-3);border:1px solid var(--border)"></div></div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 16px"><span style="font-size:10px;font-weight:700;color:var(--text)">Casual</span><div style="width:14px;height:14px;border-radius:4px;background:var(--surface-3);border:1px solid var(--border)"></div></div>
               </div>
               <!-- Sticky footer -->
               <div style="flex-shrink:0;padding:8px 16px 14px;border-top:1px solid var(--border-subtle);display:flex;gap:7px">
@@ -426,7 +420,7 @@
               </div>
             </div>
             <div id="sc-v3" class="phone-scrim" onclick="snapClose()"></div>
-            <div id="sh-v3" style="position:absolute;bottom:0;left:0;right:0;background:var(--surface-2);border-radius:16px 16px 0 0;border-top:1px solid var(--border);transform:translateY(100%);transition:height 380ms cubic-bezier(.32,.72,0,1),transform 420ms cubic-bezier(.32,.72,0,1);overflow:hidden">
+            <div id="sh-v3" style="position:absolute;bottom:0;left:0;right:0;background:var(--surface-2);border-radius:16px 16px 0 0;border-top:1px solid var(--border);transform:translateY(100%);transition:height var(--dur-sheet) var(--ease-emphasized),transform var(--dur-enter) var(--ease-emphasized);overflow:hidden">
               <div class="phone-sheet-handle" style="cursor:grab"><div class="phone-sheet-handle-pill"></div></div>
               <div style="padding:6px 16px 0">
                 <div style="font-size:12px;font-weight:700;color:var(--text)">Game details</div>
@@ -436,7 +430,7 @@
                 <div style="font-size:9px;color:var(--text2);line-height:1.55">A beautiful platformer with hand-crafted 2.5D worlds. Collect Quills, rescue Tonic powers, and challenge the Impossible Lair.</div>
                 <div style="display:flex;gap:5px;margin-top:4px">
                   <div style="height:20px;border-radius:var(--pill);background:rgba(0,168,89,.15);border:1px solid rgba(0,168,89,.2);padding:0 8px;display:flex;align-items:center"><span style="font-size:7px;font-weight:700;color:var(--jio)">Platformer</span></div>
-                  <div style="height:20px;border-radius:var(--pill);background:var(--surface-3);border:1px solid var(--border-subtle);padding:0 8px;display:flex;align-items:center"><span style="font-size:7px;font-weight:600;color:var(--text3)">Adventure</span></div>
+                  <div style="height:20px;border-radius:var(--pill);background:var(--surface-3);border:1px solid var(--border-subtle);padding:0 8px;display:flex;align-items:center"><span style="font-size:7px;font-weight:700;color:var(--text3)">Adventure</span></div>
                 </div>
                 <div style="margin-top:4px;display:flex;flex-direction:column;gap:4px">
                   <div style="height:4px;background:var(--surface-3);border-radius:2px;width:100%"></div>
@@ -529,7 +523,7 @@ function onDragEnd(velocity, position) {
             <!-- Fake desktop bg -->
             <div style="position:absolute;inset:0;background:linear-gradient(180deg,#0e1118 0%,#06080f 100%);opacity:.7"></div>
             <!-- Dialog -->
-            <div id="dialog-v4w" style="position:relative;z-index:2;width:280px;background:var(--surface-2);border-radius:14px;border:1px solid var(--border);padding:0;overflow:hidden;transform:scale(0.9) translateY(8px);opacity:0;transition:transform 320ms cubic-bezier(.32,.72,0,1),opacity 280ms ease;pointer-events:none">
+            <div id="dialog-v4w" style="position:relative;z-index:2;width:280px;background:var(--surface-2);border-radius:14px;border:1px solid var(--border);padding:0;overflow:hidden;transform:scale(0.9) translateY(8px);opacity:0;transition:transform var(--dur-slow) var(--ease-emphasized),opacity var(--dur-pop) var(--ease-out);pointer-events:none">
               <div style="padding:20px 20px 0">
                 <div style="font-size:14px;font-weight:700;color:var(--text)">Upgrade to Ultimate</div>
                 <div style="font-size:11px;color:var(--text3);margin-top:2px">Unlock 200+ games, TV + mobile</div>
@@ -571,6 +565,169 @@ function onDragEnd(velocity, position) {
         </div>
       </div>
     </div>
+
+    <!-- ── Variant 5: Confirmation / Destructive ── -->
+    <h3 class="ds-subsection-title" style="margin-top:40px">Confirmation — destructive action</h3>
+    <p class="ds-body" style="max-width:560px">Used for irreversible actions: delete save, cancel subscription, clear history. Two actions only — ghost Cancel and red Confirm. No scrollable body. Never auto-open.</p>
+    <div class="variant-demo-section">
+      <div class="variant-demo-preview">
+        <div class="demo-trigger-group">
+          <div id="ph-v5" class="phone" style="width:220px;height:340px">
+            <div style="padding:18px 16px 0">
+              <div style="font-size:11px;font-weight:700;color:var(--text);margin-bottom:9px">My saves</div>
+              <div style="display:flex;flex-direction:column;gap:5px">
+                <div style="height:44px;background:var(--surface-2);border-radius:10px;border:1px solid var(--border-subtle);display:flex;align-items:center;padding:0 10px;gap:8px">
+                  <div style="width:26px;height:26px;background:linear-gradient(135deg,rgba(0,168,89,.3),rgba(142,91,255,.15));border-radius:6px;flex-shrink:0"></div>
+                  <div style="flex:1"><div style="font-size:9px;font-weight:700;color:var(--text)">Checkpoint #7 — Cave</div><div style="font-size:7px;color:var(--text3)">Saved 2 hrs ago</div></div>
+                  <button onclick="dsOpen('v5')" style="background:none;border:none;padding:4px;cursor:pointer;display:flex;align-items:center;justify-content:center">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="var(--negative)"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                  </button>
+                </div>
+                <div style="height:44px;background:var(--surface-2);border-radius:10px;border:1px solid var(--border-subtle);display:flex;align-items:center;padding:0 10px;gap:8px">
+                  <div style="width:26px;height:26px;background:linear-gradient(135deg,rgba(142,91,255,.3),rgba(0,168,89,.1));border-radius:6px;flex-shrink:0"></div>
+                  <div><div style="font-size:9px;font-weight:700;color:var(--text)">Checkpoint #5 — Ruins</div><div style="font-size:7px;color:var(--text3)">Saved yesterday</div></div>
+                </div>
+              </div>
+            </div>
+            <div id="sc-v5" class="phone-scrim" onclick="dsClose('v5')"></div>
+            <div id="sh-v5" class="phone-sheet" style="height:220px">
+              <div class="phone-sheet-handle"><div class="phone-sheet-handle-pill"></div></div>
+              <div style="display:flex;flex-direction:column;align-items:center;padding:12px 18px 0;gap:10px">
+                <div style="width:44px;height:44px;border-radius:50%;background:rgba(255,71,87,.12);border:1px solid rgba(255,71,87,.25);display:flex;align-items:center;justify-content:center">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="var(--negative)"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                </div>
+                <div style="text-align:center">
+                  <div style="font-size:13px;font-weight:700;color:var(--text);line-height:1.3">Delete save?</div>
+                  <div style="font-size:10px;color:var(--text3);margin-top:4px;line-height:1.5">Checkpoint #7 — Cave will be permanently deleted. This can't be undone.</div>
+                </div>
+              </div>
+              <div style="flex-shrink:0;padding:14px 16px 16px;display:flex;gap:8px">
+                <button onclick="dsClose('v5')" class="btn btn--ghost btn--sm" style="flex:1">Cancel</button>
+                <button onclick="dsClose('v5')" style="flex:1.4;background:var(--negative);color:#fff;border:none;border-radius:var(--r3);font-weight:700;cursor:pointer;font-size:12px;font-family:var(--jio-font);">Delete save</button>
+              </div>
+            </div>
+          </div>
+          <button id="btn-v5" class="demo-trigger" onclick="dsOpen('v5')">Open Confirmation</button>
+        </div>
+      </div>
+      <div class="variant-demo-body">
+        <p class="variant-demo-desc">Icon at top signals severity immediately. Title is a direct question (3–5 words). Description explains consequence in one sentence. Ghost Cancel on left, destructive Confirm on right. Use <code style="font-family:monospace;font-size:12px;color:#a8e6c5">role="alertdialog"</code> — screen readers announce it with higher urgency. Focus must land on Cancel (safest action) on open.</p>
+        <div class="ds-code-block" style="margin-top:16px">
+          <div class="ds-code-label">Destructive sheet — HTML</div>
+          <pre class="ds-code-pre"><code>&lt;div class="bottom-sheet" role="alertdialog"
+  aria-modal="true"
+  aria-labelledby="confirm-title"
+  aria-describedby="confirm-desc"&gt;
+
+  &lt;div class="sheet-handle"&gt;&lt;/div&gt;
+
+  &lt;div class="sheet-body sheet-body--centered"&gt;
+    &lt;div class="confirm-icon confirm-icon--danger"&gt;&lt;!-- icon --&gt;&lt;/div&gt;
+    &lt;h2 id="confirm-title"&gt;Delete save?&lt;/h2&gt;
+    &lt;p id="confirm-desc"&gt;This can't be undone.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class="sheet-footer"&gt;
+    &lt;!-- autofocus Cancel, not Delete --&gt;
+    &lt;button autofocus class="btn btn--ghost btn--m"&gt;Cancel&lt;/button&gt;
+    &lt;button class="btn btn--danger btn--m"&gt;Delete save&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Variant 6: Rich media hero ── -->
+    <h3 class="ds-subsection-title" style="margin-top:40px">Rich media — game hero</h3>
+    <p class="ds-body" style="max-width:560px">Full-bleed hero at the top of the sheet, used for game previews and promotional drawers. Hero is fixed-height; content scrolls beneath it. The drag handle overlays the hero absolutely.</p>
+    <div class="variant-demo-section">
+      <div class="variant-demo-preview">
+        <div class="demo-trigger-group">
+          <div id="ph-v6" class="phone" style="width:220px;height:340px">
+            <div style="padding:18px 16px 0">
+              <div style="display:flex;flex-direction:column;gap:5px">
+                <div style="height:40px;background:var(--surface-2);border-radius:9px;border:1px solid var(--border-subtle);display:flex;align-items:center;gap:8px;padding:0 8px">
+                  <div style="width:24px;height:24px;background:linear-gradient(135deg,rgba(0,168,89,.3),rgba(90,60,200,.2));border-radius:5px;flex-shrink:0"></div>
+                  <span style="font-size:8px;font-weight:700;color:var(--text)">Tomb Raider: Shadow</span>
+                </div>
+                <div style="height:40px;background:var(--surface-2);border-radius:9px;border:1px solid var(--border-subtle);display:flex;align-items:center;gap:8px;padding:0 8px">
+                  <div style="width:24px;height:24px;background:linear-gradient(135deg,rgba(142,91,255,.3),rgba(0,168,89,.1));border-radius:5px;flex-shrink:0"></div>
+                  <span style="font-size:8px;font-weight:700;color:var(--text)">War Thunder</span>
+                </div>
+                <div onclick="dsOpen('v6')" style="height:40px;background:var(--surface-2);border-radius:9px;border:1px solid rgba(0,168,89,.3);display:flex;align-items:center;gap:8px;padding:0 8px;cursor:pointer">
+                  <div style="width:24px;height:24px;background:linear-gradient(135deg,rgba(0,168,89,.3),rgba(0,232,112,.1));border-radius:5px;flex-shrink:0"></div>
+                  <span style="font-size:8px;font-weight:700;color:var(--jio)">Yooka-Laylee ›</span>
+                </div>
+              </div>
+            </div>
+            <div id="sc-v6" class="phone-scrim" onclick="dsClose('v6')"></div>
+            <div id="sh-v6" class="phone-sheet" style="height:290px">
+              <!-- Handle overlays hero -->
+              <div class="phone-sheet-handle" style="position:absolute;top:0;left:0;right:0;z-index:3;padding-top:8px"><div class="phone-sheet-handle-pill"></div></div>
+              <!-- Hero -->
+              <div style="flex-shrink:0;height:120px;background:linear-gradient(135deg,#0d2b1a 0%,#1a0d2e 50%,#0b1a2e 100%);position:relative;overflow:hidden;border-radius:16px 16px 0 0">
+                <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,rgba(0,168,89,.35) 0%,transparent 60%),radial-gradient(ellipse at 20% 80%,rgba(142,91,255,.2) 0%,transparent 50%)"></div>
+                <div style="position:absolute;bottom:14px;left:14px">
+                  <div style="font-size:7px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:rgba(255,255,255,.5)">PLATFORMER · ADVENTURE</div>
+                  <div style="font-size:14px;font-weight:900;color:#fff;line-height:1.1;margin-top:2px">Yooka-Laylee</div>
+                  <div style="font-size:9px;font-weight:500;color:rgba(255,255,255,.6);margin-top:1px">&amp; The Impossible Lair</div>
+                </div>
+                <div style="position:absolute;top:10px;right:10px;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.15);border-radius:6px;padding:3px 7px">
+                  <span style="font-size:8px;font-weight:700;color:#fbbf24">★ 4.7</span>
+                </div>
+                <div style="position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(transparent,var(--surface-2))"></div>
+              </div>
+              <!-- Scrollable body -->
+              <div style="flex:1;overflow-y:auto;min-height:0;padding:8px 14px 0">
+                <div style="font-size:9px;color:var(--text2);line-height:1.6;margin-bottom:8px">A beautiful 2.5D platformer. Collect Quills, rescue Tonic powers, and challenge the Impossible Lair.</div>
+                <div style="display:flex;gap:5px;margin-bottom:10px">
+                  <div style="height:18px;border-radius:var(--pill);background:rgba(0,168,89,.12);border:1px solid rgba(0,168,89,.2);padding:0 7px;display:flex;align-items:center"><span style="font-size:7px;font-weight:700;color:var(--jio)">Free with Pass</span></div>
+                  <div style="height:18px;border-radius:var(--pill);background:var(--surface-3);border:1px solid var(--border-subtle);padding:0 7px;display:flex;align-items:center"><span style="font-size:7px;font-weight:700;color:var(--text3)">Co-op</span></div>
+                </div>
+                <div style="display:flex;gap:0;border-top:1px solid var(--border-subtle);border-bottom:1px solid var(--border-subtle);padding:8px 0">
+                  <div style="flex:1;text-align:center"><div style="font-size:11px;font-weight:700;color:var(--text)">2.1GB</div><div style="font-size:7px;color:var(--text3);margin-top:1px">Size</div></div>
+                  <div style="flex:1;text-align:center"><div style="font-size:11px;font-weight:700;color:var(--text)">7+</div><div style="font-size:7px;color:var(--text3);margin-top:1px">Age</div></div>
+                  <div style="flex:1;text-align:center"><div style="font-size:11px;font-weight:700;color:#fbbf24">4.7★</div><div style="font-size:7px;color:var(--text3);margin-top:1px">Rating</div></div>
+                  <div style="flex:1;text-align:center"><div style="font-size:11px;font-weight:700;color:var(--text)">12h</div><div style="font-size:7px;color:var(--text3);margin-top:1px">Avg play</div></div>
+                </div>
+              </div>
+              <!-- Footer -->
+              <div style="flex-shrink:0;padding:8px 14px 14px;display:flex;gap:7px">
+                <button onclick="dsClose('v6')" class="btn btn--ghost btn--sm" style="padding:0 12px">♡</button>
+                <button onclick="dsClose('v6')" class="btn btn--primary btn--sm" style="flex:1">▶ Play now</button>
+              </div>
+            </div>
+          </div>
+          <button id="btn-v6" class="demo-trigger" onclick="dsOpen('v6')">Open Game Preview</button>
+        </div>
+      </div>
+      <div class="variant-demo-body">
+        <p class="variant-demo-desc">Hero is <code style="font-family:monospace;font-size:12px;color:#a8e6c5">flex-shrink:0</code>. A gradient fade at its bottom edge blends into <code style="font-family:monospace;font-size:12px;color:#a8e6c5">--surface-2</code>. Drag handle overlays the hero via <code style="font-family:monospace;font-size:12px;color:#a8e6c5">position:absolute;z-index:2</code>. Stats row uses 4-column flex for instant reference without scroll.</p>
+        <div class="ds-code-block" style="margin-top:16px">
+          <div class="ds-code-label">CSS — rich media hero</div>
+          <pre class="ds-code-pre"><code>.sheet-hero {
+  flex-shrink: 0;
+  height: 200px; /* ~40vw on 375px viewport */
+  position: relative;
+  overflow: hidden;
+}
+.sheet-hero img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.sheet-hero-fade {
+  /* blends hero into sheet surface */
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 72px;
+  background: linear-gradient(transparent, var(--surface-2));
+  pointer-events: none;
+}
+/* Handle sits on top of hero */
+.sheet-handle { position: absolute; top: 0; left: 0; right: 0; z-index: 2; }</code></pre>
+        </div>
+      </div>
+    </div>
+
   </section>
 
   <!-- ══════════════════════════════════════════
@@ -630,6 +787,35 @@ function onDragEnd(velocity, position) {
   <!-- ══════════════════════════════════════════
        CODE — Full example
   ══════════════════════════════════════════ -->
+  <!-- API -->
+  <section class="ds-section" id="api">
+    <h2 class="ds-section-title">API</h2>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:0 0 12px;">CSS classes</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>.ds-bottom-sheet</code></td><td>Root sheet — fixed bottom, full width</td></tr>
+        <tr><td><code>.ds-bottom-sheet__handle</code></td><td>40×4px drag handle — centered top</td></tr>
+        <tr><td><code>.ds-bottom-sheet__header</code></td><td>Optional title row</td></tr>
+        <tr><td><code>.ds-bottom-sheet__body</code></td><td>Scrollable content area</td></tr>
+        <tr><td><code>.ds-bottom-sheet__scrim</code></td><td>Full-screen backdrop</td></tr>
+        <tr><td><code>.ds-bottom-sheet--open</code></td><td>Visible state — translateY(0)</td></tr>
+      </tbody>
+    </table>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 12px;">React props</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>open</code></td><td><span class="api-type">boolean</span></td><td><span class="api-default">required</span></td><td>Controls sheet visibility</td></tr>
+        <tr><td><code>onClose</code></td><td><span class="api-type">() => void</span></td><td><span class="api-default">required</span></td><td>Fired on scrim tap or swipe down</td></tr>
+        <tr><td><code>snapPoints</code></td><td><span class="api-type">number[]</span></td><td><span class="api-default">[0.5, 0.9]</span></td><td>Snap heights as fraction of viewport</td></tr>
+        <tr><td><code>defaultSnap</code></td><td><span class="api-type">number</span></td><td><span class="api-default">0</span></td><td>Index into snapPoints for initial open height</td></tr>
+        <tr><td><code>title</code></td><td><span class="api-type">string</span></td><td><span class="api-default">undefined</span></td><td>Optional header title</td></tr>
+        <tr><td><code>children</code></td><td><span class="api-type">ReactNode</span></td><td><span class="api-default">required</span></td><td>Sheet body content</td></tr>
+      </tbody>
+    </table>
+  </section>
+
   <section class="ds-section" id="code">
     <h2 class="ds-section-title">Code examples</h2>
     <p class="ds-section-desc">Copy these snippets as starting points. Always link <code style="font-family:monospace;font-size:12px;color:#a8e6c5">tokens/tokens.css</code>, <code style="font-family:monospace;font-size:12px;color:#a8e6c5">components.css</code>, and <code style="font-family:monospace;font-size:12px;color:#a8e6c5">states.css</code> first.</p>
@@ -694,7 +880,7 @@ sheet.querySelector('.sheet-handle').addEventListener('keydown', e => {
   position: fixed; inset: 0;
   background: rgba(0,0,0,.45);
   opacity: 0; pointer-events: none;
-  transition: opacity 300ms ease;
+  transition: opacity var(--dur-pop) var(--ease-out);
   z-index: 100;
 }
 .sheet-overlay.is-visible { opacity: 1; pointer-events: auto; }
@@ -705,7 +891,7 @@ sheet.querySelector('.sheet-handle').addEventListener('keydown', e => {
   border-radius: 20px 20px 0 0;
   border-top: 1px solid var(--border);
   transform: translateY(100%);
-  transition: transform 420ms cubic-bezier(0.32, 0.72, 0, 1);
+  transition: transform var(--dur-enter) var(--ease-emphasized);
   display: flex; flex-direction: column;
   max-height: 90vh;
   z-index: 101;
@@ -749,9 +935,9 @@ sheet.querySelector('.sheet-handle').addEventListener('keydown', e => {
         <tr><td><code>--overlay-scrim</code></td><td>rgba(0,0,0,.45)</td><td>Backdrop scrim color</td></tr>
         <tr><td><code>--ease-out</code></td><td>cubic-bezier(0.32,0.72,0,1)</td><td>Entry and snap easing (vaul-style)</td></tr>
         <tr><td><code>--spring</code></td><td>cubic-bezier(0.34,1.56,0.64,1)</td><td>Bounce easing for snap to higher height</td></tr>
-        <tr><td><code>--dur-300</code></td><td>300ms</td><td>Overlay fade duration</td></tr>
-        <tr><td><code>--dur-400</code></td><td>420ms</td><td>Sheet slide-up / snap duration</td></tr>
-        <tr><td><code>--dur-200</code></td><td>200ms</td><td>Dismiss (swipe-driven, ease-in)</td></tr>
+        <tr><td><code>--dur-slow</code></td><td>320ms</td><td>Overlay fade duration</td></tr>
+        <tr><td><code>--dur-sheet</code></td><td>420ms</td><td>Sheet slide-up / snap duration</td></tr>
+        <tr><td><code>--dur-default</code></td><td>200ms</td><td>Dismiss (swipe-driven, ease-in)</td></tr>
       </tbody>
     </table>
   </section>
@@ -759,6 +945,31 @@ sheet.querySelector('.sheet-handle').addEventListener('keydown', e => {
   <!-- ══════════════════════════════════════════
        DO / DON'T
   ══════════════════════════════════════════ -->
+  <!-- WHEN TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use</h2>
+    <div class="ds-usage-grid">
+      <div class="ds-usage-card ds-usage-card--do">
+        <p class="ds-usage-label ds-usage-label--do">Use when</p>
+        <ul class="ds-usage-list">
+              <li>Contextual actions for a selected item (share, report, save)</li>
+              <li>Multi-step flows that should not block the full screen</li>
+              <li>Filters and sort options on list/grid screens</li>
+              <li>Pass upsell panels that slide up over content</li>
+        </ul>
+      </div>
+      <div class="ds-usage-card ds-usage-card--dont">
+        <p class="ds-usage-label ds-usage-label--dont">Don't use when</p>
+        <ul class="ds-usage-list">
+              <li>Full app flows with many steps — use a dedicated screen</li>
+              <li>Confirmation dialogs — use Dialog for destructive actions</li>
+              <li>Content taller than 90vh without internal scrolling</li>
+              <li>Nesting one bottom sheet inside another</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <section class="ds-section" id="best-practices">
     <h2 class="ds-section-title">Do / Don&#x27;t</h2>
     <div class="bp-grid">
@@ -836,6 +1047,617 @@ sheet.querySelector('.sheet-handle').addEventListener('keydown', e => {
   <!-- ══════════════════════════════════════════
        ACCESSIBILITY
   ══════════════════════════════════════════ -->
+  <!-- MOTION -->
+  <!-- SIZES -->
+  <section class="ds-section" id="sizes">
+    <h2 class="ds-section-title">Sizes</h2>
+    <table class="ds-api-table" style="margin-top:16px;">
+      <thead><tr><th>Size</th><th>Token / Height</th><th>Use case</th><th>Platform</th></tr></thead>
+      <tbody>
+        <tr><td>Half</td><td>50vh default height</td><td>Context actions, filters</td><td>Mobile</td></tr>
+        <tr><td>Three-quarter</td><td>75vh snap point</td><td>Rich content panels</td><td>Mobile</td></tr>
+        <tr><td>Full</td><td>90vh snap point</td><td>Full-screen overlays</td><td>Mobile</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- STATES -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:16px;">
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px;">
+        <p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 6px;">Closed</p>
+        <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5;">Translated 100% off-screen; scrim hidden</p>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px;">
+        <p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 6px;">Opening</p>
+        <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5;">Slides up with ease-out; scrim fades in simultaneously</p>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px;">
+        <p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 6px;">Open</p>
+        <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5;">Resting at default snap point; draggable handle visible</p>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px;">
+        <p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 6px;">Dragging</p>
+        <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5;">Follows finger position in real time; no animation</p>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px;">
+        <p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 6px;">Snapping</p>
+        <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5;">Releases to nearest snap point with ease-out spring</p>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px;">
+        <p style="font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 6px;">Closing</p>
+        <p style="font-size:13px;color:var(--text2);margin:0;line-height:1.5;">Slides down; scrim fades out</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-motion-table">
+      <thead><tr><th>Interaction</th><th>Easing</th><th>Duration</th><th>Property</th></tr></thead>
+      <tbody>
+        <tr><td>Open</td><td><code>--ease-out</code></td><td><code>--dur-base</code></td><td>transform translateY(100% → 0)</td></tr>
+        <tr><td>Close (swipe/button)</td><td><code>--ease-in</code></td><td><code>--dur-fast</code></td><td>transform translateY(0 → 100%)</td></tr>
+        <tr><td>Scrim fade in</td><td><code>--ease-out</code></td><td><code>--dur-base</code></td><td>opacity</td></tr>
+        <tr><td>Snap expand</td><td><code>--ease-out</code></td><td><code>--dur-base</code></td><td>height</td></tr>
+        <tr><td>Handle drag</td><td><code>none</code></td><td><code>realtime</code></td><td>transform translateY</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       GESTURE BEHAVIOR
+  ══════════════════════════════════════════ -->
+  <section class="ds-section" id="gesture">
+    <h2 class="ds-section-title">Gesture behavior</h2>
+    <p class="ds-section-desc">Touch-driven interaction model. All thresholds are minimum recommendations — tune for your content density.</p>
+
+    <h3 class="ds-subsection-title" style="margin-top:24px;font-size:13px;font-weight:700;color:var(--text)">Drag thresholds</h3>
+    <table class="ds-api-table" style="margin-top:12px">
+      <thead><tr><th>Gesture</th><th>Threshold</th><th>Outcome</th></tr></thead>
+      <tbody>
+        <tr><td>Slow drag down, release below 40% height</td><td>&lt; 0.3 px/ms velocity</td><td>Snap to lower snap point or dismiss</td></tr>
+        <tr><td>Fast flick down</td><td>≥ 0.5 px/ms velocity</td><td>Dismiss regardless of position</td></tr>
+        <tr><td>Fast flick up</td><td>≥ 0.5 px/ms velocity</td><td>Snap to next higher snap point</td></tr>
+        <tr><td>Drag up past max height</td><td>&gt; 92 vh</td><td>Rubber-band resist — spring back to max on release</td></tr>
+        <tr><td>Drag on scrollable body at top</td><td>scrollTop === 0</td><td>Pass drag to sheet drag handler</td></tr>
+        <tr><td>Drag on scrollable body mid-scroll</td><td>scrollTop &gt; 0</td><td>Scroll the body; do not move the sheet</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="ds-subsection-title" style="margin-top:24px;font-size:13px;font-weight:700;color:var(--text)">Overscroll &amp; rubber-band</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px">
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px">
+        <p style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 8px">Overscroll up (past max)</p>
+        <p style="font-size:12px;color:var(--text2);margin:0;line-height:1.6">Resist with <code style="font-family:monospace;font-size:11px;color:#a8e6c5">Math.pow(delta, 0.7)</code> (damped spring). Sheet follows finger at ~35% ratio. On release, snap back to max height with spring easing <code style="font-family:monospace;font-size:11px;color:#a8e6c5">cubic-bezier(.34,1.56,.64,1)</code>.</p>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);padding:16px">
+        <p style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:0 0 8px">Overscroll down (dismiss zone)</p>
+        <p style="font-size:12px;color:var(--text2);margin:0;line-height:1.6">Sheet follows finger 1:1. Scrim opacity tracks linearly: <code style="font-family:monospace;font-size:11px;color:#a8e6c5">opacity = 0.45 * (sheetY / dismissThreshold)</code>. Fast flick below 40% height → dismiss with <code style="font-family:monospace;font-size:11px;color:#a8e6c5">ease-in 200ms</code>.</p>
+      </div>
+    </div>
+
+    <h3 class="ds-subsection-title" style="margin-top:24px;font-size:13px;font-weight:700;color:var(--text)">Scroll handoff</h3>
+    <div class="ds-code-block" style="margin-top:12px">
+      <div class="ds-code-label">JS — scroll / drag handoff</div>
+      <pre class="ds-code-pre"><code>let startY = 0;
+let isDraggingSheet = false;
+
+body.addEventListener('touchstart', (e) => {
+  startY = e.touches[0].clientY;
+  isDraggingSheet = body.scrollTop === 0; // only drag if at top
+});
+
+body.addEventListener('touchmove', (e) => {
+  const dy = e.touches[0].clientY - startY;
+  if (isDraggingSheet && dy > 0) {
+    e.preventDefault(); // stop body scroll — hand off to sheet
+    moveSheet(dy);      // translate sheet with finger
+  }
+  // dy < 0 (scrolling up): let body scroll naturally
+}, { passive: false });
+
+body.addEventListener('touchend', (e) => {
+  if (isDraggingSheet) snapOrDismiss(velocity);
+});</code></pre>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       CONTENT GUIDELINES
+  ══════════════════════════════════════════ -->
+  <section class="ds-section" id="content">
+    <h2 class="ds-section-title">Content guidelines</h2>
+    <p class="ds-section-desc">Rules for titles, action labels, item count, and copy inside a bottom sheet.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px">
+
+      <!-- Titles -->
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);overflow:hidden">
+        <div style="padding:12px 16px 10px;border-bottom:1px solid var(--border-subtle);background:var(--surface-2)">
+          <p style="margin:0;font-size:11px;font-weight:700;color:var(--text);letter-spacing:.3px">Sheet title</p>
+        </div>
+        <div style="padding:14px 16px;display:flex;flex-direction:column;gap:10px">
+          <div>
+            <p style="margin:0 0 4px;font-size:10px;font-weight:700;color:var(--jio);text-transform:uppercase;letter-spacing:.5px">✓ Do</p>
+            <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px">
+              <li style="font-size:12px;color:var(--text2);line-height:1.5">2–5 words, action-noun ("Share game", "Filter by genre")</li>
+              <li style="font-size:12px;color:var(--text2);line-height:1.5">Destructive: direct question ("Delete save?")</li>
+              <li style="font-size:12px;color:var(--text2);line-height:1.5">Sentence case, no trailing punctuation</li>
+            </ul>
+          </div>
+          <div>
+            <p style="margin:0 0 4px;font-size:10px;font-weight:700;color:var(--negative);text-transform:uppercase;letter-spacing:.5px">✕ Don't</p>
+            <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px">
+              <li style="font-size:12px;color:var(--text2);line-height:1.5">Generic labels: "Options", "Menu", "More"</li>
+              <li style="font-size:12px;color:var(--text2);line-height:1.5">More than 6 words — wraps awkwardly</li>
+              <li style="font-size:12px;color:var(--text2);line-height:1.5">Title Case For Every Word</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action labels -->
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);overflow:hidden">
+        <div style="padding:12px 16px 10px;border-bottom:1px solid var(--border-subtle);background:var(--surface-2)">
+          <p style="margin:0;font-size:11px;font-weight:700;color:var(--text);letter-spacing:.3px">Action labels</p>
+        </div>
+        <div style="padding:14px 16px;display:flex;flex-direction:column;gap:10px">
+          <div>
+            <p style="margin:0 0 4px;font-size:10px;font-weight:700;color:var(--jio);text-transform:uppercase;letter-spacing:.5px">✓ Do</p>
+            <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px">
+              <li style="font-size:12px;color:var(--text2);line-height:1.5">Verb-first: "Apply filters", "Save settings"</li>
+              <li style="font-size:12px;color:var(--text2);line-height:1.5">Destructive CTA echoes the action: "Delete save"</li>
+              <li style="font-size:12px;color:var(--text2);line-height:1.5">1–3 words per button label</li>
+            </ul>
+          </div>
+          <div>
+            <p style="margin:0 0 4px;font-size:10px;font-weight:700;color:var(--negative);text-transform:uppercase;letter-spacing:.5px">✕ Don't</p>
+            <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px">
+              <li style="font-size:12px;color:var(--text2);line-height:1.5">"OK" / "Yes" / "No" — ambiguous after time passes</li>
+              <li style="font-size:12px;color:var(--text2);line-height:1.5">More than 2 footer actions</li>
+              <li style="font-size:12px;color:var(--text2);line-height:1.5">Two primary (green) buttons side-by-side</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item count -->
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);overflow:hidden">
+        <div style="padding:12px 16px 10px;border-bottom:1px solid var(--border-subtle);background:var(--surface-2)">
+          <p style="margin:0;font-size:11px;font-weight:700;color:var(--text);letter-spacing:.3px">Action list — item count</p>
+        </div>
+        <div style="padding:14px 16px">
+          <table style="width:100%;border-collapse:collapse;font-size:12px">
+            <thead><tr>
+              <th style="text-align:left;padding:4px 0;font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.5px;text-transform:uppercase;padding-bottom:8px">Count</th>
+              <th style="text-align:left;padding:4px 0;font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.5px;text-transform:uppercase;padding-bottom:8px">Guidance</th>
+            </tr></thead>
+            <tbody>
+              <tr><td style="padding:5px 0;color:var(--jio);font-weight:700">2–4</td><td style="padding:5px 0;color:var(--text2)">Ideal — fits in half-height sheet, no scroll</td></tr>
+              <tr><td style="padding:5px 0;color:var(--jio);font-weight:700">5–6</td><td style="padding:5px 0;color:var(--text2)">Acceptable — use scroll or expand to 75vh</td></tr>
+              <tr><td style="padding:5px 0;color:var(--negative);font-weight:700">7+</td><td style="padding:5px 0;color:var(--text2)">Reconsider — add search or move to a full screen</td></tr>
+              <tr><td style="padding:5px 0;color:var(--negative);font-weight:700">1</td><td style="padding:5px 0;color:var(--text2)">Use a Toast or inline action instead</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Descriptions -->
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r3);overflow:hidden">
+        <div style="padding:12px 16px 10px;border-bottom:1px solid var(--border-subtle);background:var(--surface-2)">
+          <p style="margin:0;font-size:11px;font-weight:700;color:var(--text);letter-spacing:.3px">Descriptions &amp; helper text</p>
+        </div>
+        <div style="padding:14px 16px;display:flex;flex-direction:column;gap:10px">
+          <div>
+            <p style="margin:0 0 4px;font-size:10px;font-weight:700;color:var(--jio);text-transform:uppercase;letter-spacing:.5px">✓ Do</p>
+            <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px">
+              <li style="font-size:12px;color:var(--text2);line-height:1.5">Max 2 lines below the title (≈ 80 chars)</li>
+              <li style="font-size:12px;color:var(--text2);line-height:1.5">State the consequence, not the mechanic</li>
+              <li style="font-size:12px;color:var(--text2);line-height:1.5">Omit if the title is self-evident</li>
+            </ul>
+          </div>
+          <div>
+            <p style="margin:0 0 4px;font-size:10px;font-weight:700;color:var(--negative);text-transform:uppercase;letter-spacing:.5px">✕ Don't</p>
+            <ul style="margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px">
+              <li style="font-size:12px;color:var(--text2);line-height:1.5">Repeat the sheet title verbatim</li>
+              <li style="font-size:12px;color:var(--text2);line-height:1.5">Marketing copy ("Unlock incredible features…")</li>
+              <li style="font-size:12px;color:var(--text2);line-height:1.5">3+ sentences — move to a dedicated screen</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       JIOGAMES APP PATTERNS
+  ══════════════════════════════════════════ -->
+  <section class="ds-section" id="app-patterns">
+    <h2 class="ds-section-title">JioGames app patterns</h2>
+    <p class="ds-section-desc">Five real bottom-sheet patterns from the JioGames app, rebuilt against the DLS foundation.</p>
+
+    <!-- styles scoped to this section -->
+    <style>
+      /* ── Duration picker ── */
+      .dur-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:10px 0 8px }
+      .dur-card { background:var(--surface-3);border:1.5px solid transparent;border-radius:10px;padding:9px 6px;text-align:center;cursor:pointer;position:relative;transition:border-color var(--dur-default) var(--ease-out),background var(--dur-default) var(--ease-out) }
+      .dur-card.sel { background:rgba(0,168,89,.12);border-color:var(--jio) }
+      .dur-card-label { font-size:8px;font-weight:700;color:var(--text3) }
+      .dur-card-price { font-size:12px;font-weight:700;color:var(--text);margin-top:2px }
+      .dur-card.sel .dur-card-label,.dur-card.sel .dur-card-price { color:var(--jio) }
+      .dur-save { position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:#f59e0b;color:#000;font-size:7px;font-weight:700;border-radius:4px;padding:2px 5px;white-space:nowrap;letter-spacing:.3px }
+      /* ── Accordion rows ── */
+      /* accordion wrapper = the card */
+      .acc-wrap { background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:9px;overflow:hidden;margin:5px 0 }
+      .acc-row { display:flex;align-items:center;gap:8px;padding:11px 12px;cursor:pointer; }
+      .acc-row-icon { width:22px;height:22px;border-radius:6px;background:rgba(0,168,89,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0 }
+      .acc-row-label { font-size:10px;font-weight:700;color:var(--text);flex:1 }
+      .acc-row-chevron { color:var(--text3);transition:transform var(--dur-pop) var(--ease-out);display:flex;align-items:center }
+      .acc-wrap.open .acc-row-chevron { transform:rotate(180deg) }
+      .acc-body { overflow:hidden;max-height:0;transition:max-height var(--dur-pop) var(--ease-out);border-top:0 solid var(--border-subtle) }
+      .acc-wrap.open .acc-body { max-height:140px;border-top-width:1px }
+      /* ── Plan radio cards ── */
+      .plan-card { display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--surface-2);border-radius:10px;border:1.5px solid var(--border-subtle);margin:6px 0;cursor:pointer;transition:border-color var(--dur-default) var(--ease-out) }
+      .plan-card.sel { border-color:var(--jio) }
+      .plan-radio { width:14px;height:14px;border-radius:50%;border:1.5px solid var(--border);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:border-color var(--dur-default) var(--ease-out) }
+      .plan-card.sel .plan-radio { border-color:var(--jio) }
+      .plan-radio-inner { width:7px;height:7px;border-radius:50%;background:var(--jio);opacity:0;transition:opacity var(--dur-fast) var(--ease-out) }
+      .plan-card.sel .plan-radio-inner { opacity:1 }
+      .plan-upgrade { display:inline-block;font-size:7px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--jio);background:rgba(0,168,89,.15);border-radius:4px;padding:2px 6px;margin-left:5px;vertical-align:middle }
+      /* ── Feature bullet rows ── */
+      .feat-row { display:flex;align-items:flex-start;gap:10px;padding:5px 0 }
+      .feat-icon { width:22px;height:22px;border-radius:6px;background:rgba(0,168,89,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:0 }
+      .feat-text { font-size:10px;font-weight:700;color:var(--text);line-height:1.4;padding-top:3px }
+      /* ── Warning banner ── */
+      .warn-banner { display:flex;align-items:flex-start;gap:8px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:9px;padding:9px 12px;margin:8px 0 }
+      .warn-icon { font-size:12px;flex-shrink:0;margin-top:0;color:#f59e0b }
+      .warn-text { font-size:9px;font-weight:700;color:#f59e0b;line-height:1.5 }
+      /* ── Privacy note ── */
+      .privacy-note { display:flex;align-items:flex-start;gap:7px;background:var(--surface-3);border-radius:8px;padding:8px 10px;margin:8px 0 }
+      .privacy-text { font-size:8px;font-weight:500;color:var(--text3);line-height:1.55 }
+      /* ── Step chip ── */
+      .step-chip { display:inline-flex;align-items:center;gap:5px;background:var(--jio);border-radius:var(--pill);padding:5px 10px 5px 5px;font-size:9px;font-weight:700;color:var(--text-inv);cursor:pointer }
+      .step-chip-num { width:18px;height:18px;border-radius:50%;background:rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900 }
+      /* ── Date field ── */
+      .date-field { display:flex;align-items:center;gap:9px;background:var(--surface-2);border:1px solid var(--border);border-radius:9px;padding:10px 12px;margin:10px 0 }
+      .date-label { font-size:8px;color:var(--text3);margin-bottom:1px }
+      .date-value { font-size:11px;font-weight:700;color:var(--text) }
+      /* ── Bill summary ── */
+      .bill-row { display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border-subtle) }
+      .bill-total { display:flex;justify-content:space-between;padding:7px 0 0 }
+    </style>
+
+    <div style="display:flex;flex-wrap:wrap;gap:32px;margin-top:32px;justify-content:flex-start">
+
+      <!-- ─── Pattern 1: Pass Purchase ─── -->
+      <div style="flex-shrink:0">
+        <p style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin:0 0 12px">Pass purchase</p>
+        <div class="phone" style="width:300px;height:620px;background:#08090e;overflow:hidden">
+          <!-- App bg -->
+          <div style="padding:18px 18px 0">
+            <div style="font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">All Screen Pass</div>
+            <div style="height:72px;background:linear-gradient(135deg,rgba(0,168,89,.1),rgba(90,60,200,.08));border-radius:12px;border:1px solid var(--border-subtle);display:flex;align-items:center;padding:0 14px;gap:10px">
+              <div style="width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,rgba(0,168,89,.3),rgba(90,60,200,.2));flex-shrink:0"></div>
+              <div><div style="font-size:11px;font-weight:700;color:var(--text)">All Screen Pass</div><div style="font-size:9px;color:var(--text3);margin-top:2px">800+ PC games · No ads · Instant play</div></div>
+            </div>
+          </div>
+          <!-- Scrim -->
+          <div style="position:absolute;inset:0;background:rgba(0,0,0,.5);pointer-events:none"></div>
+          <!-- Sheet — always open -->
+          <div style="position:absolute;bottom:0;left:0;right:0;background:var(--surface-2);border-radius:20px 20px 0 0;border-top:1px solid var(--border);display:flex;flex-direction:column;height:530px">
+            <div style="display:flex;justify-content:center;padding:10px 0 var(--space-1);flex-shrink:0"><div style="width:40px;height:4px;border-radius:2px;background:rgba(255,255,255,.2)"></div></div>
+            <!-- Body -->
+            <div style="padding:2px 18px 0;flex:1;overflow:hidden">
+              <div class="sheet-title" style="display:flex;align-items:center;gap:6px;padding-right:36px">
+                <span style="font-size:18px;font-weight:700;color:var(--text)">All Screen Pass</span>
+                <span style="font-size:14px;color:var(--text3)">ⓘ</span>
+              </div>
+              <div class="sheet-desc" style="font-size:11px;color:var(--text3);line-height:1.6">800+ PC games. No ads. Instant play.</div>
+              <!-- Duration picker -->
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px">
+                <div style="background:var(--surface-3);border:1.5px solid transparent;border-radius:12px;padding:11px 8px;text-align:center;position:relative">
+                  <div style="font-size:10px;font-weight:700;color:var(--text3)">3 Days</div>
+                  <div style="font-size:14px;font-weight:700;color:var(--text);margin-top:3px">₹48</div>
+                </div>
+                <div style="background:var(--surface-3);border:1.5px solid transparent;border-radius:12px;padding:11px 8px;text-align:center;position:relative">
+                  <div style="position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:#f59e0b;color:#000;font-size:8px;font-weight:700;border-radius:4px;padding:2px 6px;white-space:nowrap">SAVE 20%</div>
+                  <div style="font-size:10px;font-weight:700;color:var(--text3)">7 Days</div>
+                  <div style="font-size:14px;font-weight:700;color:var(--text);margin-top:3px">₹98</div>
+                </div>
+                <div style="background:rgba(0,168,89,.12);border:1.5px solid var(--jio);border-radius:12px;padding:11px 8px;text-align:center;position:relative">
+                  <div style="position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:#f59e0b;color:#000;font-size:8px;font-weight:700;border-radius:4px;padding:2px 6px;white-space:nowrap">SAVE 35%</div>
+                  <div style="font-size:10px;font-weight:700;color:var(--jio)">28 Days</div>
+                  <div style="font-size:14px;font-weight:700;color:var(--jio);margin-top:3px">₹398</div>
+                </div>
+              </div>
+              <!-- Billing Details -->
+              <div style="background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:10px;overflow:hidden;margin-bottom:8px">
+                <div style="display:flex;align-items:center;gap:10px;padding:12px 14px">
+                  <div style="width:26px;height:26px;border-radius:7px;background:rgba(0,168,89,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg viewBox="0 0 24 24" width="13" height="13" fill="var(--jio)"><path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4V8h16v10zM4 6h16v2H4z"/></svg></div>
+                  <span style="font-size:12px;font-weight:700;color:var(--text);flex:1">Billing Details</span>
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="var(--text3)"><path d="M7 10l5 5 5-5z"/></svg>
+                </div>
+              </div>
+              <!-- Apply Coupon -->
+              <div style="background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:10px;overflow:hidden;margin-bottom:8px">
+                <div style="display:flex;align-items:center;gap:10px;padding:12px 14px">
+                  <div style="width:26px;height:26px;border-radius:7px;background:rgba(0,168,89,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg viewBox="0 0 24 24" width="13" height="13" fill="var(--jio)"><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58s1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41s-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg></div>
+                  <span style="font-size:12px;font-weight:700;color:var(--text);flex:1">Apply Coupon</span>
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="var(--text3)"><path d="M7 10l5 5 5-5z"/></svg>
+                </div>
+              </div>
+              <!-- Bill Summary — open -->
+              <div style="background:var(--surface-2);border:1px solid var(--border-subtle);border-radius:10px;overflow:hidden">
+                <div style="display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid var(--border-subtle)">
+                  <div style="width:26px;height:26px;border-radius:7px;background:rgba(0,168,89,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg viewBox="0 0 24 24" width="13" height="13" fill="var(--jio)"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg></div>
+                  <span style="font-size:12px;font-weight:700;color:var(--text);flex:1">Bill Summary</span>
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="var(--text3)" style="transform:rotate(180deg)"><path d="M7 10l5 5 5-5z"/></svg>
+                </div>
+                <div style="padding:12px 14px;display:flex;flex-direction:column;gap:0">
+                  <div style="display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:9px;border-bottom:1px solid var(--border-subtle)">
+                    <div><div style="font-size:11px;font-weight:700;color:var(--text)">All Screen Pass</div><div style="font-size:9px;color:var(--text3);margin-top:2px">28 Days · Auto-renew</div></div>
+                    <span style="font-size:12px;font-weight:700;color:var(--text)">₹398</span>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border-subtle)">
+                    <span style="font-size:11px;color:var(--text2)">Taxes &amp; charges</span>
+                    <span style="font-size:11px;color:var(--text2)">₹11</span>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;padding-top:9px">
+                    <span style="font-size:12px;font-weight:700;color:var(--text)">To pay</span>
+                    <span style="font-size:16px;font-weight:700;color:var(--text)">₹409</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Footer -->
+            <div style="flex-shrink:0;padding:12px 18px 16px">
+              <div style="width:100%;height:52px;background:var(--jio);border-radius:var(--pill);display:flex;align-items:center;justify-content:center"><span style="font-size:16px;font-weight:700;color:var(--text-inv)">Pay ₹409</span></div>
+              <p style="text-align:center;font-size:10px;color:var(--text3);margin:7px 0 0">Auto-renews automatically · Cancel anytime</p>
+            </div>
+          </div>
+        </div>
+        <p style="font-size:11px;color:var(--text2);line-height:1.6;margin:12px 0 0;max-width:300px">Duration picker · accordions · sticky pay</p>
+      </div>
+
+      <!-- ─── Pattern 2: Subscription Renewal ─── -->
+      <div style="flex-shrink:0">
+        <p style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin:0 0 12px">Subscription renewal</p>
+        <div class="phone" style="width:300px;height:620px;background:#08090e;overflow:hidden">
+          <!-- Notification screen -->
+          <div style="padding:14px 14px 0">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+              <span style="font-size:14px;font-weight:700;color:var(--text)">Notifications</span>
+              <span style="font-size:10px;font-weight:700;color:var(--jio);background:rgba(0,168,89,.12);border-radius:var(--pill);padding:2px 8px">3 unread</span>
+            </div>
+            <div style="background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:10px;padding:10px 12px;margin-bottom:6px;display:flex;align-items:center;gap:8px">
+              <span style="font-size:15px">🔕</span>
+              <div><div style="font-size:10px;font-weight:700;color:var(--text)">Push notifications are off</div><div style="font-size:8px;color:var(--text3)">Tap to enable in Settings</div></div>
+            </div>
+            <div style="background:var(--surface-2);border-radius:10px;padding:10px 12px;margin-bottom:6px;border:1px solid var(--border-subtle);display:flex;align-items:flex-start;gap:8px">
+              <div style="width:26px;height:26px;border-radius:7px;background:rgba(255,71,87,.12);flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px"><span style="font-size:13px">🛡</span></div>
+              <div style="flex:1"><div style="font-size:10px;font-weight:700;color:var(--text)">New login detected from Chrome on Windows</div><div style="font-size:8px;color:var(--text3);margin-top:2px">Mumbai · 4 Jun 2026</div></div>
+              <div style="width:7px;height:7px;border-radius:50%;background:var(--jio);flex-shrink:0;margin-top:4px"></div>
+            </div>
+            <div style="background:var(--surface-2);border-radius:10px;padding:10px 12px;border:1px solid var(--border-subtle);display:flex;align-items:flex-start;gap:8px">
+              <div style="width:26px;height:26px;border-radius:7px;background:rgba(0,168,89,.12);flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px"><svg viewBox="0 0 24 24" width="13" height="13" fill="var(--jio)"><path d="M20 4H4c-1.11 0-2 .89-2 2v12c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2z"/></svg></div>
+              <div style="flex:1">
+                <div style="font-size:9px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.4px">Mobile Pass</div>
+                <div style="font-size:12px;font-weight:700;color:var(--text)">Expires in 2 days</div>
+                <div style="font-size:8px;color:var(--text3)">10 Jun 2026 · ₹111</div>
+                <div style="margin-top:6px;height:28px;background:var(--jio);border-radius:6px;display:flex;align-items:center;justify-content:center"><span style="font-size:10px;font-weight:700;color:var(--text-inv)">Renew now</span></div>
+              </div>
+            </div>
+          </div>
+          <!-- Scrim -->
+          <div style="position:absolute;inset:0;background:rgba(0,0,0,.5);pointer-events:none"></div>
+          <!-- Sheet — always open, half height -->
+          <div style="position:absolute;bottom:0;left:0;right:0;background:var(--surface-2);border-radius:20px 20px 0 0;border-top:1px solid var(--border);display:flex;flex-direction:column;height:390px">
+            <div style="display:flex;justify-content:center;padding:10px 0 var(--space-1);flex-shrink:0"><div style="width:40px;height:4px;border-radius:2px;background:rgba(255,255,255,.2)"></div></div>
+            <div style="padding:6px 18px 0;flex:1;overflow:hidden">
+              <div style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--jio);margin-bottom:var(--space-0-5)">Subscription</div>
+              <div class="sheet-title" style="font-size:20px;font-weight:700;color:var(--text)">Renew Mobile Pass</div>
+              <div class="sheet-desc" style="font-size:11px;color:var(--text3);line-height:1.6">Your pass renews on 10 Jun 2026. Choose a plan to continue.</div>
+              <!-- Plan cards -->
+              <div style="background:var(--surface-2);border:1.5px solid var(--jio);border-radius:12px;padding:14px;margin-bottom:10px;display:flex;align-items:flex-start;gap:12px">
+                <div style="width:16px;height:16px;border-radius:50%;border:1.5px solid var(--jio);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center"><div style="width:8px;height:8px;border-radius:50%;background:var(--jio)"></div></div>
+                <div>
+                  <div style="font-size:12px;font-weight:700;color:var(--text)">Mobile Pass</div>
+                  <div style="font-size:17px;font-weight:700;color:var(--text)">₹111 <span style="font-size:11px;font-weight:500;color:var(--text3)">/ 56 days</span></div>
+                  <div style="font-size:10px;color:var(--text3)">150+ mobile games · Play on phone</div>
+                </div>
+              </div>
+              <div style="background:var(--surface-2);border:1.5px solid var(--border-subtle);border-radius:12px;padding:14px;display:flex;align-items:flex-start;gap:12px">
+                <div style="width:16px;height:16px;border-radius:50%;border:1.5px solid var(--border);flex-shrink:0;margin-top:2px"></div>
+                <div>
+                  <div style="font-size:12px;font-weight:700;color:var(--text)">All Screen Pass <span style="display:inline-block;font-size:9px;font-weight:700;color:var(--jio);background:rgba(0,168,89,.15);border-radius:4px;padding:2px 7px;margin-left:4px;vertical-align:middle">UPGRADE</span></div>
+                  <div style="font-size:17px;font-weight:700;color:var(--text)">₹298 <span style="font-size:11px;font-weight:500;color:var(--text3)">/ 28 days</span></div>
+                  <div style="font-size:10px;color:var(--text3)">500+ games · Mobile, TV &amp; laptop</div>
+                </div>
+              </div>
+            </div>
+            <div style="flex-shrink:0;padding:12px 18px 16px">
+              <div style="width:100%;height:50px;background:var(--jio);border-radius:var(--pill);display:flex;align-items:center;justify-content:center"><span style="font-size:15px;font-weight:700;color:var(--text-inv)">Renew Mobile Pass</span></div>
+            </div>
+          </div>
+        </div>
+        <p style="font-size:11px;color:var(--text2);line-height:1.6;margin:12px 0 0;max-width:300px">Radio plan selector · UPGRADE badge · half-height</p>
+      </div>
+
+      <!-- ─── Pattern 3: Connect Steam ─── -->
+      <div style="flex-shrink:0">
+        <p style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin:0 0 12px">Connect store</p>
+        <div class="phone" style="width:300px;height:620px;overflow:hidden;background:#000">
+          <!-- Game art bg -->
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,#3d1a00 0%,#1a0d00 38%,rgba(0,0,0,.88) 65%,#000 100%)">
+            <div style="position:absolute;top:0;left:0;right:0;height:58%;background:radial-gradient(ellipse at 60% 30%,rgba(255,120,30,.45) 0%,rgba(80,20,0,.5) 40%,transparent 70%);opacity:.9"></div>
+            <div style="position:absolute;top:14px;left:50%;transform:translateX(-50%);width:80%;text-align:center">
+              <div style="font-size:11px;font-weight:900;color:rgba(255,255,255,.12);letter-spacing:8px;text-transform:uppercase;margin-bottom:3px">TOMB</div>
+              <div style="font-size:11px;font-weight:900;color:rgba(255,255,255,.12);letter-spacing:8px;text-transform:uppercase">RAIDER</div>
+            </div>
+          </div>
+          <!-- Scrim -->
+          <div style="position:absolute;inset:0;background:rgba(0,0,0,.45);pointer-events:none"></div>
+          <!-- Sheet -->
+          <div style="position:absolute;bottom:0;left:0;right:0;background:var(--surface-2);border-radius:20px 20px 0 0;border-top:1px solid var(--border);display:flex;flex-direction:column;height:428px">
+            <div style="display:flex;justify-content:center;padding:10px 0 var(--space-1);flex-shrink:0"><div style="width:40px;height:4px;border-radius:2px;background:rgba(255,255,255,.2)"></div></div>
+            <div style="padding:4px 20px 0;flex:1;overflow:hidden">
+              <div class="sheet-title" style="font-size:22px;font-weight:700;color:var(--text);line-height:1.2">Connect Steam to Play</div>
+              <div class="sheet-desc" style="font-size:11px;color:var(--text3);line-height:1.6">Link your Steam account so JioGames can verify ownership and unlock Tomb Raider — no extra purchase needed.</div>
+              <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:10px">
+                <div style="width:28px;height:28px;border-radius:8px;background:rgba(0,168,89,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-size:13px;color:var(--jio)">✓</span></div>
+                <span style="font-size:13px;font-weight:700;color:var(--text);padding-top:5px">No extra purchase — you already own it</span>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:var(--space-1-5);margin-bottom:var(--space-2)">
+                <div style="width:28px;height:28px;border-radius:8px;background:rgba(0,168,89,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-size:13px;color:var(--jio)">⚡</span></div>
+                <span style="font-size:13px;font-weight:700;color:var(--text);padding-top:5px">Instant access via cloud gaming</span>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:10px;background:var(--surface-3);border-radius:10px;padding:10px 12px">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="var(--text3)" style="flex-shrink:0;margin-top:2px"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+                <span style="font-size:10px;color:var(--text3);line-height:1.6">Read-only access. JioGames cannot purchase, post, or modify your Steam account.</span>
+              </div>
+            </div>
+            <div style="flex-shrink:0;padding:10px 20px 10px;display:flex;flex-direction:column;gap:8px">
+              <div style="height:50px;background:var(--jio);border-radius:var(--pill);display:flex;align-items:center;justify-content:center"><span style="font-size:15px;font-weight:700;color:var(--text-inv)">Connect Steam</span></div>
+              <div style="height:44px;background:var(--surface-3);border:1px solid var(--border-subtle);border-radius:var(--pill);display:flex;align-items:center;justify-content:center"><span style="font-size:14px;font-weight:700;color:var(--text2)">Not Now</span></div>
+              <div style="display:flex;justify-content:center;padding-top:2px">
+                <div style="display:inline-flex;align-items:center;gap:6px;background:var(--jio);border-radius:var(--pill);padding:6px 12px 6px 6px">
+                  <div style="width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:var(--text-inv)">S7</div>
+                  <span style="font-size:11px;font-weight:700;color:var(--text-inv)">Connect Store</span>
+                  <span style="font-size:11px;color:var(--text-inv)">∧</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p style="font-size:11px;color:var(--text2);line-height:1.6;margin:12px 0 0;max-width:300px">Game art bg · feature bullets · privacy note · step chip</p>
+      </div>
+
+      <!-- ─── Pattern 4: Set Reminder ─── -->
+      <div style="flex-shrink:0">
+        <p style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin:0 0 12px">Set reminder</p>
+        <div class="phone" style="width:300px;height:620px;overflow:hidden;background:#000">
+          <!-- Art bg -->
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,#1a1a24 0%,#0d0d14 45%,rgba(0,0,0,.92) 70%,#000 100%)">
+            <div style="position:absolute;top:0;left:0;right:0;height:55%;background:radial-gradient(ellipse at 50% 20%,rgba(80,80,130,.3) 0%,transparent 70%)"></div>
+            <div style="position:absolute;top:34px;left:24px">
+              <div style="font-size:22px;font-weight:900;color:rgba(180,30,30,.7);letter-spacing:3px;line-height:1">TOMB</div>
+              <div style="font-size:22px;font-weight:900;color:rgba(180,30,30,.7);letter-spacing:3px">RAIDER</div>
+            </div>
+          </div>
+          <!-- Scrim -->
+          <div style="position:absolute;inset:0;background:rgba(0,0,0,.45);pointer-events:none"></div>
+          <!-- Sheet -->
+          <div style="position:absolute;bottom:0;left:0;right:0;background:var(--surface-2);border-radius:20px 20px 0 0;border-top:1px solid var(--border);display:flex;flex-direction:column;height:372px">
+            <div style="display:flex;justify-content:center;padding:10px 0 var(--space-1);flex-shrink:0"><div style="width:40px;height:4px;border-radius:2px;background:rgba(255,255,255,.2)"></div></div>
+            <div style="padding:6px 20px 0;flex:1;overflow:hidden">
+              <div class="sheet-title" style="font-size:22px;font-weight:700;color:var(--text)">Set a Reminder</div>
+              <div class="sheet-desc" style="font-size:11px;color:var(--text3);line-height:1.6">We'll notify you when Tomb Raider becomes available on <strong style="color:var(--text);font-weight:700">Jun 4, 2026</strong>. You can remove it anytime.</div>
+              <div style="display:flex;align-items:center;gap:12px;background:var(--surface-2);border:1px solid var(--border);border-radius:10px;padding:14px 16px">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="var(--text3)" style="flex-shrink:0"><path d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>
+                <div><div style="font-size:9px;color:var(--text3);margin-bottom:2px">Reminder date</div><div style="font-size:14px;font-weight:700;color:var(--text)">Jun 4, 2026</div></div>
+              </div>
+            </div>
+            <div style="flex-shrink:0;padding:12px 20px 10px;display:flex;flex-direction:column;gap:8px">
+              <div style="height:50px;background:var(--jio);border-radius:var(--pill);display:flex;align-items:center;justify-content:center"><span style="font-size:15px;font-weight:700;color:var(--text-inv)">Set Reminder</span></div>
+              <div style="height:44px;background:var(--surface-3);border:1px solid var(--border-subtle);border-radius:var(--pill);display:flex;align-items:center;justify-content:center"><span style="font-size:14px;font-weight:700;color:var(--text2)">Cancel</span></div>
+              <div style="display:flex;justify-content:center;padding-top:2px">
+                <div style="display:inline-flex;align-items:center;gap:6px;background:var(--jio);border-radius:var(--pill);padding:6px 12px 6px 6px">
+                  <div style="width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:var(--text-inv)">S5</div>
+                  <span style="font-size:11px;font-weight:700;color:var(--text-inv)">Remind me</span>
+                  <span style="font-size:11px;color:var(--text-inv)">∧</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p style="font-size:11px;color:var(--text2);line-height:1.6;margin:12px 0 0;max-width:300px">Minimal — date field · two actions · step chip</p>
+      </div>
+
+      <!-- ─── Pattern 5: 30-day Unlock ─── -->
+      <div style="flex-shrink:0">
+        <p style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text3);margin:0 0 12px">30-day access unlock</p>
+        <div class="phone" style="width:300px;height:620px;overflow:hidden;background:#000">
+          <!-- Art bg -->
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,#1a1220 0%,#0d0a14 45%,rgba(0,0,0,.92) 68%,#080a10 100%)">
+            <div style="position:absolute;top:0;left:0;right:0;height:55%;background:radial-gradient(ellipse at 40% 30%,rgba(60,40,100,.4) 0%,transparent 65%)"></div>
+            <div style="position:absolute;top:30px;left:22px">
+              <div style="font-size:20px;font-weight:900;color:rgba(160,20,20,.65);letter-spacing:3px;line-height:1">TOMB</div>
+              <div style="font-size:20px;font-weight:900;color:rgba(160,20,20,.65);letter-spacing:3px">RAIDER</div>
+            </div>
+          </div>
+          <!-- Page dots -->
+          <div style="position:absolute;top:48%;left:50%;transform:translate(-50%,-50%);display:flex;gap:5px;z-index:2">
+            <div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.25)"></div>
+            <div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.25)"></div>
+            <div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.25)"></div>
+            <div style="width:18px;height:6px;border-radius:3px;background:var(--jio)"></div>
+            <div style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.25)"></div>
+          </div>
+          <!-- Scrim -->
+          <div style="position:absolute;inset:0;background:rgba(0,0,0,.45);pointer-events:none"></div>
+          <!-- Sheet — dark green surface -->
+          <div style="position:absolute;bottom:0;left:0;right:0;background:#0f1a12;border-radius:20px 20px 0 0;border-top:1px solid rgba(0,168,89,.2);display:flex;flex-direction:column;height:440px">
+            <div style="display:flex;justify-content:center;padding:10px 0 var(--space-1);flex-shrink:0"><div style="width:40px;height:4px;border-radius:2px;background:rgba(255,255,255,.2)"></div></div>
+            <div style="padding:4px 20px 0;flex:1;overflow:hidden">
+              <div class="sheet-title" style="font-size:20px;font-weight:700;color:var(--text);line-height:1.2">Unlock Tomb Raider for 30 days</div>
+              <div class="sheet-desc" style="font-size:11px;color:var(--text3);line-height:1.6">Unlock Tomb Raider today and play it until 30 July with your All Screen Pass.</div>
+              <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:10px">
+                <div style="width:28px;height:28px;border-radius:8px;background:rgba(0,168,89,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                  <svg viewBox="0 0 24 24" width="13" height="13" fill="var(--jio)"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2" stroke="#0f1a12" stroke-width="2" fill="none"/></svg>
+                </div>
+                <span style="font-size:13px;font-weight:700;color:var(--text);padding-top:5px">30-day access starts today</span>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:10px">
+                <div style="width:28px;height:28px;border-radius:8px;background:rgba(0,168,89,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-size:13px;color:var(--jio)">⚡</span></div>
+                <span style="font-size:13px;font-weight:700;color:var(--text);padding-top:5px">Play on Mobile, PC &amp; TV</span>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:var(--space-1-5);margin-bottom:var(--space-2)">
+                <div style="width:28px;height:28px;border-radius:8px;background:rgba(0,168,89,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg viewBox="0 0 24 24" width="13" height="13" fill="var(--jio)"><path d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg></div>
+                <span style="font-size:13px;font-weight:700;color:var(--text);padding-top:5px">Available to unlock until 30 June</span>
+              </div>
+              <!-- Amber warning -->
+              <div style="display:flex;align-items:flex-start;gap:10px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:10px;padding:10px 14px">
+                <span style="font-size:14px;flex-shrink:0;color:#f59e0b">⚠</span>
+                <span style="font-size:11px;font-weight:700;color:#f59e0b;line-height:1.5">Your 30-day access starts once you unlock this game.</span>
+              </div>
+            </div>
+            <div style="flex-shrink:0;padding:10px 20px 10px;display:flex;flex-direction:column;gap:8px">
+              <div style="height:50px;background:var(--jio);border-radius:var(--pill);display:flex;align-items:center;justify-content:center"><span style="font-size:14px;font-weight:700;color:var(--text-inv)">Unlock 30-day access</span></div>
+              <div style="height:44px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--pill);display:flex;align-items:center;justify-content:center"><span style="font-size:14px;font-weight:700;color:var(--text2)">Not Now</span></div>
+              <div style="display:flex;justify-content:center;padding-top:2px">
+                <div style="display:inline-flex;align-items:center;gap:6px;background:var(--jio);border-radius:var(--pill);padding:6px 12px 6px 6px">
+                  <div style="width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:var(--text-inv)">S4</div>
+                  <span style="font-size:11px;font-weight:700;color:var(--text-inv)">Unlock 30-day access</span>
+                  <span style="font-size:11px;color:var(--text-inv)">∧</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p style="font-size:11px;color:var(--text2);line-height:1.6;margin:12px 0 0;max-width:300px">Dark green surface · amber warning · step chip</p>
+      </div>
+
+    </div><!-- /grid -->
+
+    <!-- Interaction notes -->
+    <div style="margin-top:32px;padding:20px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+      <p style="margin:0 0 12px;font-size:12px;font-weight:700;color:var(--text)">Pattern notes</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div>
+          <p style="margin:0 0 4px;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.5px">Sheet surface variants</p>
+          <p style="margin:0;font-size:12px;color:var(--text2);line-height:1.6">Standard sheets use <code style="font-family:monospace;font-size:11px;color:#a8e6c5">--surface-2</code>. Game-context sheets (unlock, connect) use <code style="font-family:monospace;font-size:11px;color:#a8e6c5">#0f1a12</code> — a dark green tint that visually connects to the JioGames brand while distinguishing game actions from system UI.</p>
+        </div>
+        <div>
+          <p style="margin:0 0 4px;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.5px">Step chip</p>
+          <p style="margin:0;font-size:12px;color:var(--text2);line-height:1.6">The green step chip (S4, S5, S7…) signals position in a multi-step flow. Tapping it collapses back to the previous step. Always docked below the footer buttons, never inside the sheet scroll area. Uses <code style="font-family:monospace;font-size:11px;color:#a8e6c5">var(--jio)</code> background with black text for maximum contrast.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="ds-section" id="accessibility">
     <h2 class="ds-section-title">Accessibility</h2>
     <div class="a11y-grid">
@@ -873,7 +1695,7 @@ sheet.querySelector('.sheet-handle').addEventListener('keydown', e => {
 (function () {
   /* Generic open/close for demos keyed by id suffix */
   var frames = {};
-  ['a','b','v1','v2','v4m'].forEach(function(k) {
+  ['a','b','v1','v2','v4m','v5','v6','p1','p2','p3','p4','p5'].forEach(function(k) {
     frames[k] = {
       ph: document.getElementById('ph-'  + k),
       sh: document.getElementById('sh-'  + k),
@@ -897,6 +1719,34 @@ sheet.querySelector('.sheet-handle').addEventListener('keydown', e => {
     f.sh.classList.remove('is-open');
     f.sc.classList.remove('is-open');
     if (f.btn) { f.btn.textContent = 'Open Drawer'; f.btn.onclick = function(){ dsOpen(k); }; }
+  };
+
+  /* Duration picker */
+  var durCards = document.querySelectorAll('.dur-card');
+  window.selDur = function(idx) {
+    durCards.forEach(function(c, i) { c.classList.toggle('sel', i === idx); });
+  };
+
+  /* Plan selector */
+  window.selPlan = function(plan) {
+    ['mobile','all'].forEach(function(p) {
+      var el = document.getElementById('plan-' + p);
+      if (el) el.classList.toggle('sel', p === plan);
+    });
+    var btn = document.getElementById('renew-btn');
+    if (btn) btn.textContent = plan === 'all' ? 'Renew All Screen Pass' : 'Renew Mobile Pass';
+  };
+
+  /* Accordion toggle — wrapId = the .acc-wrap, bodyId = the .acc-body */
+  window.toggleAcc = function(wrapId, bodyId) {
+    var wrap = document.getElementById(wrapId);
+    var body = document.getElementById(bodyId);
+    if (!wrap || !body) return;
+    var isOpen = wrap.classList.contains('open');
+    wrap.classList.toggle('open', !isOpen);
+    body.classList.toggle('open', !isOpen);
+    var chevron = wrap.querySelector('.acc-row-chevron');
+    if (chevron) chevron.style.transform = isOpen ? '' : 'rotate(180deg)';
   };
 
   /* Snap point demo */
@@ -954,6 +1804,6 @@ sheet.querySelector('.sheet-handle').addEventListener('keydown', e => {
 })();
 </script>
 <script src="../sprite-loader.js"></script>
-<script src="../shell.js"></script>
+<script src="../shell.js?v=2"></script>
 </body>
 </html>

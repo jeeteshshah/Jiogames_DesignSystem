@@ -1,0 +1,241 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Share &amp; Invite — JioGames DLS Patterns</title>
+  <link rel="stylesheet" href="../../tokens/tokens.css">
+  <link rel="stylesheet" href="../../components.css">
+  <link rel="stylesheet" href="../../states.css">
+  <link rel="stylesheet" href="../../shell.css?v=3">
+</head>
+<body>
+<main class="ds-main">
+
+  <header class="component-page-header">
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <a href="../../" class="component-breadcrumb-link">JioGames DLS</a>
+      <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+      <a href="../" class="component-breadcrumb-link">Patterns</a>
+      <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="component-breadcrumb-current">Share &amp; Invite</span>
+    </nav>
+    <h1 class="component-page-title">Share &amp; Invite</h1>
+    <p class="component-page-def">Patterns for sharing game links, inviting friends, and distributing referral codes — using native APIs where available and graceful fallbacks where not.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+      <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+      <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+    </div>
+  </header>
+
+  <!-- PURPOSE -->
+  <section class="ds-section" id="purpose">
+    <h2 class="ds-section-title">Purpose</h2>
+    <p style="font-size:13px;color:var(--text2);line-height:1.6;margin-top:12px">Share and Invite surfaces allow users to spread discovery of games and bring friends into JioGames. There are three distinct sub-patterns: <strong style="color:var(--text)">Share</strong> (copy/send a link to a game or piece of content), <strong style="color:var(--text)">Invite</strong> (send a personalised invitation to a specific contact), and <strong style="color:var(--text)">Referral</strong> (share a code that grants both parties a benefit). Each has different UX needs and platform constraints — particularly TV, where clipboard and contacts APIs are unavailable.</p>
+  </section>
+
+  <!-- WHEN TO USE / WHEN NOT TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use / When not to use</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px">
+      <div style="padding:20px;background:var(--status-positive-soft);border:1px solid var(--status-positive-border);border-radius:var(--r4)">
+        <p style="font-size:12px;font-weight:700;color:var(--status-positive);margin:0 0 12px">Use when</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:16px;position:relative"><span style="position:absolute;left:2px;color:var(--status-positive)">·</span>Content is publicly reachable by the recipient (or you handle auth-gate resolution for the link)</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:16px;position:relative"><span style="position:absolute;left:2px;color:var(--status-positive)">·</span>The game detail page or content has a stable, shareable URL</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:16px;position:relative"><span style="position:absolute;left:2px;color:var(--status-positive)">·</span>Referral program is active and the user is eligible</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:16px;position:relative"><span style="position:absolute;left:2px;color:var(--status-positive)">·</span>Invite flow has a well-defined success state (invite sent, accepted)</li>
+        </ul>
+      </div>
+      <div style="padding:20px;background:var(--status-negative-soft);border:1px solid var(--status-negative-border);border-radius:var(--r4)">
+        <p style="font-size:12px;font-weight:700;color:var(--status-negative);margin:0 0 12px">Do not use when</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:16px;position:relative"><span style="position:absolute;left:2px;color:var(--status-negative)">·</span>The shared content is behind an auth gate and link resolution for unauthenticated recipients is not handled — the recipient would land on a login screen with no context</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:16px;position:relative"><span style="position:absolute;left:2px;color:var(--status-negative)">·</span>The content is user-generated and hasn't been reviewed — sharing could amplify harmful content</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5;padding-left:16px;position:relative"><span style="position:absolute;left:2px;color:var(--status-negative)">·</span>The referral program is not active — do not show referral UI for ineligible users</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANATOMY -->
+  <section class="ds-section" id="anatomy">
+    <h2 class="ds-section-title">Anatomy</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:16px">
+      <div style="padding:20px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <p style="font-size:12px;font-weight:700;color:var(--text);margin:0 0 12px">Share (link)</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--text)">Share button</strong> — icon button (upload/share icon). Label "Share game".</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--text)">Native share sheet</strong> — triggered via <code class="ds-code">navigator.share()</code> on mobile web and PWA.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--text)">Copy link fallback</strong> — bottom sheet with URL field + "Copy link" CTA, for environments where <code class="ds-code">navigator.share</code> is unavailable.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--text)">Copy feedback</strong> — button swaps to checkmark icon (<code class="ds-code">var(--dur-instant)</code>), reverts after 2s.</li>
+        </ul>
+      </div>
+      <div style="padding:20px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <p style="font-size:12px;font-weight:700;color:var(--text);margin:0 0 12px">Invite friend</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--text)">Input field</strong> — phone number or email. Label: "Invite a friend".</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--text)">Contact picker</strong> — "Choose from contacts" button triggers native contacts API where permitted.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--text)">Send CTA</strong> — primary button, disabled until valid input.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--text)">Success state</strong> — inline success message below field. Toast "Invite sent" (positive variant) also fires.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--text)">Error state</strong> — inline field error. Toast "Couldn't send invite" (negative variant).</li>
+        </ul>
+      </div>
+      <div style="padding:20px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <p style="font-size:12px;font-weight:700;color:var(--text);margin:0 0 12px">Referral code</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--text)">Code pill</strong> — monospace text in a pill badge. Select-all on tap for easy manual copy.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--text)">Copy icon button</strong> — adjacent to pill. Swaps to checkmark on copy success.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--text)">Share button</strong> — shares pre-composed message including code and join link.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5"><strong style="color:var(--text)">Benefit label</strong> — short description of reward for both referrer and referee.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOW -->
+  <section class="ds-section" id="flow">
+    <h2 class="ds-section-title">Flow</h2>
+    <div style="display:flex;flex-direction:column;gap:0;border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;margin-top:20px">
+      <div style="display:grid;grid-template-columns:32px 180px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">1</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">User taps Share</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">Share icon button tapped on game detail. Check for <code class="ds-code">navigator.share</code> support. If available on mobile, call it immediately with title, url, and optional text. No intermediate UI needed.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 180px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">2</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Native share (mobile)</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">OS native share sheet appears. User selects app (WhatsApp, Messages, etc.). JioGames has no further control. On success: no Toast needed — the OS confirms. On user cancel: no action, no Toast.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 180px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">3</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Copy link fallback</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">When <code class="ds-code">navigator.share</code> unavailable (desktop web, old browsers). Bottom sheet / popover slides up with URL field + "Copy link" button. User taps Copy: button swaps to checkmark, Toast fires "Link copied to clipboard", reverts after 2s.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 180px 1fr;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-subtle);align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">4</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Invite friend</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">User enters phone/email or selects contact. Taps Send. Button enters loading state. On success: inline "Invite sent!" message + positive Toast. On failure: inline field error + negative Toast.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:32px 180px 1fr;gap:16px;padding:14px 20px;align-items:start">
+        <div style="width:24px;height:24px;background:var(--jio-soft);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--jio)">5</div>
+        <span style="font-size:13px;font-weight:700;color:var(--text)">Referral share</span>
+        <span style="font-size:12px;color:var(--text2);line-height:1.5">User taps code pill (selects all) or copy icon. Toast "Referral code copied". Share button opens native share with pre-composed message: "Join JioGames with my code [CODE] and get [BENEFIT]: [link]".</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATES -->
+  <section class="ds-section" id="states">
+    <h2 class="ds-section-title">States</h2>
+    <table class="ds-api-table" style="margin-top:16px">
+      <thead><tr><th>State</th><th>Component</th><th>Behaviour</th></tr></thead>
+      <tbody>
+        <tr><td>Share idle</td><td>Icon button</td><td>Standard icon button. Touch target minimum <code class="ds-code">var(--touch-min)</code> 44px.</td></tr>
+        <tr><td>Copy success</td><td>Button + Toast</td><td>Button icon swaps to checkmark (<code class="ds-code">var(--dur-instant)</code>). Toast "Link copied to clipboard". Both revert after 2s / <code class="ds-code">var(--dur-default)</code> dismiss.</td></tr>
+        <tr><td>Copy failure</td><td>Toast (negative)</td><td>"Couldn't copy link — try again". No button state change (clipboard write failed silently).</td></tr>
+        <tr><td>Invite sending</td><td>Button loading</td><td>Send button enters spinner state. Input field disabled. <code class="ds-code">aria-busy="true"</code> on form.</td></tr>
+        <tr><td>Invite success</td><td>Inline + Toast</td><td>Green checkmark + "Invite sent" inline below input. Toast positive variant.</td></tr>
+        <tr><td>Invite failure</td><td>Inline error + Toast</td><td>Red border on input field + error message below. Toast negative variant "Couldn't send invite — try again".</td></tr>
+        <tr><td>navigator.share unsupported</td><td>Fallback sheet</td><td>Detected at click time via feature check. Show copy-link sheet instead of calling share API.</td></tr>
+        <tr><td>Referral code copied</td><td>Toast</td><td>"Referral code copied". Code pill shows brief highlight animation.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PLATFORM BEHAVIOR -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform behavior</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:16px">
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--jio);border-radius:var(--r4);padding:20px;background:var(--surface-1)">
+        <p style="font-size:12px;font-weight:700;color:var(--jio);margin:0 0 12px">Mobile</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Use <code class="ds-code">navigator.share()</code> for all share actions — shows native OS share sheet.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Invite: contact picker via <code class="ds-code">navigator.contacts.select()</code> where supported (Android). Fallback: manual input field.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Share surface: bottom sheet for copy-link fallback, slides up from bottom edge.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Referral pill: tap selects all text. Copy icon triggers clipboard write.</li>
+        </ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--gold);border-radius:var(--r4);padding:20px;background:var(--surface-1)">
+        <p style="font-size:12px;font-weight:700;color:var(--gold);margin:0 0 12px">Web</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Check <code class="ds-code">navigator.share</code> support at click time — available in Chrome/Edge, not Firefox/Safari desktop.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Fallback: dropdown/popover anchored to the Share button. Shows URL + Copy link + optional direct-share icons (WhatsApp, Twitter links).</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Invite: no contacts API on web — input field only.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Escape key closes popover. Focus returns to trigger button on close.</li>
+        </ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--amber);border-radius:var(--r4);padding:20px;background:var(--surface-1)">
+        <p style="font-size:12px;font-weight:700;color:var(--amber);margin:0 0 12px">TV</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px">
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">No clipboard API, no contacts API, no native share sheet on TV.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Share: show a full-screen dialog with a QR code linking to the game. "Scan with your phone to share or play on mobile."</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Invite: not available on TV. Share button leads to QR code only.</li>
+          <li style="font-size:12px;color:var(--text2);line-height:1.5">Referral: show code on screen in large, readable text alongside QR code. User reads/copies on their phone.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOTION -->
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-api-table" style="margin-top:16px">
+      <thead><tr><th>Moment</th><th>Token</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Copy button icon swap (idle → checkmark)</td><td><code class="ds-code">var(--dur-instant)</code> 90ms</td><td>Crossfade icons. Immediate — snappy feedback on tap.</td></tr>
+        <tr><td>Copy button icon revert (checkmark → icon)</td><td><code class="ds-code">var(--dur-default)</code> 200ms</td><td>After 2s dwell. Slower revert so user notices the cycle has ended.</td></tr>
+        <tr><td>Bottom sheet appear (mobile fallback)</td><td><code class="ds-code">var(--dur-sheet)</code> 400ms, <code class="ds-code">var(--spring)</code></td><td>Translate Y from bottom. Scrim fades in behind.</td></tr>
+        <tr><td>Web popover appear</td><td><code class="ds-code">var(--dur-pop)</code> 280ms, <code class="ds-code">var(--ease-out)</code></td><td>Scale 0.95 → 1.0 + opacity. Anchored to trigger button.</td></tr>
+        <tr><td>Referral pill tap highlight</td><td><code class="ds-code">var(--dur-fast)</code> 120ms</td><td>Brief background flash in <code class="ds-code">var(--jio-soft)</code> then fades.</td></tr>
+        <tr><td>TV QR dialog appear</td><td><code class="ds-code">var(--dur-tv-enter)</code> 560ms, <code class="ds-code">var(--spring)</code></td><td>Standard TV enter timing. Scrim behind at <code class="ds-code">var(--overlay-scrim)</code>.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ACCESSIBILITY -->
+  <section class="ds-section" id="accessibility">
+    <h2 class="ds-section-title">Accessibility</h2>
+    <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;margin-top:16px">
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span><strong style="color:var(--text)">Share button:</strong> <code class="ds-code">aria-label="Share game"</code> (icon-only buttons must have an accessible name). If button label is visible text, no aria-label needed.</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span><strong style="color:var(--text)">Copy link:</strong> On successful copy, announce via <code class="ds-code">aria-live="polite"</code>: "Link copied to clipboard". This supplements the Toast for screen reader users who may not perceive the Toast visual.</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span><strong style="color:var(--text)">Referral code field:</strong> <code class="ds-code">role="textbox" aria-label="Your referral code" aria-readonly="true"</code>. Include <code class="ds-code">tabindex="0"</code> so keyboard users can focus and copy via Ctrl+C / Cmd+C.</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span><strong style="color:var(--text)">Copy button state change:</strong> When icon swaps to checkmark, update <code class="ds-code">aria-label</code> to "Link copied" so screen readers announce the state change. Revert label when icon reverts.</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span><strong style="color:var(--text)">Invite input error:</strong> Error message linked to input via <code class="ds-code">aria-describedby</code>. Error announced via <code class="ds-code">aria-live="assertive"</code> because it's an action failure requiring immediate attention.</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span><strong style="color:var(--text)">Bottom sheet / popover focus:</strong> On open, focus moves to first interactive element inside. On close, focus returns to the trigger Share button.</li>
+      <li style="font-size:13px;color:var(--text2);line-height:1.5;padding-left:20px;position:relative"><span style="position:absolute;left:4px;color:var(--jio)">·</span><strong style="color:var(--text)">TV QR dialog:</strong> QR code image must have <code class="ds-code">alt="QR code — scan to share [Game Title]"</code>. The URL should also be displayed as readable text below the QR code for users who cannot scan.</li>
+    </ul>
+  </section>
+
+  <!-- CONTENT GUIDANCE -->
+  <section class="ds-section" id="content">
+    <h2 class="ds-section-title">Content guidance</h2>
+    <table class="ds-api-table" style="margin-top:16px">
+      <thead><tr><th>Element</th><th>Copy</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Share button label</td><td>"Share" (with icon) or icon-only with aria-label</td><td>Keep it one word on mobile — space is limited in game detail action bar</td></tr>
+        <tr><td>Copy link button</td><td>"Copy link"</td><td>Not "Copy URL" — plain language. After copy: "Copied!"</td></tr>
+        <tr><td>Toast on copy success</td><td>"Link copied to clipboard"</td><td>Full phrase, not just "Copied" — confirms what was copied</td></tr>
+        <tr><td>Toast on copy failure</td><td>"Couldn't copy link — try again"</td><td>Actionable: implies retry is possible</td></tr>
+        <tr><td>Invite CTA</td><td>"Send invite"</td><td>Not "Invite" alone — verb + noun = clearer intent</td></tr>
+        <tr><td>Invite success Toast</td><td>"Invite sent"</td><td>Short, positive. Past tense confirms completion.</td></tr>
+        <tr><td>Invite failure Toast</td><td>"Couldn't send invite — try again"</td><td>Same pattern as copy failure for consistency</td></tr>
+        <tr><td>Referral pre-composed share text</td><td>"Play with me on JioGames! Use my code [CODE] to join and we both get [BENEFIT]: [link]"</td><td>Keep under 180 chars for SMS compatibility. Editable before sending via native share.</td></tr>
+        <tr><td>TV QR code label</td><td>"Scan to share [Game Title] on your phone"</td><td>Include the game name so the dialog is unambiguous if user walked away and returned</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- RELATED COMPONENTS -->
+  <section class="ds-section" id="components">
+    <h2 class="ds-section-title">Related components</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px">
+      <a href="../../toast/" class="ds-chip ds-chip--default">Toast</a>
+      <a href="../../buttons/" class="ds-chip ds-chip--default">Buttons</a>
+      <a href="../../inputs/" class="ds-chip ds-chip--default">Input</a>
+      <a href="../../dialogs/" class="ds-chip ds-chip--default">Dialog</a>
+      <a href="../../sheets/" class="ds-chip ds-chip--default">Bottom sheet</a>
+    </div>
+  </section>
+
+</main>
+<script src="../../shell.js?v=2"></script>
+</body></html>

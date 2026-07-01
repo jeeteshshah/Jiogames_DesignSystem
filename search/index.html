@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     /* ── Page-specific styles ── */
     body { background: var(--bg); color: var(--text); font-family: var(--jio-font); margin: 0; }
@@ -12,346 +12,82 @@
     /* Component page header */
 
     /* Hero */
-    .component-hero {
-      border-radius: 20px;
-      overflow: hidden;
-      margin-bottom: 48px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      min-height: 280px;
-      padding: 48px 32px 32px;
-    }
-    .component-hero--dark { background: #060810; }
-    .component-hero--grid {
-      background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-      background-size: 32px 32px;
-      background-color: #060810;
-      border: 1px solid var(--border-subtle);
-    }
-    .component-hero-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 28px;
-      position: relative;
-      z-index: 2;
-      width: 100%;
-    }
-    .component-hero-caption {
-      display: block;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .6px;
-      text-transform: uppercase;
-      color: var(--text4);
-      margin-top: 24px;
-      position: relative;
-      z-index: 2;
-    }
-    .hero-glow {
-      position: absolute;
-      width: 320px;
-      height: 180px;
-      border-radius: var(--pill);
-      background: radial-gradient(ellipse, rgba(0,168,89,.2) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 1;
-    }
+    
+    
+    
+    
+    
+    
 
     /* Intro */
-    .component-intro {
-      margin-bottom: 48px;
-    }
-    .component-intro p {
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.65;
-      margin-bottom: 20px;
-      max-width: 640px;
-    }
-    .component-summary-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border: 1px solid var(--border-subtle);
-      border-radius: 14px;
-      overflow: hidden;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .component-summary-list li {
-      padding: 14px 20px;
-      border-bottom: 1px solid var(--border-subtle);
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.55;
-    }
-    .component-summary-list li:last-child { border-bottom: none; }
-    .component-summary-list li strong {
-      color: var(--text);
-      font-weight: 700;
-    }
+    
+    
+    
+    
+    
+    
 
     /* Best practices */
-    .component-best-practices {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 24px;
-    }
-    .component-bp-card {
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1.5px solid;
-    }
-    .component-bp-card--do   { border-color: rgba(0,168,89,.3); }
-    .component-bp-card--dont { border-color: rgba(255,71,87,.3); }
-    .component-bp-label {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 10px 16px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .6px;
-      text-transform: uppercase;
-    }
-    .component-bp-label--do   { background: rgba(0,168,89,.07);  color: var(--jio); }
-    .component-bp-label--dont { background: rgba(255,71,87,.07); color: var(--negative); }
-    .component-bp-label--do::before   { content: '\2713'; font-size: 11px; }
-    .component-bp-label--dont::before { content: '\2715'; font-size: 11px; }
-    .component-bp-list {
-      padding: 16px 20px 20px;
-      background: var(--surface-1);
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      list-style: none;
-    }
-    .component-bp-list li {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.5;
-      padding-left: 14px;
-      position: relative;
-    }
-    .component-bp-list li::before {
-      content: '\00B7';
-      position: absolute;
-      left: 3px;
-      color: var(--text4);
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /* Content grid */
-    .component-content-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-top: 24px;
-    }
-    .component-content-card {
-      background: var(--surface-1);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--r4);
-      padding: 20px;
-    }
-    .component-content-title {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text);
-      text-transform: uppercase;
-      letter-spacing: .5px;
-      margin-bottom: 12px;
-    }
-    .component-content-card ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-    .component-content-card li {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.5;
-      padding-left: 14px;
-      position: relative;
-    }
-    .component-content-card li::before {
-      content: '\00B7';
-      position: absolute;
-      left: 3px;
-      color: var(--text4);
-    }
+    
+    
+    
+    
+    
+    
 
     /* Platform cards */
-    .component-platform-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 24px;
-    }
-    .component-platform-card {
-      background: var(--surface-1);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--r4);
-      padding: 20px;
-    }
-    .component-platform-card--mobile { border-top: 2px solid rgba(110,231,183,.4); }
-    .component-platform-card--web    { border-top: 2px solid rgba(147,197,253,.4); }
-    .component-platform-card--tv     { border-top: 2px solid rgba(251,191,36,.4); }
-    .component-platform-card-title {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .6px;
-      text-transform: uppercase;
-      color: var(--text3);
-      margin-bottom: 12px;
-    }
-    .component-platform-card--mobile .component-platform-card-title { color: #6ee7b7; }
-    .component-platform-card--web    .component-platform-card-title { color: #93c5fd; }
-    .component-platform-card--tv     .component-platform-card-title { color: #fbbf24; }
-    .component-platform-card ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-    .component-platform-card li {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.5;
-      padding-left: 14px;
-      position: relative;
-    }
-    .component-platform-card li::before {
-      content: '\00B7';
-      position: absolute;
-      left: 3px;
-      color: var(--text4);
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /* Changelog */
-    .component-changelog {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--r4);
-      overflow: hidden;
-    }
-    .component-changelog-entry {
-      display: grid;
-      grid-template-columns: 56px 80px 1fr;
-      gap: 16px;
-      align-items: start;
-      padding: 14px 20px;
-      border-bottom: 1px solid var(--border-subtle);
-      font-size: 12px;
-    }
-    .component-changelog-entry:last-child { border-bottom: none; }
-    .component-changelog-version {
-      font-family: monospace;
-      font-weight: 700;
-      color: var(--jio);
-      font-size: 11px;
-    }
-    .component-changelog-date {
-      color: var(--text3);
-      font-weight: 500;
-    }
-    .component-changelog-desc {
-      color: var(--text2);
-      line-height: 1.5;
-    }
+    
+    
+    
+    
+    
+    
 
     /* Note box */
-    .ds-note {
-      background: rgba(0,168,89,.06);
-      border: 1px solid rgba(0,168,89,.2);
-      border-radius: var(--r3);
-      padding: 14px 18px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.55;
-    }
-    .ds-note strong { color: var(--jio); }
+    
+    
 
     /* Platform size grid */
-    .platform-size-grid {
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--r4);
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 140px 1fr 1fr 1fr;
-      margin-top: 20px;
-    }
-    .platform-size-cell {
-      padding: 14px 16px;
-      border-bottom: 1px solid var(--border-subtle);
-      border-right: 1px solid var(--border-subtle);
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.5;
-    }
-    .platform-size-cell:last-child,
-    .platform-size-cell:nth-child(4n) { border-right: none; }
-    .platform-size-cell:nth-last-child(-n+4) { border-bottom: none; }
-    .platform-size-cell--header {
-      background: var(--surface-2);
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: .8px;
-      text-transform: uppercase;
-      color: var(--text3);
-      padding: 10px 16px;
-    }
-    .platform-size-cell--header.platform-size-cell--mobile { color: #6ee7b7; }
-    .platform-size-cell--header.platform-size-cell--web    { color: #93c5fd; }
-    .platform-size-cell--header.platform-size-cell--tv     { color: #fbbf24; }
-    .platform-size-cell--label {
-      background: var(--surface-2);
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text);
-      border-right: 1px solid var(--border-subtle);
-    }
-    .platform-size-token {
-      font-family: monospace;
-      font-size: 10px;
-      color: #a8e6c5;
-      display: block;
-      margin-top: 3px;
-    }
-    .platform-size-value {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--text);
-      display: block;
-    }
-    .platform-size-note {
-      font-size: 10px;
-      color: var(--text3);
-      display: block;
-      margin-top: 3px;
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /* State demos */
     .search-state-demo {
@@ -384,69 +120,20 @@
       0%   { background-position: -400px 0; }
       100% { background-position: 400px 0; }
     }
-    .skeleton {
-      border-radius: 6px;
-      background: linear-gradient(90deg,
-        var(--surface-2) 25%,
-        var(--glass-1) 50%,
-        var(--surface-2) 75%
-      );
-      background-size: 800px 100%;
-      animation: shimmer 1.4s infinite linear;
-    }
-    .skeleton--text {
-      height: 12px;
-    }
+    
+    
     .skeleton--card {
       height: 80px;
       border-radius: var(--r3);
     }
 
     /* Accessibility grid */
-    .a11y-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--r4);
-      overflow: hidden;
-      margin-top: 24px;
-    }
-    .a11y-row {
-      display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: 0;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-    .a11y-row:last-child { border-bottom: none; }
-    .a11y-label {
-      padding: 14px 16px;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text3);
-      letter-spacing: .3px;
-      background: var(--surface-2);
-      text-transform: uppercase;
-      display: flex;
-      align-items: flex-start;
-      padding-top: 16px;
-    }
-    .a11y-content {
-      padding: 14px 20px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.6;
-      background: var(--surface-1);
-    }
-    .a11y-content code {
-      font-family: monospace;
-      font-size: 11px;
-      color: #a8e6c5;
-      background: var(--surface-2);
-      padding: 1px 5px;
-      border-radius: 4px;
-    }
+    
+    
+    
+    
+    
+    
 
     /* Variant rows */
     .search-variant-grid {
@@ -487,10 +174,8 @@
     }
 
     @media (max-width: 760px) {
-      .component-best-practices,
-      .component-content-grid,
-      .component-platform-grid { grid-template-columns: 1fr; }
-      .platform-size-grid { overflow-x: auto; }
+      
+      
       .search-variant-row { grid-template-columns: 1fr; gap: 12px; }
     }
   </style>
@@ -502,20 +187,20 @@
        1. PAGE HEADER
   =================================================== -->
   <div class="component-page-header">
-    <div class="component-breadcrumb">
-      <a href="../index.html">JioGames DLS</a>
-      <span class="component-breadcrumb-sep">&#x203A;</span>
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <span class="component-breadcrumb-link">JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
       <span>Components</span>
-      <span class="component-breadcrumb-sep">&#x203A;</span>
-      <span>Search</span>
-    </div>
-    <h1 class="component-page-title">Search</h1>
-    <p class="component-page-def">Search gives players immediate access to any game, genre, or creator in the JioGames library.</p>
+      <span class="component-breadcrumb-sep">›</span>
+      <span class="component-breadcrumb-current">Search</span>
+    </nav>
+    <h1 class="component-page-title">Search</h1><p class="component-page-def">Search gives players immediate access to any game, genre, or creator in the JioGames library.</p>
     <div class="component-platforms">
       <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
       <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
       <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
       <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBTZWFyY2gg4oCUIEppb0dhbWVzIERMUyBzcGVjCgo+IFNvdXJjZTogYHNlYXJjaC9pbmRleC5odG1sYCBpbiB0aGUgSmlvR2FtZXMgRGVzaWduIFN5c3RlbS4KPiBUaGlzIHNwZWMgaXMgZ2VuZXJhdGVkIHZlcmJhdGltIGZyb20gdGhlIHBhZ2Ug4oCUIGRvIG5vdCBpbnZlbnQgdmFsdWVzIG5vdCBsaXN0ZWQgaGVyZS4KCioqUGF0aDoqKiBKaW9HYW1lcyBETFMg4oC6IENvbXBvbmVudHMg4oC6IFNlYXJjaAoKLS0tCgpTZWFyY2ggZ2l2ZXMgcGxheWVycyBpbW1lZGlhdGUgYWNjZXNzIHRvIGFueSBnYW1lLCBnZW5yZSwgb3IgY3JlYXRvciBpbiB0aGUgSmlvR2FtZXMgbGlicmFyeS4KClNlYXJjaCBpcyB0aGUgZmFzdGVzdCBwYXRoIHRvIGRpc2NvdmVyeSBpbiBKaW9HYW1lcy4gSXQgY29tYmluZXMgYSB0ZXh0IGlucHV0LCBzdGF0ZS1kcml2ZW4gdmlzdWFsIGZlZWRiYWNrLCBhbmQgYSBjb250ZXh0dWFsIHJlc3VsdHMgc3VyZmFjZSDigJQgYWxsIHJlc3BvbmRpbmcgdG8gd2hhdCB0aGUgcGxheWVyIGlzIGRvaW5nIHJpZ2h0IG5vdywgd2hldGhlciBicm93c2luZyByZWNlbnRzLCB0eXBpbmcgYSBxdWVyeSwgb3IgbGFuZGluZyBvbiBhbiBlbXB0eSBzdGF0ZS4KCi0gKipJbW1lZGlhdGUgZmVlZGJhY2suKiogVGhlIHNlYXJjaCBpY29uIHR1cm5zIGdyZWVuIG9uIGZvY3VzLCByZWNlbnQgY2hpcHMgYXBwZWFyLCBhbmQgcmVzdWx0cyBza2VsZXRvbiBpbiBhZnRlciAzMDBtcyBkZWJvdW5jZS4KLSAqKlRocmVlIHNpemUgdGllcnMuKiogUywgTSwgYW5kIEwgbWFwIHRvIGNvbXBhY3QgZmlsdGVyIGJhcnMsIHRoZSBkZWZhdWx0IHNlYXJjaCBzdXJmYWNlLCBhbmQgZnVsbC1zY3JlZW4gaGVybyBtb21lbnRzLiBQbGF0Zm9ybSBjb250ZXh0IHJlc29sdmVzIHBpeGVsIHZhbHVlcyBhdXRvbWF0aWNhbGx5LgotICoqRm91ciB2YXJpYW50cy4qKiBTdGFuZGFsb25lLCBBcHBCYXItaW50ZWdyYXRlZCwgZnVsbC1zY3JlZW4gb3ZlcmxheSwgYW5kIGZpbHRlci1hdWdtZW50ZWQg4oCUIGVhY2ggd2l0aCB0aGUgc2FtZSBjb3JlIGFuYXRvbXkuCi0gKipTdGF0ZWZ1bCBieSBkZXNpZ24uKiogRXZlcnkgbGlmZWN5Y2xlIG1vbWVudCDigJQgZnJvbSBkZWZhdWx0IHRvIGxvYWRpbmcgdG8gbm8tcmVzdWx0cyB0byBvZmZsaW5lIOKAlCBoYXMgYSBkZWZpbmVkIHZpc3VhbCB0cmVhdG1lbnQgYW5kIG5leHQgc3RlcCBmb3IgdGhlIHBsYXllci4KCiMjIFdoZW4gdG8gdXNlCgpVc2Ugd2hlbgoKLSBHbG9iYWwgZ2FtZSBzZWFyY2ggZnJvbSB0aGUgQXBwQmFyIG9yIGRlZGljYXRlZCBzZWFyY2ggc2NyZWVuCi0gRmlsdGVyaW5nIGl0ZW1zIGluIGEgbGlzdCBvciBkYXRhIHRhYmxlCi0gQ29tbWFuZCBwYWxldHRlIGlucHV0IChpbnNpZGUgdGhlIENvbW1hbmQgY29tcG9uZW50KQotIEdlbnJlL3RpdGxlIHNlYXJjaCBpbiB0aGUgZ2FtZSBsaWJyYXJ5CgpEb24ndCB1c2Ugd2hlbgoKLSBGdWxsLXRleHQgY29udGVudCBzZWFyY2ggaW4gYXJ0aWNsZXMvaGVscCBkb2NzIOKAlCBkaWZmZXJlbnQgVVggcGF0dGVybiBuZWVkZWQKLSBTZWFyY2ggYXMgdGhlIG9ubHkgbmF2aWdhdGlvbiDigJQgcGFpciB3aXRoIEJyb3dzZS9kaXNjb3ZlcnkKLSBTZWFyY2ggaW5wdXQgd2l0aG91dCBhIHJlc3VsdHMgc3RhdGUgKGVtcHR5LCBsb2FkaW5nLCBubyByZXN1bHRzKQoKIyMgQmVzdCBwcmFjdGljZXMKClJ1bGVzIGZvciBrZWVwaW5nIHNlYXJjaCB1c2FnZSBjb25zaXN0ZW50IGFuZCB1c2VmdWwgYWNyb3NzIHRoZSBKaW9HYW1lcyBwcm9kdWN0IHN1cmZhY2UuCgotIFVzZSBhIGRlc2NyaXB0aXZlLCBjb250ZXh0LWF3YXJlIHBsYWNlaG9sZGVyOiAiU2VhcmNoIGdhbWVzLCBnZW5yZXMsIGNyZWF0b3JzLi4uIgotIFNob3cgcmVjZW50IHNlYXJjaGVzIHdoZW4gdGhlIGlucHV0IGlzIGZvY3VzZWQgYW5kIGVtcHR5Ci0gRGVib3VuY2Ugc2VhcmNoIHJlcXVlc3RzIGF0IDMwMG1zIG1pbmltdW0gYmVmb3JlIGZpcmluZwotIFNob3cgc2tlbGV0b24gcmVzdWx0cyB3aGlsZSBsb2FkaW5nIOKAlCBub3QgYSBmdWxsLXNjcmVlbiBzcGlubmVyCi0gQWx3YXlzIG9mZmVyIGdlbnJlIGNoaXBzIGluIHRoZSBuby1yZXN1bHRzIHN0YXRlCi0gQW5ub3VuY2UgcmVzdWx0IGNvdW50IHZpYSBgYXJpYS1saXZlYCB3aGVuIHJlc3VsdHMgbG9hZAotIEtlZXAgdGhlIGNsZWFyIGJ1dHRvbiBhY2Nlc3NpYmxlOiBgYXJpYS1sYWJlbD0iQ2xlYXIgc2VhcmNoImAKLSBPbiBUViwgbWFrZSByZWNlbnQgc2VhcmNoZXMgdGhlIHByaW1hcnkgdmlzaWJsZSBjb250ZW50CgotIERvbid0IGZpcmUgYSByZXF1ZXN0IG9uIGV2ZXJ5IGtleXN0cm9rZSDigJQgZGVib3VuY2UgZmlyc3QKLSBEb24ndCBzYXkgIk5vIHJlc3VsdHMgZm91bmQiIHdpdGhvdXQgYSBuZXh0IGFjdGlvbiBvciBnZW5yZSBmYWxsYmFjawotIERvbid0IGJsb2NrIHRoZSBVSSB3aXRoIGEgZnVsbC1zY3JlZW4gbG9hZGVyIGR1cmluZyBzZWFyY2gKLSBEb24ndCB1c2UgYSB2YWd1ZSBzaW5nbGUtd29yZCBwbGFjZWhvbGRlciBsaWtlICJTZWFyY2giCi0gRG9uJ3QgcmVtb3ZlIHRoZSBmb2N1cyByaW5nIOKAlCB1c2UgYHZhcigtLWppbylgIGJvcmRlciwgbmV2ZXIgb3V0bGluZTogbm9uZQotIERvbid0IHBsYWNlIHNlYXJjaCBpbnNpZGUgYSBjYXJkIG9yIG1vZGFsIHdpdGhvdXQgbWFuYWdlZCBzY3JvbGwgY29udGV4dAotIERvbid0IHNraXAgdGhlIG1pbmltdW0gMi1jaGFyYWN0ZXIgdGhyZXNob2xkIGJlZm9yZSB0cmlnZ2VyaW5nIHJlc3VsdHMKCiMjIEFuYXRvbXkKCkV2ZXJ5IHNlYXJjaCBiYXIgaXMgYnVpbHQgZnJvbSBmaXZlIHNsb3RzLiBUaGUgY29udGFpbmVyIGFuZCBpbnB1dCBmaWVsZCBhcmUgcmVxdWlyZWQuIEFsbCBvdGhlcnMgcmVzcG9uZCB0byBpbnRlcmFjdGlvbiBzdGF0ZS4KCiMjIFZhcmlhbnRzCgpGb3VyIHNlYXJjaCB2YXJpYW50cyBjb3ZlciBldmVyeSBzdXJmYWNlIHdoZXJlIHBsYXllcnMgbmVlZCB0byBmaW5kIGNvbnRlbnQuIEFsbCBzaGFyZSB0aGUgc2FtZSBmaXZlLXNsb3QgYW5hdG9teTsgb25seSBjb250ZXh0IGFuZCBsYXlvdXQgZGlmZmVyLgoKIyMgU2l6ZXMKClRocmVlIHNpemUgdGllcnMg4oCUIFMsIE0sIEwg4oCUIHJlc29sdmUgdG8gZGlmZmVyZW50IHBpeGVsIGhlaWdodHMgcGVyIHBsYXRmb3JtLiBUaGUgc2l6ZSBjbGFzcyBzdGF5cyBjb25zdGFudDsgcGxhdGZvcm0gY29udGV4dCBwcm92aWRlcyB0aGUgZmluYWwgdmFsdWUuCgojIyBTdGF0ZXMKClNpeCBpbnRlcmFjdGlvbiBzdGF0ZXMgY292ZXIgdGhlIGZ1bGwgc2VhcmNoIGxpZmVjeWNsZS4gRWFjaCBzdGF0ZSBoYXMgYSBkaXN0aW5jdCB2aXN1YWwgdHJlYXRtZW50IGFuZCBkcml2ZXMgZGlmZmVyZW50IHBhbmVsIGNvbnRlbnQgYmVsb3cgdGhlIGlucHV0LgoKIyMgQ29udGVudAoKRXZlcnkgc2VhcmNoIHN1cmZhY2UgdGV4dCB0b3VjaC1wb2ludCDigJQgcGxhY2Vob2xkZXIsIGVtcHR5IHN0YXRlIGNvcHksIGVycm9yIOKAlCBzaG91bGQgcmVkdWNlIGZyaWN0aW9uIGFuZCBzaG93IHRoZSBwbGF5ZXIgYSBjbGVhciBuZXh0IHN0ZXAuCgotIFVzZSAiU2VhcmNoIGdhbWVzLCBnZW5yZXMsIGNyZWF0b3JzLi4uIiBvbiBtYWluIHNlYXJjaCBwYWdlCi0gVXNlICJTZWFyY2guLi4iIG9ubHkgaW5zaWRlIEFwcEJhciBkdWUgdG8gc3BhY2UgY29uc3RyYWludHMKLSBOZXZlciB1c2UganVzdCAiU2VhcmNoIiBhbG9uZSDigJQgbmFtZSB0aGUgb2JqZWN0cyBwbGF5ZXJzIGNhbiBmaW5kCi0gTWF0Y2ggbGFuZ3VhZ2UgdG8gdGhlIGN1cnJlbnQgc3VyZmFjZSBjb250ZXh0CgotIFJlcXVpcmUgbWluaW11bSAyIGNoYXJhY3RlcnMgYmVmb3JlIHRyaWdnZXJpbmcgYW55IHJlcXVlc3QKLSBEZWJvdW5jZSBhdCAzMDBtcyBhZnRlciBsYXN0IGtleXN0cm9rZQotIFNob3cgcmVjZW50IHNlYXJjaGVzIHdoZW4gZm9jdXNlZCBhbmQgaW5wdXQgaXMgZW1wdHkKLSBEaXNwbGF5IHNrZWxldG9uIGNhcmRzIHdoaWxlIHJlc3VsdHMgbG9hZCDigJQgbm90IGEgc3Bpbm5lciBvdmVybGF5CgotIEZvcm1hdDogTm8gcmVzdWx0cyBmb3Ig4oCcW3F1ZXJ5XeKAnQotIEFsd2F5cyBmb2xsb3cgd2l0aDogVHJ5IGEgZGlmZmVyZW50IGtleXdvcmQgb3IgYnJvd3NlIGJ5IGdlbnJlCi0gU2hvdyA04oCTNiBnZW5yZSBjaGlwcyBhcyBmYWxsYmFjayBicm93c2luZyBwYXRoCi0gTmV2ZXIgc2hvdyBhIGRlYWQtZW5kIHdpdGggbm8gbmV4dCBhY3Rpb24KCi0gRXJyb3IgbWVzc2FnZTogIlNlYXJjaCB1bmF2YWlsYWJsZS4gQ2hlY2sgeW91ciBjb25uZWN0aW9uIGFuZCB0cnkgYWdhaW4uIgotIFNob3cgaW4gYSByZWQtdGludGVkIGJhbm5lciBiZWxvdyB0aGUgYmFyLCBub3QgaW5zaWRlIGl0Ci0gQXV0by1yZXRyeSB3aGVuIGNvbm5lY3Rpb24gcmVzdG9yZXMg4oCUIG5vIG1hbnVhbCB1c2VyIGFjdGlvbiBuZWVkZWQKLSBEaXNhYmxlZCBzdGF0ZTogYG9wYWNpdHk6IHZhcigtLXN0YXRlLWRpc2FibGVkLW9wYWNpdHkpYAoKIyMgUGxhdGZvcm0gY29uc2lkZXJhdGlvbnMKClRoZSBzZWFyY2ggY29tcG9uZW50IGFkYXB0cyBpdHMgaW50ZXJhY3Rpb24gbW9kZWwsIHNpemUsIGFuZCBwYW5lbCBsYXlvdXQgdG8gdGhlIGNvbnN0cmFpbnRzIG9mIGVhY2ggcGxhdGZvcm0uCgotIEZ1bGwtd2lkdGggYXQgdG9wIG9mIHNlYXJjaCBwYWdlCi0gVGFwIGFjdGl2YXRlcyBmb2N1czsgc3lzdGVtIGtleWJvYXJkIHNsaWRlcyB1cAotIFJlc3VsdHMgYW5kIHJlY2VudCBzZWFyY2hlcyBmaWxsIHRoZSBwYWdlIGJlbG93Ci0gQm90dG9tIHNoZWV0IGZvciBmaWx0ZXIgY2hpcHMgd2hlbiByZXN1bHRzIGFyZSBkaXNwbGF5ZWQKLSBWb2ljZSBzZWFyY2ggaWNvbiBpbiB0cmFpbGluZyBwb3NpdGlvbiBpZiBtaWNyb3Bob25lIHBlcm1pc3Npb24gZ3JhbnRlZAotIERpc21pc3MgdmlhIGJhY2sgZ2VzdHVyZSBvciB0YXBwaW5nIG91dHNpZGUKLSBMIHNpemUgKDU0cHgpIHJlcXVpcmVkIGZvciB0b3VjaCB0YXJnZXQgY29tcGxpYW5jZQoKLSBJbmxpbmUgd2l0aGluIHBhZ2Ugb3IgQXBwQmFyLCBtYXgtd2lkdGggNDgwcHgKLSBJbmxpbmUgcmVzdWx0cyBkcm9wZG93biBwYW5lbCwgei1pbmRleCBtYW5hZ2VkIGFib3ZlIHJhaWwgY29udGVudAotIEhvdmVyIHN0YXRlIG9uIHN1Z2dlc3Rpb24gaXRlbXMgKGB2YXIoLS1nbGFzcy0xKWAgYmcpCi0gQXJyb3cga2V5cyBuYXZpZ2F0ZSBzdWdnZXN0aW9uIGxpc3QKLSBFU0MgY2xlYXJzIHZhbHVlIGFuZCBjbG9zZXMgc3VnZ2VzdGlvbnMKLSBFbnRlciBzdWJtaXRzIGFuZCByb3V0ZXMgdG8gcmVzdWx0cyBwYWdlCi0gTSBzaXplICg0NHB4KSBmb3Igc3RhbmRhcmQgcGxhY2VtZW50CgotIEQtcGFkIE9LL0VudGVyIHRvIG9wZW4gdmlydHVhbCBrZXlib2FyZCBvdmVybGF5Ci0gRnVsbC13aWR0aCBzZWFyY2ggYmFyIGFsd2F5cyB2aXNpYmxlOyBjdXJzb3IgbmF2aWdhdGVzIHRvIGl0Ci0gUmVjZW50IHNlYXJjaGVzIHNob3duIHByb21pbmVudGx5IOKAlCByZWR1Y2UgdHlwaW5nIGJ1cmRlbgotIFZvaWNlIHNlYXJjaCBidXR0b24gYWNjZXNzaWJsZSB2aWEgRC1wYWQKLSBTdWdnZXN0aW9uIGl0ZW1zIG5hdmlnYWJsZSB1cC9kb3duIHdpdGggRC1wYWQKLSBGb2N1cyByaW5nIHVzZXMgYHZhcigtLXR2LWZvY3VzLXNoYWRvdylgIGdsb3cgKyBzY2FsZSgxLjA1KQotIEwgc2l6ZSAoNzJweCkgZm9yIGxlZ2liaWxpdHkgYXQgdmlld2luZyBkaXN0YW5jZQoKIyMgTW90aW9uCgp8IEludGVyYWN0aW9uIHwgRWFzaW5nIHwgRHVyYXRpb24gfCBQcm9wZXJ0eSB8CnwtLS18LS0tfC0tLXwtLS18CnwgRm9jdXMgZXhwYW5kIChtb2JpbGUpIHwgYC0tZWFzZS1vdXRgIHwgYC0tZHVyLWZhc3RgIHwgd2lkdGgsIG9wYWNpdHkgfAp8IENsZWFyIGJ1dHRvbiBhcHBlYXIgfCBgLS1lYXNlLW91dGAgfCBgLS1kdXItZmFzdGAgfCBvcGFjaXR5LCB0cmFuc2Zvcm0gc2NhbGUoMC44IOKGkiAxKSB8CnwgUmVzdWx0cyBhcHBlYXIgfCBgLS1lYXNlLW91dGAgfCBgLS1kdXItZmFzdGAgfCBvcGFjaXR5LCB0cmFuc2Zvcm0gdHJhbnNsYXRlWSgtNHB4IOKGkiAwKSB8CnwgUmVzdWx0IGl0ZW0gc3RhZ2dlciB8IGAtLWVhc2Utb3V0YCB8IGAtLWR1ci1mYXN0YCB8IG9wYWNpdHkgKDMwbXMgZGVsYXkgcGVyIGl0ZW0pIHwKfCBMb2FkaW5nIHNwaW5uZXIgfCBgbGluZWFyYCB8IGA2MDBtcyBpbmZpbml0ZWAgfCB0cmFuc2Zvcm0gcm90YXRlIHwKCiMjIFBsYXRmb3JtIHJ1bGVzCgpNb2JpbGUKCi0gQXBwQmFyIGludGVncmF0aW9uOiB0YXBwaW5nIHNlYXJjaCBpY29uIGV4cGFuZHMgaW5wdXQgZnVsbC13aWR0aAotIFJlc3VsdHMgZHJvcGRvd24gYmVjb21lcyBmdWxsLXNjcmVlbiBvdmVybGF5IG9uIG1vYmlsZQotIEtleWJvYXJkIGF1dG8tb3BlbnMgb24gc2VhcmNoIGZpZWxkIGZvY3VzCi0gQ2xlYXIgYnV0dG9uICjDlykgaW4gdHJhaWxpbmcgc2xvdCDigJQgNDTDlzQ0cHggdG91Y2ggdGFyZ2V0CgpXZWIKCi0gSW5saW5lIGRyb3Bkb3duIHJlc3VsdHMgYW5jaG9yZWQgYmVsb3cgaW5wdXQg4oCUIG1heCA0ODBweCBoZWlnaHQKLSBLZXlib2FyZDogYXJyb3cga2V5cyBuYXZpZ2F0ZSByZXN1bHRzOyBFbnRlciBvcGVuczsgRXNjYXBlIGNsb3NlcyBkcm9wZG93bgotIERlYm91bmNlIDMwMG1zIGJlZm9yZSBmaXJpbmcgc2VhcmNoIHF1ZXJ5Ci0gUmVzdWx0IGl0ZW1zOiA0OHB4IGhlaWdodCB3aXRoIHRodW1ibmFpbCwgdGl0bGUsIGFuZCBtZXRhCgpUVgoKLSBEZWRpY2F0ZWQgc2VhcmNoIHNjcmVlbiDigJQgbm90IGlubGluZSBpbiBBcHBCYXIKLSBPbi1zY3JlZW4ga2V5Ym9hcmQgb3Igdm9pY2Ugc2VhcmNoIGludGVncmF0aW9uCi0gUmVzdWx0cyByZW5kZXJlZCBhcyBjYXJkIGdyaWQgbmF2aWdhYmxlIHdpdGggRC1wYWQKLSBSZWNlbnQgc2VhcmNoZXMgc2hvd24gd2hlbiBxdWVyeSBpcyBlbXB0eQoKIyMgQWNjZXNzaWJpbGl0eQoKU2VhcmNoIG11c3QgYmUgZnVsbHkgb3BlcmFibGUgYnkga2V5Ym9hcmQsIHNjcmVlbiByZWFkZXIsIGFuZCBzd2l0Y2ggYWNjZXNzLiBBbGwgbGl2ZSByZWdpb25zIGFuZCBBUklBIHJvbGVzIGFyZSByZXF1aXJlZCDigJQgbm90IG9wdGlvbmFsLgoKIyMgUmVsYXRlZCB0b2tlbnMKClRva2VucyB0aGF0IGRyaXZlIHRoZSBzZWFyY2ggaW5wdXQncyB2aXN1YWwgc3RhdGVzLCBzaXppbmcsIGFuZCBtb3Rpb24uIFVzZSB0aGVzZSBhbGlhc2VzIOKAlCBuZXZlciBoYXJkY29kZSBwaXhlbCB2YWx1ZXMuCgp8IFRva2VuIHwgVmFsdWUgfCBVc2FnZSB8CnwtLS18LS0tfC0tLXwKfCBgLS1pbnB1dC1zLWhgIHwgMzZweCAvIDM4cHggLyA1NnB4IHwgQ29tcGFjdCBzZWFyY2ggYmFyIGhlaWdodCDigJQgbW9iaWxlIC8gd2ViIC8gVFYgfAp8IGAtLWlucHV0LW0taGAgfCA0NHB4IC8gNDRweCAvIDY0cHggfCBTdGFuZGFyZCBzZWFyY2ggYmFyIGhlaWdodCDigJQgbW9iaWxlIC8gd2ViIC8gVFYgfAp8IGAtLWlucHV0LWwtaGAgfCA1NHB4IC8gNTJweCAvIDcycHggfCBGdWxsIC8gaGVybyBzZWFyY2ggYmFyIGhlaWdodCDigJQgbW9iaWxlIC8gd2ViIC8gVFYgfAp8IGAtLXI0YCB8IDE0cHggfCBEZWZhdWx0IGlucHV0IGNvbnRhaW5lciBib3JkZXItcmFkaXVzIHwKfCBgLS1ib3JkZXItc3VidGxlYCB8IHJnYmEoMjU1LDI1NSwyNTUsLjA2KSB8IERlZmF1bHQgdW5mb2N1c2VkIGJvcmRlciB8CnwgYC0tamlvYCB8ICMwMEE4NTkgfCBGb2N1cyBib3JkZXIgY29sb3IsIGxlYWRpbmcgaWNvbiBvbiBmb2N1cyB8CnwgYC0tc3VyZmFjZS0yYCB8ICMxNjFBMjQgfCBJbnB1dCBjb250YWluZXIgYmFja2dyb3VuZCB8CnwgYC0tdGV4dDNgIHwgcmdiYSgyNDQsMjQyLDIzOCwuMzIpIHwgTGVhZGluZyBpY29uIGNvbG9yIChkZWZhdWx0KSwgcGxhY2Vob2xkZXIgdGV4dCB8CnwgYC0tZHVyLWRlZmF1bHRgIHwgMjAwbXMgfCBCb3JkZXIgY29sb3IgdHJhbnNpdGlvbiBvbiBmb2N1cy9ibHVyIHwKfCBgLS1lYXNlLW91dGAgfCBjdWJpYy1iZXppZXIoMCwuNiwuNCwxKSB8IEVhc2luZyBmb3IgZm9jdXMgcmluZyBhcHBlYXJhbmNlIGFuZCBwYW5lbCBzbGlkZS1pbiB8CgojIyBBUEkKCiMjIyBDU1MgY2xhc3NlcwoKfCBDbGFzcyB8IERlc2NyaXB0aW9uIHwKfC0tLXwtLS18CnwgYC5kcy1zZWFyY2hgIHwgUm9vdCDigJQgcmVsYXRpdmUgY29udGFpbmVyIHwKfCBgLmRzLXNlYXJjaF9faW5wdXRgIHwgSW5wdXQgZmllbGQg4oCUIGxlYWRpbmcgc2VhcmNoIGljb24sIHRyYWlsaW5nIGNsZWFyIHwKfCBgLmRzLXNlYXJjaF9fcmVzdWx0c2AgfCBEcm9wZG93biByZXN1bHRzIHBhbmVsIOKAlCBzdXJmYWNlLTIsIHI0LCBzaGFkb3cgfAp8IGAuZHMtc2VhcmNoX19yZXN1bHQtaXRlbWAgfCBTaW5nbGUgcmVzdWx0IHJvdyDigJQgNDhweCwgdGh1bWJuYWlsICsgdGl0bGUgKyBtZXRhIHwKfCBgLmRzLXNlYXJjaF9fZW1wdHlgIHwgTm8gcmVzdWx0cyBtZXNzYWdlIOKAlCBjZW50ZXJlZCwgdGV4dDMgfAp8IGAuZHMtc2VhcmNoX19sb2FkaW5nYCB8IExvYWRpbmcgc3Bpbm5lciBpbnNpZGUgdGhlIGlucHV0IHRyYWlsaW5nIGFyZWEgfAoKIyMjIFJlYWN0IHByb3BzCgp8IFByb3AgfCBUeXBlIHwgRGVmYXVsdCB8IERlc2NyaXB0aW9uIHwKfC0tLXwtLS18LS0tfC0tLXwKfCBgdmFsdWVgIHwgc3RyaW5nIHwgdW5kZWZpbmVkIHwgQ29udHJvbGxlZCBpbnB1dCB2YWx1ZSB8CnwgYG9uQ2hhbmdlYCB8ICh2OiBzdHJpbmcpID0+IHZvaWQgfCB1bmRlZmluZWQgfCBJbnB1dCBjaGFuZ2UgaGFuZGxlciB8CnwgYHJlc3VsdHNgIHwgU2VhcmNoUmVzdWx0W10gfCB1bmRlZmluZWQgfCBSZXN1bHQgaXRlbXMgdG8gZGlzcGxheSB8CnwgYG9uUmVzdWx0U2VsZWN0YCB8IChyZXN1bHQ6IFNlYXJjaFJlc3VsdCkgPT4gdm9pZCB8IHVuZGVmaW5lZCB8IFJlc3VsdCBjbGljayBoYW5kbGVyIHwKfCBgbG9hZGluZ2AgfCBib29sZWFuIHwgZmFsc2UgfCBTaG93IGxvYWRpbmcgaW5kaWNhdG9yIHwKfCBgcGxhY2Vob2xkZXJgIHwgc3RyaW5nIHwgIlNlYXJjaCBnYW1lc+KApiIgfCBJbnB1dCBwbGFjZWhvbGRlciB8CnwgYGF1dG9Gb2N1c2AgfCBib29sZWFuIHwgZmFsc2UgfCBGb2N1cyBpbnB1dCBvbiBtb3VudCB8CgojIyBDb2RlIGV4YW1wbGVzCgpDb3B5IHRoZXNlIHNuaXBwZXRzIGFzIHN0YXJ0aW5nIHBvaW50cy4gQWx3YXlzIGxpbmsgYHRva2Vucy90b2tlbnMuY3NzYCwgYGNvbXBvbmVudHMuY3NzYCwgYW5kIGBzdGF0ZXMuY3NzYCBiZWZvcmUgdXNpbmcgY29tcG9uZW50IGNsYXNzZXMuCgpgYGBgCjxmb3JtIGNsYXNzPSJzZWFyY2gtYmFyIiByb2xlPSJzZWFyY2giIGFyaWEtbGFiZWw9IlNlYXJjaCBnYW1lcyI+CiAgPHN2ZyBjbGFzcz0iaWNvbiBpY29uLS1tIHNlYXJjaC1iYXJfX2ljb24iIGFyaWEtaGlkZGVuPSJ0cnVlIj4KICAgIDx1c2UgaHJlZj0iL3Nwcml0ZS5zdmcjaWNfc2VhcmNoIj48L3VzZT4KICA8L3N2Zz4KICA8aW5wdXQKICAgIGNsYXNzPSJpbnB1dC1maWVsZCBzZWFyY2gtYmFyX19pbnB1dCIKICAgIHR5cGU9InNlYXJjaCIKICAgIHBsYWNlaG9sZGVyPSJTZWFyY2ggZ2FtZXMsIGdlbnJlcywgcHVibGlzaGVyc+KApiIKICAgIGFyaWEtbGFiZWw9IlNlYXJjaCIKICAgIGF1dG9jb21wbGV0ZT0ib2ZmIgogICAgc3BlbGxjaGVjaz0iZmFsc2UiCiAgPgogIDxidXR0b24gY2xhc3M9ImJ0biBidG4tLWljb24gc2VhcmNoLWJhcl9fY2xlYXIiIGFyaWEtbGFiZWw9IkNsZWFyIHNlYXJjaCIgaGlkZGVuPuKclTwvYnV0dG9uPgo8L2Zvcm0+CmBgYGAKCmBgYGAKPHVsIGNsYXNzPSJkcy1saXN0IiByb2xlPSJsaXN0Ym94IiBhcmlhLWxhYmVsPSJTZWFyY2ggcmVzdWx0cyI+CiAgPGxpIGNsYXNzPSJkcy1saXN0LWl0ZW0iIHJvbGU9Im9wdGlvbiI+CiAgICA8ZGl2IGNsYXNzPSJjYXJkX19hcnQiIHN0eWxlPSJ3aWR0aDo0MHB4O2hlaWdodDo0MHB4O2JvcmRlci1yYWRpdXM6dmFyKC0tcjMpO2ZsZXgtc2hyaW5rOjAiPjwvZGl2PgogICAgPGRpdiBjbGFzcz0iZHMtbGlzdC1pdGVtX19ib2R5Ij4KICAgICAgPGRpdiBjbGFzcz0iZHMtbGlzdC1pdGVtX19sYWJlbCI+V2FyIFRodW5kZXI8L2Rpdj4KICAgICAgPGRpdiBjbGFzcz0iZHMtbGlzdC1pdGVtX19tZXRhIj5BY3Rpb24gwrcgRnJlZSB0byBwbGF5PC9kaXY+CiAgICA8L2Rpdj4KICA8L2xpPgogIDxsaSBjbGFzcz0iZHMtbGlzdC1pdGVtIiByb2xlPSJvcHRpb24iPgogICAgPGRpdiBjbGFzcz0iY2FyZF9fYXJ0IiBzdHlsZT0id2lkdGg6NDBweDtoZWlnaHQ6NDBweDtib3JkZXItcmFkaXVzOnZhcigtLXIzKTtmbGV4LXNocmluazowIj48L2Rpdj4KICAgIDxkaXYgY2xhc3M9ImRzLWxpc3QtaXRlbV9fYm9keSI+CiAgICAgIDxkaXYgY2xhc3M9ImRzLWxpc3QtaXRlbV9fbGFiZWwiPlRvbWIgUmFpZGVyPC9kaXY+CiAgICAgIDxkaXYgY2xhc3M9ImRzLWxpc3QtaXRlbV9fbWV0YSI+QWR2ZW50dXJlIMK3IFBhc3MgaW5jbHVkZWQ8L2Rpdj4KICAgIDwvZGl2PgogIDwvbGk+CjwvdWw+CmBgYGAKCi0tLQoKIyMgVG9rZW5zIHJlZmVyZW5jZWQgb24gdGhpcyBwYWdlCgpVc2UgdGhlc2UgZXhhY3QgdG9rZW5zIOKAlCBkZWZpbmVkIGluIGB0b2tlbnMvdG9rZW5zLmNzc2AuIERvIG5vdCBzdWJzdGl0dXRlIHJhdyB2YWx1ZXMuCgotIGAtLWFtYmVyYAotIGAtLWJnYAotIGAtLWJvcmRlcmAKLSBgLS1ib3JkZXItc3VidGxlYAotIGAtLWdsYXNzLTFgCi0gYC0tZ29sZGAKLSBgLS1qaW9gCi0gYC0tamlvLWZvbnRgCi0gYC0tbmVnYXRpdmVgCi0gYC0tcjNgCi0gYC0tcjRgCi0gYC0tc3RhdGUtZGlzYWJsZWQtb3BhY2l0eWAKLSBgLS1zdXJmYWNlLTFgCi0gYC0tc3VyZmFjZS0yYAotIGAtLXRleHRgCi0gYC0tdGV4dDJgCi0gYC0tdGV4dDNgCi0gYC0tdHYtZm9jdXMtc2hhZG93YAoKLS0tCgojIyBCdWlsZCBydWxlcyAoYmluZGluZykKCjEuIFVzZSAqKm9ubHkqKiB0aGUgdG9rZW5zIGxpc3RlZCBhYm92ZS4gSWYgYSB2YWx1ZSB5b3UgbmVlZCBpcyBub3QgbGlzdGVkLCBzdG9wIGFuZCBhc2sg4oCUIGRvIG5vdCBpbnRyb2R1Y2UgYSByYXcgdmFsdWUuCjIuIEZvbnQgaXMgKipKaW9UeXBlKiogb25seS4gV2VpZ2h0czogMzAwLCA1MDAsIDcwMCwgOTAwLgozLiBSZXVzZSB0aGUgY29tcG9uZW50IENTUyBwYXR0ZXJucyBzaG93biBvbiB0aGUgc291cmNlIHBhZ2U7IGRvIG5vdCByZWRlc2lnbi4KNC4gTWF0Y2ggZXZlcnkgc3RhdGUgKGRlZmF1bHQsIGhvdmVyLCBmb2N1cywgYWN0aXZlLCBkaXNhYmxlZCwgbG9hZGluZykgc2hvd24gb24gdGhlIHBhZ2UuCjUuIEFjY2Vzc2liaWxpdHkgcmVxdWlyZW1lbnRzIG9uIHRoZSBwYWdlIGFyZSBtYW5kYXRvcnksIG5vdCBvcHRpb25hbC4K" download="search-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
     </div>
   </div>
 
@@ -584,6 +269,30 @@
   <!-- ===================================================
        4. BEST PRACTICES
   =================================================== -->
+  <!-- WHEN TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use</h2>
+    <div class="ds-usage-grid">
+      <div class="ds-usage-card ds-usage-card--do">
+        <p class="ds-usage-label ds-usage-label--do">Use when</p>
+        <ul class="ds-usage-list">
+              <li>Global game search from the AppBar or dedicated search screen</li>
+              <li>Filtering items in a list or data table</li>
+              <li>Command palette input (inside the Command component)</li>
+              <li>Genre/title search in the game library</li>
+        </ul>
+      </div>
+      <div class="ds-usage-card ds-usage-card--dont">
+        <p class="ds-usage-label ds-usage-label--dont">Don't use when</p>
+        <ul class="ds-usage-list">
+              <li>Full-text content search in articles/help docs — different UX pattern needed</li>
+              <li>Search as the only navigation — pair with Browse/discovery</li>
+              <li>Search input without a results state (empty, loading, no results)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <section class="ds-section" id="best-practices">
     <h2 class="ds-section-title">Best practices</h2>
     <p class="ds-section-desc">Rules for keeping search usage consistent and useful across the JioGames product surface.</p>
@@ -1058,6 +767,40 @@
   <!-- ===================================================
        11. ACCESSIBILITY
   =================================================== -->
+  <!-- MOTION -->
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-motion-table">
+      <thead><tr><th>Interaction</th><th>Easing</th><th>Duration</th><th>Property</th></tr></thead>
+      <tbody>
+        <tr><td>Focus expand (mobile)</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>width, opacity</td></tr>
+        <tr><td>Clear button appear</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>opacity, transform scale(0.8 → 1)</td></tr>
+        <tr><td>Results appear</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>opacity, transform translateY(-4px → 0)</td></tr>
+        <tr><td>Result item stagger</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>opacity (30ms delay per item)</td></tr>
+        <tr><td>Loading spinner</td><td><code>linear</code></td><td><code>600ms infinite</code></td><td>transform rotate</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PLATFORM -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform rules</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:16px;">
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--gold);border-radius:var(--r4);padding:20px;background:var(--surface-1);">
+        <p style="font-size:12px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px;">Mobile</p>
+        <ul style="list-style:none;padding:0;margin:0;"><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">AppBar integration: tapping search icon expands input full-width</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Results dropdown becomes full-screen overlay on mobile</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Keyboard auto-opens on search field focus</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Clear button (×) in trailing slot — 44×44px touch target</li></ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--amber);border-radius:var(--r4);padding:20px;background:var(--surface-1);">
+        <p style="font-size:12px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px;">Web</p>
+        <ul style="list-style:none;padding:0;margin:0;"><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Inline dropdown results anchored below input — max 480px height</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Keyboard: arrow keys navigate results; Enter opens; Escape closes dropdown</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Debounce 300ms before firing search query</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Result items: 48px height with thumbnail, title, and meta</li></ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid #F59E0B;border-radius:var(--r4);padding:20px;background:var(--surface-1);">
+        <p style="font-size:12px;font-weight:700;color:#F59E0B;text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px;">TV</p>
+        <ul style="list-style:none;padding:0;margin:0;"><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Dedicated search screen — not inline in AppBar</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">On-screen keyboard or voice search integration</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Results rendered as card grid navigable with D-pad</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Recent searches shown when query is empty</li></ul>
+      </div>
+    </div>
+  </section>
+
   <section class="ds-section" id="accessibility">
     <h2 class="ds-section-title">Accessibility</h2>
     <p class="ds-section-desc">Search must be fully operable by keyboard, screen reader, and switch access. All live regions and ARIA roles are required &#x2014; not optional.</p>
@@ -1170,6 +913,36 @@
   <!-- ===================================================
        13. CODE EXAMPLES
   =================================================== -->
+  <!-- API -->
+  <section class="ds-section" id="api">
+    <h2 class="ds-section-title">API</h2>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:0 0 12px;">CSS classes</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>.ds-search</code></td><td>Root — relative container</td></tr>
+        <tr><td><code>.ds-search__input</code></td><td>Input field — leading search icon, trailing clear</td></tr>
+        <tr><td><code>.ds-search__results</code></td><td>Dropdown results panel — surface-2, r4, shadow</td></tr>
+        <tr><td><code>.ds-search__result-item</code></td><td>Single result row — 48px, thumbnail + title + meta</td></tr>
+        <tr><td><code>.ds-search__empty</code></td><td>No results message — centered, text3</td></tr>
+        <tr><td><code>.ds-search__loading</code></td><td>Loading spinner inside the input trailing area</td></tr>
+      </tbody>
+    </table>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 12px;">React props</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>value</code></td><td><span class="api-type">string</span></td><td><span class="api-default">undefined</span></td><td>Controlled input value</td></tr>
+        <tr><td><code>onChange</code></td><td><span class="api-type">(v: string) => void</span></td><td><span class="api-default">undefined</span></td><td>Input change handler</td></tr>
+        <tr><td><code>results</code></td><td><span class="api-type">SearchResult[]</span></td><td><span class="api-default">undefined</span></td><td>Result items to display</td></tr>
+        <tr><td><code>onResultSelect</code></td><td><span class="api-type">(result: SearchResult) => void</span></td><td><span class="api-default">undefined</span></td><td>Result click handler</td></tr>
+        <tr><td><code>loading</code></td><td><span class="api-type">boolean</span></td><td><span class="api-default">false</span></td><td>Show loading indicator</td></tr>
+        <tr><td><code>placeholder</code></td><td><span class="api-type">string</span></td><td><span class="api-default">"Search games…"</span></td><td>Input placeholder</td></tr>
+        <tr><td><code>autoFocus</code></td><td><span class="api-type">boolean</span></td><td><span class="api-default">false</span></td><td>Focus input on mount</td></tr>
+      </tbody>
+    </table>
+  </section>
+
   <section class="component-section" id="code-examples">
     <h2 class="ds-section-title">Code examples</h2>
     <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
@@ -1217,6 +990,6 @@
 
 </main>
 <script src="../sprite-loader.js"></script>
-<script src="../shell.js"></script>
+<script src="../shell.js?v=2"></script>
 </body>
 </html>

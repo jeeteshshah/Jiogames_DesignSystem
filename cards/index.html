@@ -4,20 +4,19 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
 </head><body><main class="ds-content">
 
 <!-- 1. PAGE HEADER -->
 <header class="component-page-header">
-  <nav class="component-breadcrumb">
-    <a href="../index.html">JioGames DLS</a>
+  <nav class="component-breadcrumb" aria-label="Breadcrumb">
+    <span class="component-breadcrumb-link">JioGames DLS</span>
     <span class="component-breadcrumb-sep">›</span>
-    <a href="../components.html">Components</a>
+    <span>Components</span>
     <span class="component-breadcrumb-sep">›</span>
-    <span>Cards</span>
+    <span class="component-breadcrumb-current">Cards</span>
   </nav>
-  <h1 class="component-page-title">Cards</h1>
-  <p class="component-page-def">Cards are the primary surface for presenting games, passes, and content items across JioGames.</p>
+  <h1 class="component-page-title">Cards</h1><p class="component-page-def">Cards are the primary surface for presenting games, passes, and content items across JioGames.</p>
   <div style="display:flex;align-items:center;gap:12px;margin-top:16px;flex-wrap:wrap;">
     <div class="component-platforms">
       <span class="component-platform component-platform--mobile">
@@ -29,6 +28,7 @@
       <span class="component-platform component-platform--tv">
         <span class="component-platform-dot"></span>TV
       </span>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBDYXJkcyDigJQgSmlvR2FtZXMgRExTIHNwZWMKCj4gU291cmNlOiBgY2FyZHMvaW5kZXguaHRtbGAgaW4gdGhlIEppb0dhbWVzIERlc2lnbiBTeXN0ZW0uCj4gVGhpcyBzcGVjIGlzIGdlbmVyYXRlZCB2ZXJiYXRpbSBmcm9tIHRoZSBwYWdlIOKAlCBkbyBub3QgaW52ZW50IHZhbHVlcyBub3QgbGlzdGVkIGhlcmUuCgoqKlBhdGg6KiogSmlvR2FtZXMgRExTIOKAuiBDb21wb25lbnRzIOKAuiBDYXJkcwoKLS0tCgpDYXJkcyBhcmUgdGhlIHByaW1hcnkgc3VyZmFjZSBmb3IgcHJlc2VudGluZyBnYW1lcywgcGFzc2VzLCBhbmQgY29udGVudCBpdGVtcyBhY3Jvc3MgSmlvR2FtZXMuCgpDYXJkcyDCtyBMYW5kc2NhcGUsIFBvcnRyYWl0LCBGb2N1cyBzdGF0ZQoKQ2FyZHMgYXJlIHRoZSBmdW5kYW1lbnRhbCBidWlsZGluZyBibG9jayBvZiBnYW1lIGRpc2NvdmVyeSBpbiBKaW9HYW1lcy4gVGhleSBhcHBlYXIgYWNyb3NzIGV2ZXJ5IHN1cmZhY2Ug4oCUIGhvbWUgcmFpbHMsIGdlbnJlIHBhZ2VzLCBzZWFyY2ggcmVzdWx0cywgYW5kIHBhc3MgbGlicmFyaWVzIOKAlCBwcmVzZW50aW5nIGp1c3QgZW5vdWdoIGluZm9ybWF0aW9uIGZvciBhIHBsYXllciB0byBkZWNpZGUgd2hldGhlciB0byB0YXAgYW5kIGxlYXJuIG1vcmUgb3IgbGF1bmNoIGRpcmVjdGx5LiBFdmVyeSBjYXJkIGNvbnNpc3RzIG9mIGEgbWVkaWEgYXJlYSBiYWNrZWQgYnkgZ2FtZSBhcnQsIGEgbGlnaHR3ZWlnaHQgbWV0YWRhdGEgZm9vdGVyLCBhbmQgYSBzeXN0ZW0gb2Ygb3ZlcmxheXMgZm9yIHN0YXRlcyBsaWtlIGxvY2tlZCwgcHJlbWl1bSwgYW5kIHVuYXZhaWxhYmxlLgoKLSAqKk1lZGlhIGFyZWEqKiDigJQgVGhlIGFydCBjb250YWluZXIuIE1haW50YWlucyBhc3BlY3QgcmF0aW8gYXQgYWxsIGJyZWFrcG9pbnRzLiBVc2VzIGEgZ3JhZGllbnQgcGxhY2Vob2xkZXIgZHVyaW5nIGxvYWQuCi0gKipUaXRsZSArIG1ldGFkYXRhKiog4oCUIEdhbWUgbmFtZSAoMi1saW5lIG1heCB3aXRoIGVsbGlwc2lzKSwgb3B0aW9uYWwgZ2VucmUsIHJhdGluZywgb3IgZHVyYXRpb24gcm93IGJlbmVhdGguCi0gKipCYWRnZSBvdmVybGF5cyoqIOKAlCBQb3NpdGlvbmVkIGNoaXBzIGluIGNvcm5lciByZWdpb25zOiBORVcsIFBSRU1JVU0sIExJVkUsIG9yIGN1c3RvbSBsYWJlbHMuIE1heCB0d28gYmFkZ2VzIHBlciBjYXJkLgotICoqRm9jdXMgLyBzZWxlY3RlZCBzdGF0ZXMqKiDigJQgR3JlZW4gZ2xvdyByaW5nIG9uIFRWIGFuZCB3ZWIga2V5Ym9hcmQgbmF2aWdhdGlvbi4gU2NhbGUgYW5pbWF0aW9uIG9uIHByZXNzIGZvciBtb2JpbGUuCgojIyBCZXN0IHByYWN0aWNlcwoKLSBNYWludGFpbiBhc3BlY3QgcmF0aW8gc3RyaWN0bHkg4oCUIDE2OjkgZm9yIGxhbmRzY2FwZSwgMjozIGZvciBwb3J0cmFpdC4gTmV2ZXIgc3RyZXRjaCBvciBzcXVpc2ggYXJ0LgotIENhcCB0aXRsZSB0byAyIGxpbmVzIG1heGltdW0gd2l0aCBgdGV4dC1vdmVyZmxvdzogZWxsaXBzaXNgIGFuZCBgLXdlYmtpdC1saW5lLWNsYW1wOiAyYC4KLSBJbmNsdWRlIGEgc2tlbGV0b24gYXQgdGhlIGV4YWN0IGNhcmQgZGltZW5zaW9ucyBiZWZvcmUgYXJ0IGxvYWRzIOKAlCB3aWR0aCwgaGVpZ2h0LCBhbmQgYm9yZGVyLXJhZGl1cyBtdXN0IG1hdGNoLgotIFVzZSB0aGUgbG9jayBpY29uIGFsb25nc2lkZSAiU3Vic2NyaWJlIHRvIHVubG9jayIgY29weSBmb3IgbG9ja2VkLXN0YXRlIGNhcmRzIHNvIHRoZSByZXN0cmljdGlvbiBpcyBpbW1lZGlhdGVseSBjbGVhci4KCi0gRG9uJ3QgY3JvcCBhcnQgdW5ldmVubHkg4oCUIGFsd2F5cyB1c2UgYG9iamVjdC1maXQ6IGNvdmVyYCBjZW50ZXJlZCBvbiB0aGUgaW1hZ2UuCi0gRG9uJ3Qgc2hvdyBhIGJsYW5rIHdoaXRlIG9yIHRyYW5zcGFyZW50IGFydCBhcmVhIHdoZW4gdGhlIGltYWdlIGZhaWxzIHRvIGxvYWQ7IGFsd2F5cyBmYWxsIGJhY2sgdG8gdGhlIGdyYWRpZW50IHBsYWNlaG9sZGVyLgotIERvbid0IHVzZSBjYXJkcyBmb3IgbmF2aWdhdGlvbiBsaW5rcyB0aGF0IGhhdmUgbm8gbWVkaWEgKHVzZSBsaXN0IHJvd3Mgb3IgbWVudSBpdGVtcyBpbnN0ZWFkKS4KLSBEb24ndCBhbGxvdyB0ZXh0IG92ZXJmbG93IHdpdGhvdXQgdHJ1bmNhdGlvbiDigJQgYSBjYXJkIHdpdGggd3JhcHBpbmcgdGV4dCBicmVha3MgdGhlIGdyaWQgYWxpZ25tZW50LgoKIyMgQW5hdG9teQoKQSBsYW5kc2NhcGUgY2FyZCBzaG93aW5nIGFsbCBvcHRpb25hbCBhbmQgcmVxdWlyZWQgem9uZXMuIE1vc3QgY2FyZHMgb25seSByZW5kZXIgMeKAkzQgb2YgdGhlc2UgbGF5ZXJzLgoKLSAxIE1lZGlhIGFyZWEgUmVxdWlyZWQgVGhlIGltYWdlIG9yIGFydCBjb250YWluZXIuIE9jY3VwaWVzIHRoZSBmdWxsIGNhcmQgc3VyZmFjZSwgYWx3YXlzIGBvYmplY3QtZml0OiBjb3ZlcmAuIEZhbGxzIGJhY2sgdG8gZ3JhZGllbnQgcGxhY2Vob2xkZXIuCi0gMiBUaXRsZSBSZXF1aXJlZCBHYW1lIG9yIGNvbnRlbnQgbmFtZS4gTWF4aW11bSAyIGxpbmVzLCBgLXdlYmtpdC1saW5lLWNsYW1wOiAyYC4gUG9zaXRpb25lZCBpbiB0aGUgZ3JhZGllbnQgb3ZlcmxheSB6b25lLgotIDMgTWV0YWRhdGEgcm93IE9wdGlvbmFsIFNlY29uZGFyeSBpbmZvcm1hdGlvbjogZ2VucmUsIHN0YXIgcmF0aW5nLCBwbGF5IGR1cmF0aW9uLiBSZW5kZXJlZCBiZWxvdyB0aXRsZSBpbiBtdXRlZCB0ZXh0LiBQYXR0ZXJuOiBgR2VucmUgwrcg4piFUmF0aW5nYC4KLSA0IEJhZGdlIG92ZXJsYXkgT3B0aW9uYWwgUG9zaXRpb25lZCBjaGlwIGluIGEgY2FyZCBjb3JuZXIgKHRvcC1sZWZ0IHByZWZlcnJlZCkuIExhYmVsczogTkVXLCBQUkVNSVVNLCBMSVZFLCBvciBjdXN0b20uIE1heCAyIHdvcmRzLiBNYXggMiBiYWRnZXMgcGVyIGNhcmQuIC0tcHJlbWl1bS1ncmFkaWVudAotIDUgTG9ja2VkIG92ZXJsYXkgT3B0aW9uYWwgU2VtaS10cmFuc3BhcmVudCBkYXJrIHNjcmltIG92ZXIgdGhlIG1lZGlhIGFyZWEgd2l0aCBhIGxvY2sgaWNvbiBhbmQgIlN1YnNjcmliZSB0byB1bmxvY2siIHRleHQgY2VudHJlZCB2ZXJ0aWNhbGx5LiAtLWxvY2tlZC1vdmVybGF5Ci0gNiBGb2N1cyByaW5nIE9wdGlvbmFsIEdyZWVuIGdsb3cgcmluZyBhcHBsaWVkIG9uIFRWIEQtcGFkIGZvY3VzIGFuZCB3ZWIga2V5Ym9hcmQgbmF2aWdhdGlvbi4gTWVldHMgMzoxIGNvbnRyYXN0LiBVc2VzIGBib3gtc2hhZG93OiAwIDAgMCAycHggIzAwQTg1OSwgMCAwIDI0cHggcmdiYSgwLDIwMCwxMDAsLjQpYC4KCiMjIFZhcmlhbnRzCgpGaXZlIGNhcmQgdmFyaWFudHMgY292ZXIgYWxsIHVzZSBjYXNlcyBhY3Jvc3MgSmlvR2FtZXMgc3VyZmFjZXMuCgojIyBTaXplcwoKQ2FyZCBkaW1lbnNpb25zIGFjcm9zcyBzaXplIHRpZXJzIGFuZCBwbGF0Zm9ybXMuIEFsbCB2YWx1ZXMgYXJlIHdpZHRoIMOXIGhlaWdodCBpbiBwaXhlbHMuIEhlcm8gY2FyZHMgdXNlIGZ1bGwgY29udGFpbmVyIHdpZHRoLgoKfCBTaXplIHwgTW9iaWxlIHwgV2ViIHwgVFYgfAp8LS0tfC0tLXwtLS18LS0tfAp8IENvbXBhY3QgfCBgMTUyIMOXIDk2YCB8IGAxNjggw5cgMTA2YCB8IGAyNDAgw5cgMTUwYCB8CnwgU3RhbmRhcmQgfCBgMjAwIMOXIDEyNmAgfCBgMjIwIMOXIDEzOGAgfCBgMzIwIMOXIDIwMGAgfAp8IExhcmdlIHwgYDI3MiDDlyAxNzJgIHwgYDMwMCDDlyAxODhgIHwgYDQwMCDDlyAyNTBgIHwKfCBIZXJvIHwgYDEwMCUgw5cgMjAwYCB8IGAxMDAlIMOXIDMyMGAgfCBgMTAwJSDDlyA1NDBgIHwKCiMjIFN0YXRlcwoKQWxsIGludGVyYWN0aXZlIGFuZCB2aXN1YWwgc3RhdGVzIGEgY2FyZCBjYW4gZXhwcmVzcy4gTm90IGFsbCBzdGF0ZXMgYXBwbHkgdG8gZXZlcnkgdmFyaWFudC4KCiMjIENvbnRlbnQgZ3VpZGFuY2UKCldoYXQgZ29lcyBvbiBhIGNhcmQgYW5kIGhvdyB0byBwcmVzZW50IGl0IGNvcnJlY3RseS4KCiMjIyBUaXRsZSAmIG1ldGFkYXRhCgotIE1heGltdW0gMiBsaW5lcyDigJQgYWx3YXlzIHRydW5jYXRlIHdpdGggYC13ZWJraXQtbGluZS1jbGFtcDogMmAgYW5kIGFuIGVsbGlwc2lzLiBOZXZlciB3cmFwIHRvIGEgdGhpcmQgbGluZS4KLSBNZXRhZGF0YSByb3cgcGF0dGVybjogYEdlbnJlIMK3IOKYhVJhdGluZ2Agb3IgYEdlbnJlIMK3IER1cmF0aW9uYC4gVXNlIHRoZSBpbnRlcnB1bmN0ICjCtykgYXMgc2VwYXJhdG9yLCBub3QgYSBkYXNoLgotIFN0YXIgcmF0aW5ncyB1c2UgdGhlIOKYhSBjaGFyYWN0ZXIgZm9sbG93ZWQgYnkgdGhlIG51bWVyaWMgc2NvcmUgdG8gb25lIGRlY2ltYWwgcGxhY2UgKGUuZy4g4piFNC45KS4KLSBCYWRnZXMgYXJlIEFMTCBDQVBTLCBtYXhpbXVtIDIgd29yZHMgKGUuZy4gTkVXLCBMSVZFIE5PVywgRUFSTFkgQUNDRVNTKS4gRG8gbm90IHVzZSBzZW50ZW5jZSBjYXNlLgotIERvIG5vdCByZXBlYXQgdGhlIGdhbWUgbmFtZSBpbiBib3RoIHRoZSBiYWRnZSBhbmQgdGhlIHRpdGxlIGFyZWEg4oCUIHRoZSB0aXRsZSBpcyBhbHdheXMgc3VmZmljaWVudC4KCiMjIyBMb2NrZWQgJiBwcmVtaXVtCgotIEEgbG9ja2VkIGdhbWUgbXVzdCBzaG93IHRoZSBsb2NrIGljb24gKPCflJIpIGFsb25nc2lkZSB0aGUgdGV4dCAiU3Vic2NyaWJlIHRvIHVubG9jayIg4oCUIG5ldmVyIHVzZSBjb2xvciBhbG9uZSB0byBjb21tdW5pY2F0ZSB0aGUgcmVzdHJpY3Rpb24uCi0gUHJlbWl1bSBwYXNzIGdhbWVzIHNob3cgdGhlIGdyYWRpZW50IFBSRU1JVU0gYmFkZ2UgKGAtLXByZW1pdW0tZ3JhZGllbnRgKSBpbiB0aGUgdG9wLWxlZnQgY29ybmVyIGFuZCBhIHN1YnRsZSBncmVlbiBib3JkZXIgKGAtLXByZW1pdW0tYm9yZGVyYCkuCi0gRG8gbm90IGNvbWJpbmUgYm90aCBhIGxvY2tlZCBvdmVybGF5IGFuZCBhIHByZW1pdW0gYmFkZ2Ug4oCUIGEgZ2FtZSBpcyBlaXRoZXIgYWNjZXNzaWJsZSAocHJlbWl1bSkgb3IgYmxvY2tlZCAobG9ja2VkKSwgbm90IGJvdGguCi0gVW5hdmFpbGFibGUgZ2FtZXMgbXVzdCB1c2Ugb3BhY2l0eSByZWR1Y3Rpb24gb25seSDigJQgZG8gbm90IGFkZCBhbnkgb3ZlcmxheSB0ZXh0IG9yIGljb25vZ3JhcGh5OyB0aGUgcmVkdWNlZCBvcGFjaXR5IHNpZ25hbHMgdGhlIHN0YXRlIHBhc3NpdmVseS4KCiMjIFBsYXRmb3JtIGNvbnNpZGVyYXRpb25zCgpDYXJkIGJlaGF2aW91ciBhZGFwdHMgdG8gdGhlIGludGVyYWN0aW9uIG1vZGVsIG9mIGVhY2ggcGxhdGZvcm0uCgotIENhcmRzIHNpdCBpbiBob3Jpem9udGFsbHkgc2Nyb2xsYWJsZSByYWlscyB3aXRoIGBvdmVyZmxvdy14OiBhdXRvYCBhbmQgYHNjcm9sbC1zbmFwLXR5cGU6IHggbWFuZGF0b3J5YC4KLSBMZWZ0IGFuZCByaWdodCBndXR0ZXJzIGFyZSBgMjBweGAgZnJvbSB0aGUgdmlld3BvcnQgZWRnZS4KLSBJbnRlci1jYXJkIHNwYWNpbmcgaXMgYDEwcHhgLgotIFRhcHBpbmcgYSBjYXJkIG5hdmlnYXRlcyBkaXJlY3RseSB0byBnYW1lIGRldGFpbC4gTm8gaG92ZXIgc3RhdGUuCi0gQWN0aXZlIHN0YXRlIHVzZXMgYHNjYWxlKDAuOTcpYCBhdCA4MG1zIGZvciBwcmVzcyBmZWVkYmFjay4KLSBTd2lwZSBtb21lbnR1bSBtdXN0IHJlbWFpbiBuYXRpdmUg4oCUIGRvIG5vdCBibG9jayBgdG91Y2htb3ZlYCBvbiBjYXJkIHNjcm9sbCBjb250YWluZXJzLgoKLSBIb3ZlciBzdGF0ZSBlbGV2YXRlcyB0aGUgY2FyZCB3aXRoIGB0cmFuc2xhdGVZKC0ycHgpYCBhbmQgYSBkZWVwZXIgc2hhZG93LiBUcmFuc2l0aW9uIDE1MG1zIGVhc2Utb3V0LgotIEN1cnNvciBtdXN0IGJlIGBwb2ludGVyYCBvbiBhbGwgaW50ZXJhY3RpdmUgY2FyZHMuCi0gR3V0dGVyIGlzIGAyNHB4YCBlYWNoIHNpZGUuIENhcmRzIGluIGEgZ3JpZCB1c2UgYSBgZ2FwYCBvZiBgMTZweGAuCi0gS2V5Ym9hcmQgZm9jdXMgKFRhYiBrZXkpIHNob3dzIHRoZSBncmVlbiBmb2N1cyByaW5nIOKAlCBuZXZlciBzdXBwcmVzcyB0aGUgb3V0bGluZSB3aXRob3V0IHJlcGxhY2luZyBpdC4KLSBSaWdodC1jbGljayBjb250ZXh0IG1lbnUgY2FuIG9wdGlvbmFsbHkgc3VyZmFjZSAiQWRkIHRvIHdpc2hsaXN0IiBhbmQgIlNoYXJlIiBhY3Rpb25zLgoKLSBGb2N1cyByaW5nIGlzIG1hbmRhdG9yeSDigJQgaXQgaXMgdGhlIHByaW1hcnkgaW50ZXJhY3Rpb24gc2lnbmFsLiBDbGFzcyBgLmlzLXR2LWZvY3VzZWRgIGFwcGxpZXMgdGhlIGdyZWVuIGdsb3cuCi0gRC1wYWQgbmF2aWdhdGlvbiBtb3ZlcyBmb2N1cyBiZXR3ZWVuIGNhcmRzLiBMZWZ0L3JpZ2h0IHdpdGhpbiBhIHJhaWw7IHVwL2Rvd24gYmV0d2VlbiByYWlscy4KLSBDYXJkIHNpemVzIGFyZSB0aGUgbGFyZ2VzdCB0aWVyIOKAlCB1c2UgdGhlIFRWIGNvbHVtbiBmcm9tIHRoZSBzaXplcyB0YWJsZSBhYm92ZS4KLSBJbnRlci1jYXJkIHNwYWNpbmcgaW5jcmVhc2VzIHRvIGAyMHB4YCB0byBhbGxvdyB0aGUgZm9jdXMgcmluZyB0byBicmVhdGhlIHdpdGhvdXQgb3ZlcmxhcHBpbmcgYWRqYWNlbnQgY2FyZHMuCi0gRG8gbm90IHJlbHkgb24gaG92ZXIg4oCUIFRWIHJlbW90ZXMgaGF2ZSBubyBwb2ludGVyLiBBbGwgaW50ZXJhY3RpdmUgc3RhdGVzIG11c3QgYmUgcmVhY2hhYmxlIHZpYSBELXBhZCBhbG9uZS4KLSBMb25nLXByZXNzIFNlbGVjdCBvbiBhIGZvY3VzZWQgY2FyZCBvcGVucyBhIGNvbnRleHQgYWN0aW9uIHNoZWV0IChwbGF5LCBhZGQgdG8gbGlzdCwgZGV0YWlscykuCgojIyBBY2Nlc3NpYmlsaXR5CgpDYXJkcyBtdXN0IGJlIHVzYWJsZSBieSBzY3JlZW4gcmVhZGVycywga2V5Ym9hcmQtb25seSB1c2VycywgYW5kIGFzc2lzdGl2ZSB0ZWNobm9sb2d5LgoKfCBBdHRyaWJ1dGUgLyBQYXR0ZXJuIHwgVmFsdWUgLyBHdWlkYW5jZSB8IE5vdGVzIHwKfC0tLXwtLS18LS0tfAp8IGByb2xlYCB8IGBhcnRpY2xlYCAoc3RhdGljKSBvciBgYnV0dG9uYCAoaW50ZXJhY3RpdmUpIHwgVXNlIGBidXR0b25gIHdoZW4gdGhlIGNhcmQgaXMgdGhlIHByaW1hcnkgdGFwL2NsaWNrIHRhcmdldC4gTmV2ZXIgbmVzdCBpbnRlcmFjdGl2ZSBlbGVtZW50cyBpbnNpZGUgYSBgYnV0dG9uYC1yb2xlIGNhcmQuIHwKfCBgYXJpYS1sYWJlbGAgfCBJbmNsdWRlIGdhbWUgbmFtZSArIHN0YXR1cyB8IEV4YW1wbGU6IGBhcmlhLWxhYmVsPSJUb21iIFJhaWRlciwgQWN0aW9uLCByYXRlZCA0LjkiYC4gQWRkIHN0YXR1cyBmb3IgcHJlbWl1bTogYCJEb29tIEV0ZXJuYWwsIGluY2x1ZGVkIGluIEppb0dhbWVzIFBhc3MiYC4gfAp8IExvY2tlZCBzdGF0ZSBhbm5vdW5jZW1lbnQgfCBgIlN1YnNjcmliZSB0byB1bmxvY2siYCBhcHBlbmRlZCB0byBsYWJlbCB8IFNjcmVlbiByZWFkZXJzIG11c3QgaGVhciB0aGUgcmVzdHJpY3Rpb24uIEluY2x1ZGUgaW4gYGFyaWEtbGFiZWxgOiBgIldhciBUaHVuZGVyIOKAlCBTdWJzY3JpYmUgdG8gdW5sb2NrImAuIHwKfCBTa2VsZXRvbiBsb2FkaW5nIHwgYGFyaWEtYnVzeT0idHJ1ZSJgIHwgQWRkIGBhcmlhLWxhYmVsPSJMb2FkaW5nIGdhbWUiYCBvbiB0aGUgc2tlbGV0b24gY29udGFpbmVyLiBSZW1vdmUgYm90aCBhdHRyaWJ1dGVzIG9uY2UgY29udGVudCBpcyBwb3B1bGF0ZWQuIHwKfCBGb2N1cyByaW5nIGNvbnRyYXN0IHwgYCMwMEE4NTlgIG9uIGAjMDYwODBGYCB8IE1lZXRzIFdDQUcgMi4xIFNDIDEuNC4xMSBOb24tdGV4dCBDb250cmFzdCBtaW5pbXVtIG9mIDM6MS4gVGhlIGFkZGl0aW9uYWwgb3V0ZXIgZ2xvdyAoYHJnYmEoMCwyMDAsMTAwLC40KWApIGlzIGRlY29yYXRpdmUgb25seS4gfAoKIyMgUmVsYXRlZCB0b2tlbnMKCkRlc2lnbiB0b2tlbnMgZnJvbSBgdG9rZW5zLmNzc2AgdGhhdCBkaXJlY3RseSBnb3Zlcm4gY2FyZCBhcHBlYXJhbmNlLgoKfCBUb2tlbiB8IFZhbHVlIHwgVXNhZ2UgfAp8LS0tfC0tLXwtLS18CnwgYC0tY2FyZC1yYWRpdXMtbGFuZHNjYXBlYCB8IGAxNnB4YCB8IEJvcmRlci1yYWRpdXMgZm9yIGFsbCBsYW5kc2NhcGUgKDE2OjkpIGNhcmQgY29udGFpbmVycy4gfAp8IGAtLWNhcmQtb3ZlcmxheWAgfCBncmFkaWVudCB8IEJvdHRvbSBncmFkaWVudCBvdmVybGF5IGZvciB0aXRsZS9tZXRhZGF0YSBsZWdpYmlsaXR5LiBGYWRlcyBmcm9tIGByZ2JhKDYsOCwxNSwuODUpYCB0byB0cmFuc3BhcmVudCBhdCA1NSUuIHwKfCBgLS1sb2NrZWQtb3ZlcmxheWAgfCBgcmdiYSg2LDgsMTUsLjc1KWAgfCBGdWxsLWNhcmQgc2NyaW0gZm9yIGxvY2tlZCBzdGF0ZS4gQXBwbGllZCBhcyBhbiBhYnNvbHV0ZSBpbnNldCBsYXllciBvdmVyIHRoZSBhcnQuIHwKfCBgLS1wcmVtaXVtLWdyYWRpZW50YCB8IGdyYWRpZW50IHwgRmlsbCBmb3IgUFJFTUlVTSBiYWRnZSBjaGlwLiBgbGluZWFyLWdyYWRpZW50KDEzNWRlZywgdmFyKC0tdWx0aW1hdGUpLCB2YXIoLS1qaW8tYnJpZ2h0KSlgLiBEYXJrIHRleHQgKCMwNjA4MEYpIG9uIHRvcC4gfAp8IGAtLXNrZWxldG9uLWJnYCB8IGAjMTYxQTI0YCB8IEJhc2UgYmFja2dyb3VuZCBjb2xvdXIgZm9yIGNhcmQgc2tlbGV0b24gLyBsb2FkaW5nIHN0YXRlLiBNYXBzIHRvIGAtLXN1cmZhY2UtMmAuIHwKfCBgLS11bmF2YWlsYWJsZS1vcGFjaXR5YCB8IGAwLjRgIHwgT3BhY2l0eSBhcHBsaWVkIHRvIHRoZSBlbnRpcmUgY2FyZCBlbGVtZW50IHdoZW4gdGhlIGdhbWUgaXMgdW5hdmFpbGFibGUgaW4gdGhlIHVzZXIncyByZWdpb24uIHwKCiMjIFdoZW4gdG8gdXNlCgpVc2Ugd2hlbgoKLSBHYW1lIHRpbGVzIGluIGhvcml6b250YWwgcmFpbHMgYW5kIGdyaWQgbGF5b3V0cwotIFBhc3MgcGxhbiBjb21wYXJpc29uIHdpdGggcHJpY2UgYW5kIGZlYXR1cmVzCi0gQ29udGVudCBwcmV2aWV3cyB3aXRoIHRodW1ibmFpbCwgdGl0bGUsIGFuZCBtZXRhZGF0YQotIExlYWRlcmJvYXJkIGVudHJpZXMsIGFjaGlldmVtZW50IGl0ZW1zLCBhbmQgbGlzdCByb3dzIHdpdGggcmljaCBtZWRpYQoKRG9uJ3QgdXNlIHdoZW4KCi0gRnVsbC1ibGVlZCBlZGl0b3JpYWwgc2VjdGlvbnMg4oCUIHVzZSBhIHNlY3Rpb24gbGF5b3V0IGluc3RlYWQKLSBTaW5nbGUgbGluZXMgb2YgdGV4dCB3aXRoIG5vIHZpc3VhbCBoaWVyYXJjaHkg4oCUIHVzZSBhIExpc3QgaXRlbQotIERlZXBseSBuZXN0ZWQgY2FyZHMgKGNhcmQgaW5zaWRlIGNhcmQpCi0gSW50ZXJhY3RpdmUgY2FyZHMgd2l0aG91dCBhIHZpc2libGUgYWZmb3JkYW5jZSAoaG92ZXIvZm9jdXMgc3RhdGUpCgojIyBNb3Rpb24KCnwgSW50ZXJhY3Rpb24gfCBFYXNpbmcgfCBEdXJhdGlvbiB8IFByb3BlcnR5IHwKfC0tLXwtLS18LS0tfC0tLXwKfCBIb3ZlciBsaWZ0IHwgYC0tZWFzZS1vdXRgIHwgYC0tZHVyLWZhc3RgIHwgdHJhbnNmb3JtIHNjYWxlKDEuMDIpLCBib3gtc2hhZG93IHwKfCBQcmVzcyB8IGAtLWVhc2Utb3V0YCB8IGA4MG1zYCB8IHRyYW5zZm9ybSBzY2FsZSgwLjk3KSB8CnwgVFYgZm9jdXMgc2NhbGUgfCBgLS1lYXNlLW91dGAgfCBgLS1kdXItZmFzdGAgfCB0cmFuc2Zvcm0gc2NhbGUoMS4wNikgfAp8IEltYWdlIGxvYWQgZmFkZSB8IGAtLWVhc2Utb3V0YCB8IGAtLWR1ci1iYXNlYCB8IG9wYWNpdHkgfAp8IFNrZWxldG9uIHNoaW1tZXIgfCBgbGluZWFyYCB8IGAxNDAwbXMgaW5maW5pdGVgIHwgYmFja2dyb3VuZC1wb3NpdGlvbiB8CgojIyBBUEkKCiMjIyBDU1MgY2xhc3NlcwoKfCBDbGFzcyB8IERlc2NyaXB0aW9uIHwKfC0tLXwtLS18CnwgYC5kcy1jYXJkYCB8IEJhc2UgY2FyZCDigJQgc3VyZmFjZS0xIGJnLCBib3JkZXItc3VidGxlLCByNCByYWRpdXMgfAp8IGAuZHMtY2FyZC0tZ2FtZWAgfCBHYW1lIHRpbGUg4oCUIDE2OjkgdGh1bWJuYWlsICsgdGl0bGUgKyBtZXRhZGF0YSB8CnwgYC5kcy1jYXJkLS1wYXNzYCB8IFBhc3MgcGxhbiBjYXJkIOKAlCBncmFkaWVudCBoZWFkZXIsIGZlYXR1cmUgbGlzdCB8CnwgYC5kcy1jYXJkLS13aWRlYCB8IExhbmRzY2FwZSBjYXJkIGZvciBob3Jpem9udGFsIHJhaWxzICgyMTDDlzEyOHB4KSB8CnwgYC5kcy1jYXJkLS1wb3J0cmFpdGAgfCBQb3J0cmFpdCBjb3ZlciBjYXJkICgxMjDDlzE4MHB4KSB8CnwgYC5kcy1jYXJkX190aHVtYm5haWxgIHwgSW1hZ2UgY29udGFpbmVyIOKAlCBhc3BlY3QtcmF0aW8gZW5mb3JjZWQgfAp8IGAuZHMtY2FyZF9fYm9keWAgfCBUZXh0IGNvbnRlbnQgYXJlYSDigJQgcGFkZGluZyAxMnB4IHwKfCBgLmRzLWNhcmRfX3RpdGxlYCB8IENhcmQgdGl0bGUg4oCUIDEzcHggNjAwIHdlaWdodCB8CnwgYC5kcy1jYXJkX19tZXRhYCB8IFNlY29uZGFyeSBpbmZvIHJvdyDigJQgMTFweCB0ZXh0MyB8CgojIyMgUmVhY3QgcHJvcHMKCnwgUHJvcCB8IFR5cGUgfCBEZWZhdWx0IHwgRGVzY3JpcHRpb24gfAp8LS0tfC0tLXwtLS18LS0tfAp8IGB2YXJpYW50YCB8ICJnYW1lIiB8ICJwYXNzIiB8ICJ3aWRlIiB8ICJwb3J0cmFpdCIgfCAiZGVmYXVsdCIgfCAiZGVmYXVsdCIgfCBDYXJkIGxheW91dCBwcmVzZXQgfAp8IGBocmVmYCB8IHN0cmluZyB8IHVuZGVmaW5lZCB8IE1ha2VzIGNhcmQgYSBsaW5rIOKAlCB3cmFwcyBpbiBhbmNob3IgfAp8IGBvbkNsaWNrYCB8ICgpID0+IHZvaWQgfCB1bmRlZmluZWQgfCBQcmVzcyBoYW5kbGVyIHwKfCBgdGh1bWJuYWlsYCB8IHN0cmluZyB8IHVuZGVmaW5lZCB8IEltYWdlIFVSTCBmb3IgdGhlIGNhcmQgaGVybyB8CnwgYHRpdGxlYCB8IHN0cmluZyB8IHJlcXVpcmVkIHwgQ2FyZCBoZWFkbGluZSB0ZXh0IHwKfCBgbWV0YWAgfCBzdHJpbmcgfCBSZWFjdE5vZGUgfCB1bmRlZmluZWQgfCBTZWNvbmRhcnkgZGVzY3JpcHRvciBiZWxvdyB0aXRsZSB8CnwgYGJhZGdlYCB8IFJlYWN0Tm9kZSB8IHVuZGVmaW5lZCB8IE92ZXJsYXkgYmFkZ2UgKE5ldywgSG90LCBMaXZlKSB8CgojIyBDb2RlIGV4YW1wbGVzCgpDb3B5IHRoZXNlIHNuaXBwZXRzIGFzIHN0YXJ0aW5nIHBvaW50cy4gQWx3YXlzIGxpbmsgYHRva2Vucy90b2tlbnMuY3NzYCwgYGNvbXBvbmVudHMuY3NzYCwgYW5kIGBzdGF0ZXMuY3NzYCBiZWZvcmUgdXNpbmcgY29tcG9uZW50IGNsYXNzZXMuCgpgYGBgaHRtbAo8ZGl2IGNsYXNzPSJjYXJkIj4KICA8ZGl2IGNsYXNzPSJjYXJkX19hcnQiPgogICAgPGltZyBzcmM9ImdhbWUtaGVyby5qcGciIGFsdD0iV2FyIFRodW5kZXIiIGNsYXNzPSJjYXJkX19pbWciPgogICAgPGRpdiBjbGFzcz0iY2FyZF9fb3ZlcmxheSI+PC9kaXY+CiAgPC9kaXY+CiAgPGRpdiBjbGFzcz0iY2FyZF9fYm9keSI+CiAgICA8ZGl2IGNsYXNzPSJjYXJkX190aXRsZSI+V2FyIFRodW5kZXI8L2Rpdj4KICAgIDxkaXYgY2xhc3M9ImNhcmRfX21ldGEiPkFjdGlvbiDCtyBGcmVlIHRvIHBsYXk8L2Rpdj4KICA8L2Rpdj4KPC9kaXY+CmBgYGAKCmBgYGBodG1sCjxkaXYgY2xhc3M9ImNhcmQgaXMtaG92ZXIiPgogIDxkaXYgY2xhc3M9ImNhcmRfX2FydCI+CiAgICA8aW1nIHNyYz0iZ2FtZS1oZXJvLmpwZyIgYWx0PSJUb21iIFJhaWRlciIgY2xhc3M9ImNhcmRfX2ltZyI+CiAgICA8ZGl2IGNsYXNzPSJjYXJkX19vdmVybGF5Ij48L2Rpdj4KICAgIDxzcGFuIGNsYXNzPSJiYWRnZSBiYWRnZS0tbmV3Ij5OZXc8L3NwYW4+CiAgPC9kaXY+CiAgPGRpdiBjbGFzcz0iY2FyZF9fYm9keSI+CiAgICA8ZGl2IGNsYXNzPSJjYXJkX190aXRsZSI+VG9tYiBSYWlkZXI8L2Rpdj4KICAgIDxkaXYgY2xhc3M9ImNhcmRfX21ldGEiPkFkdmVudHVyZSDCtyBQYXNzIGluY2x1ZGVkPC9kaXY+CiAgPC9kaXY+CjwvZGl2PgpgYGBgCgojIyBDaGFuZ2Vsb2cKCkFkZGVkIGAtLXByZW1pdW0tZ3JhZGllbnRgLCBgLS1wcmVtaXVtLWJvcmRlcmAsIGFuZCBgLS1sb2NrZWQtb3ZlcmxheWAgdG9rZW5zLiBJbnRyb2R1Y2VkIHRoZSBwcmVtaXVtIGJhZGdlIHBhdHRlcm4gYW5kIHRoZSBsb2NrZWQtc3RhdGUgb3ZlcmxheSBzcGVjaWZpY2F0aW9uLiBVcGRhdGVkIGFuYXRvbXkgZGlhZ3JhbSB0byBpbmNsdWRlIGNhbGxvdXRzIDQgYW5kIDUuCgpBZGRlZCBUViBmb2N1cyBnbG93IHN0YXRlLiBJbnRyb2R1Y2VkIGAuaXMtdHYtZm9jdXNlZGAgY2xhc3Mgd2l0aCBncmVlbiByaW5nIGBib3gtc2hhZG93YCBwYXR0ZXJuLiBEb2N1bWVudGVkIEQtcGFkIG5hdmlnYXRpb24gcmVxdWlyZW1lbnRzIGFuZCBUViBzaXplIHRpZXIuIFVwZGF0ZWQgcGxhdGZvcm0gY29uc2lkZXJhdGlvbnMgc2VjdGlvbi4KCkluaXRpYWwgY29tcG9uZW50IHJlbGVhc2UuIExhbmRzY2FwZSwgcG9ydHJhaXQsIHNxdWFyZSwgbWluaSwgYW5kIGhlcm8gdmFyaWFudHMuIERlZmF1bHQsIGhvdmVyLCBhY3RpdmUsIGxvY2tlZCwgdW5hdmFpbGFibGUsIGFuZCBza2VsZXRvbiBzdGF0ZXMuIEFuYXRvbXksIGJlc3QgcHJhY3RpY2VzLCBzaXplcywgYW5kIGFjY2Vzc2liaWxpdHkgZG9jdW1lbnRhdGlvbi4KCi0tLQoKIyMgVG9rZW5zIHJlZmVyZW5jZWQgb24gdGhpcyBwYWdlCgpVc2UgdGhlc2UgZXhhY3QgdG9rZW5zIOKAlCBkZWZpbmVkIGluIGB0b2tlbnMvdG9rZW5zLmNzc2AuIERvIG5vdCBzdWJzdGl0dXRlIHJhdyB2YWx1ZXMuCgotIGAtLWJvcmRlci11bHRpbWF0ZWAKLSBgLS1nb2xkYAotIGAtLWppby1icmlnaHRgCi0gYC0tamlvLWZvbnRgCi0gYC0tc3VyZmFjZS0yYAotIGAtLXRleHRgCi0gYC0tdGV4dDJgCi0gYC0tdGV4dDNgCi0gYC0tdWx0aW1hdGVgCgotLS0KCiMjIEJ1aWxkIHJ1bGVzIChiaW5kaW5nKQoKMS4gVXNlICoqb25seSoqIHRoZSB0b2tlbnMgbGlzdGVkIGFib3ZlLiBJZiBhIHZhbHVlIHlvdSBuZWVkIGlzIG5vdCBsaXN0ZWQsIHN0b3AgYW5kIGFzayDigJQgZG8gbm90IGludHJvZHVjZSBhIHJhdyB2YWx1ZS4KMi4gRm9udCBpcyAqKkppb1R5cGUqKiBvbmx5LiBXZWlnaHRzOiAzMDAsIDUwMCwgNzAwLCA5MDAuCjMuIFJldXNlIHRoZSBjb21wb25lbnQgQ1NTIHBhdHRlcm5zIHNob3duIG9uIHRoZSBzb3VyY2UgcGFnZTsgZG8gbm90IHJlZGVzaWduLgo0LiBNYXRjaCBldmVyeSBzdGF0ZSAoZGVmYXVsdCwgaG92ZXIsIGZvY3VzLCBhY3RpdmUsIGRpc2FibGVkLCBsb2FkaW5nKSBzaG93biBvbiB0aGUgcGFnZS4KNS4gQWNjZXNzaWJpbGl0eSByZXF1aXJlbWVudHMgb24gdGhlIHBhZ2UgYXJlIG1hbmRhdG9yeSwgbm90IG9wdGlvbmFsLgo=" download="cards-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
     </div>
     <span class="component-maturity component-maturity--stable">
       <span class="component-maturity--dot"></span>Stable
@@ -43,40 +43,40 @@
 
     <!-- Card 1: Landscape Standard -->
     <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
-      <div style="width:200px;height:128px;border-radius:16px;overflow:hidden;position:relative;background:#1a0820;box-shadow:0 8px 32px rgba(0,0,0,.6);">
+      <div style="width:200px;height:128px;border-radius:16px;overflow:hidden;position:relative;background:var(--surface-2);box-shadow:0 8px 32px rgba(0,0,0,.6);">
         <div style="width:100%;height:100px;background:linear-gradient(135deg,#1a0820,#3d1060);position:absolute;top:0;left:0;"></div>
         <div style="position:absolute;bottom:0;left:0;right:0;height:72px;background:linear-gradient(0deg,rgba(6,8,15,.88) 0%,transparent 100%);padding:8px 10px 8px;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;">
-          <div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:#F4F2EE;line-height:1.3;">Tomb Raider</div>
-          <div style="font-family:'Outfit',sans-serif;font-size:10px;color:#A8ADBA;line-height:1.3;">Action · ★4.9</div>
+          <div style="font-family:var(--jio-font),sans-serif;font-size:12px;font-weight:700;color:#F4F2EE;line-height:1.3;">Tomb Raider</div>
+          <div style="font-family:var(--jio-font),sans-serif;font-size:10px;color:var(--text2);line-height:1.3;">Action · ★4.9</div>
         </div>
       </div>
-      <span style="font-family:'Outfit',sans-serif;font-size:10px;color:#6B7280;">Landscape · Standard</span>
+      <span style="font-family:var(--jio-font),sans-serif;font-size:10px;color:var(--text3);">Landscape · Standard</span>
     </div>
 
     <!-- Card 2: Portrait with NEW badge -->
     <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
-      <div style="width:110px;height:160px;border-radius:16px;overflow:hidden;position:relative;background:#0a1a30;box-shadow:0 8px 32px rgba(0,0,0,.6);">
+      <div style="width:110px;height:160px;border-radius:16px;overflow:hidden;position:relative;background:var(--surface-2);box-shadow:0 8px 32px rgba(0,0,0,.6);">
         <div style="width:100%;height:100%;background:linear-gradient(135deg,#0a1a30,#1a4060);position:absolute;inset:0;"></div>
         <!-- NEW badge -->
-        <div style="position:absolute;top:8px;left:8px;background:#00A859;color:#fff;font-family:'Outfit',sans-serif;font-size:9px;font-weight:700;letter-spacing:.6px;padding:2px 6px;border-radius:4px;line-height:1.4;z-index:2;">NEW</div>
+        <div style="position:absolute;top:8px;left:8px;background:#00A859;color:var(--text);font-family:var(--jio-font),sans-serif;font-size:9px;font-weight:700;letter-spacing:.6px;padding:2px 6px;border-radius:4px;line-height:1.4;z-index:2;">NEW</div>
         <div style="position:absolute;bottom:0;left:0;right:0;height:56px;background:linear-gradient(0deg,rgba(6,8,15,.9) 0%,transparent 100%);padding:6px 8px 8px;display:flex;flex-direction:column;justify-content:flex-end;gap:1px;">
-          <div style="font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#F4F2EE;line-height:1.3;">Yooka-Laylee</div>
-          <div style="font-family:'Outfit',sans-serif;font-size:9px;color:#A8ADBA;">Platformer</div>
+          <div style="font-family:var(--jio-font),sans-serif;font-size:11px;font-weight:700;color:#F4F2EE;line-height:1.3;">Yooka-Laylee</div>
+          <div style="font-family:var(--jio-font),sans-serif;font-size:9px;color:var(--text2);">Platformer</div>
         </div>
       </div>
-      <span style="font-family:'Outfit',sans-serif;font-size:10px;color:#6B7280;">Portrait · NEW badge</span>
+      <span style="font-family:var(--jio-font),sans-serif;font-size:10px;color:var(--text3);">Portrait · NEW badge</span>
     </div>
 
     <!-- Card 3: Landscape Focus (TV) -->
     <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
-      <div style="width:200px;height:128px;border-radius:16px;overflow:hidden;position:relative;background:#0a2010;box-shadow:0 0 0 2px #00A859,0 0 24px rgba(0,200,100,.4),0 8px 32px rgba(0,0,0,.6);">
+      <div style="width:200px;height:128px;border-radius:16px;overflow:hidden;position:relative;background:var(--surface-2);box-shadow:0 0 0 2px #00A859,0 0 24px rgba(0,200,100,.4),0 8px 32px rgba(0,0,0,.6);">
         <div style="width:100%;height:100px;background:linear-gradient(135deg,#0a2010,#1a5030);position:absolute;top:0;left:0;"></div>
         <div style="position:absolute;bottom:0;left:0;right:0;height:72px;background:linear-gradient(0deg,rgba(6,8,15,.88) 0%,transparent 100%);padding:8px 10px 8px;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;">
-          <div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:#F4F2EE;line-height:1.3;">War Thunder</div>
-          <div style="font-family:'Outfit',sans-serif;font-size:10px;color:#A8ADBA;line-height:1.3;">Action · ★4.7</div>
+          <div style="font-family:var(--jio-font),sans-serif;font-size:12px;font-weight:700;color:#F4F2EE;line-height:1.3;">War Thunder</div>
+          <div style="font-family:var(--jio-font),sans-serif;font-size:10px;color:var(--text2);line-height:1.3;">Action · ★4.7</div>
         </div>
       </div>
-      <span style="font-family:'Outfit',sans-serif;font-size:10px;color:#6B7280;">Landscape · TV Focus</span>
+      <span style="font-family:var(--jio-font),sans-serif;font-size:10px;color:var(--text3);">Landscape · TV Focus</span>
     </div>
 
   </div>
@@ -85,7 +85,7 @@
 
 <!-- 3. INTRO -->
 <section class="component-intro ds-section">
-  <p style="font-family:'Outfit',sans-serif;font-size:15px;color:#A8ADBA;line-height:1.7;max-width:680px;margin:0 0 24px;">
+  <p style="font-family:var(--jio-font),sans-serif;font-size:15px;color:var(--text2);line-height:1.7;max-width:680px;margin:0 0 24px;">
     Cards are the fundamental building block of game discovery in JioGames. They appear across every surface — home rails, genre pages, search results, and pass libraries — presenting just enough information for a player to decide whether to tap and learn more or launch directly. Every card consists of a media area backed by game art, a lightweight metadata footer, and a system of overlays for states like locked, premium, and unavailable.
   </p>
   <ul class="component-summary-list">
@@ -133,18 +133,18 @@
     <div class="ds-anatomy-preview">
       <!-- Anatomy card demo with callout dots -->
       <div style="position:relative;display:inline-block;">
-        <div class="ds-anatomy-component" style="width:240px;height:152px;border-radius:16px;overflow:visible;position:relative;background:#1a0830;box-shadow:0 8px 32px rgba(0,0,0,.5);">
+        <div class="ds-anatomy-component" style="width:240px;height:152px;border-radius:16px;overflow:visible;position:relative;background:var(--surface-2);box-shadow:0 8px 32px rgba(0,0,0,.5);">
           <!-- Art area -->
           <div style="width:240px;height:152px;border-radius:16px;overflow:hidden;position:absolute;top:0;left:0;">
             <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a0830,#3d1070);"></div>
             <!-- Badge overlay (callout 4) -->
-            <div style="position:absolute;top:8px;left:8px;background:#00A859;color:#fff;font-family:'Outfit',sans-serif;font-size:9px;font-weight:700;letter-spacing:.6px;padding:2px 7px;border-radius:4px;line-height:1.4;">NEW</div>
+            <div style="position:absolute;top:8px;left:8px;background:#00A859;color:var(--text);font-family:var(--jio-font),sans-serif;font-size:9px;font-weight:700;letter-spacing:.6px;padding:2px 7px;border-radius:4px;line-height:1.4;">NEW</div>
             <!-- Locked overlay (callout 5) - subtle for anatomy display -->
             <!-- Focus ring (callout 6) - shown as outer ring -->
             <!-- Metadata overlay -->
             <div style="position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(0deg,rgba(6,8,15,.9) 0%,transparent 100%);padding:8px 12px 10px;display:flex;flex-direction:column;justify-content:flex-end;gap:3px;">
-              <div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;line-height:1.3;">Tomb Raider</div>
-              <div style="font-family:'Outfit',sans-serif;font-size:10px;color:#A8ADBA;">Action Adventure · ★4.9</div>
+              <div style="font-family:var(--jio-font),sans-serif;font-size:13px;font-weight:700;color:#F4F2EE;line-height:1.3;">Tomb Raider</div>
+              <div style="font-family:var(--jio-font),sans-serif;font-size:10px;color:var(--text2);">Action Adventure · ★4.9</div>
             </div>
           </div>
           <!-- Focus ring demo line -->
@@ -152,27 +152,27 @@
 
           <!-- Callout dot 1 - media area -->
           <div class="ds-anatomy-callout-dot" style="position:absolute;top:28px;left:50%;transform:translateX(-50%);">
-            <div class="ds-anatomy-callout-num" style="background:#00A859;color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;box-shadow:0 0 0 2px rgba(0,168,89,.3);">1</div>
+            <div class="ds-anatomy-callout-num" style="background:#00A859;color:var(--text);width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:var(--jio-font),sans-serif;box-shadow:0 0 0 2px rgba(0,168,89,.3);">1</div>
           </div>
           <!-- Callout dot 2 - title -->
           <div class="ds-anatomy-callout-dot" style="position:absolute;bottom:28px;left:12px;">
-            <div class="ds-anatomy-callout-num" style="background:#00A859;color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;box-shadow:0 0 0 2px rgba(0,168,89,.3);">2</div>
+            <div class="ds-anatomy-callout-num" style="background:#00A859;color:var(--text);width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:var(--jio-font),sans-serif;box-shadow:0 0 0 2px rgba(0,168,89,.3);">2</div>
           </div>
           <!-- Callout dot 3 - metadata -->
           <div class="ds-anatomy-callout-dot" style="position:absolute;bottom:10px;left:12px;">
-            <div class="ds-anatomy-callout-num" style="background:#00A859;color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;box-shadow:0 0 0 2px rgba(0,168,89,.3);">3</div>
+            <div class="ds-anatomy-callout-num" style="background:#00A859;color:var(--text);width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:var(--jio-font),sans-serif;box-shadow:0 0 0 2px rgba(0,168,89,.3);">3</div>
           </div>
           <!-- Callout dot 4 - badge -->
           <div class="ds-anatomy-callout-dot" style="position:absolute;top:8px;right:8px;">
-            <div class="ds-anatomy-callout-num" style="background:#00A859;color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;box-shadow:0 0 0 2px rgba(0,168,89,.3);">4</div>
+            <div class="ds-anatomy-callout-num" style="background:#00A859;color:var(--text);width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:var(--jio-font),sans-serif;box-shadow:0 0 0 2px rgba(0,168,89,.3);">4</div>
           </div>
           <!-- Callout dot 5 - locked overlay (top-right area) -->
           <div class="ds-anatomy-callout-dot" style="position:absolute;top:44px;right:8px;">
-            <div class="ds-anatomy-callout-num" style="background:#00A859;color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;box-shadow:0 0 0 2px rgba(0,168,89,.3);">5</div>
+            <div class="ds-anatomy-callout-num" style="background:#00A859;color:var(--text);width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:var(--jio-font),sans-serif;box-shadow:0 0 0 2px rgba(0,168,89,.3);">5</div>
           </div>
           <!-- Callout dot 6 - focus ring -->
           <div class="ds-anatomy-callout-dot" style="position:absolute;top:-12px;right:50%;transform:translateX(50%);">
-            <div class="ds-anatomy-callout-num" style="background:#00A859;color:#fff;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;box-shadow:0 0 0 2px rgba(0,168,89,.3);">6</div>
+            <div class="ds-anatomy-callout-num" style="background:#00A859;color:var(--text);width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:var(--jio-font),sans-serif;box-shadow:0 0 0 2px rgba(0,168,89,.3);">6</div>
           </div>
 
         </div>
@@ -181,7 +181,7 @@
 
     <ul class="ds-anatomy-list">
       <li class="ds-anatomy-item">
-        <span class="ds-anatomy-callout-num" style="background:#00A859;color:#fff;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;flex-shrink:0;">1</span>
+        <span class="ds-anatomy-callout-num" style="background:#00A859;color:var(--text);width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:var(--jio-font),sans-serif;flex-shrink:0;">1</span>
         <span>
           <span class="ds-anatomy-label">Media area</span>
           <span class="ds-anatomy-required">Required</span>
@@ -189,7 +189,7 @@
         </span>
       </li>
       <li class="ds-anatomy-item">
-        <span class="ds-anatomy-callout-num" style="background:#00A859;color:#fff;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;flex-shrink:0;">2</span>
+        <span class="ds-anatomy-callout-num" style="background:#00A859;color:var(--text);width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:var(--jio-font),sans-serif;flex-shrink:0;">2</span>
         <span>
           <span class="ds-anatomy-label">Title</span>
           <span class="ds-anatomy-required">Required</span>
@@ -197,7 +197,7 @@
         </span>
       </li>
       <li class="ds-anatomy-item">
-        <span class="ds-anatomy-callout-num" style="background:#00A859;color:#fff;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;flex-shrink:0;">3</span>
+        <span class="ds-anatomy-callout-num" style="background:#00A859;color:var(--text);width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:var(--jio-font),sans-serif;flex-shrink:0;">3</span>
         <span>
           <span class="ds-anatomy-label">Metadata row</span>
           <span class="ds-anatomy-optional">Optional</span>
@@ -205,7 +205,7 @@
         </span>
       </li>
       <li class="ds-anatomy-item">
-        <span class="ds-anatomy-callout-num" style="background:#00A859;color:#fff;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;flex-shrink:0;">4</span>
+        <span class="ds-anatomy-callout-num" style="background:#00A859;color:var(--text);width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:var(--jio-font),sans-serif;flex-shrink:0;">4</span>
         <span>
           <span class="ds-anatomy-label">Badge overlay</span>
           <span class="ds-anatomy-optional">Optional</span>
@@ -214,7 +214,7 @@
         </span>
       </li>
       <li class="ds-anatomy-item">
-        <span class="ds-anatomy-callout-num" style="background:#00A859;color:#fff;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;flex-shrink:0;">5</span>
+        <span class="ds-anatomy-callout-num" style="background:#00A859;color:var(--text);width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:var(--jio-font),sans-serif;flex-shrink:0;">5</span>
         <span>
           <span class="ds-anatomy-label">Locked overlay</span>
           <span class="ds-anatomy-optional">Optional</span>
@@ -223,7 +223,7 @@
         </span>
       </li>
       <li class="ds-anatomy-item">
-        <span class="ds-anatomy-callout-num" style="background:#00A859;color:#fff;width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:'Outfit',sans-serif;flex-shrink:0;">6</span>
+        <span class="ds-anatomy-callout-num" style="background:#00A859;color:var(--text);width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;font-family:var(--jio-font),sans-serif;flex-shrink:0;">6</span>
         <span>
           <span class="ds-anatomy-label">Focus ring</span>
           <span class="ds-anatomy-optional">Optional</span>
@@ -246,13 +246,13 @@
       <div style="margin-bottom:12px;">
         <div style="width:100%;max-width:200px;height:126px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#0d1a2e,#1a3a5c);position:relative;">
           <div style="position:absolute;bottom:0;left:0;right:0;height:64px;background:linear-gradient(0deg,rgba(6,8,15,.88) 0%,transparent 100%);padding:6px 10px 8px;display:flex;flex-direction:column;justify-content:flex-end;gap:2px;">
-            <div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:#F4F2EE;">Shadow of War</div>
-            <div style="font-family:'Outfit',sans-serif;font-size:10px;color:#A8ADBA;">RPG · ★4.8</div>
+            <div style="font-family:var(--jio-font),sans-serif;font-size:12px;font-weight:700;color:#F4F2EE;">Shadow of War</div>
+            <div style="font-family:var(--jio-font),sans-serif;font-size:10px;color:var(--text2);">RPG · ★4.8</div>
           </div>
         </div>
       </div>
-      <div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;margin-bottom:4px;">.card--landscape</div>
-      <div style="font-family:'Outfit',sans-serif;font-size:12px;color:#6B7280;line-height:1.5;">16:9 aspect ratio. The primary browsing card used in horizontal rails on home, genre, and search surfaces.</div>
+      <div style="font-family:var(--jio-font),sans-serif;font-size:13px;font-weight:700;color:#F4F2EE;margin-bottom:4px;">.card--landscape</div>
+      <div style="font-family:var(--jio-font),sans-serif;font-size:12px;color:var(--text3);line-height:1.5;">16:9 aspect ratio. The primary browsing card used in horizontal rails on home, genre, and search surfaces.</div>
     </div>
 
     <!-- Portrait / Cover -->
@@ -260,12 +260,12 @@
       <div style="margin-bottom:12px;display:flex;gap:10px;">
         <div style="width:90px;height:134px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#1a1a0a,#3a3010);position:relative;flex-shrink:0;">
           <div style="position:absolute;bottom:0;left:0;right:0;height:52px;background:linear-gradient(0deg,rgba(6,8,15,.9) 0%,transparent 100%);padding:4px 8px 7px;display:flex;flex-direction:column;justify-content:flex-end;gap:1px;">
-            <div style="font-family:'Outfit',sans-serif;font-size:10px;font-weight:600;color:#F4F2EE;">Vigilante</div>
+            <div style="font-family:var(--jio-font),sans-serif;font-size:10px;font-weight:700;color:#F4F2EE;">Vigilante</div>
           </div>
         </div>
       </div>
-      <div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;margin-bottom:4px;">.card--portrait</div>
-      <div style="font-family:'Outfit',sans-serif;font-size:12px;color:#6B7280;line-height:1.5;">2:3 aspect ratio. Used for featured game covers on editorial, pass library, and genre spotlight rows.</div>
+      <div style="font-family:var(--jio-font),sans-serif;font-size:13px;font-weight:700;color:#F4F2EE;margin-bottom:4px;">.card--portrait</div>
+      <div style="font-family:var(--jio-font),sans-serif;font-size:12px;color:var(--text3);line-height:1.5;">2:3 aspect ratio. Used for featured game covers on editorial, pass library, and genre spotlight rows.</div>
     </div>
 
     <!-- Square -->
@@ -273,17 +273,17 @@
       <div style="margin-bottom:12px;display:flex;gap:10px;">
         <div style="width:96px;height:96px;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#1a0a0a,#3a1010);position:relative;">
           <div style="position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(0deg,rgba(6,8,15,.88) 0%,transparent 100%);padding:3px 6px 6px;display:flex;align-items:flex-end;">
-            <div style="font-family:'Outfit',sans-serif;font-size:9px;font-weight:600;color:#F4F2EE;">Chess</div>
+            <div style="font-family:var(--jio-font),sans-serif;font-size:9px;font-weight:700;color:#F4F2EE;">Chess</div>
           </div>
         </div>
         <div style="width:96px;height:96px;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#0a0a1a,#101040);position:relative;">
           <div style="position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(0deg,rgba(6,8,15,.88) 0%,transparent 100%);padding:3px 6px 6px;display:flex;align-items:flex-end;">
-            <div style="font-family:'Outfit',sans-serif;font-size:9px;font-weight:600;color:#F4F2EE;">Puzzles</div>
+            <div style="font-family:var(--jio-font),sans-serif;font-size:9px;font-weight:700;color:#F4F2EE;">Puzzles</div>
           </div>
         </div>
       </div>
-      <div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;margin-bottom:4px;">.card--square</div>
-      <div style="font-family:'Outfit',sans-serif;font-size:12px;color:#6B7280;line-height:1.5;">1:1 aspect ratio, 96px default. Icon-style mini cards for quick-game grids and category chips.</div>
+      <div style="font-family:var(--jio-font),sans-serif;font-size:13px;font-weight:700;color:#F4F2EE;margin-bottom:4px;">.card--square</div>
+      <div style="font-family:var(--jio-font),sans-serif;font-size:12px;color:var(--text3);line-height:1.5;">1:1 aspect ratio, 96px default. Icon-style mini cards for quick-game grids and category chips.</div>
     </div>
 
     <!-- Mini -->
@@ -292,20 +292,20 @@
         <div style="display:flex;align-items:center;gap:10px;padding:8px;background:rgba(255,255,255,.04);border-radius:10px;">
           <div style="width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,#0a1a0a,#1a4020);flex-shrink:0;"></div>
           <div>
-            <div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:#F4F2EE;line-height:1.3;">Carrom King</div>
-            <div style="font-family:'Outfit',sans-serif;font-size:10px;color:#6B7280;">Board · ★4.6</div>
+            <div style="font-family:var(--jio-font),sans-serif;font-size:12px;font-weight:700;color:#F4F2EE;line-height:1.3;">Carrom King</div>
+            <div style="font-family:var(--jio-font),sans-serif;font-size:10px;color:var(--text3);">Board · ★4.6</div>
           </div>
         </div>
         <div style="display:flex;align-items:center;gap:10px;padding:8px;background:rgba(255,255,255,.04);border-radius:10px;">
           <div style="width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,#1a0a10,#401020);flex-shrink:0;"></div>
           <div>
-            <div style="font-family:'Outfit',sans-serif;font-size:12px;font-weight:600;color:#F4F2EE;line-height:1.3;">Ludo King</div>
-            <div style="font-family:'Outfit',sans-serif;font-size:10px;color:#6B7280;">Board · ★4.4</div>
+            <div style="font-family:var(--jio-font),sans-serif;font-size:12px;font-weight:700;color:#F4F2EE;line-height:1.3;">Ludo King</div>
+            <div style="font-family:var(--jio-font),sans-serif;font-size:10px;color:var(--text3);">Board · ★4.4</div>
           </div>
         </div>
       </div>
-      <div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;margin-bottom:4px;">.card--mini</div>
-      <div style="font-family:'Outfit',sans-serif;font-size:12px;color:#6B7280;line-height:1.5;">Compact horizontal layout for list-style surfaces: search results, recently played, and notification trays.</div>
+      <div style="font-family:var(--jio-font),sans-serif;font-size:13px;font-weight:700;color:#F4F2EE;margin-bottom:4px;">.card--mini</div>
+      <div style="font-family:var(--jio-font),sans-serif;font-size:12px;color:var(--text3);line-height:1.5;">Compact horizontal layout for list-style surfaces: search results, recently played, and notification trays.</div>
     </div>
 
     <!-- Hero / Feature -->
@@ -314,14 +314,14 @@
         <div style="width:100%;height:120px;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#0d0520,#2a1060);position:relative;">
           <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,8,15,.85) 0%,transparent 60%);"></div>
           <div style="position:absolute;bottom:16px;left:16px;">
-            <div style="font-family:'Outfit',sans-serif;font-size:9px;font-weight:700;letter-spacing:1.2px;color:#00A859;text-transform:uppercase;margin-bottom:4px;">Featured · Action</div>
-            <div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:700;color:#F4F2EE;line-height:1.2;">Doom Eternal</div>
-            <div style="font-family:'Outfit',sans-serif;font-size:11px;color:#A8ADBA;margin-top:2px;">★4.9 · 2.4M plays</div>
+            <div style="font-family:var(--jio-font),sans-serif;font-size:9px;font-weight:700;letter-spacing:1.2px;color:#00A859;text-transform:uppercase;margin-bottom:4px;">Featured · Action</div>
+            <div style="font-family:var(--jio-font),sans-serif;font-size:18px;font-weight:700;color:#F4F2EE;line-height:1.2;">Doom Eternal</div>
+            <div style="font-family:var(--jio-font),sans-serif;font-size:11px;color:var(--text2);margin-top:2px;">★4.9 · 2.4M plays</div>
           </div>
         </div>
       </div>
-      <div style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;margin-bottom:4px;">.card--hero</div>
-      <div style="font-family:'Outfit',sans-serif;font-size:12px;color:#6B7280;line-height:1.5;">Full-width feature card with large art canvas and left-anchored editorial text. Used for hero spotlights at the top of home, genre pages, and promotional surfaces.</div>
+      <div style="font-family:var(--jio-font),sans-serif;font-size:13px;font-weight:700;color:#F4F2EE;margin-bottom:4px;">.card--hero</div>
+      <div style="font-family:var(--jio-font),sans-serif;font-size:12px;color:var(--text3);line-height:1.5;">Full-width feature card with large art canvas and left-anchored editorial text. Used for hero spotlights at the top of home, genre pages, and promotional surfaces.</div>
     </div>
 
   </div>
@@ -336,42 +336,42 @@
     <table class="ds-spec-table" style="width:100%;border-collapse:collapse;">
       <thead>
         <tr>
-          <th style="padding:10px 14px;text-align:left;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Size</th>
-          <th style="padding:10px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">
+          <th style="padding:10px 14px;text-align:left;font-family:var(--jio-font),sans-serif;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Size</th>
+          <th style="padding:10px 14px;text-align:center;font-family:var(--jio-font),sans-serif;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">
             <span style="display:inline-flex;align-items:center;gap:4px;"><span style="width:7px;height:7px;border-radius:50%;background:#00A859;display:inline-block;"></span>Mobile</span>
           </th>
-          <th style="padding:10px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">
-            <span style="display:inline-flex;align-items:center;gap:4px;"><span style="width:7px;height:7px;border-radius:50%;background:#3B82F6;display:inline-block;"></span>Web</span>
+          <th style="padding:10px 14px;text-align:center;font-family:var(--jio-font),sans-serif;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">
+            <span style="display:inline-flex;align-items:center;gap:4px;"><span style="width:7px;height:7px;border-radius:50%;background:var(--gold);display:inline-block;"></span>Web</span>
           </th>
-          <th style="padding:10px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">
+          <th style="padding:10px 14px;text-align:center;font-family:var(--jio-font),sans-serif;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">
             <span style="display:inline-flex;align-items:center;gap:4px;"><span style="width:7px;height:7px;border-radius:50%;background:#A855F7;display:inline-block;"></span>TV</span>
           </th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);">Compact</td>
-          <td style="padding:12px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">152 × 96</code></td>
-          <td style="padding:12px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">168 × 106</code></td>
-          <td style="padding:12px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">240 × 150</code></td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;font-weight:700;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);">Compact</td>
+          <td style="padding:12px 14px;text-align:center;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">152 × 96</code></td>
+          <td style="padding:12px 14px;text-align:center;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">168 × 106</code></td>
+          <td style="padding:12px 14px;text-align:center;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">240 × 150</code></td>
         </tr>
         <tr>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);">Standard</td>
-          <td style="padding:12px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">200 × 126</code></td>
-          <td style="padding:12px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">220 × 138</code></td>
-          <td style="padding:12px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">320 × 200</code></td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;font-weight:700;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);">Standard</td>
+          <td style="padding:12px 14px;text-align:center;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">200 × 126</code></td>
+          <td style="padding:12px 14px;text-align:center;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">220 × 138</code></td>
+          <td style="padding:12px 14px;text-align:center;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">320 × 200</code></td>
         </tr>
         <tr>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);">Large</td>
-          <td style="padding:12px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">272 × 172</code></td>
-          <td style="padding:12px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">300 × 188</code></td>
-          <td style="padding:12px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">400 × 250</code></td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;font-weight:700;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);">Large</td>
+          <td style="padding:12px 14px;text-align:center;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">272 × 172</code></td>
+          <td style="padding:12px 14px;text-align:center;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">300 × 188</code></td>
+          <td style="padding:12px 14px;text-align:center;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">400 × 250</code></td>
         </tr>
         <tr>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;">Hero</td>
-          <td style="padding:12px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;"><code class="ds-code">100% × 200</code></td>
-          <td style="padding:12px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;"><code class="ds-code">100% × 320</code></td>
-          <td style="padding:12px 14px;text-align:center;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;"><code class="ds-code">100% × 540</code></td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;font-weight:700;color:#F4F2EE;">Hero</td>
+          <td style="padding:12px 14px;text-align:center;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);"><code class="ds-code">100% × 200</code></td>
+          <td style="padding:12px 14px;text-align:center;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);"><code class="ds-code">100% × 320</code></td>
+          <td style="padding:12px 14px;text-align:center;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);"><code class="ds-code">100% × 540</code></td>
         </tr>
       </tbody>
     </table>
@@ -388,92 +388,92 @@
       <div style="display:grid;grid-template-columns:140px 1fr 200px;gap:0;min-width:520px;">
 
         <!-- Header row -->
-        <div class="ds-matrix-header" style="padding:10px 14px;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">State</div>
-        <div class="ds-matrix-header" style="padding:10px 14px;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Description</div>
-        <div class="ds-matrix-header" style="padding:10px 14px;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Visual</div>
+        <div class="ds-matrix-header" style="padding:10px 14px;font-family:var(--jio-font),sans-serif;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">State</div>
+        <div class="ds-matrix-header" style="padding:10px 14px;font-family:var(--jio-font),sans-serif;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Description</div>
+        <div class="ds-matrix-header" style="padding:10px 14px;font-family:var(--jio-font),sans-serif;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Visual</div>
 
         <!-- Default -->
-        <div class="ds-matrix-row-label" style="padding:14px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">Default</div>
-        <div style="padding:14px;font-family:'Outfit',sans-serif;font-size:12px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);line-height:1.6;">Resting state. No elevation, no overlay. Art fills card, gradient overlay with title visible.</div>
+        <div class="ds-matrix-row-label" style="padding:14px;font-family:var(--jio-font),sans-serif;font-size:13px;font-weight:700;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">Default</div>
+        <div style="padding:14px;font-family:var(--jio-font),sans-serif;font-size:12px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);line-height:1.6;">Resting state. No elevation, no overlay. Art fills card, gradient overlay with title visible.</div>
         <div style="padding:14px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">
           <div style="width:80px;height:50px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,#0d1a2e,#1a3a5c);position:relative;">
             <div style="position:absolute;bottom:0;left:0;right:0;height:28px;background:linear-gradient(0deg,rgba(6,8,15,.88) 0%,transparent 100%);padding:3px 6px;display:flex;flex-direction:column;justify-content:flex-end;">
-              <div style="font-family:'Outfit',sans-serif;font-size:8px;font-weight:600;color:#F4F2EE;">Game Title</div>
+              <div style="font-family:var(--jio-font),sans-serif;font-size:8px;font-weight:700;color:#F4F2EE;">Game Title</div>
             </div>
           </div>
         </div>
 
         <!-- Hover -->
-        <div class="ds-matrix-row-label" style="padding:14px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">Hover</div>
-        <div style="padding:14px;font-family:'Outfit',sans-serif;font-size:12px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);line-height:1.6;">Web only. Slight upward lift via <code class="ds-code">translateY(-2px)</code> + <code class="ds-code">box-shadow</code>. Transition 150ms ease-out.</div>
+        <div class="ds-matrix-row-label" style="padding:14px;font-family:var(--jio-font),sans-serif;font-size:13px;font-weight:700;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">Hover</div>
+        <div style="padding:14px;font-family:var(--jio-font),sans-serif;font-size:12px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);line-height:1.6;">Web only. Slight upward lift via <code class="ds-code">translateY(-2px)</code> + <code class="ds-code">box-shadow</code>. Transition 150ms ease-out.</div>
         <div style="padding:14px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">
           <div style="width:80px;height:50px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,#0d1a2e,#1a3a5c);position:relative;transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.5);">
             <div style="position:absolute;bottom:0;left:0;right:0;height:28px;background:linear-gradient(0deg,rgba(6,8,15,.88) 0%,transparent 100%);padding:3px 6px;display:flex;flex-direction:column;justify-content:flex-end;">
-              <div style="font-family:'Outfit',sans-serif;font-size:8px;font-weight:600;color:#F4F2EE;">Game Title</div>
+              <div style="font-family:var(--jio-font),sans-serif;font-size:8px;font-weight:700;color:#F4F2EE;">Game Title</div>
             </div>
           </div>
         </div>
 
         <!-- Focus -->
-        <div class="ds-matrix-row-label" style="padding:14px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">Focus</div>
-        <div style="padding:14px;font-family:'Outfit',sans-serif;font-size:12px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);line-height:1.6;">TV D-pad and web keyboard. Green ring: <code class="ds-code">box-shadow: 0 0 0 2px #00A859, 0 0 24px rgba(0,200,100,.4)</code>. Class <code class="ds-code">.is-tv-focused</code>.</div>
+        <div class="ds-matrix-row-label" style="padding:14px;font-family:var(--jio-font),sans-serif;font-size:13px;font-weight:700;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">Focus</div>
+        <div style="padding:14px;font-family:var(--jio-font),sans-serif;font-size:12px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);line-height:1.6;">TV D-pad and web keyboard. Green ring: <code class="ds-code">box-shadow: 0 0 0 2px #00A859, 0 0 24px rgba(0,200,100,.4)</code>. Class <code class="ds-code">.is-tv-focused</code>.</div>
         <div style="padding:14px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">
           <div style="width:80px;height:50px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,#0a2010,#1a5030);position:relative;box-shadow:0 0 0 2px #00A859,0 0 16px rgba(0,200,100,.4);">
             <div style="position:absolute;bottom:0;left:0;right:0;height:28px;background:linear-gradient(0deg,rgba(6,8,15,.88) 0%,transparent 100%);padding:3px 6px;display:flex;flex-direction:column;justify-content:flex-end;">
-              <div style="font-family:'Outfit',sans-serif;font-size:8px;font-weight:600;color:#F4F2EE;">Game Title</div>
+              <div style="font-family:var(--jio-font),sans-serif;font-size:8px;font-weight:700;color:#F4F2EE;">Game Title</div>
             </div>
           </div>
         </div>
 
         <!-- Active -->
-        <div class="ds-matrix-row-label" style="padding:14px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">Active</div>
-        <div style="padding:14px;font-family:'Outfit',sans-serif;font-size:12px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);line-height:1.6;">Mobile tap / pointer press. Scales to <code class="ds-code">scale(0.97)</code> with 80ms transition. Provides tactile feedback.</div>
+        <div class="ds-matrix-row-label" style="padding:14px;font-family:var(--jio-font),sans-serif;font-size:13px;font-weight:700;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">Active</div>
+        <div style="padding:14px;font-family:var(--jio-font),sans-serif;font-size:12px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);line-height:1.6;">Mobile tap / pointer press. Scales to <code class="ds-code">scale(0.97)</code> with 80ms transition. Provides tactile feedback.</div>
         <div style="padding:14px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">
           <div style="width:80px;height:50px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,#0d1a2e,#1a3a5c);position:relative;transform:scale(.97);">
             <div style="position:absolute;bottom:0;left:0;right:0;height:28px;background:linear-gradient(0deg,rgba(6,8,15,.88) 0%,transparent 100%);padding:3px 6px;display:flex;flex-direction:column;justify-content:flex-end;">
-              <div style="font-family:'Outfit',sans-serif;font-size:8px;font-weight:600;color:#F4F2EE;">Game Title</div>
+              <div style="font-family:var(--jio-font),sans-serif;font-size:8px;font-weight:700;color:#F4F2EE;">Game Title</div>
             </div>
           </div>
         </div>
 
         <!-- Locked -->
-        <div class="ds-matrix-row-label" style="padding:14px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">Locked</div>
-        <div style="padding:14px;font-family:'Outfit',sans-serif;font-size:12px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);line-height:1.6;">Game requires subscription. Dark scrim overlay (<code class="ds-code">--locked-overlay</code>) with lock icon + "Subscribe to unlock" centred.</div>
+        <div class="ds-matrix-row-label" style="padding:14px;font-family:var(--jio-font),sans-serif;font-size:13px;font-weight:700;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">Locked</div>
+        <div style="padding:14px;font-family:var(--jio-font),sans-serif;font-size:12px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);line-height:1.6;">Game requires subscription. Dark scrim overlay (<code class="ds-code">--locked-overlay</code>) with lock icon + "Subscribe to unlock" centred.</div>
         <div style="padding:14px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">
           <div style="width:80px;height:50px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,#1a1020,#2a2040);position:relative;">
             <div style="position:absolute;inset:0;background:rgba(6,8,15,.75);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;">
               <div style="font-size:12px;">🔒</div>
-              <div style="font-family:'Outfit',sans-serif;font-size:7px;color:#A8ADBA;text-align:center;line-height:1.2;">Subscribe</div>
+              <div style="font-family:var(--jio-font),sans-serif;font-size:7px;color:var(--text2);text-align:center;line-height:1.2;">Subscribe</div>
             </div>
           </div>
         </div>
 
         <!-- Premium -->
-        <div class="ds-matrix-row-label" style="padding:14px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">Premium</div>
-        <div style="padding:14px;font-family:'Outfit',sans-serif;font-size:12px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);line-height:1.6;">Included in pass. Gradient border (<code class="ds-code">--premium-border</code>) + green gradient PREMIUM badge. Accessible without lock.</div>
+        <div class="ds-matrix-row-label" style="padding:14px;font-family:var(--jio-font),sans-serif;font-size:13px;font-weight:700;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">Premium</div>
+        <div style="padding:14px;font-family:var(--jio-font),sans-serif;font-size:12px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);line-height:1.6;">Included in pass. Gradient border (<code class="ds-code">--premium-border</code>) + green gradient PREMIUM badge. Accessible without lock.</div>
         <div style="padding:14px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">
-          <div style="width:80px;height:50px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,#0a1a10,#1a4020);position:relative;box-shadow:0 0 0 1.5px rgba(0,204,101,.35);">
-            <div style="position:absolute;top:4px;left:4px;background:linear-gradient(135deg,#00cc65,#00E870);color:#06080F;font-family:'Outfit',sans-serif;font-size:7px;font-weight:700;letter-spacing:.5px;padding:1px 5px;border-radius:3px;line-height:1.4;">PREMIUM</div>
+          <div style="width:80px;height:50px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,#0a1a10,#1a4020);position:relative;box-shadow:0 0 0 1.5px var(--border-ultimate);">
+            <div style="position:absolute;top:4px;left:4px;background:linear-gradient(135deg,#00cc65,#00E870);color:#06080F;font-family:var(--jio-font),sans-serif;font-size:7px;font-weight:700;letter-spacing:.5px;padding:1px 5px;border-radius:3px;line-height:1.4;">PREMIUM</div>
             <div style="position:absolute;bottom:0;left:0;right:0;height:24px;background:linear-gradient(0deg,rgba(6,8,15,.88) 0%,transparent 100%);padding:2px 5px;display:flex;align-items:flex-end;">
-              <div style="font-family:'Outfit',sans-serif;font-size:8px;font-weight:600;color:#F4F2EE;">Game Title</div>
+              <div style="font-family:var(--jio-font),sans-serif;font-size:8px;font-weight:700;color:#F4F2EE;">Game Title</div>
             </div>
           </div>
         </div>
 
         <!-- Unavailable -->
-        <div class="ds-matrix-row-label" style="padding:14px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">Unavailable</div>
-        <div style="padding:14px;font-family:'Outfit',sans-serif;font-size:12px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);line-height:1.6;">Not available in user's region or temporarily down. Whole card at <code class="ds-code">opacity: 0.4</code> (<code class="ds-code">--unavailable-opacity</code>). No interaction.</div>
+        <div class="ds-matrix-row-label" style="padding:14px;font-family:var(--jio-font),sans-serif;font-size:13px;font-weight:700;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">Unavailable</div>
+        <div style="padding:14px;font-family:var(--jio-font),sans-serif;font-size:12px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);line-height:1.6;">Not available in user's region or temporarily down. Whole card at <code class="ds-code">opacity: 0.4</code> (<code class="ds-code">--unavailable-opacity</code>). No interaction.</div>
         <div style="padding:14px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;">
           <div style="width:80px;height:50px;border-radius:10px;overflow:hidden;background:linear-gradient(135deg,#0d1a2e,#1a3a5c);position:relative;opacity:.4;">
             <div style="position:absolute;bottom:0;left:0;right:0;height:28px;background:linear-gradient(0deg,rgba(6,8,15,.88) 0%,transparent 100%);padding:3px 6px;display:flex;flex-direction:column;justify-content:flex-end;">
-              <div style="font-family:'Outfit',sans-serif;font-size:8px;font-weight:600;color:#F4F2EE;">Game Title</div>
+              <div style="font-family:var(--jio-font),sans-serif;font-size:8px;font-weight:700;color:#F4F2EE;">Game Title</div>
             </div>
           </div>
         </div>
 
         <!-- Skeleton -->
-        <div class="ds-matrix-row-label" style="padding:14px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:600;color:#F4F2EE;display:flex;align-items:center;">Skeleton</div>
-        <div style="padding:14px;font-family:'Outfit',sans-serif;font-size:12px;color:#A8ADBA;line-height:1.6;">Loading placeholder at exact card dimensions. Background <code class="ds-code">--skeleton-bg</code> with shimmer animation. <code class="ds-code">aria-busy="true"</code>.</div>
+        <div class="ds-matrix-row-label" style="padding:14px;font-family:var(--jio-font),sans-serif;font-size:13px;font-weight:700;color:#F4F2EE;display:flex;align-items:center;">Skeleton</div>
+        <div style="padding:14px;font-family:var(--jio-font),sans-serif;font-size:12px;color:var(--text2);line-height:1.6;">Loading placeholder at exact card dimensions. Background <code class="ds-code">--skeleton-bg</code> with shimmer animation. <code class="ds-code">aria-busy="true"</code>.</div>
         <div style="padding:14px;display:flex;align-items:center;">
           <div style="width:80px;height:50px;border-radius:10px;background:#161A24;position:relative;overflow:hidden;">
             <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.06) 50%,transparent 100%);animation:shimmer 1.6s infinite;"></div>
@@ -495,7 +495,7 @@
 
     <div class="component-content-card">
       <h3 class="component-content-title">Title &amp; metadata</h3>
-      <ul style="font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;line-height:1.8;padding-left:18px;margin:0;">
+      <ul style="font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);line-height:1.8;padding-left:18px;margin:0;">
         <li>Maximum 2 lines — always truncate with <code class="ds-code">-webkit-line-clamp: 2</code> and an ellipsis. Never wrap to a third line.</li>
         <li>Metadata row pattern: <code class="ds-code">Genre · ★Rating</code> or <code class="ds-code">Genre · Duration</code>. Use the interpunct (·) as separator, not a dash.</li>
         <li>Star ratings use the ★ character followed by the numeric score to one decimal place (e.g. ★4.9).</li>
@@ -506,7 +506,7 @@
 
     <div class="component-content-card">
       <h3 class="component-content-title">Locked &amp; premium</h3>
-      <ul style="font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;line-height:1.8;padding-left:18px;margin:0;">
+      <ul style="font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);line-height:1.8;padding-left:18px;margin:0;">
         <li>A locked game must show the lock icon (🔒) alongside the text "Subscribe to unlock" — never use color alone to communicate the restriction.</li>
         <li>Premium pass games show the gradient PREMIUM badge (<code class="ds-code">--premium-gradient</code>) in the top-left corner and a subtle green border (<code class="ds-code">--premium-border</code>).</li>
         <li>Do not combine both a locked overlay and a premium badge — a game is either accessible (premium) or blocked (locked), not both.</li>
@@ -530,7 +530,7 @@
           <span style="width:8px;height:8px;border-radius:50%;background:#00A859;display:inline-block;"></span>Mobile
         </span>
       </div>
-      <ul style="font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;line-height:1.8;padding-left:18px;margin:8px 0 0;">
+      <ul style="font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);line-height:1.8;padding-left:18px;margin:8px 0 0;">
         <li>Cards sit in horizontally scrollable rails with <code class="ds-code">overflow-x: auto</code> and <code class="ds-code">scroll-snap-type: x mandatory</code>.</li>
         <li>Left and right gutters are <code class="ds-code">20px</code> from the viewport edge.</li>
         <li>Inter-card spacing is <code class="ds-code">10px</code>.</li>
@@ -543,10 +543,10 @@
     <div class="component-platform-card component-platform-card--web">
       <div class="component-platform-card-title">
         <span style="display:inline-flex;align-items:center;gap:6px;">
-          <span style="width:8px;height:8px;border-radius:50%;background:#3B82F6;display:inline-block;"></span>Web
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--gold);display:inline-block;"></span>Web
         </span>
       </div>
-      <ul style="font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;line-height:1.8;padding-left:18px;margin:8px 0 0;">
+      <ul style="font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);line-height:1.8;padding-left:18px;margin:8px 0 0;">
         <li>Hover state elevates the card with <code class="ds-code">translateY(-2px)</code> and a deeper shadow. Transition 150ms ease-out.</li>
         <li>Cursor must be <code class="ds-code">pointer</code> on all interactive cards.</li>
         <li>Gutter is <code class="ds-code">24px</code> each side. Cards in a grid use a <code class="ds-code">gap</code> of <code class="ds-code">16px</code>.</li>
@@ -561,7 +561,7 @@
           <span style="width:8px;height:8px;border-radius:50%;background:#A855F7;display:inline-block;"></span>TV
         </span>
       </div>
-      <ul style="font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;line-height:1.8;padding-left:18px;margin:8px 0 0;">
+      <ul style="font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);line-height:1.8;padding-left:18px;margin:8px 0 0;">
         <li>Focus ring is mandatory — it is the primary interaction signal. Class <code class="ds-code">.is-tv-focused</code> applies the green glow.</li>
         <li>D-pad navigation moves focus between cards. Left/right within a rail; up/down between rails.</li>
         <li>Card sizes are the largest tier — use the TV column from the sizes table above.</li>
@@ -583,36 +583,36 @@
     <table class="ds-spec-table" style="width:100%;border-collapse:collapse;">
       <thead>
         <tr>
-          <th style="padding:10px 14px;text-align:left;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Attribute / Pattern</th>
-          <th style="padding:10px 14px;text-align:left;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Value / Guidance</th>
-          <th style="padding:10px 14px;text-align:left;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Notes</th>
+          <th style="padding:10px 14px;text-align:left;font-family:var(--jio-font),sans-serif;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Attribute / Pattern</th>
+          <th style="padding:10px 14px;text-align:left;font-family:var(--jio-font),sans-serif;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Value / Guidance</th>
+          <th style="padding:10px 14px;text-align:left;font-family:var(--jio-font),sans-serif;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Notes</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">role</code></td>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">article</code> (static) or <code class="ds-code">button</code> (interactive)</td>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);">Use <code class="ds-code">button</code> when the card is the primary tap/click target. Never nest interactive elements inside a <code class="ds-code">button</code>-role card.</td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">role</code></td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">article</code> (static) or <code class="ds-code">button</code> (interactive)</td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);">Use <code class="ds-code">button</code> when the card is the primary tap/click target. Never nest interactive elements inside a <code class="ds-code">button</code>-role card.</td>
         </tr>
         <tr>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">aria-label</code></td>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);">Include game name + status</td>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);">Example: <code class="ds-code">aria-label="Tomb Raider, Action, rated 4.9"</code>. Add status for premium: <code class="ds-code">"Doom Eternal, included in JioGames Pass"</code>.</td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">aria-label</code></td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);">Include game name + status</td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);">Example: <code class="ds-code">aria-label="Tomb Raider, Action, rated 4.9"</code>. Add status for premium: <code class="ds-code">"Doom Eternal, included in JioGames Pass"</code>.</td>
         </tr>
         <tr>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);">Locked state announcement</td>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">"Subscribe to unlock"</code> appended to label</td>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);">Screen readers must hear the restriction. Include in <code class="ds-code">aria-label</code>: <code class="ds-code">"War Thunder — Subscribe to unlock"</code>.</td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);">Locked state announcement</td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">"Subscribe to unlock"</code> appended to label</td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);">Screen readers must hear the restriction. Include in <code class="ds-code">aria-label</code>: <code class="ds-code">"War Thunder — Subscribe to unlock"</code>.</td>
         </tr>
         <tr>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);">Skeleton loading</td>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">aria-busy="true"</code></td>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);">Add <code class="ds-code">aria-label="Loading game"</code> on the skeleton container. Remove both attributes once content is populated.</td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:#F4F2EE;border-bottom:1px solid rgba(255,255,255,.05);">Skeleton loading</td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">aria-busy="true"</code></td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);">Add <code class="ds-code">aria-label="Loading game"</code> on the skeleton container. Remove both attributes once content is populated.</td>
         </tr>
         <tr>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#F4F2EE;">Focus ring contrast</td>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;"><code class="ds-code">#00A859</code> on <code class="ds-code">#06080F</code></td>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;">Meets WCAG 2.1 SC 1.4.11 Non-text Contrast minimum of 3:1. The additional outer glow (<code class="ds-code">rgba(0,200,100,.4)</code>) is decorative only.</td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:#F4F2EE;">Focus ring contrast</td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);"><code class="ds-code">#00A859</code> on <code class="ds-code">#06080F</code></td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);">Meets WCAG 2.1 SC 1.4.11 Non-text Contrast minimum of 3:1. The additional outer glow (<code class="ds-code">rgba(0,200,100,.4)</code>) is decorative only.</td>
         </tr>
       </tbody>
     </table>
@@ -628,44 +628,138 @@
     <table class="ds-spec-table" style="width:100%;border-collapse:collapse;">
       <thead>
         <tr>
-          <th style="padding:10px 14px;text-align:left;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Token</th>
-          <th style="padding:10px 14px;text-align:left;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Value</th>
-          <th style="padding:10px 14px;text-align:left;font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Usage</th>
+          <th style="padding:10px 14px;text-align:left;font-family:var(--jio-font),sans-serif;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Token</th>
+          <th style="padding:10px 14px;text-align:left;font-family:var(--jio-font),sans-serif;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Value</th>
+          <th style="padding:10px 14px;text-align:left;font-family:var(--jio-font),sans-serif;font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.08);">Usage</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td style="padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">--card-radius-landscape</code></td>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">16px</code></td>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);">Border-radius for all landscape (16:9) card containers.</td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">16px</code></td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);">Border-radius for all landscape (16:9) card containers.</td>
         </tr>
         <tr>
           <td style="padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">--card-overlay</code></td>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);">gradient</td>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);">Bottom gradient overlay for title/metadata legibility. Fades from <code class="ds-code">rgba(6,8,15,.85)</code> to transparent at 55%.</td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);">gradient</td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);">Bottom gradient overlay for title/metadata legibility. Fades from <code class="ds-code">rgba(6,8,15,.85)</code> to transparent at 55%.</td>
         </tr>
         <tr>
           <td style="padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">--locked-overlay</code></td>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">rgba(6,8,15,.75)</code></td>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);">Full-card scrim for locked state. Applied as an absolute inset layer over the art.</td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">rgba(6,8,15,.75)</code></td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);">Full-card scrim for locked state. Applied as an absolute inset layer over the art.</td>
         </tr>
         <tr>
           <td style="padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">--premium-gradient</code></td>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);">gradient</td>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);">Fill for PREMIUM badge chip. <code class="ds-code">linear-gradient(135deg, #00cc65, #00E870)</code>. Dark text (#06080F) on top.</td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);">gradient</td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);">Fill for PREMIUM badge chip. <code class="ds-code">linear-gradient(135deg, var(--ultimate), var(--jio-bright))</code>. Dark text (#06080F) on top.</td>
         </tr>
         <tr>
           <td style="padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">--skeleton-bg</code></td>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">#161A24</code></td>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;border-bottom:1px solid rgba(255,255,255,.05);">Base background colour for card skeleton / loading state. Maps to <code class="ds-code">--surface-2</code>.</td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);"><code class="ds-code">#161A24</code></td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);border-bottom:1px solid rgba(255,255,255,.05);">Base background colour for card skeleton / loading state. Maps to <code class="ds-code">--surface-2</code>.</td>
         </tr>
         <tr>
           <td style="padding:12px 14px;"><code class="ds-code">--unavailable-opacity</code></td>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;"><code class="ds-code">0.4</code></td>
-          <td style="padding:12px 14px;font-family:'Outfit',sans-serif;font-size:13px;color:#A8ADBA;">Opacity applied to the entire card element when the game is unavailable in the user's region.</td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);"><code class="ds-code">0.4</code></td>
+          <td style="padding:12px 14px;font-family:var(--jio-font),sans-serif;font-size:13px;color:var(--text2);">Opacity applied to the entire card element when the game is unavailable in the user's region.</td>
         </tr>
       </tbody>
     </table>
+  <!-- WHEN TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use</h2>
+    <div class="ds-usage-grid">
+      <div class="ds-usage-card ds-usage-card--do">
+        <p class="ds-usage-label ds-usage-label--do">Use when</p>
+        <ul class="ds-usage-list">
+              <li>Game tiles in horizontal rails and grid layouts</li>
+              <li>Pass plan comparison with price and features</li>
+              <li>Content previews with thumbnail, title, and metadata</li>
+              <li>Leaderboard entries, achievement items, and list rows with rich media</li>
+        </ul>
+      </div>
+      <div class="ds-usage-card ds-usage-card--dont">
+        <p class="ds-usage-label ds-usage-label--dont">Don't use when</p>
+        <ul class="ds-usage-list">
+              <li>Full-bleed editorial sections — use a section layout instead</li>
+              <li>Single lines of text with no visual hierarchy — use a List item</li>
+              <li>Deeply nested cards (card inside card)</li>
+              <li>Interactive cards without a visible affordance (hover/focus state)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MOTION -->
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-motion-table">
+      <thead><tr><th>Interaction</th><th>Easing</th><th>Duration</th><th>Property</th></tr></thead>
+      <tbody>
+        <tr><td>Hover lift</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>transform scale(1.02), box-shadow</td></tr>
+        <tr><td>Press</td><td><code>--ease-out</code></td><td><code>80ms</code></td><td>transform scale(0.97)</td></tr>
+        <tr><td>TV focus scale</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>transform scale(1.06)</td></tr>
+        <tr><td>Image load fade</td><td><code>--ease-out</code></td><td><code>--dur-base</code></td><td>opacity</td></tr>
+        <tr><td>Skeleton shimmer</td><td><code>linear</code></td><td><code>1400ms infinite</code></td><td>background-position</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- API -->
+  <section class="ds-section" id="api">
+    <h2 class="ds-section-title">API</h2>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:0 0 12px;">CSS classes</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>.ds-card</code></td><td>Base card — surface-1 bg, border-subtle, r4 radius</td></tr>
+        <tr><td><code>.ds-card--game</code></td><td>Game tile — 16:9 thumbnail + title + metadata</td></tr>
+        <tr><td><code>.ds-card--pass</code></td><td>Pass plan card — gradient header, feature list</td></tr>
+        <tr><td><code>.ds-card--wide</code></td><td>Landscape card for horizontal rails (210×128px)</td></tr>
+        <tr><td><code>.ds-card--portrait</code></td><td>Portrait cover card (120×180px)</td></tr>
+        <tr><td><code>.ds-card__thumbnail</code></td><td>Image container — aspect-ratio enforced</td></tr>
+        <tr><td><code>.ds-card__body</code></td><td>Text content area — padding 12px</td></tr>
+        <tr><td><code>.ds-card__title</code></td><td>Card title — 13px 600 weight</td></tr>
+        <tr><td><code>.ds-card__meta</code></td><td>Secondary info row — 11px text3</td></tr>
+      </tbody>
+    </table>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 12px;">React props</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>variant</code></td><td><span class="api-type">"game" | "pass" | "wide" | "portrait" | "default"</span></td><td><span class="api-default">"default"</span></td><td>Card layout preset</td></tr>
+        <tr><td><code>href</code></td><td><span class="api-type">string</span></td><td><span class="api-default">undefined</span></td><td>Makes card a link — wraps in anchor</td></tr>
+        <tr><td><code>onClick</code></td><td><span class="api-type">() => void</span></td><td><span class="api-default">undefined</span></td><td>Press handler</td></tr>
+        <tr><td><code>thumbnail</code></td><td><span class="api-type">string</span></td><td><span class="api-default">undefined</span></td><td>Image URL for the card hero</td></tr>
+        <tr><td><code>title</code></td><td><span class="api-type">string</span></td><td><span class="api-default">required</span></td><td>Card headline text</td></tr>
+        <tr><td><code>meta</code></td><td><span class="api-type">string | ReactNode</span></td><td><span class="api-default">undefined</span></td><td>Secondary descriptor below title</td></tr>
+        <tr><td><code>badge</code></td><td><span class="api-type">ReactNode</span></td><td><span class="api-default">undefined</span></td><td>Overlay badge (New, Hot, Live)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  
+
+  
+
+  
+
+  
+
   </div>
 </section>
 
@@ -729,4 +823,4 @@
   </div>
 </section>
 
-</main><script src="../sprite-loader.js"></script><script src="../shell.js"></script></body></html>
+</main><script src="../sprite-loader.js"></script><script src="../shell.js?v=2"></script></body></html>

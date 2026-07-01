@@ -1,0 +1,392 @@
+/* JioGames DLS — frame.js
+   Powers the persistent iframe app shell (index.html).
+   Does NOT run inside iframed pages (shell.js bails out there).
+*/
+(function () {
+  /* A) Detect base path — use script src, not location.pathname.
+       location.pathname drifts after history.replaceState (e.g. to /overview/)
+       and would compute wrong BASE on refresh. Script src is always stable. */
+  var BASE = (function () {
+    var s = document.currentScript;
+    if (!s) {
+      var scripts = document.getElementsByTagName('script');
+      s = scripts[scripts.length - 1];
+    }
+    return s && s.src ? new URL(s.src).pathname.replace(/[^/]+$/, '') : '/';
+  }());
+  // e.g. /jiogames-design-system/ on GH Pages, / locally
+
+  /* A2) Force-load JioType via Font Loading API — bypasses @font-face timing issues */
+  var FONT_MAP = { 300: 'Light', 500: 'Medium', 700: 'Bold', 900: 'Black' };
+  Object.keys(FONT_MAP).forEach(function (w) {
+    var f = new FontFace('JioType', 'url(' + BASE + 'font/JioType-' + FONT_MAP[w] + '.ttf)', { weight: w });
+    f.load().then(function (loaded) { document.fonts.add(loaded); });
+  });
+
+  /* B) Full NAV structure — copied verbatim from shell.js */
+  var NAV = [
+    {
+      group: 'Getting Started',
+      items: [
+        { label: 'Getting Started', path: '/getting-started/', status: 'beta' },
+        { label: 'Tooling',         path: '/tooling/',         status: 'beta' },
+        { label: 'Token Reference', path: '/token-reference/', status: 'beta' },
+      ]
+    },
+    {
+      group: 'Foundations',
+      items: [
+        { label: 'Foundations',  path: '/foundations/'  },
+        { label: 'Colours',      path: '/colours/'      },
+        { label: 'Typography',   path: '/typography/'   },
+        { label: 'Spacing',      path: '/spacing/'      },
+        { label: 'Radius',       path: '/radius/'       },
+        { label: 'Motion',       path: '/motion/'       },
+        { label: 'Elevation',    path: '/elevation/'    },
+      ]
+    },
+    {
+      group: 'Core Systems',
+      items: [
+        { label: 'Buttons',       path: '/buttons/'                                },
+        { label: 'Icons',         path: '/icons/'                                  },
+        { label: 'Navigation + AppBar', path: '/navigation/',      status: 'beta'  },
+        { label: 'TV Focus',      path: '/tv-focus/',      status: 'beta'          },
+        { label: 'Accessibility', path: '/accessibility/'                          },
+        { label: 'Templates',     path: '/templates/',     status: 'beta'          },
+        { label: 'Governance',    path: '/governance/'                             },
+      ]
+    },
+    {
+      group: 'Components',
+      items: [
+        { label: 'Cards',        path: '/cards/'                          },
+        { label: 'Inputs',       path: '/inputs/',       status: 'beta'   },
+        { label: 'Search',       path: '/search/',       status: 'beta'   },
+        { label: 'Chips',        path: '/chips/',        status: 'beta'   },
+        { label: 'Rails',        path: '/rails/',        status: 'beta'   },
+        { label: 'Genre Tiles',  path: '/genre-tiles/',  status: 'beta'   },
+        { label: 'Pass Cards',   path: '/pass-cards/',   status: 'beta'   },
+        { label: 'Page Dots',    path: '/page-dots/',    status: 'beta'   },
+        { label: 'Tab Bar',      path: '/tab-bar/',      status: 'beta'   },
+        { label: 'Navigation',   path: '/navigation/',   status: 'beta'   },
+        { label: 'Bottom Sheet', path: '/bottom-sheet/', status: 'beta'   },
+        { label: 'Drawer',       path: '/drawer/',       status: 'draft'  },
+        { label: 'Dialogs',      path: '/dialogs/',      status: 'beta'   },
+        { label: 'Toast',        path: '/toast/',        status: 'beta'   },
+        { label: 'Banners',      path: '/banners/',      status: 'beta'   },
+        { label: 'Lists',        path: '/lists/',        status: 'beta'   },
+        { label: 'Toggle',       path: '/toggle/',       status: 'beta'   },
+        { label: 'Badges',       path: '/badges/',       status: 'beta'   },
+        { label: 'Forms',        path: '/forms/',        status: 'beta'   },
+        { label: 'Avatar',       path: '/avatar/',       status: 'beta'   },
+        { label: 'Skeleton',     path: '/skeleton/',     status: 'beta'   },
+        { label: 'Progress Bar', path: '/progress-bar/', status: 'beta'   },
+      ]
+    },
+    {
+      group: 'Form Controls',
+      items: [
+        { label: 'Checkbox',   path: '/checkbox/',  status: 'draft' },
+        { label: 'Radio',      path: '/radio/',     status: 'draft' },
+        { label: 'Label',      path: '/label/',     status: 'draft' },
+        { label: 'Textarea',   path: '/textarea/',  status: 'draft' },
+        { label: 'Slider',     path: '/slider/',    status: 'draft' },
+        { label: 'Select',     path: '/select/',    status: 'draft' },
+        { label: 'Combobox',   path: '/combobox/',  status: 'draft' },
+      ]
+    },
+    {
+      group: 'Navigation',
+      items: [
+        { label: 'Tabs',            path: '/tabs/',            status: 'draft' },
+        { label: 'Accordion',       path: '/accordion/',       status: 'draft' },
+        { label: 'Collapsible',     path: '/collapsible/',     status: 'draft' },
+        { label: 'Toggle Group',    path: '/toggle-group/',    status: 'draft' },
+        { label: 'Navigation Menu', path: '/navigation-menu/', status: 'draft' },
+      ]
+    },
+    {
+      group: 'Overlays',
+      items: [
+        { label: 'Tooltip',       path: '/tooltip/',       status: 'draft' },
+        { label: 'Popover',       path: '/popover/',       status: 'draft' },
+        { label: 'Hover Card',    path: '/hover-card/',    status: 'draft' },
+        { label: 'Context Menu',  path: '/context-menu/',  status: 'draft' },
+        { label: 'Dropdown Menu', path: '/dropdown-menu/', status: 'draft' },
+        { label: 'Command',       path: '/command/',       status: 'draft' },
+      ]
+    },
+    {
+      group: 'Data & Layout',
+      items: [
+        { label: 'Data Table',  path: '/data-table/',         status: 'draft' },
+        { label: 'Scroll Area', path: '/scroll-area/',        status: 'draft' },
+        { label: 'Carousel',    path: '/carousel-component/', status: 'draft' },
+        { label: 'Chart',       path: '/chart/',              status: 'draft' },
+        { label: 'Separator',   path: '/separator/',          status: 'draft' },
+        { label: 'Aspect Ratio',path: '/aspect-ratio/',       status: 'draft' },
+        { label: 'Resizable',   path: '/resizable/',          status: 'draft' },
+      ]
+    },
+    {
+      group: 'Patterns',
+      items: [
+        { label: 'All Patterns',         path: '/patterns/',                    status: 'beta' },
+        { label: 'Payment & Checkout',   path: '/patterns/checkout/',           status: 'beta' },
+        { label: 'Onboarding',           path: '/patterns/onboarding/',         status: 'beta' },
+        { label: 'Game Launch',          path: '/patterns/game-launch/',        status: 'beta' },
+        { label: 'Empty Search',         path: '/patterns/empty-search/',       status: 'beta' },
+        { label: 'Pull to Refresh',      path: '/patterns/pull-to-refresh/',    status: 'beta' },
+        { label: 'Infinite Scroll',      path: '/patterns/load-more/',          status: 'beta' },
+        { label: 'Notification Center',  path: '/patterns/notification-center/', status: 'beta' },
+        { label: 'Share & Invite',       path: '/patterns/share/',              status: 'beta' },
+      ]
+    },
+    {
+      group: 'Complex',
+      items: [
+        { label: 'Calendar',    path: '/calendar/',    status: 'draft' },
+        { label: 'Date Picker', path: '/date-picker/', status: 'draft' },
+        { label: 'Menubar',     path: '/menubar/',     status: 'draft' },
+      ]
+    }
+  ];
+
+  /* C) Render sidebar HTML into #ds-sidebar */
+  var sidebar = document.getElementById('ds-sidebar');
+  if (!sidebar) return;
+
+  var overviewHref = BASE + 'overview/';
+
+  var html = '<div class="ds-shell-logo">' +
+    '<a href="' + BASE + '" class="ds-shell-logo-link">' +
+    '<img src="' + BASE + 'logos/JioGames_ServiceLogo_Horizontal_White.svg" class="ds-shell-logo-img" alt="JioGames DLS">' +
+    '</a>' +
+    '<span class="ds-shell-logo-ver">v1.0</span>' +
+    '</div>' +
+    '<div class="ds-shell-search-wrap">' +
+    '<input type="search" id="ds-nav-search" class="ds-shell-search" placeholder="Search… (or press /)" autocomplete="off">' +
+    '</div>' +
+    '<div class="ds-shell-nav-wrap" id="ds-nav-wrap">' +
+    '<a href="' + overviewHref + '" class="ds-shell-link" data-label="overview">Overview</a>';
+
+  NAV.forEach(function (group) {
+    html += '<div class="ds-shell-group" data-group="' + group.group.toLowerCase() + '">' +
+      '<span class="ds-shell-group-label">' + group.group + '</span>';
+    group.items.forEach(function (item) {
+      var badge = '';
+      if (item.status === 'beta')  badge = '<span class="ds-shell-link-badge ds-shell-link-badge--beta">Beta</span>';
+      if (item.status === 'draft') badge = '<span class="ds-shell-link-badge ds-shell-link-badge--draft">Draft</span>';
+      var seg = item.path.replace(/^\//, '').replace(/\/$/, '');
+      var href = BASE + seg + '/';
+      html += '<a href="' + href + '" class="ds-shell-link" data-label="' + item.label.toLowerCase() + '">' + item.label + badge + '</a>';
+    });
+    html += '</div>';
+  });
+
+  html += '</div>';
+  sidebar.innerHTML = html;
+
+  /* D) Iframe element */
+  var iframe = document.getElementById('ds-iframe');
+
+  /* F) Active state function */
+  function normalizePath(p) {
+    // Strip index.html suffix and ensure trailing slash
+    return p.replace(/\/index\.html$/, '/').replace(/\/?$/, '/');
+  }
+
+  function updateActive(pathname) {
+    var normPath = normalizePath(pathname);
+    var activeEl = null;
+    document.querySelectorAll('.ds-shell-link').forEach(function (a) {
+      var href = a.getAttribute('href');
+      if (!href) { a.classList.remove('active'); return; }
+      var normHref = normalizePath(href);
+      var isActive = normPath === normHref ||
+        (normPath === normalizePath(BASE) && normHref === normalizePath(overviewHref));
+      a.classList.toggle('active', isActive);
+      if (isActive) activeEl = a;
+    });
+    // Scroll active item into view within the sidebar (block:nearest = no scroll if already visible)
+    if (activeEl) {
+      activeEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+  }
+
+  /* TOC panel */
+  var toc = document.getElementById('ds-toc');
+  var _tocObserver = null;
+
+  function buildToc() {
+    if (!toc) return;
+    try {
+      var doc = iframe.contentDocument;
+      // Collect section headings. Primary source: the section-title classes every
+      // page shares (.ds-section-title / .home-section-title). Falls back to a
+      // generated slug id when the section/heading has none, so the TOC works on
+      // pages whose sections were authored without explicit ids.
+      var headings = [];
+      var seen = {};
+      function slugify(s) {
+        return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40);
+      }
+      var titleSel = 'h2.ds-section-title, .ds-section-title, h2.home-section-title, .home-section-title';
+      var titles = doc.querySelectorAll(titleSel);
+      if (titles.length) {
+        titles.forEach(function (h) {
+          var label = h.textContent.trim();
+          if (label.length < 2) return;
+          // Scroll target: nearest id'd section, else nearest section wrapper, else the heading
+          var target = h.closest('section[id], [id].ds-section') ||
+                       h.closest('section, .ds-section') || h;
+          var id = target.id;
+          if (!id) { id = slugify(label) || 'sec-' + headings.length; target.id = id; }
+          if (seen[id]) return;
+          seen[id] = true;
+          headings.push({ id: id, label: label, depth: 2, el: target });
+        });
+      } else {
+        // Legacy fallback — original selector for any page without title classes
+        doc.querySelectorAll('section[id], [id] > h2, h2[id]').forEach(function (el) {
+          var sec, label;
+          if (el.tagName === 'SECTION') {
+            sec = el;
+            var h = sec.querySelector('h2.ds-section-title, h2');
+            label = h ? h.textContent.trim() : sec.id.replace(/-/g, ' ');
+          } else if (el.tagName === 'H2') {
+            sec = el.id ? el : el.parentElement;
+            label = el.textContent.trim();
+          } else { return; }
+          var id = sec.id;
+          if (!id || seen[id]) return;
+          seen[id] = true;
+          if (label.length < 2) return;
+          headings.push({ id: id, label: label, depth: 2, el: sec });
+        });
+      }
+
+      if (!headings.length) {
+        toc.innerHTML = '<span class="ds-toc-label">On this page</span>';
+        return;
+      }
+
+      var html = '<span class="ds-toc-label">On this page</span>';
+      headings.forEach(function (h) {
+        html += '<a class="ds-toc-link depth-' + h.depth + '" data-toc-id="' + h.id + '" href="#">' + h.label + '</a>';
+      });
+      toc.innerHTML = html;
+
+      // Click handler — scroll inside iframe
+      toc.querySelectorAll('.ds-toc-link').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          var id = a.getAttribute('data-toc-id');
+          var target = iframe.contentDocument.getElementById(id);
+          if (target) {
+            var scrollEl = iframe.contentDocument.querySelector('.ds-content') || iframe.contentDocument.documentElement;
+            // find the scrollable ancestor
+            var scrollable = iframe.contentDocument.querySelector('main.ds-content') ||
+                             iframe.contentDocument.querySelector('.ds-content') ||
+                             iframe.contentDocument.documentElement;
+            var top = target.getBoundingClientRect().top + iframe.contentWindow.scrollY - 24;
+            iframe.contentWindow.scrollTo({ top: top, behavior: 'smooth' });
+          }
+          // Immediately highlight
+          toc.querySelectorAll('.ds-toc-link').forEach(function (l) { l.classList.remove('active'); });
+          a.classList.add('active');
+        });
+      });
+
+      // IntersectionObserver inside iframe to highlight active section
+      if (_tocObserver) { try { _tocObserver.disconnect(); } catch(e){} }
+      var tocLinks = toc.querySelectorAll('.ds-toc-link');
+      var visibleSections = {};
+      _tocObserver = new iframe.contentWindow.IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          visibleSections[entry.target.id] = entry.isIntersecting;
+        });
+        // Find topmost visible section
+        var active = null;
+        headings.forEach(function (h) {
+          if (visibleSections[h.id] && !active) active = h.id;
+        });
+        tocLinks.forEach(function (l) {
+          l.classList.toggle('active', l.getAttribute('data-toc-id') === active);
+        });
+      }, { root: null, rootMargin: '0px 0px -60% 0px', threshold: 0 });
+
+      headings.forEach(function (h) { _tocObserver.observe(h.el); });
+
+    } catch (err) {}
+  }
+
+  /* E) Iframe routing — no history manipulation to avoid refresh-at-content-URL breakage */
+  iframe.addEventListener('load', function () {
+    try {
+      var p = iframe.contentWindow.location.pathname;
+      updateActive(p);
+      document.title = iframe.contentDocument.title || 'JioGames DLS';
+      buildToc();
+
+      // Intercept ALL in-content link clicks so breadcrumbs and cards route through the shell
+      iframe.contentDocument.addEventListener('click', function (e) {
+        var a = e.target.closest('a[href]');
+        if (!a) return;
+        var raw = a.getAttribute('href');
+        if (!raw || raw.startsWith('#') || raw.startsWith('javascript')) return;
+        if (/^(https?:)?\/\//.test(raw)) return; // external
+        var resolved = new URL(raw, iframe.contentWindow.location.href).pathname;
+        // Redirect root to overview
+        if (resolved === '/' || resolved === BASE || resolved === BASE.replace(/\/$/, '')) {
+          resolved = BASE + 'overview/';
+        }
+        e.preventDefault();
+        iframe.src = resolved;
+        updateActive(resolved);
+      });
+    } catch (e) {}
+  });
+
+  // D links: intercept clicks on sidebar links
+  sidebar.addEventListener('click', function (e) {
+    var a = e.target.closest('a.ds-shell-link');
+    if (!a) return;
+    e.preventDefault();
+    var href = a.getAttribute('href');
+    iframe.src = href;
+    updateActive(href);
+  });
+
+  // Initial page load — always from root, iframe loads overview
+  iframe.src = BASE + 'overview/';
+
+  /* G) Search */
+  var search = document.querySelector('.ds-shell-search');
+  search.addEventListener('input', function () {
+    var q = this.value.trim().toLowerCase();
+    document.querySelectorAll('.ds-shell-group').forEach(function (grp) {
+      var links = grp.querySelectorAll('.ds-shell-link');
+      var any = false;
+      links.forEach(function (a) {
+        var show = !q || (a.getAttribute('data-label') || '').toLowerCase().indexOf(q) !== -1;
+        a.style.display = show ? '' : 'none';
+        if (show) any = true;
+      });
+      grp.style.display = any ? '' : 'none';
+    });
+    if (!q) {
+      document.querySelectorAll('.ds-shell-group, .ds-shell-link').forEach(function (el) { el.style.display = ''; });
+    }
+  });
+  search.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { this.value = ''; this.dispatchEvent(new Event('input')); this.blur(); }
+  });
+  // Global / shortcut
+  document.addEventListener('keydown', function (e) {
+    if (e.key === '/' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'TEXTAREA') {
+      e.preventDefault(); search.focus(); search.select();
+    }
+  });
+})();

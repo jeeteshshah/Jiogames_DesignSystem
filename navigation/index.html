@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="../tokens/tokens.css">
   <link rel="stylesheet" href="../components.css">
   <link rel="stylesheet" href="../states.css">
-  <link rel="stylesheet" href="../shell.css?v=3">
+  <link rel="stylesheet" href="../shell.css?v=6">
   <style>
     /* ── Page-specific styles ── */
     body { background: var(--bg); color: var(--text); font-family: var(--jio-font); margin: 0; }
@@ -12,287 +12,68 @@
     /* Component page header */
 
     /* Hero */
-    .component-hero {
-      border-radius: 20px;
-      overflow: hidden;
-      margin-bottom: 48px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      min-height: 280px;
-      padding: 48px 32px 32px;
-    }
-    .component-hero--dark { background: #060810; }
-    .component-hero--grid {
-      background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-      background-size: 32px 32px;
-      background-color: #060810;
-      border: 1px solid var(--border-subtle);
-    }
-    .component-hero-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      max-width: 640px;
-    }
-    .component-hero-caption {
-      display: block;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .6px;
-      text-transform: uppercase;
-      color: var(--text4);
-      margin-top: 24px;
-      position: relative;
-      z-index: 2;
-    }
-    .hero-glow {
-      position: absolute;
-      width: 320px;
-      height: 180px;
-      border-radius: var(--pill);
-      background: radial-gradient(ellipse, rgba(0,168,89,.2) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 1;
-    }
+    
+    
+    
+    
+    
+    
 
     /* Intro */
-    .component-intro {
-      margin-bottom: 48px;
-    }
-    .component-intro p {
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.65;
-      margin-bottom: 20px;
-      max-width: 640px;
-    }
-    .component-summary-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border: 1px solid var(--border-subtle);
-      border-radius: 14px;
-      overflow: hidden;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .component-summary-list li {
-      padding: 14px 20px;
-      border-bottom: 1px solid var(--border-subtle);
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.55;
-    }
-    .component-summary-list li:last-child { border-bottom: none; }
-    .component-summary-list li strong {
-      color: var(--text);
-      font-weight: 700;
-    }
+    
+    
+    
+    
+    
+    
 
     /* Best practices */
-    .component-best-practices {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 24px;
-    }
-    .component-bp-card {
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1.5px solid;
-    }
-    .component-bp-card--do   { border-color: rgba(0,168,89,.3); }
-    .component-bp-card--dont { border-color: rgba(255,71,87,.3); }
-    .component-bp-label {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 10px 16px;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .6px;
-      text-transform: uppercase;
-    }
-    .component-bp-label--do   { background: rgba(0,168,89,.07);  color: var(--jio); }
-    .component-bp-label--dont { background: rgba(255,71,87,.07); color: var(--negative); }
-    .component-bp-label--do::before   { content: '\2713'; font-size: 11px; }
-    .component-bp-label--dont::before { content: '\2715'; font-size: 11px; }
-    .component-bp-list {
-      padding: 16px 20px 20px;
-      background: var(--surface-1);
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      list-style: none;
-    }
-    .component-bp-list li {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.5;
-      padding-left: 14px;
-      position: relative;
-    }
-    .component-bp-list li::before {
-      content: '\00B7';
-      position: absolute;
-      left: 3px;
-      color: var(--text4);
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /* Content grid */
-    .component-content-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-top: 24px;
-    }
-    .component-content-card {
-      background: var(--surface-1);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--r4);
-      padding: 20px;
-    }
-    .component-content-title {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text);
-      text-transform: uppercase;
-      letter-spacing: .5px;
-      margin-bottom: 12px;
-    }
-    .component-content-card ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-    .component-content-card li {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.5;
-      padding-left: 14px;
-      position: relative;
-    }
-    .component-content-card li::before {
-      content: '\00B7';
-      position: absolute;
-      left: 3px;
-      color: var(--text4);
-    }
+    
+    
+    
+    
+    
+    
 
     /* Platform cards */
-    .component-platform-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 24px;
-    }
-    .component-platform-card {
-      background: var(--surface-1);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--r4);
-      padding: 20px;
-    }
-    .component-platform-card--mobile { border-top: 2px solid rgba(110,231,183,.4); }
-    .component-platform-card--web    { border-top: 2px solid rgba(147,197,253,.4); }
-    .component-platform-card--tv     { border-top: 2px solid rgba(251,191,36,.4); }
-    .component-platform-card-title {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .6px;
-      text-transform: uppercase;
-      color: var(--text3);
-      margin-bottom: 12px;
-    }
-    .component-platform-card--mobile .component-platform-card-title { color: #6ee7b7; }
-    .component-platform-card--web    .component-platform-card-title { color: #93c5fd; }
-    .component-platform-card--tv     .component-platform-card-title { color: #fbbf24; }
-    .component-platform-card ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-    .component-platform-card li {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.5;
-      padding-left: 14px;
-      position: relative;
-    }
-    .component-platform-card li::before {
-      content: '\00B7';
-      position: absolute;
-      left: 3px;
-      color: var(--text4);
-    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     /* Changelog */
-    .component-changelog {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--r4);
-      overflow: hidden;
-    }
-    .component-changelog-entry {
-      display: grid;
-      grid-template-columns: 56px 80px 1fr;
-      gap: 16px;
-      align-items: start;
-      padding: 14px 20px;
-      border-bottom: 1px solid var(--border-subtle);
-      font-size: 12px;
-    }
-    .component-changelog-entry:last-child { border-bottom: none; }
-    .component-changelog-version {
-      font-family: monospace;
-      font-weight: 700;
-      color: var(--jio);
-      font-size: 11px;
-    }
-    .component-changelog-date {
-      color: var(--text3);
-      font-weight: 500;
-    }
-    .component-changelog-desc {
-      color: var(--text2);
-      line-height: 1.5;
-    }
+    
+    
+    
+    
+    
+    
 
     /* Note box */
-    .ds-note {
-      background: rgba(0,168,89,.06);
-      border: 1px solid rgba(0,168,89,.2);
-      border-radius: var(--r3);
-      padding: 14px 18px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.55;
-    }
-    .ds-note strong { color: var(--jio); }
+    
+    
 
     /* Nav size matrix */
     .nav-size-matrix {
@@ -357,73 +138,19 @@
     }
 
     /* State grid for nav items */
-    .ds-state-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 12px;
-      margin-top: 24px;
-    }
-    .ds-state-cell {
-      background: var(--surface-1);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--r4);
-      padding: 20px 12px 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 14px;
-    }
-    .ds-state-label {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: .6px;
-      text-transform: uppercase;
-      color: var(--text3);
-      text-align: center;
-    }
+    
+    
+    
 
     /* Token table */
-    .ds-token-table {
-      width: 100%;
-      border-collapse: collapse;
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--r4);
-      overflow: hidden;
-      font-size: 12px;
-      margin-top: 24px;
-    }
-    .ds-token-table thead tr {
-      background: var(--surface-2);
-    }
-    .ds-token-table th {
-      padding: 10px 16px;
-      text-align: left;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: .8px;
-      text-transform: uppercase;
-      color: var(--text3);
-      border-bottom: 1px solid var(--border-subtle);
-    }
-    .ds-token-table td {
-      padding: 12px 16px;
-      border-bottom: 1px solid var(--border-subtle);
-      vertical-align: top;
-      background: var(--surface-1);
-    }
-    .ds-token-table tr:last-child td { border-bottom: none; }
-    .ds-token-table tr:hover td { background: var(--glass-1); }
-    .ds-token-name {
-      font-family: monospace;
-      font-size: 11px;
-      color: #a8e6c5;
-      font-weight: 700;
-    }
-    .ds-token-value {
-      font-family: monospace;
-      font-size: 11px;
-      color: var(--text2);
-    }
+    
+    
+    
+    
+    
+    
+    
+    
     .ds-token-desc {
       font-size: 12px;
       color: var(--text2);
@@ -431,60 +158,14 @@
     }
 
     /* Accessibility grid */
-    .a11y-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--r4);
-      overflow: hidden;
-      margin-top: 24px;
-    }
-    .a11y-row {
-      display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 0;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-    .a11y-row:last-child { border-bottom: none; }
-    .a11y-label {
-      padding: 14px 16px;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text3);
-      letter-spacing: .3px;
-      background: var(--surface-2);
-      text-transform: uppercase;
-      display: flex;
-      align-items: flex-start;
-      padding-top: 16px;
-    }
-    .a11y-content {
-      padding: 14px 20px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text2);
-      line-height: 1.6;
-      background: var(--surface-1);
-    }
-    .a11y-content ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-    .a11y-content li {
-      padding-left: 14px;
-      position: relative;
-    }
-    .a11y-content li::before {
-      content: '\00B7';
-      position: absolute;
-      left: 3px;
-      color: var(--text4);
-    }
+    
+    
+    
+    
+    
+    
+    
+    
 
     kbd {
       display: inline-block;
@@ -502,7 +183,7 @@
       padding: 5px 12px;
       border-radius: var(--pill);
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--text3);
       cursor: pointer;
       white-space: nowrap;
@@ -514,7 +195,7 @@
     .nav-genre-tab {
       padding: 6px 14px;
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--text3);
       cursor: pointer;
       white-space: nowrap;
@@ -533,7 +214,7 @@
       height: 18px;
       border-radius: 50%;
       background: var(--jio);
-      color: #000;
+      color: var(--text-inv);
       font-size: 9px;
       font-weight: 900;
       display: flex;
@@ -562,13 +243,11 @@
     }
 
     @media (max-width: 760px) {
-      .component-best-practices,
-      .component-content-grid,
-      .component-platform-grid { grid-template-columns: 1fr; }
+      
       .nav-size-matrix { overflow-x: auto; }
       .nav-size-matrix-head,
       .nav-size-matrix-row { min-width: 520px; }
-      .ds-state-grid { grid-template-columns: repeat(3, 1fr); }
+      
     }
   </style>
 </head><body><main class="ds-content">
@@ -577,20 +256,20 @@
        1. PAGE HEADER
   =================================================== -->
   <div class="component-page-header">
-    <div class="component-breadcrumb">
-      <a href="../index.html">JioGames DLS</a>
-      <span class="component-breadcrumb-sep">&#x203A;</span>
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <span class="component-breadcrumb-link">JioGames DLS</span>
+      <span class="component-breadcrumb-sep">›</span>
       <span>Components</span>
-      <span class="component-breadcrumb-sep">&#x203A;</span>
-      <span>Navigation</span>
-    </div>
-    <h1 class="component-page-title">Navigation</h1>
-    <p class="component-page-def">Navigation provides the persistent wayfinding structure that helps players move between JioGames surfaces.</p>
+      <span class="component-breadcrumb-sep">›</span>
+      <span class="component-breadcrumb-current">Navigation</span>
+    </nav>
+    <h1 class="component-page-title">Navigation</h1><p class="component-page-def">Navigation provides the persistent wayfinding structure that helps players move between JioGames surfaces.</p>
     <div class="component-platforms">
       <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
       <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
       <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
       <span class="component-maturity component-maturity--stable"><span class="component-maturity--dot"></span>Stable</span>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBOYXZpZ2F0aW9uIOKAlCBKaW9HYW1lcyBETFMgc3BlYwoKPiBTb3VyY2U6IGBuYXZpZ2F0aW9uL2luZGV4Lmh0bWxgIGluIHRoZSBKaW9HYW1lcyBEZXNpZ24gU3lzdGVtLgo+IFRoaXMgc3BlYyBpcyBnZW5lcmF0ZWQgdmVyYmF0aW0gZnJvbSB0aGUgcGFnZSDigJQgZG8gbm90IGludmVudCB2YWx1ZXMgbm90IGxpc3RlZCBoZXJlLgoKKipQYXRoOioqIEppb0dhbWVzIERMUyDigLogQ29tcG9uZW50cyDigLogTmF2aWdhdGlvbgoKLS0tCgpOYXZpZ2F0aW9uIHByb3ZpZGVzIHRoZSBwZXJzaXN0ZW50IHdheWZpbmRpbmcgc3RydWN0dXJlIHRoYXQgaGVscHMgcGxheWVycyBtb3ZlIGJldHdlZW4gSmlvR2FtZXMgc3VyZmFjZXMuCgpOYXZpZ2F0aW9uIGRlZmluZXMgaG93IHBsYXllcnMgb3JpZW50IHRoZW1zZWx2ZXMgYW5kIG1vdmUgdGhyb3VnaCBKaW9HYW1lcy4gVW5saWtlIGluZGl2aWR1YWwgY29tcG9uZW50cywgbmF2aWdhdGlvbiBpcyBhIHN5c3RlbSDigJQgaXQgZ292ZXJucyB3aGljaCBzdXJmYWNlcyBleGlzdCwgaG93IHRoZXkgcmVsYXRlLCBhbmQgaG93IHBsYXllcnMgdHJhbnNpdGlvbiBiZXR3ZWVuIHRoZW0uCgotICoqSGllcmFyY2h5LioqIFRocmVlIHRpZXJzOiBnbG9iYWwgbmF2IChhbHdheXMgdmlzaWJsZSksIHNlY3Rpb24gbmF2IChjb250ZXh0dWFsKSwgaW4tcGFnZSBuYXYgKGxvY2FsIHRhYnMgb3IgYW5jaG9ycykuCi0gKipQbGF0Zm9ybS4qKiBXZWIgdXNlcyBhIHBlcnNpc3RlbnQgdG9wIGJhcjsgbW9iaWxlIHVzZXMgYSBib3R0b20gdGFiIGJhcjsgVFYgdXNlcyBhIGQtcGFkLXRyYXZlcnNhYmxlIHNpZGUgcmFpbC4KLSAqKlN0YXRlLioqIEV2ZXJ5IG5hdiBpdGVtIGhhcyBkZWZhdWx0LCBob3ZlciAod2ViKSwgYWN0aXZlL3NlbGVjdGVkLCBhbmQgZGlzYWJsZWQgc3RhdGVzLgotICoqQ29udGV4dC4qKiBBY3RpdmUgc3RhdGUgYWx3YXlzIHJlZmxlY3RzIGN1cnJlbnQgbG9jYXRpb24uIEJhY2sgbmF2aWdhdGlvbiBwcmVzZXJ2ZXMgc2Nyb2xsIHBvc2l0aW9uLgoKIyMgV2hlbiB0byB1c2UKClVzZSB3aGVuCgotIFByaW1hcnkgYXBwLWxldmVsIG5hdmlnYXRpb24gYmV0d2VlbiAzLTUgdG9wLWxldmVsIHNjcmVlbnMKLSBUYWIgYmFyIGF0IHRoZSBib3R0b20gb24gbW9iaWxlIChIb21lLCBCcm93c2UsIExpYnJhcnksIFByb2ZpbGUpCi0gU2lkZSBuYXYgb24gd2ViIGZvciBwZXJzaXN0ZW50IHRvcC1sZXZlbCB3YXlmaW5kaW5nCgpEb24ndCB1c2Ugd2hlbgoKLSBNb3JlIHRoYW4gNSB0b3AtbGV2ZWwgZGVzdGluYXRpb25zIOKAlCBjcmVhdGVzIGNvZ25pdGl2ZSBvdmVybG9hZAotIFNlY29uZGFyeS9jb250ZXh0dWFsIG5hdmlnYXRpb24g4oCUIHVzZSB0YWJzLCBzZWdtZW50ZWQgY29udHJvbCwgb3IgYnJlYWRjcnVtYnMKLSBOYXZpZ2F0aW9uIGl0ZW1zIHdpdGhvdXQgaWNvbiBhbmQgbGFiZWwg4oCUIGljb25zIGFsb25lIGFyZSBhbWJpZ3VvdXMKCiMjIEJlc3QgcHJhY3RpY2VzCgpGb2xsb3cgdGhlc2UgcnVsZXMgdG8ga2VlcCBuYXZpZ2F0aW9uIGNvbnNpc3RlbnQgYW5kIHJlbGlhYmxlIGFjcm9zcyB0aGUgSmlvR2FtZXMgcHJvZHVjdCBzdXJmYWNlLgoKLSBVc2UgbWF4IDXigJM2IG5hdiBpdGVtcyBpbiB0b3AgbmF2Ci0gVXNlIG5vdW4gbGFiZWxzIChIb21lIG5vdCBHbyBIb21lKQotIEtlZXAgYWN0aXZlIGluZGljYXRvciB2aXNpYmxlIGF0IGFsbCB0aW1lcwotIEVuc3VyZSA0NHB4IG1pbmltdW0gdG91Y2ggdGFyZ2V0cyBvbiBtb2JpbGUKLSBVc2UgcGVyc2lzdGVudCBuYXYg4oCUIG5ldmVyIGhpZGUgb24gc2Nyb2xsIG9uIHdlYgotIEhpZ2hsaWdodCB0aGUgYWN0aXZlIHNlY3Rpb24gY2xlYXJseSB3aXRoIGNvbG9yIGFuZCBpbmRpY2F0b3IKCi0gRG9uJ3QgdXNlIGljb24tb25seSBuYXYgaXRlbXMgd2l0aG91dCBsYWJlbHMgb24gbW9iaWxlCi0gRG9uJ3QgZXhjZWVkIDYgaXRlbXMgaW4gYSBzaW5nbGUgbmF2IHN1cmZhY2UKLSBEb24ndCBjaGFuZ2UgbmF2IHN0cnVjdHVyZSBiZXR3ZWVuIGF1dGhlbnRpY2F0ZWQgYW5kIHVuYXV0aGVudGljYXRlZCBzdGF0ZXMgYmV5b25kIGhpZGluZyBsb2NrZWQgaXRlbXMKLSBEb24ndCB1c2UgbmF2IGFzIGEgQ1RBIHN1cmZhY2Ug4oCUIGtlZXAgQ1RBcyBpbiByaWdodC1zbG90IGJ1dHRvbnMKLSBEb24ndCByZWx5IG9uIGNvbG9yIGFsb25lIGZvciBhY3RpdmUgc3RhdGUKCiMjIEFuYXRvbXkKClRoZSB3ZWIgdG9wIG5hdiBiYXIgaXMgdGhlIG1vc3QgYW5hdG9taWNhbGx5IGNvbXBsZXRlIG5hdmlnYXRpb24gc3VyZmFjZSDigJQgaXQgY29udGFpbnMgYWxsIHNpeCBwYXJ0cy4gTW9iaWxlIGFuZCBUViB1c2Ugc3Vic2V0cyBvZiB0aGlzIHN0cnVjdHVyZS4KCiMjIFZhcmlhbnRzCgpGb3VyIG5hdmlnYXRpb24gcGF0dGVybnMgY292ZXIgYWxsIEppb0dhbWVzIHN1cmZhY2VzLiBFYWNoIGlzIGFkYXB0ZWQgZm9yIGl0cyBwbGF0Zm9ybSBjb250ZXh0LgoKMS4gW0ppb0dhbWVzXSgjKQoyLiDigLoKMy4gW0dhbWVzXSgjKQo0LiDigLoKNS4gQWN0aW9uCgojIyBQbGF0Zm9ybSBtYXRyaXgKCk5hdmlnYXRpb24gZGltZW5zaW9ucywgYWN0aXZlIGluZGljYXRvcnMsIGFuZCBpdGVtIGxpbWl0cyBkaWZmZXIgcGVyIHBsYXRmb3JtLiBVc2UgdG9rZW4gYWxpYXNlczsgbmV2ZXIgaGFyZGNvZGUgcmF3IHBpeGVsIHZhbHVlcyBpbiBjb21wb25lbnQgQ1NTLgoKIyMgU3RhdGVzCgpFdmVyeSBuYXYgaXRlbSBhY3Jvc3MgcGxhdGZvcm1zIHJlc3BvbmRzIHRvIHRoZSBzYW1lIGludGVyYWN0aW9uIHN0YXRlcy4gSG92ZXIgZXhpc3RzIG9ubHkgb24gd2ViLiBUViBGb2N1c2VkIHVzZXMgdGhlIFRWIGdsb3cgcmluZyBleGNsdXNpdmVseSDigJQgbm8gaG92ZXIuCgojIyBDb250ZW50CgpOYXYgbGFiZWxzIGFuZCBpdGVtIGNvdW50cyBhcmUgbG9hZC1iZWFyaW5nIGRlY2lzaW9ucy4gRXZlcnkgd29yZCBhbmQgZXZlcnkgZGVzdGluYXRpb24gc2hhcGVzIGhvdyBwbGF5ZXJzIHVuZGVyc3RhbmQgdGhlIHByb2R1Y3QuCgotIFVzZSBub3VucyBub3QgdmVyYnMgKEhvbWUgbm90IEdvIEhvbWUpCi0gQ2FwaXRhbGl6ZSBmaXJzdCBsZXR0ZXIgb25seQotIEtlZXAgdG8gMSB3b3JkIHdoZXJlIHBvc3NpYmxlCi0gQXZvaWQgYWJicmV2aWF0aW9ucyDigJQgc3BlbGwgb3V0IGZ1bGwgZGVzdGluYXRpb24gbmFtZQotIE1hdGNoIHRoZSBsYWJlbCB0byB3aGF0IHRoZSBzZWN0aW9uIGNvbnRhaW5zLCBub3Qgd2hhdCB5b3Ugd2FudCB1c2VycyB0byBkbwoKLSBNYXggNSB0YWJzIG9uIG1vYmlsZSBib3R0b20gYmFyCi0gTWF4IDYgbGlua3MgaW4gd2ViIHRvcCBuYXYKLSBQcmlvcml0aXplIG1vc3QtdXNlZCBkZXN0aW5hdGlvbnMg4oCUIGFuYWx5dGljcy1pbmZvcm1lZAotIFN1cmZhY2UgUGFzcy9TdG9yZSBhcyBDVEEgYnV0dG9uIG5vdCBhIG5hdiBpdGVtCi0gSGlkZSBsb2NrZWQgaXRlbXM7IGRvbid0IGRpc2FibGUgdGhlbSAoZGlzYWJsZWQgaW1wbGllcyBjb21pbmcgc29vbikKCiMjIFBsYXRmb3JtIGNvbnNpZGVyYXRpb25zCgpFYWNoIHBsYXRmb3JtIGVuZm9yY2VzIGRpZmZlcmVudCBjb25zdHJhaW50cy4gTmF2aWdhdGlvbiB0aGF0IHdvcmtzIG9uIHdlYiBtYXkgYmUgY29tcGxldGVseSB1bnVzYWJsZSBvbiBUViBvciBpbmFjY2Vzc2libGUgb24gbW9iaWxlLgoKLSBCb3R0b20gdGFiIGJhciBpcyBwcmltYXJ5IG5hdiDigJQgbmV2ZXIgdG9wIG5hdgotIDUgdGFiIG1heGltdW0g4oCUIHN0cmljdGx5IGVuZm9yY2VkCi0gSWNvbnMgKyBsYWJlbHMgcmVxdWlyZWQgb24gZXZlcnkgdGFiCi0gVGFiIGJhciBoZWlnaHQgYHZhcigtLXRhYi1iYXItaClgIDY0cHgKLSBTYWZlIGFyZWEgaW5zZXQgYm90dG9tIGFwcGxpZWQgKGBlbnYoc2FmZS1hcmVhLWluc2V0LWJvdHRvbSlgKQotIE5vIGhvdmVyIHN0YXRlcyDigJQgb25seSBwcmVzcyBhbmQgYWN0aXZlCgotIFBlcnNpc3RlbnQgc3RpY2t5IHRvcCBuYXYg4oCUIG5ldmVyIGhpZGVzIG9uIHNjcm9sbAotIEhhbWJ1cmdlciBoaWRkZW4gYXQg4omlNzY4cHggYnJlYWtwb2ludAotIFBpbGwgdGFiIGdyb3VwIG9yIHVuZGVybGluZSB0YWJzIHN1cHBvcnRlZAotIEhvdmVyIHN0YXRlcyBvbiBhbGwgaW50ZXJhY3RpdmUgaXRlbXMKLSBDVEEgYnV0dG9uIGluIHJpZ2h0bW9zdCBzbG90LCBvbmUgbWF4aW11bQotIEZyb3N0ZWQgZ2xhc3MgdHJlYXRtZW50OiBgYmFja2Ryb3AtZmlsdGVyOiBibHVyKDEycHgpYAoKLSBTaWRlIHJhaWwgbmF2aWdhdGlvbiByZXBsYWNlcyB0b3AgYmFyIGVudGlyZWx5Ci0gRC1wYWQgdHJhdmVyc2FsIOKAlCB2ZXJ0aWNhbCBtb3ZlbWVudCB0aHJvdWdoIHJhaWwgaXRlbXMKLSBgdmFyKC0tdHYtZm9jdXMtc2hhZG93KWAgZ2xvdyBtYW5kYXRvcnkgb24gZm9jdXMKLSBObyBob3ZlciBzdGF0ZXMg4oCUIEQtcGFkIGhhcyBubyBwb2ludGVyCi0gTGFiZWxzIGFsd2F5cyB2aXNpYmxlIGFsb25nc2lkZSBpY29ucwotIEZvY3VzIG1vdmVzIHZlcnRpY2FsbHk7IHNlbGVjdCB3aXRoIE9LL0VudGVyCgojIyBNb3Rpb24KCnwgSW50ZXJhY3Rpb24gfCBFYXNpbmcgfCBEdXJhdGlvbiB8IFByb3BlcnR5IHwKfC0tLXwtLS18LS0tfC0tLXwKfCBUYWIgc3dpdGNoIHwgYC0tZWFzZS1vdXRgIHwgYC0tZHVyLWZhc3RgIHwgaW5kaWNhdG9yIHRyYW5zbGF0ZVggfAp8IEFjdGl2ZSBpbmRpY2F0b3IgfCBgLS1lYXNlLW91dGAgfCBgLS1kdXItZmFzdGAgfCB3aWR0aCwgb3BhY2l0eSB8CnwgSWNvbiBwcmVzcyB8IGAtLWVhc2Utb3V0YCB8IGA4MG1zYCB8IHRyYW5zZm9ybSBzY2FsZSgwLjg4IOKGkiAxKSB8CnwgQmFkZ2UgdXBkYXRlIHwgYC0tZWFzZS1vdXRgIHwgYC0tZHVyLWZhc3RgIHwgdHJhbnNmb3JtIHNjYWxlKDEuMyDihpIgMSkgfAp8IFRhYiBiYXIgaGlkZSAoc2Nyb2xsKSB8IGAtLWVhc2UtaW5gIHwgYC0tZHVyLWJhc2VgIHwgdHJhbnNmb3JtIHRyYW5zbGF0ZVkoMTAwJSkgfAp8IFRhYiBiYXIgc2hvdyB8IGAtLWVhc2Utb3V0YCB8IGAtLWR1ci1iYXNlYCB8IHRyYW5zZm9ybSB0cmFuc2xhdGVZKDApIHwKCiMjIFBsYXRmb3JtIHJ1bGVzCgpNb2JpbGUKCi0gVGFiIEJhciBhdCBib3R0b206IDU2cHggaGVpZ2h0LCAz4oCTNSBpdGVtcywgaWNvbiArIGxhYmVsCi0gQWN0aXZlIGluZGljYXRvcjogamlvLWdyZWVuIGljb24gYW5kIGxhYmVsIGNvbG9yCi0gVGFiIGJhciBoaWRlcyBvbiBkb3dud2FyZCBzY3JvbGwsIHJldmVhbHMgb24gdXB3YXJkIHNjcm9sbAotIEJhZGdlIGNvdW50IG92ZXJsYXlzIGljb24g4oCUIDQ0w5c0NHB4IHRhcCB0YXJnZXQgcGVyIGl0ZW0KCldlYgoKLSBUb3AgaG9yaXpvbnRhbCBuYXYgYmFyIG9yIGxlZnQgc2lkZWJhciBkZXBlbmRpbmcgb24gYXBwIGNvbXBsZXhpdHkKLSBLZXlib2FyZDogVGFiIG5hdmlnYXRlcyBpdGVtczsgRW50ZXIvU3BhY2UgYWN0aXZhdGVzCi0gQWN0aXZlIHJvdXRlOiBqaW8tZ3JlZW4gdW5kZXJsaW5lIG9yIGZpbGxlZCBiYWNrZ3JvdW5kIGluZGljYXRvcgotIEJyZWFkY3J1bWJzIHVzZWQgb24gc2Vjb25kYXJ5IHBhZ2VzIGFsb25nc2lkZSBwcmltYXJ5IG5hdgoKVFYKCi0gTGVmdCBzaWRlYmFyIG5hdiDigJQgYWx3YXlzIHZpc2libGUsIEQtcGFkIExlZnQgZW50ZXJzIG5hdiBmcm9tIGFueSBzY3JlZW4KLSBOYXYgaXRlbXM6IDY0cHggaGVpZ2h0LCAzMnB4IGljb25zLCAxOHB4KyBsYWJlbHMKLSBGb2N1cyBtb3ZlcyBsZWZ0IGludG8gbmF2LCByaWdodCBleGl0cyBuYXYgdG8gY29udGVudAotIFNlbGVjdGVkIGl0ZW06IGppby1ncmVlbiBmaWxsIGJhY2tncm91bmQgb24gdGhlIG5hdiBpdGVtCgojIyBBY2Nlc3NpYmlsaXR5CgpOYXZpZ2F0aW9uIG11c3QgYmUgZnVsbHkgb3BlcmFibGUgYnkga2V5Ym9hcmQsIHNjcmVlbiByZWFkZXIsIGFuZCBELXBhZCBvbiBhbGwgcGxhdGZvcm1zLiBUaGVzZSByZXF1aXJlbWVudHMgYXJlIG5vdCBvcHRpb25hbC4KCi0gYGAgd3JhcHBpbmcgZWxlbWVudCBvbiBhbGwgbmF2IHN1cmZhY2VzCi0gYHJvbGU9Imxpc3QiYCBmb3IgbmF2IGl0ZW0gZ3JvdXAgd2hlcmUgYGAvYGAgaXMgbm90IHVzZWQKLSBNb2JpbGUgdGFiIGJhcjogYHJvbGU9InRhYmxpc3QiYCB3aXRoIGBhcmlhLWxhYmVsPSJNYWluIG5hdmlnYXRpb24iYAoKLSBUYWIgLyBTaGlmdCtUYWIgY3ljbGVzIHRocm91Z2ggYWxsIG5hdiBpdGVtcwotIEVudGVyIC8gU3BhY2UgYWN0aXZhdGVzIHRoZSBmb2N1c2VkIGl0ZW0KLSBDdXJyZW50IHBhZ2UgaXRlbSByZWNlaXZlcyBgYXJpYS1jdXJyZW50PSJwYWdlImAKLSBOZXZlciB0cmFwIGtleWJvYXJkIGZvY3VzIGluc2lkZSBuYXYg4oCUIFRhYiBtdXN0IGFsd2F5cyBtb3ZlIG91dAoKLSBgYXJpYS1sYWJlbGAgb24gYWxsIGljb24tb25seSBidXR0b25zIChzZWFyY2gsIG5vdGlmaWNhdGlvbiwgaGFtYnVyZ2VyKQotIGBhcmlhLWV4cGFuZGVkPSJ0cnVlL2ZhbHNlImAgb24gaGFtYnVyZ2VyIG1lbnUgdG9nZ2xlCi0gU2NyZWVuIHJlYWRlciBhbm5vdW5jZXMgYWN0aXZlIHNlY3Rpb24gdmlhIGBhcmlhLWN1cnJlbnRgCi0gSGlkZGVuIG5hdiBkcmF3ZXIgbXVzdCB1c2UgYGFyaWEtaGlkZGVuPSJ0cnVlImAgKyBgdGFiaW5kZXg9Ii0xImAgb24gYWxsIGNoaWxkcmVuCgotIEZvY3VzIHJpbmcgYWx3YXlzIHZpc2libGUg4oCUIG5ldmVyIHN1cHByZXNzIGA6Zm9jdXMtdmlzaWJsZWAKLSBUViB1c2VzIGB2YXIoLS10di1mb2N1cy1zaGFkb3cpYCDigJQgbWFuZGF0b3J5IGdsb3cgcmluZyBvbiBldmVyeSBmb2N1c2FibGUgaXRlbQotIFNraXAtdG8tY29udGVudCBsaW5rIHBsYWNlZCBiZWZvcmUgbmF2OiBgW1NraXAgdG8gY29udGVudF0oI21haW4pYAoKIyMgUmVsYXRlZCB0b2tlbnMKClVzZSB0aGVzZSB0b2tlbiBhbGlhc2VzIGluIGFsbCBuYXZpZ2F0aW9uIGNvbXBvbmVudCBDU1MuIE5ldmVyIGhhcmRjb2RlIHJhdyBoZXggb3IgcGl4ZWwgdmFsdWVzLgoKfCBUb2tlbiB8IFZhbHVlIHwgUm9sZSB8CnwtLS18LS0tfC0tLXwKfCAtLWFwcC1iYXItaCB8IDY0cHggfCBBcHAgYmFyIC8gbmF2IGJhciBoZWlnaHQgfAp8IC0tdGFiLWJhci1oIHwgNjRweCB8IEJvdHRvbSB0YWIgYmFyIGhlaWdodCAobW9iaWxlKSB8CnwgLS1zdGF0dXMtYmFyLWggfCA0NHB4IHwgU3RhdHVzIGJhciBoZWlnaHQgKHNhZmUgYXJlYSkgfAp8IC0tdG91Y2gtbWluIHwgNDRweCB8IE1pbmltdW0gdG91Y2ggdGFyZ2V0IHNpemUgfAp8IC0tamlvIHwgIzAwQTg1OSB8IEFjdGl2ZSBpdGVtIGNvbG9yLCBhY3RpdmUgaW5kaWNhdG9yLCBsb2dvIHdvcmRtYXJrIHwKfCAtLXRleHQzIHwgIzZCNzI4MCB8IERlZmF1bHQgLyBpbmFjdGl2ZSBuYXYgaXRlbSB0ZXh0IGNvbG9yIHwKfCAtLWJvcmRlci1zdWJ0bGUgfCByZ2JhKDI1NSwyNTUsMjU1LC4wOCkgfCBOYXYgYmFyIGJvdHRvbSBib3JkZXIsIFRWIHJhaWwgc2VwYXJhdG9yIHwKfCAtLWppby1mb250IHwgSmlvVHlwZSB8IE5hdiBsYWJlbCBmb250IGZhbWlseSB8CnwgLS10di1mb2N1cy1zaGFkb3cgfCAwIDAgMCAycHggdmFyKC0tamlvKSB8IFRWIEQtcGFkIGZvY3VzIHJpbmcgb24gbmF2IGl0ZW1zIOKAlCBtYW5kYXRvcnkgfAp8IC0tZ2xhc3MtMSB8IHJnYmEoMjU1LDI1NSwyNTUsLjA1KSB8IFdlYiBuYXYgaXRlbSBob3ZlciBiYWNrZ3JvdW5kIHwKCiMjIEFQSQoKIyMjIENTUyBjbGFzc2VzCgp8IENsYXNzIHwgRGVzY3JpcHRpb24gfAp8LS0tfC0tLXwKfCBgLmRzLXRhYi1iYXJgIHwgUm9vdCDigJQgZml4ZWQgYm90dG9tLCBmdWxsIHdpZHRoLCBzdXJmYWNlLTEsIGJvcmRlci10b3AgfAp8IGAuZHMtdGFiLWJhcl9faXRlbWAgfCBTaW5nbGUgdGFiIOKAlCBmbGV4IGNvbHVtbiwgY2VudGVyLCBmbGV4OjEgfAp8IGAuZHMtdGFiLWJhcl9faWNvbmAgfCAyNHB4IGljb24g4oCUIHRleHQzIGRlZmF1bHQsIGppbyBhY3RpdmUgfAp8IGAuZHMtdGFiLWJhcl9fbGFiZWxgIHwgMTBweCA3MDAg4oCUIHRleHQzIGRlZmF1bHQsIGppbyBhY3RpdmUgfAp8IGAuZHMtdGFiLWJhcl9faXRlbS0tYWN0aXZlYCB8IEFjdGl2ZSBzdGF0ZSDigJQgamlvIGljb24gKyBsYWJlbCB8CnwgYC5kcy10YWItYmFyX19iYWRnZWAgfCBVbnJlYWQgY291bnQgYmFkZ2Ugb3ZlciBpY29uIHwKCiMjIyBSZWFjdCBwcm9wcwoKfCBQcm9wIHwgVHlwZSB8IERlZmF1bHQgfCBEZXNjcmlwdGlvbiB8CnwtLS18LS0tfC0tLXwtLS18CnwgYGl0ZW1zYCB8IE5hdkl0ZW1bXSB8IHJlcXVpcmVkIHwgVGFiIGRlZmluaXRpb25zIHdpdGggaWNvbiwgbGFiZWwsIGhyZWYgfAp8IGBhY3RpdmVJdGVtYCB8IHN0cmluZyB8IHJlcXVpcmVkIHwgQWN0aXZlIHRhYiBpZGVudGlmaWVyIHwKfCBgb25JdGVtQ2hhbmdlYCB8IChpZDogc3RyaW5nKSA9PiB2b2lkIHwgcmVxdWlyZWQgfCBUYWIgc3dpdGNoIGhhbmRsZXIgfAp8IGBiYWRnZWAgfCBSZWNvcmQgfCB1bmRlZmluZWQgfCBCYWRnZSBjb3VudHMga2V5ZWQgYnkgaXRlbSBpZCB8CgojIyBDb2RlIGV4YW1wbGVzCgpDb3B5IHRoZXNlIHNuaXBwZXRzIGFzIHN0YXJ0aW5nIHBvaW50cy4gQWx3YXlzIGxpbmsgYHRva2Vucy90b2tlbnMuY3NzYCwgYGNvbXBvbmVudHMuY3NzYCwgYW5kIGBzdGF0ZXMuY3NzYCBiZWZvcmUgdXNpbmcgY29tcG9uZW50IGNsYXNzZXMuCgpgYGBgaHRtbAo8bmF2IGNsYXNzPSJkcy1uYXYiIGFyaWEtbGFiZWw9Ik1haW4gbmF2aWdhdGlvbiI+CiAgPGEgaHJlZj0iL2hvbWUiIGNsYXNzPSJkcy1uYXYtbGluayBpcy1hY3RpdmUiIGFyaWEtY3VycmVudD0icGFnZSI+CiAgICA8c3ZnIGNsYXNzPSJpY29uIGljb24tLW0iIGFyaWEtaGlkZGVuPSJ0cnVlIj48dXNlIGhyZWY9Ii9zcHJpdGUuc3ZnI2ljX2hvbWUiPjwvdXNlPjwvc3ZnPgogICAgSG9tZQogIDwvYT4KICA8YSBocmVmPSIvZ2FtZXMiIGNsYXNzPSJkcy1uYXYtbGluayI+CiAgICA8c3ZnIGNsYXNzPSJpY29uIGljb24tLW0iIGFyaWEtaGlkZGVuPSJ0cnVlIj48dXNlIGhyZWY9Ii9zcHJpdGUuc3ZnI2ljX2dhbWVzIj48L3VzZT48L3N2Zz4KICAgIEdhbWVzCiAgPC9hPgogIDxhIGhyZWY9Ii9zZWFyY2giIGNsYXNzPSJkcy1uYXYtbGluayI+CiAgICA8c3ZnIGNsYXNzPSJpY29uIGljb24tLW0iIGFyaWEtaGlkZGVuPSJ0cnVlIj48dXNlIGhyZWY9Ii9zcHJpdGUuc3ZnI2ljX3NlYXJjaCI+PC91c2U+PC9zdmc+CiAgICBTZWFyY2gKICA8L2E+CjwvbmF2PgpgYGBgCgpgYGBgaHRtbAo8bmF2IGFyaWEtbGFiZWw9IkJyZWFkY3J1bWIiPgogIDxvbCBzdHlsZT0iZGlzcGxheTpmbGV4O2FsaWduLWl0ZW1zOmNlbnRlcjtnYXA6NnB4O2xpc3Qtc3R5bGU6bm9uZTtwYWRkaW5nOjA7bWFyZ2luOjAiPgogICAgPGxpPjxhIGhyZWY9Ii8iIHN0eWxlPSJjb2xvcjp2YXIoLS10ZXh0Myk7dGV4dC1kZWNvcmF0aW9uOm5vbmU7Zm9udC1zaXplOjEycHgiPkhvbWU8L2E+PC9saT4KICAgIDxsaSBhcmlhLWhpZGRlbj0idHJ1ZSIgc3R5bGU9ImNvbG9yOnZhcigtLXRleHQ0KTtmb250LXNpemU6MTJweCI+LzwvbGk+CiAgICA8bGk+PGEgaHJlZj0iL2dhbWVzIiBzdHlsZT0iY29sb3I6dmFyKC0tdGV4dDMpO3RleHQtZGVjb3JhdGlvbjpub25lO2ZvbnQtc2l6ZToxMnB4Ij5HYW1lczwvYT48L2xpPgogICAgPGxpIGFyaWEtaGlkZGVuPSJ0cnVlIiBzdHlsZT0iY29sb3I6dmFyKC0tdGV4dDQpO2ZvbnQtc2l6ZToxMnB4Ij4vPC9saT4KICAgIDxsaT48c3BhbiBhcmlhLWN1cnJlbnQ9InBhZ2UiIHN0eWxlPSJjb2xvcjp2YXIoLS10ZXh0KTtmb250LXNpemU6MTJweDtmb250LXdlaWdodDo3MDAiPldhciBUaHVuZGVyPC9zcGFuPjwvbGk+CiAgPC9vbD4KPC9uYXY+CmBgYGAKCiMjIEFwcCBiYXIKClRoZSBhcHAgYmFyIGlzIHRoZSB0b3AtZml4ZWQgY2hyb21lIG9mIGV2ZXJ5IHNjcmVlbi4gSXQgY29udGFpbnMgdGhlIGJhY2sgYnV0dG9uLCBzY3JlZW4gdGl0bGUsIGFuZCBjb250ZXh0dWFsIGFjdGlvbnMuIEl0IGlzIGEgc3ViLXBhdHRlcm4gb2YgTmF2aWdhdGlvbiDigJQgbm90IGEgc2VwYXJhdGUgY29tcG9uZW50LgoKIyMjIEFuYXRvbXkKCnwgTGF5ZXIgfCBUb2tlbiAvIGNsYXNzIHwgTm90ZXMgfAp8LS0tfC0tLXwtLS18CnwgQ29udGFpbmVyIGhlaWdodCB8IGB2YXIoLS1hcHAtYmFyLWgpYCDigJQgNTZweCB8IEV4Y2x1ZGVzIHN0YXR1cyBiYXIuIFN0aWNreSwgei1pbmRleDogdmFyKC0tei1hcHBiYXIpLiB8CnwgU3RhdHVzIGJhciBzcGFjZXIgfCBgdmFyKC0tc2FmZS10b3ApYCB8IGlPUyBzYWZlIGFyZWEuIEFuZHJvaWQgc3RhdHVzIGJhciBoZWlnaHQgdmlhIHdpbmRvdy5zdGF0dXNCYXJIZWlnaHQuIHwKfCBCYWNrZ3JvdW5kIChkZWZhdWx0KSB8IGB2YXIoLS1iZylgIHwgT3BhcXVlIG9uIGlubmVyIHBhZ2VzLiBUcmFuc3BhcmVudCBvbiBob21lL2NpbmVtYXRpYyBzY3JlZW5zLiB8CnwgQmFja2dyb3VuZCAoc2Nyb2xsZWQpIHwgYHZhcigtLW92ZXJsYXktc2NyaW0pYCArIGJsdXIoMTRweCkgfCBGcm9zdGVkIGdsYXNzIG9uIHNjcm9sbC4gQHN1cHBvcnRzIGd1YXJkIGZvciBibHVyLiB8CnwgQmFjayBidXR0b24gfCBgdmFyKC0taWNvbi1zaXplLWJhc2UpYCDigJQgMjRweCBpY29uIHwgQ2hldnJvbi1sZWZ0IG9yIHBsYXRmb3JtIGJhY2sgYXJyb3cuIHwKfCBUaXRsZSB8IEJvZHkgYm9sZCAvIGBmb250LXdlaWdodDo3MDBgIHwgU2luZ2xlIGxpbmUsIHRydW5jYXRlZCB3aXRoIGVsbGlwc2lzLiB8CnwgQWN0aW9ucyB8IE1heCAyIGljb24gYnV0dG9ucyByaWdodC1hbGlnbmVkIHwgNDjDlzQ4cHggdG91Y2ggdGFyZ2V0LiB8CgojIyMgVmFyaWFudHMKCiMjIyBTY3JvbGwgYmVoYXZpb3VyCgpIb21lIGFuZCBjaW5lbWF0aWMgc2NyZWVucyB1c2Ugc2Nyb2xsLWF3YXJlIGFwcCBiYXIuIFRocmVlIHN0YXRlcyBiYXNlZCBvbiBzY3JvbGwgcG9zaXRpb24gYW5kIGRpcmVjdGlvbi4gQW4gOHB4IGppdHRlciBndWFyZCBwcmV2ZW50cyBjbGFzcyB0aHJhc2hpbmcgb24gcnViYmVyLWJhbmQgc2Nyb2xscy4KCmBgYGBjc3MKLmFwcC1iYXIgewogIHBvc2l0aW9uOiBzdGlja3k7CiAgdG9wOiAwOwogIHotaW5kZXg6IHZhcigtLXotYXBwYmFyKTsKICBoZWlnaHQ6IHZhcigtLWFwcC1iYXItaCk7CiAgdHJhbnNpdGlvbjogdHJhbnNmb3JtIHZhcigtLWR1ci1kZWZhdWx0KSwgYmFja2dyb3VuZCB2YXIoLS1kdXItZGVmYXVsdCksIGJhY2tkcm9wLWZpbHRlciB2YXIoLS1kdXItZGVmYXVsdCk7CiAgLyogcmVkdWNlZC1tb3Rpb24gb3ZlcnJpZGUgKi8KICBAbWVkaWEgKHByZWZlcnMtcmVkdWNlZC1tb3Rpb246IHJlZHVjZSkgewogICAgdHJhbnNpdGlvbjogbm9uZTsKICB9Cn0KLmFwcC1iYXIuaGVhZGVyLXNjcm9sbGVkIHsKICBiYWNrZ3JvdW5kOiB2YXIoLS1vdmVybGF5LXNjcmltKTsKICBAc3VwcG9ydHMgKGJhY2tkcm9wLWZpbHRlcjogYmx1cigxcHgpKSB7CiAgICBiYWNrZHJvcC1maWx0ZXI6IGJsdXIoMTRweCk7CiAgICAtd2Via2l0LWJhY2tkcm9wLWZpbHRlcjogYmx1cigxNHB4KTsKICAgIGJhY2tncm91bmQ6IHJnYmEoNiw4LDE1LC42KTsKICB9Cn0KLmFwcC1iYXIuaGVhZGVyLWhpZGRlbiB7CiAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKC0xMTAlKTsKfQpgYGBgCgpgYGBgCmNvbnN0IGJhciA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoJy5hcHAtYmFyJyk7CmxldCBsYXN0WSA9IDA7Cgp3aW5kb3cuYWRkRXZlbnRMaXN0ZW5lcignc2Nyb2xsJywgKCkgPT4gewogIGNvbnN0IHkgPSB3aW5kb3cuc2Nyb2xsWTsKICBjb25zdCBkZWx0YSA9IHkgLSBsYXN0WTsKCiAgaWYgKE1hdGguYWJzKGRlbHRhKSA8IDgpIHJldHVybjsgLy8gaml0dGVyIGd1YXJkCgogIGlmICh5IDwgODApIHsKICAgIGJhci5jbGFzc0xpc3QucmVtb3ZlKCdoZWFkZXItc2Nyb2xsZWQnLCAnaGVhZGVyLWhpZGRlbicpOwogIH0gZWxzZSBpZiAoZGVsdGEgPCAwKSB7CiAgICBiYXIuY2xhc3NMaXN0LmFkZCgnaGVhZGVyLXNjcm9sbGVkJyk7CiAgICBiYXIuY2xhc3NMaXN0LnJlbW92ZSgnaGVhZGVyLWhpZGRlbicpOwogIH0gZWxzZSB7CiAgICBiYXIuY2xhc3NMaXN0LmFkZCgnaGVhZGVyLWhpZGRlbicpOwogICAgYmFyLmNsYXNzTGlzdC5yZW1vdmUoJ2hlYWRlci1zY3JvbGxlZCcpOwogIH0KCiAgbGFzdFkgPSB5Owp9LCB7IHBhc3NpdmU6IHRydWUgfSk7CmBgYGAKCiMjIyBQbGF0Zm9ybSBiZWhhdmlvcgoKTW9iaWxlCgotIFN0YXR1cyBiYXIgc3BhY2VyIHZpYSBgdmFyKC0tc2FmZS10b3ApYAotIEJhY2sgc3dpcGUgZ2VzdHVyZSByZXBsYWNlcyBiYWNrIGJ1dHRvbiBvbiBpT1MKLSBTY3JvbGwtaGlkZSBvbiBob21lIG9ubHkKLSA1NnB4IGhlaWdodCBjYW5vbmljYWwKCldlYgoKLSBObyBzdGF0dXMgYmFyIHNwYWNlcgotIEJhY2sgPSBicm93c2VyIGJhY2sgb3IgZXhwbGljaXQgYmFjayBsaW5rCi0gU3RpY2t5IHRvcC0wIHdpdGggei1hcHBiYXIKLSBNYXkgaW5jbHVkZSBnbG9iYWwgc2VhcmNoIGluIGJhcgoKVFYKCi0gTm8gc2Nyb2xsLWhpZGUg4oCUIFRWIGRvZXNuJ3Qgc2Nyb2xsIHZlcnRpY2FsbHkgbGlrZSBtb2JpbGUKLSBCYWNrID0gcmVtb3RlIEJhY2sgYnV0dG9uLiBBbHdheXMgYXZhaWxhYmxlLgotIFRWIHNhZmUtYXJlYSBpbnNldDogYHZhcigtLXR2LXNhZmUpYCA9IDQ4cHgKLSBMYXJnZXIgdG91Y2ggdGFyZ2V0czogbWluIDY0cHgKCi0tLQoKIyMgVG9rZW5zIHJlZmVyZW5jZWQgb24gdGhpcyBwYWdlCgpVc2UgdGhlc2UgZXhhY3QgdG9rZW5zIOKAlCBkZWZpbmVkIGluIGB0b2tlbnMvdG9rZW5zLmNzc2AuIERvIG5vdCBzdWJzdGl0dXRlIHJhdyB2YWx1ZXMuCgotIGAtLWFtYmVyYAotIGAtLWFwcC1iYXItaGAKLSBgLS1iZ2AKLSBgLS1ib3JkZXJgCi0gYC0tYm9yZGVyLXN1YnRsZWAKLSBgLS1kdXItZGVmYXVsdGAKLSBgLS1nbGFzcy0xYAotIGAtLWdvbGRgCi0gYC0taWNvbi1zaXplLWJhc2VgCi0gYC0tamlvYAotIGAtLWppby0zYAotIGAtLWppby1mb250YAotIGAtLW92ZXJsYXktc2NyaW1gCi0gYC0tcGlsbGAKLSBgLS1yM2AKLSBgLS1yNGAKLSBgLS1zYWZlLXRvcGAKLSBgLS1zdGF0dXMtbmVnYXRpdmVgCi0gYC0tc3VyZmFjZS0xYAotIGAtLXN1cmZhY2UtMmAKLSBgLS1zdXJmYWNlLTNgCi0gYC0tdGFiLWJhci1oYAotIGAtLXRleHRgCi0gYC0tdGV4dC1pbnZgCi0gYC0tdGV4dDJgCi0gYC0tdGV4dDNgCi0gYC0tdGV4dDRgCi0gYC0tdHYtZm9jdXMtc2hhZG93YAotIGAtLXR2LXNhZmVgCi0gYC0tei1hcHBiYXJgCgotLS0KCiMjIEJ1aWxkIHJ1bGVzIChiaW5kaW5nKQoKMS4gVXNlICoqb25seSoqIHRoZSB0b2tlbnMgbGlzdGVkIGFib3ZlLiBJZiBhIHZhbHVlIHlvdSBuZWVkIGlzIG5vdCBsaXN0ZWQsIHN0b3AgYW5kIGFzayDigJQgZG8gbm90IGludHJvZHVjZSBhIHJhdyB2YWx1ZS4KMi4gRm9udCBpcyAqKkppb1R5cGUqKiBvbmx5LiBXZWlnaHRzOiAzMDAsIDUwMCwgNzAwLCA5MDAuCjMuIFJldXNlIHRoZSBjb21wb25lbnQgQ1NTIHBhdHRlcm5zIHNob3duIG9uIHRoZSBzb3VyY2UgcGFnZTsgZG8gbm90IHJlZGVzaWduLgo0LiBNYXRjaCBldmVyeSBzdGF0ZSAoZGVmYXVsdCwgaG92ZXIsIGZvY3VzLCBhY3RpdmUsIGRpc2FibGVkLCBsb2FkaW5nKSBzaG93biBvbiB0aGUgcGFnZS4KNS4gQWNjZXNzaWJpbGl0eSByZXF1aXJlbWVudHMgb24gdGhlIHBhZ2UgYXJlIG1hbmRhdG9yeSwgbm90IG9wdGlvbmFsLgo=" download="navigation-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
     </div>
   </div>
 
@@ -654,8 +333,243 @@
   </section>
 
   <!-- ===================================================
+       PLATFORM PATTERNS — split by surface
+  =================================================== -->
+  <section class="ds-section" id="platform-patterns">
+    <h2 class="ds-section-title">Platform patterns</h2>
+    <p class="ds-section-desc">Navigation in JioGames splits into three platform surfaces. Each has its own anatomy, container, and rules. Build per-surface — never reuse one pattern across platforms.</p>
+
+    <!-- ===== MOBILE APP ===== -->
+    <h3 class="ds-subsection-title" style="margin-top:8px;display:flex;align-items:center;gap:10px">
+      <span style="display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:var(--pill);background:rgba(110,231,183,.12);border:1px solid rgba(110,231,183,.35);font-size:10px;font-weight:700;letter-spacing:.5px;color:#6ee7b7;text-transform:uppercase">Mobile App</span>
+      Two surfaces: header (top) + bottom navigation
+    </h3>
+
+    <!-- Mobile · Header (Home) -->
+    <div style="margin-top:var(--space-2);padding:var(--space-3);border:1px solid var(--border-subtle);border-radius:var(--r4);background:var(--surface-1)">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-1-5);flex-wrap:wrap;margin-bottom:var(--space-2)">
+        <h4 class="text-title-xs" style="margin:0">Mobile · Header (Home)</h4>
+        <span class="text-caption-sm" style="font-family:monospace">--app-bar-h</span>
+      </div>
+      <div class="ds-demo ds-demo--dark" style="padding:var(--space-3)">
+        <div style="width:280px;margin:0 auto;background:var(--bg);border:1px solid var(--border-subtle);border-radius:var(--r6);overflow:hidden">
+          <div style="height:var(--space-2);display:flex;align-items:center;justify-content:space-between;padding:0 var(--space-2);color:var(--text3)"></div>
+          <div style="height:var(--app-bar-h);display:flex;align-items:center;padding:0 var(--space-1-5);gap:var(--space-1);background:var(--surface-1);border-bottom:1px solid var(--border-subtle)">
+            <div class="text-title-xs" style="flex:1;letter-spacing:-.3px"><span style="color:var(--jio)">Jio</span>Games</div>
+            <button class="icon-btn" aria-label="Search">
+              <svg viewBox="0 0 24 24" style="width:var(--icon-size-md);height:var(--icon-size-md)" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_search"></use></svg>
+            </button>
+            <button class="icon-btn" aria-label="Notifications" style="position:relative">
+              <svg viewBox="0 0 24 24" style="width:var(--icon-size-md);height:var(--icon-size-md)" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_notification"></use></svg>
+              <span style="position:absolute;top:var(--space-1);right:var(--space-1);width:var(--space-1);height:var(--space-1);border-radius:50%;background:var(--status-negative);border:2px solid var(--surface-1)"></span>
+            </button>
+          </div>
+          <div style="height:var(--space-12);background:linear-gradient(180deg,var(--surface-1),var(--bg))"></div>
+        </div>
+      </div>
+      <ul style="list-style:none;padding:0;margin:var(--space-2) 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--space-1)">
+        <li class="text-caption"><strong style="color:var(--text)">Height</strong> <code class="ds-code">var(--app-bar-h)</code></li>
+        <li class="text-caption"><strong style="color:var(--text)">Padding</strong> <code class="ds-code">0 var(--space-1-5)</code></li>
+        <li class="text-caption"><strong style="color:var(--text)">Gap</strong> <code class="ds-code">var(--space-1)</code></li>
+        <li class="text-caption"><strong style="color:var(--text)">Left</strong> JioGames wordmark · <code class="ds-code">.text-title-xs</code></li>
+        <li class="text-caption"><strong style="color:var(--text)">Right</strong> Search + Notifications · <code class="ds-code">.icon-btn</code></li>
+        <li class="text-caption"><strong style="color:var(--text)">Icon size</strong> <code class="ds-code">var(--icon-size-md)</code></li>
+      </ul>
+    </div>
+
+    <!-- Mobile · Header (Inner page) -->
+    <div style="margin-top:var(--space-2);padding:var(--space-3);border:1px solid var(--border-subtle);border-radius:var(--r4);background:var(--surface-1)">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-1-5);flex-wrap:wrap;margin-bottom:var(--space-2)">
+        <h4 class="text-title-xs" style="margin:0">Mobile · Header (Inner page)</h4>
+        <span class="text-caption-sm" style="font-family:monospace">--app-bar-h</span>
+      </div>
+      <div class="ds-demo ds-demo--dark" style="padding:var(--space-3)">
+        <div style="width:280px;margin:0 auto;background:var(--bg);border:1px solid var(--border-subtle);border-radius:var(--r6);overflow:hidden">
+          <div style="height:var(--space-2);display:flex;align-items:center;justify-content:space-between;padding:0 var(--space-2);color:var(--text3)"></div>
+          <div style="height:var(--app-bar-h);display:flex;align-items:center;padding:0 var(--space-1-5);gap:var(--space-1);background:var(--surface-1);border-bottom:1px solid var(--border-subtle)">
+            <button class="icon-btn" aria-label="Back">
+              <svg viewBox="0 0 24 24" style="width:var(--icon-size-md);height:var(--icon-size-md)" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <div class="text-title-xs" style="flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">War Thunder</div>
+            <button class="icon-btn" aria-label="Search">
+              <svg viewBox="0 0 24 24" style="width:var(--icon-size-md);height:var(--icon-size-md)" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_search"></use></svg>
+            </button>
+          </div>
+          <div style="height:var(--space-12);background:linear-gradient(180deg,var(--surface-1),var(--bg))"></div>
+        </div>
+      </div>
+      <ul style="list-style:none;padding:0;margin:var(--space-2) 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--space-1)">
+        <li class="text-caption"><strong style="color:var(--text)">Height</strong> <code class="ds-code">var(--app-bar-h)</code></li>
+        <li class="text-caption"><strong style="color:var(--text)">Padding</strong> <code class="ds-code">0 var(--space-1-5)</code></li>
+        <li class="text-caption"><strong style="color:var(--text)">Gap (back → title)</strong> <code class="ds-code">var(--space-1)</code></li>
+        <li class="text-caption"><strong style="color:var(--text)">Title</strong> <code class="ds-code">.text-title-xs</code></li>
+        <li class="text-caption"><strong style="color:var(--text)">Chips</strong> <code class="ds-code">.icon-btn</code></li>
+        <li class="text-caption"><strong style="color:var(--text)">Icon</strong> <code class="ds-code">var(--icon-size-md)</code></li>
+      </ul>
+
+      <!-- Inner-page states -->
+      <div style="margin-top:var(--space-3);padding-top:var(--space-2);border-top:1px solid var(--border-subtle)">
+        <p class="text-label-xs" style="color:var(--jio);text-transform:uppercase;margin:0 0 var(--space-2)">Inner-page states</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--space-2)">
+
+          <!-- State 1: Game detail — back only (transparent bar over hero) -->
+          <div>
+            <p class="text-label-xs" style="color:var(--text3);text-transform:uppercase;margin:0 0 var(--space-1)">Game detail — Back only</p>
+            <div style="background:var(--surface-3);border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden;position:relative">
+              <div style="position:absolute;inset:0;background:var(--overlay-image);pointer-events:none"></div>
+              <div style="position:relative;height:var(--app-bar-h);display:flex;align-items:center;padding:0 var(--space-1-5);gap:var(--space-1);background:transparent">
+                <button class="icon-btn icon-btn--dark" aria-label="Back">
+                  <svg viewBox="0 0 24 24" style="width:var(--icon-size-md);height:var(--icon-size-md)" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <div style="flex:1"></div>
+              </div>
+              <div style="height:var(--space-5);background:linear-gradient(180deg,var(--surface-1),var(--bg))"></div>
+            </div>
+            <ul style="list-style:none;padding:0;margin:var(--space-1) 0 0">
+              <li class="text-caption-sm">Bar: <code class="ds-code">var(--surface-1)</code></li>
+              <li class="text-caption-sm">Back chip: <code class="ds-code">var(--glass-1)</code></li>
+              <li class="text-caption-sm">No title, no right actions</li>
+            </ul>
+          </div>
+
+          <!-- State 2: Inner page — title + kebab -->
+          <div>
+            <p class="text-label-xs" style="color:var(--text3);text-transform:uppercase;margin:0 0 var(--space-1)">Inner page — Title + kebab</p>
+            <div style="background:var(--bg);border:1px solid var(--border-subtle);border-radius:var(--r4);overflow:hidden">
+              <div style="height:var(--app-bar-h);display:flex;align-items:center;padding:0 var(--space-1-5);gap:var(--space-1);background:var(--surface-1)">
+                <button class="icon-btn" aria-label="Back">
+                  <svg viewBox="0 0 24 24" style="width:var(--icon-size-md);height:var(--icon-size-md)" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <div class="text-title-xs" style="flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Notifications</div>
+                <button class="icon-btn" aria-label="More options">
+                  <svg viewBox="0 0 24 24" style="width:var(--icon-size-md);height:var(--icon-size-md)" fill="currentColor" aria-hidden="true"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg>
+                </button>
+              </div>
+              <div style="height:var(--space-5);background:linear-gradient(180deg,var(--surface-1),var(--bg))"></div>
+            </div>
+            <ul style="list-style:none;padding:0;margin:var(--space-1) 0 0">
+              <li class="text-caption-sm">Title: <code class="ds-code">.text-title-xs</code></li>
+              <li class="text-caption-sm">Chips: <code class="ds-code">var(--glass-1)</code></li>
+              <li class="text-caption-sm">Height: <code class="ds-code">var(--app-bar-h)</code></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile · Bottom navigation -->
+    <div style="margin-top:16px;padding:20px;border:1px solid var(--border-subtle);border-radius:var(--r4);background:var(--surface-1)">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px">
+        <h4 style="font-size:14px;font-weight:700;color:var(--text);margin:0">Mobile · Bottom navigation (tab bar)</h4>
+        <span style="font-size:11px;color:var(--text3);font-family:monospace">--tab-bar-h · 64px</span>
+      </div>
+      <div class="ds-demo ds-demo--dark" style="padding:24px">
+        <div style="width:280px;margin:0 auto;background:var(--bg);border:1px solid var(--border-subtle);border-radius:18px;overflow:hidden">
+          <div style="height:140px;background:linear-gradient(180deg,var(--surface-1),var(--bg))"></div>
+          <!-- tab bar -->
+          <div style="height:var(--tab-bar-h);background:var(--surface-1);border-top:1px solid var(--border-subtle);display:flex;align-items:center;padding:var(--space-1) var(--space-0-5);gap:0">
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:var(--space-0-25)">
+              <svg viewBox="0 0 24 24" style="width:var(--icon-size-md);height:var(--icon-size-md)" fill="var(--icon-color-active)" aria-hidden="true"><use href="../sprite.svg#ic_home"></use></svg>
+              <span class="text-label-xs" style="color:var(--text-brand)">Home</span>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:var(--space-0-25)">
+              <svg viewBox="0 0 24 24" style="width:var(--icon-size-md);height:var(--icon-size-md)" fill="var(--icon-color-default)" aria-hidden="true"><use href="../sprite.svg#ic_games"></use></svg>
+              <span class="text-label-xs" style="color:var(--text3)">Games</span>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:var(--space-0-25)">
+              <svg viewBox="0 0 24 24" style="width:var(--icon-size-md);height:var(--icon-size-md)" fill="var(--icon-color-default)" aria-hidden="true"><use href="../sprite.svg#ic_shopping_bag"></use></svg>
+              <span class="text-label-xs" style="color:var(--text3)">Store</span>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:var(--space-0-25);position:relative">
+              <svg viewBox="0 0 24 24" style="width:var(--icon-size-md);height:var(--icon-size-md)" fill="var(--icon-color-default)" aria-hidden="true"><use href="../sprite.svg#ic_account_info"></use></svg>
+              <span style="position:absolute;top:0;right:calc(50% - var(--space-3));min-width:var(--space-2);height:var(--space-2);background:var(--status-negative);color:var(--text-inv);border-radius:var(--pill);font-size:9px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;padding:0 var(--space-0-5)">3</span>
+              <span class="text-label-xs" style="color:var(--text3)">Profile</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ul style="list-style:none;padding:0;margin:14px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px">
+        <li style="font-size:12px;color:var(--text2);padding:6px 0"><strong style="color:var(--text)">Height</strong> <code class="ds-code">var(--tab-bar-h)</code> = 64px</li>
+        <li style="font-size:12px;color:var(--text2);padding:6px 0"><strong style="color:var(--text)">Items</strong> 3–5 max, equal flex</li>
+        <li style="font-size:12px;color:var(--text2);padding:6px 0"><strong style="color:var(--text)">Anatomy</strong> icon (22px) + label (10px/700)</li>
+        <li style="font-size:12px;color:var(--text2);padding:6px 0"><strong style="color:var(--text)">Active</strong> <code class="ds-code">var(--jio)</code> icon + label</li>
+        <li style="font-size:12px;color:var(--text2);padding:6px 0"><strong style="color:var(--text)">Safe area</strong> <code class="ds-code">env(safe-area-inset-bottom)</code></li>
+        <li style="font-size:12px;color:var(--text2);padding:6px 0"><strong style="color:var(--text)">No hover</strong> press + active only</li>
+      </ul>
+    </div>
+
+    <!-- ===== WEB ===== -->
+    <h3 class="ds-subsection-title" style="margin-top:36px;display:flex;align-items:center;gap:10px">
+      <span style="display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:var(--pill);background:rgba(147,197,253,.12);border:1px solid rgba(147,197,253,.35);font-size:10px;font-weight:700;letter-spacing:.5px;color:#93c5fd;text-transform:uppercase">Web</span>
+      One surface: persistent top navigation
+    </h3>
+
+    <div style="margin-top:16px;padding:20px;border:1px solid var(--border-subtle);border-radius:var(--r4);background:var(--surface-1)">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px">
+        <h4 style="font-size:14px;font-weight:700;color:var(--text);margin:0">Web · Top navigation</h4>
+        <span style="font-size:11px;color:var(--text3);font-family:monospace">--app-bar-h · 64px</span>
+      </div>
+      <div class="ds-demo ds-demo--dark" style="padding:24px">
+        <div style="width:100%;max-width:560px;margin:0 auto;background:var(--bg);border:1px solid var(--border-subtle);border-radius:12px;overflow:hidden">
+          <div style="height:64px;background:rgba(6,8,15,.92);display:flex;align-items:center;padding:0 18px;gap:14px">
+            <div style="font-size:15px;font-weight:900;color:var(--jio);letter-spacing:-.4px;flex-shrink:0">JioGames</div>
+            <div style="display:flex;align-items:center;gap:2px;background:var(--surface-2);border-radius:var(--pill);padding:3px;flex-shrink:0">
+              <div class="nav-pill-tab nav-pill-tab--active" style="font-size:11px;padding:5px 11px">Home</div>
+              <div class="nav-pill-tab" style="font-size:11px;padding:5px 11px">Games</div>
+              <div class="nav-pill-tab" style="font-size:11px;padding:5px 11px">Store</div>
+              <div class="nav-pill-tab" style="font-size:11px;padding:5px 11px">Library</div>
+            </div>
+            <div style="flex:1"></div>
+            <button class="btn btn--icon" aria-label="Search" style="flex-shrink:0">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><use href="../sprite.svg#ic_search"></use></svg>
+            </button>
+            <button class="btn btn--primary btn--xs btn--hug" style="flex-shrink:0">Get Pass</button>
+          </div>
+          <div style="height:120px;background:linear-gradient(180deg,var(--surface-1),var(--bg))"></div>
+        </div>
+      </div>
+      <ul style="list-style:none;padding:0;margin:14px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px">
+        <li style="font-size:12px;color:var(--text2);padding:6px 0"><strong style="color:var(--text)">Height</strong> <code class="ds-code">var(--app-bar-h)</code> = 64px</li>
+        <li style="font-size:12px;color:var(--text2);padding:6px 0"><strong style="color:var(--text)">Items</strong> 4–6 in pill group</li>
+        <li style="font-size:12px;color:var(--text2);padding:6px 0"><strong style="color:var(--text)">Active</strong> green pill or 2px underline</li>
+        <li style="font-size:12px;color:var(--text2);padding:6px 0"><strong style="color:var(--text)">CTA</strong> rightmost slot, 1 max</li>
+        <li style="font-size:12px;color:var(--text2);padding:6px 0"><strong style="color:var(--text)">Hover</strong> required on every link</li>
+        <li style="font-size:12px;color:var(--text2);padding:6px 0"><strong style="color:var(--text)">Mobile web &lt;640px</strong> collapses to hamburger</li>
+      </ul>
+    </div>
+
+    <div class="ds-note" style="margin-top:24px">
+      <strong>Never mix surfaces.</strong> Mobile app uses <em>header + bottom nav</em>. Web uses <em>top nav only</em>. Don't put a bottom tab bar on web. Don't strip the bottom bar from the mobile app in favour of a top nav.
+    </div>
+  </section>
+
+  <!-- ===================================================
        4. BEST PRACTICES
   =================================================== -->
+  <!-- WHEN TO USE -->
+  <section class="ds-section" id="when-to-use">
+    <h2 class="ds-section-title">When to use</h2>
+    <div class="ds-usage-grid">
+      <div class="ds-usage-card ds-usage-card--do">
+        <p class="ds-usage-label ds-usage-label--do">Use when</p>
+        <ul class="ds-usage-list">
+              <li>Primary app-level navigation between 3-5 top-level screens</li>
+              <li>Tab bar at the bottom on mobile (Home, Browse, Library, Profile)</li>
+              <li>Side nav on web for persistent top-level wayfinding</li>
+        </ul>
+      </div>
+      <div class="ds-usage-card ds-usage-card--dont">
+        <p class="ds-usage-label ds-usage-label--dont">Don't use when</p>
+        <ul class="ds-usage-list">
+              <li>More than 5 top-level destinations — creates cognitive overload</li>
+              <li>Secondary/contextual navigation — use tabs, segmented control, or breadcrumbs</li>
+              <li>Navigation items without icon and label — icons alone are ambiguous</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <section class="ds-section" id="best-practices">
     <h2 class="ds-section-title">Best practices</h2>
     <p class="ds-section-desc">Follow these rules to keep navigation consistent and reliable across the JioGames product surface.</p>
@@ -851,15 +765,15 @@
     <div class="nav-size-matrix">
       <div class="nav-size-matrix-head">
         <div>Attribute</div>
-        <div style="color:#6ee7b7">Mobile</div>
-        <div style="color:#93c5fd">Web</div>
-        <div style="color:#fbbf24">TV</div>
+        <div style="color:var(--jio)">Mobile</div>
+        <div style="color:var(--gold)">Web</div>
+        <div style="color:var(--amber)">TV</div>
       </div>
 
       <div class="nav-size-matrix-row">
         <div class="nav-size-matrix-label">
           <span class="nav-size-matrix-name">Nav height</span>
-          <span style="font-family:monospace;font-size:10px;color:#a8e6c5">--app-bar-h</span>
+          <span style="font-family:monospace;font-size:10px;color:var(--jio-3)">--app-bar-h</span>
         </div>
         <div class="nav-size-matrix-cell">
           <span class="nav-size-matrix-value">64px</span>
@@ -914,7 +828,7 @@
       <div class="nav-size-matrix-row">
         <div class="nav-size-matrix-label">
           <span class="nav-size-matrix-name">Touch target</span>
-          <span style="font-family:monospace;font-size:10px;color:#a8e6c5">--touch-min</span>
+          <span style="font-family:monospace;font-size:10px;color:var(--jio-3)">--touch-min</span>
         </div>
         <div class="nav-size-matrix-cell">
           <span class="nav-size-matrix-value">44px</span>
@@ -945,7 +859,7 @@
       <div class="ds-state-cell" style="background:var(--bg)">
         <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 12px;border-radius:var(--r3)">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--text3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
-          <span style="font-size:11px;font-weight:600;color:var(--text3)">Games</span>
+          <span style="font-size:11px;font-weight:700;color:var(--text3)">Games</span>
         </div>
         <div class="ds-state-label">Default</div>
       </div>
@@ -954,7 +868,7 @@
       <div class="ds-state-cell" style="background:var(--bg)">
         <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 12px;border-radius:var(--r3);background:var(--glass-1)">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--text2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
-          <span style="font-size:11px;font-weight:600;color:var(--text2)">Games</span>
+          <span style="font-size:11px;font-weight:700;color:var(--text2)">Games</span>
         </div>
         <div class="ds-state-label">Hover (web)</div>
       </div>
@@ -972,7 +886,7 @@
       <div class="ds-state-cell" style="background:var(--bg)">
         <div style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 12px;border-radius:var(--r3);opacity:.32">
           <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--text3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="../sprite.svg#ic_favorite"></use></svg>
-          <span style="font-size:11px;font-weight:600;color:var(--text3)">Wishlist</span>
+          <span style="font-size:11px;font-weight:700;color:var(--text3)">Wishlist</span>
         </div>
         <div class="ds-state-label">Disabled</div>
       </div>
@@ -984,7 +898,7 @@
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="var(--text3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="../sprite.svg#ic_notification"></use></svg>
             <div style="position:absolute;top:-3px;right:-3px;width:8px;height:8px;border-radius:50%;background:#ff4757;border:1.5px solid var(--bg)"></div>
           </div>
-          <span style="font-size:11px;font-weight:600;color:var(--text3)">Alerts</span>
+          <span style="font-size:11px;font-weight:700;color:var(--text3)">Alerts</span>
         </div>
         <div class="ds-state-label">Badge</div>
       </div>
@@ -1072,6 +986,41 @@
   <!-- ===================================================
        11. ACCESSIBILITY
   =================================================== -->
+  <!-- MOTION -->
+  <section class="ds-section" id="motion">
+    <h2 class="ds-section-title">Motion</h2>
+    <table class="ds-motion-table">
+      <thead><tr><th>Interaction</th><th>Easing</th><th>Duration</th><th>Property</th></tr></thead>
+      <tbody>
+        <tr><td>Tab switch</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>indicator translateX</td></tr>
+        <tr><td>Active indicator</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>width, opacity</td></tr>
+        <tr><td>Icon press</td><td><code>--ease-out</code></td><td><code>80ms</code></td><td>transform scale(0.88 → 1)</td></tr>
+        <tr><td>Badge update</td><td><code>--ease-out</code></td><td><code>--dur-fast</code></td><td>transform scale(1.3 → 1)</td></tr>
+        <tr><td>Tab bar hide (scroll)</td><td><code>--ease-in</code></td><td><code>--dur-base</code></td><td>transform translateY(100%)</td></tr>
+        <tr><td>Tab bar show</td><td><code>--ease-out</code></td><td><code>--dur-base</code></td><td>transform translateY(0)</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PLATFORM -->
+  <section class="ds-section" id="platform">
+    <h2 class="ds-section-title">Platform rules</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:16px;">
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--gold);border-radius:var(--r4);padding:20px;background:var(--surface-1);">
+        <p style="font-size:12px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px;">Mobile</p>
+        <ul style="list-style:none;padding:0;margin:0;"><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Tab Bar at bottom: 56px height, 3–5 items, icon + label</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Active indicator: jio-green icon and label color</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Tab bar hides on downward scroll, reveals on upward scroll</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Badge count overlays icon — 44×44px tap target per item</li></ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--amber);border-radius:var(--r4);padding:20px;background:var(--surface-1);">
+        <p style="font-size:12px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px;">Web</p>
+        <ul style="list-style:none;padding:0;margin:0;"><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Top horizontal nav bar or left sidebar depending on app complexity</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Keyboard: Tab navigates items; Enter/Space activates</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Active route: jio-green underline or filled background indicator</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Breadcrumbs used on secondary pages alongside primary nav</li></ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--amber);border-radius:var(--r4);padding:20px;background:var(--surface-1);">
+        <p style="font-size:12px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:.6px;margin:0 0 12px;">TV</p>
+        <ul style="list-style:none;padding:0;margin:0;"><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Left sidebar nav — always visible, D-pad Left enters nav from any screen</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Nav items: 64px height, 32px icons, 18px+ labels</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Focus moves left into nav, right exits nav to content</li><li style="font-size:13px;color:var(--text2);line-height:1.6;padding:4px 0;border-bottom:.5px solid var(--border-subtle);margin:0">Selected item: jio-green fill background on the nav item</li></ul>
+      </div>
+    </div>
+  </section>
+
   <section class="ds-section" id="accessibility">
     <h2 class="ds-section-title">Accessibility</h2>
     <p class="ds-section-desc">Navigation must be fully operable by keyboard, screen reader, and D-pad on all platforms. These requirements are not optional.</p>
@@ -1195,6 +1144,33 @@
   <!-- ===================================================
        13. CODE EXAMPLES
   =================================================== -->
+  <!-- API -->
+  <section class="ds-section" id="api">
+    <h2 class="ds-section-title">API</h2>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:0 0 12px;">CSS classes</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Class</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>.ds-tab-bar</code></td><td>Root — fixed bottom, full width, surface-1, border-top</td></tr>
+        <tr><td><code>.ds-tab-bar__item</code></td><td>Single tab — flex column, center, flex:1</td></tr>
+        <tr><td><code>.ds-tab-bar__icon</code></td><td>24px icon — text3 default, jio active</td></tr>
+        <tr><td><code>.ds-tab-bar__label</code></td><td>10px 700 — text3 default, jio active</td></tr>
+        <tr><td><code>.ds-tab-bar__item--active</code></td><td>Active state — jio icon + label</td></tr>
+        <tr><td><code>.ds-tab-bar__badge</code></td><td>Unread count badge over icon</td></tr>
+      </tbody>
+    </table>
+    <h3 class="ds-section-subtitle" style="font-size:13px;font-weight:700;color:var(--text);margin:24px 0 12px;">React props</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Prop</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>items</code></td><td><span class="api-type">NavItem[]</span></td><td><span class="api-default">required</span></td><td>Tab definitions with icon, label, href</td></tr>
+        <tr><td><code>activeItem</code></td><td><span class="api-type">string</span></td><td><span class="api-default">required</span></td><td>Active tab identifier</td></tr>
+        <tr><td><code>onItemChange</code></td><td><span class="api-type">(id: string) => void</span></td><td><span class="api-default">required</span></td><td>Tab switch handler</td></tr>
+        <tr><td><code>badge</code></td><td><span class="api-type">Record<string, number></span></td><td><span class="api-default">undefined</span></td><td>Badge counts keyed by item id</td></tr>
+      </tbody>
+    </table>
+  </section>
+
   <section class="component-section" id="code-examples">
     <h2 class="ds-section-title">Code examples</h2>
     <p class="ds-body">Copy these snippets as starting points. Always link <code>tokens/tokens.css</code>, <code>components.css</code>, and <code>states.css</code> before using component classes.</p>
@@ -1230,7 +1206,146 @@
   </section>
 
   <!-- ===================================================
-       14. CHANGELOG
+       14. APP BAR (merged from standalone AppBar page)
   =================================================== -->
+  <section class="ds-section" id="app-bar">
+    <h2 class="ds-section-title">App bar</h2>
+    <p class="ds-section-desc">The app bar is the top-fixed chrome of every screen. It contains the back button, screen title, and contextual actions. It is a sub-pattern of Navigation — not a separate component.</p>
 
-</main><script src="../sprite-loader.js"></script><script src="../shell.js"></script></body></html>
+    <h3 class="ds-subsection-title">Anatomy</h3>
+    <table class="ds-api-table">
+      <thead><tr><th>Layer</th><th>Token / class</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Container height</td><td><code class="ds-code">var(--app-bar-h)</code> — 56px</td><td>Excludes status bar. Sticky, z-index: var(--z-appbar).</td></tr>
+        <tr><td>Status bar spacer</td><td><code class="ds-code">var(--safe-top)</code></td><td>iOS safe area. Android status bar height via window.statusBarHeight.</td></tr>
+        <tr><td>Background (default)</td><td><code class="ds-code">var(--bg)</code></td><td>Opaque on inner pages. Transparent on home/cinematic screens.</td></tr>
+        <tr><td>Background (scrolled)</td><td><code class="ds-code">var(--overlay-scrim)</code> + blur(14px)</td><td>Frosted glass on scroll. @supports guard for blur.</td></tr>
+        <tr><td>Back button</td><td><code class="ds-code">var(--icon-size-base)</code> — 24px icon</td><td>Chevron-left or platform back arrow.</td></tr>
+        <tr><td>Title</td><td>Body bold / <code class="ds-code">font-weight:700</code></td><td>Single line, truncated with ellipsis.</td></tr>
+        <tr><td>Actions</td><td>Max 2 icon buttons right-aligned</td><td>48×48px touch target.</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="ds-subsection-title" style="margin-top:24px">Variants</h3>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:12px">
+      <div style="padding:16px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px">Default</div>
+        <div style="font-size:11px;color:var(--text2);line-height:1.5">Opaque. Used on all inner screens. Always visible regardless of scroll.</div>
+      </div>
+      <div style="padding:16px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px">Cinematic / transparent</div>
+        <div style="font-size:11px;color:var(--text2);line-height:1.5">Transparent over hero image. Only on home and game detail. Transitions to frosted on scroll.</div>
+      </div>
+      <div style="padding:16px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <div style="font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px">Condensed</div>
+        <div style="font-size:11px;color:var(--text2);line-height:1.5">After scroll threshold: title collapses into bar. Used on long detail pages (game description, T&amp;C).</div>
+      </div>
+    </div>
+
+    <h3 class="ds-subsection-title" style="margin-top:28px">Scroll behaviour</h3>
+    <p class="ds-body">Home and cinematic screens use scroll-aware app bar. Three states based on scroll position and direction. An 8px jitter guard prevents class thrashing on rubber-band scrolls.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0 24px">
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:16px">
+        <div style="font-size:11px;font-weight:700;color:var(--jio);margin-bottom:8px">Default — scrollTop &lt; 80px</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">Transparent on home, opaque on inner pages. Class: <code class="ds-code">.app-bar</code></div>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:16px">
+        <div style="font-size:11px;font-weight:700;color:var(--jio);margin-bottom:8px">Scrolled up — scrollTop ≥ 80px</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">Frosted opaque + blur(14px). Class: <code class="ds-code">.app-bar.header-scrolled</code></div>
+      </div>
+      <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:16px">
+        <div style="font-size:11px;font-weight:700;color:var(--status-negative);margin-bottom:8px">Scrolled down — hidden</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">Translates off-screen. Class: <code class="ds-code">.app-bar.header-hidden</code></div>
+      </div>
+    </div>
+    <div class="component-code-block">
+      <div class="component-code-label">CSS — scroll states</div>
+      <pre class="component-code-pre"><code>.app-bar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-appbar);
+  height: var(--app-bar-h);
+  transition: transform var(--dur-default), background var(--dur-default), backdrop-filter var(--dur-default);
+  /* reduced-motion override */
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+.app-bar.header-scrolled {
+  background: var(--overlay-scrim);
+  @supports (backdrop-filter: blur(1px)) {
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    background: rgba(6,8,15,.6);
+  }
+}
+.app-bar.header-hidden {
+  transform: translateY(-110%);
+}</code></pre>
+    </div>
+    <div class="component-code-block" style="margin-top:16px">
+      <div class="component-code-label">JS — scroll listener (80px threshold · 8px jitter guard)</div>
+      <pre class="component-code-pre"><code>const bar = document.querySelector('.app-bar');
+let lastY = 0;
+
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  const delta = y - lastY;
+
+  if (Math.abs(delta) &lt; 8) return; // jitter guard
+
+  if (y &lt; 80) {
+    bar.classList.remove('header-scrolled', 'header-hidden');
+  } else if (delta &lt; 0) {
+    bar.classList.add('header-scrolled');
+    bar.classList.remove('header-hidden');
+  } else {
+    bar.classList.add('header-hidden');
+    bar.classList.remove('header-scrolled');
+  }
+
+  lastY = y;
+}, { passive: true });</code></pre>
+    </div>
+    <div class="ds-rules" style="margin-top:20px">
+      <div class="ds-rule ds-rule--pass">Always use <code class="ds-code">{ passive: true }</code> on the scroll listener.</div>
+      <div class="ds-rule ds-rule--pass">Use the 8px jitter guard — prevents rapid toggling on rubber-band scroll.</div>
+      <div class="ds-rule ds-rule--pass">Wrap backdrop-filter in <code class="ds-code">@supports</code> — falls back to opaque background on low-end devices.</div>
+      <div class="ds-rule ds-rule--pass">Under <code class="ds-code">prefers-reduced-motion: reduce</code> — remove transitions, switch states instantly.</div>
+      <div class="ds-rule ds-rule--fail">Animate <code class="ds-code">height</code> or <code class="ds-code">top</code> — only <code class="ds-code">transform</code> is compositor-friendly.</div>
+      <div class="ds-rule ds-rule--fail">Use scroll-hide on inner/detail pages — only home and cinematic screens.</div>
+    </div>
+
+    <h3 class="ds-subsection-title" style="margin-top:28px">Platform behavior</h3>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px">
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--jio);border-radius:var(--r4);padding:16px;background:var(--surface-1)">
+        <p style="font-size:11px;font-weight:700;color:var(--jio);margin:0 0 10px">Mobile</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px">
+          <li style="font-size:11px;color:var(--text2);line-height:1.4">Status bar spacer via <code class="ds-code">var(--safe-top)</code></li>
+          <li style="font-size:11px;color:var(--text2);line-height:1.4">Back swipe gesture replaces back button on iOS</li>
+          <li style="font-size:11px;color:var(--text2);line-height:1.4">Scroll-hide on home only</li>
+          <li style="font-size:11px;color:var(--text2);line-height:1.4">56px height canonical</li>
+        </ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--gold);border-radius:var(--r4);padding:16px;background:var(--surface-1)">
+        <p style="font-size:11px;font-weight:700;color:var(--gold);margin:0 0 10px">Web</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px">
+          <li style="font-size:11px;color:var(--text2);line-height:1.4">No status bar spacer</li>
+          <li style="font-size:11px;color:var(--text2);line-height:1.4">Back = browser back or explicit back link</li>
+          <li style="font-size:11px;color:var(--text2);line-height:1.4">Sticky top-0 with z-appbar</li>
+          <li style="font-size:11px;color:var(--text2);line-height:1.4">May include global search in bar</li>
+        </ul>
+      </div>
+      <div style="border:1px solid var(--border-subtle);border-top:2px solid var(--amber);border-radius:var(--r4);padding:16px;background:var(--surface-1)">
+        <p style="font-size:11px;font-weight:700;color:var(--amber);margin:0 0 10px">TV</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px">
+          <li style="font-size:11px;color:var(--text2);line-height:1.4">No scroll-hide — TV doesn't scroll vertically like mobile</li>
+          <li style="font-size:11px;color:var(--text2);line-height:1.4">Back = remote Back button. Always available.</li>
+          <li style="font-size:11px;color:var(--text2);line-height:1.4">TV safe-area inset: <code class="ds-code">var(--tv-safe)</code> = 48px</li>
+          <li style="font-size:11px;color:var(--text2);line-height:1.4">Larger touch targets: min 64px</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main><script src="../sprite-loader.js"></script><script src="../shell.js?v=2"></script></body></html>

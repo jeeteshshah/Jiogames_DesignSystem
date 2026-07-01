@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UX Patterns — JioGames DLS</title>
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <link rel="stylesheet" href="../components.css">
+  <link rel="stylesheet" href="../states.css">
+  <link rel="stylesheet" href="../shell.css?v=6">
+</head>
+<body>
+<main class="ds-main">
+
+  <header class="component-page-header">
+    <nav class="component-breadcrumb" aria-label="Breadcrumb">
+      <a href="../" class="component-breadcrumb-link">JioGames DLS</a>
+      <span class="component-breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="component-breadcrumb-current">Patterns</span>
+    </nav>
+    <h1 class="component-page-title">UX Patterns</h1><p class="component-page-def">Multi-component flows that solve common product problems. Patterns are not new components — they are orchestration guidance using existing DLS components.</p>
+    <div class="component-platforms">
+      <span class="component-platform component-platform--mobile"><span class="component-platform-dot"></span>Mobile</span>
+      <span class="component-platform component-platform--web"><span class="component-platform-dot"></span>Web</span>
+      <span class="component-platform component-platform--tv"><span class="component-platform-dot"></span>TV</span>
+      <span class="component-maturity component-maturity--beta"><span class="component-maturity--dot"></span>Beta</span>
+      <a class="spec-download" data-spec-download href="data:text/markdown;charset=utf-8;base64,IyBVWCBQYXR0ZXJucyDigJQgSmlvR2FtZXMgRExTIHNwZWMKCj4gU291cmNlOiBgcGF0dGVybnMvaW5kZXguaHRtbGAgaW4gdGhlIEppb0dhbWVzIERlc2lnbiBTeXN0ZW0uCj4gVGhpcyBzcGVjIGlzIGdlbmVyYXRlZCB2ZXJiYXRpbSBmcm9tIHRoZSBwYWdlIOKAlCBkbyBub3QgaW52ZW50IHZhbHVlcyBub3QgbGlzdGVkIGhlcmUuCgoqKlBhdGg6KiogSmlvR2FtZXMgRExTIOKAuiBQYXR0ZXJucwoKLS0tCgpNdWx0aS1jb21wb25lbnQgZmxvd3MgdGhhdCBzb2x2ZSBjb21tb24gcHJvZHVjdCBwcm9ibGVtcy4gUGF0dGVybnMgYXJlIG5vdCBuZXcgY29tcG9uZW50cyDigJQgdGhleSBhcmUgb3JjaGVzdHJhdGlvbiBndWlkYW5jZSB1c2luZyBleGlzdGluZyBETFMgY29tcG9uZW50cy4KCiMjIEF2YWlsYWJsZSBwYXR0ZXJucwoKIyMgUGF0dGVybiBydWxlcwoKLS0tCgojIyBUb2tlbnMgcmVmZXJlbmNlZCBvbiB0aGlzIHBhZ2UKClVzZSB0aGVzZSBleGFjdCB0b2tlbnMg4oCUIGRlZmluZWQgaW4gYHRva2Vucy90b2tlbnMuY3NzYC4gRG8gbm90IHN1YnN0aXR1dGUgcmF3IHZhbHVlcy4KCi0gYC0tYm9yZGVyLXN1YnRsZWAKLSBgLS1yNGAKLSBgLS1zdXJmYWNlLTFgCi0gYC0tdGV4dGAKLSBgLS10ZXh0MmAKCi0tLQoKIyMgQnVpbGQgcnVsZXMgKGJpbmRpbmcpCgoxLiBVc2UgKipvbmx5KiogdGhlIHRva2VucyBsaXN0ZWQgYWJvdmUuIElmIGEgdmFsdWUgeW91IG5lZWQgaXMgbm90IGxpc3RlZCwgc3RvcCBhbmQgYXNrIOKAlCBkbyBub3QgaW50cm9kdWNlIGEgcmF3IHZhbHVlLgoyLiBGb250IGlzICoqSmlvVHlwZSoqIG9ubHkuIFdlaWdodHM6IDMwMCwgNTAwLCA3MDAsIDkwMC4KMy4gUmV1c2UgdGhlIGNvbXBvbmVudCBDU1MgcGF0dGVybnMgc2hvd24gb24gdGhlIHNvdXJjZSBwYWdlOyBkbyBub3QgcmVkZXNpZ24uCjQuIE1hdGNoIGV2ZXJ5IHN0YXRlIChkZWZhdWx0LCBob3ZlciwgZm9jdXMsIGFjdGl2ZSwgZGlzYWJsZWQsIGxvYWRpbmcpIHNob3duIG9uIHRoZSBwYWdlLgo1LiBBY2Nlc3NpYmlsaXR5IHJlcXVpcmVtZW50cyBvbiB0aGUgcGFnZSBhcmUgbWFuZGF0b3J5LCBub3Qgb3B0aW9uYWwuCg==" download="patterns-spec.md" aria-label="Download component spec as Markdown"><span aria-hidden="true">↓</span> Download MD</a>
+    </div>
+  </header>
+
+  <section class="ds-section" id="patterns-index">
+    <h2 class="ds-section-title">Available patterns</h2>
+    <div class="ds-doc-card-grid" style="margin-top:20px">
+
+      <a href="./checkout/" class="ds-doc-card" style="text-decoration:none">
+        <div class="ds-doc-card-title">Payment &amp; Checkout</div>
+        <div class="ds-doc-card-desc">Entry, plan selection, payment method, confirmation, failure, and retry flow for pass subscriptions.</div>
+        <div class="ds-doc-card-meta">Pass cards · Button · Dialog · Toast · Banner</div>
+      </a>
+
+      <a href="./onboarding/" class="ds-doc-card" style="text-decoration:none">
+        <div class="ds-doc-card-title">Onboarding</div>
+        <div class="ds-doc-card-desc">Multi-step genre/platform preference flow with progress indicator, skip logic, and resume state.</div>
+        <div class="ds-doc-card-meta">Genre tiles · Progress dots · Button · Input</div>
+      </a>
+
+      <a href="./game-launch/" class="ds-doc-card" style="text-decoration:none">
+        <div class="ds-doc-card-title">Game Launch</div>
+        <div class="ds-doc-card-desc">Tap Play → loading → launch success/failure with retry, back, and error handling.</div>
+        <div class="ds-doc-card-meta">Button · Skeleton · Toast · Dialog</div>
+      </a>
+
+      <a href="./empty-search/" class="ds-doc-card" style="text-decoration:none">
+        <div class="ds-doc-card-title">Empty Search</div>
+        <div class="ds-doc-card-desc">No-results state with query display, suggestions, filter reset, and popular fallback.</div>
+        <div class="ds-doc-card-meta">Search · Chips · Cards · Typography</div>
+      </a>
+
+      <a href="./pull-to-refresh/" class="ds-doc-card" style="text-decoration:none">
+        <div class="ds-doc-card-title">Pull to Refresh</div>
+        <div class="ds-doc-card-desc">Overscroll refresh on mobile. Trigger distance, indicator states, spring resistance, and reduced-motion behavior.</div>
+        <div class="ds-doc-card-meta">Progress · Motion · Skeleton</div>
+      </a>
+
+      <a href="./load-more/" class="ds-doc-card" style="text-decoration:none">
+        <div class="ds-doc-card-title">Infinite Scroll &amp; Load More</div>
+        <div class="ds-doc-card-desc">Decision guide: when to use infinite scroll vs pagination vs Load More. Focus recovery, scroll persistence, TV guidance.</div>
+        <div class="ds-doc-card-meta">Buttons · Cards · Rails · Accessibility</div>
+      </a>
+
+      <a href="./notification-center/" class="ds-doc-card" style="text-decoration:none">
+        <div class="ds-doc-card-title">Notification Center</div>
+        <div class="ds-doc-card-desc">Persistent accumulated notifications. Read/unread states, grouping, deep links, empty state, and badge management.</div>
+        <div class="ds-doc-card-meta">Toast · Badges · Lists · Typography</div>
+      </a>
+
+      <a href="./share/" class="ds-doc-card" style="text-decoration:none">
+        <div class="ds-doc-card-title">Share &amp; Invite</div>
+        <div class="ds-doc-card-desc">Native share, copy link, friend invite, and referral code flows. Platform differences, success/failure feedback.</div>
+        <div class="ds-doc-card-meta">Bottom Sheet · Toast · Inputs · Buttons</div>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="ds-section" id="pattern-rules">
+    <h2 class="ds-section-title">Pattern rules</h2>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:16px">
+      <div style="padding:16px 20px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">Patterns compose existing components</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">No pattern may introduce new visual primitives, new tokens, or new component variants without an RFC. Patterns are flow documentation only.</div>
+      </div>
+      <div style="padding:16px 20px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">Platform differences are explicit</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">Every pattern documents Mobile, Web, and TV behaviour separately where they differ. Never assume mobile == web.</div>
+      </div>
+      <div style="padding:16px 20px;background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4)">
+        <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:6px">Accessibility is always specified</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.5">Every pattern includes focus management, screen reader announcements, and reduced-motion behaviour.</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+<script src="../shell.js?v=2"></script>
+</body></html>

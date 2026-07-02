@@ -311,6 +311,212 @@
         </div>
       </section>
 
+      <!-- ===================================================
+           EXHAUSTIVE COMPONENT AUDIT GUARDRAIL
+      =================================================== -->
+      <section class="ds-section" id="guardrail">
+        <h2 class="ds-section-title">Exhaustive Component Audit Guardrail</h2>
+        <p class="ds-section-desc">A component audit is not complete if it only checks background and stroke colors. Every component must be inspected across all dimensions — structure, tokens, states, accessibility, motion, platform, and documentation — before any approval.</p>
+
+        <!-- Scope warning -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-2);margin-bottom:var(--space-3)">
+          <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-top:2px solid var(--jio);border-radius:var(--r4);padding:var(--space-2)">
+            <p style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--jio);margin:0 0 var(--space-1)">Full audit scope</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-0-5)">
+              <span class="text-label-sm" style="color:var(--text2)">Component name</span>
+              <span class="text-label-sm" style="color:var(--text2)">Purpose</span>
+              <span class="text-label-sm" style="color:var(--text2)">Variants · Sizes · States</span>
+              <span class="text-label-sm" style="color:var(--text2)">Slots · Nested components</span>
+              <span class="text-label-sm" style="color:var(--text2)">Layers · Typography</span>
+              <span class="text-label-sm" style="color:var(--text2)">Icons · Spacing</span>
+              <span class="text-label-sm" style="color:var(--text2)">Padding · Margin · Gap</span>
+              <span class="text-label-sm" style="color:var(--text2)">Width · Height · Min/max</span>
+              <span class="text-label-sm" style="color:var(--text2)">Radius · Border width</span>
+              <span class="text-label-sm" style="color:var(--text2)">Border color · Fill</span>
+              <span class="text-label-sm" style="color:var(--text2)">Stroke · Shadow</span>
+              <span class="text-label-sm" style="color:var(--text2)">Opacity · Blur</span>
+              <span class="text-label-sm" style="color:var(--text2)">Focus ring · Motion</span>
+              <span class="text-label-sm" style="color:var(--text2)">Hover · Pressed · Disabled</span>
+              <span class="text-label-sm" style="color:var(--text2)">Loading · Error · Success</span>
+              <span class="text-label-sm" style="color:var(--text2)">Mobile · Web · TV/STB</span>
+              <span class="text-label-sm" style="color:var(--text2)">Responsive · Accessibility</span>
+            </div>
+          </div>
+          <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-top:2px solid var(--negative);border-radius:var(--r4);padding:var(--space-2)">
+            <p style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--negative);margin:0 0 var(--space-1)">Not enough — never stop at</p>
+            <div style="display:flex;flex-direction:column;gap:var(--space-0-5)">
+              <span class="text-label-sm" style="color:var(--text2)">Background colors only</span>
+              <span class="text-label-sm" style="color:var(--text2)">Stroke colors only</span>
+              <span class="text-label-sm" style="color:var(--text2)">Default variant only</span>
+              <span class="text-label-sm" style="color:var(--text2)">Default state only</span>
+              <span class="text-label-sm" style="color:var(--text2)">Top-level layers only</span>
+              <span class="text-label-sm" style="color:var(--text2)">Visual appearance only</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Audit method -->
+        <h3 class="ds-section-subtitle" style="margin-top:var(--space-4);margin-bottom:var(--space-2)">Required audit method</h3>
+        <p class="ds-section-desc" style="margin-bottom:var(--space-2)">Follow every step for every component. Skipping any step makes the audit incomplete.</p>
+
+        <div style="display:flex;flex-direction:column;gap:var(--space-1-5);margin-bottom:var(--space-3)">
+
+          <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:var(--space-2)">
+            <p style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:0 0 var(--space-1)">Step 1 — Inspect anatomy</p>
+            <p class="text-label-sm" style="color:var(--text2);margin:0">Check every visible and functional part of the component — all slots, layers, nested elements, and decorative pieces.</p>
+          </div>
+
+          <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:var(--space-2)">
+            <p style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:0 0 var(--space-1)">Step 2 — Inspect every variant</p>
+            <p class="text-label-sm" style="color:var(--text2);margin:0">Check every size, type, layout, and usage variant. Do not check only the default. Each variant may introduce unique raw values.</p>
+          </div>
+
+          <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:var(--space-2)">
+            <p style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:0 0 var(--space-1)">Step 3 — Inspect every state</p>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:var(--space-0-5);margin-top:var(--space-1)">
+              <span class="text-label-sm" style="color:var(--text2)">Default</span>
+              <span class="text-label-sm" style="color:var(--text2)">Hover</span>
+              <span class="text-label-sm" style="color:var(--text2)">Pressed</span>
+              <span class="text-label-sm" style="color:var(--text2)">Focus</span>
+              <span class="text-label-sm" style="color:var(--text2)">Selected</span>
+              <span class="text-label-sm" style="color:var(--text2)">Active</span>
+              <span class="text-label-sm" style="color:var(--text2)">Disabled</span>
+              <span class="text-label-sm" style="color:var(--text2)">Loading</span>
+              <span class="text-label-sm" style="color:var(--text2)">Error</span>
+              <span class="text-label-sm" style="color:var(--text2)">Success</span>
+              <span class="text-label-sm" style="color:var(--text2)">Empty</span>
+              <span class="text-label-sm" style="color:var(--text2)">Skeleton</span>
+              <span class="text-label-sm" style="color:var(--text2)">TV focus</span>
+              <span class="text-label-sm" style="color:var(--text2)">Reduced motion</span>
+            </div>
+          </div>
+
+          <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:var(--space-2)">
+            <p style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:0 0 var(--space-1)">Step 4 — Inspect every token category</p>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:var(--space-0-5)">
+              <span class="text-label-sm" style="color:var(--text2)">Color tokens</span>
+              <span class="text-label-sm" style="color:var(--text2)">Typography tokens</span>
+              <span class="text-label-sm" style="color:var(--text2)">Spacing tokens</span>
+              <span class="text-label-sm" style="color:var(--text2)">Radius tokens</span>
+              <span class="text-label-sm" style="color:var(--text2)">Border tokens</span>
+              <span class="text-label-sm" style="color:var(--text2)">Elevation tokens</span>
+              <span class="text-label-sm" style="color:var(--text2)">Sizing tokens</span>
+              <span class="text-label-sm" style="color:var(--text2)">Icon tokens</span>
+              <span class="text-label-sm" style="color:var(--text2)">Opacity tokens</span>
+              <span class="text-label-sm" style="color:var(--text2)">Motion tokens</span>
+              <span class="text-label-sm" style="color:var(--text2)">Focus tokens</span>
+              <span class="text-label-sm" style="color:var(--text2)">Responsive tokens</span>
+              <span class="text-label-sm" style="color:var(--text2)">Platform tokens</span>
+            </div>
+          </div>
+
+          <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:var(--space-2)">
+            <p style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:0 0 var(--space-1)">Step 5 — Inspect nested components</p>
+            <p class="text-label-sm" style="color:var(--text2);margin:0">If a component contains another component, check whether the nested component also uses the correct design-system version — not a detached or overridden copy.</p>
+          </div>
+
+          <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:var(--space-2)">
+            <p style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:0 0 var(--space-1)">Step 6 — Inspect layer-level values</p>
+            <p class="text-label-sm" style="color:var(--text2);margin:0 0 var(--space-1)">Check whether any internal layer uses raw or custom values instead of tokens. Look specifically for:</p>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:var(--space-0-5)">
+              <span class="text-label-sm" style="color:var(--negative)">Raw hex values</span>
+              <span class="text-label-sm" style="color:var(--negative)">One-off px values</span>
+              <span class="text-label-sm" style="color:var(--negative)">Custom font sizes</span>
+              <span class="text-label-sm" style="color:var(--negative)">Custom font weights</span>
+              <span class="text-label-sm" style="color:var(--negative)">Custom line heights</span>
+              <span class="text-label-sm" style="color:var(--negative)">Custom letter spacing</span>
+              <span class="text-label-sm" style="color:var(--negative)">Custom padding/margin/gap</span>
+              <span class="text-label-sm" style="color:var(--negative)">Custom radius</span>
+              <span class="text-label-sm" style="color:var(--negative)">Custom border width</span>
+              <span class="text-label-sm" style="color:var(--negative)">Custom shadows</span>
+              <span class="text-label-sm" style="color:var(--negative)">Custom icon sizes</span>
+              <span class="text-label-sm" style="color:var(--negative)">Custom opacity</span>
+              <span class="text-label-sm" style="color:var(--negative)">Custom motion timing</span>
+              <span class="text-label-sm" style="color:var(--negative)">Custom easing</span>
+              <span class="text-label-sm" style="color:var(--negative)">Detached styles</span>
+            </div>
+          </div>
+
+          <div style="background:var(--surface-1);border:1px solid var(--border-subtle);border-radius:var(--r4);padding:var(--space-2)">
+            <p style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:0 0 var(--space-1)">Step 7 — Check documentation completeness</p>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:var(--space-0-5)">
+              <span class="text-label-sm" style="color:var(--text2)">Purpose</span>
+              <span class="text-label-sm" style="color:var(--text2)">Anatomy</span>
+              <span class="text-label-sm" style="color:var(--text2)">Variants</span>
+              <span class="text-label-sm" style="color:var(--text2)">Sizes · States</span>
+              <span class="text-label-sm" style="color:var(--text2)">Tokens used</span>
+              <span class="text-label-sm" style="color:var(--text2)">Usage rules · Do/don't</span>
+              <span class="text-label-sm" style="color:var(--text2)">Accessibility</span>
+              <span class="text-label-sm" style="color:var(--text2)">Motion</span>
+              <span class="text-label-sm" style="color:var(--text2)">Platform behavior</span>
+              <span class="text-label-sm" style="color:var(--text2)">Responsive behavior</span>
+              <span class="text-label-sm" style="color:var(--text2)">Engineering notes</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Report format -->
+        <h3 class="ds-section-subtitle" style="margin-top:var(--space-4);margin-bottom:var(--space-2)">Required audit report format</h3>
+        <p class="ds-section-desc" style="margin-bottom:var(--space-2)">Every audit must produce a report in this exact structure.</p>
+
+        <div style="display:flex;flex-direction:column;gap:var(--space-1-5);margin-bottom:var(--space-3)">
+
+          <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r4);padding:var(--space-2)">
+            <p style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:0 0 var(--space-1)">Section 1 — Component inventory</p>
+            <p class="text-label-sm" style="color:var(--text2);margin:0">List every component found. For each: component name, category, number of variants, available states, documentation status, audit status.</p>
+          </div>
+
+          <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r4);padding:var(--space-2)">
+            <p style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:0 0 var(--space-1)">Section 2 — Component-by-component audit</p>
+            <p class="text-label-sm" style="color:var(--text2);margin:0 0 var(--space-1)">For every component provide: overall status, compliance score /100, variants checked, states checked, token compliance table (color / typography / spacing / radius / border / elevation / sizing / icon / motion / focus / responsive / accessibility — Pass/Fail per category with issues and required fix), non-tokenized values found, missing states, missing variants, accessibility issues, motion issues, platform issues, documentation issues, required fixes, design-system gaps, recommendation.</p>
+          </div>
+
+          <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r4);padding:var(--space-2)">
+            <p style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:0 0 var(--space-1)">Section 3 — Cross-component issues</p>
+            <p class="text-label-sm" style="color:var(--text2);margin:0">Repeated raw spacing · Custom radii · Typography inconsistencies · Missing hover/focus states · Missing TV focus · Missing reduced motion · Duplicated variants · Inconsistent card/icon/doc behavior.</p>
+          </div>
+
+          <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r4);padding:var(--space-2)">
+            <p style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:0 0 var(--space-1)">Section 4 — Token gaps</p>
+            <p class="text-label-sm" style="color:var(--text2);margin:0">All tokens missing from the system but needed by existing components. Group by: Color · Typography · Spacing · Radius · Border · Elevation · Sizing · Icon · Motion · Focus · Responsive · Platform.</p>
+          </div>
+
+          <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r4);padding:var(--space-2)">
+            <p style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:0 0 var(--space-1)">Section 5 — Component gaps</p>
+            <p class="text-label-sm" style="color:var(--text2);margin:0">Components or variants that are missing but required by the product.</p>
+          </div>
+
+          <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r4);padding:var(--space-2)">
+            <p style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:0 0 var(--space-1)">Section 6 — Priority fix list</p>
+            <div style="display:flex;flex-direction:column;gap:var(--space-0-5)">
+              <span class="text-label-sm" style="color:var(--negative)">P0 — Must fix before system can be used</span>
+              <span class="text-label-sm" style="color:var(--amber)">P1 — Important for consistency and handoff</span>
+              <span class="text-label-sm" style="color:var(--gold)">P2 — Should fix soon</span>
+              <span class="text-label-sm" style="color:var(--text3)">P3 — Nice to have</span>
+            </div>
+          </div>
+
+          <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:var(--r4);padding:var(--space-2)">
+            <p style="font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--text3);margin:0 0 var(--space-1)">Section 7 — Final compliance summary</p>
+            <p class="text-label-sm" style="color:var(--text2);margin:0">Total components audited · Total variants audited · Total states audited · Compliant count · Partially compliant count · Non-compliant count · Overall design-system compliance score /100.</p>
+          </div>
+
+        </div>
+
+        <!-- Hard rules -->
+        <h3 class="ds-section-subtitle" style="margin-top:var(--space-4);margin-bottom:var(--space-2)">Hard rules</h3>
+        <div style="display:flex;flex-direction:column;gap:var(--space-1)">
+          <div class="ds-rule ds-rule--fail">Do not stop after checking colors. Do not only check fills and strokes.</div>
+          <div class="ds-rule ds-rule--fail">Do not audit only the default component state. Do not skip variants.</div>
+          <div class="ds-rule ds-rule--fail">Do not skip nested layers. Do not skip documentation.</div>
+          <div class="ds-rule ds-rule--fail">Do not assume compliance just because color tokens are used.</div>
+          <div class="ds-rule ds-rule--pass">A component is compliant only when all visual, structural, state, motion, accessibility, platform, and documentation rules follow the JioGames Design System.</div>
+          <div class="ds-rule ds-rule--fail">Do not approve any component with raw values, missing states, undocumented variants, inaccessible behavior, or non-tokenized motion.</div>
+        </div>
+
+      </section>
+
     </div><!-- /.ds-page -->
   </main>
 
@@ -325,6 +531,7 @@
     <a href="#motion-principles" class="ds-toc-link">Motion</a>
     <a href="#maturity-model" class="ds-toc-link">Maturity Model</a>
     <a href="#rules" class="ds-toc-link">Rules</a>
+    <a href="#guardrail" class="ds-toc-link">Guardrail</a>
   </aside>
 
   <script src="../sprite-loader.js"></script>
